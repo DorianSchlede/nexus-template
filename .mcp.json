@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upsolv/context7"]
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"]
+    },
+    "airtable": {
+      "command": "npx",
+      "args": ["-y", "airtable-mcp-server"],
+      "env": {
+        "AIRTABLE_API_KEY": "${AIRTABLE_API_KEY}"
+      }
+    },
+    "beam": {
+      "command": "uvx",
+      "args": [
+        "mcp-proxy",
+        "https://api.beamstudio.ai/mcp",
+        "--transport",
+        "streamablehttp",
+        "-H",
+        "Authorization",
+        "Bearer ${BEAM_API_TOKEN}"
+      ]
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      }
+    },
+    "Beam Knowledge Base": {
+      "url": "https://docs.beam.ai/mcp"
+    }
+  }
+}
