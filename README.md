@@ -30,30 +30,9 @@ git clone https://github.com/DorianSchlede/nexus-template.git
 cd nexus-template
 ```
 
-### 2. Set Up Environment (Optional MCP Integrations)
+### 2. Open in Claude Code
 
-If you want to use MCP integrations (Airtable, Beam, Slack):
-
-```bash
-# Copy the environment template
-cp .env.example .env
-
-# Edit .env and add your API keys
-# AIRTABLE_API_KEY=your_key_here
-# BEAM_API_TOKEN=your_token_here
-# SLACK_BOT_TOKEN=your_token_here
-# SLACK_TEAM_ID=your_team_id_here
-```
-
-### 3. Load in Claude
-
-In Claude Desktop or Claude Code, load the entry file:
-
-```
-@c:/path/to/nexus-template/claude.md
-```
-
-### 4. Follow Onboarding
+Open the folder in Claude Code and say **"hi"** - the system will automatically load and initialize!
 
 The system will:
 1. Detect it's your first time
@@ -62,6 +41,8 @@ The system will:
 4. Set up your memory system
 
 **Total Onboarding**: 35-40 minutes → Fully operational!
+
+> **Alternative**: In Claude Desktop, load `@CLAUDE.md` to start
 
 ---
 
@@ -299,47 +280,6 @@ Load minimum at start, more context just-in-time:
 
 ---
 
-## 🔌 MCP Integrations (Optional)
-
-Nexus-v3 supports MCP (Model Context Protocol) integrations out of the box.
-
-### Available Integrations
-
-**Pre-configured in `.mcp.json`**:
-- **Context7** - Access library documentation
-- **Linear** - Project management and issue tracking
-- **Airtable** - Database and spreadsheet integration
-- **Beam Studio** - Knowledge base and documentation
-- **Slack** - Team communication
-
-### Setup Instructions
-
-1. **Copy environment template**:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. **Add your API keys to `.env`**:
-   ```env
-   AIRTABLE_API_KEY=your_key_here
-   BEAM_API_TOKEN=your_token_here
-   SLACK_BOT_TOKEN=xoxb-your-token-here
-   SLACK_TEAM_ID=T-your-team-id-here
-   ```
-
-3. **Load environment variables**:
-   The `.mcp.json` file references these environment variables automatically.
-
-4. **Test integration**:
-   Say "add integration" in Claude to get guided setup help.
-
-### Security Note
-
-**Never commit `.env` to version control!**
-The `.gitignore` file is already configured to exclude it.
-
----
-
 ## 🎨 Design Philosophy
 
 ### 1. Concrete Before Abstract
@@ -380,10 +320,51 @@ Check `01-memory/session-reports/` for historical summaries.
 Say "validate system" - it will detect and recreate templates.
 
 ### API keys not working?
-Make sure your `.env` file exists and contains the correct keys.
+Make sure your `.env` file exists and contains the correct keys. See [MCP Integrations](#-mcp-integrations-optional) below.
 
 ### Need help?
 The system self-guides! Just ask questions naturally.
+
+---
+
+## 🔌 MCP Integrations (Optional)
+
+Nexus-v3 supports MCP (Model Context Protocol) integrations for connecting external tools.
+
+### Available Integrations
+
+**Pre-configured in `.mcp.json`**:
+- **Context7** - Access library documentation
+- **Linear** - Project management and issue tracking
+- **Airtable** - Database and spreadsheet integration
+- **Beam Studio** - Knowledge base and documentation
+- **Slack** - Team communication
+
+### Setup Instructions
+
+1. **Copy environment template**:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Add your API keys to `.env`**:
+   ```env
+   AIRTABLE_API_KEY=your_key_here
+   BEAM_API_TOKEN=your_token_here
+   SLACK_BOT_TOKEN=xoxb-your-token-here
+   SLACK_TEAM_ID=T-your-team-id-here
+   ```
+
+3. **Load environment variables**:
+   The `.mcp.json` file references these environment variables automatically.
+
+4. **Test integration**:
+   Say "add integration" in Claude to get guided setup help.
+
+### Security Note
+
+**Never commit `.env` to version control!**
+The `.gitignore` file is already configured to exclude it.
 
 ---
 
