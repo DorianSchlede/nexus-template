@@ -1,6 +1,6 @@
 # Nexus-v3 Template
 
-> **Self-Guiding Work Organization System** - AI-powered project and workflow management through conversation
+> **Self Evolving Knowledge System** - Unified AI interface & PhD level intelligence for all your work
 
 A Claude AI-powered system that remembers you across sessions, tracks projects, captures workflows, and maintains context—all through natural conversation.
 
