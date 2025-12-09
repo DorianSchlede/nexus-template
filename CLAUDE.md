@@ -1,15 +1,16 @@
 # MANDATORY Initialization
 
-**EVERY SESSION MUST START WITH THIS EXACT SEQUENCE:**
+**MANDATORY EVERY SESSION MUST START WITH THIS EXACT SEQUENCE:**
 
-```bash
-python 00-system/core/nexus-loader.py --startup
-```
+1. **Read the orchestrator first:**
+   [00-system/core/orchestrator.md](00-system/core/orchestrator.md)
 
-Then read ALL files from the `files_to_load` array returned by the script.
+2. **Run the startup script:**
+   ```bash
+   python3 00-system/core/nexus-loader.py --startup
+   ```
 
-**The orchestrator contains the complete instructions:**
-[00-system/core/orchestrator.md](00-system/core/orchestrator.md)
+3. **Load all files** from the `files_to_load` array returned by the script
 
 ---
 
@@ -22,12 +23,15 @@ Then read ALL files from the `files_to_load` array returned by the script.
 CORE REQUIREMENT FOR NEXT AI INSTANCE - EXECUTE BEFORE ANY RESPONSE:
 ═══════════════════════════════════════════════════════════════════════════
 
-1. RUN THE STARTUP SCRIPT:
-   python 00-system/core/nexus-loader.py --startup
+1. READ THE ORCHESTRATOR:
+   00-system/core/orchestrator.md
 
-2. READ ALL FILES from the `files_to_load` array in the script output
+2. RUN THE STARTUP SCRIPT:
+   python3 00-system/core/nexus-loader.py --startup
 
-3. FOLLOW the `instructions.action` from the script output
+3. READ ALL FILES from the `files_to_load` array in the script output
+
+4. FOLLOW the `instructions.action` from the script output
 
 This initializes the Nexus system with:
 - Memory files (goals.md, roadmap.md, user-config.yaml)
