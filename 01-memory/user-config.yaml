@@ -1,0 +1,41 @@
+---
+# User Configuration
+# Purpose: Store persistent user preferences (loaded every session)
+# Updated: Set during onboarding, modified anytime
+
+user_preferences:
+  language: ""
+  timezone: ""
+  date_format: "YYYY-MM-DD"
+
+  system:
+    python_cmd: "python"
+
+onboarding:
+  status: "not_started"
+  current_session: 0
+  last_completed: null
+  sessions_completed: []
+
+created: null
+updated: null
+---
+
+# Instructions for AI
+
+When this file is loaded (every session via --startup):
+1. Respect the language preference throughout ALL interactions
+2. Use timezone for accurate session timestamps
+3. Format dates according to user preference
+4. Check onboarding status to determine next session
+
+If onboarding status is "in_progress":
+- Load the next onboarding session based on current_session value
+- Session 1: 00-define-goals
+- Session 2: 01-first-project
+- Session 3: 02-first-skill
+- Session 4: 03-system-mastery
+
+If language is not set (empty string):
+- Default to English
+- Prompt user to set preference during next onboarding step

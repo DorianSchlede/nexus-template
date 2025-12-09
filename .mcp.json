@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upsolv/context7"],
+      "env": {}
+    },
+    "linear": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "env": {}
+    },
+    "airtable": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "airtable-mcp-server"],
+      "env": {
+        "AIRTABLE_API_KEY": "YOUR_AIRTABLE_API_KEY"
+      }
+    },
+    "beam": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "mcp-proxy",
+        "https://api.beamstudio.ai/mcp",
+        "--transport",
+        "streamablehttp",
+        "-H",
+        "Authorization",
+        "Bearer YOUR_BEAM_API_KEY"
+      ],
+      "env": {}
+    }
+  }
+}

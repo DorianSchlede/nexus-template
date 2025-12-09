@@ -1,0 +1,14 @@
+# Nexus-v3 Template - Environment Variables
+# Copy this file to .env and fill in your actual values
+
+# Airtable Configuration
+AIRTABLE_API_KEY=your_airtable_api_key_here
+
+# Beam Studio Configuration
+# Get your API token from: https://app.beam.ai -> Personal settings -> API Keys
+# Used by the Beam MCP server configured in .mcp.json
+BEAM_API_TOKEN=your_beam_api_token_here
+
+# Slack Configuration (optional)
+SLACK_BOT_TOKEN=xoxb-your-slack-bot-token-here
+SLACK_TEAM_ID=T-your-team-id-here
