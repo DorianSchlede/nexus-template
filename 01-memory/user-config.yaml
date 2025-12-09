@@ -9,7 +9,7 @@ user_preferences:
   date_format: "YYYY-MM-DD"
 
   system:
-    python_cmd: "python"
+    python_cmd: "python3"
 
 onboarding:
   status: "not_started"
