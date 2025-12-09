@@ -1,6 +1,6 @@
 # Nexus
 
-> **Quick Start:** Clone repo → Open in VS Code → Open Claude Chat → Say "hi" → Say "use input"
+> **Quick Start:** Clone repo → Open in VS Code → Open Claude Chat → Say "hi" → Follow Guided Onboarding
 >
 > ```bash
 > git clone https://github.com/DorianSchlede/nexus-template.git
