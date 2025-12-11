@@ -110,7 +110,12 @@ onboarding:
 
 learning_tracker:
   session_count: 0
-  completed: []
+  completed:
+    setup_goals: false
+    setup_workspace: false
+    learn_projects: false
+    learn_skills: false
+    learn_nexus: false
   dismissed: []
   last_suggested: null
   suggestion_preference: "normal"
@@ -870,6 +875,31 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
     workspace_map_path = base / "04-workspace" / "workspace-map.md"
     workspace_configured = workspace_map_path.exists() and not is_template_file(str(workspace_map_path))
 
+    # Extract learning_tracker.completed from user-config.yaml
+    learning_completed = {
+        'setup_goals': False,
+        'setup_workspace': False,
+        'learn_projects': False,
+        'learn_skills': False,
+        'learn_nexus': False,
+    }
+    if files_exist['user_config']:
+        try:
+            with open(optional_files['user_config'], 'r', encoding='utf-8') as f:
+                config_content = f.read()
+                # Parse YAML frontmatter
+                if config_content.startswith('---'):
+                    parts = config_content.split('---', 2)
+                    if len(parts) >= 2:
+                        import yaml
+                        config_data = yaml.safe_load(parts[1])
+                        if config_data and 'learning_tracker' in config_data:
+                            tracker = config_data['learning_tracker']
+                            if 'completed' in tracker and isinstance(tracker['completed'], dict):
+                                learning_completed.update(tracker['completed'])
+        except Exception:
+            pass  # Keep defaults on error
+
     # Filter to non-complete projects for menu
     active_projects = [p for p in projects if p.get('status') != 'COMPLETE']
 
@@ -884,6 +914,7 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         'user_skills': len(user_skills),
         'goals_personalized': goals_personalized,
         'workspace_configured': workspace_configured,
+        'learning_completed': learning_completed,
     }
 
     return result

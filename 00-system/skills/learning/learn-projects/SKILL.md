@@ -98,3 +98,26 @@ To create a project, say:
 
 Ready? Say "create project" to start one!
 ```
+
+---
+
+### Step 7: Finalize
+
+**Actions** (MUST complete):
+
+1. **Mark skill complete** in user-config.yaml:
+   ```yaml
+   learning_tracker:
+     completed:
+       learn_projects: true  # ADD THIS LINE
+   ```
+
+---
+
+## Success Criteria
+
+- [ ] User understands project vs skill distinction
+- [ ] User can apply decision framework
+- [ ] User knows project folder structure
+- [ ] User understands lifecycle states
+- [ ] `learning_tracker.completed.learn_projects: true` in user-config.yaml

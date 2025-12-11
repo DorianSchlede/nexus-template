@@ -102,3 +102,27 @@ To create a skill, say:
 YOUR skills go in 03-skills/ (prioritized!)
 SYSTEM skills in 00-system/skills/
 ```
+
+---
+
+### Step 7: Finalize
+
+**Actions** (MUST complete):
+
+1. **Mark skill complete** in user-config.yaml:
+   ```yaml
+   learning_tracker:
+     completed:
+       learn_skills: true  # ADD THIS LINE
+   ```
+
+---
+
+## Success Criteria
+
+- [ ] User understands skill vs project distinction
+- [ ] User can apply 3-criteria skill-worthiness framework
+- [ ] User knows skill folder structure
+- [ ] User understands trigger mechanism
+- [ ] User identified at least one potential skill from their work
+- [ ] `learning_tracker.completed.learn_skills: true` in user-config.yaml

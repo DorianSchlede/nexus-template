@@ -1,3 +1,0 @@
-# Example Asset File
-
-This placeholder represents where asset files would be stored.

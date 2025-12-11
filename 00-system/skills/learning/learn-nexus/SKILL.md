@@ -134,3 +134,26 @@ Answers:
 1. ONE "expense-report" skill
 2. "Show me the files"
 3. "Can this be simpler?"
+
+---
+
+## Finalize
+
+**Actions** (MUST complete):
+
+1. **Mark skill complete** in user-config.yaml:
+   ```yaml
+   learning_tracker:
+     completed:
+       learn_nexus: true  # ADD THIS LINE
+   ```
+
+---
+
+## Success Criteria
+
+- [ ] User knows 3 system pitfalls and how to avoid them
+- [ ] User can detect 3 AI behavior patterns
+- [ ] User understands 3 expert collaboration patterns
+- [ ] User passed mastery check quiz
+- [ ] `learning_tracker.completed.learn_nexus: true` in user-config.yaml

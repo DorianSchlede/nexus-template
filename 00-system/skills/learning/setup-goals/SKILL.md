@@ -79,10 +79,24 @@ Quick questions:
 
 ### Step 6: Finalize
 
-**Actions**:
-1. Remove `smart_default: true` YAML frontmatter from goals.md (if present)
-2. Update `Last Updated` timestamp
-3. Update user-config.yaml learning_tracker
+**Actions** (MUST complete all):
+
+1. **Remove `smart_default: true`** from goals.md YAML frontmatter (if present)
+
+2. **Update `Last Updated`** timestamp in goals.md
+
+3. **Mark skill complete** in user-config.yaml:
+   ```yaml
+   learning_tracker:
+     completed:
+       setup_goals: true  # ADD THIS LINE
+   ```
+
+4. **Update language** in user-config.yaml (if user specified):
+   ```yaml
+   user_preferences:
+     language: "{user's language}"
+   ```
 
 ---
 
@@ -103,10 +117,11 @@ Wait for "done", then trigger close-session.
 
 ## Success Criteria
 
-- Language preference captured
-- Role clearly defined
-- Short-term goal specific and measurable
-- Success metrics defined
-- Long-term vision captured
-- smart_default removed
-- User practiced close-session
+- [ ] Language preference captured in user-config.yaml
+- [ ] Role clearly defined in goals.md
+- [ ] Short-term goal specific and measurable
+- [ ] Success metrics defined
+- [ ] Long-term vision captured
+- [ ] `smart_default: true` removed from goals.md
+- [ ] `learning_tracker.completed.setup_goals: true` in user-config.yaml
+- [ ] User practiced close-session

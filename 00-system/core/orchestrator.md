@@ -83,29 +83,62 @@ Smart routing does NOT apply:
 
 ## Menu Display (when `action = display_menu`)
 
-**Output this EXACTLY as shown, preserving line breaks. Replace bracketed values with actual data.**
+**⚠️ CRITICAL: Output the ENTIRE menu (banner + content) inside ONE markdown code block.**
 
+Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.skills`
+
+~~~
 ```
+    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
+    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+    ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
+    ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
+    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
+    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝ v4
+
 🧠 MEMORY
-   [If goals empty: "Empty ▸ say 'setup goals' to teach me about you"]
-   [If goals set: "Role: {role}" and "Goal: {goal}"]
+   [If stats.goals_personalized=false: "Not configured ▸ 'setup goals'"]
+   [If stats.goals_personalized=true: "Role: {role}" and "Focus: {goal}"]
 
 📦 PROJECTS
-   [If none: "None yet ▸ say 'create project' to start something"]
-   [If exists: "• {name} | {status} | {progress}% ▸ '{trigger}'" per project, max 5]
+   [If stats.total_projects=0: "None yet ▸ 'create project'"]
+   [If projects exist: List non-COMPLETE, max 5:
+    "• {name} | {status} | {progress}%"
+    If >5: "+{N} more"]
 
-🔧 SKILLS
-   [If user skills: "User: {names}"]
-   System: create-project, create-skill, close-session
+🔧 SKILLS  [{total_skills} available ▸ 'list skills']
+   [If stats.user_skills>0: "User: {names}"]
+   System: create-project, create-skill, setup-goals, close-session
 
-📁 WORKSPACE [SKIP THIS SECTION ENTIRELY if workspace IS configured]
-   Not configured ▸ say "setup workspace" to organize your files
+📁 WORKSPACE
+   [If stats.workspace_configured=false: "Not configured ▸ 'setup workspace'"]
+   [If stats.workspace_configured=true: "Configured ▸ 'validate workspace' to sync"]
 
-💬 WHAT'S NEXT?
-   [First applicable: IN_PROGRESS suggestion OR PLANNING suggestion OR "What would you like to work on?"]
+💡 SUGGESTED NEXT STEPS
+   [Number sequentially starting from 1. Show ALL applicable:]
 
-Say "explain Nexus" for help ▸ or just tell me what to do!
+   Onboarding sequence (show unconfigured ones):
+   - goals_personalized=false → "[N]. 'setup goals' - teach Nexus about you"
+   - workspace_configured=false → "[N]. 'setup workspace' - organize your files"
+   - user_skills=0 → "[N]. 'create skill' - automate a repeating workflow"
+   - total_projects=0 → "[N]. 'create project' - start your first project"
+
+   Active work (always show if applicable, continue numbering):
+   - IN_PROGRESS project → "[N]. 'continue {name}' - resume at {progress}%"
+   - PLANNING project → "[N]. 'work on {name}' - ready to start"
+
+   Intelligent suggestions (show when contextually relevant):
+   - After file changes in 04-workspace/ → "[N]. 'validate workspace' - sync your workspace map"
+   - End of session → "[N]. 'close session' - save learnings & update docs"
+   - Multiple similar tasks done → "[N]. 'create skill' - automate this workflow"
+
+   If fully configured & no active work:
+   "All set! Say 'create project' or just tell me what you need."
+
+────────────────────────────────────────────────
+ Say 'explain nexus' for help • Or just ask anything!
 ```
+~~~
 
 ---
 
