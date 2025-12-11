@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
+description: "[CORE SKILL] Create reusable workflow skills. Load when user says 'create skill', 'new skill', 'make skill', 'automate this'. AI should SUGGEST (not auto-load) when: (1) user describes repeating tasks ('every week I...'), (2) user completes a reusable workflow, (3) user creates similar things (report-jan, report-feb). Ask: 'Want to turn this into a reusable skill?' - let user decide."
 ---
 
 # Create Skill

@@ -111,12 +111,13 @@ You can start working **immediately** — no setup required!
 
 ### Optional: Learn the System
 
-When you're ready, 5 optional learning skills teach you everything:
+When you're ready, 6 optional learning skills teach you everything:
 
 | Skill | Trigger | Time |
 |-------|---------|------|
 | **setup-goals** | "setup goals" | 8-10 min |
 | **setup-workspace** | "setup workspace" | 5-8 min |
+| **learn-integrations** | "learn integrations" | 10-12 min |
 | **learn-projects** | "learn projects" | 8-10 min |
 | **learn-skills** | "learn skills" | 10-12 min |
 | **learn-nexus** | "learn nexus" | 15-18 min |
@@ -298,6 +299,7 @@ Nexus/
 |-------|---------|--------------|
 | `setup-goals` | "setup goals" | Personalize your goals |
 | `setup-workspace` | "setup workspace" | Configure folder structure |
+| `learn-integrations` | "learn integrations" | Connect external tools |
 | `learn-projects` | "learn projects" | Project system tutorial |
 | `learn-skills` | "learn skills" | Skill system tutorial |
 | `learn-nexus` | "learn nexus" | System mastery |

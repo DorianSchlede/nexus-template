@@ -1,6 +1,6 @@
 ---
 name: execute-project
-description: Execute project work systematically while tracking progress against tasks.md or steps.md. Load when user says "execute project", "work on project", "continue [project-name]", or when orchestrator detects project continuation. Continuously updates task completion as work progresses using bulk-complete-tasks.py.
+description: "[CORE SKILL] Execute and track project work. Load when user says 'continue project', 'work on project', 'execute project', 'resume [name]'. AI should SUGGEST (not auto-load) when: (1) user has IN_PROGRESS projects and asks related work, (2) user references an existing project. Ask: 'Want to continue your [project-name] project?' - let user decide."
 ---
 
 # Skill: Execute Project

@@ -1,0 +1,122 @@
+# {{SERVICE_NAME}} Error Handling
+
+Troubleshooting guide for {{SERVICE_NAME}} integration errors.
+
+---
+
+## HTTP Error Codes
+
+### 401 Unauthorized
+
+**Cause**: Invalid or expired authentication
+
+**Solutions**:
+1. Check API key is correct in `.env`
+2. Verify API key hasn't been revoked
+3. Re-run setup wizard: `python setup_{{SERVICE_SLUG}}.py`
+
+### 403 Forbidden
+
+**Cause**: Insufficient permissions
+
+**Solutions**:
+1. Check API key has required scopes/permissions
+2. Verify your {{SERVICE_NAME}} plan includes API access
+3. Generate new key with correct permissions
+
+### 404 Not Found
+
+**Cause**: Resource doesn't exist
+
+**Solutions**:
+1. Verify resource ID is correct
+2. Check resource hasn't been deleted
+3. Ensure you have access to the resource
+
+### 429 Rate Limited
+
+**Cause**: Too many requests
+
+**Solutions**:
+1. Wait before retrying (check `Retry-After` header)
+2. Implement exponential backoff
+3. Reduce request frequency
+4. Consider batch operations
+
+### 500 Internal Server Error
+
+**Cause**: {{SERVICE_NAME}} server error
+
+**Solutions**:
+1. Retry after a few seconds
+2. Check {{SERVICE_NAME}} status page
+3. If persistent, contact {{SERVICE_NAME}} support
+
+---
+
+## Configuration Errors
+
+### "{{ENV_KEY}} not found"
+
+**Cause**: Missing environment variable
+
+**Solution**:
+```bash
+# Add to .env file:
+{{ENV_KEY}}=your_key_here
+```
+
+### "Connection refused"
+
+**Cause**: Network or firewall issue
+
+**Solutions**:
+1. Check internet connection
+2. Verify firewall allows HTTPS traffic
+3. Check if {{SERVICE_NAME}} is accessible from your network
+
+---
+
+## Common Issues
+
+{{COMMON_ISSUES}}
+
+---
+
+## Debugging Tips
+
+### Enable Verbose Logging
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
+
+### Inspect Raw Response
+
+```python
+response = requests.get(url, headers=headers)
+print(f"Status: {response.status_code}")
+print(f"Headers: {response.headers}")
+print(f"Body: {response.text}")
+```
+
+### Test with curl
+
+```bash
+curl -v -H "Authorization: {{AUTH_HEADER}}" \
+  "{{BASE_URL}}/test-endpoint"
+```
+
+---
+
+## Getting Help
+
+1. Check official docs: {{API_DOCS_URL}}
+2. {{SERVICE_NAME}} community/support
+3. GitHub issues for the integration
+
+---
+
+**Version**: 1.0
+**Created**: {{CREATED_DATE}}

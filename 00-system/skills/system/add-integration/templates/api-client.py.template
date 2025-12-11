@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""
+{{SERVICE_NAME}} API Client
+
+Shared client for {{SERVICE_NAME}} API authentication and requests.
+Used by all {{SERVICE_NAME}} API scripts.
+"""
+
+import os
+import time
+from pathlib import Path
+
+{{ADDITIONAL_IMPORTS}}
+
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent.parent
+ENV_FILE = PROJECT_ROOT / ".env"
+BASE_URL = "{{BASE_URL}}"
+
+
+class {{CLIENT_CLASS_NAME}}:
+    """{{SERVICE_NAME}} API client with automatic token management"""
+
+    def __init__(self):
+        self.api_key = None
+        {{ADDITIONAL_INIT_VARS}}
+        self.access_token = None
+        self.token_expiry = 0
+        self._load_config()
+
+    def _load_config(self):
+        """Load configuration from .env"""
+        env_vars = {}
+        if ENV_FILE.exists():
+            with open(ENV_FILE, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        key, _, value = line.partition('=')
+                        env_vars[key.strip()] = value.strip().strip('"\'')
+
+        self.api_key = env_vars.get('{{ENV_KEY}}') or os.getenv('{{ENV_KEY}}')
+        {{ADDITIONAL_CONFIG_LOADING}}
+
+        if not self.api_key:
+            raise ValueError("{{ENV_KEY}} not found in .env or environment")
+        {{ADDITIONAL_VALIDATION}}
+
+{{AUTH_METHODS}}
+
+    def get_headers(self):
+        """Get headers for API request"""
+        {{GET_HEADERS_BODY}}
+
+    def get(self, endpoint, params=None):
+        """Make GET request"""
+        import requests
+
+        url = f"{BASE_URL}{endpoint}"
+        response = requests.get(
+            url,
+            headers=self.get_headers(),
+            params=params,
+            timeout=60
+        )
+        return self._handle_response(response)
+
+    def post(self, endpoint, data=None):
+        """Make POST request"""
+        import requests
+
+        url = f"{BASE_URL}{endpoint}"
+        response = requests.post(
+            url,
+            headers=self.get_headers(),
+            json=data,
+            timeout=60
+        )
+        return self._handle_response(response)
+
+    def patch(self, endpoint, data=None):
+        """Make PATCH request"""
+        import requests
+
+        url = f"{BASE_URL}{endpoint}"
+        response = requests.patch(
+            url,
+            headers=self.get_headers(),
+            json=data,
+            timeout=60
+        )
+        return self._handle_response(response)
+
+    def delete(self, endpoint):
+        """Make DELETE request"""
+        import requests
+
+        url = f"{BASE_URL}{endpoint}"
+        response = requests.delete(
+            url,
+            headers=self.get_headers(),
+            timeout=60
+        )
+        return self._handle_response(response)
+
+    def _handle_response(self, response):
+        """Handle API response"""
+        if response.status_code in [200, 201, 204]:
+            try:
+                return response.json()
+            except:
+                return {"status": "success"}
+        elif response.status_code == 401:
+            # Token expired, retry once
+            self._authenticate()
+            raise Exception("Token expired - please retry")
+        else:
+            raise Exception(f"API error: {response.status_code} - {response.text}")
+
+
+def get_client():
+    """Get a configured {{SERVICE_NAME}} client"""
+    return {{CLIENT_CLASS_NAME}}()

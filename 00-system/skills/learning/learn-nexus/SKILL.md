@@ -1,21 +1,126 @@
 ---
 name: learn-nexus
-description: "Master Nexus - system pitfalls, AI patterns, expert collaboration. Load when user says 'learn nexus', 'system mastery', 'nexus tutorial', 'AI collaboration tips', 'advanced nexus', 'how to use nexus effectively', 'nexus best practices', 'nexus tips', 'common mistakes', 'AI patterns', 'expert tips', 'power user', 'nexus guide', 'master nexus', 'nexus help', 'how to use nexus', 'nexus training', 'nexus course', 'become expert', or asks about common pitfalls, AI collaboration patterns, or advanced usage. Comprehensive skill covering common mistakes and power-user patterns. Takes 15-18 minutes."
+description: "Load when user says 'learn nexus', 'nexus tutorial', 'system mastery', 'nexus best practices'. Covers philosophy, design principles, pitfalls, AI patterns. 15-18 min."
 ---
 
 # Learn Nexus
 
-Achieve mastery through pitfall awareness, AI pattern recognition, and expert techniques.
+Master Nexus through understanding its philosophy, design principles, and practical patterns.
 
 ## Purpose
 
-Help experienced users avoid common mistakes, recognize AI behavioral patterns, and apply expert collaboration techniques.
+Help users understand WHY Nexus works the way it does, avoid common mistakes, and collaborate effectively with AI.
 
 **Time Estimate**: 15-18 minutes
 
 ---
 
-## Part A: System Pitfalls (5 min)
+## Part A: The Living Knowledge Organism (3 min)
+
+### Display:
+```
+━━━ CORE PHILOSOPHY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ALL FILES IN THIS SYSTEM ARE EXECUTABLE — NOT DOCUMENTATION!
+
+Every .md file, .yaml config, and planning document is designed
+to be READ, LOADED, and EXECUTED by AI in conversation.
+
+This is not a static knowledge base. It's a living, breathing
+organism that guides you through work, adapts to your context,
+and evolves with every interaction.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Ask**: "Does that click? Every markdown file is essentially code for the AI."
+
+---
+
+## Part B: The 7 Problems Nexus Solves (4 min)
+
+### Display one at a time, confirm understanding:
+
+```
+━━━ THE 7 PROBLEMS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. AI AMNESIA
+   Problem: AI forgets everything every session
+   Solution: Memory files auto-load every session (goals.md, etc.)
+
+2. FILE CHAOS
+   Problem: AI generates files randomly everywhere
+   Solution: 5-folder system with clear boundaries
+
+3. INCONSISTENT RESULTS
+   Problem: AI improvises differently every time
+   Solution: Skills = saved workflows with exact steps
+
+4. REPEATED WORK
+   Problem: Build same workflow multiple times
+   Solution: Create skill once, reuse forever
+
+5. CONTEXT OVERLOAD
+   Problem: Loading everything slows responses
+   Solution: Progressive loading (metadata first, content on-demand)
+
+6. HARD TO LEARN
+   Problem: Steep learning curve, overwhelming complexity
+   Solution: Optional onboarding skills, smart defaults
+
+7. IMMEDIATE EXECUTION
+   Problem: AI builds before understanding requirements
+   Solution: Planning mode → separate execution session
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Ask**: "Which of these problems have you experienced? That's why Nexus exists."
+
+---
+
+## Part C: The 7 Design Principles (4 min)
+
+### Display:
+```
+━━━ 7 DESIGN PRINCIPLES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. INSTRUCTION-DRIVEN
+   Python script returns COMPLETE instructions.
+   AI follows exactly. Zero interpretation.
+
+2. YAML-DRIVEN AUTO-DETECTION
+   Everything has metadata describing when to load it.
+   AI matches your message → context loads automatically.
+
+3. SKILL-FIRST EXECUTION
+   Skills have priority over projects.
+   User skills have priority over system skills.
+
+4. PROGRESSIVE DISCLOSURE
+   Load minimum at start (metadata only).
+   More context just-in-time when needed.
+
+5. STATE IN DATA FILES
+   System state tracked in YAML and checkboxes.
+   No hidden logic. Transparent. Inspectable.
+
+6. CONTEXT PRESERVATION
+   Nothing is lost between sessions.
+   close-session saves everything automatically.
+
+7. CONCRETE BEFORE ABSTRACT
+   Experience first, explanation after.
+   Value delivery before feature teaching.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Ask**: "Any principle you want me to explain further?"
+
+---
+
+## Part D: System Pitfalls (2 min)
 
 ### Pitfall #1: Projects Instead of Skills
 
@@ -53,9 +158,9 @@ Add folders WHEN needed, not before.
 
 ---
 
-## Part B: AI Patterns (5 min)
+## Part E: AI Collaboration Patterns (2 min)
 
-### Pattern #1: False Progress (19% of failures)
+### Pattern #1: False Progress
 
 ```
 AI: "Done! Files created."
@@ -64,21 +169,19 @@ AI: "Done! Files created."
 Detection:
 🔍 "Show me the files"
 🔍 "Read that back"
-🔍 "What was modified?"
 ```
 
-### Pattern #2: Incomplete Reads (40% of integration failures)
+### Pattern #2: Incomplete Reads
 
 ```
 AI reads 100 of 500 lines, misses critical info.
 
 Detection:
 🔍 "Did you read the ENTIRE file?"
-🔍 "How many lines?"
 🔍 "What's at the end?"
 ```
 
-### Pattern #3: Over-Engineering (16% of failures)
+### Pattern #3: Over-Engineering
 
 ```
 You want simple, AI builds framework.
@@ -86,60 +189,67 @@ You want simple, AI builds framework.
 Detection:
 🔍 "Can this be simpler?"
 🔍 "What's the minimum needed?"
-🔍 "Start small, add later"
 ```
 
 ---
 
-## Part C: Expert Patterns (5 min)
+## Part F: Expert Techniques (2 min)
 
-### Pattern #1: "Yes, And..." Collaboration
+### "Yes, And..." Collaboration
 
-AI adds value beyond request. Example:
 ```
 You: "Create sales proposal template"
 AI: "I'll create it. I notice you target enterprise
-     clients - should I add ROI calculator section?"
+     clients - should I add ROI calculator?"
 ```
 
 Evaluate additions, don't auto-accept/reject.
 
-### Pattern #2: Intelligent Friction
+### Intelligent Friction
 
-Sometimes AI SHOULD slow you down:
 ```
-You: "Create 10 projects for Q1 goals"
+You: "Create 10 projects for Q1"
 AI: "Before 10 projects: Which unblocks others?
      Should some be skills? Start with 2-3?"
 ```
 
 Good friction prevents wasted effort.
 
-### Pattern #3: Proactive Scanning
+### The Planning Pattern
 
-Expert users expect AI to LOOK before asking. Enable by:
-- Keep workspace-map.md updated
-- Use close-session to save context
+```
+Session 1 (Planning - 20-30 min):
+- Create project structure
+- Fill overview.md, plan.md, steps.md
+- NO IMPLEMENTATION
+
+Session 2 (Execution):
+- Load planning files (crystal-clear requirements)
+- Execute end-to-end
+- Minimal intervention needed
+```
+
+Planning optimized for thinking. Execution optimized for doing.
 
 ---
 
-## Part D: Mastery Check (3 min)
+## Part G: Mastery Check (2 min)
 
 Quick quiz:
 1. Creating "expense-report-jan", "expense-report-feb"... Fix?
 2. AI says "Done! All files created." Response?
-3. AI suggests complex 10-step solution. Response?
+3. What's the #1 design principle of Nexus?
 
 Answers:
 1. ONE "expense-report" skill
 2. "Show me the files"
-3. "Can this be simpler?"
+3. Instruction-driven (Python script controls, AI follows)
 
 ---
 
 ## Finalize
 
-**Actions** (MUST complete):
+**Actions** (MUST complete all):
 
 1. **Mark skill complete** in user-config.yaml:
    ```yaml
@@ -148,12 +258,40 @@ Answers:
        learn_nexus: true  # ADD THIS LINE
    ```
 
+2. **Display completion**:
+   ```
+   ✅ Learn Nexus Complete!
+
+   You now understand:
+   • The Living Knowledge Organism philosophy
+   • 7 problems Nexus solves
+   • 7 design principles (instruction-driven, skill-first, etc.)
+   • 3 system pitfalls to avoid
+   • 3 AI patterns to detect
+   • Expert collaboration techniques
+
+   You're ready to use Nexus at full power.
+
+   Next steps:
+   • 'create project' - Start a new project
+   • 'create skill' - Capture a workflow
+   • Just work - Nexus guides you
+   ```
+
+3. **Prompt close-session**:
+   ```
+   💡 When you're done working, say "done" to save progress.
+   ```
+
 ---
 
 ## Success Criteria
 
+- [ ] User understands the Living Knowledge Organism philosophy
+- [ ] User knows the 7 problems Nexus solves
+- [ ] User can name key design principles
 - [ ] User knows 3 system pitfalls and how to avoid them
 - [ ] User can detect 3 AI behavior patterns
-- [ ] User understands 3 expert collaboration patterns
+- [ ] User understands expert collaboration patterns
 - [ ] User passed mastery check quiz
 - [ ] `learning_tracker.completed.learn_nexus: true` in user-config.yaml

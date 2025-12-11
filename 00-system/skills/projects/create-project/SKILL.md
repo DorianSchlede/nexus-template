@@ -1,6 +1,6 @@
 ---
 name: create-project
-description: Create new temporal work projects with AI-guided planning and structure. Load when user mentions "create project", "new project", or "start something new". Guides through collaborative project definition, folder creation, task breakdown, and system integration using mental models.
+description: "[CORE SKILL] Create new temporal work projects. Load when user says 'create project', 'new project', 'start project'. AI should SUGGEST (not auto-load) when: (1) user describes work with a clear endpoint, (2) user asks for help with a deliverable, (3) user mentions planning work. Ask: 'Would you like me to create a project to track this?' - let user decide."
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

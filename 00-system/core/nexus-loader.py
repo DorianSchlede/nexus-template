@@ -46,19 +46,19 @@ smart_default: true
 
 > **Purpose**: Define what you want to achieve (for AI context)
 >
-> **Updated**: Set during onboarding, revised as needed
+> **Updated**: Set via 'setup goals' skill, revised as needed
 
 ---
 
 ## Current Role
 
-[TODO: Set in onboarding - Project 00]
+[TODO: Say 'setup goals' to personalize]
 
 ---
 
 ## Short-Term Goal (3 months)
 
-[TODO: Set in onboarding - Project 00]
+[TODO: Say 'setup goals' to personalize]
 
 **Why This Matters**:
 [TODO: Why is this important to you?]
@@ -72,7 +72,7 @@ smart_default: true
 
 ## Long-Term Vision (1-3 years)
 
-[TODO: Set in onboarding - Project 00]
+[TODO: Say 'setup goals' to personalize]
 
 ---
 
@@ -84,7 +84,7 @@ smart_default: true
 
 ---
 
-**Last Updated**: [TODO: Set during onboarding]
+**Last Updated**: [TODO: Updated after 'setup goals']
 """
 
 SMART_DEFAULT_CONFIG = """---
@@ -113,6 +113,7 @@ learning_tracker:
   completed:
     setup_goals: false
     setup_workspace: false
+    learn_integrations: false
     learn_projects: false
     learn_skills: false
     learn_nexus: false
@@ -557,6 +558,50 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
     return projects
 
 
+def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]:
+    """
+    Detect which integrations are already built in the system.
+
+    An integration is considered "configured" if it has a master skill folder:
+    00-system/skills/{integration}/{integration}-master/
+
+    Returns:
+        List of dicts with integration name and available skills
+    """
+    integrations = []
+    skills_dir = Path(base_path) / "00-system" / "skills"
+
+    if not skills_dir.exists():
+        return []
+
+    # Known integration patterns (folders that represent external service integrations)
+    # These follow the master/connect/specialized pattern
+    for category_dir in skills_dir.iterdir():
+        if not category_dir.is_dir():
+            continue
+
+        category_name = category_dir.name
+
+        # Check if this category has a master skill (indicates it's an integration)
+        master_skill = category_dir / f"{category_name}-master"
+        if master_skill.exists() and (master_skill / "SKILL.md").exists():
+            # This is a configured integration
+            integration = {
+                'name': category_name,
+                'slug': category_name.lower(),
+                'skills': []
+            }
+
+            # List all skills in this integration
+            for skill_dir in category_dir.iterdir():
+                if skill_dir.is_dir() and (skill_dir / "SKILL.md").exists():
+                    integration['skills'].append(skill_dir.name)
+
+            integrations.append(integration)
+
+    return integrations
+
+
 def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, Any]]:
     """Scan all skills and extract YAML metadata.
     
@@ -879,6 +924,7 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
     learning_completed = {
         'setup_goals': False,
         'setup_workspace': False,
+        'learn_integrations': False,
         'learn_projects': False,
         'learn_skills': False,
         'learn_nexus': False,
@@ -903,6 +949,33 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
     # Filter to non-complete projects for menu
     active_projects = [p for p in projects if p.get('status') != 'COMPLETE']
 
+    # Check if any integrations are configured
+    # Detection methods (any one is sufficient):
+    # 1. core-learnings.md has ## Integrations section with actual integration entries (### headers)
+    # 2. User has completed learn_integrations skill (tracked in learning_completed)
+    integrations_configured = False
+    core_learnings_path = base / "01-memory" / "core-learnings.md"
+    if core_learnings_path.exists():
+        try:
+            with open(core_learnings_path, 'r', encoding='utf-8') as f:
+                learnings_content = f.read()
+                # Check for Integrations section with actual integration entries (### subsections)
+                if '## Integrations' in learnings_content:
+                    # Look for ### headers under ## Integrations (indicates actual integrations added)
+                    integrations_match = re.search(r'## Integrations\s*\n(.*?)(?=\n## |\Z)', learnings_content, re.DOTALL)
+                    if integrations_match:
+                        section_content = integrations_match.group(1)
+                        # Has actual integrations if there are ### subsections (e.g., ### Notion, ### GitHub)
+                        integrations_configured = '### ' in section_content
+        except Exception:
+            pass
+
+    # Also check if user has completed learn_integrations (they understand integrations even if none configured)
+    # This is stored separately in learning_completed['learn_integrations']
+
+    # Detect built integrations (have master/connect skill pattern)
+    configured_integrations = detect_configured_integrations(base_path)
+
     result['stats'] = {
         'files_embedded': len(result['memory_content']),
         'mandatory_maps_loaded': mandatory_maps_found,
@@ -914,6 +987,8 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
         'user_skills': len(user_skills),
         'goals_personalized': goals_personalized,
         'workspace_configured': workspace_configured,
+        'integrations_configured': integrations_configured,
+        'configured_integrations': configured_integrations,  # List of built integrations
         'learning_completed': learning_completed,
     }
 

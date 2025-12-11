@@ -68,12 +68,20 @@ Smart routing does NOT apply:
 
 | Priority | Trigger | Action |
 |----------|---------|--------|
+| **0. Integration Exists** | "add/integrate [name]" where name is in `stats.configured_integrations` | Redirect to `{name}-connect` skill, explain it's already built |
 | **1. Skill Match** | Message matches any skill description in `metadata.skills` | Load skill → Execute workflow |
 | **2. Project Work** | "continue/work on/resume [project]" | Auto-load `execute-project` skill with project context |
 | **3. Project Reference** | Message mentions project name | Load project, show context (don't auto-execute) |
 | **4. General** | No match | Respond naturally. For Nexus questions → `00-system/documentation/product-overview.md` |
 
+**Integration Redirect (P0):**
+Before loading `add-integration` skill, check `stats.configured_integrations[]`.
+If user says "add beam" and "beam" exists in configured_integrations → DON'T load add-integration.
+Instead: "Beam is already integrated! Say 'beam connect' to use it, or tell me what you want to do with Beam."
+
 **Examples:**
+- "add beam" → Check configured_integrations → "beam" found → Redirect to beam-connect (P0)
+- "add hubspot" → Check configured_integrations → not found → `add-integration` skill (P1)
 - "create project" → `create-project` skill (P1)
 - "setup goals" → `setup-goals` skill (P1)
 - "continue website" → `execute-project` + website context (P2)
@@ -114,12 +122,21 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
    [If stats.workspace_configured=false: "Not configured ▸ 'setup workspace'"]
    [If stats.workspace_configured=true: "Configured ▸ 'validate workspace' to sync"]
 
+🔌 INTEGRATIONS
+   Available: Notion, Airtable, Beam.ai ▸ 'add integration'
+   [If stats.integrations_configured=false AND stats.learning_completed.learn_integrations=false:
+    "Not configured ▸ 'learn integrations'"]
+   [If stats.integrations_configured=false AND stats.learning_completed.learn_integrations=true:
+    "Ready to connect ▸ 'connect notion' or 'add integration'"]
+   [If stats.integrations_configured=true: "Active ▸ 'add integration' for more"]
+
 💡 SUGGESTED NEXT STEPS
    [Number sequentially starting from 1. Show ALL applicable:]
 
    Onboarding sequence (show unconfigured ones):
    - goals_personalized=false → "[N]. 'setup goals' - teach Nexus about you"
    - workspace_configured=false → "[N]. 'setup workspace' - organize your files"
+   - learning_completed.learn_integrations=false → "[N]. 'learn integrations' - connect external tools"
    - user_skills=0 → "[N]. 'create skill' - automate a repeating workflow"
    - total_projects=0 → "[N]. 'create project' - start your first project"
 
@@ -157,6 +174,27 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
 After loading files, check `user-config.yaml`:
 - If `user_preferences.language` is set → Use that language for ALL responses
 - If empty → Default to English
+
+---
+
+## Session End Behavior
+
+### Gentle Reminders
+When user signals they're wrapping up (e.g., "thanks", "that's all", "I'm done for now"):
+- Gently remind: "Want me to save your session progress? Say 'done' to capture what we accomplished."
+- Don't force it — if user says "no" or ignores, respect that
+
+### Auto-Trigger Signals
+Auto-trigger `close-session` skill when:
+- User explicitly says "done", "close session", "wrap up", "finished"
+- A project reaches 100% completion
+- A major skill workflow completes (create-project, setup-goals, etc.)
+
+### Why This Matters
+Without `close-session`:
+- Progress isn't saved to session reports
+- Learnings aren't captured
+- Next session loses context
 
 ---
 

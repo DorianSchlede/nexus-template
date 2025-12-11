@@ -120,9 +120,9 @@ This ensures all validation results and any auto-fixes are properly saved to mem
 **Scenario**: Projects/ exists but is empty (only during first-time setup)
 
 **Action**:
-- Report: "Projects/ folder is empty (system appears uninitialized)"
-- Note: "This is normal if you haven't completed onboarding yet."
-- Suggest: "Complete Project 00-setup-memory to initialize system."
+- Report: "Projects/ folder is empty (no projects yet)"
+- Note: "This is normal for new users."
+- Suggest: "Say 'create project' to start your first project!"
 - Mark as INFO (not an error)
 
 ### Empty Skills/ Folder

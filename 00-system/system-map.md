@@ -43,6 +43,7 @@ Nexus-v4/
 │   │   ├── create-skill/
 │   │   ├── setup-goals/
 │   │   ├── setup-workspace/
+│   │   ├── learn-integrations/
 │   │   ├── learn-projects/
 │   │   ├── learn-skills/
 │   │   ├── learn-nexus/
@@ -59,7 +60,6 @@ Nexus-v4/
 │   └── session-reports/            # Historical sessions
 │
 ├── 02-projects/                    # TEMPORAL WORK
-│   ├── 00-onboarding/              # Legacy onboarding projects
 │   └── {ID}-{name}/                # User projects
 │       ├── 01-planning/
 │       │   ├── overview.md         # YAML metadata

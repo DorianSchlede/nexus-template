@@ -112,7 +112,6 @@ Checking folder structure...
 
 - [ ] `02-projects/project-map.md` exists and is valid markdown
 - [ ] `01-memory/goals.md` exists
-- [ ] `01-memory/roadmap.md` exists
 - [ ] `01-memory/core-learnings.md` exists
 
 **For each file:**
@@ -125,7 +124,6 @@ Checking folder structure...
 Checking memory files...
 ✅ 02-projects/project-map.md (valid markdown)
 ✅ 01-memory/goals.md
-✅ 01-memory/roadmap.md
 ✅ 01-memory/core-learnings.md
 ```
 

@@ -1,24 +1,42 @@
 ---
 name: add-integration
-description: Guide MCP server setup to connect external tools to Nexus. Load when user mentions "add integration", "connect tool", "setup MCP", or "integrate with". Walks through installation, configuration, credential setup, testing, and documentation of integrations like GitHub, Slack, Notion, and Google Drive.
+description: Build a new API integration for Nexus. Load when user mentions "add integration", "new integration", "integrate with", "connect to [service]", or "build [service] integration". Interactive workflow that discovers API endpoints, plans the integration, and creates a project for implementation.
 ---
 
 # Add Integration
 
-Guide MCP server setup to connect external tools to Nexus.
+Build complete API integrations following the master/connect/specialized pattern.
 
 ## Purpose
 
-The `add-integration` skill helps you connect external tools and services to Nexus via MCP (Model Context Protocol). It guides you through installation, configuration, testing, and documentation of integrations like GitHub, Slack, Notion, Google Drive, and more.
+The `add-integration` skill transforms API documentation into a complete, production-ready integration. It:
 
-**Key Features:**
-- **MCP Explanation**: Clear intro to what MCP is and why it's useful
-- **Tool Selection**: Helps identify which MCP servers fit your needs
-- **Setup Guidance**: Step-by-step installation and configuration
-- **Connection Testing**: Verifies integration works
-- **Documentation**: Records integration in Memory for future reference
+1. **Discovers** available API endpoints via web search
+2. **Presents** endpoints for user selection
+3. **Plans** the integration architecture
+4. **Creates a project** for implementation
 
-**Time Estimate**: 10-20 minutes (depending on tool complexity)
+**Architecture Pattern**: See [references/integration-architecture.md](references/integration-architecture.md)
+
+**Time Estimate**: 15-25 minutes (planning phase)
+
+---
+
+## Workflow Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                   ADD INTEGRATION                        │
+├─────────────────────────────────────────────────────────┤
+│  Step 1: Ask which service to integrate                 │
+│  Step 2: Web search for API documentation               │
+│  Step 3: Parse and present available endpoints          │
+│  Step 4: User selects endpoints to implement            │
+│  Step 5: Gather authentication details                  │
+│  Step 6: Create integration project with full plan      │
+│  Step 7: Prompt user to close session & start project   │
+└─────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -28,476 +46,418 @@ The `add-integration` skill helps you connect external tools and services to Nex
 
 Create TodoWrite with all workflow steps:
 ```
-- [ ] Display MCP introduction
-- [ ] Ask which tool to connect
-- [ ] Check MCP server availability
-- [ ] Retrieve latest API documentation via Context7
-- [ ] Guide through installation
-- [ ] Guide through configuration
-- [ ] Test connection
-- [ ] Document integration
-- [ ] Display success
-- [ ] Close session to save progress
+- [ ] Ask which service to integrate
+- [ ] Search for API documentation
+- [ ] Parse and present endpoints
+- [ ] User selects endpoints
+- [ ] Gather authentication details
+- [ ] Create integration project
+- [ ] Close session
 ```
 
 **Mark tasks complete as you finish each step.**
 
 ---
 
-### Step 2: Display MCP Introduction
-
-**For complete MCP overview**: See [references/mcp-introduction.md](references/mcp-introduction.md)
-
-**Brief explanation to user:**
-
-```
-Let me help you connect external tools to Nexus! 🔌
-
-**What is MCP (Model Context Protocol)?**
-
-MCP is like a universal adapter that lets me (Claude) interact with
-external tools and data sources. Think of it as building bridges between
-Nexus and the tools you already use.
-
-**Popular integrations:**
-- GitHub (repos, issues, PRs)
-- Slack (messaging, notifications)
-- Google Drive (file storage)
-- Notion (notes, databases)
-- Linear (issue tracking)
-- And many more...
-
-**How it works:**
-1. Install an MCP server (small program for the tool)
-2. Configure connection (API keys, credentials)
-3. I can now read/write data from that tool
-4. Use it naturally in your Nexus workflows
-
-Want to add an integration? I'll guide you through it step-by-step!
-```
-
-**Wait for user acknowledgment.**
-
----
-
-### Step 3: Ask Which Tool to Connect
+### Step 2: Interactive Service Selection
 
 Display:
 ```
-Which tool would you like to connect?
+Let's build a new integration! 🔌
 
-**Popular options:**
-- GitHub (code repos, issues, PRs)
-- Slack (messaging, notifications)
-- Google Drive (file storage, sharing)
-- Notion (notes, databases, pages)
-- Linear (issue tracking, projects)
-- Jira, Trello, PostgreSQL, Obsidian, File System
+Which service would you like to integrate?
 
-Just tell me the tool name, or say "show me more options" for the full list.
+Examples:
+• HubSpot (CRM, marketing automation)
+• Stripe (payments, subscriptions)
+• Twilio (SMS, voice, messaging)
+• Airtable (databases, spreadsheets)
+• Slack (messaging, notifications)
+• GitHub (repos, issues, PRs)
+• Linear (issue tracking)
+• Notion (notes, databases)
+• Or any service with a REST API
+
+Tell me the service name:
 ```
 
 **Wait for user response.**
 
-**Capture tool name:**
-- Normalize input (e.g., "github", "GitHub", "GITHUB" → "github")
-- Validate against known MCP servers
-- Store for later steps
+**Capture and normalize**:
+- Store service name (e.g., "HubSpot")
+- Generate slug (e.g., "hubspot")
+- Note any specific features mentioned
 
 ---
 
-### Step 4: Check MCP Server Availability
+### Step 3: Web Search for API Documentation
 
-**Check if tool has MCP server:**
+**CRITICAL: Use WebSearch to find current API documentation**
 
-**Known MCP servers**:
-github, slack, gdrive, notion, linear, jira, trello, postgres, obsidian, filesystem
+```
+AI Action:
+1. WebSearch: "{service_name} REST API documentation endpoints"
+2. WebSearch: "{service_name} API reference authentication"
+3. Identify official API docs URL
+4. Use WebFetch on official docs to get endpoint details
+```
 
-**Full directory**: https://github.com/modelcontextprotocol/servers
+**Search targets**:
+- Official API documentation
+- Authentication methods
+- Available endpoints by category
+- Rate limits and requirements
+
+**Display progress**:
+```
+Searching for {Service} API documentation...
+
+Found:
+• Official docs: {url}
+• API version: {version}
+• Auth type: {oauth2/api_key/bearer}
+```
 
 ---
 
-**IF tool has known MCP server:**
+### Step 4: Parse and Present Endpoints
 
-Display:
+After fetching API docs, categorize and present:
+
 ```
-✅ Great choice! {Tool} has an official MCP server.
+I found {N} API endpoints for {Service}:
 
-I'll guide you through:
-1. Installing the MCP server
-2. Getting necessary credentials (API keys, tokens)
-3. Configuring the connection
-4. Testing it works
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+AUTHENTICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [1] POST /oauth/token - Get access token
+  [2] POST /oauth/refresh - Refresh token
 
-Ready to start? (This will take about 10-15 minutes)
-```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{CATEGORY 1} (e.g., CONTACTS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [3] GET /contacts - List all contacts
+  [4] GET /contacts/{id} - Get contact by ID
+  [5] POST /contacts - Create contact
+  [6] PATCH /contacts/{id} - Update contact
+  [7] DELETE /contacts/{id} - Delete contact
 
-**Wait for confirmation.**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{CATEGORY 2} (e.g., DEALS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  [8] GET /deals - List deals
+  [9] POST /deals - Create deal
+  ...
 
----
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**IF tool doesn't have known MCP server:**
-
-Display:
-```
-⚠️  I don't see an official MCP server for {Tool}.
+Which endpoints do you want to implement?
 
 Options:
-1. Check the MCP directory: https://github.com/modelcontextprotocol/servers
-2. Request from community: https://github.com/modelcontextprotocol/discussions
-3. Build custom server: https://modelcontextprotocol.io/docs/custom-servers
-4. Choose different tool: Pick one with existing support
-
-What would you like to do?
+• "all" - Implement everything ({N} endpoints)
+• "1,3,5,8" - Select by number
+• "contacts, deals" - Select by category
+• "core" - Essential CRUD operations only
 ```
 
-**Handle user response appropriately.**
+**Wait for user response.**
 
 ---
 
-### Step 5: Retrieve Latest API Documentation (Context7)
+### Step 5: Gather Authentication Details
 
-🔥 **CRITICAL: Use Context7 MCP for up-to-date API documentation!**
+Based on API docs discovered:
 
-**Before providing installation/configuration guidance:**
+```
+Authentication Setup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-```python
-# Use Context7 to get latest library documentation
-1. Resolve library ID: resolve-library-id("{tool-name}")
-2. Get documentation: get-library-docs(library_id, topic="authentication setup configuration")
+{Service} uses {auth_type} authentication.
+
+To set up:
+{auth_instructions from API docs}
+
+I'll need this info for the integration config:
+
+1. API Base URL: {detected_base_url}
+   Is this correct? (or provide alternative)
+
+2. Auth type: {oauth2/api_key/bearer}
+   Confirm or correct
+
+3. Environment variable name suggestion:
+   {SERVICE_SLUG}_API_KEY
+
+   Okay? Or suggest different name
 ```
 
-**Why this matters:**
-- API endpoints change frequently
-- OAuth scopes get updated
-- New authentication methods emerge
-- Configuration formats evolve
-
-**Example usage:**
-```
-For Gmail: resolve-library-id("gmail-api") → get-library-docs("/googleapis/google-api-python-client", topic="gmail authentication oauth")
-For GitHub: resolve-library-id("github api") → get-library-docs("/octokit/rest.js", topic="authentication tokens")
-For Slack: resolve-library-id("slack api") → get-library-docs("/slackapi/node-slack-sdk", topic="oauth configuration")
-```
-
-**Use retrieved documentation to:**
-- ✅ Provide accurate credential setup steps
-- ✅ List current required scopes/permissions
-- ✅ Show latest configuration format
-- ✅ Include any breaking changes or deprecations
-
-**If Context7 unavailable:** Fall back to reference files, but note documentation may be outdated.
+**Wait for user confirmation/corrections.**
 
 ---
 
-### Step 6: Guide Through Installation
+### Step 6: Create Integration Project
 
-**For detailed setup instructions**: See [references/mcp-setup-guide.md](references/mcp-setup-guide.md)
+**Use create-project skill internally** to create a project for implementation.
 
-**Provide concise installation guidance:**
-
+**Project structure**:
 ```
-Step 1: Install the MCP Server
-
-**Prerequisites:**
-- Node.js installed (check: `node --version`)
-- If not installed, download from: https://nodejs.org/
-
-**Installation:**
-The MCP server installs via npx (no permanent installation needed):
-
-```bash
-npx -y @modelcontextprotocol/server-{tool}
+02-projects/{next_id}-{service_slug}-integration/
+├── 01-planning/
+│   ├── overview.md          # Project metadata
+│   └── steps.md             # Implementation checklist
+├── 02-resources/
+│   └── integration-config.json   # Captured configuration
+├── 03-working/
+└── 04-outputs/
 ```
 
-This downloads the {Tool} MCP server automatically.
-
-**Ready to proceed?** Say "next" when you've verified Node.js is installed.
-```
-
-**Wait for user confirmation.**
-
+**overview.md content**:
+```yaml
+---
+id: {next_id}-{service_slug}-integration
+name: {Service Name} Integration
+status: PLANNING
+description: Load when user mentions '{service_slug} integration', 'implement {service_slug}', 'build {service_slug} skills'
+created: {today}
 ---
 
-### Step 7: Guide Through Configuration
+# {Service Name} Integration
 
-**For complete configuration guide**: See [references/mcp-setup-guide.md#tool-specific-credentials](references/mcp-setup-guide.md)
+Build complete {Service Name} integration following the master/connect/specialized pattern.
 
-**💡 Use Context7 documentation from Step 5 for accurate, up-to-date credential instructions!**
+## Scope
 
-**Step 7a: Get API Credentials**
+- **Service**: {Service Name}
+- **Base URL**: {base_url}
+- **Auth Type**: {auth_type}
+- **Endpoints**: {count} selected
 
-Guide user to get credentials:
+## Architecture
+
+Will create:
+- `{service_slug}-master/` - Shared resources
+- `{service_slug}-connect/` - Meta-skill entry point
+- `{service_slug}-{operation}/` - One skill per endpoint
+
+## References
+
+- API Docs: {api_docs_url}
+- Pattern: See 00-system/skills/system/add-integration/references/integration-architecture.md
 ```
-Step 2: Get {Tool} API Credentials
 
-[Provide tool-specific instructions]
+**steps.md content**:
+```markdown
+# Implementation Steps
 
-Example for GitHub:
-1. Go to https://github.com/settings/tokens
-2. Click "Generate new token (classic)"
-3. Name: "Nexus MCP Integration"
-4. Select scopes: ✓ repo, ✓ workflow
-5. Generate and copy token immediately
+## Phase 1: Setup Master Skill
+- [ ] Create {service_slug}-master/ directory structure
+- [ ] Generate {service_slug}_client.py from template
+- [ ] Generate check_{service_slug}_config.py
+- [ ] Generate setup_{service_slug}.py wizard
+- [ ] Create references/setup-guide.md
+- [ ] Create references/api-reference.md
+- [ ] Create references/error-handling.md
+- [ ] Create references/authentication.md
 
-Once you have your credentials, say "I have the credentials".
+## Phase 2: Setup Connect Skill
+- [ ] Create {service_slug}-connect/ directory
+- [ ] Generate SKILL.md with routing table
+- [ ] Map workflows to endpoints
+
+## Phase 3: Create Operation Skills
+{for each selected endpoint:}
+- [ ] Create {service_slug}-{endpoint_slug}/ skill
+- [ ] Generate SKILL.md with API reference
+- [ ] Generate {endpoint_slug}.py script
+
+## Phase 4: Test & Validate
+- [ ] Run config check script
+- [ ] Test authentication flow
+- [ ] Test each endpoint script
+- [ ] Verify error handling
+
+## Phase 5: Documentation
+- [ ] Update master SKILL.md with all skills
+- [ ] Document any service-specific quirks
+- [ ] Add usage examples
 ```
 
-**Wait for user confirmation.**
-
----
-
-**Step 7b: Configure MCP Server**
-
-Provide configuration instructions:
-```
-Step 3: Configure Claude to Use {Tool}
-
-**Config file location:**
-- macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
-- Windows: %APPDATA%\Claude\claude_desktop_config.json
-- Linux: ~/.config/Claude/claude_desktop_config.json
-
-**Add this configuration:**
-
+**integration-config.json content**:
 ```json
 {
-  "mcpServers": {
-    "{tool}": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-{tool}"],
-      "env": {
-        "{TOKEN_NAME}": "your_token_here"
-      }
+  "service_name": "{Service Name}",
+  "service_slug": "{service_slug}",
+  "base_url": "{base_url}",
+  "auth_type": "{auth_type}",
+  "env_key": "{ENV_KEY}",
+  "api_docs_url": "{api_docs_url}",
+  "endpoints": [
+    {
+      "name": "{Endpoint Name}",
+      "slug": "{endpoint-slug}",
+      "method": "GET|POST|PATCH|DELETE",
+      "path": "/api/path",
+      "description": "{description}",
+      "triggers": ["trigger phrase 1", "trigger phrase 2"],
+      "parameters": []
     }
-  }
+  ],
+  "created": "{timestamp}",
+  "created_by": "add-integration skill"
 }
 ```
 
-Replace `your_token_here` with your actual token.
-
-**After editing:**
-1. Save the file
-2. **Restart Claude** (important!)
-3. Say "I've configured it"
-
-For detailed examples and troubleshooting, see:
-[references/mcp-setup-guide.md](references/mcp-setup-guide.md)
+**Display confirmation**:
 ```
+Project Created!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Wait for user confirmation.**
+📁 02-projects/{id}-{service_slug}-integration/
 
----
+This project contains:
+• Full implementation plan in steps.md
+• Configuration saved in integration-config.json
+• {N} endpoints ready to implement
 
-### Step 8: Test Connection
+The implementation will create:
+• {service_slug}-master/ (shared resources)
+• {service_slug}-connect/ (meta-skill)
+• {count} operation skills
 
-Guide user through connection test:
-```
-Step 4: Test the Integration
-
-**Restarted Claude?** If not, please restart now.
-
-**Test command for {Tool}:**
-
-[Tool-specific test examples:]
-- GitHub: "List my GitHub repositories"
-- Slack: "List Slack channels"
-- Google Drive: "Show files in my Google Drive"
-- Notion: "List my Notion pages"
-
-Try that command now!
-```
-
-**Wait for user to try command.**
-
-**Attempt connection:**
-- Try to execute test command via MCP
-- IF succeeds → Display success, proceed to Step 8
-- IF fails → Show error, refer to troubleshooting
-
----
-
-**IF connection succeeds:**
-
-```
-✅ Connection successful!
-
-I was able to connect to {Tool} and {what you did}.
-
-Your integration is working! You can now use {Tool} features
-directly in Nexus workflows.
-
-**Example uses:**
-- [Use case 1]
-- [Use case 2]
-- [Use case 3]
-
-Let me document this integration in your Memory...
-```
-
-Proceed to Step 9.
-
----
-
-**IF connection fails:**
-
-```
-❌ Connection failed.
-
-Error: {error message}
-
-**Quick troubleshooting:**
-1. Verify API key is correct (no typos, no extra spaces)
-2. Check token permissions/scopes
-3. Verify JSON syntax in config file
-4. Confirm you restarted Claude
-5. Test npx: `npx -y @modelcontextprotocol/server-{tool} --version`
-
-For detailed troubleshooting: [references/troubleshooting-guide.md](references/troubleshooting-guide.md)
-
-Want to try troubleshooting, or pause and revisit later?
-```
-
-**Wait for user response.**
-
----
-
-### Step 9: Document Integration
-
-Update 01-memory/core-learnings.md:
-
-Load `01-memory/core-learnings.md`
-
-**Add integration entry** to "## Integrations" section:
-
-```markdown
-### {Tool Name}
-**Connected**: {YYYY-MM-DD}
-**MCP Server**: @modelcontextprotocol/server-{tool}
-**Use For**: {Purpose based on tool}
-**Setup Notes**:
-- API Key: {masked version}
-- Permissions: {what permissions granted}
-- Config Location: {path to config file}
-
-**Example Uses**:
-- {Use case 1}
-- {Use case 2}
-
-**Tested**: {YYYY-MM-DD} - ✅ Working
-```
-
-Write updated file.
-
-Confirm: `✓ Integration documented in 01-memory/core-learnings.md`
-
----
-
-### Step 10: Display Success Summary
-
-Show complete integration summary:
-```
-✅ Integration Complete!
-
-🔌 {Tool} is now connected to Nexus!
-
----
-
-**What you can do now:**
-- {Feature 1}
-- {Feature 2}
-- {Feature 3}
-
-**Documented in:**
-- 01-memory/core-learnings.md (integration details)
-
-**Configuration:**
-- MCP Server: @modelcontextprotocol/server-{tool}
-- Config File: {path}
-
----
-
-**For more ideas**: See [references/integration-ideas.md](references/integration-ideas.md)
-
-**Tips:**
-- Test integration regularly
-- Rotate API keys periodically (3-6 months)
-- Check tool docs for advanced features
-
-**Need another integration?** Just say "add integration" again!
-
-Your integration is ready to use! 🎉
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
 
-### Final Step: Close Session
+### Step 7: Prompt Close Session & Start Implementation
 
-Auto-trigger the `close-session` skill:
-
+**Final message**:
 ```
-Auto-triggering close-session to save your integration...
+Integration planning complete! 🎉
 
-[close-session workflow executes]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Session saved! ✅
+1. Say "done" to close this session
+   (This saves your planning work)
 
-Your {Tool} integration is documented and ready! 🚀
+2. Start a new session
+
+3. Say "work on {service_slug} integration"
+   (This will execute the implementation project)
+
+The project will guide you through:
+• Creating all skill folders
+• Generating scripts from templates
+• Setting up authentication
+• Testing each endpoint
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ready to close this session? Say "done"
 ```
+
+**Wait for user to say "done"** → Triggers close-session skill
+
+---
+
+## Project Execution Notes
+
+When the user returns and says "work on {service} integration", the `execute-project` skill will:
+
+1. **Load** the integration-config.json
+2. **Run** scaffold_integration.py with the config:
+   ```bash
+   python 00-system/skills/system/add-integration/scripts/scaffold_integration.py \
+     --config 02-projects/{id}-{service_slug}-integration/02-resources/integration-config.json
+   ```
+3. **Check off** steps.md tasks as completed
+4. **Guide** through testing and validation
+
+---
+
+## Templates & Scripts
+
+### Templates (in templates/)
+- `master-skill.md.template` - Master SKILL.md
+- `connect-skill.md.template` - Connect SKILL.md
+- `operation-skill.md.template` - Operation SKILL.md
+- `api-client.py.template` - API client class
+- `config-check.py.template` - Config validator
+- `setup-wizard.py.template` - Setup wizard
+- `operation-script.py.template` - Operation script
+- `references/*.template` - Reference documents
+
+### Scripts (in scripts/)
+- `scaffold_integration.py` - Main scaffolding script
 
 ---
 
 ## Error Handling
 
-**For comprehensive error scenarios**: See [references/troubleshooting-guide.md](references/troubleshooting-guide.md)
+### Web Search Fails
+```
+I couldn't find official API documentation for {Service}.
 
-### Quick Reference
+Options:
+1. Provide the API docs URL directly
+2. Tell me the base URL and auth type manually
+3. Try a different service name
 
-| Issue | Solution |
-|-------|----------|
-| Node.js Not Installed | Download from https://nodejs.org/ |
-| API Key Invalid | Regenerate token, update config, restart Claude |
-| Config File Syntax Error | Validate JSON at https://jsonlint.com/ |
-| MCP Server Not Responding | Verify config location, check Claude restarted |
-| Tool Not Supported | Check https://github.com/modelcontextprotocol/servers |
-| Permissions Insufficient | Add required scopes to token |
-| Multiple Integration Conflicts | Check for duplicate keys in JSON |
+What would you like to do?
+```
 
-**For detailed troubleshooting steps**: See troubleshooting guide reference file.
+### No Endpoints Found
+```
+I found {Service} docs but couldn't parse specific endpoints.
+
+Let me try:
+1. Fetching a different docs page
+2. You provide endpoint list manually
+
+Which approach?
+```
+
+### User Cancels
+```
+No problem! Integration planning cancelled.
+
+Your progress was not saved. Run "add integration"
+again when you're ready.
+```
 
 ---
 
 ## Notes
 
-**Why MCP?**
-- **Universal**: One protocol for many tools
-- **Secure**: API keys stay on your machine
-- **Flexible**: Extend Nexus without modifying core
-- **Optional**: Nexus works perfectly standalone
+**Why projects?**
+- Integration implementation is multi-step work (project)
+- Planning is reusable (skill handles discovery)
+- Separates planning from execution
 
-**Security Best Practices:**
-- Never share API keys publicly
-- Use read-only keys when possible
-- Rotate keys periodically (3-6 months)
-- Review permissions granted
-- Keep config file secure
+**Why web search?**
+- APIs change frequently
+- Ensures current endpoint info
+- Discovers auth requirements automatically
 
-**Integration Ideas:**
-For creative ways to use integrations, see:
-- [references/integration-ideas.md](references/integration-ideas.md)
-
-**Examples**:
-- GitHub: Create issues from tasks
-- Slack: Send project updates
-- Notion: Sync Memory to Notion
-- Google Drive: Auto-backup outputs
-- Obsidian: Sync to vault
-
-**Resources:**
-- MCP Documentation: https://modelcontextprotocol.io/
-- MCP Server Directory: https://github.com/modelcontextprotocol/servers
-- MCP Discussions: https://github.com/modelcontextprotocol/discussions
+**Pattern consistency**:
+- All integrations follow same architecture
+- Matches existing Beam integration
+- Templates ensure quality
 
 ---
 
-**Remember**: Integrations are powerful but optional. Add them only when they add clear value to your workflow. Nexus works perfectly standalone!
+## References
+
+- [Integration Architecture](references/integration-architecture.md) - The pattern explained
+- [MCP Introduction](references/mcp-introduction.md) - What MCP is
+- [MCP Setup Guide](references/mcp-setup-guide.md) - Manual MCP setup
+- [Troubleshooting](references/troubleshooting-guide.md) - Common issues
+- [Integration Ideas](references/integration-ideas.md) - Use cases
+
+---
+
+**Version**: 2.0
+**Updated**: 2025-12-11
+**Major change**: Now creates projects for implementation instead of doing everything in one session

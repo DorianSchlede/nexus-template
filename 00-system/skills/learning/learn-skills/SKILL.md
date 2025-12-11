@@ -1,6 +1,6 @@
 ---
 name: learn-skills
-description: "Learn how Nexus skills work - identifying workflows, skill-worthiness criteria, creating skills. Load when user says 'learn skills', 'skill tutorial', 'how do skills work', 'what is a skill', 'understand workflows', 'explain skills', 'teach me skills', 'skill basics', 'how skills work', 'skill guide', 'when to create skill', 'skill worthiness', 'reusable workflows', 'workflow automation', 'what makes a skill', 'skill structure', or asks about when/how to create reusable workflows. Teaches when and how to create reusable workflows. Takes 10-12 minutes."
+description: "Load when user says 'learn skills', 'how do skills work', 'what is a skill', 'skill tutorial'. Teaches skill-worthiness, structure, and triggering. 10-12 min."
 ---
 
 # Learn Skills
@@ -107,13 +107,34 @@ SYSTEM skills in 00-system/skills/
 
 ### Step 7: Finalize
 
-**Actions** (MUST complete):
+**Actions** (MUST complete all):
 
 1. **Mark skill complete** in user-config.yaml:
    ```yaml
    learning_tracker:
      completed:
        learn_skills: true  # ADD THIS LINE
+   ```
+
+2. **Display completion**:
+   ```
+   ✅ Learn Skills Complete!
+
+   You now understand:
+   • Skills = reusable workflows (do AGAIN → skill)
+   • 3-criteria framework (Frequency + Repeatability + Value)
+   • Skill structure (SKILL.md + optional references/scripts)
+   • Trigger mechanism (keywords in description)
+
+   Next steps:
+   • 'create skill' - Create your first skill
+   • 'learn projects' - Learn about temporal work
+   • 'learn nexus' - System mastery
+   ```
+
+3. **Prompt close-session**:
+   ```
+   💡 When you're done working, say "done" to save progress.
    ```
 
 ---

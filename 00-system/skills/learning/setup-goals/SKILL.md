@@ -1,6 +1,6 @@
 ---
 name: setup-goals
-description: "Personalize Nexus with your goals, role, and preferences. Load when user says 'setup goals', 'define goals', 'personalize nexus', 'set my goals', 'configure nexus', 'my goals', 'update goals', 'edit goals', 'change my goals', 'goals setup', 'personalize my goals', 'customize nexus', 'set up my profile', 'tell nexus about me', 'who am I', 'define my role', or asks about personalizing the system. Transforms smart default templates into personalized context. Takes 8-10 minutes. Optional but recommended for best experience."
+description: "Load when user says 'setup goals', 'personalize nexus', 'set my goals', 'define my role'. Captures role, goals, preferences. 8-10 min."
 ---
 
 # Setup Goals
@@ -96,6 +96,24 @@ Quick questions:
    ```yaml
    user_preferences:
      language: "{user's language}"
+   ```
+
+5. **Display completion**:
+   ```
+   ✅ Setup Goals Complete!
+
+   Captured:
+   • Your role and work context
+   • Short-term goal (3 months) with success metrics
+   • Long-term vision (1-3 years)
+   • Work style preferences
+
+   Nexus now understands you. Context loads every session.
+
+   Next steps:
+   • 'setup workspace' - Organize your folders
+   • 'learn projects' - Understand project workflow
+   • 'create project' - Start working
    ```
 
 ---

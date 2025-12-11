@@ -1,0 +1,253 @@
+---
+name: learn-integrations
+description: "Load when user says 'learn integrations', 'what is MCP', 'connect tools', 'integration tutorial'. Teaches MCP, available integrations, when to integrate. 10-12 min."
+---
+
+# Learn Integrations
+
+Learn how to connect external tools to Nexus via MCP (Model Context Protocol).
+
+## Purpose
+
+This skill teaches you how integrations work in Nexus — what they are, which ones are available, and when/how to add them. By the end, you'll understand:
+
+- What MCP is and why it matters
+- Which integrations are available
+- When to add integrations vs work standalone
+- How to set up your first integration
+
+**Time Estimate**: 10-12 minutes
+
+---
+
+## Workflow
+
+### Step 1: Why Integrations?
+
+**Ask**: "Before we dive in — do you currently use any external tools for your work? Things like GitHub, Notion, Slack, Airtable, Google Drive, or Linear?"
+
+**Listen for**: Tools they already use, how they use them, pain points.
+
+**Respond based on answer**:
+- If they mention tools → "Perfect! Integrations let me work directly with those tools."
+- If they're unsure → "That's fine! Let's explore what's possible."
+
+---
+
+### Step 2: What is MCP?
+
+**Display**:
+```
+━━━ WHAT IS MCP? ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MCP (Model Context Protocol) is like a universal adapter.
+It lets me connect to your external tools and work with them directly.
+
+WITHOUT MCP:
+  You: "Check my GitHub issues"
+  Me: "I can't access GitHub directly. Please copy-paste the info."
+  You: [manually copies data]
+
+WITH MCP:
+  You: "Check my GitHub issues"
+  Me: [directly queries GitHub] "You have 5 open issues..."
+
+Think of MCP as building bridges between Nexus and your tools.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Ask**: "Does that make sense? Any questions about what MCP does?"
+
+---
+
+### Step 3: Available Integrations
+
+**Display**:
+```
+━━━ CORE INTEGRATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Nexus includes master skills for these integrations:
+
+🔷 BUILT-IN (Ready to Configure)
+   • Notion     → "connect notion"     → Databases, pages, search
+   • Airtable   → "connect airtable"   → Bases, records, automation
+   • Beam.ai    → "beam" commands      → AI agent workflows
+
+🔌 MCP SERVERS (Via add-integration skill)
+   • GitHub     → Repos, issues, PRs, actions
+   • Slack      → Messages, channels, notifications
+   • Google Drive → Files, folders, sharing
+   • Linear     → Issues, projects, roadmaps
+   • PostgreSQL → Direct database queries
+   • Filesystem → Local file operations
+   • And 50+ more via MCP directory
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Ask**: "Any of these tools sound relevant to your work?"
+
+---
+
+### Step 4: When to Integrate
+
+**Display**:
+```
+━━━ INTEGRATION DECISION FRAMEWORK ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADD AN INTEGRATION WHEN:
+   • You frequently copy-paste data from a tool
+   • You want automated workflows (e.g., create GitHub issue from task)
+   • You need real-time data (e.g., check Slack messages)
+   • The tool is central to your daily work
+
+❌ SKIP INTEGRATION WHEN:
+   • You rarely use the tool
+   • Manual copy-paste is fast enough
+   • The tool doesn't have MCP support
+   • You prefer keeping systems separate
+
+REMEMBER: Nexus works perfectly standalone!
+Integrations are power-ups, not requirements.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+**Confirm**: "Make sense? The key is: integrate what adds value to YOUR workflow."
+
+---
+
+### Step 5: How to Add Integrations
+
+**Display**:
+```
+━━━ ADDING INTEGRATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHOD 1: Built-in Master Skills
+   Just say the command:
+   • "connect notion"    → Notion setup wizard
+   • "connect airtable"  → Airtable setup wizard
+
+METHOD 2: MCP Server Setup
+   Say "add integration" → I'll guide you through:
+   1. Installing the MCP server
+   2. Getting API credentials
+   3. Configuring the connection
+   4. Testing it works
+   5. Documenting in your Memory
+
+TIME: 10-20 minutes per integration
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+### Step 6: Quick Example
+
+**Display**:
+```
+━━━ EXAMPLE: NOTION INTEGRATION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BEFORE (No Integration):
+  You: "Add this task to my Notion board"
+  Me: "I can't access Notion. Here's the formatted text to copy..."
+  You: [Opens Notion, manually adds task]
+
+AFTER (With Integration):
+  You: "Add this task to my Notion board"
+  Me: [Directly creates task in Notion] "Done! Added to your Tasks database."
+
+OTHER USE CASES:
+  • "Query my projects database in Notion"
+  • "Sync session report to Notion"
+  • "Search my notes for [topic]"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+---
+
+### Step 7: What's Next?
+
+**Ask**: "Would you like to set up an integration now, or save it for later?"
+
+**IF YES** (wants to integrate now):
+- "Which tool would you like to connect?"
+- Based on response:
+  - Notion → Load `notion-connect` skill
+  - Airtable → Load `airtable-connect` skill
+  - Other → Load `add-integration` skill
+- Skip Step 8, proceed to finalization after integration complete
+
+**IF NO** (save for later):
+- "No problem! When you're ready, just say:"
+  - `'connect notion'` for Notion
+  - `'connect airtable'` for Airtable
+  - `'add integration'` for any other tool
+- Proceed to Step 8
+
+---
+
+### Step 8: Finalize
+
+**Actions** (MUST complete all):
+
+1. **Mark skill complete** in user-config.yaml:
+   ```yaml
+   learning_tracker:
+     completed:
+       learn_integrations: true  # ADD THIS LINE
+   ```
+
+2. **Display completion**:
+   ```
+   ✅ Learn Integrations Complete!
+
+   You now understand:
+   • What MCP is (universal adapter for tools)
+   • Available integrations (Notion, Airtable, GitHub, etc.)
+   • When to integrate (adds value) vs skip (overhead)
+   • How to add them (built-in skills or 'add integration')
+
+   Next steps:
+   • 'connect notion' - Set up Notion
+   • 'connect airtable' - Set up Airtable
+   • 'add integration' - Any other tool
+   • 'learn projects' or 'learn skills' - Continue learning
+   ```
+
+3. **Prompt close-session**:
+   ```
+   💡 When you're done working, say "done" to save progress.
+   ```
+
+---
+
+## Success Criteria
+
+- [ ] User understands what MCP is
+- [ ] User knows which integrations are available
+- [ ] User understands when to integrate vs work standalone
+- [ ] User knows commands to add integrations
+- [ ] `learning_tracker.completed.learn_integrations: true` in user-config.yaml
+
+---
+
+## Notes
+
+**Key Messages**:
+- Integrations are optional power-ups, not requirements
+- Nexus works perfectly standalone
+- Add integrations that save YOU time
+- Start with one, add more as needed
+
+**Related Skills**:
+- `add-integration` - General MCP server setup
+- `notion-connect` - Notion-specific setup
+- `airtable-connect` - Airtable-specific setup
+- `notion-master` - Shared Notion resources
+- `airtable-master` - Shared Airtable resources
+
+**Resources**:
+- MCP Documentation: https://modelcontextprotocol.io/
+- MCP Server Directory: https://github.com/modelcontextprotocol/servers

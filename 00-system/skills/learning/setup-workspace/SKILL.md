@@ -1,6 +1,6 @@
 ---
 name: setup-workspace
-description: "Configure your 04-workspace/ folder structure for organized file storage. Load when user says 'setup workspace', 'organize workspace', 'configure folders', 'create workspace structure', 'workspace setup', 'folder structure', 'organize my files', 'create folders', 'file organization', 'where do I put files', 'workspace folders', 'set up workspace', 'organize folders', 'folder setup', 'my workspace', or asks about organizing files/folders in Nexus. Collaborative folder design based on actual work needs. Takes 5-8 minutes."
+description: "Load when user says 'setup workspace', 'organize folders', 'folder structure', 'configure workspace'. Creates practical 04-workspace/ structure. 5-8 min."
 ---
 
 # Setup Workspace
@@ -96,14 +96,26 @@ Create/update `04-workspace/workspace-map.md` with structure and usage notes:
        setup_workspace: true  # ADD THIS LINE
    ```
 
----
+3. **Display completion**:
+   ```
+   ✅ Setup Workspace Complete!
 
-### Step 7: Complete
+   Created:
+   • {N} folders in 04-workspace/
+   • workspace-map.md with structure documentation
 
-**Display** folder count and suggest next steps:
-- "learn projects" - project planning
-- "learn skills" - reusable workflows
-- "create project" - start first project
+   Principle: Just-in-time organization. Add folders when needed.
+
+   Next steps:
+   • 'learn projects' - Understand project workflow
+   • 'learn skills' - Create reusable workflows
+   • 'create project' - Start your first project
+   ```
+
+4. **Prompt close-session**:
+   ```
+   💡 When you're done working, say "done" to save progress.
+   ```
 
 ---
 

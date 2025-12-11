@@ -1,5 +1,5 @@
 ---
-name: import-skill-to-nexus
+name: import-skill
 description: Import a skill from Notion (or other source) into local Nexus. Load when user mentions "import skill", "download skill", "add skill to nexus", "pull skill from notion", or selects a skill to import after querying.
 ---
 

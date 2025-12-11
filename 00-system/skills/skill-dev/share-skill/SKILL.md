@@ -1,6 +1,6 @@
 ---
-name: export-skill-to-notion
-description: Push a local skill to the Notion skills database. Load when user mentions "export skill", "push to notion", "share skill", "add skill to database", or after creating a new skill with create-skill.
+name: share-skill
+description: Push a local skill to the Notion skills database. Load when user mentions "share skill", "export skill", "push to notion", "add skill to database", or after creating a new skill with create-skill.
 ---
 
 # Export Skill to Notion

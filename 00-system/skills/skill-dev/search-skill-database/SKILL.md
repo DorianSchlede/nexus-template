@@ -1,6 +1,6 @@
 ---
-name: query-notion-db
-description: Query ALL available  Skills database in Notion with filters. Load when user mentions "query notion", "search skills database", "find skills in notion", or "browse notion skills".
+name: search-skill-database
+description: Query ALL available Skills database in Notion with filters. Load when user mentions "search skill database", "query notion", "search skills database", "find skills in notion", or "browse notion skills".
 ---
 
 # Query Notion Database

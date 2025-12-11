@@ -301,7 +301,7 @@ First-time users get **smart defaults** automatically created:
 
 **Result**: User sees menu immediately and can start working. No forced onboarding!
 
-### 5 Optional Onboarding Skills
+### 6 Optional Onboarding Skills
 
 When ready to learn, users can invoke any skill by trigger phrase:
 
@@ -309,11 +309,12 @@ When ready to learn, users can invoke any skill by trigger phrase:
 |-------|-----------------|----------|
 | **setup-goals** | "setup goals", "personalize goals" | 8-10 min |
 | **setup-workspace** | "setup workspace", "configure folders" | 5-8 min |
+| **learn-integrations** | "learn integrations", "connect tools" | 10-12 min |
 | **learn-projects** | "learn projects", "how do projects work" | 8-10 min |
 | **learn-skills** | "learn skills", "how do skills work" | 10-12 min |
 | **learn-nexus** | "learn nexus", "system mastery" | 15-18 min |
 
-**Total if all completed**: ~45 minutes (but completely optional!)
+**Total if all completed**: ~55 minutes (but completely optional!)
 
 ### Legacy Onboarding (4 Projects)
 
@@ -976,7 +977,7 @@ python nexus-loader.py --show-tokens      # Display token costs
 
 ---
 
-## 🤖 System Skills (24 Built-In)
+## 🤖 System Skills (25 Built-In)
 
 **Location**: `00-system/skills/` (NOT in 03-skills/)
 
@@ -994,6 +995,7 @@ python nexus-loader.py --show-tokens      # Display token costs
 |-------|---------|---------|
 | **setup-goals** | Personalize goals and preferences | "setup goals" |
 | **setup-workspace** | Configure workspace folders | "setup workspace" |
+| **learn-integrations** | Learn how to connect external tools | "learn integrations" |
 | **learn-projects** | Learn project system | "learn projects" |
 | **learn-skills** | Learn skill system | "learn skills" |
 | **learn-nexus** | System mastery tutorial | "learn nexus" |
@@ -1299,6 +1301,7 @@ User: Start working OR learn the system with optional skills
 **Optional: Learn the System** (when ready)
 - Say "setup goals" → Personalize your goals (8-10 min)
 - Say "setup workspace" → Configure your folders (5-8 min)
+- Say "learn integrations" → Connect external tools (10-12 min)
 - Say "learn projects" → Understand project workflow (8-10 min)
 - Say "learn skills" → Create reusable workflows (10-12 min)
 - Say "learn nexus" → Advanced system mastery (15-18 min)

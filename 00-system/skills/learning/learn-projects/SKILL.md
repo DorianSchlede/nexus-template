@@ -1,6 +1,6 @@
 ---
 name: learn-projects
-description: "Learn how Nexus projects work - when to create them, structure, and lifecycle. Load when user says 'learn projects', 'understand projects', 'project tutorial', 'how do projects work', 'what is a project', 'projects vs skills', 'when to create project', 'project structure', 'explain projects', 'teach me projects', 'project help', 'how projects work', 'project guide', 'project basics', 'new to projects', or asks about the difference between projects and skills. Teaches Projects vs Skills decision framework. Takes 8-10 minutes."
+description: "Load when user says 'learn projects', 'how do projects work', 'projects vs skills', 'project tutorial'. Teaches project structure, lifecycle, and decision framework. 8-10 min."
 ---
 
 # Learn Projects
@@ -103,13 +103,34 @@ Ready? Say "create project" to start one!
 
 ### Step 7: Finalize
 
-**Actions** (MUST complete):
+**Actions** (MUST complete all):
 
 1. **Mark skill complete** in user-config.yaml:
    ```yaml
    learning_tracker:
      completed:
        learn_projects: true  # ADD THIS LINE
+   ```
+
+2. **Display completion**:
+   ```
+   ✅ Learn Projects Complete!
+
+   You now understand:
+   • Projects vs Skills (projects END, skills REPEAT)
+   • Decision framework (Direction → Work → Repeat?)
+   • Project structure (planning → resources → working → outputs)
+   • Lifecycle states (PLANNING → IN_PROGRESS → COMPLETE)
+
+   Next steps:
+   • 'create project' - Start your first project
+   • 'learn skills' - Learn about reusable workflows
+   • 'learn nexus' - System mastery
+   ```
+
+3. **Prompt close-session**:
+   ```
+   💡 When you're done working, say "done" to save progress.
    ```
 
 ---

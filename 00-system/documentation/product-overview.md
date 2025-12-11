@@ -506,4 +506,4 @@ AI: [Runs validate-system skill]
 
 ---
 
-**Ready to start?** Begin with the onboarding projects, or ask "How do I [task]?" and AI will guide you.
+**Ready to start?** Say "create project" to start working, or "setup goals" to personalize first. AI will guide you.
