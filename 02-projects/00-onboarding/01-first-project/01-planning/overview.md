@@ -3,7 +3,7 @@ id: 01-first-project
 created: 2025-11-03
 name: First Project
 onboarding: true
-status: PLANNING
+status: COMPLETE
 description: Load when user mentions "first project", "workspace", "project 01", "continue onboarding". Second onboarding project that creates workspace structure using just-in-time organization, teaches Projects vs Skills decision framework with user's scenarios, and guides creation of first real project using create-project skill and user's actual goals.
 tasks_total: 0
 tasks_completed: 0

@@ -18,5 +18,12 @@
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "context7",
+    "linear",
+    "airtable",
+    "beam"
+  ],
+  "enableAllProjectMcpServers": true
 }

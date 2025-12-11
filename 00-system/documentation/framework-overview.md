@@ -1,8 +1,8 @@
-# Nexus-v3 Framework Overview
+# Nexus Framework Overview
 
-**The complete guide to understanding how Nexus-v3 works.**
+**The complete guide to understanding how Nexus works.**
 
-> **Start Here**: If you're new to Nexus-v3, this document explains the entire system and how all pieces fit together.
+> **Start Here**: If you're new to Nexus, this document explains the entire system and how all pieces fit together.
 
 ---
 
@@ -25,9 +25,9 @@
 
 ---
 
-## 🎯 What is Nexus-v3?
+## 🎯 What is Nexus?
 
-**Nexus-v3 is a self-guiding work organization system** that runs entirely through conversation with Claude AI. It helps you:
+**Nexus is a self-guiding work organization system** that runs entirely through conversation with Claude AI. It helps you:
 
 - **Track temporal work** with projects (planning → execution → outputs)
 - **Capture reusable workflows** with skills
@@ -47,9 +47,9 @@
 
 ---
 
-## 🗺️ The Four Navigation Maps
+## 🗺️ The Three Navigation Maps
 
-Nexus-v3 has **4 specialized maps** that guide you through different aspects of the system:
+Nexus has **3 specialized maps** that guide you through different aspects of the system:
 
 ### 1. [System Map](../system-map.md) 📊
 
@@ -64,7 +64,7 @@ Nexus-v3 has **4 specialized maps** that guide you through different aspects of 
 **Key sections**:
 - System structure diagram
 - Core infrastructure (loader, orchestrator)
-- System skills reference (10 built-in skills)
+- System skills reference (24 built-in skills)
 - YAML metadata formats
 - Startup loading sequence
 
@@ -88,26 +88,7 @@ Nexus-v3 has **4 specialized maps** that guide you through different aspects of 
 
 ---
 
-### 3. [Project Map](../../02-projects/project-map.md) 📋
-
-**What it covers**: System state and current focus
-
-**Use it for**:
-- Checking system initialization status
-- Finding your current focus (what you were working on)
-- Seeing recent decisions
-- Understanding project lifecycle
-
-**Key information**:
-- System state (first_time_setup, operational, etc.)
-- Onboarding status and current project
-- Current focus (active project + next task)
-- Recent decisions log
-- Project status tracking
-
----
-
-### 4. [Workspace Map](../../04-workspace/workspace-map.md) 🗺️
+### 3. [Workspace Map](../../04-workspace/workspace-map.md) 🗺️
 
 **What it covers**: Your custom folder structure
 
@@ -123,9 +104,9 @@ Nexus-v3 has **4 specialized maps** that guide you through different aspects of 
 ## 📁 System Structure
 
 ```
-Nexus-v3/
+Nexus-v4/
 │
-├── claude.md                   🚀 LOAD THIS TO START!
+├── CLAUDE.md                   🚀 LOAD THIS TO START!
 │
 ├── 00-system/                  📊 SYSTEM FRAMEWORK
 │   ├── system-map.md               Master system navigation
@@ -133,16 +114,19 @@ Nexus-v3/
 │   │   ├── orchestrator.md             AI decision logic (minimal)
 │   │   ├── nexus-loader.py             Context loading + decision engine
 │   │   └── init-memory.py              Memory initialization script
-│   ├── skills/                     System skills (6 built-in)
+│   ├── skills/                     System skills (24 built-in)
 │   │   ├── create-project/             Project creation wizard
 │   │   ├── create-skill/               Skill creation wizard
-│   │   ├── add-integration/            MCP integration guide
+│   │   ├── execute-project/            Project execution workflow
 │   │   ├── close-session/              Session cleanup & memory update
-│   │   ├── validate-system/            System integrity checker
-│   │   └── archive-project/            Archive completed projects
+│   │   ├── setup-goals/                Goal personalization
+│   │   ├── setup-workspace/            Workspace configuration
+│   │   ├── learn-projects/             Project system tutorial
+│   │   ├── learn-skills/               Skill system tutorial
+│   │   ├── learn-nexus/                System mastery tutorial
+│   │   └── ...more                     (notion, validation, etc.)
 │   └── documentation/              System documentation
 │       ├── framework-overview.md (THIS FILE)
-│       ├── yaml-quick-reference.md
 │       └── skill-file-format.md
 │
 ├── 01-memory/                  🧠 CONTEXT PERSISTENCE
@@ -154,12 +138,7 @@ Nexus-v3/
 │   └── session-reports/            Historical summaries
 │
 ├── 02-projects/                📋 TEMPORAL WORK
-│   ├── project-map.md              System state & current focus
-│   ├── 00-define-goals/            Onboarding Project 00 (8-10 min)
-│   ├── 01-first-project/           Onboarding Project 01 (10-12 min)
-│   ├── 02-first-skill/             Onboarding Project 02 (15 min)
-│   ├── 03-system-mastery/          Onboarding Project 03 (10 min)
-│   ├── 05-archived/                Completed projects (archive-project skill)
+│   ├── 00-onboarding/              Legacy onboarding projects (00-03)
 │   └── {ID}-{name}/                Individual user projects
 │       ├── 01-planning/
 │       │   ├── overview.md             YAML metadata + purpose + success criteria + context
@@ -193,23 +172,17 @@ The script doesn't just return file lists - it returns **COMPLETE INSTRUCTIONS**
 
 ```json
 {
-  "system_state": "first_time_setup",
-  "files_to_load": [
-    "00-system/system-map.md",
-    "02-projects/project-map.md",
-    "04-workspace/workspace-map.md"
-  ],
+  "system_state": "first_time_with_defaults",
+  "memory_content": {
+    "system-map.md": "...(embedded content)...",
+    "goals.md": "...(embedded content)...",
+    "user-config.yaml": "...(embedded content)..."
+  },
   "instructions": {
-    "action": "load_and_execute_project",
-    "project_id": "00-define-goals",
-    "execution_mode": "immediate",
-    "message": "Welcome to Nexus! Starting onboarding...",
-    "reason": "First time setup - goals.md not initialized",
-    "workflow": [
-      "Load Project 00: Define Goals",
-      "Execute steps.md in sequence",
-      "Create goals.md, roadmap.md, and memory system"
-    ]
+    "action": "display_menu",
+    "suggest_onboarding": true,
+    "message": "Welcome to Nexus! Quick Start Mode active.",
+    "reason": "Smart defaults created - system ready for immediate use"
   },
   "metadata": {
     "projects": [...],
@@ -250,21 +223,22 @@ python 00-system/core/nexus-loader.py --startup
 ```
 
 The script analyzes system state and returns:
-- `system_state` - Current state (first_time_setup, operational, etc.)
-- `files_to_load` - Array of files that exist and should be loaded
+- `system_state` - Current state (first_time_with_defaults, operational, operational_with_active_projects)
+- `memory_content` - Dictionary of file contents (already embedded, keyed by filename)
 - `instructions` - Complete instructions for what to do next
 - `metadata` - Projects and skills metadata (YAML scan)
-- `stats` - System statistics and token counts
+- `stats` - System statistics and flags for menu display
 
 ---
 
-### Step 2: Load Files
+### Step 2: Use Embedded Content
 
-Load ALL files from `files_to_load` array using Read tool (parallel):
+The `memory_content` dictionary contains file contents already loaded - no separate Read calls needed:
 
 ```python
-for file_path in startup['files_to_load']:
-    Read(file_path)
+# Content is already embedded in the response
+goals_content = startup['memory_content']['goals.md']
+config_content = startup['memory_content']['user-config.yaml']
 ```
 
 **Result**: Zero "file not found" errors (script only lists files that exist)
@@ -309,21 +283,41 @@ show_skills()
 wait_for_user_input()
 ```
 
-#### Action: `resume_project`
-
-```python
-project_id = startup['instructions']['project_id']
-load_project_and_find_next_task()
-continue_from_checkpoint()
-```
-
 **That's it!** The script tells you exactly what to do. No guessing, no interpretation.
 
 ---
 
-## 🎓 The Onboarding Journey (4 Projects, 35-40 min)
+## 🎓 The Onboarding System (Optional Skills)
 
-Nexus-v3 features a **pedagogically-designed onboarding** that teaches through experience, not explanation.
+> **Updated 2025-12:** Nexus now uses **optional skill-based onboarding** instead of forced projects. Smart defaults are auto-created on first run, so users can start working immediately.
+
+### Quick Start Mode (New Default)
+
+First-time users get **smart defaults** automatically created:
+- `01-memory/goals.md` - Template with placeholder goals
+- `01-memory/user-config.yaml` - Default configuration
+- `01-memory/core-learnings.md` - Empty learnings file
+- `01-memory/memory-map.md` - Memory navigation
+
+**Result**: User sees menu immediately and can start working. No forced onboarding!
+
+### 5 Optional Onboarding Skills
+
+When ready to learn, users can invoke any skill by trigger phrase:
+
+| Skill | Trigger Phrases | Duration |
+|-------|-----------------|----------|
+| **setup-goals** | "setup goals", "personalize goals" | 8-10 min |
+| **setup-workspace** | "setup workspace", "configure folders" | 5-8 min |
+| **learn-projects** | "learn projects", "how do projects work" | 8-10 min |
+| **learn-skills** | "learn skills", "how do skills work" | 10-12 min |
+| **learn-nexus** | "learn nexus", "system mastery" | 15-18 min |
+
+**Total if all completed**: ~45 minutes (but completely optional!)
+
+### Legacy Onboarding (4 Projects)
+
+The original 4-project onboarding still exists for users who prefer structured learning:
 
 ### Project 00: Define Goals (8-10 min) - V2.0 Redesign
 
@@ -388,7 +382,6 @@ By the end of Project 00:
 - ✅ `01-memory/goals.md` - YOUR role, work pattern, goals
 - ✅ `01-memory/roadmap.md` - YOUR milestones, metrics, priorities
 - ✅ `01-memory/user-config.yaml` - YOUR language and preferences
-- ✅ `02-projects/project-map.md` - Project tracking
 - ✅ `01-memory/core-learnings.md` - Insight capture template
 - ✅ `01-memory/session-reports/` - Session summary folder
 
@@ -478,13 +471,11 @@ By the end of Project 00:
 3. Script returns instructions:
    {
      "system_state": "operational",
-     "files_to_load": [
-       "system-map.md",
-       "memory-map.md",
-       "project-map.md",
-       "goals.md",
-       "workspace-map.md"
-     ],
+     "memory_content": {
+       "system-map.md": "...(embedded)...",
+       "goals.md": "...(embedded)...",
+       "user-config.yaml": "...(embedded)..."
+     },
      "instructions": {
        "action": "display_menu"
      },
@@ -494,7 +485,7 @@ By the end of Project 00:
      }
    }
    ↓
-4. AI loads all files in parallel
+4. AI uses memory_content (already embedded)
    ↓
 5. AI follows instructions (display_menu):
    - Show Nexus banner
@@ -565,15 +556,11 @@ User: "done for now"
 AI triggers: close-session skill
   ↓
 Skill workflow:
-  1. Update project-map.md:
-     - Set current focus
-     - Log recent decisions
-  ↓
-  2. Update task progress:
+  1. Update task progress:
      - Mark completed tasks with [x]
      - Calculate progress percentage
   ↓
-  3. Create session report:
+  2. Create session report:
      - 01-memory/session-reports/{date}.md
      - Summary of work done
      - Decisions made
@@ -697,6 +684,200 @@ AI matches "homepage" → Loads website project
 
 ---
 
+### 5. Mental Models (Thinking Frameworks)
+
+**Purpose**: Library of 10 battle-tested thinking frameworks that guide structured planning and decision-making.
+
+**Architecture**:
+- **Catalog**: `00-system/mental-models/mental-models.md` - Framework overview
+- **References**: `00-system/mental-models/references/mental-models/` - Individual model files
+- **Selection Script**: `00-system/mental-models/scripts/select_mental_models.py`
+
+**Two-Tier System**:
+- **Tier 1 (Foundational)**: First Principles, Socratic Questioning, Devil's Advocate - core thinking tools for all projects
+- **Tier 2 (Situational)**: Systems Thinking, Pre-Mortem, Stakeholder Mapping, SWOT, Pareto, Design Thinking, MVP Thinking
+
+**YAML Frontmatter Format** (in mental model files):
+```yaml
+---
+name: First Principles
+category: cognitive
+tier: 1
+best_for: Novel projects, challenging assumptions
+questions:
+  - What are we assuming here?
+  - What would we do if starting from scratch?
+  - What's the fundamental truth we can build on?
+---
+```
+
+**Offering Pattern** (used in create-project, execute-project):
+```markdown
+AI runs: python 00-system/mental-models/scripts/select_mental_models.py
+  ↓
+AI reviews JSON output with all available models
+  ↓
+AI offers 2-3 relevant models to user:
+
+"For your Build/Create project, I recommend:
+
+1. **First Principles** – Strip assumptions, find fundamental truths
+   Best for: Novel projects, challenging assumptions
+
+2. **Pre-Mortem** – Imagine failure modes before implementation
+   Best for: High-stakes projects, risk mitigation
+
+Which approach(es) sound most useful? Or we can combine them!"
+  ↓
+User picks: "First Principles + Pre-Mortem"
+  ↓
+AI loads: mental-models/references/cognitive-models.md (First Principles section)
+AI loads: mental-models/references/diagnostic-models.md (Pre-Mortem section)
+  ↓
+AI applies questions from selected models to fill plan.md
+```
+
+**Integration Points**:
+- **create-project**: MANDATORY mental model selection during plan.md phase
+- **execute-project**: Offered at key decision points (section completion, risk assessment)
+- **create-skill**: Offered for workflow design decisions
+
+**Token Efficiency**:
+- Metadata only: ~50 tokens (always available)
+- Selected models: ~2K tokens (loaded on-demand)
+- Full catalog: ~15K tokens (never loaded entirely)
+
+**See**: [`mental-models framework`](../mental-models/mental-models.md) for full catalog
+
+---
+
+### 6. Bulk-Complete Automation (Task Tracking)
+
+**Purpose**: Automatic task completion when work is done, eliminating manual checkbox tedium.
+
+**How It Works**:
+```
+Project work completed this session
+  ↓
+close-session skill detects completion signals:
+  - "done", "finished", "complete"
+  - All tasks in section executed
+  - User confirms work is done
+  ↓
+Auto-runs bulk-complete script:
+  python 00-system/skills/bulk-complete/scripts/bulk-complete.py \
+    --project [ID] --all --no-confirm
+  ↓
+Validates: Re-reads file to confirm completion
+  ↓
+Reports: "✅ VALIDATED: 40/40 tasks now complete (100%)"
+```
+
+**Script Options**:
+```bash
+# Complete all tasks (project finished)
+python scripts/bulk-complete.py --project 01 --all --no-confirm
+
+# Complete specific phase (phase done)
+python scripts/bulk-complete.py --project 01 --section "Phase 2"
+
+# Complete task range (selective)
+python scripts/bulk-complete.py --project 01 --tasks 1-5,7,10-15
+
+# Interactive mode (pick tasks)
+python scripts/bulk-complete.py --project 01
+```
+
+**Safety Features**:
+- **Threshold**: Requires context signal (completion detected, not random)
+- **Validation**: Re-reads file after completion to confirm
+- **Fallback**: Manual Edit tool if script fails
+- **Confirmation**: Optional `--no-confirm` flag (safe for auto-triggers)
+
+**Time Savings**: 5-10 minutes per project (eliminates manual checkbox marking)
+
+**Integration Points**:
+- **close-session**: Auto-runs bulk-complete when project complete (Step 2)
+- **execute-project**: Offers bulk-complete after each section
+- **Manual trigger**: "bulk complete [project]" or "mark all tasks done"
+
+**See**: [`bulk-complete skill`](../skills/bulk-complete/SKILL.md) for complete usage
+
+---
+
+### 7. Dynamic Template System (Project Types)
+
+**Purpose**: Type-specific plan.md templates that eliminate the blank page problem with domain-specific structure.
+
+**6 Project Types**:
+| Type | Best For | Template Sections |
+|------|----------|-------------------|
+| **Build/Create** | Software, features, products | Technical Architecture, Implementation Strategy, Integration Points |
+| **Research/Analysis** | Investigations, studies | Research Questions, Data Sources, Analysis Framework |
+| **Strategy/Planning** | Roadmaps, decisions | Stakeholder Analysis, Options Evaluation, Decision Framework |
+| **Content/Creative** | Writing, design, media | Audience, Format, Distribution Channels |
+| **Process/Workflow** | Automation, optimization | Current State, Bottlenecks, Improvement Plan |
+| **Generic** | Anything else | Flexible structure |
+
+**Type Selection Workflow** (in create-project):
+```
+AI: "What type of project is this?"
+  ↓
+Offer 6 types with brief descriptions
+  ↓
+User selects: "Build/Create"
+  ↓
+init_project.py generates plan.md with Build-specific sections:
+  ## Technical Architecture
+  ## Implementation Strategy
+  ## Integration Points
+  ## Testing Approach
+  ## Deployment Plan
+```
+
+**Template Injection** (init_project.py):
+```python
+def create_plan_template(project_type):
+    templates = {
+        'build': BUILD_TEMPLATE,      # Technical sections
+        'research': RESEARCH_TEMPLATE, # Analysis sections
+        'strategy': STRATEGY_TEMPLATE, # Decision sections
+        'content': CONTENT_TEMPLATE,   # Creative sections
+        'process': PROCESS_TEMPLATE,   # Workflow sections
+        'generic': GENERIC_TEMPLATE    # Flexible sections
+    }
+    return templates.get(project_type, GENERIC_TEMPLATE)
+```
+
+**Benefits**:
+- **Better planning quality**: Domain-specific prompts guide thinking
+- **Faster planning**: Pre-filled sections reduce blank page paralysis
+- **Encoded expertise**: Templates capture best practices for each type
+- **Consistency**: All Build projects have same structure
+
+**Template Files Location**:
+```
+00-system/skills/create-project/scripts/templates/
+├── template-build.md
+├── template-research.md
+├── template-strategy.md
+├── template-content.md
+├── template-process.md
+└── template-generic.md
+```
+
+**When to Use Each Type**:
+- **Build**: New feature, software project, product development
+- **Research**: Market research, technical investigation, user study
+- **Strategy**: Quarterly planning, organizational decision, roadmap
+- **Content**: Blog post, documentation, video script
+- **Process**: Workflow automation, process optimization, efficiency
+- **Generic**: Unclear scope, mixed types, or unusual projects
+
+**See**: [`create-project skill`](../skills/create-project/SKILL.md) for complete workflow
+
+---
+
 ## 🔧 Core Infrastructure
 
 ### nexus-loader.py
@@ -728,7 +909,10 @@ python nexus-loader.py --show-tokens      # Display token costs
   "loaded_at": "2025-11-05T01:05:54",
   "bundle": "startup",
   "system_state": "operational",
-  "files_to_load": ["...", "...", "..."],
+  "memory_content": {
+    "system-map.md": "...(embedded content)...",
+    "goals.md": "...(embedded content)..."
+  },
   "instructions": {
     "action": "display_menu",
     "message": "...",
@@ -739,7 +923,7 @@ python nexus-loader.py --show-tokens      # Display token costs
     "skills": [...]
   },
   "stats": {
-    "files_found": 3,
+    "files_embedded": 3,
     "total_projects": 8,
     "total_skills": 12
   }
@@ -782,7 +966,7 @@ python nexus-loader.py --show-tokens      # Display token costs
 - Populates goals.md with user's role, work pattern, goals
 - Populates roadmap.md with user's milestones, metrics
 - Creates user-config.yaml with language preference
-- Initializes project-map.md with onboarding state
+- Sets up user-config.yaml with learning tracker
 - Creates core-learnings.md template
 - Creates session-reports/ folder
 
@@ -792,18 +976,49 @@ python nexus-loader.py --show-tokens      # Display token costs
 
 ---
 
-## 🤖 System Skills (6 Built-In)
+## 🤖 System Skills (24 Built-In)
 
 **Location**: `00-system/skills/` (NOT in 03-skills/)
 
+### Core Skills
 | Skill | Purpose | Trigger |
 |-------|---------|---------|
 | **create-project** | Create new projects with AI-guided planning | "create project" |
 | **create-skill** | Create reusable workflows for repetitive tasks | "create skill" |
-| **add-integration** | Guide MCP server setup for external tools | "add integration" |
+| **execute-project** | Execute project work systematically | "continue [project]", "work on" |
 | **close-session** | End session, update memory, save progress | "done", "finish", "close" |
-| **validate-system** | Check system integrity, auto-fix issues | "validate system" |
-| **archive-project** | Move completed projects to 05-archived/ | "archive project" |
+| **bulk-complete** | Bulk-complete tasks in projects | "bulk complete", "mark all done" |
+
+### Learning Skills
+| Skill | Purpose | Trigger |
+|-------|---------|---------|
+| **setup-goals** | Personalize goals and preferences | "setup goals" |
+| **setup-workspace** | Configure workspace folders | "setup workspace" |
+| **learn-projects** | Learn project system | "learn projects" |
+| **learn-skills** | Learn skill system | "learn skills" |
+| **learn-nexus** | System mastery tutorial | "learn nexus" |
+
+### Integration Skills
+| Skill | Purpose | Trigger |
+|-------|---------|---------|
+| **add-integration** | Guide MCP server setup | "add integration" |
+| **notion-connect** | Connect to Notion databases | "notion", "connect notion" |
+| **notion-master** | Shared Notion resources | (internal use) |
+| **query-notion-db** | Query Notion databases | "query notion" |
+| **export-skill-to-notion** | Push skills to Notion | "export skill" |
+| **import-skill-to-nexus** | Import skills from Notion | "import skill" |
+
+### Utility Skills
+| Skill | Purpose | Trigger |
+|-------|---------|---------|
+| **archive-project** | Archive completed projects | "archive project" |
+| **validate-system** | Check system integrity | "validate system" |
+| **validate-workspace-map** | Validate workspace map | "validate workspace" |
+| **validate-docs-implementation** | Check docs vs code | "validate docs" |
+| **validate-skill-functionality** | Validate skill execution | "validate skill" |
+| **skip-onboarding** | Skip onboarding flow | "skip onboarding" |
+| **mental-models** | Access thinking frameworks | "mental model" |
+| **generate-philosophy-doc** | Generate philosophy docs | "generate philosophy" |
 
 **Note**: All skills use V2.0 format (name + description only)
 
@@ -817,11 +1032,9 @@ python nexus-loader.py --show-tokens      # Display token costs
 - **[System Map](../system-map.md)** - System structure and architecture
 - **[Orchestrator](../core/orchestrator.md)** - AI decision logic (minimal, instruction-driven)
 - **[Memory Map](../../01-memory/memory-map.md)** - Context persistence
-- **[Project Map](../../02-projects/project-map.md)** - Current state
 
 ### For Building Skills
 
-- **[YAML Quick Reference](yaml-quick-reference.md)** - V2.0 skill YAML format cheat sheet
 - **[Skill File Format](skill-file-format.md)** - .skill packaging specification
 - **create-skill skill** - Use the create-skill skill for guided skill creation with built-in best practices
 
@@ -880,7 +1093,7 @@ python nexus-loader.py --show-tokens      # Display token costs
 
 **Why**: Transparent. Inspectable. Debuggable. AI can read state directly.
 
-**Example**: Current focus stored in project-map.md, not in Python variables.
+**Example**: System state tracked in user-config.yaml and project metadata, not in Python variables.
 
 ---
 
@@ -961,7 +1174,7 @@ Step 3: Collaborative Planning (20-30 min)
   ↓
 Step 4: Close session (save for later execution)
   ↓
-Updates: project-map.md with new project
+Project metadata auto-detected on next startup
 ```
 
 ### Creating a Skill
@@ -1016,22 +1229,21 @@ User: "done for now"
 AI triggers: close-session skill
   ↓
 Skill workflow:
-  1. Update project-map.md (current focus, decisions)
-  2. Update steps.md (mark completed steps with [x])
-  3. Create session report (session-reports/{date}.md)
-  4. Clean temp files
-  5. Confirm completion
+  1. Update steps.md (mark completed steps with [x])
+  2. Create session report (session-reports/{date}.md)
+  3. Update core-learnings.md if insights captured
+  4. Confirm completion
   ↓
 Session complete - all context preserved
 ```
 
 ---
 
-## 🌟 Why Nexus-v3?
+## 🌟 Why Nexus?
 
 ### Problems It Solves
 
-❌ **Without Nexus-v3**:
+❌ **Without Nexus**:
 - Start every AI session from scratch
 - Repeat context manually
 - Lose track of progress
@@ -1039,11 +1251,11 @@ Session complete - all context preserved
 - No reusable workflows
 - Manual project management overhead
 
-✅ **With Nexus-v3**:
+✅ **With Nexus**:
 - Resume exactly where you left off
 - Context loads automatically (instruction-driven)
 - Progress tracked automatically (steps.md)
-- Always know current focus (project-map.md)
+- Always know current focus (via nexus-loader.py)
 - Capture and reuse workflows (skills)
 - Zero-overhead organization (YAML-driven)
 
@@ -1062,32 +1274,41 @@ Session complete - all context preserved
 
 ## 🚀 Getting Started
 
-### First-Time User Journey
+### First-Time User Journey (Quick Start)
 
-**Step 1: Load claude.md**
+**Step 1: Load CLAUDE.md**
 ```
 In Claude Desktop or Claude Code:
-Load: Nexus-v3/claude.md
+Load: Nexus-v4/CLAUDE.md
 ```
 
-**Step 2: System Auto-Detects First Time**
+**Step 2: Smart Defaults Auto-Created**
 ```
-Script returns: "system_state": "first_time_setup"
-Instructions: Load and execute Project 00 (immediate)
+Script detects: No goals.md exists
+Action: Creates smart default files automatically
+Script returns: "system_state": "first_time_with_defaults"
+Instructions: Display menu with onboarding suggestions
 ```
 
-**Step 3: Complete Onboarding** (35-40 min total)
-- **Project 00** (8-10 min): Define goals, create memory
-- **Project 01** (10-12 min): Create workspace, first project
-- **Project 02** (15 min): Create first skill
-- **Project 03** (10 min): System mastery review + graduation
+**Step 3: Start Working Immediately!**
+```
+AI shows: Menu with your projects, skills, and suggestions
+User: Start working OR learn the system with optional skills
+```
+
+**Optional: Learn the System** (when ready)
+- Say "setup goals" → Personalize your goals (8-10 min)
+- Say "setup workspace" → Configure your folders (5-8 min)
+- Say "learn projects" → Understand project workflow (8-10 min)
+- Say "learn skills" → Create reusable workflows (10-12 min)
+- Say "learn nexus" → Advanced system mastery (15-18 min)
 
 **Step 4: Operational!**
 ```
-Next session:
+After personalizing goals:
 Script returns: "system_state": "operational"
 Instructions: Display menu
-AI shows: Goals, projects, skills, current focus
+AI shows: YOUR goals, projects, skills, current focus
 User: Work naturally with full context preservation
 ```
 
@@ -1113,13 +1334,11 @@ User: Work naturally with full context preservation
 
 - Lost? Check the [System Map](../system-map.md)
 - Need context? Check the [Memory Map](../../01-memory/memory-map.md)
-- Want to know what's next? Check the [Project Map](../../02-projects/project-map.md)
 - How does orchestration work? Check the [Orchestrator](../core/orchestrator.md)
 
 ### Building
 
 - Creating skills? Use the **create-skill** skill for guided workflow with built-in best practices
-- Quick YAML reference? See [YAML Quick Reference](yaml-quick-reference.md)
 - Packaging skills? See [Skill File Format](skill-file-format.md)
 
 ### Understanding
@@ -1170,16 +1389,30 @@ Benefits:
 
 ---
 
-**Nexus-v3** - Self-guiding work organization through AI conversation and instruction-driven automation.
+**Nexus** - Self-guiding work organization through AI conversation and instruction-driven automation.
 
 **Never start from scratch. Always resume where you left off. Let the system remember for you.**
 
 ---
 
-**Version**: 2.0
-**Last Updated**: 2025-11-05
+**Version**: 4.0
+**Last Updated**: 2025-12-11
 **Status**: Production Ready
-**Major Changes**:
+**Major Changes in V4.0**:
+- **Optional Onboarding System** - Smart defaults auto-created, no forced onboarding
+- **5 Onboarding Skills** - setup-goals, setup-workspace, learn-projects, learn-skills, learn-nexus
+- **Quick Start Mode** - Users can work immediately on first run
+- **`first_time_with_defaults` state** - New system state for smart default users
+- **Modern Menu Header** - Replaced ASCII art with 3-line header
+- **Progressive Disclosure** - Context-aware skill suggestions via learning_tracker
+
+**Previous V3.0 Changes**:
+- Added Mental Models Framework (Section 5) - 15+ thinking frameworks with 3-tier system
+- Added Bulk-Complete Automation (Section 6) - Automatic task completion with validation
+- Added Dynamic Template System (Section 7) - 6 project types with type-specific templates
+- Key Concepts expanded from 4 to 7 sections
+
+**Previous V2.0 Changes**:
 - Added instruction-driven architecture documentation
 - Documented three-step startup pattern
 - Comprehensive onboarding journey (Project 00 V2.0 redesign)

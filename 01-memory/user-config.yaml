@@ -1,7 +1,7 @@
 ---
 # User Configuration
 # Purpose: Store persistent user preferences (loaded every session)
-# Updated: Set during onboarding, modified anytime
+# Updated: Set via setup-goals skill, modified anytime
 
 user_preferences:
   language: ""
@@ -11,14 +11,22 @@ user_preferences:
   system:
     python_cmd: "python3"
 
-onboarding:
-  status: "not_started"
-  current_session: 0
-  last_completed: null
-  sessions_completed: []
+# Learning Tracker (Progressive Disclosure System)
+# Tracks skill completion and suggestion preferences
+learning_tracker:
+  session_count: 4
+  suggestion_preference: "proactive"  # off | minimal | normal | proactive
+  completed:
+    setup_goals: false
+    setup_workspace: false
+    learn_projects: false
+    learn_skills: false
+    learn_nexus: false
+  dismissed: []
+  last_suggested: null
 
-created: null
-updated: null
+created: 2025-12-10
+updated: 2025-12-11
 ---
 
 # Instructions for AI
@@ -27,15 +35,21 @@ When this file is loaded (every session via --startup):
 1. Respect the language preference throughout ALL interactions
 2. Use timezone for accurate session timestamps
 3. Format dates according to user preference
-4. Check onboarding status to determine next session
-
-If onboarding status is "in_progress":
-- Load the next onboarding session based on current_session value
-- Session 1: 00-define-goals
-- Session 2: 01-first-project
-- Session 3: 02-first-skill
-- Session 4: 03-system-mastery
+4. Check learning_tracker for progressive disclosure suggestions
 
 If language is not set (empty string):
 - Default to English
-- Prompt user to set preference during next onboarding step
+
+## Learning Tracker Usage
+
+**WHO updates WHAT**:
+- nexus-loader.py → session_count (incremented each startup)
+- Each learning skill → completed[skill_name] = true when finished
+- Orchestrator → dismissed[], last_suggested (when user dismisses suggestions)
+- close-session → can add insights to core-learnings.md
+
+**Suggestion Preference**:
+- off: Never suggest learning skills
+- minimal: Suggest only when directly relevant
+- normal: Balanced suggestions based on context
+- proactive: Actively suggest uncompleted skills

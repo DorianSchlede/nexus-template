@@ -147,10 +147,11 @@ triggers:
         self.assertIn("system-skill", names)
 
     def test_startup_first_time(self):
-        # No goals.md exists
+        # No goals.md exists - smart defaults are created
         result = nexus_loader.load_startup(str(self.base_path))
-        self.assertEqual(result['system_state'], 'first_time_setup')
-        self.assertEqual(result['instructions']['project_id'], '00-define-goals')
+        self.assertEqual(result['system_state'], 'first_time_with_defaults')
+        self.assertEqual(result['instructions']['action'], 'display_menu')
+        self.assertTrue(result['instructions'].get('suggest_onboarding', False))
 
     def test_startup_operational(self):
         # Create goals.md
@@ -160,14 +161,15 @@ triggers:
         self.assertEqual(result['system_state'], 'operational')
         self.assertEqual(result['instructions']['action'], 'display_menu')
 
-    def test_startup_onboarding_in_progress(self):
-        # Create goals.md so it's not first_time_setup
+    def test_startup_onboarding_project_treated_as_regular(self):
+        # Onboarding is now skill-based (via learning_tracker in user-config.yaml)
+        # Projects with onboarding: true are treated as regular IN_PROGRESS projects
         (self.base_path / "01-memory" / "goals.md").write_text("# Goals", encoding='utf-8')
-        
-        # Create an incomplete onboarding project
+
+        # Create an incomplete project with legacy onboarding flag
         project_dir = self.base_path / "02-projects" / "00-onboarding" / "01-first-project"
         (project_dir / "01-planning").mkdir(parents=True)
-        
+
         overview_content = """---
 id: "01-first-project"
 name: "First Project"
@@ -176,16 +178,16 @@ status: "IN_PROGRESS"
 ---
 """
         (project_dir / "01-planning" / "overview.md").write_text(overview_content, encoding='utf-8')
-        
+
         # Create steps with incomplete tasks
         steps_content = "- [x] Done\n- [ ] Not Done"
         (project_dir / "01-planning" / "steps.md").write_text(steps_content, encoding='utf-8')
-        
+
         result = nexus_loader.load_startup(str(self.base_path))
-        
-        self.assertEqual(result['system_state'], 'onboarding_in_progress')
-        self.assertEqual(result['instructions']['project_id'], '01-first-project')
-        self.assertEqual(result['instructions']['action'], 'load_and_execute_project')
+
+        # Should be treated as operational with active projects (not forced onboarding)
+        self.assertEqual(result['system_state'], 'operational_with_active_projects')
+        self.assertEqual(result['instructions']['action'], 'display_menu')
 
     def test_startup_onboarding_complete_active_project(self):
         # Create goals.md

@@ -1,0 +1,206 @@
+# {{INTEGRATION_TITLE}} Error Handling
+
+**Common errors, causes, and solutions for all {{INTEGRATION_TITLE}} integration skills.**
+
+---
+
+## Common HTTP Errors
+
+| Error Code | Error Message | Cause | Solution |
+|------------|---------------|-------|----------|
+| 400 | Bad Request | Invalid request format or parameters | Check request body and parameters |
+| 401 | Unauthorized | Invalid or expired API key | Check `{{INTEGRATION_UPPER}}_API_KEY` in `.env` |
+| 403 | Forbidden | Insufficient permissions | {{PERMISSION_SOLUTION}} |
+| 404 | Not Found | Resource doesn't exist or no access | Verify resource ID |
+| 409 | Conflict | Duplicate or version conflict | Check for existing resource |
+| 422 | Unprocessable Entity | Validation error | Check required fields and formats |
+| 429 | Too Many Requests | Rate limited | Wait and retry with backoff |
+| 500 | Internal Server Error | {{INTEGRATION_TITLE}} API issue | Retry after a few seconds |
+| 503 | Service Unavailable | {{INTEGRATION_TITLE}} maintenance | Wait and retry later |
+
+---
+
+## Skill-Specific Errors
+
+### {{CHILD_SKILL_1}} Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| No results found | Filter too restrictive or empty | Check filter criteria |
+| Invalid filter | Filter syntax incorrect | Review filter documentation |
+| Missing configuration | Required env vars not set | Run setup wizard |
+
+### {{CHILD_SKILL_2}} Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+{{CHILD_SKILL_2_ERRORS}}
+
+### {{CHILD_SKILL_3}} Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+{{CHILD_SKILL_3_ERRORS}}
+
+---
+
+## Configuration Errors
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| `.env` file not found | Missing in Nexus root | Create `.env` with required variables |
+| `user-config.yaml` parse error | Invalid YAML syntax | Fix YAML formatting (check indentation) |
+| PyYAML not installed | Missing Python dependency | Run: `pip install pyyaml` |
+| requests not installed | Missing Python dependency | Run: `pip install requests` |
+| Invalid API key format | Wrong value copied | Ensure key starts with `{{API_KEY_PREFIX}}` |
+
+---
+
+## Network & Timeout Errors
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| Connection timeout | Network issue or slow connection | Retry with longer timeout |
+| SSL certificate error | Corporate proxy or firewall | Configure proxy settings or use VPN |
+| DNS resolution failed | Internet connectivity issue | Check internet connection |
+| Connection refused | {{INTEGRATION_TITLE}} API down (rare) | Check {{STATUS_PAGE_URL}} |
+
+---
+
+## Troubleshooting Steps
+
+### Step 1: Validate Configuration
+
+Run the configuration checker:
+```bash
+python 00-system/skills/{{INTEGRATION}}-master/scripts/check_{{INTEGRATION}}_config.py
+```
+
+This validates:
+- ✅ `.env` file exists and has required variables
+- ✅ API key format is correct
+- ✅ API connection works
+- ✅ Resource access (if applicable)
+
+### Step 2: Test API Connection Manually
+
+Test basic API connectivity:
+```bash
+{{TEST_CONNECTION_CURL}}
+```
+
+**Expected response (success):**
+```json
+{{SUCCESS_RESPONSE_EXAMPLE}}
+```
+
+**Common errors:**
+- `{"error": ...}` with status 401 → Invalid API key
+- Connection refused → Network issue
+- Timeout → Check firewall/proxy
+
+### Step 3: Verify Resource Access
+
+Test resource query:
+```bash
+{{TEST_RESOURCE_CURL}}
+```
+
+**Expected response (success):**
+```json
+{{RESOURCE_SUCCESS_EXAMPLE}}
+```
+
+**Common errors:**
+- `404` → Resource ID incorrect or no access
+- `403` → Insufficient permissions
+
+### Step 4: Check Python Dependencies
+
+Ensure required packages are installed:
+```bash
+python -c "import yaml; import requests; print('✅ Dependencies OK')"
+```
+
+If error occurs:
+```bash
+pip install pyyaml requests
+```
+
+---
+
+## Error Recovery Patterns
+
+### Pattern 1: Retry with Exponential Backoff
+
+For transient errors (429, 500, 503):
+```python
+import time
+
+max_retries = 3
+for attempt in range(max_retries):
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            break
+        elif response.status_code in [429, 500, 503]:
+            wait = 2 ** attempt  # 1s, 2s, 4s
+            time.sleep(wait)
+    except requests.exceptions.RequestException:
+        if attempt == max_retries - 1:
+            raise
+```
+
+### Pattern 2: Graceful Degradation
+
+If operation fails, fall back to alternative:
+```python
+try:
+    result = primary_operation()
+except OperationError:
+    result = fallback_operation()
+```
+
+### Pattern 3: User Confirmation on Conflicts
+
+For duplicate detection:
+```python
+if resource_exists:
+    print("⚠️ Resource already exists")
+    choice = input("1) Update 2) Skip 3) Create new: ")
+    handle_choice(choice)
+```
+
+---
+
+## Logging & Debugging
+
+### Enable Verbose Logging
+
+For detailed API debugging:
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
+
+### Common Debug Checks
+
+1. **Print API key prefix**: `echo ${{{INTEGRATION_UPPER}}_API_KEY:0:10}` (verify format)
+2. **Check resource ID**: `echo ${{{INTEGRATION_UPPER}}_{{RESOURCE_UPPER}}_ID}`
+3. **Verify file paths**: Use absolute paths
+4. **Check YAML syntax**: Use online YAML validator
+
+---
+
+## Getting Help
+
+If errors persist:
+
+1. **Check Status Page**: {{STATUS_PAGE_URL}}
+2. **Review API Docs**: {{OFFICIAL_API_DOCS_URL}}
+3. **Re-run Setup**: `python 00-system/skills/{{INTEGRATION}}-master/scripts/setup_{{INTEGRATION}}.py`
+4. **Community Support**: {{COMMUNITY_URL}}
+
+---
+
+**Last Updated:** {{DATE}}

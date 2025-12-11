@@ -2,7 +2,7 @@
 id: 02-first-skill
 name: First Skill
 onboarding: true
-status: PLANNING
+status: COMPLETE
 description: "Load when user mentions 'first skill', 'create skill', 'project 02', 'continue onboarding'. Extract repeatable workflow from actual work and create first skill through experience-first learning."
 created: 2025-11-03
 ---

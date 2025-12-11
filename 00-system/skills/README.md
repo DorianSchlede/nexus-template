@@ -1,23 +1,56 @@
 # System Skills
 
-Built-in skills that come with Nexus. These are loaded automatically based on trigger phrases.
+Built-in skills organized by category. Loaded automatically based on trigger phrases.
 
+## Categories
+
+### `learning/` - Onboarding & Education
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `learn-nexus` | "learn nexus", "nexus tips" | Master Nexus patterns |
+| `learn-projects` | "learn projects", "project tutorial" | Project creation guide |
+| `learn-skills` | "learn skills", "skill tutorial" | Skill creation guide |
+| `setup-goals` | "setup goals", "personalize" | Configure preferences |
+| `setup-workspace` | "setup workspace", "organize" | Folder structure setup |
+
+### `projects/` - Project Management
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
 | `create-project` | "create project", "new project" | Guided project creation |
-| `create-skill` | "create skill" | Capture reusable workflow |
-| `execute-project` | "work on [name]", "continue [name]" | Systematic project execution |
-| `close-session` | "done", "finish", "wrap up" | Save progress, create report |
+| `execute-project` | "work on [name]", "continue" | Systematic execution |
 | `bulk-complete` | "bulk complete", "mark all done" | Batch task completion |
-| `archive-project` | "archive [name]" | Move completed to archive |
-| `skip-onboarding` | "skip onboarding" | Early exit from onboarding |
-| `add-integration` | "add integration", "connect tool" | MCP server setup |
-| `mental-models` | "mental model", "think through" | Thinking frameworks |
-| `generate-philosophy-doc` | "create philosophy doc" | Standards documentation |
-| `validate-system` | "validate system" | Check integrity, auto-fix |
+| `archive-project` | "archive [name]" | Move to archive |
+
+### `notion/` - Notion Integration
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `notion-connect` | "notion", "connect notion" | Database connection |
+| `notion-master` | *(library - not loaded directly)* | Shared scripts/references |
+| `query-notion-db` | "query notion", "search skills" | Search skills database |
+| `export-skill-to-notion` | "export skill", "push to notion" | Upload skill to Notion |
+| `import-skill-to-nexus` | "import skill", "download skill" | Download from Notion |
+
+### `skill-dev/` - Skill Development
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `create-skill` | "create skill" | Build new skill |
+| `create-master-skill` | "create master skill" | Build shared library |
 | `validate-skill-functionality` | "validate skill" | Post-execution review |
+
+### `system/` - System Utilities
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `validate-system` | "validate system" | Check integrity, auto-fix |
 | `validate-docs-implementation` | "validate docs" | Docs vs code consistency |
-| `validate-workspace-map` | "validate workspace" | Workspace structure check |
+| `update-workspace-map` | "update workspace map" | Sync workspace structure |
+| `close-session` | "done", "finish", "wrap up" | Save progress, report |
+| `add-integration` | "add integration", "connect tool" | MCP server setup |
+
+### `tools/` - General Tools
+| Skill | Trigger | Purpose |
+|-------|---------|---------|
+| `mental-models` | "mental model", "think through" | 30+ thinking frameworks |
+| `generate-philosophy-doc` | "create philosophy doc" | Standards documentation |
 
 ---
 

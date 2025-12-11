@@ -1,38 +1,40 @@
 # ⚠️ CRITICAL: INITIALIZATION REQUIRED ⚠️
 
-**THIS FILE IS LOADED AT THE START OF EVERY SESSION! NO MATTER IF INPUT IS HI, ANY MESSAGE OR A SUMMARY THAT STARTS WITH "This session is being continued from a previous conversation that ran out of context."**
+**THIS FILE IS LOADED AT THE START OF EVERY SESSION AND AFTER EVERY CONTEXT SUMMARY!**
 
-**IF YOU SEE THIS FILE, YOU MUST IMMEDIATELY:**
+# ⚠️ LOADING SEQUENCE (ALWAYS RUN) ⚠️
 
-1. **Read the orchestrator:**
-   ```
-   00-system/core/orchestrator.md
-   ```
+## Step 1: Read orchestrator (ALWAYS)
+```
+00-system/core/orchestrator.md
+```
 
-2. **Run the startup script:**
-   ```bash
-   python 00-system/core/nexus-loader.py --startup
-   ```
-   (Use `python` or `python3` based on system - check user-config.yaml)
+## Step 2: Run startup script (ALWAYS)
 
-3. **Load ALL files from `files_to_load` array** (in parallel using Read tool)
+**Fresh Session** (first message):
+```bash
+python 00-system/core/nexus-loader.py --startup
+```
 
-4. **Follow `instructions.action`** from script output
+**MANDATORY After Context Summary** (MANDATORY IF INITIAL USER CONTENT STARTS WITH: "This session is being continued from a previous conversation that ran out of context. The conversation is summarized below:"):
+```bash
+python 00-system/core/nexus-loader.py --resume
+```
 
-**DO THIS BEFORE RESPONDING TO THE USER OR READING ANY SUMMARY.**
+## Step 3: Follow `instructions.action`
+
+| Action | Behavior |
+|--------|----------|
+| `display_menu` | Show Nexus menu, wait for user input |
+| `continue_working` | Skip menu, continue from summary context |
+| `load_and_execute_project` | Load and execute specified project |
+
+**The `--resume` flag returns `continue_working` action** - this tells you to skip the menu and continue working based on the summary instructions.
+
+## Step 4: Process user message
+
+After initialization, respond to the user's actual request.
 
 ---
 
-## Why This Matters
-
-Without this initialization:
-- ❌ You have no context about user goals, projects, or skills
-- ❌ You don't know what system state the user is in
-- ❌ You can't route user requests to the right skills/projects
-- ❌ The entire Nexus system is broken
-
-With this initialization:
-- ✅ Memory files loaded (goals.md, roadmap.md, user-config.yaml)
-- ✅ System maps loaded (navigation, routing logic)
-- ✅ Project/skill metadata loaded (for intelligent matching)
-- ✅ Current system state detected (onboarding, operational, etc.)
+**DO THIS BEFORE RESPONDING TO THE USER OR DOING ANY OTHER ACTIONS.**

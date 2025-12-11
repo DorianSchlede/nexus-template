@@ -1,0 +1,228 @@
+#!/usr/bin/env python3
+"""
+{{INTEGRATION_TITLE}} Resource Discovery
+
+Discover and cache all accessible {{RESOURCE_PLURAL}} from {{INTEGRATION_TITLE}}.
+
+Usage:
+    python discover_resources.py [--refresh] [--json]
+
+Options:
+    --refresh    Force re-discovery even if cache exists
+    --json       Output as JSON only (no progress messages)
+
+Output:
+    Saves to: 01-memory/integrations/{{INTEGRATION}}-resources.yaml
+"""
+
+import os
+import sys
+import json
+import argparse
+from datetime import datetime
+
+# Find Nexus root
+def find_nexus_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, 'CLAUDE.md')):
+            return current
+        current = os.path.dirname(current)
+    return None
+
+NEXUS_ROOT = find_nexus_root()
+if not NEXUS_ROOT:
+    print("❌ Error: Could not find Nexus root")
+    sys.exit(1)
+
+sys.path.insert(0, NEXUS_ROOT)
+
+try:
+    import yaml
+    import requests
+except ImportError as e:
+    print(f"❌ Missing dependency: {e.name}")
+    print(f"   Run: pip install {e.name}")
+    sys.exit(1)
+
+
+# Configuration
+CACHE_FILE = os.path.join(NEXUS_ROOT, '01-memory', 'integrations', '{{INTEGRATION}}-resources.yaml')
+API_BASE_URL = '{{API_BASE_URL}}'
+
+
+def load_env():
+    """Load .env file."""
+    env_path = os.path.join(NEXUS_ROOT, '.env')
+    if os.path.exists(env_path):
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    os.environ[key.strip()] = value.strip().strip('"\'')
+
+
+def get_headers():
+    """Get API headers."""
+    api_key = os.environ.get('{{INTEGRATION_UPPER}}_API_KEY')
+    if not api_key:
+        raise ValueError("{{INTEGRATION_UPPER}}_API_KEY not set")
+
+    return {
+        'Authorization': '{{AUTH_HEADER_FORMAT}}'.replace('{{API_KEY_PLACEHOLDER}}', api_key),
+        'Content-Type': 'application/json',
+        {{ADDITIONAL_HEADERS_DICT}}
+    }
+
+
+def discover_{{RESOURCE_PLURAL_LOWER}}(verbose=True):
+    """Discover all accessible {{RESOURCE_PLURAL}}."""
+    headers = get_headers()
+    {{RESOURCE_PLURAL_LOWER}} = []
+
+    if verbose:
+        print(f"🔍 Discovering {{RESOURCE_PLURAL}}...")
+
+    try:
+        # Pagination loop
+        {{PAGINATION_INIT}}
+
+        while True:
+            {{PAGINATION_URL}}
+
+            response = requests.{{REQUEST_METHOD}}(
+                url,
+                headers=headers,
+                {{REQUEST_KWARGS}}
+                timeout=30
+            )
+
+            if response.status_code != 200:
+                if verbose:
+                    print(f"   ❌ API error: {response.status_code}")
+                break
+
+            data = response.json()
+            results = {{EXTRACT_RESULTS}}
+
+            for item in results:
+                resource_info = {
+                    'id': {{EXTRACT_ID}},
+                    'name': {{EXTRACT_NAME}},
+                    {{ADDITIONAL_FIELDS}}
+                }
+                {{RESOURCE_PLURAL_LOWER}}.append(resource_info)
+
+                if verbose:
+                    print(f"   ✓ {resource_info['name']}")
+
+            # Check for more pages
+            {{PAGINATION_CHECK}}
+            if not has_more:
+                break
+
+            {{PAGINATION_UPDATE}}
+
+    except requests.exceptions.RequestException as e:
+        if verbose:
+            print(f"   ❌ Request failed: {e}")
+        return []
+
+    if verbose:
+        print(f"\n📊 Found {len({{RESOURCE_PLURAL_LOWER}})} {{RESOURCE_PLURAL}}")
+
+    return {{RESOURCE_PLURAL_LOWER}}
+
+
+def get_resource_schema(resource_id, headers, verbose=True):
+    """Get schema/properties for a specific resource."""
+    try:
+        response = requests.get(
+            f"{API_BASE_URL}/{{SCHEMA_ENDPOINT}}/{resource_id}",
+            headers=headers,
+            timeout=15
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            return {{EXTRACT_SCHEMA}}
+        else:
+            return None
+
+    except requests.exceptions.RequestException:
+        return None
+
+
+def save_cache({{RESOURCE_PLURAL_LOWER}}):
+    """Save discovered resources to cache file."""
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+
+    cache_data = {
+        'discovered_at': datetime.now().isoformat(),
+        'total_{{RESOURCE_PLURAL_LOWER}}': len({{RESOURCE_PLURAL_LOWER}}),
+        '{{RESOURCE_PLURAL_LOWER}}': {{RESOURCE_PLURAL_LOWER}}
+    }
+
+    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+        yaml.dump(cache_data, f, default_flow_style=False, allow_unicode=True)
+
+    return CACHE_FILE
+
+
+def load_cache():
+    """Load cached resources if available."""
+    if os.path.exists(CACHE_FILE):
+        with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    return None
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Discover {{INTEGRATION_TITLE}} {{RESOURCE_PLURAL}}')
+    parser.add_argument('--refresh', action='store_true', help='Force re-discovery')
+    parser.add_argument('--json', action='store_true', help='Output as JSON only')
+    args = parser.parse_args()
+
+    # Load environment
+    load_env()
+
+    # Check cache
+    if not args.refresh:
+        cache = load_cache()
+        if cache:
+            if args.json:
+                print(json.dumps(cache, indent=2))
+            else:
+                print(f"📦 Using cached data from {cache['discovered_at']}")
+                print(f"   Total {{RESOURCE_PLURAL}}: {cache['total_{{RESOURCE_PLURAL_LOWER}}']}")
+                print(f"   Cache: {CACHE_FILE}")
+                print(f"\n   Use --refresh to re-discover")
+            sys.exit(0)
+
+    # Discover resources
+    verbose = not args.json
+    {{RESOURCE_PLURAL_LOWER}} = discover_{{RESOURCE_PLURAL_LOWER}}(verbose=verbose)
+
+    if not {{RESOURCE_PLURAL_LOWER}}:
+        if not args.json:
+            print("❌ No {{RESOURCE_PLURAL}} found or discovery failed")
+        sys.exit(1)
+
+    # Save cache
+    cache_path = save_cache({{RESOURCE_PLURAL_LOWER}})
+
+    if args.json:
+        result = {
+            'discovered_at': datetime.now().isoformat(),
+            'total_{{RESOURCE_PLURAL_LOWER}}': len({{RESOURCE_PLURAL_LOWER}}),
+            '{{RESOURCE_PLURAL_LOWER}}': {{RESOURCE_PLURAL_LOWER}}
+        }
+        print(json.dumps(result, indent=2))
+    else:
+        print(f"\n✅ Saved to: {cache_path}")
+
+
+if __name__ == '__main__':
+    main()

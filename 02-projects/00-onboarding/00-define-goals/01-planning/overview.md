@@ -3,7 +3,7 @@ id: 00-define-goals
 created: 2025-11-04
 name: Define Goals
 onboarding: true
-status: PLANNING
+status: COMPLETE
 description: Load when user mentions "onboarding", "get started", "define goals", "setup", "first time". Enhanced with roadmap visualization, @filename demo, deep conceptual teaching, and folder orientation. Language-first, experience-before-explanation.
 tasks_total: 40
 tasks_completed: 0
