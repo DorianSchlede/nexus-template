@@ -130,9 +130,9 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
    [If any integration in stats.configured_integrations has active=true:
     "Active: {list names where active=true}" e.g. "Active: Notion, Airtable"]
    [If no integrations active:
-    "Available: Notion, Airtable, Beam ▸ 'add integration'"]
-   [If stats.learning_completed.learn_integrations=false AND no active integrations:
-    "Not configured ▸ 'learn integrations'"]
+    "None configured ▸ 'connect notion', 'connect airtable', or 'add integration'"]
+   [If some but not all active:
+    "More: 'connect {inactive}' or 'add integration' for others"]
 
 💡 SUGGESTED NEXT STEPS
    [Number sequentially starting from 1. Show ALL applicable:]
