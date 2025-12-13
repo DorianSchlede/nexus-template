@@ -195,14 +195,37 @@ Create your own with `"create skill"` after doing something useful.
 
 ## Integrations
 
-Nexus includes master skills for connecting to external tools:
+Connect your tools with natural language:
 
-| Integration | Skill | What It Does |
-|-------------|-------|--------------|
-| **Notion** | `notion-master` | Connect databases, sync pages, search |
-| **Airtable** | `airtable-master` | Connect bases, query records, manage data |
+| Integration | Trigger | What It Does |
+|-------------|---------|--------------|
+| **Notion** | "connect notion" | Query databases, create pages, manage content |
+| **Airtable** | "connect airtable" | Query bases, manage records, batch operations |
+| **Beam AI** | "connect beam" | Manage agents, create tasks, view analytics |
+| **Any REST API** | "add integration" | Auto-discovers endpoints, creates implementation plan |
 
-Say "connect notion" or "connect airtable" to get started.
+Guided setup walks you through API keys and configuration.
+
+---
+
+## Workspace Map
+
+Your `04-workspace/` folder is documented in `workspace-map.md` — a living map of your file structure.
+
+**Why it matters:**
+- Nexus reads this to understand where your files are
+- It can find and organize things without asking
+- New files and folders are automatically understood
+
+**Keep it in sync:**
+```
+You: "update workspace map"
+
+AI: [Scans 04-workspace/, updates documentation]
+    ✅ Workspace map updated. Found 3 new folders.
+```
+
+Run this occasionally after reorganizing your files.
 
 ---
 
@@ -269,35 +292,28 @@ Nexus receives regular system updates (new skills, improvements, fixes). Your pe
 | | `04-workspace/` |
 | | `.env`, `.claude/` |
 
+### Automatic Update Checks
+
+Updates are checked automatically on startup. When available, you'll see:
+```
+⚡ UPDATE AVAILABLE: v0.9.0 → v0.10.0
+   Say 'update nexus' to get latest improvements
+```
+
 ### How to Update
 
 Just say:
 ```
 You: "update nexus"
 
-AI: [Checks for updates]
-    UPDATE AVAILABLE: v0.82.0 → v0.83.0
-    Files to update: 12
+AI: UPDATE AVAILABLE: v0.9.0 → v0.10.0
+    12 files will be updated
 
     Proceed? (yes/no)
 
 You: "yes"
 
-AI: [Updates system files, creates backup]
-    ✅ Updated! Backup at: .sync-backup/2024-01-15-143022/
-```
-
-### Check for Updates Manually
-
-Updates are checked automatically on startup. You'll see:
-```
-⚡ UPDATE AVAILABLE: v0.82.0 → v0.83.0
-   Say 'update nexus' to get latest improvements
-```
-
-Or run directly:
-```bash
-python 00-system/core/nexus-loader.py --check-update
+AI: ✅ Updated! Backup at: .sync-backup/2024-01-15/
 ```
 
 ---
