@@ -57,7 +57,7 @@ I need to set up Beam AI integration first.
 To get your credentials:
 1. Log into Beam AI (app.beam.ai)
 2. Go to Settings → API Keys
-3. Create a new API key (starts with 'bm_key_')
+3. Create a new API key
 4. Also get your Workspace ID from Settings → Workspace
 
 Please provide:
@@ -67,7 +67,7 @@ Please provide:
 After user provides key:
 ```bash
 # Write to .env
-BEAM_API_KEY=bm_key_xxx
+BEAM_API_KEY=xxx
 BEAM_WORKSPACE_ID=workspace-id
 
 # Re-run config check to verify

@@ -1,6 +1,6 @@
 ---
 title: Mental Models Framework
-description: System-level catalog of 30+ thinking frameworks for collaborative elicitation, strategic planning, and deep analysis. Loaded on-demand when referenced by create-project, execute-project, and create-skill at decision points. Supports progressive disclosure.
+description: System-level catalog of 59 thinking frameworks across 12 categories for collaborative elicitation, strategic planning, and deep analysis. Loaded on-demand when referenced by create-project, execute-project, and create-skill at decision points. Supports progressive disclosure.
 category: thinking-frameworks
 load_type: on-demand
 referenced_by: [create-project, execute-project, create-skill]
@@ -23,7 +23,7 @@ referenced_by: [create-project, execute-project, create-skill]
 ## Quick Reference
 
 **What This Skill Provides**:
-- ✅ **30+ mental models** across 8 categories
+- ✅ **59 mental models** across 12 categories
 - ✅ **Selection guidance** - Which model for which situation
 - ✅ **Question templates** - Ready-to-use elicitation questions
 - ✅ **Progressive disclosure** - Reference specific models as needed
@@ -91,72 +91,114 @@ When offering mental models, use this concise format:
 
 ---
 
-## 8 Categories of Mental Models
+## 12 Categories of Mental Models
 
-### 1. Cognitive Models (4)
+### 1. Cognitive Models (6)
 **Purpose**: Fundamental thinking frameworks
 
-- **First Principles** - Strip assumptions, find truths
-- **Systems Thinking** - Analyze interdependencies
+- **First Principles** - Strip assumptions, find fundamental truths
+- **Systems Thinking** - Analyze interdependencies and feedback loops
 - **Analogous Reasoning** - Apply patterns from similar domains
-- **Lateral Thinking** - Generate creative alternatives
+- **Lateral Thinking** - Generate creative alternatives through non-linear paths
+- **Inversion** - Solve problems by considering the opposite
+- **Second-Order Thinking** - Consider consequences of consequences
 
-### 2. Collaborative Models (3)
+### 2. Collaborative Models (4)
 **Purpose**: Multi-perspective analysis
 
-- **Six Thinking Hats** - Explore six perspectives
-- **MECE Principle** - Mutually Exclusive, Collectively Exhaustive
-- **Stakeholder Mapping** - Identify affected parties
+- **Six Thinking Hats** - Explore six distinct perspectives systematically
+- **MECE Principle** - Mutually Exclusive, Collectively Exhaustive breakdown
+- **Stakeholder Mapping** - Identify all affected parties and interests
+- **Devil's Advocate** - Deliberately argue the opposing position
 
-### 3. Diagnostic Models (4)
+### 3. Diagnostic Models (5)
 **Purpose**: Root cause identification
 
-- **Root Cause Analysis (5 Whys)** - Drill to fundamentals
-- **Fishbone Diagram** - Visual cause-effect analysis
-- **Pre-Mortem Analysis** - Identify failure modes
-- **Force Field Analysis** - Driving vs restraining forces
+- **Root Cause Analysis (5 Whys)** - Drill to fundamental causes
+- **Fishbone Diagram** - Visual cause-effect analysis across dimensions
+- **Pre-Mortem Analysis** - Identify failure modes before implementation
+- **Force Field Analysis** - Map driving vs restraining forces
+- **Fault Tree Analysis** - Work backward from failures to root causes
 
-### 4. Strategic Models (5)
-**Purpose**: Long-term planning
+### 4. Strategic Models (6)
+**Purpose**: Long-term planning and positioning
 
-- **Scenario Planning** - Multiple future states
-- **OODA Loop** - Observe-Orient-Decide-Act
-- **Jobs to Be Done** - Outcome-focused needs
-- **Blue Ocean Strategy** - Uncontested market space
+- **Scenario Planning** - Model multiple future states
+- **OODA Loop** - Observe-Orient-Decide-Act rapid cycle
+- **Jobs to Be Done** - Outcome-focused needs analysis
+- **Blue Ocean Strategy** - Create uncontested market space
 - **PESTLE Analysis** - Political, Economic, Social, Tech, Legal, Environmental
+- **Porter's Five Forces** - Analyze competitive dynamics
 
-### 5. Analytical Models (5)
+### 5. Analytical Models (6)
 **Purpose**: Data-driven decisions
 
-- **Decision Matrix** - Multi-criteria evaluation
+- **Decision Matrix** - Multi-criteria weighted evaluation
 - **SWOT Analysis** - Strengths, Weaknesses, Opportunities, Threats
-- **Cost-Benefit Analysis** - Quantified impact with ROI
-- **Pareto Analysis (80/20)** - Prioritization by impact
-- **Assumption Testing** - Validate critical assumptions
+- **Cost-Benefit Analysis** - Quantified impact with ROI calculation
+- **Pareto Analysis (80/20)** - Prioritization by impact concentration
+- **Assumption Testing** - Identify and validate critical assumptions
+- **Sensitivity Analysis** - Test how changes in inputs affect outputs
 
-### 6. Creative Models (4)
+### 6. Creative Models (5)
 **Purpose**: Innovation and ideation
 
 - **Design Thinking** - Empathize-Define-Ideate-Prototype-Test
 - **SCAMPER** - Substitute-Combine-Adapt-Modify-Put to use-Eliminate-Reverse
-- **Morphological Analysis** - Systematic solution exploration
-- **Blue Ocean Strategy** - Value innovation
+- **Morphological Analysis** - Systematic solution space exploration
+- **Random Entry** - Introduce random stimulus to break patterns
+- **Constraint Removal** - Ask "what if X limitation didn't exist?"
 
-### 7. Operational Models (4)
+### 7. Operational Models (5)
 **Purpose**: Process optimization
 
 - **Kanban Thinking** - Visualize work, limit WIP, optimize flow
-- **Value Stream Mapping** - End-to-end process flow
-- **OKR Framework** - Objectives and Key Results
+- **Value Stream Mapping** - End-to-end process with waste identification
+- **OKR Framework** - Objectives and Key Results alignment
 - **Lean Canvas** - One-page business model
+- **Theory of Constraints** - Find and elevate the bottleneck
 
 ### 8. Validation Models (4)
 **Purpose**: Testing assumptions
 
-- **Hypothesis Testing** - Scientific method
-- **Prototyping** - Build testable representations
-- **Pre-Mortem Analysis** - Imagine failure
-- **Red Team Analysis** - Adversarial perspective
+- **Hypothesis Testing** - Scientific method with controlled experiments
+- **Prototyping** - Build testable representations for validation
+- **Red Team Analysis** - Adversarial perspective to find weaknesses
+- **A/B Testing Framework** - Controlled comparison of alternatives
+
+### 9. Time & Resource Models (5)
+**Purpose**: Allocation and prioritization
+
+- **Eisenhower Matrix** - Urgent vs Important prioritization
+- **Time Boxing** - Fixed time allocation forcing completion
+- **Opportunity Cost** - What you give up by choosing this option
+- **Sunk Cost Awareness** - Ignore past investments in future decisions
+- **Resource Dependency Mapping** - Identify critical resource constraints
+
+### 10. Communication Models (4)
+**Purpose**: Influence and clarity
+
+- **Pyramid Principle** - Lead with conclusion, then support
+- **BLUF (Bottom Line Up Front)** - State the key point first
+- **Situation-Complication-Resolution** - Structure persuasive narratives
+- **Steel Manning** - Present the strongest version of opposing views
+
+### 11. Learning Models (4)
+**Purpose**: Knowledge acquisition and growth
+
+- **Feynman Technique** - Explain simply to identify gaps
+- **Spaced Repetition** - Optimize review timing for retention
+- **Deliberate Practice** - Focused improvement on specific weaknesses
+- **T-Shaped Skills** - Deep expertise plus broad knowledge
+
+### 12. Probability & Risk Models (5)
+**Purpose**: Uncertainty and risk management
+
+- **Expected Value** - Probability-weighted outcome calculation
+- **Margin of Safety** - Build in buffer for errors
+- **Black Swan Awareness** - Account for high-impact rare events
+- **Bayesian Updating** - Revise beliefs based on new evidence
+- **Regret Minimization** - Choose to minimize future regret
 
 ---
 
@@ -203,36 +245,47 @@ Offer mental models from mental-models skill:
 ## Quick Selection Guide
 
 ### For Requirements Gathering
-**Recommend**: First Principles, Stakeholder Mapping, SWOT
-
-**Load**: `references/requirements-models.md`
+**Recommend**: First Principles, Stakeholder Mapping, SWOT, Jobs to Be Done
 
 ### For Design & Architecture
-**Recommend**: Systems Thinking, Decision Matrix, Pre-Mortem
-
-**Load**: `references/design-models.md`
+**Recommend**: Systems Thinking, Decision Matrix, Pre-Mortem, Second-Order Thinking
 
 ### For Task Breakdown
-**Recommend**: Kanban, OKR, Pareto (80/20)
-
-**Load**: `references/task-models.md`
+**Recommend**: Kanban, OKR, Pareto (80/20), Eisenhower Matrix
 
 ### For Risk Analysis
-**Recommend**: Pre-Mortem, Force Field, Red Team
-
-**Load**: `references/diagnostic-models.md`
+**Recommend**: Pre-Mortem, Force Field, Red Team, Black Swan Awareness, Margin of Safety
 
 ### For Strategic Planning
-**Recommend**: Scenario Planning, PESTLE, Blue Ocean
+**Recommend**: Scenario Planning, PESTLE, Blue Ocean, Porter's Five Forces
 
-**Load**: `references/strategic-models.md`
+### For Decision Making
+**Recommend**: Decision Matrix, Inversion, Opportunity Cost, Regret Minimization, Expected Value
+
+### For Problem Solving
+**Recommend**: First Principles, 5 Whys, Fishbone, Fault Tree Analysis
+
+### For Communication & Persuasion
+**Recommend**: Pyramid Principle, BLUF, Situation-Complication-Resolution, Steel Manning
+
+### For Learning & Growth
+**Recommend**: Feynman Technique, Deliberate Practice, T-Shaped Skills
+
+### For Time Management
+**Recommend**: Eisenhower Matrix, Time Boxing, Opportunity Cost, Sunk Cost Awareness
+
+### For Innovation & Creativity
+**Recommend**: Design Thinking, SCAMPER, Lateral Thinking, Constraint Removal, Random Entry
+
+### For Uncertainty & Risk
+**Recommend**: Expected Value, Bayesian Updating, Margin of Safety, Sensitivity Analysis
 
 ---
 
 ## Reference Files (Progressive Disclosure)
 
 **Core Reference**:
-- **[mental-models-catalog.md](references/mental-models-catalog.md)** - Complete 30+ model catalog with detailed questions
+- **[mental-models-catalog.md](references/mental-models-catalog.md)** - Complete 59 model catalog with detailed questions
 
 **By Use Case**:
 - **[requirements-models.md](references/requirements-models.md)** - Models for requirements gathering

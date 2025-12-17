@@ -2,26 +2,30 @@
 """
 Mental Models Metadata Scanner
 
-Simple scanner that outputs ALL mental model metadata.
-NO selection logic - just scans and returns metadata.
+Scans all mental model files and outputs metadata for AI selection.
+Each model is a separate .md file with YAML frontmatter.
 
 Usage:
-    python select_mental_models.py
+    python select_mental_models.py [--category CATEGORY] [--format FORMAT]
+
+Arguments:
+    --category  Filter by category (e.g., cognitive, diagnostic, strategic)
+    --format    Output format: 'full' (default), 'brief', 'list'
 
 Output:
-    JSON array with file path and description for each model
+    JSON array with metadata for each model
 """
 
 import yaml
 import re
 import json
+import argparse
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 
 def extract_yaml_frontmatter(file_path: Path) -> Optional[Dict[str, Any]]:
     """
     Extract YAML frontmatter from markdown file.
-    Identical to nexus-loader.py logic.
     """
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -38,49 +42,97 @@ def extract_yaml_frontmatter(file_path: Path) -> Optional[Dict[str, Any]]:
         if metadata:
             metadata['_file_path'] = str(file_path)
             metadata['_file_name'] = file_path.name
+            # Extract category from parent folder
+            metadata['_category_folder'] = file_path.parent.name
 
         return metadata
 
     except Exception as e:
         return {'error': str(e), '_file_path': str(file_path)}
 
-def scan_mental_models(models_dir: Path) -> List[Dict[str, Any]]:
+def scan_mental_models(models_dir: Path, category_filter: Optional[str] = None) -> List[Dict[str, Any]]:
     """
-    Scan all mental model files and extract metadata.
-    Returns list with only file path and description.
+    Scan all mental model files recursively and extract metadata.
+
+    Structure: models/{category}/{model-name}.md
     """
     models = []
 
     if not models_dir.exists():
         return []
 
-    # Find all .md files
-    for model_file in models_dir.glob("*.md"):
+    # Find all .md files recursively in category subdirectories
+    for model_file in models_dir.glob("**/*.md"):
         metadata = extract_yaml_frontmatter(model_file)
         if metadata and 'error' not in metadata:
-            # Only include file path and description (no name)
+            # Apply category filter if specified
+            if category_filter:
+                model_category = metadata.get('category', metadata.get('_category_folder', ''))
+                if model_category != category_filter:
+                    continue
+
             models.append({
-                "file": metadata.get('_file_path'),
-                "description": metadata.get('description', '')
+                "name": metadata.get('name', ''),
+                "slug": metadata.get('slug', ''),
+                "category": metadata.get('category', metadata.get('_category_folder', '')),
+                "description": metadata.get('description', ''),
+                "when_to_use": metadata.get('when_to_use', []),
+                "best_for": metadata.get('best_for', ''),
+                "file": metadata.get('_file_path', '')
             })
+
+    # Sort by category, then by name
+    models.sort(key=lambda x: (x.get('category', ''), x.get('name', '')))
 
     return models
 
+def format_output(models: List[Dict[str, Any]], format_type: str) -> str:
+    """Format output based on requested format."""
+    if format_type == 'brief':
+        # Compact format: just name, category, description
+        brief = []
+        for m in models:
+            brief.append({
+                "name": m.get('name'),
+                "category": m.get('category'),
+                "description": m.get('description')
+            })
+        return json.dumps(brief, indent=2, ensure_ascii=False)
+
+    elif format_type == 'list':
+        # Ultra-compact: just names grouped by category
+        by_category = {}
+        for m in models:
+            cat = m.get('category', 'other')
+            if cat not in by_category:
+                by_category[cat] = []
+            by_category[cat].append(m.get('name'))
+        return json.dumps(by_category, indent=2, ensure_ascii=False)
+
+    else:  # 'full'
+        return json.dumps(models, indent=2, ensure_ascii=False)
+
 def main():
-    # Auto-detect base path (like nexus-loader.py)
-    # Script lives in: {nexus-root}/00-system/mental-models/scripts/select_mental_models.py
-    # Go up 3 levels: scripts -> mental-models -> 00-system -> nexus-root
+    parser = argparse.ArgumentParser(description='Scan mental models metadata')
+    parser.add_argument('--category', type=str, help='Filter by category')
+    parser.add_argument('--format', type=str, default='full',
+                        choices=['full', 'brief', 'list'],
+                        help='Output format')
+    args = parser.parse_args()
+
+    # Auto-detect base path
+    # Script lives in: {nexus-root}/00-system/mental-models/scripts/
     script_path = Path(__file__).resolve()
     base_path = script_path.parent.parent.parent.parent
 
-    # Models directory (system-level)
-    models_dir = base_path / "00-system" / "mental-models" / "references" / "mental-models"
+    # Models directory - individual files organized by category
+    models_dir = base_path / "00-system" / "mental-models" / "models"
 
-    # Scan all models (distributed YAML frontmatter)
-    all_models = scan_mental_models(models_dir)
+    # Scan all models
+    all_models = scan_mental_models(models_dir, args.category)
 
-    # Output JSON (pretty-printed for readability)
-    print(json.dumps(all_models, indent=2, ensure_ascii=False))
+    # Output formatted JSON
+    print(format_output(all_models, args.format))
 
 if __name__ == "__main__":
     main()
