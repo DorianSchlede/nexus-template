@@ -1,5 +1,56 @@
 # Release Notes
 
+## v0.13.0 - Display Hints & Mental Models Expansion (2025-12-18)
+
+### Display Hints for Menu Rendering
+
+Added `display_hints` to nexus-loader output to ensure AI never misses critical menu items.
+
+#### Features
+
+- **`stats.display_hints`** - Array of actionable hints AI must check before rendering menu
+- **`instructions.display_hints`** - Same hints in instructions for immediate visibility
+- Hints include:
+  - `SHOW_UPDATE_BANNER: vX → vY` - Display update notification
+  - `ONBOARDING_INCOMPLETE: N skills pending` - Emphasize onboarding
+  - `PROMPT_SETUP_GOALS` - Suggest goals setup
+  - `PROMPT_SETUP_WORKSPACE` - Suggest workspace setup
+
+#### Why This Matters
+
+Previously, conditional menu items (like update banners) could be missed when AI parsed the loader output. Display hints make critical items impossible to overlook.
+
+### Mental Models Expansion
+
+Expanded mental models from 30 to **59 models** across **12 categories**.
+
+#### New Categories (4)
+- **Time & Resource** - Eisenhower Matrix, Time Boxing, Opportunity Cost, Sunk Cost, Resource Mapping
+- **Communication** - Pyramid Principle, BLUF, Situation-Complication-Resolution, Steel Manning
+- **Learning** - Feynman Technique, Spaced Repetition, Deliberate Practice, T-Shaped Skills
+- **Probability & Risk** - Expected Value, Margin of Safety, Black Swan, Bayesian Updating, Regret Minimization
+
+#### New Structure
+
+Models now stored as individual files in `00-system/mental-models/models/{category}/{model}.md` for better organization and loading.
+
+#### Updated Scanner
+
+```bash
+python 00-system/mental-models/scripts/select_mental_models.py --format brief
+python 00-system/mental-models/scripts/select_mental_models.py --category cognitive
+python 00-system/mental-models/scripts/select_mental_models.py --format list
+```
+
+### Other Changes
+
+- Removed HubSpot integration project (skills remain available)
+- Added 4 tests for display_hints feature (14 total loader tests)
+- Updated orchestrator with display_hints documentation
+- Fixed beam-connect API key format
+
+---
+
 ## v0.10.0 - HubSpot Integration (2025-12-13)
 
 ### New Integration: HubSpot CRM
