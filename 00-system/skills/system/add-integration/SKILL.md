@@ -40,6 +40,18 @@ If user mentions connecting to external tools but `learn_integrations` is pendin
 
 Build complete API integrations following the master/connect/specialized pattern.
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ CRITICAL: MUST LOAD create-project SKILL ⚠️
+
+**MANDATORY**: In Step 4, load the create-project skill:
+
+```bash
+python 00-system/core/nexus-loader.py --skill create-project
+```
+
+Then follow its workflow to create the integration project.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ## Purpose
 
 The `add-integration` skill transforms API documentation into a complete, production-ready integration. It:
@@ -47,7 +59,7 @@ The `add-integration` skill transforms API documentation into a complete, produc
 1. **Discovers** available API endpoints via web search
 2. **Presents** endpoints for user selection
 3. **Plans** the integration architecture
-4. **Creates a project** for implementation
+4. **Creates a project** for implementation (via create-project skill)
 
 **Architecture Pattern**: See [references/integration-architecture.md](references/integration-architecture.md)
 
@@ -158,18 +170,26 @@ Found:
 
 **Create project immediately after discovering API docs** to save progress.
 
-**Use create-project skill internally** to create:
+**Load the create-project skill:**
+```bash
+python 00-system/core/nexus-loader.py --skill create-project
+```
 
+**Follow its workflow** with project name: "{Service Name} Integration"
+
+This creates:
 ```
 02-projects/{next_id}-{service_slug}-integration/
 ├── 01-planning/
-│   ├── overview.md          # Project metadata
+│   ├── overview.md          # Project metadata (template)
+│   ├── plan.md              # Approach and decisions (template)
 │   └── steps.md             # Implementation checklist (template)
-├── 02-resources/
-│   └── integration-config.json   # Will be populated as we go
+├── 02-resources/            # For integration-config.json
 ├── 03-working/
 └── 04-outputs/
 ```
+
+**After project is created**, update the generated files with integration-specific content.
 
 **Initial overview.md**:
 ```yaml
