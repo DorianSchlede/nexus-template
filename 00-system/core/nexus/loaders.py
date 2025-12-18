@@ -94,7 +94,6 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
                         "tasks_completed": metadata["tasks_completed"],
                         "current_task": metadata.get("current_task"),
                         "_file_path": metadata.get("_file_path"),
-                        "_file_name": metadata.get("_file_name"),
                     }
 
                 projects.append(metadata)
@@ -112,9 +111,23 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
                  If False, return all YAML fields
 
     Returns:
-        List of skill metadata dictionaries
+        List of skill metadata dictionaries, ordered by priority:
+        1. CORE skills (create-project, execute-project, create-skill)
+        2. LEARNING skills (setup-goals, learn-projects, etc.)
+        3. All other skills
     """
     skills = []
+    core_skills = []
+    learning_skills = []
+
+    # CORE SKILLS - highest priority, always at top
+    CORE_SKILL_NAMES = {"create-project", "execute-project", "create-skill"}
+
+    # LEARNING SKILLS - second priority, for onboarding
+    LEARNING_SKILL_NAMES = {
+        "setup-memory", "setup-workspace", "learn-projects",
+        "learn-skills", "learn-integrations", "learn-nexus"
+    }
 
     # Try both 03-skills/ (user skills) and 00-system/skills/ (system skills)
     skills_dirs = [
@@ -130,18 +143,26 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
         for skill_file in skills_dir.glob("**/SKILL.md"):
             metadata = extract_yaml_frontmatter(str(skill_file))
             if metadata and "error" not in metadata:
+                skill_name = metadata.get("name", "")
+
                 # PROGRESSIVE DISCLOSURE: Return minimal fields for efficiency
                 if minimal:
                     metadata = {
-                        "name": metadata.get("name"),
+                        "name": skill_name,
                         "description": metadata.get("description", ""),
                         "_file_path": metadata.get("_file_path"),
-                        "_file_name": metadata.get("_file_name"),
                     }
 
-                skills.append(metadata)
+                # Categorize by priority
+                if skill_name in CORE_SKILL_NAMES:
+                    core_skills.append(metadata)
+                elif skill_name in LEARNING_SKILL_NAMES:
+                    learning_skills.append(metadata)
+                else:
+                    skills.append(metadata)
 
-    return skills
+    # Return in priority order: CORE → LEARNING → others
+    return core_skills + learning_skills + skills
 
 
 def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]:

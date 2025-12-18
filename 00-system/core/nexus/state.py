@@ -241,7 +241,7 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
         Dict mapping skill keys to completion status
     """
     default_completed = {
-        "setup_goals": False,
+        "setup_memory": False,
         "setup_workspace": False,
         "learn_integrations": False,
         "learn_projects": False,

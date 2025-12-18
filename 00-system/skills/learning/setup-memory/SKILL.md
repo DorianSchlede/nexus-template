@@ -1,6 +1,6 @@
 ---
-name: setup-goals
-description: "Personalize Nexus with your role, goals, and preferences. Load when user mentions: setup goals, set goals, my goals, personalize, configure nexus, who am I, define role, my role, about me, preferences, customize, onboarding, get started. 8-10 min."
+name: setup-memory
+description: "Configure Nexus memory with your role, goals, and preferences. Load when user wants to personalize the system or teach Nexus about themselves. Keywords: setup memory, personalize, configure, my goals, my role, about me, preferences. 8 min."
 onboarding: true
 priority: critical
 ---

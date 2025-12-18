@@ -22,7 +22,7 @@ onboarding:
 learning_tracker:
   session_count: 0
   completed:
-    setup_goals: false
+    setup_memory: false
     setup_workspace: false
     learn_integrations: false
     learn_projects: false
@@ -51,4 +51,4 @@ If smart_default is true:
 
 If language is not set (empty string):
 - Default to English
-- Prompt user to set preference during setup-goals skill
+- Prompt user to set preference during setup-memory skill

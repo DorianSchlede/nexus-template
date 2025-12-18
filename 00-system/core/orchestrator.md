@@ -73,33 +73,52 @@ Smart routing does NOT apply:
 | **2. Project Reference** | User mentions ANY project by name, ID, or number | **ALWAYS** load `execute-project` skill first |
 | **3. General** | No match | Respond naturally. For Nexus questions → `00-system/documentation/product-overview.md` |
 
-**⚠️ CRITICAL - Skill Loading Rules:**
+---
 
-| Trigger | Skill to Load |
-|---------|---------------|
-| ANY project mention (name/ID/number) | `execute-project` |
-| "create project" | `create-project` |
-| "create skill" | `create-skill` |
-| Learning/onboarding request | Match user message against skill descriptions in `metadata.skills` |
+### ⚠️ Core Skill Matching (Semantic, Not Just Keywords)
 
-**Learning skills only load when user explicitly asks.** Check each skill's description field for trigger phrases.
+Don't just match keywords - **understand user intent**:
 
-**NEVER create project/skill folders or read project files directly.** Always load the skill first.
+| Skill | Intent Signal | Check First |
+|-------|--------------|-------------|
+| `create-project` | User wants to START something NEW with a deliverable | Is this new work? No existing project matches? |
+| `execute-project` | User references EXISTING project | Does name/ID match `metadata.projects`? |
+| `create-skill` | User wants to AUTOMATE repeating work | Is this a pattern they do regularly? |
 
-**Integration Redirect (P0):**
-Before loading `add-integration` skill, check `stats.configured_integrations[]`.
-If user says "add beam" and "beam" exists in configured_integrations → DON'T load add-integration.
-Instead: "Beam is already integrated! Say 'beam connect' to use it, or tell me what you want to do with Beam."
+**Decision flow:**
+1. Check if user mentions existing project name/ID → `execute-project`
+2. Check if user wants to create new finite work → `create-project`
+3. Check if user wants to automate patterns → `create-skill`
+4. Match against skill descriptions in `metadata.skills`
 
-**Examples:**
-- "add beam" → Check configured_integrations → "beam" found → Redirect to beam-connect (P0)
-- "add hubspot" → Check configured_integrations → not found → `add-integration` skill (P1)
-- "create project" → `create-project` skill (P1)
-- "setup goals" → `setup-goals` skill (P1)
-- "review project 4" → `execute-project` skill (P2)
-- "continue website" → `execute-project` skill (P2)
-- "what's the status of research" → `execute-project` skill (P2)
-- "what is Nexus" → Load product-overview.md (P3)
+**Key distinction:**
+- "work on website" + website project exists → `execute-project`
+- "work on website" + no website project → `create-project` (suggest)
+
+---
+
+### Learning Skills - Use `stats.pending_onboarding`
+
+The loader returns `stats.pending_onboarding[]` - use this data to suggest at contextually relevant moments:
+
+| If pending... | Suggest when user... |
+|---------------|---------------------|
+| `setup_memory` | First session, asks about personalization |
+| `learn_projects` | Creates first project, confused about projects |
+| `learn_skills` | Creates first skill, describes repeating work |
+| `learn_integrations` | Mentions external tool (Notion, Slack, GitHub) |
+
+**Intent matching** - understand what user means, not just keywords:
+- "what's the difference between projects and skills" → `learn-projects`
+- "I use Notion for my tasks" → suggest `learn-integrations`
+
+---
+
+### NEVER Do
+
+- ❌ Read project files directly → use `execute-project`
+- ❌ Create project/skill folders directly → use create skills
+- ❌ Auto-load learning skills → suggest, user decides
 
 ---
 
@@ -123,7 +142,7 @@ Before rendering the menu, check `stats.display_hints[]` for critical items:
 |------|--------|
 | `SHOW_UPDATE_BANNER: vX → vY` | Display update banner at top of menu |
 | `ONBOARDING_INCOMPLETE: N skills` | Emphasize onboarding in suggested steps |
-| `PROMPT_SETUP_GOALS` | Add "setup goals" to suggestions |
+| `PROMPT_SETUP_GOALS` | Add "setup memory" to suggestions |
 | `PROMPT_SETUP_WORKSPACE` | Add "setup workspace" to suggestions |
 
 ### Step 2: Render Menu
@@ -144,7 +163,7 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
    Say 'update nexus' to get latest improvements
 
 🧠 MEMORY
-   [If stats.goals_personalized=false: "Not configured ▸ 'setup goals'"]
+   [If stats.goals_personalized=false: "Not configured ▸ 'setup memory'"]
    [If stats.goals_personalized=true: "Role: {role}" and "Focus: {goal}"]
 
 📦 PROJECTS
@@ -156,7 +175,7 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
 🔧 SKILLS  [{total_skills} available ▸ 'list skills']
    [If stats.user_skills>0: "Custom: {names}"]
    [If stats.user_skills=0: "No custom skills ▸ 'create skill' or 'search skill library'"]
-   Core: Create Project, Create Skill, Setup Goals, Update Workspace Map
+   Core: Create Project, Create Skill, Setup Memory, Update Workspace Map
 
 📁 WORKSPACE
    [If stats.workspace_configured=false: "Not configured ▸ 'setup workspace'"]
@@ -172,7 +191,7 @@ Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.
    [Number sequentially starting from 1. Show ALL applicable:]
 
    Onboarding sequence (show unconfigured ones):
-   - goals_personalized=false → "[N]. 'setup goals' - teach Nexus about you"
+   - goals_personalized=false → "[N]. 'setup memory' - teach Nexus about you"
    - workspace_configured=false → "[N]. 'setup workspace' - organize your files"
    - learning_completed.learn_integrations=false → "[N]. 'learn integrations' - connect external tools"
    - user_skills=0 → "[N]. 'create skill' - automate a repeating workflow"
@@ -219,44 +238,56 @@ After loading files, check `user-config.yaml`:
 
 **nexus-loader.py returns `stats.pending_onboarding`** - a list of incomplete onboarding skills.
 
-### Skill Loading Rules
+### How It Works
 
-**Only load learning skills when user explicitly asks.** Match user input against trigger phrases in each skill's description field.
+1. **Check `stats.pending_onboarding`** on startup - if NOT empty, onboarding is incomplete
+2. **Suggest at natural moments** - don't interrupt, wait for relevant context
+3. **Load when user explicitly asks** - match their message against skill descriptions
+4. **Never auto-load** - always let user decide
 
-### How to Use `pending_onboarding`
+### Suggestion Triggers
 
-1. **Check on startup**: If `pending_onboarding` is NOT empty, onboarding is incomplete
-2. **Each item has**: `name`, `trigger`, `priority`, `time`
-3. **Suggest in menu** - highlight incomplete onboarding in SUGGESTED NEXT STEPS
-4. **Load only when user asks** - match their message against skill descriptions
+| Skill | Natural Moments to Suggest |
+|-------|---------------------------|
+| `setup-memory` | First session, user mentions "personalize", "my role", "about me", goals not configured |
+| `setup-workspace` | User asks about files/folders/organization, after setup-memory completes |
+| `learn-projects` | User says "create project" for first time, confused about project vs skill |
+| `learn-skills` | User says "create skill" for first time, describes repeating work pattern |
+| `learn-integrations` | User mentions external tool (Notion, Slack, GitHub, etc.), asks about connecting |
+| `learn-nexus` | After other onboarding complete, user asks philosophical questions about system |
 
-### Example `stats.pending_onboarding` Output:
-```json
-[
-  {"key": "setup_goals", "name": "setup-goals", "trigger": "setup goals", "priority": "critical", "time": "8 min"},
-  {"key": "learn_projects", "name": "learn-projects", "trigger": "learn projects", "priority": "high", "time": "8-10 min"}
-]
+### Example Suggestions
+
+**Before first project:**
+```
+💡 Before creating your first project, would you like a quick 8-minute tutorial?
+Say 'learn projects' to understand projects vs skills, or 'skip' to create directly.
 ```
 
-### When to Suggest (not auto-load)
+**When user mentions external tool:**
+```
+💡 You mentioned Notion. Want to learn how Nexus connects to external tools?
+Say 'learn integrations' (10 min) or continue with your current task.
+```
 
-| Condition | Suggestion |
-|-----------|------------|
-| `goals_personalized=false` | Prominently suggest "setup goals" in menu |
-| `workspace_configured=false` | Suggest "setup workspace" |
-| User says "create project" first time | Mention "learn projects" is available |
-| User describes repeating work | Mention "learn skills" exists |
+**When user describes repeating work:**
+```
+💡 I notice this sounds like repeating work. Skills are perfect for automating patterns.
+Say 'learn skills' to understand when to create them, or 'skip' to continue.
+```
 
-**DO NOT suggest when**:
+### DO NOT Suggest When
+
 - `stats.onboarding_complete: true` (all done!)
-- User is mid-task and focused
-- User explicitly dismissed
+- User is mid-task and focused on execution
+- User explicitly said "skip" or dismissed suggestion
+- Same suggestion was made recently in conversation
 
-### Priority Order (for suggestions)
+### Priority Order
 
-1. **Critical**: `setup_goals` - suggest first, most important
-2. **High**: `setup_workspace`, `learn_projects`, `learn_skills`, `learn_integrations`
-3. **Medium**: `learn_nexus` - suggest after others complete
+1. **Critical**: `setup-memory` - suggest first session, most impactful
+2. **High**: `setup-workspace`, `learn-projects`, `learn-skills`, `learn-integrations`
+3. **Medium**: `learn-nexus` - only after core onboarding complete
 
 ---
 
@@ -271,7 +302,7 @@ When user signals they're wrapping up (e.g., "thanks", "that's all", "I'm done f
 Auto-trigger `close-session` skill when:
 - User explicitly says "done", "close session", "wrap up", "finished"
 - A project reaches 100% completion
-- A major skill workflow completes (create-project, setup-goals, etc.)
+- A major skill workflow completes (create-project, setup-memory, etc.)
 
 ### Why This Matters
 Without `close-session`:

@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: "[CORE SKILL] Create reusable workflow skills. Load when user says 'create skill', 'new skill', 'make skill', 'automate this'. AI should SUGGEST (not auto-load) when: (1) user describes repeating tasks ('every week I...'), (2) user completes a reusable workflow, (3) user creates similar things (report-jan, report-feb). Ask: 'Want to turn this into a reusable skill?' - let user decide."
+description: "Create reusable workflow skills. Load when user wants to automate repeating work. Keywords: create skill, new skill, automate this, make reusable, save workflow. Suggest when user describes patterns (every week I..., I always...)."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

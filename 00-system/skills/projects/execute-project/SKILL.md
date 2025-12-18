@@ -1,6 +1,6 @@
 ---
 name: execute-project
-description: "[CRITICAL - ALWAYS LOAD FOR PROJECTS] The ONLY way to interact with projects. Load when user mentions ANY project by name, ID, or number - including 'review', 'check', 'look at', 'continue', 'work on', 'resume', 'status of', 'what about', 'project X'. NEVER read project files directly - this skill handles ALL project file loading (overview.md, plan.md, steps.md)."
+description: "The ONLY way to interact with existing projects. Load when user references ANY project by name, ID, or number. Includes: continue, resume, status, progress, check, review, work on [existing project]. NEVER read project files directly."
 ---
 
 ## 🎯 Onboarding Awareness (CONTEXTUAL SUGGESTIONS)

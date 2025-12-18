@@ -70,9 +70,9 @@ INTEGRATION_ENV_VARS: Dict[str, str] = {
 
 # Maps skill keys to their metadata for proactive suggestions
 ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
-    "setup_goals": {
-        "name": "setup-goals",
-        "trigger": "setup goals",
+    "setup_memory": {
+        "name": "setup-memory",
+        "trigger": "setup memory",
         "priority": "critical",
         "time": "8 min",
     },
