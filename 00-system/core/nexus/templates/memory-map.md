@@ -24,6 +24,11 @@ The `01-memory/` folder contains context that persists across all sessions:
 - Long-term vision (1-3 years)
 - Success metrics
 
+**roadmap.md** - How you'll get there
+- Goal breakdown into milestones
+- Timeline and sequencing
+- Key activities per milestone
+
 **core-learnings.md** - What you've learned
 - What works well (successes)
 - What to avoid (mistakes)
@@ -58,6 +63,9 @@ The `01-memory/` folder contains context that persists across all sessions:
 - memory-map.md
 - user-config.yaml
 
+**Strategic Discussion**:
+- roadmap.md (when talking about milestones, timeline, planning)
+
 **Pattern Recognition**:
 - core-learnings.md (when similar situations arise)
 
@@ -74,9 +82,10 @@ The `01-memory/` folder contains context that persists across all sessions:
 - Personalize anytime with "setup goals" skill
 
 **Personalized** (After setup-goals skill):
-- goals.md → Populated with user's actual goals
-- user-config.yaml → Language and preferences set
-- core-learnings.md → Grows over time via close-session
+- goals.md -> Populated with user's actual goals
+- roadmap.md -> Created with milestones
+- user-config.yaml -> Language and preferences set
+- core-learnings.md -> Grows over time via close-session
 
 ---
 
