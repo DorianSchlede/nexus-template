@@ -1,6 +1,6 @@
 ---
 name: setup-goals
-description: "Load when user says 'setup goals', 'personalize nexus', 'set my goals', 'define my role'. Captures role, goals, preferences. 8-10 min."
+description: "Personalize Nexus with your role, goals, and preferences. Load when user mentions: setup goals, set goals, my goals, personalize, configure nexus, who am I, define role, my role, about me, preferences, customize, onboarding, get started. 8-10 min."
 onboarding: true
 priority: critical
 ---

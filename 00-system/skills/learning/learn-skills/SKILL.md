@@ -1,6 +1,6 @@
 ---
 name: learn-skills
-description: "Load when user says 'learn skills', 'how do skills work', 'what is a skill', 'skill tutorial'. Teaches skill-worthiness, structure, and triggering. 10-12 min."
+description: "Learn how Nexus skills work. Load when user mentions: learn skills, how do skills work, what is a skill, skill tutorial, skill structure, understand skills, explain skills, when to create skill, skill vs project. 10-12 min."
 onboarding: true
 priority: high
 ---

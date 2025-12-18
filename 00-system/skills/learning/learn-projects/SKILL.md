@@ -1,6 +1,6 @@
 ---
 name: learn-projects
-description: "Load when user says 'learn projects', 'how do projects work', 'projects vs skills', 'project tutorial'. Teaches project structure, lifecycle, and decision framework. 8-10 min."
+description: "Learn how Nexus projects work. Load when user mentions: learn projects, how do projects work, projects vs skills, project tutorial, what is a project, project structure, project lifecycle, understand projects, explain projects. 8-10 min."
 onboarding: true
 priority: high
 ---

@@ -1,6 +1,6 @@
 ---
 name: learn-nexus
-description: "Load when user says 'learn nexus', 'nexus tutorial', 'system mastery', 'nexus best practices'. Covers philosophy, design principles, pitfalls, AI patterns. 15-18 min."
+description: "Master Nexus philosophy and best practices. Load when user mentions: learn nexus, nexus tutorial, system mastery, nexus best practices, how nexus works, nexus philosophy, nexus design, understand nexus, nexus deep dive. 15-18 min."
 onboarding: true
 priority: medium
 ---

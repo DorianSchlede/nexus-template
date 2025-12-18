@@ -1,6 +1,6 @@
 ---
 name: setup-workspace
-description: "Load when user says 'setup workspace', 'organize folders', 'folder structure', 'configure workspace'. Creates practical 04-workspace/ structure. 5-8 min."
+description: "Organize your 04-workspace/ folder structure. Load when user mentions: setup workspace, organize folders, folder structure, configure workspace, my files, file organization, where to put files, workspace setup, directories, storage. 5-8 min."
 onboarding: true
 priority: high
 ---
