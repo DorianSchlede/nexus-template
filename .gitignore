@@ -51,8 +51,12 @@ desktop.ini
 # MCP Configuration (contains API keys)
 .mcp.local.json
 
-# User-specific content (only push 00-system to GitHub)
-# Ignore all contents in folders 01-04, keep only READMEs
+# =============================================================================
+# USER CONTENT - DELETE THIS SECTION AFTER CREATING YOUR TEMPLATE
+# =============================================================================
+# These rules keep the template clean. After you create your own repo from this
+# template, DELETE EVERYTHING BELOW THIS LINE so you can track your own content.
+# =============================================================================
 
 # 01-memory - user's personal memory/goals
 01-memory/*
