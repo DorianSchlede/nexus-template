@@ -1093,6 +1093,10 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
     if not workspace_configured:
         display_hints.append("PROMPT_SETUP_WORKSPACE: Workspace not configured")
 
+    # Add display_hints to instructions so AI sees them immediately
+    if result.get('instructions') and display_hints:
+        result['instructions']['display_hints'] = display_hints
+
     result['stats'] = {
         # DISPLAY_HINTS: Critical items AI must show in menu - check this FIRST
         'display_hints': display_hints,
