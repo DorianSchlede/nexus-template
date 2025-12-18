@@ -51,21 +51,9 @@ desktop.ini
 # MCP Configuration (contains API keys)
 .mcp.local.json
 
-# User-specific content (only push 00-system to GitHub)
-# Ignore all contents in folders 01-04, keep only READMEs
+# User-specific memory (optional - uncomment if you want to keep private)
+# 01-memory/session-reports/
+# 01-memory/core-learnings.md
 
-# 01-memory - user's personal memory/goals
-01-memory/*
-!01-memory/README.md
-
-# 02-projects - user's projects
-02-projects/*
-!02-projects/README.md
-
-# 03-skills - user's custom skills
-03-skills/*
-!03-skills/README.md
-
-# 04-workspace - user's workspace files
-04-workspace/*
-!04-workspace/README.md
+# User workspace (optional - uncomment if you want to keep private)
+# 04-workspace/
