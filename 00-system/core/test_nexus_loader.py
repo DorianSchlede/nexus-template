@@ -244,6 +244,111 @@ learning_tracker:
         self.assertEqual(len(pending), 6, "Should default to all 6 pending when config malformed")
 
 
+class TestDisplayHints(TestCase):
+    """Test the display_hints feature in nexus-loader"""
+
+    def setUp(self):
+        """Create a temporary Nexus workspace for testing"""
+        self.test_dir = tempfile.mkdtemp()
+        self.base_path = Path(self.test_dir)
+
+        # Create minimal Nexus structure
+        (self.base_path / "00-system" / "core").mkdir(parents=True)
+        (self.base_path / "00-system" / "skills").mkdir(parents=True)
+        (self.base_path / "01-memory").mkdir(parents=True)
+        (self.base_path / "02-projects").mkdir(parents=True)
+        (self.base_path / "03-skills").mkdir(parents=True)
+        (self.base_path / "04-workspace").mkdir(parents=True)
+
+        (self.base_path / "00-system" / "system-map.md").write_text("# System Map\nTest file")
+        (self.base_path / "01-memory" / "memory-map.md").write_text("# Memory Map\nTest file")
+
+    def tearDown(self):
+        shutil.rmtree(self.test_dir, ignore_errors=True)
+
+    def test_display_hints_exists_in_stats(self):
+        """display_hints should always be present in stats"""
+        # Create goals with smart_default
+        (self.base_path / "01-memory" / "goals.md").write_text(
+            "---\nsmart_default: true\n---\n# Goals"
+        )
+
+        result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
+        stats = result.get('stats', {})
+
+        self.assertIn('display_hints', stats)
+        self.assertIsInstance(stats['display_hints'], list)
+
+    def test_display_hints_shows_onboarding_incomplete(self):
+        """display_hints should include ONBOARDING_INCOMPLETE when skills pending"""
+        (self.base_path / "01-memory" / "goals.md").write_text(
+            "---\nsmart_default: true\n---\n# Goals"
+        )
+        # Default user-config has all onboarding incomplete
+        config = """---
+smart_default: true
+learning_tracker:
+  completed:
+    setup_goals: false
+    setup_workspace: false
+    learn_integrations: false
+    learn_projects: false
+    learn_skills: false
+    learn_nexus: false
+---
+"""
+        (self.base_path / "01-memory" / "user-config.yaml").write_text(config)
+
+        result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
+        hints = result.get('stats', {}).get('display_hints', [])
+
+        onboarding_hints = [h for h in hints if 'ONBOARDING_INCOMPLETE' in h]
+        self.assertEqual(len(onboarding_hints), 1)
+        self.assertIn('6 skills pending', onboarding_hints[0])
+
+    def test_display_hints_shows_setup_goals_prompt(self):
+        """display_hints should include PROMPT_SETUP_GOALS when goals not personalized"""
+        (self.base_path / "01-memory" / "goals.md").write_text(
+            "---\nsmart_default: true\n---\n# Goals"
+        )
+
+        result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
+        hints = result.get('stats', {}).get('display_hints', [])
+
+        goals_hints = [h for h in hints if 'PROMPT_SETUP_GOALS' in h]
+        self.assertEqual(len(goals_hints), 1)
+
+    def test_display_hints_empty_when_all_configured(self):
+        """display_hints should be empty when everything is configured"""
+        # Personalized goals (no smart_default)
+        (self.base_path / "01-memory" / "goals.md").write_text(
+            "---\nname: My Goals\n---\n# Goals\nPersonalized content"
+        )
+        # All onboarding complete
+        config = """---
+learning_tracker:
+  completed:
+    setup_goals: true
+    setup_workspace: true
+    learn_integrations: true
+    learn_projects: true
+    learn_skills: true
+    learn_nexus: true
+---
+"""
+        (self.base_path / "01-memory" / "user-config.yaml").write_text(config)
+        # Workspace configured
+        (self.base_path / "04-workspace" / "workspace-map.md").write_text(
+            "---\nname: My Workspace\n---\n# Workspace Map\nConfigured"
+        )
+
+        result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
+        hints = result.get('stats', {}).get('display_hints', [])
+
+        # Should be empty (no update check, so no update hint)
+        self.assertEqual(len(hints), 0)
+
+
 class TestOnboardingIntegration(TestCase):
     """Integration tests for onboarding with other nexus-loader features"""
 

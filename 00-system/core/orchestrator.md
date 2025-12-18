@@ -93,6 +93,27 @@ Instead: "Beam is already integrated! Say 'beam connect' to use it, or tell me w
 
 **⚠️ CRITICAL: Output the ENTIRE menu (banner + content) inside ONE markdown code block.**
 
+### Step 1: Check `stats.display_hints` FIRST
+
+Before rendering the menu, check `stats.display_hints[]` for critical items:
+
+```json
+"display_hints": [
+  "SHOW_UPDATE_BANNER: v0.11.0 → v0.12.0",
+  "ONBOARDING_INCOMPLETE: 3 skills pending",
+  "PROMPT_SETUP_GOALS: Goals not yet personalized"
+]
+```
+
+| Hint | Action |
+|------|--------|
+| `SHOW_UPDATE_BANNER: vX → vY` | Display update banner at top of menu |
+| `ONBOARDING_INCOMPLETE: N skills` | Emphasize onboarding in suggested steps |
+| `PROMPT_SETUP_GOALS` | Add "setup goals" to suggestions |
+| `PROMPT_SETUP_WORKSPACE` | Add "setup workspace" to suggestions |
+
+### Step 2: Render Menu
+
 Use data from `nexus-loader.py` output: `stats`, `metadata.projects`, `metadata.skills`
 
 ~~~

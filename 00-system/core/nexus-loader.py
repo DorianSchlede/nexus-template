@@ -1081,7 +1081,21 @@ def load_startup(base_path: str = ".", include_metadata: bool = True, resume_mod
             # Network/git errors should NOT fail startup
             pass
 
+    # Build display_hints - critical items AI must not miss when rendering menu
+    # These are top-level action items that should be impossible to overlook
+    display_hints = []
+    if update_info['update_available']:
+        display_hints.append(f"SHOW_UPDATE_BANNER: v{update_info['local_version']} → v{update_info.get('upstream_version', 'latest')}")
+    if pending_onboarding:
+        display_hints.append(f"ONBOARDING_INCOMPLETE: {len(pending_onboarding)} skills pending")
+    if not goals_personalized:
+        display_hints.append("PROMPT_SETUP_GOALS: Goals not yet personalized")
+    if not workspace_configured:
+        display_hints.append("PROMPT_SETUP_WORKSPACE: Workspace not configured")
+
     result['stats'] = {
+        # DISPLAY_HINTS: Critical items AI must show in menu - check this FIRST
+        'display_hints': display_hints,
         'files_embedded': len(result['memory_content']),
         'mandatory_maps_loaded': mandatory_maps_found,
         'mandatory_maps_total': len(MANDATORY_MAPS),
