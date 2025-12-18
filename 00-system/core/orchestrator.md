@@ -70,9 +70,19 @@ Smart routing does NOT apply:
 |----------|---------|--------|
 | **0. Integration Exists** | "add/integrate [name]" where name is in `stats.configured_integrations` | Redirect to `{name}-connect` skill, explain it's already built |
 | **1. Skill Match** | Message matches any skill description in `metadata.skills` | Load skill → Execute workflow |
-| **2. Project Work** | "continue/work on/resume [project]" | Auto-load `execute-project` skill with project context |
-| **3. Project Reference** | Message mentions project name | Load project, show context (don't auto-execute) |
-| **4. General** | No match | Respond naturally. For Nexus questions → `00-system/documentation/product-overview.md` |
+| **2. Project Reference** | User mentions ANY project by name, ID, or number | **ALWAYS** load `execute-project` skill first |
+| **3. General** | No match | Respond naturally. For Nexus questions → `00-system/documentation/product-overview.md` |
+
+**⚠️ CRITICAL - Skill Loading Rules:**
+
+| Trigger | Skill to Load |
+|---------|---------------|
+| ANY project mention (name/ID/number) | `execute-project` |
+| "create project" | `create-project` |
+| "create skill" | `create-skill` |
+| "learn X" / "setup goals" / "setup workspace" | Learning skill from `00-system/skills/learning/` |
+
+**NEVER create project/skill folders or read project files directly.** Always load the skill first.
 
 **Integration Redirect (P0):**
 Before loading `add-integration` skill, check `stats.configured_integrations[]`.
@@ -84,8 +94,10 @@ Instead: "Beam is already integrated! Say 'beam connect' to use it, or tell me w
 - "add hubspot" → Check configured_integrations → not found → `add-integration` skill (P1)
 - "create project" → `create-project` skill (P1)
 - "setup goals" → `setup-goals` skill (P1)
-- "continue website" → `execute-project` + website context (P2)
-- "what is Nexus" → Load product-overview.md (P4)
+- "review project 4" → `execute-project` skill (P2)
+- "continue website" → `execute-project` skill (P2)
+- "what's the status of research" → `execute-project` skill (P2)
+- "what is Nexus" → Load product-overview.md (P3)
 
 ---
 

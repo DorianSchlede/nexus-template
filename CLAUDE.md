@@ -37,4 +37,18 @@ After initialization, respond to the user's actual request.
 
 ---
 
+## ⚠️ HARD RULES (NEVER SKIP)
+
+These rules override all other behavior:
+
+1. **Project reference → execute-project**: ANY mention of a project by name/ID/number → load `execute-project` skill FIRST. Never read project files directly.
+
+2. **"create project" → create-project**: ALWAYS load `create-project` skill. Never create project folders directly.
+
+3. **"create skill" → create-skill**: ALWAYS load `create-skill` skill. Never create skill folders directly.
+
+4. **Learning triggers → load learning skill**: When user says "learn X", "setup X", or matches a learning skill trigger → load that skill from `00-system/skills/learning/`.
+
+---
+
 **DO THIS BEFORE RESPONDING TO THE USER OR DOING ANY OTHER ACTIONS.**

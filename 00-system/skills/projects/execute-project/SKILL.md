@@ -1,6 +1,6 @@
 ---
 name: execute-project
-description: "[CORE SKILL] Execute and track project work. Load when user says 'continue project', 'work on project', 'execute project', 'resume [name]'. AI should SUGGEST (not auto-load) when: (1) user has IN_PROGRESS projects and asks related work, (2) user references an existing project. Ask: 'Want to continue your [project-name] project?' - let user decide."
+description: "[CRITICAL - ALWAYS LOAD FOR PROJECTS] The ONLY way to interact with projects. Load when user mentions ANY project by name, ID, or number - including 'review', 'check', 'look at', 'continue', 'work on', 'resume', 'status of', 'what about', 'project X'. NEVER read project files directly - this skill handles ALL project file loading (overview.md, plan.md, steps.md)."
 ---
 
 ## 🎯 Onboarding Awareness (CONTEXTUAL SUGGESTIONS)
