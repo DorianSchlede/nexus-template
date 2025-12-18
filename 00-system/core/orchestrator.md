@@ -80,7 +80,9 @@ Smart routing does NOT apply:
 | ANY project mention (name/ID/number) | `execute-project` |
 | "create project" | `create-project` |
 | "create skill" | `create-skill` |
-| "learn X" / "setup goals" / "setup workspace" | Learning skill from `00-system/skills/learning/` |
+| Learning/onboarding topics | Match against skill descriptions in `metadata.skills` |
+
+**Learning Skills Auto-Trigger:** When `stats.goals_personalized=false`, load `setup-goals` on FIRST user message (don't wait for them to ask). Check each skill's description for trigger phrases.
 
 **NEVER create project/skill folders or read project files directly.** Always load the skill first.
 
@@ -217,11 +219,23 @@ After loading files, check `user-config.yaml`:
 
 **nexus-loader.py returns `stats.pending_onboarding`** - a list of incomplete onboarding skills.
 
+### Auto-Trigger Rules (CRITICAL)
+
+**FIRST MESSAGE OF SESSION - Check these in order:**
+
+1. **`stats.goals_personalized=false`** → AUTO-LOAD `setup-goals` skill immediately
+   - Don't ask, don't wait - just load it
+   - User can say "skip" if they want to defer
+
+2. **`stats.workspace_configured=false`** (after goals done) → Suggest `setup workspace`
+
+3. **User mentions ANY trigger phrase from a learning skill description** → Load that skill
+
 ### How to Use `pending_onboarding`
 
 1. **Check on startup**: If `pending_onboarding` is NOT empty, onboarding is incomplete
 2. **Each item has**: `name`, `trigger`, `priority`, `time`
-3. **Suggest proactively** based on context triggers in each skill's SKILL.md
+3. **Match trigger phrases** against user input AND skill descriptions
 
 ### Example `stats.pending_onboarding` Output:
 ```json
@@ -231,22 +245,24 @@ After loading files, check `user-config.yaml`:
 ]
 ```
 
-### Proactive Suggestion Rules
+### Context-Based Auto-Triggers
 
-**DO suggest when** (based on individual skill trigger conditions):
-- `setup_goals` pending + first session or user mentions role/goals
-- `learn_projects` pending + user says "create project" for first time
-- `learn_skills` pending + user describes repeating work patterns
-- `learn_integrations` pending + user mentions external tool
+| User Says/Does | Auto-Load Skill |
+|----------------|-----------------|
+| First message + goals not set | `setup-goals` |
+| "create project" (first time) + learn_projects pending | Suggest `learn-projects` first |
+| Describes repeating work | Suggest `learn-skills` |
+| Mentions external tool/API | Suggest `learn-integrations` |
+| Asks how Nexus works | `learn-nexus` |
 
-**DO NOT suggest when**:
+**DO NOT auto-trigger when**:
 - `stats.onboarding_complete: true` (all done!)
 - User is mid-task and focused
 - User explicitly said "skip" or dismissed
 
 ### Priority Order
 
-1. **Critical**: `setup_goals` - suggest first, most important
+1. **Critical**: `setup_goals` - AUTO-LOAD on first session if not done
 2. **High**: `setup_workspace`, `learn_projects`, `learn_skills`, `learn_integrations`
 3. **Medium**: `learn_nexus` - "graduation" skill, suggest after others complete
 
