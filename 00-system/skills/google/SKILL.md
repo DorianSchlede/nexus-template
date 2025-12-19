@@ -1,12 +1,12 @@
 ---
 name: google-integration
-version: 1.0
-description: "Complete Google Workspace integration (Gmail, Docs, Sheets, Calendar). Load when user mentions 'google', 'gmail', 'email', 'google docs', 'google sheets', 'spreadsheet', 'google calendar', 'schedule meeting', 'calendar', or any Google service operation."
+version: 1.1
+description: "Complete Google Workspace integration (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides). Load when user mentions 'google', 'gmail', 'email', 'google docs', 'google sheets', 'spreadsheet', 'google calendar', 'schedule meeting', 'calendar', 'google drive', 'upload file', 'download file', 'google tasks', 'todo', 'google slides', 'presentation', or any Google service operation."
 ---
 
 # Google Integration
 
-Complete Google Workspace integration with unified OAuth authentication. One login grants access to Gmail, Google Docs, Google Sheets, and Google Calendar.
+Complete Google Workspace integration with unified OAuth authentication. One login grants access to Gmail, Google Docs, Google Sheets, Google Calendar, Google Drive, Google Tasks, and Google Slides.
 
 ## Purpose
 
@@ -23,6 +23,21 @@ Provides a unified interface to Google Workspace services with:
 | **Google Docs** | Document operations | Read, write, create, export, format |
 | **Google Sheets** | Spreadsheet operations | Read, write, append, create, format |
 | **Google Calendar** | Calendar operations | List events, create, update, find slots, check availability |
+| **Google Drive** | File storage operations | Upload, download, share, organize folders |
+| **Google Tasks** | Task management | Create, complete, organize task lists |
+| **Google Slides** | Presentation operations | Create, edit slides, add text/images, export |
+
+---
+
+## First-Time Setup
+
+**New users**: Say `"connect google"` to run the interactive setup wizard.
+
+The wizard guides you through:
+1. Creating a Google Cloud project
+2. Enabling required APIs
+3. Creating OAuth credentials
+4. Authenticating with your Google account
 
 ---
 
@@ -82,6 +97,42 @@ python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py l
 python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py find-slots --duration 30 --from "2025-12-16" --to "2025-12-20"
 ```
 
+### Google Drive
+```bash
+# List files in root
+python3 00-system/skills/google/google-drive/scripts/drive_operations.py list
+
+# Upload file
+python3 00-system/skills/google/google-drive/scripts/drive_operations.py upload ./local_file.pdf
+
+# Download file
+python3 00-system/skills/google/google-drive/scripts/drive_operations.py download <file_id> --output ./downloaded.pdf
+```
+
+### Google Tasks
+```bash
+# List tasks
+python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks
+
+# Create task
+python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Call John" --due 2025-12-20
+
+# Complete task
+python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py complete <task_id>
+```
+
+### Google Slides
+```bash
+# List presentations
+python3 00-system/skills/google/google-slides/scripts/slides_operations.py list
+
+# Create presentation
+python3 00-system/skills/google/google-slides/scripts/slides_operations.py create "Q4 Report"
+
+# Export to PDF
+python3 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./report.pdf
+```
+
 ---
 
 ## Structure
@@ -89,6 +140,8 @@ python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py f
 ```
 google/
 ├── SKILL.md                          # This file (bundle overview)
+├── google-connect/                   # Setup wizard (say "connect google")
+│   └── SKILL.md                      # Interactive setup workflow
 ├── google-master/                    # Shared resources (DO NOT load directly)
 │   ├── SKILL.md                      # Documentation for shared resources
 │   ├── scripts/
@@ -106,9 +159,18 @@ google/
 ├── google-sheets/
 │   ├── SKILL.md                      # Sheets-specific docs
 │   └── scripts/sheets_operations.py
-└── google-calendar/
-    ├── SKILL.md                      # Calendar-specific docs
-    └── scripts/calendar_operations.py
+├── google-calendar/
+│   ├── SKILL.md                      # Calendar-specific docs
+│   └── scripts/calendar_operations.py
+├── google-drive/
+│   ├── SKILL.md                      # Drive-specific docs
+│   └── scripts/drive_operations.py
+├── google-tasks/
+│   ├── SKILL.md                      # Tasks-specific docs
+│   └── scripts/tasks_operations.py
+└── google-slides/
+    ├── SKILL.md                      # Slides-specific docs
+    └── scripts/slides_operations.py
 ```
 
 ---
@@ -123,7 +185,7 @@ pip install google-auth google-auth-oauthlib google-api-python-client
 ### 1. Create Google Cloud Project
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create or select a project
-3. Enable APIs: Gmail, Docs, Sheets, Calendar, Drive
+3. Enable APIs: Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides
 
 ### 2. Create OAuth Credentials
 1. Go to APIs & Services > Credentials

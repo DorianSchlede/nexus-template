@@ -1,6 +1,6 @@
 # Google Integration Setup Guide
 
-Complete setup instructions for Google services (Gmail, Docs, Sheets, Calendar).
+Complete setup instructions for Google services (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides).
 
 ---
 
@@ -40,6 +40,8 @@ In Google Cloud Console:
    - **Google Sheets API**
    - **Google Calendar API**
    - **Google Drive API**
+   - **Google Tasks API**
+   - **Google Slides API**
 
 Click **Enable** for each one.
 
@@ -65,9 +67,14 @@ Click **Enable** for each one.
    https://www.googleapis.com/auth/gmail.labels
    https://www.googleapis.com/auth/documents
    https://www.googleapis.com/auth/drive
+   https://www.googleapis.com/auth/drive.file
+   https://www.googleapis.com/auth/drive.metadata.readonly
    https://www.googleapis.com/auth/spreadsheets
    https://www.googleapis.com/auth/calendar
    https://www.googleapis.com/auth/calendar.events
+   https://www.googleapis.com/auth/tasks
+   https://www.googleapis.com/auth/tasks.readonly
+   https://www.googleapis.com/auth/presentations
    ```
 8. Click **Save and Continue**
 9. On **Test users** page, click **Add Users**

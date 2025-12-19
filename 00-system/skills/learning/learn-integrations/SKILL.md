@@ -106,12 +106,13 @@ Nexus includes master skills for these integrations:
 🔷 BUILT-IN (Ready to Configure)
    • Notion     → "connect notion"     → Databases, pages, search
    • Airtable   → "connect airtable"   → Bases, records, automation
+   • Slack      → "connect slack"      → Messages, channels, team comms
+   • Google     → "connect google"     → Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides
+   • HubSpot    → "connect hubspot"    → CRM, contacts, deals
    • Beam.ai    → "beam" commands      → AI agent workflows
 
 🔌 MCP SERVERS (Via add-integration skill)
    • GitHub     → Repos, issues, PRs, actions
-   • Slack      → Messages, channels, notifications
-   • Google Drive → Files, folders, sharing
    • Linear     → Issues, projects, roadmaps
    • PostgreSQL → Direct database queries
    • Filesystem → Local file operations
@@ -211,6 +212,8 @@ OTHER USE CASES:
 - Based on response:
   - Notion → Load `notion-connect` skill
   - Airtable → Load `airtable-connect` skill
+  - Slack → Load `slack` skill (from google folder)
+  - Google/Gmail/Docs/Sheets/Calendar/Drive/Tasks/Slides → Load `google` skill
   - Other → Load `add-integration` skill
 - Skip Step 8, proceed to finalization after integration complete
 
@@ -218,6 +221,8 @@ OTHER USE CASES:
 - "No problem! When you're ready, just say:"
   - `'connect notion'` for Notion
   - `'connect airtable'` for Airtable
+  - `'connect slack'` for Slack
+  - `'connect google'` for Google Workspace (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides)
   - `'add integration'` for any other tool
 - Proceed to Step 8
 
@@ -240,13 +245,15 @@ OTHER USE CASES:
 
    You now understand:
    • What MCP is (universal adapter for tools)
-   • Available integrations (Notion, Airtable, GitHub, etc.)
+   • Available integrations (Notion, Airtable, Slack, Google, etc.)
    • When to integrate (adds value) vs skip (overhead)
    • How to add them (built-in skills or 'add integration')
 
    Next steps:
    • 'connect notion' - Set up Notion
    • 'connect airtable' - Set up Airtable
+   • 'connect slack' - Set up Slack
+   • 'connect google' - Set up Google Workspace (7 services)
    • 'add integration' - Any other tool
    • 'learn projects' or 'learn skills' - Continue learning
    ```
