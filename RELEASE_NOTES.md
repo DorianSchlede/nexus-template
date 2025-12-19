@@ -1,5 +1,73 @@
 # Release Notes
 
+## v0.15.1 - HeyReach Integration (2025-12-19)
+
+### New Integration: HeyReach
+
+Complete HeyReach LinkedIn automation integration.
+
+#### Features
+
+**Campaign Operations**
+- List all campaigns
+- Get campaign details
+- Pause/resume campaigns
+
+**Lead Operations**
+- Add leads to campaigns (by LinkedIn URL)
+- Get campaign leads
+
+**Conversation Operations**
+- Retrieve message threads and replies
+
+**Account Operations**
+- List connected LinkedIn accounts
+
+**List Operations**
+- List lead lists
+- Create new lead lists
+
+**Analytics Operations**
+- Get overall stats
+- Get campaign-specific metrics
+
+#### Architecture
+
+```
+00-system/skills/heyreach/
+├── heyreach-master/        # Shared resources
+│   ├── scripts/            # Python scripts
+│   │   ├── heyreach_client.py
+│   │   ├── check_heyreach_config.py
+│   │   ├── list_campaigns.py
+│   │   ├── add_leads.py
+│   │   └── ... (12 scripts total)
+│   └── references/
+│       ├── setup-guide.md
+│       ├── api-reference.md
+│       └── error-handling.md
+├── heyreach-connect/       # User entry point
+│   └── SKILL.md            # Meta-skill with routing
+└── SKILL.md                # Main skill definition
+```
+
+#### Usage
+
+Say any of these to trigger HeyReach operations:
+- "heyreach" / "linkedin outreach" / "linkedin campaigns"
+- "list campaigns" / "show campaigns"
+- "add leads to campaign"
+- "campaign stats" / "campaign metrics"
+- "linkedin accounts"
+
+#### Setup
+
+1. Log into HeyReach at https://app.heyreach.io
+2. Go to Settings → API
+3. Copy API key to `.env` as `HEYREACH_API_KEY`
+
+---
+
 ## v0.15.0 - Slack Integration (2025-12-19)
 
 ### New Integration: Slack
