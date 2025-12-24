@@ -1,0 +1,54 @@
+---
+# User Configuration
+# Purpose: Store persistent user preferences (loaded every session)
+# Updated: Set during onboarding, modified anytime
+
+smart_default: false
+
+user_preferences:
+  language: "English"
+  timezone: ""
+  date_format: "YYYY-MM-DD"
+
+  system:
+    python_cmd: "python"
+
+onboarding:
+  status: "skipped"
+  current_session: 0
+  last_completed: null
+  sessions_completed: []
+
+learning_tracker:
+  session_count: 0
+  completed:
+    setup_memory: true
+    setup_workspace: true
+    learn_integrations: false
+    learn_projects: false
+    learn_skills: false
+    learn_nexus: false
+  dismissed: []
+  last_suggested: null
+  suggestion_preference: "normal"
+
+created: null
+updated: null
+---
+
+# Instructions for AI
+
+When this file is loaded (every session via --startup):
+1. Respect the language preference throughout ALL interactions
+2. Use timezone for accurate session timestamps
+3. Format dates according to user preference
+4. Check learning_tracker for onboarding skill suggestions
+
+If smart_default is true:
+- System is using default templates (not personalized)
+- Suggest onboarding skills when contextually appropriate
+- User can work immediately without setup
+
+If language is not set (empty string):
+- Default to English
+- Prompt user to set preference during setup-memory skill
