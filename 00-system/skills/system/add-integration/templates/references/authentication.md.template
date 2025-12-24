@@ -1,0 +1,80 @@
+# {{SERVICE_NAME}} Authentication
+
+Authentication documentation for {{SERVICE_NAME}} integration.
+
+---
+
+## Authentication Type
+
+**Method**: {{AUTH_TYPE}}
+
+{{AUTH_TYPE_DESCRIPTION}}
+
+---
+
+## Configuration
+
+### Environment Variables
+
+```env
+{{ENV_TEMPLATE}}
+```
+
+### Headers
+
+{{HEADERS_DOCUMENTATION}}
+
+---
+
+{{AUTH_FLOW_DOCUMENTATION}}
+
+---
+
+## Token Management
+
+{{TOKEN_MANAGEMENT}}
+
+---
+
+## Security Best Practices
+
+1. **Never commit credentials** - Add `.env` to `.gitignore`
+2. **Use minimal permissions** - Only request scopes you need
+3. **Rotate regularly** - Change API keys every 90 days
+4. **Monitor usage** - Watch for unusual API activity
+5. **Use environment variables** - Never hardcode credentials
+
+---
+
+## Troubleshooting Authentication
+
+### Invalid Credentials
+
+```
+Error: 401 Unauthorized
+```
+
+**Solutions**:
+1. Verify API key is correct (no typos, no extra spaces)
+2. Check key hasn't been revoked in {{SERVICE_NAME}} dashboard
+3. Ensure key has required permissions
+
+### Token Expired
+
+{{TOKEN_EXPIRED_HANDLING}}
+
+### Permission Denied
+
+```
+Error: 403 Forbidden
+```
+
+**Solutions**:
+1. Check your {{SERVICE_NAME}} plan includes this feature
+2. Verify API key has required scopes
+3. Generate new key with correct permissions
+
+---
+
+**Version**: 1.0
+**Created**: {{CREATED_DATE}}

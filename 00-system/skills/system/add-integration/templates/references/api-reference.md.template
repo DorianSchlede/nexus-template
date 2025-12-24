@@ -1,0 +1,59 @@
+# {{SERVICE_NAME}} API Reference
+
+API documentation for {{SERVICE_NAME}} integration.
+
+## Base URL
+
+```
+{{BASE_URL}}
+```
+
+## Authentication
+
+{{AUTH_DOCUMENTATION}}
+
+---
+
+## Endpoints
+
+{{ENDPOINTS_DOCUMENTATION}}
+
+---
+
+## Common Response Codes
+
+| Code | Meaning |
+|------|---------|
+| 200 | OK - Request successful |
+| 201 | Created - Resource created |
+| 204 | No Content - Successful, no response body |
+| 400 | Bad Request - Invalid parameters |
+| 401 | Unauthorized - Invalid or missing authentication |
+| 403 | Forbidden - Insufficient permissions |
+| 404 | Not Found - Resource doesn't exist |
+| 429 | Rate Limited - Too many requests |
+| 500 | Server Error - {{SERVICE_NAME}} internal error |
+
+---
+
+## Rate Limits
+
+{{RATE_LIMIT_INFO}}
+
+---
+
+## Pagination
+
+{{PAGINATION_INFO}}
+
+---
+
+## Official Documentation
+
+- API Docs: {{API_DOCS_URL}}
+{{ADDITIONAL_DOCS_LINKS}}
+
+---
+
+**Version**: 1.0
+**Created**: {{CREATED_DATE}}

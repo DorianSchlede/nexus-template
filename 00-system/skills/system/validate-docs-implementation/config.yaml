@@ -1,0 +1,174 @@
+---
+# Configuration for validate-docs-implementation skill
+# This file stores persistent settings across validation sessions
+
+report_location:
+  # Where to save validation reports
+  # Options:
+  #   - "04-workspace/validation-reports/" (recommended - organized with user work)
+  #   - "01-memory/validation-reports/" (persistent system record)
+  #   - Custom path (specify any valid directory)
+  #   - null (not configured yet - will prompt user)
+
+  path: null  # Will be set on first use
+  configured: false
+  configured_date: null
+
+report_settings:
+  # Report generation preferences
+  format: "full"  # Options: "full", "minimal"
+  include_grep_commands: true
+  include_statistics: true
+  include_recommendations: true
+
+workflow_preferences:
+  # Default workflow settings
+  default_thoroughness: "comprehensive"  # Options: "quick", "comprehensive", "critical-path"
+  auto_verify: true  # Always run verification step
+  track_with_todo: true  # Use TodoWrite to track progress
+
+# History tracking (auto-updated)
+last_validation:
+  date: null
+  implementation: null
+  report_file: null
+
+validation_count: 0
+
+---
+
+# Instructions for AI
+
+## First-Time Setup (report_location.configured = false)
+
+When user triggers validation for the first time:
+
+1. Check if config.yaml exists and report_location.path is null
+2. Present location options to user:
+   ```
+   "Where should I save validation reports? Options:
+       1. 04-workspace/validation-reports/ (recommended - organized, searchable)
+       2. 01-memory/validation-reports/ (persistent record)
+       3. Custom location (you specify)
+
+       Or say 'skip' to not save reports this time."
+   ```
+
+3. Based on user choice:
+   - If option 1: Set path to "04-workspace/validation-reports/"
+   - If option 2: Set path to "01-memory/validation-reports/"
+   - If option 3: Ask for custom path
+   - If skip: Leave null, don't save report
+
+4. If path chosen (not skip):
+   - Create directory if it doesn't exist
+   - Update config.yaml:
+     - Set report_location.path
+     - Set report_location.configured = true
+     - Set report_location.configured_date = today
+   - Confirm: "Got it! Reports will be saved to [path]. This is now your default location."
+
+## Subsequent Validations (report_location.configured = true)
+
+When report_location.path is already set:
+
+1. Use configured path automatically
+2. Inform user: "Saving report to: [path]"
+3. User can override: "Use a different location this time? (yes/no)"
+   - If yes: Repeat location prompt (but don't update config)
+   - If no: Continue with configured path
+
+## Updating Configuration
+
+User can change default location anytime:
+- "Change report location" → Present options again, update config
+- "Save reports to [path]" → Update config directly
+
+## Creating Reports
+
+When saving report:
+1. Ensure directory exists (create if needed)
+2. Generate filename: `validation-{implementation-name}-YYYY-MM-DD.md`
+3. If file exists, append timestamp: `validation-{implementation-name}-YYYY-MM-DD-HHMMSS.md`
+4. Write report using template from references/report-template.md
+5. Update config.yaml:
+   - last_validation.date = today
+   - last_validation.implementation = name
+   - last_validation.report_file = filename
+   - validation_count += 1
+
+## Config Management
+
+**Read config**: At start of validation workflow
+**Update config**: After location chosen, after report saved
+**Format**: YAML (easy for both AI and humans to read/edit)
+
+---
+
+# Examples
+
+## Example 1: First Use
+
+```yaml
+report_location:
+  path: null
+  configured: false
+  configured_date: null
+```
+
+User says: "validate docs for init_project.py"
+
+AI asks: "Where should I save validation reports? [options]"
+User chooses: "option 1"
+
+Config becomes:
+```yaml
+report_location:
+  path: "04-workspace/validation-reports/"
+  configured: true
+  configured_date: "2025-11-24"
+```
+
+## Example 2: Subsequent Use
+
+```yaml
+report_location:
+  path: "04-workspace/validation-reports/"
+  configured: true
+  configured_date: "2025-11-24"
+
+last_validation:
+  date: "2025-11-24"
+  implementation: "init-project"
+  report_file: "validation-init-project-2025-11-24.md"
+
+validation_count: 1
+```
+
+User says: "validate docs for nexus-loader.py"
+
+AI uses configured path automatically, creates report, updates:
+```yaml
+last_validation:
+  date: "2025-11-24"
+  implementation: "nexus-loader"
+  report_file: "validation-nexus-loader-2025-11-24.md"
+
+validation_count: 2
+```
+
+## Example 3: Changing Location
+
+User says: "change report location to 01-memory/validation-reports/"
+
+AI updates config:
+```yaml
+report_location:
+  path: "01-memory/validation-reports/"
+  configured: true
+  configured_date: "2025-11-24"  # Original date preserved
+```
+
+---
+
+**This config file enables persistent, user-controlled report management!**

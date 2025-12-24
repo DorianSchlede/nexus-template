@@ -1,0 +1,257 @@
+#!/usr/bin/env python3
+"""
+{{INTEGRATION_TITLE}} Configuration Checker
+
+Pre-flight validation for {{INTEGRATION_TITLE}} integration.
+Run this before any {{INTEGRATION_TITLE}} operation.
+
+Usage:
+    python check_{{INTEGRATION}}_config.py [--verbose]
+
+Exit codes:
+    0 = All configured and working
+    1 = Partial config (missing optional fields)
+    2 = Config incomplete or API test failed
+"""
+
+import os
+import sys
+import argparse
+
+# Find Nexus root (walk up until we find CLAUDE.md)
+def find_nexus_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, 'CLAUDE.md')):
+            return current
+        current = os.path.dirname(current)
+    return None
+
+NEXUS_ROOT = find_nexus_root()
+if not NEXUS_ROOT:
+    print("❌ Error: Could not find Nexus root (no CLAUDE.md found)")
+    sys.exit(2)
+
+# Add to path for imports
+sys.path.insert(0, NEXUS_ROOT)
+
+try:
+    import yaml
+    import requests
+except ImportError as e:
+    print(f"❌ Missing dependency: {e.name}")
+    print(f"   Run: pip install {e.name}")
+    sys.exit(2)
+
+
+def load_env():
+    """Load environment variables from .env file."""
+    env_path = os.path.join(NEXUS_ROOT, '.env')
+    env_vars = {}
+
+    if os.path.exists(env_path):
+        with open(env_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = line.split('=', 1)
+                    env_vars[key.strip()] = value.strip().strip('"\'')
+                    os.environ[key.strip()] = value.strip().strip('"\'')
+
+    return env_vars
+
+
+def load_user_config():
+    """Load user configuration from user-config.yaml."""
+    config_path = os.path.join(NEXUS_ROOT, '01-memory', 'user-config.yaml')
+
+    if not os.path.exists(config_path):
+        return None
+
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            # Handle YAML frontmatter
+            if content.startswith('---'):
+                parts = content.split('---', 2)
+                if len(parts) >= 2:
+                    content = parts[1]
+            return yaml.safe_load(content)
+    except yaml.YAMLError:
+        return None
+
+
+def check_env_file(verbose=False):
+    """Check .env file for required variables."""
+    env_path = os.path.join(NEXUS_ROOT, '.env')
+
+    if not os.path.exists(env_path):
+        print("      ❌ .env file not found")
+        print(f"         Create at: {env_path}")
+        return False
+
+    env_vars = load_env()
+
+    # Required variables
+    required = ['{{INTEGRATION_UPPER}}_API_KEY']
+    # Optional variables (list any optional env vars)
+    optional = [{{OPTIONAL_ENV_VARS_LIST}}]
+
+    missing_required = []
+    missing_optional = []
+
+    for var in required:
+        if var not in env_vars or not env_vars[var]:
+            missing_required.append(var)
+
+    for var in optional:
+        if var not in env_vars or not env_vars[var]:
+            missing_optional.append(var)
+
+    if missing_required:
+        print("      ❌ Missing required variables:")
+        for var in missing_required:
+            print(f"         - {var}")
+        return False
+
+    if verbose and missing_optional:
+        print("      ⚠️  Missing optional variables:")
+        for var in missing_optional:
+            print(f"         - {var}")
+
+    print("      ✅ .env file configured")
+    return True
+
+
+def check_user_config(verbose=False):
+    """Check user-config.yaml for {{INTEGRATION}} settings."""
+    config = load_user_config()
+
+    if config is None:
+        print("      ⚠️  user-config.yaml not found or invalid")
+        print("         (Optional: needed for user attribution)")
+        return 'partial'
+
+    # Check for {{INTEGRATION}} user ID
+    user_id = config.get('{{INTEGRATION}}_user_id')
+    user_name = config.get('{{INTEGRATION}}_user_name')
+
+    if user_id and user_name:
+        print(f"      ✅ User configured: {user_name}")
+        return True
+    elif user_id:
+        print(f"      ✅ User ID configured (no name)")
+        return True
+    else:
+        print("      ⚠️  No {{INTEGRATION}}_user_id in user-config.yaml")
+        print("         (Optional: needed for user attribution)")
+        return 'partial'
+
+
+def check_api_connection(verbose=False):
+    """Test {{INTEGRATION_TITLE}} API connection."""
+    api_key = os.environ.get('{{INTEGRATION_UPPER}}_API_KEY')
+
+    if not api_key:
+        print("      ❌ No API key available")
+        return False
+
+    try:
+        # Test API connection
+        headers = {
+            'Authorization': '{{AUTH_HEADER_FORMAT}}'.replace('{{API_KEY_PLACEHOLDER}}', api_key),
+            'Content-Type': 'application/json',
+            {{ADDITIONAL_HEADERS_DICT}}
+        }
+
+        response = requests.get(
+            '{{API_TEST_ENDPOINT}}',
+            headers=headers,
+            timeout=10
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            # Extract identifying info from response
+            identifier = {{EXTRACT_IDENTIFIER}}
+            print(f"      ✅ API connection successful ({identifier})")
+            return True
+        elif response.status_code == 401:
+            print("      ❌ API key invalid (401 Unauthorized)")
+            print("         Check {{INTEGRATION_UPPER}}_API_KEY in .env")
+            return False
+        elif response.status_code == 403:
+            print("      ❌ API key lacks permissions (403 Forbidden)")
+            return False
+        else:
+            print(f"      ❌ API returned status {response.status_code}")
+            if verbose:
+                print(f"         Response: {response.text[:200]}")
+            return False
+
+    except requests.exceptions.Timeout:
+        print("      ❌ API connection timed out")
+        print("         Check internet connection")
+        return False
+    except requests.exceptions.RequestException as e:
+        print(f"      ❌ API connection failed: {e}")
+        return False
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Check {{INTEGRATION_TITLE}} configuration')
+    parser.add_argument('--verbose', '-v', action='store_true', help='Show detailed output')
+    parser.add_argument('--json', action='store_true', help='Output as JSON')
+    args = parser.parse_args()
+
+    results = {
+        'env_file': False,
+        'user_config': False,
+        'api_connection': False
+    }
+
+    print()
+    print(f"[1/3] Checking .env file...")
+    results['env_file'] = check_env_file(args.verbose)
+
+    print(f"[2/3] Checking user-config.yaml...")
+    user_result = check_user_config(args.verbose)
+    results['user_config'] = user_result == True
+
+    print(f"[3/3] Testing {{INTEGRATION_TITLE}} API connection...")
+    if results['env_file']:
+        results['api_connection'] = check_api_connection(args.verbose)
+    else:
+        print("      ⏭️  Skipped (no API key)")
+
+    print()
+
+    # Determine exit code
+    if all([results['env_file'], results['api_connection']]):
+        if results['user_config']:
+            print("✅ All {{INTEGRATION_TITLE}} configuration complete!")
+            exit_code = 0
+        else:
+            print("✅ {{INTEGRATION_TITLE}} configured (user ID optional)")
+            exit_code = 1
+    else:
+        print("❌ {{INTEGRATION_TITLE}} configuration incomplete")
+        print()
+        print("To fix:")
+        if not results['env_file']:
+            print("  1. Create/update .env with {{INTEGRATION_UPPER}}_API_KEY")
+        if not results['api_connection']:
+            print("  2. Verify API key is valid")
+        print()
+        print("See: 00-system/skills/{{INTEGRATION}}-master/references/setup-guide.md")
+        exit_code = 2
+
+    if args.json:
+        import json
+        print(json.dumps(results, indent=2))
+
+    sys.exit(exit_code)
+
+
+if __name__ == '__main__':
+    main()

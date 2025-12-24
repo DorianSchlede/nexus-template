@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+"""
+{{SERVICE_NAME}} Configuration Checker
+
+Pre-flight validation for {{SERVICE_NAME}} integration.
+Checks .env for required variables and tests API connection.
+
+Usage:
+    python check_{{SERVICE_SLUG}}_config.py           # Human-readable output
+    python check_{{SERVICE_SLUG}}_config.py --json    # JSON output for AI parsing
+"""
+
+import argparse
+import json
+import os
+import sys
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent.parent
+ENV_FILE = PROJECT_ROOT / ".env"
+
+
+def load_env():
+    """Load environment variables from .env"""
+    env_vars = {}
+    if ENV_FILE.exists():
+        with open(ENV_FILE, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, _, value = line.partition('=')
+                    env_vars[key.strip()] = value.strip().strip('"\'')
+    return env_vars
+
+
+def check_config():
+    """Check {{SERVICE_NAME}} configuration status"""
+    env_vars = load_env()
+
+    result = {
+        "status": "configured",
+        "exit_code": 0,
+        "ai_action": "proceed_with_operation",
+        "missing": [],
+        "present": [],
+        "fix_instructions": [],
+        "env_template": """{{ENV_TEMPLATE}}""",
+        "setup_wizard": f"python {SCRIPT_DIR}/setup_{{SERVICE_SLUG}}.py"
+    }
+
+    # Check required variables
+    required_vars = [
+{{REQUIRED_VARS_CHECK}}
+    ]
+
+    for var_name, description in required_vars:
+        value = env_vars.get(var_name) or os.getenv(var_name)
+        if value:
+            result["present"].append({
+                "item": var_name,
+                "description": description,
+                "masked_value": value[:8] + "..." if len(value) > 8 else "***"
+            })
+        else:
+            result["missing"].append({
+                "item": var_name,
+                "required": True,
+                "description": description,
+                "location": ".env"
+            })
+
+    # Determine status and action
+    if result["missing"]:
+        result["status"] = "not_configured"
+        result["exit_code"] = 2
+
+        missing_items = [m["item"] for m in result["missing"]]
+
+        if "{{ENV_KEY}}" in missing_items:
+            result["ai_action"] = "prompt_for_api_key"
+            result["fix_instructions"].append(
+                "Get your {{SERVICE_NAME}} API key from: {{API_KEY_URL}}"
+            )
+{{ADDITIONAL_MISSING_CHECKS}}
+
+        if not ENV_FILE.exists():
+            result["ai_action"] = "create_env_file"
+            result["fix_instructions"].insert(0, "Create .env file at project root")
+
+    return result
+
+
+def test_connection(env_vars):
+    """Test API connection"""
+    try:
+        import requests
+
+        api_key = env_vars.get('{{ENV_KEY}}') or os.getenv('{{ENV_KEY}}')
+        if not api_key:
+            return {"success": False, "error": "No API key"}
+
+{{CONNECTION_TEST_CODE}}
+
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Check {{SERVICE_NAME}} configuration")
+    parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--test", action="store_true", help="Test API connection")
+    args = parser.parse_args()
+
+    result = check_config()
+
+    if args.test and result["status"] == "configured":
+        env_vars = load_env()
+        test_result = test_connection(env_vars)
+        result["connection_test"] = test_result
+        if not test_result.get("success"):
+            result["status"] = "connection_failed"
+            result["exit_code"] = 3
+
+    if args.json:
+        print(json.dumps(result, indent=2))
+    else:
+        # Human-readable output
+        if result["status"] == "configured":
+            print("{{SERVICE_NAME}} Configuration Status")
+            print("=" * 40)
+            print("Status: CONFIGURED")
+            print()
+            print("Present variables:")
+            for item in result["present"]:
+                print(f"  {item['item']}: {item['masked_value']}")
+
+            if "connection_test" in result:
+                print()
+                if result["connection_test"]["success"]:
+                    print("Connection: OK")
+                else:
+                    print(f"Connection: FAILED - {result['connection_test']['error']}")
+        else:
+            print("{{SERVICE_NAME}} Configuration Status")
+            print("=" * 40)
+            print("Status: NOT CONFIGURED")
+            print()
+            print("Missing variables:")
+            for item in result["missing"]:
+                print(f"  {item['item']}: {item['description']}")
+            print()
+            print("To fix:")
+            for instruction in result["fix_instructions"]:
+                print(f"  - {instruction}")
+            print()
+            print(f"Or run: {result['setup_wizard']}")
+
+    sys.exit(result["exit_code"])
+
+
+if __name__ == "__main__":
+    main()
