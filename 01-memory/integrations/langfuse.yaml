@@ -1,0 +1,46 @@
+# Langfuse Integration Configuration
+# LLM Observability & Tracing Platform
+# Host: https://tracing.beamstudio.ai (self-hosted)
+
+service_name: "Langfuse"
+service_slug: "langfuse"
+status: "configured"
+created: "2025-12-28"
+
+# API Configuration
+api:
+  host: "https://tracing.beamstudio.ai"
+  public_key: "pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09"
+  secret_key_env: "LANGFUSE_SECRET_KEY"  # Store actual key in environment
+
+# Environment Variables Required
+env_vars:
+  LANGFUSE_SECRET_KEY: "sk-lf-d56f24f8-fb07-4f84-96d1-68dbe530bee5"
+  LANGFUSE_PUBLIC_KEY: "pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09"
+  LANGFUSE_HOST: "https://tracing.beamstudio.ai"
+
+# Usage Examples
+usage:
+  python: |
+    from langfuse import Langfuse
+
+    langfuse = Langfuse(
+        secret_key="sk-lf-d56f24f8-fb07-4f84-96d1-68dbe530bee5",
+        public_key="pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09",
+        host="https://tracing.beamstudio.ai"
+    )
+
+# Purpose
+description: |
+  Langfuse provides LLM observability, tracing, and evaluation.
+  Use for:
+  - Tracing LLM calls and agent workflows
+  - Cost tracking and latency monitoring
+  - Debugging complex agent chains
+  - A/B testing prompts
+
+# Documentation
+docs:
+  quickstart: "https://langfuse.com/docs/get-started"
+  python_sdk: "https://langfuse.com/docs/sdk/python"
+  tracing: "https://langfuse.com/docs/tracing"

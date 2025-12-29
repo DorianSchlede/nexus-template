@@ -1,0 +1,149 @@
+verified_at: '2025-12-29T10:37:01.208490'
+sample_rate: 0.1
+batches_checked: 38
+patterns_sampled: 92
+patterns_verified: 52
+patterns_failed: 40
+failures:
+- pattern: Tampering Attack Detection via Signature Mismatch
+  chunk_ref: 08-LACP-2510.13821 (Chunk 2:149-151)
+  expected_quote: Upon receiving the tampered message, the server's cryptographic
+    verification ste...
+  actual_at_lines: '    - **Observable Outcome:** Upon receiving the tampered message,
+    the server’s ...'
+  verdict: FAIL - Quote mismatch
+- pattern: Incremental Delta Updates Pattern
+  chunk_ref: 01-ACE-2510.04618 (Chunk 1:299-303)
+  expected_quote: 'ACE incrementally produces compact delta contexts: small sets of
+    candidate bulle...'
+  actual_at_lines: Rather than regenerating contexts in full, ACE incrementally produces
+    compact _d...
+  verdict: FAIL - Quote mismatch
+- pattern: Helper Interface Functions
+  chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 7:87-100)
+  expected_quote: extract_evidence_spans(text) -> List[str]... is_protocol_compatible(proto,
+    caps,...
+  actual_at_lines: '- `extract_evidence_spans(text)` _→_ `List[str]` : rule/regex
+    phrase extractor (...'
+  verdict: FAIL - Quote mismatch
+- pattern: Intent Translator Preprocessing
+  chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:191-215)
+  expected_quote: employ a high-end LLM (GPT-5) to act as an Intent Translator. This
+    agent reformu...
+  actual_at_lines: '**Intent Translation with GPT-5.** The process begins when a user
+    submits a natu...'
+  verdict: FAIL - Quote mismatch
+- pattern: Solo Performance Prompting (SPP) Persona Generation
+  chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:87-92)
+  expected_quote: SPP dynamically identifies relevant personas based on input. Management
+    agent ge...
+  actual_at_lines: architectures rely on management agents or adaptive mechanisms
+    to assign roles a...
+  verdict: FAIL - Quote mismatch
+- pattern: LLMARENA Competitive Benchmark Implementation
+  chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 2:369-377)
+  expected_quote: In LLMARENA, LLM-based MASs with competition as the main collaboration
+    type, are...
+  actual_at_lines: each agent’s capabilities. In frameworks like LLMARENA [22], LLM-based
+    MASs with...
+  verdict: FAIL - Quote mismatch
+- pattern: Ad Text Generation Tool Suite
+  chunk_ref: 10-TalkHier-2502.11098 (Chunk 4:317-344)
+  expected_quote: 'Character Counter (Generator and Revisor): utility for counting
+    characters. Goog...'
+  actual_at_lines: '  - **Character Counter (Generator and Revisor)** : A utility
+    for counting the n...'
+  verdict: FAIL - Quote mismatch
+- pattern: Atomic Fact Decomposition Validation
+  chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:103)
+  expected_quote: Language-based Validators independently assess the truthfulness
+    or coherence of ...
+  actual_at_lines: decomposition and entailment checking [229], [230], [231].
+  verdict: FAIL - Quote mismatch
+- pattern: MCP Tool with Decorator Pattern Code Example
+  chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:381-405)
+  expected_quote: '@mcp.tool() @flowcept_agent_tool def evaluate_scores(layer, result,
+    scores): ......'
+  actual_at_lines: 1 **from** langchain_openai **import** ChatOpenAI  2 **from** flowcept
+    **import*...
+  verdict: FAIL - Quote mismatch
+- pattern: Context Retrieval and Generation
+  chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:461-462)
+  expected_quote: 'Foundational Components: Context Retrieval and Generation, Context
+    Processing, a...'
+  actual_at_lines: engineering techniques into **Foundational Components** (Context
+    Retrieval and G...
+  verdict: FAIL - Quote mismatch
+- pattern: Short-Term Memory Context Maintenance
+  chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:372-380)
+  expected_quote: Short-term memory retains agent-internal dialog histories and environmental
+    feed...
+  actual_at_lines: _**Short-Term Memory.**_ Short-term memory retains agentinternal
+    dialog historie...
+  verdict: FAIL - Quote mismatch
+- pattern: Long-Term Memory Skill Codification
+  chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:391-405)
+  expected_quote: Long-term memory systematically archives agents' intermediate reasoning
+    trajecto...
+  actual_at_lines: _**Long-Term Memory.**_ Long-term memory systematically archives
+    agents’ interme...
+  verdict: FAIL - Quote mismatch
+- pattern: Context Collapse via Monolithic Rewriting
+  chunk_ref: 01-ACE-2510.04618 (Chunk 1:186-199)
+  expected_quote: context collapse, which arises when an LLM is tasked with fully
+    rewriting the ac...
+  actual_at_lines: '**Context Collapse.** In a case study on the AppWorld benchmark
+    [43], we observe...'
+  verdict: FAIL - Quote mismatch
+- pattern: Hierarchical Structure Edge Device Criticality
+  chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:203-206)
+  expected_quote: Edge devices become critical as a failure in edge devices lead to
+    system failure...
+  actual_at_lines: 'multi-modal data.               - LLM operates as a knowledge
+    generator. '
+  verdict: FAIL - Quote mismatch
+- pattern: Auto-regressive Nature Limits Slow-Thinking
+  chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 1:70)
+  expected_quote: auto-regressive nature (e.g., incapable of slow-thinking)
+  actual_at_lines: capabilities individually, they still suffer from intrinsic limitations
+    such as ...
+  verdict: FAIL - Quote mismatch
+- pattern: High API Cost from Hierarchical Communication
+  chunk_ref: 10-TalkHier-2502.11098 (Chunk 3:6-15)
+  expected_quote: One of the main limitations of TalkHier is the relatively high API
+    cost associat...
+  actual_at_lines: '**Limitations**   One of the main limitations of _TalkHier_ is
+    the relatively hi...'
+  verdict: FAIL - Quote mismatch
+- pattern: Tool Documentation Limitation
+  chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:253-261)
+  expected_quote: deficiencies may include redundant information, incomplete or inaccurate
+    descrip...
+  actual_at_lines: _1) Tool Documentation Limitation._ Execution hallucinations often
+    arise when th...
+  verdict: FAIL - Quote mismatch
+- pattern: Privacy Leakage from Memorization
+  chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 4:408-412)
+  expected_quote: privacy concerns...mainly caused by the memory capacity of LLMs,
+    which may lead ...
+  actual_at_lines: The widespread use of LLMs in multi-agent systems has also raised
+    several privac...
+  verdict: FAIL - Quote mismatch
+- pattern: Guardians Rogue Agent Detection
+  chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 4:130-132)
+  expected_quote: Guardians uses three examination methods—reverse Turing Tests, multi-agent
+    simul...
+  actual_at_lines: effectively resisting jailbreak attacks. Guardians [189] uses three
+    examination ...
+  verdict: FAIL - Quote mismatch
+- pattern: Fault-Tolerant Communication Design
+  chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 3:76-78)
+  expected_quote: LLM-based MAS demands a robust Fault-tolerant Design, incorporating
+    confirmation...
+  actual_at_lines: the risk of miscommunication [152], [153]. Finally, LLMbased MAS
+    demands a robus...
+  verdict: FAIL - Quote mismatch
+stats:
+  verification_rate: 56.5%
+  threshold: 90%
+  verdict: FAIL

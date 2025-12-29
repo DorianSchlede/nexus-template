@@ -1,0 +1,1166 @@
+field: integration_point
+aggregated_at: '2025-12-29T10:38:15.929145'
+batches_merged: 5
+patterns_input: 136
+patterns_output: 136
+patterns:
+- name: Context-as-Playbook Generation Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:111-117)
+    quote: ACE treats contexts as evolving playbooks that accumulate and organize
+      strategies over time...modular workflow of generation, reflection, and curation
+  description: Integration point at prompt_generation phase. ACE integrates context
+    adaptation by treating the system prompt as an evolving playbook that is constructed
+    before task execution. The Generator produces reasoning trajectories, which are
+    then processed through the Reflector and Curator before being assembled into the
+    final context.
+- name: Delta Context Incremental Update Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:282-304)
+    quote: 'Rather than regenerating contexts in full, ACE incrementally produces
+      compact delta contexts: small sets of candidate bullets distilled by the Reflector'
+  description: Integration point at handover phase. Delta updates are produced during
+    the handover between Generator and Curator stages. The Reflector distills insights
+    into compact delta entries which are then merged deterministically by lightweight
+    non-LLM logic, enabling parallel merging of multiple deltas.
+- name: Itemized Bullet Localization Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:285-296)
+    quote: 'itemized design enables three key properties: (1) localization, so only
+      the relevant bullets are updated; (2) fine-grained retrieval; (3) incremental
+      adaptation'
+  description: Integration point at verification phase. The bullet-based structure
+    enables localization where only relevant bullets are updated after execution.
+    The Generator highlights which bullets were useful or misleading during task execution,
+    providing feedback that guides the Reflector in proposing corrective updates.
+- name: ACE Generator Playbook Injection
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:75-89)
+    quote: 'You are also provided with a curated cheatsheet of strategies, API-specific
+      information...ACE Playbook: - Read the **Playbook** first, then execute the
+      task'
+  description: Integration point at prompt_generation phase. The playbook is injected
+    into the Generator prompt before task execution. The prompt explicitly instructs
+    the model to read the playbook first before executing the task, ensuring strategies
+    are available during reasoning.
+- name: ACE Reflector Trajectory Analysis Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:151-162)
+    quote: 'Your job is to diagnose the current trajectory: identify what went wrong...Take
+      the environment feedback into account, comparing the predicted answer with the
+      ground truth'
+  description: Integration point at verification phase. The Reflector operates after
+    task execution to analyze trajectories. It receives the complete agent-environment
+    trajectory including ground truth code, test reports, and the playbook that was
+    used, enabling comprehensive post-execution analysis.
+- name: ACE Reflector Bullet Tagging Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:159-162)
+    quote: You will receive bulletpoints that are part of playbook...give the tag
+      for each bulletpoint, tag can be ['helpful', 'harmful', 'neutral']
+  description: Integration point at verification phase. During reflection, each playbook
+    bullet is tagged as helpful, harmful, or neutral. This tagging occurs post-execution
+    and provides feedback that guides which bullets should be emphasized, modified,
+    or removed in future iterations.
+- name: ACE Curator Playbook Update Integration
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:330-341)
+    quote: Your job is to identify what new insights should be added to an existing
+      playbook based on a reflection...Identify ONLY the NEW insights that are MISSING
+  description: Integration point at handover phase. The Curator receives the reflection
+    output and performs delta updates to the playbook. It operates at the handover
+    boundary between execution cycles, synthesizing lessons into the persistent playbook
+    structure.
+- name: ACE Section-Based Add Operations
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:442-459)
+    quote: 'operations: a list of operations...ADD: Create new bullet points with
+      fresh IDs - section: the section to add the bullet to - content: the new content'
+  description: Integration point at handover phase. The Curator performs structured
+    ADD operations to specific playbook sections during the handover between task
+    iterations. This structured operation format ensures consistent integration of
+    new knowledge into appropriate sections.
+- name: Bullet ID Tracking for Generator Feedback
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 5:78-81)
+    quote: 'bullet_ids: each line in the playbook has a bullet_id. all bulletpoints
+      in the playbook that''s relevant, helpful for you to answer this question'
+  description: Integration point at execution phase. During task execution, the Generator
+    tracks which bullet_ids from the playbook were actually used. This enables attribution
+    tracking throughout the execution phase, supporting later verification and refinement.
+- name: Dynamic Context Assembly Function
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 1:419-424)
+    quote: Context Engineering re-conceptualizes the context C as a dynamically structured
+      set of informational components...orchestrated by a high-level assembly function,
+      A
+  description: Integration point at prompt_generation phase. The assembly function
+    A orchestrates multiple context components (c_instr, c_know, c_tools, c_mem, c_state,
+    c_query) into a unified context before the LLM processes the input. This is the
+    primary integration point for context composition.
+- name: Dynamic Context Orchestration Pipeline
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:64-67)
+    quote: The assembly function A is a form of Dynamic Context Orchestration, a pipeline
+      of formatting and concatenation operations, A = Concat (Format1, ..., Formatn)
+  description: Integration point at prompt_generation phase. The orchestration pipeline
+    performs formatting and concatenation operations before LLM inference. Each Format
+    function must be optimized for the LLM's architectural biases such as attention
+    patterns.
+- name: Tool Definition Context Component
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:38-39)
+    quote: 'c_tools: Definitions and signatures of available external tools (Function
+      Calling & Tool-Integrated Reasoning)'
+  description: Integration point at prompt_generation phase. Tool definitions and
+    signatures are assembled as a distinct context component before execution. This
+    enables the model to understand available capabilities before task decomposition.
+- name: Memory Context Component Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:41-42)
+    quote: 'c_mem: Persistent information from prior interactions (Memory Systems,
+      Context Management)'
+  description: Integration point at prompt_generation phase. Memory from prior interactions
+    is retrieved and integrated as a context component before each new interaction.
+    This enables persistent context across sessions.
+- name: Multi-Agent State Context Component
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:44-45)
+    quote: 'c_state: The dynamic state of the user, world, or multi-agent system (Multi-Agent
+      Systems & Orchestration)'
+  description: Integration point at prompt_generation phase. The dynamic state of
+    the multi-agent system is captured and integrated as a context component. This
+    enables agents to maintain awareness of the overall system state.
+- name: Self-RAG Adaptive Retrieval Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:378-379)
+    quote: Self-RAG introduces adaptive retrieval mechanisms where models dynamically
+      decide when to retrieve information and generate special tokens to control retrieval
+  description: Integration point at execution phase. Self-RAG generates special tokens
+    during execution to control retrieval timing and quality assessment. This represents
+    an execution-time integration where the model itself decides when additional context
+    is needed.
+- name: Dynamic Context Assembly Orchestration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:11-15)
+    quote: Dynamic context assembly represents the sophisticated orchestration of
+      acquired information components into coherent, task-optimized contexts
+  description: Integration point at prompt_generation phase. Dynamic assembly orchestrates
+    information components while respecting computational constraints. The orchestration
+    occurs before LLM inference to maximize language model performance.
+- name: Assembly Functions Template-Based Formatting
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:18-22)
+    quote: The assembly function A encompasses template-based formatting, priority-based
+      selection, and adaptive composition strategies
+  description: Integration point at prompt_generation phase. Template-based formatting
+    and priority-based selection occur during context assembly. The composition strategies
+    must adapt to varying task requirements, model capabilities, and resource constraints.
+- name: Multi-Agent Orchestration Flow Control
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:18-22)
+    quote: Contemporary orchestration mechanisms manage agent selection, context distribution,
+      and interaction flow control in multi-agent systems
+  description: Integration point at handover phase. Orchestration mechanisms manage
+    the handover between agents by controlling context distribution and interaction
+    flow. This includes user input processing, contextual distribution, and agent
+    selection based on capability assessment.
+- name: Intent Recognition Contextual Memory Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:25-28)
+    quote: Advanced orchestration frameworks incorporate intent recognition, contextual
+      memory maintenance, and task dispatching components
+  description: Integration point at prompt_generation phase. Intent recognition and
+    contextual memory are integrated before task dispatching. This enables intelligent
+    coordination across domain-specific agents.
+- name: Self-Refine Iterative Output Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:56-58)
+    quote: Self-refine enables iterative output improvement through self-critique
+      and revision across multiple iterations, with GPT-4 achieving approximately
+      20% improvement
+  description: Integration point at verification phase. Self-critique and revision
+    occur after initial output generation. The iterative refinement loop integrates
+    verification feedback back into the generation process.
+- name: Tool Integration Framework Chain-of-Thought
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:63-66)
+    quote: Tool integration frameworks combine Chain-of-Thought reasoning with external
+      tool execution, automating intermediate reasoning step generation
+  description: Integration point at execution phase. Chain-of-Thought reasoning is
+    combined with tool execution during the reasoning process. Intermediate reasoning
+    steps are generated as executable programs that strategically incorporate external
+    data.
+- name: Self-Refinement Cyclical Feedback Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 3:176-178)
+    quote: Self-refinement enables LLMs to improve outputs through cyclical feedback
+      mechanisms mirroring human revision processes
+  description: Integration point at verification phase. Self-refinement operates through
+    cyclical feedback after initial generation. The same model serves as generator,
+    feedback provider, and refiner through prompt engineering rather than reinforcement
+    learning.
+- name: Memory Paging Context Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:131-137)
+    quote: MemGPT exemplifying this approach through systems that page information
+      between limited context windows (main memory) and external storage
+  description: Integration point at execution phase. Memory paging occurs during execution
+    through function-calling capabilities that enable autonomous paging decisions.
+    Main context contains system instructions, FIFO message queues, and writable scratchpads.
+- name: Agentic RAG Dynamic Retrieval Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:346-359)
+    quote: Agentic RAG embeds autonomous AI agents into the RAG pipeline, enabling
+      dynamic, context-sensitive operations guided by continuous reasoning
+  description: Integration point at execution phase. Agentic RAG treats retrieval
+    as a dynamic operation during execution. Agents function as intelligent investigators
+    analyzing content and cross-referencing information throughout the reasoning process.
+- name: Graph-Enhanced RAG Multi-Hop Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 5:7-13)
+    quote: Graph-based Retrieval-Augmented Generation shifts from document-oriented
+      approaches toward structured knowledge representations capturing entity relationships
+  description: Integration point at prompt_generation phase. Graph-based retrieval
+    extracts specific reasoning paths before generation. The structured knowledge
+    representations enable multi-hop reasoning through pathway navigation during context
+    assembly.
+- name: ReAct Thought-Action-Observation Cycle
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 6:99-101)
+    quote: Evolution began with Toolformer's self-supervised approach...inspiring
+      ReAct's thought-action-observation cycle
+  description: Integration point at execution phase. The ReAct framework interleaves
+    reasoning with actions during execution. The thought-action-observation cycle
+    represents a pattern where context is dynamically updated based on action outcomes.
+- name: Orchestrator Context Distribution
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 6:384-390)
+    quote: Orchestration mechanisms constitute the critical coordination infrastructure
+      for multi-agent systems, managing agent selection, context distribution, and
+      interaction flow
+  description: Integration point at handover phase. Orchestration mechanisms manage
+    context distribution during handover between agents. This includes processing
+    user input, distributing contextual information, and selecting optimal agents
+    based on capability assessment.
+- name: Session-Based Context Refinement
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 7:21-24)
+    quote: Session-based context refinement defines collaborative scope boundaries,
+      facilitating event-driven orchestration where agents can enter and exit dynamically
+  description: Integration point at handover phase. Session-based context refinement
+    occurs at agent handover boundaries. Configurable sessions enable agent inclusion
+    based on user input or autonomous decision-making, creating adaptable systems
+    responsive to changing task requirements.
+- name: Multi-Agent Orchestration Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:60-65)
+    quote: Multi-agent orchestration presents particular challenges in developing
+      mathematical frameworks for predicting coordination effectiveness
+  description: Integration point at execution phase. The pattern addresses how individual
+    components interact, interfere, and synergize within integrated architectures
+    during multi-agent coordination. Focus is on the execution phase where emergent
+    collaborative behaviors occur.
+- name: Communication Protocol Standardization
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:315-324)
+    quote: Communication protocol standardization represents a critical research frontier,
+      with emerging protocols including MCP, A2A, ACP, and ANP
+  description: Integration point at handover phase. Standardized protocols (MCP for
+    tool invocation, A2A for agent-to-agent) enable interoperability across diverse
+    agent ecosystems at the handover boundary between agents.
+- name: Tool-Integrated Reasoning at Execution
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:190-194)
+    quote: Tool-integrated reasoning represents a paradigmatic advancement requiring
+      dynamic interaction with external resources during reasoning processes
+  description: Integration point at execution phase. Pattern involves autonomous tool
+    selection, parameter extraction, multi-tool coordination, and error recovery during
+    the reasoning/execution cycle.
+- name: Orchestration Transaction Integrity
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:327-332)
+    quote: Orchestration challenges including transactional integrity, context management,
+      and coordination strategy effectiveness represent significant obstacles
+  description: Integration point at handover phase. Contemporary frameworks face challenges
+    in transaction support and validation, requiring compensation mechanisms for partial
+    failures during agent handover.
+- name: Context Retrieval and Generation
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 8:461-462)
+    quote: 'Foundational Components: Context Retrieval and Generation, Context Processing,
+      and Context Management'
+  description: Integration point at prompt_generation phase. Core technical capability
+    for constructing context before agent execution - the foundational layer for RAG,
+    memory systems, and tool integration.
+- name: Intent Translation Pre-Processing
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:191-215)
+    quote: The process begins when a user submits a natural language query... To ensure
+      the system accurately grasps the requirements, we employ GPT-5 as an Intent
+      Translator
+  description: Integration point at prompt_generation phase. Intent translation step
+    occurs before task delegation, reformulating queries into structured specifications
+    that guide subsequent retrieval and planning steps.
+- name: Semantic Literature Retrieval Injection
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:218-228)
+    quote: The refined task specification is used to query external knowledge sources...
+      We integrate Elicit to perform semantic search over academic papers
+  description: Integration point at prompt_generation phase. External knowledge retrieval
+    occurs after intent translation but before coding agent execution, injecting domain-specific
+    documentation into the context.
+- name: Knowledge Synthesis with NotebookLM
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:231-241)
+    quote: Simply retrieving documents is not enough—the system must distill them
+      into useful context... We utilize NotebookLM as a document analysis agent
+  description: Integration point at prompt_generation phase. Document synthesis step
+    produces summarized knowledge base that is injected into code-writing prompts,
+    structuring external knowledge for agent consumption.
+- name: Repository Context Retrieval
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:244-269)
+    quote: In parallel with external knowledge gathering, the system prepares relevant
+      context from the codebase itself... we built a semantic code search index using
+      a vector database
+  description: Integration point at prompt_generation phase. AST-based chunking and
+    semantic embedding of code files enables retrieval of relevant code fragments
+    before task execution.
+- name: Orchestrator Hub-and-Spoke Delegation
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:277-287)
+    quote: Our coding workflow is implemented using Claude Code's multi-agent capabilities...
+      a primary Claude instance (the Manager) coordinates several specialist sub-agents
+  description: Integration point at execution phase. Centralized orchestrator-worker
+    paradigm where manager delegates to specialized sub-agents, each with isolated
+    context windows and role-specific tools.
+- name: Agent Context Isolation Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:309-315)
+    quote: Each subagent operates with an isolated context window... preventing cross-contamination
+      between different phases of the workflow
+  description: Integration point at handover phase. Context isolation during agent
+    handover ensures focused execution - common background info via CLAUDE.md with
+    task-specific augmentation for each step.
+- name: Iterative Validation During Execution
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:374-382)
+    quote: As agents make changes, we leverage Claude's tool integration to run validations.
+      After code is written, the orchestrator can trigger test execution via a shell
+      tool
+  description: Integration point at verification phase. Test execution and validation
+    feedback loop integrated after each code generation step, enabling iterative refinement
+    based on test results.
+- name: Code Review as Final Verification
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 1:384-395)
+    quote: Once all steps are completed and the test suite passes, the orchestrator
+      invokes the code-reviewer agent to do a final pass
+  description: Integration point at verification phase. Dedicated reviewer agent performs
+    post-execution verification using comprehensive checklist for style, performance,
+    security before output acceptance.
+- name: Context Layering at Agent Prompt
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 2:6-11)
+    quote: 'At any given time, an agent is working with a manageable slice of information:
+      its role-specific prompt + CLAUDE.md context + task-specific instructions +
+      relevant code snippets'
+  description: Integration point at prompt_generation phase. Structured context layering
+    combines persistent project context with task-specific instructions at the moment
+    of agent prompt construction.
+- name: Planner Responsibility Delineation
+  sources:
+  - chunk_ref: 03-ClaudeCode-2508.08322 (Chunk 2:110-117)
+    quote: We mitigated this by refining the Planner's prompt to explicitly assign
+      sub-tasks to agent roles, implementing a simple lock to prevent concurrent edits
+  description: Integration point at prompt_generation phase. Planner's prompt explicitly
+    assigns sub-tasks to agent roles, with orchestrator implementing locks to prevent
+    handover conflicts.
+- name: GCC Context Controller File System
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:67-71)
+    quote: GCC organizes contextual information as a structured, version-controlled
+      file system, and introduces a set of specialized commands to support logging,
+      managing, and retrieving context
+  description: Integration point at handover phase. Persistent file system abstraction
+    (.GCC/ directory) enables memory handover across sessions and agents through structured
+    artifacts (main.md, commit.md, log.md).
+- name: Multi-Level Context Retrieval
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:87-91)
+    quote: Agents can access context at varying levels of detail, from high-level
+      project plans to low-level OTA steps. The system enables seamless navigation
+      across these layers
+  description: Integration point at prompt_generation phase. CONTEXT command allows
+    agents to retrieve historical information at varying resolutions before task execution
+    - from global roadmap to fine-grained traces.
+- name: COMMIT Milestone Checkpointing
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:172-173)
+    quote: COMMIT <summary> - called when the agent notices recent progress forms
+      a coherent milestone (e.g., implementing a module, finishing a hypothesis test)
+  description: Integration point at verification phase. COMMIT command triggered when
+    agent achieves coherent milestone, updating commit.md and optionally main.md,
+    creating versioned checkpoint.
+- name: BRANCH Isolated Exploration
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:176-177)
+    quote: BRANCH <name> - called when the agent wants to pursue an alternative approach
+      without affecting current context
+  description: Integration point at execution phase. BRANCH enables isolated reasoning
+    sandbox for exploring alternatives during execution, creating separate log.md
+    and commit.md files.
+- name: MERGE Synthesis Integration
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:180-181)
+    quote: MERGE <branch name> - called when a completed branch's results should be
+      synthesized back into the main trajectory
+  description: Integration point at handover phase. MERGE integrates divergent reasoning
+    paths by updating main.md with branch outcomes and merging commit.md entries under
+    unified structure.
+- name: Cross-Agent Session Handover
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 1:100-105)
+    quote: The system allows agents to operate seamlessly across sessions... Another
+      agent, based on a different LLM on a different machine, can also pick up exactly
+      where the previous one left off
+  description: Integration point at handover phase. GCC protocol enables memory handover
+    between different agents/sessions/machines through structured artifacts, eliminating
+    need to re-teach model.
+- name: OTA Cycle Logging During Execution
+  sources:
+  - chunk_ref: 04-GCC-2508.00031 (Chunk 2:103-106)
+    quote: In its committing, the agent implemented the utility in a standalone module,
+      io.py. It also generated a minimal test routine
+  description: Integration point at execution phase. Fine-grained OTA (Observation-Thought-Action)
+    cycles are logged in real-time to log.md during execution, forming continuous
+    trace of decision-making.
+- name: Protocol Adapter Normalization
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 1:110-115)
+    quote: We introduce ProtocolBench, a protocol-agnostic benchmark that measures
+      four axes... using protocol-normalizing adapters
+  description: Integration point at handover phase. Protocol adapters normalize envelopes,
+    field mappings, retries, and streaming semantics across A2A/ACP/ANP/Agora at inter-agent
+    communication boundaries.
+- name: ProtocolRouter Selection at Runtime
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 1:349-352)
+    quote: The router performs selection and composition only; translation is provided
+      by protocol adapters that encode/decode messages between wire formats while
+      preserving semantics
+  description: Integration point at handover phase. ProtocolRouter selects per-module
+    protocols based on requirements and runtime signals, with adapters performing
+    stateless encode/decode translation at link boundaries.
+- name: Router Per-Module Protocol Assignment
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 2:14-21)
+    quote: For each module, the router emits a protocol assignment... The runtime
+      binds the corresponding protocol adapters on each endpoint
+  description: Integration point at handover phase. Router outputs protocol assignment
+    per module; runtime binds adapters that perform purely syntactic translation (envelope/field
+    mapping) without altering business content.
+- name: Scenario-Aware Protocol Selection
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 2:36-44)
+    quote: Given a scenario, the router must choose the correct protocol for each
+      independent module under explicit hard requirements
+  description: Integration point at prompt_generation phase. Router evaluates scenario
+    specifications and hard constraints before execution to select appropriate protocols,
+    filtering incompatible candidates upfront.
+- name: Unified Transport Envelope (UTE)
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 6:51-59)
+    quote: 'Minimal required fields: src, dst, content, context. In BaseAgent.send(),
+      UTE.new(...) produces the envelope that ENCODE_TABLE transforms into protocol
+      payload'
+  description: Integration point at handover phase. Universal message envelope with
+    required fields (src, dst, content, context) serves as canonical format for cross-protocol
+    message translation at handover boundaries.
+- name: Async Event Hooks Pipeline
+  sources:
+  - chunk_ref: 07-ProtocolBench-2510.17149 (Chunk 6:62-77)
+    quote: 'before_encode / after_encode: UTE to protocol payload... before_transport
+      / after_transport: Network send/receive... on_stream_event: Streaming callback'
+  description: Integration point at execution phase. Event hook system (before_encode,
+    after_encode, before_transport, after_transport, on_stream_event, on_retry, on_decode)
+    provides instrumentation points throughout message lifecycle.
+- name: Three-Layer Protocol Architecture Integration
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 1:185-189)
+    quote: LACP's architecture implements three mutually-insulated layers, each with
+      well-defined interfaces that enable independent evolution
+  description: Integration occurs at all three protocol layers (Semantic, Transactional,
+    Transport). The semantic layer handles intent communication at prompt_generation.
+    Transactional layer ensures reliability at handover. Transport layer manages delivery
+    at execution.
+- name: Semantic Layer Intent Integration
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 1:192-196)
+    quote: This layer is responsible for conveying the intent of a communication.
+      It defines a minimal set of universal message types (e.g., PLAN, ACT, OBSERVE)
+  description: Integration at prompt_generation phase. The semantic layer defines
+    message types that clarify agent intent before execution, establishing the communication
+    contract between agents.
+- name: Transactional Layer Verification Integration
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 1:206-209)
+    quote: This layer ensures the reliability and integrity of communications. It
+      provides mechanisms for message signing, sequencing, unique transaction IDs
+      for idempotency
+  description: Integration at verification phase. The transactional layer provides
+    post-execution verification through message signing, sequencing, and atomic transaction
+    support (two-phase commit).
+- name: JWS Signature Verification at Handover
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 2:46-47)
+    quote: A route accepting a JWS-signed LACP message. It performs cryptographic
+      signature verification before processing the payload
+  description: Integration at handover phase. JWS signature verification occurs at
+    message receipt before payload processing, ensuring message integrity during agent-to-agent
+    transfer.
+- name: LangChain Agent Tool Integration
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 2:103-112)
+    quote: A standard ReAct agent was implemented using the LangChain library. We
+      equipped it with a custom tool where the underlying function did not execute
+      logic locally
+  description: Integration at execution phase. Custom tools send signed LACP ACT messages
+    during execution, receive OBSERVE responses, and pass results to the agent's Observation
+    field.
+- name: Transaction ID Replay Prevention at Verification
+  sources:
+  - chunk_ref: 08-LACP-2510.13821 (Chunk 2:165-168)
+    quote: The server's signature verification passed, but its Transactional Layer
+      logic identified the transaction_id as a duplicate. The server rejected the
+      request
+  description: Integration at verification phase. Transaction ID tracking prevents
+    replay attacks by rejecting duplicate transaction IDs after initial successful
+    verification.
+- name: Behavioral Contract Pre-Execution Modeling
+  sources:
+  - chunk_ref: 09-SEMAP-2510.12120 (Chunk 1:86-88)
+    quote: explicit behavioral contract modeling, (2) structured messaging, and (3)
+      lifecycle-guided execution with verification
+  description: Integration at prompt_generation phase. Behavioral contracts define
+    pre-conditions (required inputs) and post-conditions (expected outputs) before
+    agent execution begins.
+- name: Structured Messaging at Handover
+  sources:
+  - chunk_ref: 09-SEMAP-2510.12120 (Chunk 1:210-218)
+    quote: While behavioral contracts define the roles, inputs and outputs of agents,
+      effective coordination also requires that inter-agent communication be semantically
+      clear
+  description: Integration at handover phase. Structured messaging standardizes information
+    exchange between agents with defined sender, receiver, and schema-designated payload
+    objects.
+- name: Lifecycle FSM State Transitions
+  sources:
+  - chunk_ref: 09-SEMAP-2510.12120 (Chunk 1:238-248)
+    quote: a lifecycle-guided execution model, which structures agent collaboration
+      as a state machine with verification-driven transitions
+  description: Integration at verification phase. The finite state machine (FSM) gates
+    task progression through verification outcomes (pass/fail), with transitions between
+    states like initialized, implementing, reviewing, completed, failed.
+- name: A2A Agent Card Discovery
+  sources:
+  - chunk_ref: 09-SEMAP-2510.12120 (Chunk 1:137-146)
+    quote: Each agent exposes a run() function and publishes a machine-readable Agent
+      Card, a JSON-based declaration of its identity, supported endpoints, input/output
+      modalities
+  description: Integration at prompt_generation phase. Agent Cards enable dynamic
+    discovery and capability assessment before agent coordination, declaring authentication
+    requirements and supported modalities.
+- name: Context-Rich Communication Protocol
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 1:132-138)
+    quote: 'TalkHier introduces a novel communication protocol that incorporates newly
+      proposed elements: messages, intermediate outputs, and relevant background information'
+  description: Integration at handover phase. The structured communication protocol
+    embeds three elements (M, B, I) at each agent-to-agent communication event to
+    ensure context preservation during transfers.
+- name: Agent-Specific Memory Integration
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 1:272-283)
+    quote: each agent vi maintains an independent memory, Memory_i. Unlike long-term
+      memory, which relies on a shared memory pool accessible by all agents
+  description: Integration at execution phase. Each agent maintains independent, persistent
+    memory that operates without interference from others, enabling consistent and
+    informed decision-making across sessions.
+- name: Communication Event Sequence Generation
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 1:312-321)
+    quote: The elements of each edge M_ij, B_ij and I_ij are then generated by invoking
+      an independent LLM. To ensure consistency, clarity, and efficiency
+  description: Integration at prompt_generation phase. Communication elements (message,
+    background, intermediate output) are generated via specialized prompts tailored
+    to Supervisor and Member roles before transfer.
+- name: Hierarchical Refinement Feedback Loop
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 2:39-51)
+    quote: The process begins with the main Supervisor assigning tasks to the evaluation
+      Supervisor, who then distributes evaluation criteria to individual evaluators
+  description: Integration at verification phase. Hierarchical refinement involves
+    evaluation team aggregating feedback, comparing against quality threshold, and
+    triggering revision cycles if threshold not met.
+- name: Evaluation Supervisor Aggregation
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 2:45-48)
+    quote: The evaluation Supervisor aggregates and summarizes this feedback (F_eval_summary)
+      before passing it to the main Supervisor
+  description: Integration at verification phase. The evaluation supervisor synthesizes
+    feedback from multiple evaluators into a summarized form, reducing bias before
+    passing to the main supervisor for threshold evaluation.
+- name: Tool-Augmented Evaluator Execution
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 4:61-74)
+    quote: 'To enhance the evaluation capabilities of each agent, we have deployed
+      tools for each evaluator to use. The tools are listed as follows: Output Tool,
+      Truth Table Generator, Counterexample Verifier'
+  description: Integration at execution phase. Evaluator agents are equipped with
+    specialized tools (Truth Table Generator, Counterexample Verifier) during their
+    execution to enhance verification capabilities.
+- name: Hierarchical Refinement with Multi-Metric Evaluation
+  sources:
+  - chunk_ref: 10-TalkHier-2502.11098 (Chunk 5:17-24)
+    quote: TalkHier employs a hierarchical refinement process where evaluators independently
+      assess content (faithfulness, fluency, and attractiveness) and report their
+      findings
+  description: Integration at verification phase. Independent evaluators assess content
+    on multiple metrics and report to evaluation team supervisor who synthesizes feedback,
+    ensuring reduced bias in refinement.
+- name: Collaboration Stage Classification
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 1:481-485)
+    quote: 'Collaboration can occur at different stages: (i) late-stage collaborations,
+      such as ensembling outputs/actions, (ii) mid-stage collaborations, for example,
+      exchanging parameters'
+  description: 'Integration spans three phases: late-stage (verification/output ensembling),
+    mid-stage (execution/parameter exchange), and early-stage (prompt_generation/data
+    sharing). Each stage has distinct collaboration mechanisms.'
+- name: Collaboration Channels at Runtime
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 2:59-65)
+    quote: 'C = {c_j}: a set of collaboration channels that facilitate interactions
+      among agents, enabling the exchange of information based on given objectives,
+      environment, and inputs'
+  description: Integration at handover phase. Collaboration channels are distinguished
+    by actors, types, structures, and strategies. Channels facilitate agent interactions
+    during information exchange.
+- name: Role-Based Protocol at Prompt Generation
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:104-111)
+    quote: Role-based protocols in MASs leverage distinct predefined roles or division
+      of work, where each agent operates on a segmented objective that supports the
+      system's overarching goal
+  description: Integration at prompt_generation phase. Role-based protocols define
+    agent roles and objectives through system prompts before execution, enabling structured
+    collaboration via SOPs.
+- name: Rule-Based Protocol Enforcement
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:49-52)
+    quote: Rule-based protocols in MASs provide strictly controlled by predefined
+      rules, ensuring that agents coordinate their actions according to system-wide
+      constraints on acceptable inputs
+  description: Integration at execution phase. Rule-based protocols enforce structured
+    collaboration channels where agents act based on specific rule sets rather than
+    probabilistic or role-specific inputs.
+- name: Model-Based Probabilistic Decision Making
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:141-148)
+    quote: Model-based protocols in MASs provide flexibility for decision making,
+      especially in environments where uncertainties in input perception may impact
+      agents' actions
+  description: Integration at execution phase. Agents make probabilistic decisions
+    based on analysis of input, environmental data, and shared collaborative goals
+    during runtime execution.
+- name: Theory of Mind Peer Inference
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:145-148)
+    quote: probabilistic models, specifically through Theory of Mind (ToM) inferences,
+      allow agents to make decisions that account for the likely mental states of
+      their peers
+  description: Integration at execution phase. ToM-based predictions distribute agent
+    focus and enhance coordination through probabilistic adjustments in collaboration
+    channels during task execution.
+- name: Centralized Hub Coordination
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:209-212)
+    quote: In a centralized structure, the collaboration channels are set as the participating-serving
+      nature. The serving agent acts as a hub through which all other agents communicate
+  description: Integration at handover phase. Centralized structures route all agent
+    communications through a hub agent that manages, controls, and coordinates interactions
+    among participants.
+- name: Dynamic DAG-Based Task Orchestration
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:93-98)
+    quote: a graph-based orchestration mechanism employs an LLM-based Orchestrator
+      agent to dynamically construct a Directed Acyclic Graph (DAG) from user input
+  description: Integration at prompt_generation phase. The orchestrator dynamically
+    constructs task graphs from input, with nodes representing tasks and edges defining
+    dependencies and collaboration channels.
+- name: Static Sequential Channel Chaining
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:58-63)
+    quote: sequential chaining of channels is a commonly used strategy in static coordination.
+      three LLM agents are connected sequentially, where the output of one agent feeds
+      into the next
+  description: Integration at handover phase. Static coordination connects collaboration
+    channels sequentially, with each agent's output concatenated with initial input
+    to feed the next agent in the chain.
+- name: OpenAI Swarm Handoff Mechanism
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 5:67-71)
+    quote: Suitable for applications that require scalability - Handoff mechanism
+      allows for seamless transitions between specialized agents
+  description: Integration at handover phase. The Swarm framework's handoff mechanism
+    enables seamless transitions between specialized agents during active conversations,
+    with each agent capable of transferring to another.
+- name: Delegator Result Consolidation
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:96-98)
+    quote: A Delegator agent consolidates the results from all completed tasks to
+      form the final response, significantly enhancing system responsiveness and scalability
+  description: Integration at verification phase. The Delegator agent consolidates
+    results from parallel task executions to form the final response, acting as a
+    verification and synthesis point in the pipeline.
+- name: Unified Governance Coordination Integration
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:109-118)
+    quote: Unified governance is fundamental in enabling collective intelligence...Designing
+      robust mechanisms to detect and recover from failures is vital
+  description: Integration point at execution and handover phases. Unified governance
+    operates during task execution by determining which steps to take, which agents
+    to involve, and how tasks should be distributed. Also applies at handover for
+    detecting miscommunication or task disruptions and implementing recovery mechanisms
+    including redundancy or fallback agents.
+- name: Role Assignment and Specialization Integration
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:112-114)
+    quote: Assigning specific roles or specializations to individual agents can enhance
+      the system's overall effectiveness
+  description: Integration point at prompt_generation phase. Role assignment occurs
+    during agent initialization and prompt creation, where agents receive their specialized
+    roles (e.g., product managers, programmers) that determine their behavioral patterns
+    and interaction protocols.
+- name: Coordination Efficiency and Contextual Appropriateness Assessment
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:158-162)
+    quote: evaluation criteria include assessing...coordination efficiency and contextual
+      appropriateness. Fine-grained evaluation at the agent and collaboration levels
+  description: Integration point at verification phase. After task execution, evaluation
+    benchmarks assess coordination efficiency and contextual appropriateness, enabling
+    root cause analysis at both individual agent and collaboration channel levels.
+- name: Hallucination Control at Collaboration Channels
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:125-130)
+    quote: A single agent's hallucination can be spread and reinforced by other agents...Addressing
+      these issues requires techniques to control the collaboration channels between
+      agents
+  description: Integration point at handover phase. Hallucination detection and control
+    mechanisms operate at agent-to-agent message boundaries (collaboration channels)
+    to prevent error propagation and cascading effects through the multi-agent system.
+- name: Profile Definition at Agent Construction
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:316-324)
+    quote: Profile definition establishes an agent's operational identity by configuring
+      its intrinsic attributes and behavioral patterns
+  description: Integration point at prompt_generation phase. Profile definition (human-curated
+    static or batch-generated dynamic) occurs during agent construction before task
+    execution. It governs decision boundaries and interaction protocols through prompt
+    specification.
+- name: Short-Term Memory Context Maintenance
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:372-380)
+    quote: Short-term memory retains agent-internal dialog histories and environmental
+      feedback to support context-sensitive task execution
+  description: Integration point at execution phase. Short-term memory operates during
+    task execution by maintaining transient contextual data, dialog histories, and
+    environmental feedback for immediate decision-making.
+- name: Long-Term Memory Skill Codification
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:391-405)
+    quote: Long-term memory systematically archives agents' intermediate reasoning
+      trajectories and synthesizes them into reusable tools for future invocation
+  description: Integration point at verification phase (post-execution storage). After
+    task completion, successful patterns and tools are codified into skill libraries,
+    experience repositories, and tool synthesis frameworks for future retrieval and
+    reuse.
+- name: Knowledge Retrieval as External Memory
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:406-420)
+    quote: Interactive retrieval that integrates agent dialogues with external queries...Reasoning-integrated
+      retrieval...interleave step-by-step reasoning with dynamic knowledge acquisition
+  description: Integration point spans execution and prompt_generation. Knowledge
+    retrieval operates during execution through reasoning-integrated retrieval (IRCoT,
+    DeepRAG) that dynamically fetches context, and at prompt_generation through static
+    knowledge grounding (RAG, GraphRAG).
+- name: Feedback-Driven Planning Iteration
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:86-107)
+    quote: Feedback-driven iteration is a crucial aspect of LLM planning capabilities...the
+      agent can use feedback to update (regenerate) its plan
+  description: Integration point at verification and execution phases. Feedback from
+    environment, humans, model introspection, or multi-agent collaboration is collected
+    during/after execution (verification) and used to adjust plans dynamically during
+    subsequent execution cycles.
+- name: Tool Utilization Decision and Selection
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:118-132)
+    quote: 'Tool utilization involves two aspects: tool use decision and tool selection...When
+      the agent is generating content with less confidence'
+  description: Integration point at execution phase. Tool-use decision (whether to
+    invoke tools) and tool selection (which tool to use) occur during task execution
+    when the agent evaluates its confidence and current situation.
+- name: Centralized Controller Task Allocation
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:203-213)
+    quote: Centralized control architectures employ a hierarchical coordination mechanism
+      where a central controller organizes agent activities through task allocation
+  description: Integration point at prompt_generation (task decomposition) and handover
+    (decision integration). The central controller decomposes tasks and assigns subgoals
+    at prompt creation, then integrates decisions at handover between agents.
+- name: Revision-Based Agent Collaboration
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:256-270)
+    quote: agents only observe finalized decisions generated by peers and iteratively
+      refine a shared output through structured editing protocols
+  description: Integration point at verification phase. Revision-based systems operate
+    after initial execution, where agents review peer outputs and iteratively refine
+    shared results through structured editing before final output acceptance.
+- name: Communication-Based Agent Collaboration
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:271-283)
+    quote: communication-based methods feature more flexible organizational structures,
+      allowing agents to directly engage in dialogues and observe peers' reasoning
+      processes
+  description: Integration point at handover phase. Communication-based systems (MAD,
+    MADR, AutoGen group-chat) operate at agent-to-agent message boundaries, enabling
+    direct dialogue and reasoning observation during task handoffs.
+- name: Dynamic Topology Optimization
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:304-364)
+    quote: neural topology optimizers that dynamically reconfigure collaboration structures
+      based on real-time performance feedback
+  description: Integration point at handover phase. Dynamic systems (DyLAN, MDAgents,
+    DiscoGraph) reconfigure collaboration topologies in real-time during agent-to-agent
+    transfers based on performance feedback and task complexity assessment.
+- name: Self-Reflection and Self-Correction
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:7-15)
+    quote: Self-reflection and self-correction enable LLMs to iteratively refine their
+      outputs by identifying and addressing errors
+  description: Integration point at verification phase. Self-reflection (SELF-REFINE,
+    STaR) operates after initial output generation, enabling agents to retrospectively
+    assess, verify, and correct their outputs before final delivery.
+- name: CRITIC Tool-Based Feedback Verification
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:85-97)
+    quote: CRITIC allows LLMs to validate and revise their outputs through tool-based
+      feedback, improving accuracy and reducing inconsistencies
+  description: Integration point at verification phase. External tool-based feedback
+    (CRITIC, STE, SelfEvolve) provides structured validation after execution, enabling
+    iterative refinement based on execution results.
+- name: Model Context Protocol (MCP) Integration
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 4:28-33)
+    quote: MCP is an open protocol that standardizes how applications provide context
+      to LLMs. It is used to create secure links between LLMs and data sources
+  description: Integration point at handover phase. MCP standardizes context transfer
+    between applications and LLMs, operating at data source integration points to
+    build secure links for agent workflows and data handoffs.
+- name: Multi-Agent Debate Defense
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 4:97-100)
+    quote: Chern et al. introduce a multi-agent debate method to reduce the susceptibility
+      of agents to adversarial attacks
+  description: Integration point at verification phase. Multi-agent debate operates
+    after initial response generation, where multiple agents critique and verify each
+    other's outputs to detect adversarial content before final acceptance.
+- name: Trajectory Firewall Layer
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 5:1-6)
+    quote: self-correction mechanism, known as the trajectory firewall layer, to correct
+      the deviated trajectory of agents. This firewall layer verifies the generated
+      responses
+  description: Integration point at verification phase. The trajectory firewall operates
+    during execution verification, checking each step of information flow and agent
+    processes to ensure alignment with original instructions.
+- name: Scientific Multi-Agent Task Delegation
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 6:26-40)
+    quote: a Planner agent (GPT-4) decomposes a complex materials design challenge
+      into a sequence of tasks, which are then verified by a Critic agent and delegated
+      to specialist modules
+  description: Integration point at prompt_generation (task decomposition by Planner),
+    verification (by Critic agent), and handover (delegation to specialist modules).
+    AtomAgents demonstrates multi-point integration across the pipeline.
+- name: Multi-Agent Dataset Construction Workflow
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 6:75-97)
+    quote: 'multiple AI models played different roles: one vision model scanned...another
+      generated descriptive captions...additional agents iteratively refined the captions'
+  description: 'Integration point spans all phases: prompt_generation (role assignment),
+    execution (scanning/generation), handover (passing outputs between models), and
+    verification (iterative refinement). PathGen-1.6M shows complete pipeline integration.'
+- name: Goal Understanding at Initial Belief State
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:438-451)
+    quote: agent first leverages its own reasoning capabilities to perform goal understanding
+      for inferring the user's true intention...before the agent executes multiple
+      loops
+  description: Integration point at prompt_generation phase. Goal understanding (I
+    = Understand(b0, g)) occurs at the initial belief state before execution loops
+    begin, establishing the foundation for subsequent task decomposition.
+- name: Intention Decomposition Before/During Execution
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:453-468)
+    quote: pre-defined decomposition...sub-intentions are specified in advance...dynamic
+      decomposition...sub-intention for each loop is generated
+  description: Integration point at prompt_generation (pre-defined) and execution
+    (dynamic). Pre-defined decomposition occurs before execution; dynamic decomposition
+    happens during each execution loop based on current belief state.
+- name: Tool Selection and Calling Execution Phase
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:227-250)
+    quote: 'Tool Selection: Given pt and a set of candidate tools, the agent must
+      first select the appropriate tool...Tool Calling: Once Ts is selected, the agent
+      then needs to populate Ts with the tool parameters'
+  description: Integration point at execution phase. Tool selection (Eq.12-13) and
+    tool calling (Eq.14) are sub-stages of the execution process where the agent translates
+    plans into concrete executable actions.
+- name: Multi-Modal Perception Module
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:317-327)
+    quote: perception module serves as a fundamental interface, extending its perception
+      into a multi-modal space...agent receives the external information and transforms
+      this information into internal observations
+  description: Integration point spans execution and verification. Perception operates
+    during execution (receiving environmental feedback) and feeds into verification
+    (transforming raw input into structured observations for belief update).
+- name: Broadcasting in Multi-Agent Systems
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:21-28)
+    quote: Broadcasting means that the agent broadcasts its message to neighboring
+      nodes according to its plan, while structure evolution indicates that the communication
+      structure Gt can be updated
+  description: Integration point at handover phase. Broadcasting occurs after execution,
+    where agents transfer messages to neighbors according to their plans. Structure
+    evolution updates communication topology during agent-to-agent handoffs.
+- name: Communication Protocol Message Formatting
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 3:61-77)
+    quote: communication protocols define the Message formats. Current LLM-based agents
+      predominantly rely on...natural language...Adopting structured formats (e.g.,
+      JSON) can improve clarity
+  description: Integration point at handover phase. Message format standardization
+    (natural language vs. structured JSON) operates at agent-to-agent message boundaries
+    to reduce ambiguity and miscommunication risk.
+- name: Network Topology Update Integration
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 3:79-97)
+    quote: Network topology defines how agents are interconnected...network updates
+      reshape the propagation paths of messages within MAS
+  description: Integration point at handover phase. Network topology updates occur
+    during agent communication to determine message routing, ensuring messages reach
+    appropriate recipients based on current relevance and expertise.
+- name: Self-verification Mechanism at Execution
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:6-14)
+    quote: the agent assesses the validity, consistency, and factuality of the intermediate
+      decisions and actions generated in that specific step
+  description: Integration point at EXECUTION. Self-verification mechanism applied
+    during agent task execution where agents introspectively review their own behaviors
+    using internal reasoning strategy or prompt-based self-assessment to prevent hallucination
+    accumulation.
+- name: Validator Assistance at Verification
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:42-48)
+    quote: This approach leverages external validators to verify the correctness of
+      an agent's outputs, aiming to mitigate hallucinations
+  description: Integration point at VERIFICATION. External validators are applied
+    after execution to verify output correctness. Includes language-based, retrieval-based,
+    execution-based, simulation-based, and ensemble validators.
+- name: Lightweight Checkpoint Injection
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:186-189)
+    quote: lightweight checkpoints can be injected at each stage to verify whether
+      hallucinations have occurred
+  description: Integration point at VERIFICATION. Proposes injecting checkpoints at
+    each pipeline stage for hallucination detection, enabling continuous verification
+    throughout workflow execution.
+- name: Broadcasting Message Protocol
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 8:30-37)
+    quote: The agent i broadcasts its message to its neighbors in Gt according to
+      its plan
+  description: Integration point at HANDOVER. Broadcasting pattern where agents send
+    messages to neighbor agents based on their plan, representing communication structure
+    during inter-agent data transfer.
+- name: Perception-Belief Update Pipeline
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 8:53-75)
+    quote: Each agent i perceives st+1 to generate the observation...the agent i refines
+      its belief state
+  description: Integration point at EXECUTION. Multi-step pipeline where perception
+    leads to observation generation, memory update, and belief refinement, with messages
+    from neighbors integrated at each step.
+- name: Echo Chamber Communication Hallucination
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 8:192-205)
+    quote: Through multiple rounds of transmission, the information is progressively
+      distorted until it becomes completely detached from the original meaning
+  description: Integration point at HANDOVER. Demonstrates failure mode during multi-agent
+    handover where minor mis-hearings amplify through message passing, producing 'telephone
+    game' accumulation of deviations.
+- name: HalMit Watchdog Framework
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:25-29)
+    quote: a novel black-box watchdog framework that models the generalization bound
+      of LLM-empowered agents and thus detect hallucinations
+  description: Integration point at VERIFICATION. Watchdog operates as external verification
+    layer for agents, monitoring hallucinations without requiring internal model access,
+    applied after agent response generation.
+- name: Multi-Agent Bound Exploration System
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:355-356)
+    quote: 'the proposed MAS consists of three specialized agent types: core agent
+      (CA), query generation agent (QGA), evaluation agent (EA)'
+  description: 'Integration point at EXECUTION. Multi-agent system with specialized
+    roles: CA coordinates, QGA generates queries, EA evaluates responses. Each agent
+    type has specific integration point in exploration pipeline.'
+- name: Evaluation Agent Response Verification
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:470-474)
+    quote: each QA pair is sent to an EA. After receiving the QA pair, the EA assesses
+      whether the response contains a hallucination
+  description: Integration point at VERIFICATION. Evaluation Agent receives query-answer
+    pairs post-execution and assesses hallucination presence, sending evaluation report
+    back to Core Agent.
+- name: Vector Database Boundary Storage
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:476-477)
+    quote: the CA embeds the QA pair and the context information into a vector database
+      as a point of the generalization bound
+  description: Integration point at HANDOVER. When hallucination detected, Core Agent
+    stores QA pair with context in vector database, creating persistent knowledge
+    for future verification comparisons.
+- name: Hallucination Monitoring Query Comparison
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 2:381-384)
+    quote: the input query is compared with all related items in the vector database
+      built in Section 3
+  description: Integration point at VERIFICATION. At query time, input queries are
+    compared against vector database of known boundary points using cosine similarity
+    to detect potential hallucinations before response delivery.
+- name: Centroid-Based Boundary Detection
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 2:388-399)
+    quote: we calculate the centroid of three most similar items...If SC > epsilon,
+      the input query is considered to be beyond the generalization bound
+  description: Integration point at VERIFICATION. When multiple similar items found
+    in database, centroid calculation determines if query lies outside generalization
+    bound, triggering hallucination warning.
+- name: PROV-AGENT Agentic Provenance Model
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:29-38)
+    quote: PROV-AGENT, a provenance model that extends W3C PROV and leverages the
+      Model Context Protocol (MCP)...to integrate agent interactions into end-to-end
+      workflow provenance
+  description: Integration point at HANDOVER. Provenance model captures and relates
+    agent-centric metadata (prompts, responses, decisions) with workflow context,
+    enabling traceability across agent handovers.
+- name: AgentTool Execution Tracking
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:285-291)
+    quote: an AI agent can be associated with one or many tool executions (AgentTool)
+      and each tool may be informed by one or many AIModelInvocations
+  description: Integration point at EXECUTION. AgentTool class tracks tool execution
+    activities, linking agents to their model invocations, prompts, and responses
+    during task execution.
+- name: Flowcept Agent Tool Decorator
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:346-351)
+    quote: '@flowcept_agent_tool, which creates a corresponding AgentTool execution
+      activity for each tool execution...linked to its inputs and outputs'
+  description: Integration point at EXECUTION. Decorator pattern applied at tool definition
+    time to automatically capture provenance during execution, associating activities
+    with agents and PROV relationships.
+- name: LLM Wrapper Prompt-Response Capture
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:358-364)
+    quote: Whenever a prompt is sent to an LLM service provider...the wrapper captures
+      the prompt, response, model metadata...and optional telemetry
+  description: Integration point at PROMPT_GENERATION and EXECUTION. FlowceptLLM wrapper
+    intercepts LLM invocations to capture prompt, response, model parameters, and
+    timing metadata.
+- name: End-to-End Lineage Query Traversal
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 2:93-101)
+    quote: Given an agent decision Agent_Decision_i, the query traverses to its generating
+      Agent_Tool_i, then to the inputs it used...traced back through Model_Evaluation_i
+  description: Integration point at VERIFICATION. Provenance queries enable backward
+    traversal from agent decisions through tool executions, model evaluations, and
+    sensor data to original inputs for root cause analysis.
+- name: LLM Prompt-Response Tracing for Hallucination
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 2:111-122)
+    quote: What was the LLM prompt and response when a surprising agent decision was
+      identified?...traces back to Agent_Tool_2 and its linked LLM_Invocation_2 to
+      retrieve Prompt_2 and Response_2
+  description: Integration point at VERIFICATION. When unexpected decisions identified,
+    provenance enables tracing to specific prompts and responses that caused the issue,
+    supporting debugging and prompt refinement.
+- name: Hierarchical Agent Task Delegation
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:92-99)
+    quote: The supervisor Agent is required to perform task planning, break down the
+      task, assign sub-tasks, and facilitate communication between specialist agents
+  description: Integration point at PROMPT_GENERATION. Supervisor agent performs task
+    decomposition and generates sub-tasks before delegating to specialist agents,
+    defining integration point at planning phase.
+- name: Inter-Agent Message Passing Protocol
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:114-118)
+    quote: Each agent can send direct messages to other visible agents. Within the
+      context of hierarchical agents, an agent can send and receive messages from
+      its supervisor
+  description: Integration point at HANDOVER. Message passing pattern where agents
+    exchange information during task execution, with synchronized communication temporarily
+    blocking sender until response received.
+- name: Payload Referencing Mechanism
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:275-288)
+    quote: Payload referencing is a specialized mechanism designed to handle the exchange
+      of large content blocks...allowing direct injection of text extracted from past
+      multi-party communication
+  description: Integration point at HANDOVER. Optimization for inter-agent communication
+    where supervisor agent references payloads by ID instead of regenerating content,
+    reducing token overhead during message exchange.
+- name: Dynamic Agent Routing Bypass
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:338-345)
+    quote: dynamic agent routing mechanism that selectively bypasses the supervisor
+      agent's orchestration when the incoming message only requires simple routing
+  description: Integration point at PROMPT_GENERATION. Fast classifier at message
+    intake determines if full orchestration needed or if request can be directly routed
+    to specialist agent, reducing latency.
+- name: Assertion-Based Verification Framework
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 2:21-26)
+    quote: 'Assertions are categorized two types: user-side and system-side...system-side
+      assertions cover behaviors that cannot be observed by the user...tool calling
+      correctness, parameter correctness'
+  description: Integration point at VERIFICATION. Post-execution assertion checking
+    validates agent behaviors from both user and system perspectives, including tool
+    usage correctness and inter-agent behavior compliance.
+- name: LLM Judge Post-Simulation Evaluation
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 2:53-56)
+    quote: After simulations are completed, we pass the trajectories to a LLM judge
+      to help automate the assertion evaluation...returns whether each assertion is
+      True or False
+  description: Integration point at VERIFICATION. LLM-based judge applied after simulation
+    completion to evaluate assertion validity against recorded trajectories, providing
+    automated quality assessment.

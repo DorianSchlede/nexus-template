@@ -1,0 +1,23 @@
+{
+  "source_pdf": "05-DOLCE_Descriptive_Ontology.pdf",
+  "processed_at": "2025-12-27T22:51:49.977150",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 1577,
+  "total_chars": 79717,
+  "chunks": [
+    {
+      "filename": "05-DOLCE_Descriptive_Ontology_1.md",
+      "chunk_number": 1,
+      "line_count": 999,
+      "char_count": 48675
+    },
+    {
+      "filename": "05-DOLCE_Descriptive_Ontology_2.md",
+      "chunk_number": 2,
+      "line_count": 578,
+      "char_count": 31042
+    }
+  ]
+}

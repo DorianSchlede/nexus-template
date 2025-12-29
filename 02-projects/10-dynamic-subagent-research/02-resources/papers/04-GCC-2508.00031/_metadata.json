@@ -1,0 +1,23 @@
+{
+  "source_pdf": "04-GCC-2508.00031.pdf",
+  "processed_at": "2025-12-28T16:48:00.500810",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 830,
+  "total_chars": 46930,
+  "chunks": [
+    {
+      "filename": "04-GCC-2508.00031_1.md",
+      "chunk_number": 1,
+      "line_count": 500,
+      "char_count": 27343
+    },
+    {
+      "filename": "04-GCC-2508.00031_2.md",
+      "chunk_number": 2,
+      "line_count": 330,
+      "char_count": 19587
+    }
+  ]
+}

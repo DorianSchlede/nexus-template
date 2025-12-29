@@ -1,0 +1,245 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblh0GsN5Et3ApzLS
+table_name: NodeVersions
+exported_at: '2025-12-28T14:12:03.628729'
+field_count: 37
+fields:
+- id: fldlLnpVWwMXbXo2l
+  name: Node Version Name
+  type: singleLineText
+  description: null
+- id: fldtrkMWHzJTQ9m6T
+  name: Node
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblPJ9VKG74mKv7JK
+  prefer_single_record_link: false
+  inverse_link_field_id: fld18Hw8htVYZWc8g
+- id: fldzYmNQL2ys0Dtre
+  name: Agent (from Node)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldtrkMWHzJTQ9m6T
+  lookup_field_id: fldEpeI3o5mZv22BU
+- id: fldWxXkSoBx31Usu8
+  name: NodeVersion AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fldpsyKaousktKsO3
+  name: Agent Versions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: false
+  inverse_link_field_id: fldFsXt3lTx1wu4yf
+- id: fld3IIgIlnSsSG2qC
+  name: Prompt
+  type: multilineText
+  description: null
+- id: fldsUbWFq15iSgAQ2
+  name: Model
+  type: singleLineText
+  description: null
+- id: fldFGMq7rTUfoB3i7
+  name: Structured Outputs Full
+  type: multilineText
+  description: null
+- id: fldA9vunG9T3u7UfO
+  name: Input Parameters
+  type: multilineText
+  description: null
+- id: fldazeE5HsyEIHbdQ
+  name: Condition
+  type: multilineText
+  description: null
+- id: fldTkEt58XRx4tGFd
+  name: Branch Name
+  type: multilineText
+  description: null
+- id: fldxO0w3EdO0uUuh5
+  name: Require Consent
+  type: singleLineText
+  description: null
+- id: fld4Enqlv9Dk2F53U
+  name: Tool Type
+  type: singleLineText
+  description: null
+- id: fld4OLynH1xQRcz6A
+  name: TaskNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldNmqHaSkthZVMIm
+- id: fldEEFWBG5nH0Mn10
+  name: VariablesVersions
+  type: singleLineText
+  description: null
+- id: fldvMNQsgd1wr1Dl9
+  name: TaskVariables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblKhpqLs06kI01yv
+  prefer_single_record_link: false
+  inverse_link_field_id: fldMTgR5BIp9treA2
+- id: fldGFjbyqU3dbAYl7
+  name: BeamToolID
+  type: singleLineText
+  description: null
+- id: fldiWwOQuSy40umfO
+  name: Version Number
+  type: number
+  description: null
+  precision: 0
+- id: fldwEHPKTU2x73nQA
+  name: Is Variant
+  type: checkbox
+  description: null
+  icon: thumbsUp
+- id: fldgdcHmGNdooIo4Q
+  name: Parent Prompt Version
+  type: singleLineText
+  description: null
+- id: fldjMRXr1FF2csgud
+  name: Created At
+  type: dateTime
+  description: null
+  date_format:
+    name: local
+    format: l
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldSTVjWNCA4IvMNE
+  name: Updated At
+  type: dateTime
+  description: null
+  date_format:
+    name: local
+    format: l
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldnP8g3a3dh0VmfY
+  name: Created By
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl6mvvqpU4AOIpVS
+  prefer_single_record_link: true
+  inverse_link_field_id: fldM4WqamYW1M4vmd
+- id: fldbCLD8hVvzC0BT9
+  name: Owner Name
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldnP8g3a3dh0VmfY
+  lookup_field_id: fldOHt5FODmvdb2wp
+- id: fldTJJrEEniaGX2l2
+  name: Active Node
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblPJ9VKG74mKv7JK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldzRK1atiASu2b7c
+- id: fldraGRjKKRCKNLUZ
+  name: AgentTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldEm6Om46STlktkW
+- id: flduQSknH6NLqqFYi
+  name: DatasetNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblflNTX3tR0onX13
+  prefer_single_record_link: false
+  inverse_link_field_id: fldAHsY8LontazYb5
+- id: fldSyqc1mWHlsHj5a
+  name: Avg Production Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldvMNQsgd1wr1Dl9
+  lookup_field_id: fld53vRcKPcO2JYul
+  referenced_field_ids: []
+- id: fldz69TGXPDBU8ME8
+  name: Avg Evaluation Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldvMNQsgd1wr1Dl9
+  lookup_field_id: fld53vRcKPcO2JYul
+  referenced_field_ids: []
+- id: fldBWLiA6LHnIWt7S
+  name: Variables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblf2ohTHmsucjVUj
+  prefer_single_record_link: false
+  inverse_link_field_id: fldRfkLCfbdXebA3Y
+- id: fldCKJkA1Hfw3sDHR
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldNsAwQbfHXXrnFP
+- id: fldO2Vsu6U90zjoga
+  name: Node Version ID
+  type: singleLineText
+  description: null
+- id: fldWoAXcy6eHXZjo2
+  name: DatasetRunImprovements
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblT1mIwLx9JECKd8
+  prefer_single_record_link: false
+  inverse_link_field_id: fldZS1il5Q11X0wLh
+- id: fldkv5GKwqvr2CUc6
+  name: Node Version UID
+  type: multilineText
+  description: null
+- id: fldD7WkNvyl3gH2BU
+  name: Node Version
+  type: formula
+  description: Combines the version number and node name into a single text value.
+  referenced_field_ids:
+  - fldiWwOQuSy40umfO
+  - fldtrkMWHzJTQ9m6T
+  formula: CONCATENATE({fldiWwOQuSy40umfO}, " | ", {fldtrkMWHzJTQ9m6T})
+- id: fldzaabg9NT7OsKSs
+  name: NodeVersionID
+  type: formula
+  description: Concatenates the BeamToolID and Prompt fields with a pipe separator.
+  referenced_field_ids:
+  - fldGFjbyqU3dbAYl7
+  - fld3IIgIlnSsSG2qC
+  formula: '{fldGFjbyqU3dbAYl7} & "|" & {fld3IIgIlnSsSG2qC}'
+- id: fldD9waGtRIikfI3S
+  name: Prompt Word Count
+  type: formula
+  description: Counts the number of words in the Prompt field by counting spaces plus
+    one.
+  referenced_field_ids:
+  - fld3IIgIlnSsSG2qC
+  formula: "IF(\n  TRIM({fld3IIgIlnSsSG2qC}) = \"\",\n  0,\n  LEN(TRIM({fld3IIgIlnSsSG2qC}))\
+    \ - LEN(SUBSTITUTE(TRIM({fld3IIgIlnSsSG2qC}), \" \", \"\")) + 1\n)"
+views:
+- id: viw9eC4GI5AFBepHu
+  name: First Email Data
+  type: grid
+- id: viw7j6oOP05GAlx4g
+  name: Case Study
+  type: grid
+- id: viw8HukYQp404iqVE
+  name: Grid view
+  type: grid
+- id: viwjLaStXGwfDnSc3
+  name: BID MAGA
+  type: grid
+- id: viwb8BVeheFnJX6vl
+  name: BID TZV
+  type: grid

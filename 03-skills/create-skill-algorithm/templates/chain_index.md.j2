@@ -1,0 +1,161 @@
+# {{ chain_name | replace('-', ' ') | title }} - Skill-Chain Documentation
+
+**Generated**: {{ generated_date }}
+**Version**: {{ version | default('1.0') }} (Nested Architecture)
+
+---
+
+## Overview
+
+{{ description }}
+
+## Architecture Diagram
+
+```mermaid
+graph TB
+    subgraph "{{ chain_name | replace('-', ' ') | title }} Skill-Chain"
+        PARENT[SKILL.md<br/>Parent Router]
+
+        subgraph "orchestrators/"
+{% for phase in phases %}
+            {{ phase.orchestrator | replace('-', '_') | upper }}[{{ phase.orchestrator }}<br/>Phase {{ loop.index }}: {{ phase.name | title }}]
+{% endfor %}
+        end
+
+        subgraph "skills/"
+{% for phase in phases %}
+{% for skill in phase.sub_skills %}
+            {{ skill | replace('-', '_') | upper }}[{{ skill }}]
+{% endfor %}
+{% endfor %}
+        end
+
+{% if shared_skills %}
+        subgraph "shared/"
+{% for shared in shared_skills %}
+            {{ shared | replace('-', '_') | upper }}[{{ shared }}<br/>DO NOT LOAD DIRECTLY]
+{% endfor %}
+        end
+{% endif %}
+
+        subgraph "validation/"
+            VA[validate_*.py]
+        end
+    end
+
+{% for phase in phases %}
+    PARENT --> {{ phase.orchestrator | replace('-', '_') | upper }}
+{% for skill in phase.sub_skills %}
+    {{ phase.orchestrator | replace('-', '_') | upper }} --> {{ skill | replace('-', '_') | upper }}
+{% endfor %}
+{% endfor %}
+```
+
+## Process Flow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+{% for phase in phases %}
+    participant {{ phase.orchestrator | replace('-', '') | truncate(3, True, '') | upper }} as {{ phase.orchestrator }}
+{% endfor %}
+{% for phase in phases %}
+{% for skill in phase.sub_skills %}
+    participant {{ skill | replace('-', '') | truncate(3, True, '') | upper }} as {{ skill }}
+{% endfor %}
+{% endfor %}
+
+{% for phase in phases %}
+    U->>{{ phase.orchestrator | replace('-', '') | truncate(3, True, '') | upper }}: Start {{ phase.name }}
+{% for skill in phase.sub_skills %}
+    {{ phase.orchestrator | replace('-', '') | truncate(3, True, '') | upper }}->>{{ skill | replace('-', '') | truncate(3, True, '') | upper }}: Execute
+    {{ skill | replace('-', '') | truncate(3, True, '') | upper }}-->>{{ phase.orchestrator | replace('-', '') | truncate(3, True, '') | upper }}: Results
+{% endfor %}
+{% if phase.gate %}
+    Note over {{ phase.orchestrator | replace('-', '') | truncate(3, True, '') | upper }}: Gate: {{ phase.gate.name }}
+{% endif %}
+
+{% endfor %}
+```
+
+## Skill Inventory
+
+### Orchestrators (User Entry Points)
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+{% for phase in phases %}
+| {{ phase.orchestrator }} | `orchestrators/{{ phase.orchestrator }}/` | {{ phase.description | default('Phase ' ~ loop.index) }} |
+{% endfor %}
+
+### Sub-Skills
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+{% for phase in phases %}
+{% for skill in phase.sub_skills %}
+| {{ skill }} | `skills/{{ skill }}/` | TODO |
+{% endfor %}
+{% endfor %}
+
+{% if shared_skills %}
+### Shared Methodologies
+
+| Skill | Path | Note |
+|-------|------|------|
+{% for shared in shared_skills %}
+| {{ shared }} | `shared/{{ shared }}/` | **DO NOT LOAD DIRECTLY** - Loaded by subagents |
+{% endfor %}
+{% endif %}
+
+### Validation Scripts
+
+| Script | Path | Purpose |
+|--------|------|---------|
+| validate_*.py | `validation/` | Chain validation scripts |
+
+## Outputs by Phase
+
+{% for phase in phases %}
+### Phase {{ loop.index }} Outputs ({{ phase.orchestrator }})
+
+| Output | Location | Required |
+|--------|----------|----------|
+{% if phase.outputs %}
+{% for output in phase.outputs %}
+| {{ output.path.split('/')[-1] }} | `{{ output.path }}` | {{ 'Yes' if output.required else 'No' }} |
+{% endfor %}
+{% else %}
+| *No outputs defined* | - | - |
+{% endif %}
+
+{% endfor %}
+
+## Gates
+
+{% for phase in phases %}
+{% if phase.gate %}
+### {{ phase.gate.name | replace('-', ' ') | title }}
+
+{% for condition in phase.gate.conditions %}
+- {{ condition }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+
+## Usage Examples
+
+```bash
+# Start Phase 1
+"{{ phases[0].orchestrator | replace('-', ' ') }}"
+
+{% if phases | length > 1 %}
+# Continue with Phase 2
+"{{ phases[-1].orchestrator | replace('-', ' ') }}"
+{% endif %}
+```
+
+---
+
+*Auto-generated documentation for {{ chain_name }} skill-chain*

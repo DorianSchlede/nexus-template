@@ -1,0 +1,23 @@
+{
+  "source_pdf": "09-SEMAP-2510.12120.pdf",
+  "processed_at": "2025-12-28T16:48:22.806770",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 706,
+  "total_chars": 31935,
+  "chunks": [
+    {
+      "filename": "09-SEMAP-2510.12120_1.md",
+      "chunk_number": 1,
+      "line_count": 500,
+      "char_count": 24195
+    },
+    {
+      "filename": "09-SEMAP-2510.12120_2.md",
+      "chunk_number": 2,
+      "line_count": 206,
+      "char_count": 7740
+    }
+  ]
+}

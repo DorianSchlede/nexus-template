@@ -1,0 +1,17 @@
+{
+  "source_pdf": "12-Foundations_of_Process_Event_Data.pdf",
+  "processed_at": "2025-12-27T22:52:31.320718",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 1,
+  "total_lines": 853,
+  "total_chars": 55143,
+  "chunks": [
+    {
+      "filename": "12-Foundations_of_Process_Event_Data_1.md",
+      "chunk_number": 1,
+      "line_count": 853,
+      "char_count": 55143
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+field: empirical_evidence
+aggregated_at: '2025-12-29T11:26:23.715813'
+batches_merged: 1
+patterns_input: 18
+patterns_output: 18
+patterns:
+- name: Gold Standard Comparison for Completeness Measurement
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:113-117)
+    quote: Concrete strategies involve comparison with gold standards that provide
+      samples of the ideal knowledge graph (possibly based on completeness statements)
+  description: Empirical validation of knowledge graph completeness through comparison
+    with established gold standards. The pattern indicates that measuring completeness
+    directly requires knowledge of a hypothetical 'ideal knowledge graph' containing
+    all elements that should be represented, with gold standards providing samples
+    of this ideal for comparison.
+- name: Recall Measurement from Complete Sources
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:117-118)
+    quote: or measuring the recall of extraction methods from complete sources
+  description: Empirical validation pattern where extraction method quality is assessed
+    by measuring recall against complete, known data sources. This provides quantitative
+    evidence of extraction effectiveness in knowledge graph creation.
+- name: Manual Verification for Semantic Accuracy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:58-61)
+    quote: Assessing the level of semantic inaccuracies is challenging. While one
+      option is to apply manual verification, an automatic option may be to check
+      the stated relation against several sources
+  description: Empirical validation through manual expert verification to assess semantic
+    accuracy of knowledge graph data. This pattern represents human-in-the-loop validation
+    where domain experts verify whether data values correctly represent real-world
+    phenomena.
+- name: Multi-Source Cross-Validation
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:60-62)
+    quote: an automatic option may be to check the stated relation against several
+      sources
+  description: Empirical evidence gathered through automated cross-validation of knowledge
+    graph relations against multiple independent sources. This pattern addresses semantic
+    accuracy by triangulating facts across external references.
+- name: Precision Measurement with Human Experts
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:62-65)
+    quote: Another option is to rather validate the quality of individual processes
+      used to generate the knowledge graph, based on measures such as precision, possibly
+      with the help of human experts or gold standards
+  description: Process-level empirical validation where the quality of knowledge graph
+    generation processes is measured using precision metrics, with human expert involvement
+    or gold standard comparison to validate individual extraction/generation components.
+- name: Temporal Update Frequency Assessment
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:80-83)
+    quote: Timeliness can be assessed based on how frequently the knowledge graph
+      is updated with respect to underlying sources, which can be done using temporal
+      annotations of changes in the knowledge graph
+  description: Empirical evidence pattern for assessing timeliness quality dimension
+    by measuring update frequency relative to source data changes. Uses temporal annotations
+    to track and validate currency of knowledge graph content.
+- name: Statistical Distribution Comparison for Bias Detection
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:149-153)
+    quote: Measures of representativeness involve comparison of known statistical
+      distributions with those of the knowledge graph, for example, comparing geolocated
+      entities with known population densities
+  description: Empirical validation of representativeness through statistical comparison
+    between knowledge graph distributions and known real-world distributions. Used
+    to detect geographic, linguistic, and social biases by comparing against population
+    densities, speaker distributions, etc.
+- name: Benford's Law Conformance Testing
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:155-157)
+    quote: Another option is to compare the knowledge graph with general statistical
+      laws, where Soulet et al. use (non-)conformance with Benford's law to measure
+      representativeness in knowledge graphs
+  description: Novel empirical validation pattern using Benford's law (statistical
+    distribution of leading digits) to assess representativeness in knowledge graphs.
+    Non-conformance to this general statistical law can indicate data quality or bias
+    issues.
+- name: Validation Tool-Based Syntactic Accuracy Assessment
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:45-47)
+    quote: Such forms of syntactic accuracy can typically be assessed using validation
+      tools
+  description: Empirical validation through automated tooling to assess syntactic
+    accuracy of knowledge graph data. Tools validate datatype compatibility, format
+    correctness, and adherence to grammatical rules defined for the domain/data model.
+- name: Constraint Violation Counting
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:191-192)
+    quote: A straightforward measure of validity is to count the number of violations
+      per constraint
+  description: Quantitative empirical evidence pattern for assessing validity through
+    systematic counting of constraint violations in knowledge graphs, using shape
+    expressions or similar validation mechanisms.
+- name: Inconsistency Detection via Semantic Features
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:173-176)
+    quote: A measure of consistency can be the number of inconsistencies found in
+      a knowledge graph, possibly sub-divided into the number of such inconsistencies
+      identified by each semantic feature
+  description: Empirical measurement of logical consistency through quantifying inconsistencies
+    and categorizing them by semantic feature type. Provides structured evidence of
+    ontological coherence issues.
+- name: Cross-Facility Agentic Workflow Evaluation
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:36-37)
+    quote: a cross-facility evaluation spanning edge, cloud, and HPC environments,
+      demonstrating support for critical provenance queries and agent reliability
+      analysis
+  description: Empirical validation of PROV-AGENT provenance model through cross-facility
+    deployment across edge devices, cloud services, and high-performance computing
+    environments. Demonstrates real-world applicability for agent reliability analysis
+    in distributed settings.
+- name: Additive Manufacturing Use Case Validation
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:419-425)
+    quote: We employ PROV-AGENT in an autonomous additive manufacturing workflow being
+      developed at Oak Ridge National Laboratory (ORNL). This workflow integrates
+      a metal 3D printer at ORNL's Manufacturing Demonstration Facility (MDF)
+  description: Real-world empirical validation through deployment in an autonomous
+    additive manufacturing workflow at Oak Ridge National Laboratory. The use case
+    involves metal 3D printing with sensor data streaming to HPC simulations, representing
+    a concrete industrial application.
+- name: Edge-Cloud-HPC Continuum Testing
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:181-184)
+    quote: Agentic workflow spanning an edge-cloud-HPC continuum. Data stream in near
+      real time from the experimental facility to HPC systems, with results feeding
+      back into upstream tasks
+  description: Empirical validation pattern demonstrating provenance capture across
+    heterogeneous computing continuum including edge devices, cloud services, and
+    HPC systems with real-time data streaming and feedback loops.
+- name: Provenance Query Demonstration
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:487-489)
+    quote: With PROV-AGENT, several new queries are enabled to support agent accountability
+      and tracing back when errors/hallucinations happen
+  description: Empirical evidence through demonstration of concrete provenance queries
+    (Q1-Q5) that validate the model's ability to trace agent decisions, identify hallucination
+    sources, and support root cause analysis in agentic workflows.
+- name: End-to-End Lineage Tracing Validation
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:493-501)
+    quote: 'Given an agent decision Agent_Decision_i, the query traverses to its generating
+      Agent_Tool_i, then to the inputs it used: Scores_i, Control_Result_i, and Agent_Decision_i-1'
+  description: Empirical validation of complete lineage tracing capability from final
+    agent decisions back through all intermediate steps to original sensor data inputs.
+    Demonstrates practical traceability in iterative decision-making workflows.
+- name: LLM Hallucination Root Cause Analysis
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:516-522)
+    quote: Given that a hallucination was identified when the agent was deciding on
+      the scores for layer 2, after identifying the unexpected Agent_Decision_2, the
+      query traces back to Agent_Tool_2 and its linked LLM_Invocation_2
+  description: Empirical evidence pattern for debugging AI agent hallucinations through
+    provenance tracing. When unexpected decisions are identified, the system enables
+    retrieval of corresponding prompts and responses to understand reasoning context.
+- name: Iterative Decision Propagation Analysis
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:524-529)
+    quote: Given that an agent decision Agent_Decision_i is used by another Agent_Decision_i+1,
+      the query recursively navigates on the used/wasGeneratedBy relationships in
+      the path between the Agent_Decision_i and the Agent_Decision in the last layer
+  description: Empirical validation of error propagation analysis capability, where
+    the system tracks how individual agent decisions influence subsequent workflow
+    activities through recursive relationship traversal across iterative processing
+    layers.

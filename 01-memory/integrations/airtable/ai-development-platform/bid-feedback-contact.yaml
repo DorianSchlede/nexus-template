@@ -1,0 +1,64 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblB6uthptJnf4Wi9
+table_name: BID Feedback Contact
+exported_at: '2025-12-28T14:12:03.742624'
+field_count: 9
+fields:
+- id: fldLcNt4eJWTDaeXn
+  name: Group ID
+  type: singleLineText
+  description: null
+- id: fldmePguvUyXgXa8A
+  name: Contact Role
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldE8f0Ayrp10LXDf
+  name: Contact Type
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldQnEceULhzFcYhW
+  name: Missing Contact Variables
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fldDquxw7bNyxcoYn
+- id: fldoovuKlmFfx52A6
+  name: Wrong Contact Variables
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fldDquxw7bNyxcoYn
+- id: fldF1rOBl4TlMSpgx
+  name: BID Feedback
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblH9H6wAD90a9Q88
+  prefer_single_record_link: false
+  inverse_link_field_id: fldaSqju4zdbKTpwj
+- id: fldI7FwSK8R5xbmXU
+  name: Category (from BID Feedback)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fldssaNtPunOkB7rC
+- id: fldDtaM9dS8Qq1sFW
+  name: Variable_text (from BID Feedback)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fldDquxw7bNyxcoYn
+- id: fldGDBC8odZjfHZTN
+  name: User_Value (from BID Feedback) 2
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldF1rOBl4TlMSpgx
+  lookup_field_id: fld1JohqCmBvibc45
+views:
+- id: viwT0oheQ91kVY5uy
+  name: Grid view
+  type: grid

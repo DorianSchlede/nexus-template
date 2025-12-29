@@ -1,0 +1,56 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblheJuJQmEAI4Th1
+table_name: Workspace
+exported_at: '2025-12-28T14:12:03.605182'
+field_count: 8
+fields:
+- id: fldMzpTCBoEDelFXs
+  name: Workspace Name
+  type: singleLineText
+  description: null
+- id: fldsKPoJdtku7UCb9
+  name: Workspace BID
+  type: singleLineText
+  description: null
+- id: fldkHgGesirQZOyvh
+  name: Agents
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fldItXOU8yc1YbCdu
+- id: fldY5Xo8lKL3SDESX
+  name: Datasets (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldkHgGesirQZOyvh
+  lookup_field_id: fld9B2t6YWzRo767v
+- id: fld4Jh5HiPk6LNnEC
+  name: Nodes (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldkHgGesirQZOyvh
+  lookup_field_id: fldnt1IfujyoHRIQm
+- id: flduRTKM4jGzNmQmn
+  name: Variables (from Nodes) (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldkHgGesirQZOyvh
+  lookup_field_id: fldv9MoZk4sPyCoXj
+- id: fldNqjVvvGacffEIJ
+  name: Agent Tasks (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldkHgGesirQZOyvh
+  lookup_field_id: fld6yGmd8u0yMju5d
+- id: fldeP3rsHsZ91VNUy
+  name: Workspace AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+views:
+- id: viwFsbqeAEl2ymIYb
+  name: Grid view
+  type: grid

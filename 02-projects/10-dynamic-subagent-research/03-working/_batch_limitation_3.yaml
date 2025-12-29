@@ -1,0 +1,230 @@
+---
+batch_id: "limitation_3"
+field: limitation
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 12
+patterns_found: 42
+---
+
+patterns:
+  # ProtocolBench-2510.17149 Chunk 6 Patterns
+  - name: "A2A Inbox Not Universally Implemented"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:310-311)"
+    quote: "/inbox is not universally implemented (PAL keeps a negative cache); receive_message() is a compatibility stub"
+    description: "A2A protocol limitation where the /inbox endpoint is not consistently implemented across systems, requiring PAL to maintain a negative cache. The receive_message function serves only as a compatibility stub rather than full functionality."
+
+  - name: "ACP Streaming Depends on Server SSE"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:314-315)"
+    quote: "Streaming depends on server SSE; long-running flows require /acp/status"
+    description: "ACP protocol limitation where streaming functionality is contingent on server-side SSE (Server-Sent Events) support. Long-running workflows must rely on polling the /acp/status endpoint."
+
+  - name: "ANP DID Verification Bypass in Test Configs"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:318-320)"
+    quote: "Test configs may enable DID verification bypass; if no DID service is available, use HTTP fallback POST /anp/message"
+    description: "ANP adapter limitation where test configurations may bypass DID verification for interoperability, and HTTP fallback is required when no DID service is available. The local resolver caches target DIDs but is not a general-purpose resolver."
+
+  - name: "Agora Simplified HTTP Without Official Toolformer"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:323)"
+    quote: "Without official toolformer, uses simplified HTTP with keyword classification; semantics and performance are limited"
+    description: "AgoraClientAdapter limitation where absence of official toolformer forces use of simplified HTTP with keyword classification, resulting in limited semantics and performance capabilities."
+
+  - name: "HTTP Transport Not Ordered"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:331)"
+    quote: "HTTP is not ordered; ANP is near-ordered per session; cross-session requires merge logic"
+    description: "Transport layer limitation where HTTP does not guarantee message ordering. ANP provides only near-ordering within a single session, and cross-session scenarios require application-level merge logic."
+
+  - name: "Client Adapters No Deduplication Persistence"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:335-336)"
+    quote: "Client adapters do not persist deduplication; implement on the server or one layer up"
+    description: "Idempotency limitation where client adapters do not maintain persistent deduplication state. Deduplication must be implemented at the server level or in a higher layer of the architecture."
+
+  - name: "Local Loopback Requires Explicit Default Adapter"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:326-328)"
+    quote: "IntelligentAgentNetwork._execute_single_agent_task() may use agent.send(agent_id, ...) for self-delivery; the network must bind an explicit default adapter"
+    description: "Local loopback limitation requiring explicit binding of a default adapter for agent self-delivery when using IntelligentAgentNetwork._execute_single_agent_task() for internal routing."
+
+  # LACP-2510.13821 Chunk 1 Patterns
+  - name: "Crippling Interoperability Gaps in Current Protocols"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:100-103)"
+    quote: "The absence of a universal standard necessitates bespoke, often brittle, integrations between different agent systems"
+    description: "Current agent communication landscape limitation where lack of universal standards creates fragmented ecosystem requiring custom integrations that are fragile and impede scalable multi-agent system development."
+
+  - name: "Security as an Afterthought in Existing Protocols"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:106-109)"
+    quote: "Security is often not a core, mandatory component of existing protocols. This design choice exposes systems to significant risks"
+    description: "Fundamental limitation of existing agent protocols where security is treated as optional add-on rather than foundational requirement, exposing systems to data tampering, agent spoofing, and adversarial attacks."
+
+  - name: "Monolithic Design Lacks Transactional Integrity"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:112-115)"
+    quote: "Current approaches often tightly couple communication logic with core agent implementation. This leads to monolithic systems"
+    description: "Architectural limitation where tight coupling of communication and agent logic creates monolithic systems that are difficult to maintain, debug, and extend, with no built-in atomic transaction support."
+
+  - name: "LACP Payload Size Overhead for Small Messages"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:469-471)"
+    quote: "Small (51B) 51 bytes 306 bytes +500%... Medium (151B) 151 bytes 442 bytes +191%"
+    description: "LACP protocol limitation where cryptographic overhead causes significant payload size increase for small messages (+500% for 51-byte messages), though overhead decreases to +30% for larger payloads."
+
+  # LACP-2510.13821 Chunk 2 Patterns
+  - name: "LACP Latency Overhead from Cryptographic Verification"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 2:78-82)"
+    quote: "The latency overhead is minimal across all scenarios, with an absolute increase of only 0.03ms for large, complex tasks"
+    description: "LACP performance limitation with ~3% latency overhead due to cryptographic signature verification, though absolute increase remains minimal at 0.03ms for realistic payloads."
+
+  # SEMAP-2510.12120 Chunk 1 Patterns
+  - name: "Under-specification in Multi-Agent LLMs"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:18-21)"
+    quote: "these systems often fail due to three core deficiencies: under-specification, coordination misalignment, and inappropriate verification"
+    description: "Multi-agent LLM limitation where agent responsibilities and role boundaries are poorly defined, leading to ambiguity and system failures. SEMAP addresses this through explicit behavioral contracts."
+
+  - name: "Coordination Misalignment Between Agents"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:74-75)"
+    quote: "insufficient interface specification, where inter-agent communication lacks semantic structure or typed formats"
+    description: "Multi-agent system limitation where inter-agent communication lacks semantic clarity and typed message formats, causing coordination failures. Requires structured messaging protocols to resolve."
+
+  - name: "Inappropriate Transition Logic Without Gating"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:76-77)"
+    quote: "inappropriate transition logic, where the system progresses between stages without formal gating or validation"
+    description: "Multi-agent workflow limitation where state transitions occur without proper verification gates, leading to premature or invalid termination. Lifecycle-guided execution with verification is needed."
+
+  - name: "Loosely Coupled Prompts in Current Frameworks"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:83-84)"
+    quote: "these SE principles remain largely absent from current multi-agent LLM frameworks, which are often built on loosely coupled prompts"
+    description: "Current multi-agent framework limitation where systems rely on informal, ad hoc role specifications and loosely coupled prompts rather than explicit behavioral contracts and structured protocols."
+
+  # SEMAP-2510.12120 Chunk 2 Patterns
+  - name: "SEMAP Future Work: Resource Overhead Measurement"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 2:18-19)"
+    quote: "Future work also includes measuring resource overhead, enabling cross-agent tool use, adding formal protocol correctness verification"
+    description: "Current SEMAP limitation acknowledging need for resource overhead measurement, cross-agent tool use capabilities, and formal protocol correctness verification not yet implemented."
+
+  # TalkHier-2502.11098 Chunk 2 Patterns
+  - name: "Vague Quality Threshold Definition"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 2:54-56)"
+    quote: "The main Supervisor evaluates whether the summarized feedback meets the quality threshold (M_threshold), defined vaguely as 'ensuring correctness'"
+    description: "TalkHier limitation where quality threshold for hierarchical refinement is defined vaguely as 'ensuring correctness' or 'achieving high relevance' without precise quantitative criteria."
+
+  - name: "OpenAI o1 Limited API Support"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 2:103-105)"
+    quote: "OpenAI-o1-preview... a beta model using advanced inference techniques, though limited by API support"
+    description: "Baseline comparison limitation where OpenAI o1-preview model has restricted API support, limiting direct comparisons with TalkHier and other baselines."
+
+  - name: "Baseline Implementation Challenges for Ad Text"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 2:303-306)"
+    quote: "Setting up baselines like AutoGPT, AgentVerse, and GPTSwarm for this task was challenging, as their implementations focus on general benchmarks"
+    description: "Multi-agent framework limitation where existing systems like AutoGPT, AgentVerse, and GPTSwarm require significant customization for domain-specific tasks like ad text generation."
+
+  # TalkHier-2502.11098 Chunk 3 Patterns
+  - name: "High API Cost from Hierarchical Communication"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 3:6-15)"
+    quote: "One of the main limitations of TalkHier is the relatively high API cost associated with the experiments... This is a trade-off due to the design of TalkHier"
+    description: "TalkHier limitation where hierarchical multi-agent collaboration with structured communication protocol significantly increases computational expenses and API costs, posing barriers for resource-limited researchers. Total experiment cost approximately $2,100 USD."
+
+  - name: "LLM Research Accessibility and Democratization Concerns"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 3:11-15)"
+    quote: "This raises broader concerns about the accessibility and democratization of LLM research, as such costs may pose barriers for researchers with limited resources"
+    description: "Systemic limitation where high computational costs of multi-agent LLM systems create accessibility barriers, limiting research democratization and participation by resource-constrained researchers."
+
+  # CollabSurvey-2501.06322 Chunk 1 Patterns
+  - name: "LLM Intrinsic Hallucination Limitation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 1:69-70)"
+    quote: "While these models have shown remarkable capabilities individually, they still suffer from intrinsic limitations such as hallucination"
+    description: "Fundamental LLM limitation where models generate false or fabricated information (hallucination), which can propagate and amplify in multi-agent collaborative systems."
+
+  - name: "Auto-regressive Nature Limits Slow-Thinking"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 1:70)"
+    quote: "auto-regressive nature (e.g., incapable of slow-thinking)"
+    description: "Inherent LLM architectural limitation where auto-regressive generation prevents deliberate slow-thinking capabilities, requiring multi-agent approaches to address complex reasoning tasks."
+
+  - name: "LLMs Not Trained for Inter-Agent Communication"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 1:390-391)"
+    quote: "LLMs are not inherently designed and trained to communicate with one another, leaving a wide array of potential applications and open problems"
+    description: "Fundamental limitation where LLMs lack native training for multi-agent communication, creating challenges in collaborative task execution and requiring additional protocols and frameworks."
+
+  # CollabSurvey-2501.06322 Chunk 2 Patterns
+  - name: "Context Window Token Constraint"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:31-33)"
+    quote: "Environment e: the environment or context... In LLM, usually the context window is constrained by the number of tokens"
+    description: "LLM operational limitation where context window size constrains the amount of environmental and task information agents can process, limiting collaborative task complexity."
+
+  - name: "Cooperation Communication and Computational Overhead"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:342-345)"
+    quote: "Frequent communication and multiple collaboration channels in C between agents can lead to increased computational cost and complexity"
+    description: "Multi-agent cooperation limitation where frequent inter-agent communication increases computational costs and system complexity, particularly challenging in dynamic environments."
+
+  - name: "Agent Failure Amplification in Cooperative MAS"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:354-357)"
+    quote: "the failure of one agent or more agents (e.g., infinite conversation loop, amplified hallucinations) can negatively impact the entire system"
+    description: "Cooperative MAS limitation where single agent failures such as infinite loops or hallucinations can cascade and negatively impact the entire multi-agent system performance."
+
+  - name: "Unpredictable Agent Behavior in Cooperation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:346-348)"
+    quote: "agents may act unpredictably by sending messages to themselves, pretending to be clients"
+    description: "Multi-agent cooperation limitation where agents may exhibit unpredictable behaviors including self-messaging and role impersonation, requiring failure handling and trustworthiness mechanisms."
+
+  - name: "Competition Conflict Resolution Requirements"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:391-393)"
+    quote: "competition can also introduce challenges, including potential conflicts that require mechanisms to ensure that competition remains constructive"
+    description: "Competitive MAS limitation requiring additional mechanisms to resolve conflicts and ensure competition remains beneficial to overall system goals rather than destructive."
+
+  - name: "Suboptimal MAS Design Underperforms Single-Agent"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:394-396)"
+    quote: "a MAS approach with suboptimal design for their competitive collaboration channels can be overtaken by single-agent counterparts with strong prompts"
+    description: "Critical MAS limitation where poorly designed competitive collaboration channels result in worse performance than single-agent systems with well-crafted prompts on reasoning tasks."
+
+  # CollabSurvey-2501.06322 Chunk 3 Patterns
+  - name: "Rule-based Systems Low Adaptability"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:97-101)"
+    quote: "rule-based systems suffer from a lack of adaptability. When confronted with unexpected situations or dynamic environments... these systems may fail"
+    description: "Rule-based protocol limitation where predefined rules cannot handle unexpected situations or dynamic environments, requiring manual intervention. Rule complexity grows exponentially with task complexity."
+
+  - name: "Role-based Systems Rigidity and Interdependencies"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:134-138)"
+    quote: "role-based systems can show rigidity, which might result in disputes or functional deficiencies... interdependencies between agent jobs are intrinsically linked"
+    description: "Role-based protocol limitation where improperly specified roles cause system rigidity, disputes, and functional gaps. Performance depends heavily on effective inter-role communication."
+
+  - name: "Model-based Systems Complex and Computationally Expensive"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:173-176)"
+    quote: "the greater complexity of model-based solutions is a trade-off for their flexibility. These systems can be difficult to design and deploy"
+    description: "Model-based protocol limitation where probabilistic decision-making increases system complexity, implementation difficulty, and computational costs, potentially restricting real-time applications."
+
+  # CollabSurvey-2501.06322 Chunk 4 Patterns
+  - name: "Centralized Structure Single Point of Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:193-197)"
+    quote: "If the central node fails the entire system might collapse... System is less resilient to disruptions"
+    description: "Centralized communication structure limitation where failure of the central coordinating agent causes complete system collapse, reducing overall resilience and fault tolerance."
+
+  - name: "Decentralized Structure Inefficient Resource Allocation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:198-200)"
+    quote: "Inefficient resource allocation... High communication overheads"
+    description: "Decentralized structure limitation causing inefficient resource distribution and high communication overhead as agents must coordinate directly without central management."
+
+  - name: "Hierarchical Structure Edge Device Criticality"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:203-206)"
+    quote: "Edge devices become critical as a failure in edge devices lead to system failure... High complexity and latency"
+    description: "Hierarchical structure limitation where edge device failures cascade to system-wide failures, combined with increased complexity and communication latency across layers."
+
+  - name: "Static Architecture Scalability and Flexibility Issues"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:14-19)"
+    quote: "Relies on accurate initial design and domain knowledge... Fixed channels may deal with scalability and flexibility"
+    description: "Static coordination architecture limitation requiring accurate initial design and domain expertise, with fixed collaboration channels limiting scalability and adaptability to new requirements."
+
+  - name: "Dynamic Architecture Resource Usage and Failure Risk"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:20-26)"
+    quote: "Higher resource usage due to real-time adjustments... Potential failures in dynamic adjustments"
+    description: "Dynamic coordination architecture limitation with increased resource consumption for real-time adjustments and risk of failures during dynamic channel reconfiguration."
+
+  # CollabSurvey-2501.06322 Chunk 5 Patterns
+  - name: "LLMs Struggle with Long Scenario Coherence"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 5:6-7)"
+    quote: "LLMs struggle to maintain coherence and relevance in long scenarios"
+    description: "Multi-agent debate limitation where LLMs have difficulty maintaining coherent and relevant arguments across extended debate scenarios, affecting quality of collaborative reasoning."
+
+  - name: "ChatDev Requires Clear Detailed Requirements"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 5:41-47)"
+    quote: "Without clear, detailed requirements, agents struggle to grasp task ideas... Automating the evaluation of general-purpose software is highly complex"
+    description: "ChatDev framework limitation where agents require explicit, detailed requirements to understand tasks. Multiple agents increase token usage and computational demands. Automated software evaluation remains highly complex."
+
+  - name: "Swarm Framework Not Production-Ready"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 5:94-96)"
+    quote: "Concern mainly with role-based protocol & centralised/decentralized structure... Not yet production-ready"
+    description: "OpenAI Swarm limitation where framework focuses primarily on role-based protocols and specific structures, and is not yet suitable for production deployment."

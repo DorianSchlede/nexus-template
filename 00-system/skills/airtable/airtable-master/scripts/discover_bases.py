@@ -22,6 +22,10 @@ import json
 import argparse
 from datetime import datetime
 
+# Fix Windows console encoding
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
 # Find Nexus root
 def find_nexus_root():
     current = os.path.dirname(os.path.abspath(__file__))

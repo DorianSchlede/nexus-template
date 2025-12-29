@@ -1,0 +1,212 @@
+---
+batch_id: "pattern_definition_1"
+field: pattern_definition
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 11
+patterns_found: 28
+---
+
+patterns:
+  # ============================================================================
+  # ACE PAPER (01-ACE-2510.04618) PATTERNS
+  # ============================================================================
+
+  - name: "Agentic Context Engineering (ACE) Framework"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:24-27)"
+    quote: "ACE treats contexts as evolving playbooks that accumulate, refine, and organize strategies through a modular process of generation, reflection, and curation"
+    description: "Core framework pattern for context adaptation. ACE prevents context collapse with structured, incremental updates that preserve detailed knowledge and scale with long-context models. The pattern operates in both offline (system prompt optimization) and online (test-time memory adaptation) settings."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Dynamic Cheatsheet Adaptive Memory"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:114-116)"
+    quote: "Building on the agentic architecture of Dynamic Cheatsheet, ACE incorporates a modular workflow of generation, reflection, and curation"
+    description: "Pattern for test-time learning with adaptive external memory. Introduces an adaptive memory of reusable strategies and code snippets that continuously updates with newly encountered inputs and outputs. Does not require ground-truth labels - model curates its own memory from generations."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Generator-Reflector-Curator Division of Labor"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:214-218)"
+    quote: "ACE introduces a structured division of labor across three roles: the Generator, which produces reasoning trajectories; the Reflector, which distills concrete insights; and the Curator"
+    description: "Three-component agentic architecture pattern. The Generator produces reasoning trajectories; the Reflector critiques traces to extract lessons; the Curator synthesizes lessons into compact delta entries merged deterministically. Mirrors human learning process of experimenting, reflecting, and consolidating."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Incremental Delta Updates"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:285-296)"
+    quote: "context as a collection of structured, itemized bullets with metadata including unique identifier and counters tracking how often it was marked helpful or harmful"
+    description: "Pattern for context representation as structured bullets rather than monolithic prompts. Each bullet contains: (1) metadata with unique ID and helpful/harmful counters, (2) content capturing strategies, domain concepts, or failure modes. Enables localization, fine-grained retrieval, and incremental adaptation."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Grow-and-Refine Context Evolution"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:309-314)"
+    quote: "bullets with new identifiers are appended, while existing bullets are updated in place. A de-duplication step then prunes redundancy by comparing bullets via semantic embeddings"
+    description: "Pattern for context maintenance ensuring compactness and relevance. New bullets are appended, existing ones updated with counter increments. Semantic embedding-based de-duplication prunes redundancy. Can be proactive (after each delta) or lazy (only when context window exceeded)."
+    mechanism_type: "prevention"
+    confidence: "high"
+
+  - name: "Brevity Bias Prevention"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:167-174)"
+    quote: "brevity bias: the tendency of optimization to collapse toward short, generic prompts...sacrificing diversity and omitting domain-specific detail"
+    description: "Anti-pattern identification. Addresses the tendency of context adaptation methods to collapse toward short, generic prompts that omit domain-specific heuristics, tool-use guidelines, and failure modes. ACE counters this by treating contexts as comprehensive playbooks rather than concise summaries."
+    mechanism_type: "prevention"
+    confidence: "high"
+
+  - name: "Context Collapse Prevention"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:186-199)"
+    quote: "context collapse arises when an LLM is tasked with fully rewriting the accumulated context at each adaptation step...model tends to compress it into much shorter, less informative summaries"
+    description: "Anti-pattern identification and prevention. Context collapse occurs during monolithic rewriting when LLMs compress large contexts into shorter summaries, causing dramatic information loss. Example: 18,282 tokens collapsed to 122 tokens with accuracy dropping from 66.7 to 57.1."
+    mechanism_type: "prevention"
+    confidence: "high"
+
+  - name: "Playbook-Based Context Organization"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 3:478-488)"
+    quote: "ACE Playbook: Read the Playbook first, then execute the task by explicitly leveraging each relevant section"
+    description: "Pattern for organizing context as a structured playbook with labeled sections (PLAYBOOK_BEGIN/END markers). Agent reads playbook before task execution, explicitly leveraging relevant sections. Contains curated strategies, API-specific information, common mistakes, and proven solutions."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Reflector Error Diagnosis"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 4:151-166)"
+    quote: "diagnose the current trajectory: identify what went wrong, grounded in execution feedback, API usage, unit test report, and ground truth when applicable"
+    description: "Pattern for systematic error analysis. Reflector analyzes model reasoning traces to identify errors, performs root cause analysis, determines correct approach, and extracts key insights. Tags existing playbook bullets as helpful/harmful/neutral to guide future generation."
+    mechanism_type: "detection"
+    confidence: "high"
+
+  - name: "Curator Knowledge Curation"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 4:330-341)"
+    quote: "identify what new insights should be added to an existing playbook based on a reflection from a previous attempt"
+    description: "Pattern for incremental knowledge accumulation. Curator reviews existing playbook and reflection, identifies NEW insights missing from current playbook, avoids redundancy, and outputs only additions needed. Uses ADD operations with section and content specifications."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  # ============================================================================
+  # CONTEXT SURVEY PAPER (02-ContextSurvey-2507.13334) PATTERNS
+  # ============================================================================
+
+  - name: "Context Engineering Formal Definition"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 1:419-424)"
+    quote: "Context Engineering re-conceptualizes the context C as a dynamically structured set of informational components, c1, c2, ..., cn orchestrated by a high-level assembly function A"
+    description: "Formal mathematical pattern defining context as C = A(c1, c2, ..., cn). Components include: c_instr (system instructions), c_know (external knowledge), c_tools (tool definitions), c_mem (persistent memory), c_state (dynamic state), c_query (user request). Replaces monolithic static prompt view."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Dynamic Context Orchestration"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:65-67)"
+    quote: "assembly function A is a form of Dynamic Context Orchestration, a pipeline of formatting and concatenation operations, A = Concat (Format1, ..., Formatn)"
+    description: "Pattern for context assembly as pipeline of formatting and concatenation operations. Each format function must be optimized for LLM architectural biases (attention patterns). Enables systematic composition of context components."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Information-Theoretic Retrieval Optimality"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:70-77)"
+    quote: "goal is to select knowledge that maximizes the mutual information with the target answer Y*, given the query c_query"
+    description: "Formal pattern for optimal knowledge retrieval. Retrieve* = arg max I(Y*; c_know | c_query). Ensures retrieved context is not just semantically similar but maximally informative for solving the task."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Bayesian Context Inference"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:80-101)"
+    quote: "infer the optimal context posterior P(C|c_query, History, World)...decision-theoretic objective is to find context C* that maximizes expected reward"
+    description: "Pattern for probabilistic context construction. Uses Bayes' theorem to compute context posterior proportional to likelihood of query given context and prior probability of context relevance. Provides principled uncertainty handling and adaptive retrieval through prior updates."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Chain-of-Thought Prompting"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:310-314)"
+    quote: "Chain-of-Thought (CoT) prompting decomposes complex problems into intermediate reasoning steps, mirroring human cognition"
+    description: "Pattern for structured reasoning through intermediate steps. Zero-shot CoT uses trigger phrases like 'Let's think step by step,' improving MultiArith accuracy from 17.7% to 78.7%. Enables complex multi-step problem solving."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Tree-of-Thoughts Hierarchical Reasoning"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:317-318)"
+    quote: "Tree-of-Thoughts (ToT) organizes reasoning as hierarchical structures with exploration, lookahead, and backtracking capabilities"
+    description: "Pattern for organizing reasoning as hierarchical tree structures. Enables exploration, lookahead, and backtracking. Increased Game of 24 success rates from 4% to 74%. Extends CoT by allowing branching and non-linear reasoning paths."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Graph-of-Thoughts Reasoning"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:319-320)"
+    quote: "Graph-of-Thoughts (GoT) models reasoning as arbitrary graphs with thoughts as vertices and dependencies as edges"
+    description: "Pattern for graph-based reasoning where thoughts are vertices and dependencies are edges. Improves quality by 62% and reduces costs by 31% compared to ToT. Enables modeling of complex non-hierarchical reasoning dependencies."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Self-Refine Iterative Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:181-185)"
+    quote: "Self-Refine framework uses the same model as generator, feedback provider, and refiner, demonstrating that identifying and fixing errors is often easier than producing perfect initial solutions"
+    description: "Pattern for self-improvement through cyclical feedback. Same model serves as generator, feedback provider, and refiner. Based on insight that error identification and correction is easier than perfect initial generation. Maintains reflective text in episodic memory buffers."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Multi-Aspect Feedback Integration"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:188-191)"
+    quote: "Multi-Aspect Feedback integrates frozen language models and external tools focusing on specific error categories to enable more comprehensive, independent evaluation"
+    description: "Pattern for diverse feedback sources. Integrates multiple feedback modules (frozen LMs and external tools) each focusing on specific error categories. Enables more comprehensive, independent evaluation compared to single-model feedback."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Modular RAG Architecture"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:312-316)"
+    quote: "Modular RAG shifts from linear retrieval-generation architectures toward reconfigurable frameworks with flexible component interaction"
+    description: "Pattern for flexible RAG component composition. Introduces hierarchical architectures: top-level RAG stages, middle-level sub-modules, bottom-level operational units. Transcends linear structures through routing, scheduling, and fusion mechanisms enabling dynamic reconfiguration."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Agentic RAG Dynamic Retrieval"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:347-351)"
+    quote: "Agentic RAG embeds autonomous AI agents into the RAG pipeline, enabling dynamic, context-sensitive operations guided by continuous reasoning"
+    description: "Pattern for agent-embedded retrieval. Embeds autonomous AI agents into RAG pipeline for dynamic, context-sensitive operations. Leverages reflection, planning, tool use, and multi-agent collaboration. Treats retrieval as dynamic operation where agents function as intelligent investigators."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "Graph-Enhanced RAG"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 5:7-13)"
+    quote: "Graph-based RAG shifts from document-oriented approaches toward structured knowledge representations capturing entity relationships, domain hierarchies, and semantic connections"
+    description: "Pattern for structured knowledge retrieval. Captures entity relationships, domain hierarchies, and semantic connections. Enables extraction of specific reasoning paths and multi-hop reasoning through structured pathway navigation. Minimizes context drift and hallucinations."
+    mechanism_type: "verification"
+    confidence: "high"
+
+  - name: "OS-Inspired Hierarchical Memory"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:131-137)"
+    quote: "OS-inspired hierarchical memory systems implement virtual memory management concepts, with MemGPT exemplifying this approach through systems that page information between limited context windows and external storage"
+    description: "Pattern for memory management inspired by operating systems. Pages information between limited context windows (main memory) and external storage. Main context contains system instructions, FIFO message queues, and writable scratchpads. Memory management through function-calling capabilities."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "Ebbinghaus Forgetting Curve Memory"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:141-142)"
+    quote: "MemoryBank using Ebbinghaus Forgetting Curve theory to dynamically adjust memory strength according to time and significance"
+    description: "Pattern for cognitive-inspired memory management. Dynamically adjusts memory strength based on temporal factors and significance, following psychological forgetting curve principles. Enables selective memory preservation and natural memory decay."
+    mechanism_type: "prevention"
+    confidence: "high"
+
+  - name: "Lost-in-the-Middle Phenomenon"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:103-108)"
+    quote: "lost-in-the-middle phenomenon, where LLMs struggle to access information positioned in middle sections of long contexts, performing significantly better when relevant information appears at beginning or end"
+    description: "Anti-pattern identification. LLMs exhibit positional bias where information in middle of long contexts is harder to access. Performance degrades by up to 73% when critical results are in middle positions. Impacts extended chain-of-thought reasoning where earlier results become susceptible to forgetting."
+    mechanism_type: "detection"
+    confidence: "high"
+
+  - name: "MCP Communication Protocol"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 6:337-340)"
+    quote: "MCP functions as 'USB-C for AI,' standardizing agent-environment interactions through JSON-RPC client-server interfaces"
+    description: "Pattern for standardized agent-environment communication. Model Context Protocol (MCP) standardizes interactions through JSON-RPC client-server interfaces. Enables hundreds of servers across diverse domains while introducing security considerations."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "A2A Peer-to-Peer Communication"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 6:343-345)"
+    quote: "A2A standardizes peer-to-peer communication through capability-based Agent Cards enabling task delegation and secure collaboration via JSON-based lifecycle models"
+    description: "Pattern for inter-agent communication. Agent-to-Agent (A2A) protocol enables peer-to-peer communication through capability-based Agent Cards. Supports task delegation and secure collaboration via JSON-based lifecycle models."
+    mechanism_type: "enforcement"
+    confidence: "high"
+
+  - name: "ReAct Thought-Action-Observation Cycle"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 6:99-101)"
+    quote: "ReAct's 'thought-action-observation' cycle, progressing through specialized models like Gorilla and comprehensive frameworks"
+    description: "Pattern for interleaved reasoning and action. Pioneered interleaving of reasoning traces with task-specific actions. Reasoning supports plan tracking while actions interface with external information sources. Enables models to think and act complementarily."
+    mechanism_type: "enforcement"
+    confidence: "high"

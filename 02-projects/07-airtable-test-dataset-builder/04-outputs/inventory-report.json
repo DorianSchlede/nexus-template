@@ -1,0 +1,461 @@
+{
+  "generated_at": "2025-12-28T16:02:47.416289",
+  "base_id": "appFPoOfBpUv73M5A",
+  "summary": {
+    "total_agents": 38,
+    "total_dataset_variables_with_expected": 500,
+    "total_variable_tasks_with_dataset_link": 500,
+    "total_dataset_nodes": 500,
+    "total_dataset_tasks_expected_done": 964
+  },
+  "accuracy_stats": {
+    "distribution": {
+      "perfect": 126,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "failed": 374,
+      "unknown": 0
+    },
+    "total": 500,
+    "with_accuracy": 500,
+    "average_accuracy": 0.252
+  },
+  "by_agent": {
+    "rec84E6VfgVfq2Yy3": {
+      "expected_value_count": 61,
+      "unique_variables": 25,
+      "variable_names": [
+        "StartDate",
+        "Name",
+        "Production Ops Type",
+        "Email__c",
+        "AccountId",
+        "Contact_Full_Name_h__c",
+        "url",
+        "thread_id",
+        "id",
+        "RecordTypeId"
+      ]
+    },
+    "recXh3uPqp9jgmq0C": {
+      "expected_value_count": 271,
+      "unique_variables": 72,
+      "variable_names": [
+        "reasoning_nAmountFirstInstalment",
+        "nAmountFurtherInstalments",
+        "nDebtorChildrenCount",
+        "cPhoneNumber",
+        "cInsolvencyRef",
+        "bSignatureTZV",
+        "bIsPowerOfAttorneyBankersOrder",
+        "reasoning_debtorIncome",
+        "reasoning_debtorInformation",
+        "reasoning_nAmountFurtherInstalments"
+      ]
+    },
+    "rec1oUVlQ94H1kjSy": {
+      "expected_value_count": 58,
+      "unique_variables": 35,
+      "variable_names": [
+        "experience_total_years",
+        "requirements_nice_to_have_preferred_experience",
+        "experience_years_other",
+        "requirements_must_have_required_setting",
+        "experience_years_corrections",
+        "reason",
+        "experience_has_medical_surgical",
+        "license_expiration_date",
+        "experience_relevance_duration_assessment",
+        "license_status"
+      ]
+    },
+    "recJb7KxIfd0C1KCC": {
+      "expected_value_count": 2,
+      "unique_variables": 2,
+      "variable_names": [
+        "product_position",
+        "reasoning_product_position"
+      ]
+    },
+    "recpPSu1PEDKnQnNL": {
+      "expected_value_count": 90,
+      "unique_variables": 54,
+      "variable_names": [
+        "reasoning_cStreetNumber",
+        "bIsTitleRequest",
+        "cPhoneNumber",
+        "cInsolvencyRef",
+        "reasoning_debtorMaritalStatus",
+        "reasoning_debtorInformation",
+        "reasoning_bHasPreliminaryInsoTermination",
+        "cDebtorActivityState",
+        "bHasDebtReliefGranted",
+        "bIsInsufficient"
+      ]
+    },
+    "recy3mM9ceHY9XNie": {
+      "expected_value_count": 3,
+      "unique_variables": 3,
+      "variable_names": [
+        "payment_reference",
+        "third_party_name",
+        "debtor_name"
+      ]
+    },
+    "reczpQdoGmkonqxj2": {
+      "expected_value_count": 9,
+      "unique_variables": 7,
+      "variable_names": [
+        "Registration ID",
+        "registration_company_name",
+        "Customer number",
+        "customer_name",
+        "City",
+        "eu_vat_number_core",
+        "eu_vat_number_complete"
+      ]
+    },
+    "reclKMChZxSuFjg8A": {
+      "expected_value_count": 3,
+      "unique_variables": 2,
+      "variable_names": [
+        "Bestellnummer",
+        "message"
+      ]
+    },
+    "rec5tcWxQEKLmxo99": {
+      "expected_value_count": 2,
+      "unique_variables": 2,
+      "variable_names": [
+        "Contract Number (Vertragsnummer)",
+        "Rechnungsdatum"
+      ]
+    },
+    "rec5LwhsPzi0kfUoC": {
+      "expected_value_count": 1,
+      "unique_variables": 1,
+      "variable_names": [
+        "reasoning_nAmountFirstInstalment"
+      ]
+    }
+  },
+  "link_validation": {
+    "dataset_variables": {
+      "with_dataset_nodes": 493,
+      "without_dataset_nodes": 7,
+      "link_rate": 0.986
+    },
+    "dataset_nodes": {
+      "with_node_version": 436,
+      "without_node_version": 64,
+      "link_rate": 0.872
+    }
+  },
+  "agents": [
+    {
+      "id": "rec0Mi0L7vqcQxAdU",
+      "name": "Inso All-In-One Agent",
+      "workspace": [
+        "rec8Y5bWy3GTMQwzT"
+      ],
+      "nodes_count": 9
+    },
+    {
+      "id": "rec0lsLbfT7kEd3OR",
+      "name": "Branch Tool",
+      "workspace": [
+        "recZrV96zejTnDYTF"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "rec1oUVlQ94H1kjSy",
+      "name": "CV Screening Agent - Favorite Staffing v2",
+      "workspace": [
+        "recxep5i0N42LsO0U"
+      ],
+      "nodes_count": 10
+    },
+    {
+      "id": "rec2hglEKNfnLaj4h",
+      "name": "Agent AOP Brigitte",
+      "workspace": [
+        "rec0pYSqkVganR3KE"
+      ],
+      "nodes_count": 162
+    },
+    {
+      "id": "rec5LwhsPzi0kfUoC",
+      "name": "TZV Agent",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 2
+    },
+    {
+      "id": "rec5tcWxQEKLmxo99",
+      "name": "Payment reconciliation - Help Table",
+      "workspace": [
+        "recZIrj8AhOjWeMef"
+      ],
+      "nodes_count": 12
+    },
+    {
+      "id": "rec7r7IrKJHrAabrd",
+      "name": "Accommodation and Facts Agent -Staging",
+      "workspace": [
+        "rec8jsgbKXd1qWJnh"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "rec84E6VfgVfq2Yy3",
+      "name": "Ops Case Handler (Prod) ",
+      "workspace": [
+        "rec9I6Qpp57BhaAry"
+      ],
+      "nodes_count": 124
+    },
+    {
+      "id": "rec8fV71HJiiI0WxA",
+      "name": "Debt Collection Agent",
+      "workspace": [
+        "recMFiAJpzDLPell6"
+      ],
+      "nodes_count": 6
+    },
+    {
+      "id": "rec8nxId7VVfBqe7m",
+      "name": "Agent AOP Sandra (Deprecated)",
+      "workspace": [
+        "rec0pYSqkVganR3KE"
+      ],
+      "nodes_count": 45
+    },
+    {
+      "id": "rec9vqwwJmvu3lqwR",
+      "name": "Agent AOP Sandra",
+      "workspace": [
+        "rec0pYSqkVganR3KE"
+      ],
+      "nodes_count": 61
+    },
+    {
+      "id": "recB8cn2BhJS0OAIJ",
+      "name": "CV Screening Agent",
+      "workspace": [
+        "recxep5i0N42LsO0U"
+      ],
+      "nodes_count": 5
+    },
+    {
+      "id": "recFIXJbXMSKicrY9",
+      "name": "JJ | Claims Support Agent V1 (Deprecated)",
+      "workspace": [
+        "recaoOtS6u0HxROJq"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recFMIQEKXWbJhYWo",
+      "name": "Eval Test - Anas",
+      "workspace": [
+        "recU0zovQE4PC68H6"
+      ],
+      "nodes_count": 1
+    },
+    {
+      "id": "recGZUi4WddTn28u2",
+      "name": "Email Classification Agent",
+      "workspace": [
+        "recHrBFm2RaFzMcUn"
+      ],
+      "nodes_count": 8
+    },
+    {
+      "id": "recJTfXDzSpql1UnS",
+      "name": "Email Management Assistant (POC)",
+      "workspace": [
+        "recvRpmTXPq71ZhkM"
+      ],
+      "nodes_count": 10
+    },
+    {
+      "id": "recJb7KxIfd0C1KCC",
+      "name": "Deal Breaker",
+      "workspace": [
+        "recDVGGoqxsYDL6tU"
+      ],
+      "nodes_count": 2
+    },
+    {
+      "id": "recLNNrmZ8WO8Y7XQ",
+      "name": "LS Agent",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 8
+    },
+    {
+      "id": "recLUje8gMZy7Ew8y",
+      "name": "General - Staging",
+      "workspace": [
+        "rec8jsgbKXd1qWJnh"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recOnA37q37Dfp3oL",
+      "name": "Claims Support Agent V2 (Live)",
+      "workspace": [
+        "recaoOtS6u0HxROJq"
+      ],
+      "nodes_count": 13
+    },
+    {
+      "id": "recPKwYMXLiRRuKy9",
+      "name": "Provider - Staging",
+      "workspace": [
+        "rec8jsgbKXd1qWJnh"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recQwPPzAzLaQBYaz",
+      "name": "LIVE - Extension GX Agent",
+      "workspace": [
+        "rec78dydBYFUnmpl0"
+      ],
+      "nodes_count": 30
+    },
+    {
+      "id": "recTKZjs8GUcTwZQS",
+      "name": "Workflow Automation Assistant - Trawa Sandbox",
+      "workspace": [
+        "recZIrj8AhOjWeMef"
+      ],
+      "nodes_count": 11
+    },
+    {
+      "id": "recTXq5VdZI5e1wkJ",
+      "name": "TA Interview Agent",
+      "workspace": [
+        "recjNaYealxR9XU8d"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recXh3uPqp9jgmq0C",
+      "name": "TZV Agent 03.09",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 10
+    },
+    {
+      "id": "recbzf24zIrrD767H",
+      "name": "Debt Collection Agent (Delete)",
+      "workspace": [
+        "recMFiAJpzDLPell6"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "reccxfTsCnISJipSU",
+      "name": "Agent AOP Sebastian",
+      "workspace": [
+        "rec0pYSqkVganR3KE"
+      ],
+      "nodes_count": 37
+    },
+    {
+      "id": "recfDLG6HOlWoTqev",
+      "name": "TZV Schuldnder Agent",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 8
+    },
+    {
+      "id": "recgVh1XBJOy5x8fG",
+      "name": "General - Production ",
+      "workspace": [
+        "rec8jsgbKXd1qWJnh"
+      ],
+      "nodes_count": 2
+    },
+    {
+      "id": "rechwkkW2nJbWhOvR",
+      "name": "Inso All-In-One Agent",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recl9PXJbaLJ8FynH",
+      "name": "CV Screening Agent ",
+      "workspace": [
+        "recr8boWN9URZlYlv"
+      ],
+      "nodes_count": 20
+    },
+    {
+      "id": "reclKMChZxSuFjg8A",
+      "name": "Coolback Order Processing - Final",
+      "workspace": [
+        "rec5lvVe3PAQzeN16"
+      ],
+      "nodes_count": 23
+    },
+    {
+      "id": "recmBfd53ybPN3L8Q",
+      "name": "PoA Customer Support Agent",
+      "workspace": [
+        "recTK0MSvq8UlAsFm"
+      ],
+      "nodes_count": 11
+    },
+    {
+      "id": "recpPSu1PEDKnQnNL",
+      "name": "Inso All-In-One Agent MAGA",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 8
+    },
+    {
+      "id": "recr0azQO3Nk70R68",
+      "name": "LS Agent 2",
+      "workspace": [
+        "recD75se1JCnbV2Gr"
+      ],
+      "nodes_count": 0
+    },
+    {
+      "id": "recrQW7JqEfCW7AqR",
+      "name": "Agent AOP Andrea",
+      "workspace": [
+        "rec0pYSqkVganR3KE"
+      ],
+      "nodes_count": 36
+    },
+    {
+      "id": "recy3mM9ceHY9XNie",
+      "name": "Creditreform ERV Agent",
+      "workspace": [
+        "recHrBFm2RaFzMcUn"
+      ],
+      "nodes_count": 3
+    },
+    {
+      "id": "reczpQdoGmkonqxj2",
+      "name": "B2B Check Agent",
+      "workspace": [
+        "rectwRSkEoOiTScYG"
+      ],
+      "nodes_count": 35
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+---
+batch_id: "pattern_definition_2"
+field: pattern_definition
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 11
+patterns_found: 28
+---
+
+patterns:
+  # ============================================
+  # Paper 02-ContextSurvey (Chunks 7-9)
+  # ============================================
+
+  - name: "Session-based Context Refinement"
+    chunk_ref: "02-ContextSurvey (Chunk 7:21-24)"
+    quote: "Session-based context refinement defines collaborative scope boundaries, facilitating event-driven orchestration where agents can enter and exit dynamically"
+    description: "A pattern for defining collaborative scope boundaries in multi-agent systems. Uses sessions to enable event-driven orchestration where agents can dynamically enter/exit, create output streams, and contribute to shared session streams. Enables agent inclusion based on user input or autonomous decision-making for adaptable systems."
+
+  - name: "Handover Pattern in Business Process Simulation"
+    chunk_ref: "02-ContextSurvey (Chunk 7:84-87)"
+    quote: "autonomous behavior operates through local control-flow and handover patterns acknowledging agent autonomy in collaborative work"
+    description: "A coordination pattern for multi-agent business process simulation (AgentSimulator). Orchestrated behavior follows global control-flow patterns while autonomous behavior uses local control-flow and explicit handover patterns that acknowledge agent autonomy. Enables process behavior discovery in both orchestrated and autonomous settings."
+
+  - name: "SagaLLM Transaction Framework"
+    chunk_ref: "02-ContextSurvey (Chunk 7:59-62)"
+    quote: "comprehensive solutions such as the SagaLLM framework providing transaction support, independent validation procedures, and robust context preservation mechanisms"
+    description: "A framework pattern addressing multi-agent coordination challenges including transaction support, independent validation procedures, and context preservation. Designed to handle LangGraph/AutoGen/CAMEL limitations in atomicity guarantees, compensation mechanisms, and validation procedures."
+
+  - name: "Protocol Adherence Evaluation Pattern"
+    chunk_ref: "02-ContextSurvey (Chunk 7:201-206)"
+    quote: "Multi-agent systems evaluation captures communication effectiveness, coordination efficiency, and collective outcome quality through specialized metrics addressing protocol adherence, task decomposition accuracy"
+    description: "An evaluation pattern for multi-agent systems that measures communication effectiveness, coordination efficiency, and collective outcomes. Uses specialized metrics for protocol adherence, task decomposition accuracy, and emergent collaborative behaviors. Addresses validation limitations in frameworks relying on LLM self-validation."
+
+  - name: "Unified Taxonomic Framework for Context Engineering"
+    chunk_ref: "02-ContextSurvey (Chunk 8:460-464)"
+    quote: "a unified taxonomic framework that organizes context engineering techniques into Foundational Components and System Implementations"
+    description: "A meta-pattern organizing context engineering into two tiers: Foundational Components (Context Retrieval/Generation, Context Processing, Context Management) and System Implementations (RAG, Memory Systems, Tool-Integrated Reasoning, Multi-Agent Systems). Demonstrates how core capabilities integrate into sophisticated architectures."
+
+  - name: "Communication Protocol Standardization Pattern"
+    chunk_ref: "02-ContextSurvey (Chunk 8:315-324)"
+    quote: "Communication protocol standardization represents a critical research frontier, with emerging protocols including MCP, A2A, ACP, and ANP demonstrating the need for unified frameworks"
+    description: "A pattern addressing inter-agent communication standardization. References MCP (USB-C for AI), A2A (Agent-to-Agent), ACP (Agent Communication Protocol), and ANP (Agent Network Protocol). Identifies security vulnerabilities and scalability limitations requiring solutions for large-scale deployment."
+
+  - name: "Graceful Degradation Strategy"
+    chunk_ref: "02-ContextSurvey (Chunk 8:375-379)"
+    quote: "Multi-agent systems face additional challenges in coordination failure scenarios, where partial system failures can cascade through the entire agent network. Evaluation frameworks must address graceful degradation strategies"
+    description: "A resilience pattern for multi-agent systems handling partial failures that can cascade through agent networks. Requires error recovery protocols and mechanisms to maintain system functionality under adverse conditions, including handling unknown unknowns and emergent failure cascades."
+
+  - name: "GAIA Performance Gap Pattern"
+    chunk_ref: "02-ContextSurvey (Chunk 9:33-35)"
+    quote: "GAIA (human 92% vs AI 15%) highlight the importance of transparent capability communication and appropriate expectation setting"
+    description: "An evaluation pattern revealing substantial performance gaps between human (92%) and AI (15%) capabilities on general assistant tasks. Underscores the importance of transparent capability communication, appropriate expectation setting, and developed robust alignment mechanisms for deployed systems."
+
+  # ============================================
+  # Paper 03-ClaudeCode (Chunks 1-2)
+  # ============================================
+
+  - name: "Context Engineering Workflow"
+    chunk_ref: "03-ClaudeCode (Chunk 1:69-72)"
+    quote: "context engineering approach for LLM-based code assistants. By context engineering, we mean systematically constructing and supplying all relevant information needed for a coding task"
+    description: "A comprehensive pattern for LLM code assistants involving systematic construction and supply of all relevant information: clarified intent, high-level plans, external knowledge, and repository-specific details. Implemented via a coordinated multi-agent process with Intent Translator, Retrieval, Synthesis, and Multi-Agent orchestration."
+
+  - name: "Intent Translator Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 1:75-77)"
+    quote: "an Intent Translator using GPT-5 to rewrite or elaborate the user request into a structured task specification"
+    description: "A preprocessing pattern using a high-end LLM to reformulate ambiguous user queries into structured specifications. Translates requests like 'Add a calendar view' into explicit step-by-step task lists including UI updates, data fetching, styling, and testing requirements. Reduces burden on coding agents to interpret fuzzy instructions."
+
+  - name: "Orchestrator-Worker Multi-Agent Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 1:278-287)"
+    quote: "centralized orchestrator-worker paradigm (often called a hub-and-spoke pattern): a primary Claude instance (the Manager) coordinates several specialist sub-agents that each have their own context and role"
+    description: "A multi-agent architecture where a central Manager orchestrates specialist sub-agents (backend-architect, frontend-specialist, devops-engineer, code-reviewer) defined via YAML/Markdown configurations. Each subagent operates with isolated context windows to prevent cross-contamination between workflow phases."
+
+  - name: "Semantic Code Search Index Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 1:246-269)"
+    quote: "semantic code search index using a vector database. We embed code files and fragments into high-dimensional vectors using a code-specialized embedding model"
+    description: "A retrieval pattern combining semantic search (vector embeddings via ChromaDB/Zilliz) with lexical search (grep, file path matching). Uses AST parser (tree-sitter) to chunk files by function/class definitions. Queries repository for relevant code fragments based on task specifications."
+
+  - name: "Context Layering Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 2:7-9)"
+    quote: "structured layering of context is key. At any given time, an agent is working with a manageable slice of information: role-specific prompt + CLAUDE.md context + task-specific instructions + relevant code/knowledge snippets"
+    description: "A pattern ensuring each agent works with manageable context slices: role-specific prompts, CLAUDE.md project context, task-specific instructions, and retrieved code/knowledge snippets. Helps maintain coherence for large tasks and mitigates context window issues by dividing work among specialized agents."
+
+  - name: "Iterative Coding and Validation Loop"
+    chunk_ref: "03-ClaudeCode (Chunk 1:374-381)"
+    quote: "As agents make changes, we leverage Claude's tool integration to run validations. After code for a step is written, the orchestrator can trigger test execution via a shell tool"
+    description: "A feedback loop pattern where agents make code changes, tests are executed, and error output is captured. Failed tests feed back into the responsible agent or debugging agent to prompt fixes. Resembles DARS feedback loop with simple re-try rather than multiple simultaneous trajectories."
+
+  - name: "Single-Shot Success Rate Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 2:66-74)"
+    quote: "multi-agent approach succeeded in more tasks and required fewer iterations. It often produced working solutions on the first attempt, whereas the baseline frequently needed follow-up prompts"
+    description: "A success metric pattern comparing multi-agent vs single-agent approaches. Multi-agent system achieved 80% success rate (4/5 tasks) without human corrections vs 40% for single-agent baseline. Demonstrates value of comprehensive context engineering and specialized agent roles for first-attempt correctness."
+
+  - name: "Agent Responsibility Delineation Pattern"
+    chunk_ref: "03-ClaudeCode (Chunk 2:110-122)"
+    quote: "importance of clearly delineating responsibilities to avoid both gaps and overlaps. Planner's prompt to explicitly assign sub-tasks to agent roles, and implementing a simple lock to prevent concurrent edits"
+    description: "An orchestration pattern ensuring clear agent responsibilities. Requires Planner to explicitly assign sub-tasks to specific agent roles. Implements file locks to prevent concurrent edits to same files. Quality assurance step with dedicated reviewer agent catches subtle issues missed by coding agents."
+
+  # ============================================
+  # Paper 04-GCC (Chunks 1-2)
+  # ============================================
+
+  - name: "Git-Context-Controller (GCC) Framework"
+    chunk_ref: "04-GCC (Chunk 1:17-22)"
+    quote: "GCC, a structured context management framework inspired by software version control systems. GCC elevates context from passive token streams to a navigable, versioned memory hierarchy"
+    description: "A context management pattern treating agent memory as a version-controlled file system. Structures context under .GCC/ directory with global roadmap (main.md), per-branch execution traces (log.md), milestone summaries (commit.md), and metadata (metadata.yaml). Enables milestone-based checkpointing and structured reflection."
+
+  - name: "COMMIT Checkpointing Pattern"
+    chunk_ref: "04-GCC (Chunk 1:172-175)"
+    quote: "COMMIT <summary> - called when the agent notices recent progress forms a coherent milestone (e.g., implementing a module, finishing a hypothesis test)"
+    description: "A memory persistence pattern where agents checkpoint meaningful progress as coherent milestones. Updates commit.md with branch purpose, previous progress summary, and current commit contribution. Turns loose OTA sequences into retrievable memory units enabling progress tracking and rollbacks."
+
+  - name: "BRANCH Exploration Pattern"
+    chunk_ref: "04-GCC (Chunk 1:176-177)"
+    quote: "BRANCH <name> - called when the agent wants to pursue an alternative approach without affecting current context"
+    description: "An isolation pattern for exploring alternative approaches (new API designs, research paths) without affecting main context. Creates isolated workspace with empty log.md and new commit.md. Ensures focused reasoning while maintaining ability to return to main flow. Enables safe architectural experiments."
+
+  - name: "MERGE Synthesis Pattern"
+    chunk_ref: "04-GCC (Chunk 1:180-181)"
+    quote: "MERGE <branch name> - called when a completed branch's results should be synthesized back into the main trajectory"
+    description: "A convergence pattern for integrating branch outcomes into main plan. Automatically calls CONTEXT on target branch, updates main.md with branch outcome impact, merges commit.md entries with origin tags for traceability. Creates Git commit to checkpoint unified memory state."
+
+  - name: "Multi-level Context Retrieval Pattern"
+    chunk_ref: "04-GCC (Chunk 1:87-91)"
+    quote: "Multi-level context retrieval: Agents can access context at varying levels of detail, from high-level project plans to low-level OTA steps"
+    description: "A hierarchical retrieval pattern enabling agents to access context at varying granularity: high-level project plans (main.md) to fine-grained OTA (Observation-Thought-Action) execution traces (log.md). Supports seamless navigation across layers for tracing and locating any point in reasoning history."
+
+  - name: "Cross-agent Memory Handover Pattern"
+    chunk_ref: "04-GCC (Chunk 1:100-105)"
+    quote: "allows agents to operate seamlessly across sessions. No need to 're-teach' the model when a new session begins. Another agent, based on a different LLM, can pick up exactly where the previous one left off"
+    description: "A continuity pattern enabling seamless operation across sessions and agents. Different LLMs on different machines can resume where previous agents stopped with minimal overhead. Smooths distribution and handover of agent-generated codebases, similar to human Git collaboration workflows."
+
+  - name: "Spontaneous Modular Behavior Emergence"
+    chunk_ref: "04-GCC (Chunk 2:118-124)"
+    quote: "What is notable about this sequence is that it was not procedurally enforced. These behaviors emerged spontaneously from the framing structure of GCC itself"
+    description: "An emergent behavior pattern where agents internalize GCC affordances as cognitive norms without explicit instructions. Agents independently write tests, validate correctness, then commit - behaving as disciplined software engineers. The system's structured memory framing induces proper development workflows."
+
+  # ============================================
+  # Paper 07-ProtocolBench (Chunks 1-4)
+  # ============================================
+
+  - name: "ProtocolBench Evaluation Framework"
+    chunk_ref: "07-ProtocolBench (Chunk 1:22-23)"
+    quote: "ProtocolBench, a benchmark that systematically compares agent protocols along four measurable axes: task success, end-to-end latency, message or byte overhead, and robustness under failures"
+    description: "A comprehensive evaluation pattern for multi-agent communication protocols. Measures four axes: task success/quality, end-to-end latency/throughput, message/byte overhead, and failure-time robustness. Uses protocol-normalizing adapters and shared scenario suite for fair comparisons."
+
+  - name: "Protocol Adapter Normalization Pattern"
+    chunk_ref: "07-ProtocolBench (Chunk 1:112-116)"
+    quote: "Protocol Adapters that normalize envelopes, field mappings, retries, and streaming semantics across A2A/ACP/ANP/Agora"
+    description: "A translation pattern where protocol adapters normalize envelopes, field mappings, retries, and streaming semantics across different protocols (A2A, ACP, ANP, Agora). Enables fair protocol comparisons by isolating protocol-specific effects while pinning non-protocol factors."
+
+  - name: "ProtocolRouter Dynamic Selection Pattern"
+    chunk_ref: "07-ProtocolBench (Chunk 1:113-116)"
+    quote: "ProtocolRouter, a learned protocol router that selects per-scenario (or per-module) protocols based on requirements and runtime signals"
+    description: "A dynamic routing pattern that selects optimal protocols per-scenario or per-module based on stated requirements and observable signals. Performs selection and composition only; cross-protocol message translation uses stateless encode/decode bridges preserving semantics and security attributes."
+
+  - name: "Fail-Storm Recovery Pattern"
+    chunk_ref: "07-ProtocolBench (Chunk 2:103-106)"
+    quote: "Pre-fault (60 seconds before failure) and Post-fault (60 seconds after recovery). We measure Answer Discovery Rate, Latency, and Recovery Time"
+    description: "A resilience evaluation pattern testing protocol behavior under cyclic node failures in Shard-QA ring topology. Measures pre-fault vs post-fault answer discovery rate, median task completion latency, and duration from fault injection to system stabilization. Tests with 8 agents, 3 killed every 120s."
+
+  - name: "Security Capability Matrix Pattern"
+    chunk_ref: "07-ProtocolBench (Chunk 2:131-136)"
+    quote: "evaluate security capabilities using a binary matrix indicating whether each protocol supports specific security features (TLS transport, session hijacking protection, end-to-end encryption)"
+    description: "A security assessment pattern using binary capability matrix for protocol evaluation. Tests TLS transport, session hijacking protection, E2E encryption, tunnel sniffing resistance, and metadata leakage prevention. Measures probe block rates as percentage of attacks successfully blocked. ANP/Agora provide comprehensive coverage; ACP/A2A offer partial capabilities."

@@ -1,0 +1,1883 @@
+{
+  "aggregated_at": "C:\\Users\\dsber\\strategy-nexus\\02-projects\\02-ontologies-research\\02-resources\\papers",
+  "paper_count": 21,
+  "papers": {
+    "02-Knowledge_Graphs": {
+      "paper_id": "02-Knowledge_Graphs",
+      "title": "Knowledge Graphs",
+      "entity_types": [
+        "Entity",
+        "Node",
+        "Edge",
+        "Class",
+        "Property",
+        "Individual",
+        "Relation",
+        "Literal",
+        "IRI",
+        "Blank Node",
+        "Named Graph",
+        "Data Graph",
+        "Domain Graph",
+        "Agent (in PROV-O context)",
+        "Activity (in PROV-O context)",
+        "Endurant (referenced)",
+        "Perdurant (referenced)",
+        "Schema",
+        "Shape",
+        "Graph",
+        "Interpretation"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "RDF",
+          "relationship": "standard_for",
+          "details": "RDF is the W3C recommended standard data model for directed edge-labelled graphs (Chunk 1:435-439)",
+          "source": "Chunk 1:435-439"
+        },
+        {
+          "compared_to": "Property Graph",
+          "relationship": "alternative_model",
+          "details": "Property graphs allow property-value pairs and labels on both nodes and edges; can be translated to/from directed edge-labelled graphs without loss (Chunk 1:548-567)",
+          "source": "Chunk 1:548-567"
+        },
+        {
+          "compared_to": "RDFS",
+          "relationship": "semantic_schema",
+          "details": "RDF Schema allows defining subclasses, subproperties, domains, and ranges for RDF graphs (Chunk 2:176-182)",
+          "source": "Chunk 2:176-182"
+        },
+        {
+          "compared_to": "OWL",
+          "relationship": "extends",
+          "details": "Web Ontology Language supports richer semantics than RDFS for defining term meanings (Chunk 2:188-191, Chunk 3:350-356)",
+          "source": "Chunk 2:188-191"
+        },
+        {
+          "compared_to": "SHACL",
+          "relationship": "validating_schema",
+          "details": "Shapes Constraint Language for validating graph data against shape constraints (Chunk 2:381-389)",
+          "source": "Chunk 2:381-389"
+        },
+        {
+          "compared_to": "ShEx",
+          "relationship": "validating_schema",
+          "details": "Shape Expressions language for RDF graph validation (Chunk 2:381-385)",
+          "source": "Chunk 2:381-385"
+        },
+        {
+          "compared_to": "PROV-O",
+          "relationship": "context_representation",
+          "details": "PROV Data Model specifies how provenance can be described in RDF graphs with entities, activities, and agents (Chunk 2:864-870)",
+          "source": "Chunk 2:864-870"
+        },
+        {
+          "compared_to": "Description Logics",
+          "relationship": "influenced_by",
+          "details": "DLs heavily influenced OWL; OWL 2 DL is a fragment restricted for decidable entailment (Chunk 4:127-189)",
+          "source": "Chunk 4:127-189"
+        },
+        {
+          "compared_to": "Datalog",
+          "relationship": "rule_language",
+          "details": "Rules correspond to positive Datalog in databases, Horn clauses in logic programming (Chunk 4:33-35)",
+          "source": "Chunk 4:33-35"
+        },
+        {
+          "compared_to": "FAIR Principles",
+          "relationship": "implements",
+          "details": "Knowledge graphs use IRIs, metadata, and access protocols to satisfy FAIR principles (Chunk 7:617-718)",
+          "source": "Chunk 7:617-718"
+        },
+        {
+          "compared_to": "Linked Data Principles",
+          "relationship": "implements",
+          "details": "Knowledge graphs published following four Linked Data Principles for Web of Data (Chunk 7:728-774)",
+          "source": "Chunk 7:728-774"
+        },
+        {
+          "compared_to": "PROV Data Model",
+          "relationship": "uses_for_provenance",
+          "details": "PROV Data Model used for capturing detailed provenance in KGs (Chunk 7:715-718)",
+          "source": "Chunk 7:715-718"
+        },
+        {
+          "compared_to": "DBpedia",
+          "relationship": "example_of",
+          "details": "DBpedia extracts graph-structured data from Wikipedia, multilingual with up to 97 languages (Chunk 8:458-502)",
+          "source": "Chunk 8:458-502"
+        },
+        {
+          "compared_to": "YAGO",
+          "relationship": "example_of",
+          "details": "YAGO unifies Wikipedia with WordNet hierarchical structure (Chunk 8:504-541)",
+          "source": "Chunk 8:504-541"
+        },
+        {
+          "compared_to": "Wikidata",
+          "relationship": "example_of",
+          "details": "Wikidata is collaboratively edited KG supplying Wikipedia with data (Chunk 8:579-621)",
+          "source": "Chunk 8:579-621"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "Knowledge Graph Embeddings",
+          "description": "Dense numerical representations of graph in low-dimensional vector space for machine learning tasks including link prediction, similarity, and recommendations (Chunk 4:767-822)",
+          "source": "Chunk 4:767-822"
+        },
+        {
+          "pattern": "Graph Neural Networks",
+          "description": "Custom neural network models adapted for graph-structured data, building network based on data graph topology for supervised learning (Chunk 5:393-446)",
+          "source": "Chunk 5:393-446"
+        },
+        {
+          "pattern": "Rule Mining (AMIE)",
+          "description": "System for discovering meaningful rules from knowledge graphs with support and confidence measures, using PCA for incomplete data (Chunk 5:704-827)",
+          "source": "Chunk 5:704-827"
+        },
+        {
+          "pattern": "Differentiable Rule Mining",
+          "description": "End-to-end learning of rules using matrix multiplication for joins; NeuralLP uses attention for path-like rules (Chunk 5:868-909)",
+          "source": "Chunk 5:868-909"
+        },
+        {
+          "pattern": "TransE and Translational Models",
+          "description": "Learn embeddings where relations translate subject entities to object entities; used for link prediction (Chunk 4:907-961, Chunk 5:7-60)",
+          "source": "Chunk 4:907-961"
+        },
+        {
+          "pattern": "Tensor Decomposition (DistMult, RESCAL)",
+          "description": "Decompose graph tensor into latent factors for plausibility scoring (Chunk 5:63-237)",
+          "source": "Chunk 5:63-237"
+        },
+        {
+          "pattern": "Convolutional Models (ConvE, HypER)",
+          "description": "Use convolutional kernels over embeddings for neural plausibility scoring (Chunk 5:260-291)",
+          "source": "Chunk 5:260-291"
+        },
+        {
+          "pattern": "Language Model Approaches (RDF2Vec, KGloVe)",
+          "description": "Leverage word embedding techniques by generating graph sequences as sentences (Chunk 5:294-338)",
+          "source": "Chunk 5:294-338"
+        },
+        {
+          "pattern": "Semantic Search",
+          "description": "Knowledge graphs enable 'things not strings' paradigm for web search (Chunk 8:726-745)",
+          "source": "Chunk 8:726-745"
+        },
+        {
+          "pattern": "Question Answering",
+          "description": "Bloomberg KG powers QA service and sentiment analysis (Chunk 8:810-817)",
+          "source": "Chunk 8:810-817"
+        },
+        {
+          "pattern": "Conversational Agents",
+          "description": "eBay uses KG for conversational agents in commerce (Chunk 8:758-763)",
+          "source": "Chunk 8:758-763"
+        },
+        {
+          "pattern": "Recommendations",
+          "description": "KGs used for product recommendations (Amazon, Airbnb, Uber Eats) (Chunk 8:750-777)",
+          "source": "Chunk 8:750-777"
+        },
+        {
+          "pattern": "Entailment-aware Embeddings",
+          "description": "Entailment-aware embeddings incorporate rules/ontologies for plausibility (Chunk 9:9-13)",
+          "source": "Chunk 9:9-13"
+        },
+        {
+          "pattern": "Graph Parallel Frameworks",
+          "description": "Message-passing computation model (Msg, Agg, End) for distributed graph processing",
+          "source": "Chunk 14:483-756"
+        },
+        {
+          "pattern": "Symbolic Learning",
+          "description": "Rule mining and axiom mining for hypothesis induction from graphs",
+          "source": "Chunk 15:530-682"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "N/A - Paper predates agentic AI discussion",
+          "description": "This 2020 paper focuses on knowledge graph foundations rather than AI agent orchestration patterns",
+          "source": "N/A"
+        },
+        {
+          "pattern": "Link Discovery",
+          "description": "Discovering links across knowledge graphs using similarity measures (Chunk 7:817-837)",
+          "source": "Chunk 7:817-837"
+        },
+        {
+          "pattern": "Fact Checking Pipeline",
+          "description": "Multi-stage fact validation using external sources (structured/unstructured) (Chunk 7:444-524)",
+          "source": "Chunk 7:444-524"
+        },
+        {
+          "pattern": "Knowledge Graph Completion",
+          "description": "Automated completion of missing edges via link prediction (Chunk 7:295-323)",
+          "source": "Chunk 7:295-323"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "N/A - Paper predates LLM integration discussion",
+          "description": "Published before widespread LLM integration; focuses on traditional ML embeddings and neural networks for knowledge graphs",
+          "source": "N/A"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Query Rewriting for Ontological Entailments",
+          "description": "Extending queries to find solutions entailed by rules; OWL 2 QL profile designed for this (Chunk 4:92-109)",
+          "source": "Chunk 4:92-109"
+        },
+        {
+          "mechanism": "Materialisation",
+          "description": "Applying rules recursively to graph, adding conclusions until fixpoint reached (Chunk 4:54-64)",
+          "source": "Chunk 4:54-64"
+        },
+        {
+          "mechanism": "Ontology-Based Data Access (OBDA)",
+          "description": "Query rewriting approaches that support ontological entailments over virtualized data (Chunk 6:689-695)",
+          "source": "Chunk 6:689-695"
+        },
+        {
+          "mechanism": "Entailment-Aware Embeddings",
+          "description": "Joint embeddings considering both data graph and rules (KALE, RUGE, FSL) using t-norm fuzzy logics (Chunk 5:341-390)",
+          "source": "Chunk 5:341-390"
+        },
+        {
+          "mechanism": "SPARQL Querying",
+          "description": "Graph pattern queries over RDF knowledge graphs (Chunk 8:108-135)",
+          "source": "Chunk 8:108-135"
+        },
+        {
+          "mechanism": "Triple Pattern Fragments",
+          "description": "Edge pattern protocol for distributed querying (Chunk 8:65-106)",
+          "source": "Chunk 8:65-106"
+        },
+        {
+          "mechanism": "Node Lookups (Linked Data)",
+          "description": "HTTP dereferencing for node-based access (Chunk 8:27-62)",
+          "source": "Chunk 8:27-62"
+        },
+        {
+          "mechanism": "Rule Mining",
+          "description": "Extract symbolic rules from knowledge graphs (Chunk 9:15-17)",
+          "source": "Chunk 9:15-17"
+        },
+        {
+          "mechanism": "Knowledge Graph Querying",
+          "description": "Graph patterns, navigational queries, and path expressions for retrieval",
+          "source": "Chunk 13:444-706"
+        },
+        {
+          "mechanism": "Deductive Reasoning",
+          "description": "Rules and Description Logics for inference over graphs",
+          "source": "Chunk 14:177-465"
+        },
+        {
+          "mechanism": "Inductive Learning",
+          "description": "Embeddings and GNNs for learning latent representations",
+          "source": "Chunk 14:759-Chunk 15:527"
+        }
+      ]
+    },
+    "04-PROV-O_to_BFO_Semantic_Mapping": {
+      "paper_id": "04-PROV-O_to_BFO_Semantic_Mapping",
+      "title": "A semantic approach to mapping the Provenance Ontology to Basic Formal Ontology",
+      "entity_types": [
+        "Entity",
+        "Agent",
+        "Activity",
+        "Influence",
+        "InstantaneousEvent",
+        "Generation",
+        "Start",
+        "End",
+        "Communication",
+        "Derivation",
+        "EntityInfluence",
+        "ActivityInfluence",
+        "AgentInfluence",
+        "Role",
+        "Plan",
+        "Location",
+        "Bundle",
+        "Collection",
+        "Person",
+        "Organization",
+        "SoftwareAgent"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "BFO",
+          "relationship": "maps_to",
+          "details": "Total alignment of 153 classes and object properties. PROV Activity = BFO process; PROV Entity subclass of BFO continuant; PROV Agent subclass of BFO material entity",
+          "source": "Chunk 1:577-598"
+        },
+        {
+          "compared_to": "CCO",
+          "relationship": "extends_to",
+          "details": "PROV Agent = CCO Agent intersection; PROV Person = CCO Person intersection; PROV Plan subclass of CCO Information Content Entity; PROV Start = CCO process beginning; PROV End = CCO process ending",
+          "source": "Chunk 1:676-679, Chunk 2:93-100, 116-124"
+        },
+        {
+          "compared_to": "RO",
+          "relationship": "maps_to",
+          "details": "25 terms explicitly mapped using 26 subsumption relations. wasDerivedFrom mapped to RO causally influenced by",
+          "source": "Chunk 1:594-595, 818-821"
+        },
+        {
+          "compared_to": "SOSA",
+          "relationship": "compatible_with",
+          "details": "Alignments tested for consistency with PROV-SOSA alignment; no inconsistencies found",
+          "source": "Chunk 1:439-445"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (2025 ontology mapping focus)",
+      "agentic_workflows": "N/A - paper focuses on ontology alignment, not workflow patterns",
+      "generative_ai_patterns": "N/A - paper predates generative AI discussion",
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Knowledge graph integration",
+          "description": "Alignment enables SPARQL queries over PROV-O data using BFO classes; semantic reasoners can discover implicit information",
+          "source": "Chunk 1:106-112"
+        },
+        {
+          "mechanism": "Automated reasoning",
+          "description": "HermiT reasoner used to test consistency and materialize inferences from combined ontologies",
+          "source": "Chunk 1:424-436"
+        },
+        {
+          "mechanism": "Error detection",
+          "description": "Alignments used to automatically detect mistakes in canonical PROV-O examples",
+          "source": "Chunk 1:110-112, Chunk 2:226-258"
+        }
+      ]
+    },
+    "05-DOLCE_Descriptive_Ontology": {
+      "paper_id": "05-DOLCE_Descriptive_Ontology",
+      "title": "DOLCE: A Descriptive Ontology for Linguistic and Cognitive Engineering",
+      "entity_types": [
+        "Endurant (Continuant)",
+        "Perdurant (Occurrent)",
+        "Quality",
+        "Abstract",
+        "Physical Object (POB)",
+        "Agentive Physical Object (APO)",
+        "Non-Agentive Physical Object",
+        "Feature",
+        "Process (PRO)",
+        "Event",
+        "Achievement",
+        "Accomplishment (ACC)",
+        "State",
+        "Concept (C)",
+        "Role (RL)",
+        "Artifact",
+        "Physical Quality (PQ)",
+        "Temporal Quality (TQ)",
+        "Abstract Quality (AQ)",
+        "Quale",
+        "Quality Space/Region",
+        "Matter (M)",
+        "Social Object (SOB)",
+        "Non-Agentive Social Object (NASO)"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "ISO 21838",
+          "relationship": "becoming_part_of",
+          "details": "DOLCE is becoming part of the ISO 21838 standard under development",
+          "source": "Chunk 1:109-111"
+        },
+        {
+          "compared_to": "CIDOC CRM",
+          "relationship": "influenced",
+          "details": "DOLCE has been used to develop or improve CIDOC CRM",
+          "source": "Chunk 1:18-19"
+        },
+        {
+          "compared_to": "DBpedia",
+          "relationship": "improved",
+          "details": "Used to identify and fix millions of inconsistencies in DBpedia",
+          "source": "Chunk 2:456-458"
+        },
+        {
+          "compared_to": "WordNet",
+          "relationship": "improved",
+          "details": "Used to reorganize WordNet top level and include individual/class distinction",
+          "source": "Chunk 2:459-461"
+        },
+        {
+          "compared_to": "SSN (Semantic Sensor Network)",
+          "relationship": "compatible",
+          "details": "SSN is based on or compatible with DUL",
+          "source": "Chunk 2:463"
+        },
+        {
+          "compared_to": "SAREF",
+          "relationship": "compatible",
+          "details": "SAREF is based on or compatible with DUL",
+          "source": "Chunk 2:465"
+        },
+        {
+          "compared_to": "BFO/DOLCE-CORE",
+          "relationship": "related_terminology",
+          "details": "DOLCE-CORE uses 'object' and 'event' instead of 'endurant' and 'perdurant'",
+          "source": "Chunk 1:87-89"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (foundational ontology paper focused on formal axiomatization)",
+      "agentic_workflows": "N/A - paper predates agentic workflow discussion",
+      "generative_ai_patterns": "N/A - paper predates generative AI patterns",
+      "agent_ontology_integration": "N/A - paper predates AI agent ontology integration patterns"
+    },
+    "06-BFO_Function_Role_Disposition": {
+      "paper_id": "06-BFO_Function_Role_Disposition",
+      "title": "Function, Role and Disposition in Basic Formal Ontology",
+      "entity_types": [
+        "Continuant",
+        "Occurrent",
+        "Independent Continuant",
+        "Dependent Continuant",
+        "Specifically Dependent Continuant",
+        "Generically Dependent Continuant",
+        "Realizable Entity",
+        "Role",
+        "Disposition",
+        "Function",
+        "Capability",
+        "Quality",
+        "Object",
+        "Process"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "OBO Foundry",
+          "relationship": "provides_upper_level",
+          "details": "BFO serves as upper-level framework for OBO Foundry ontologies including Gene Ontology, FMA, Protein Ontology",
+          "source": "Chunk 1:42-46"
+        },
+        {
+          "compared_to": "Gene Ontology",
+          "relationship": "grounds",
+          "details": "GO molecular function ontology represents molecular functions; BFO provides theoretical grounding for function concept",
+          "source": "Chunk 1:136-139"
+        },
+        {
+          "compared_to": "ICF (WHO)",
+          "relationship": "informs",
+          "details": "Functions invoked in standard definitions of health/disease and WHO's International Classification of Functions",
+          "source": "Chunk 1:138-139"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (2008/2011)",
+      "agentic_workflows": "N/A - paper predates agentic workflow discussion",
+      "generative_ai_patterns": "N/A - paper predates generative AI patterns",
+      "agent_ontology_integration": "N/A - paper predates AI-ontology integration discussion"
+    },
+    "07-Classifying_Processes_Barry_Smith": {
+      "paper_id": "07-Classifying_Processes_Barry_Smith",
+      "title": "Classifying Processes: An Essay in Applied Ontology",
+      "entity_types": [
+        "Continuant",
+        "Occurrent",
+        "Independent Continuant",
+        "Dependent Continuant",
+        "Quality",
+        "Disposition",
+        "Process",
+        "Process Boundary",
+        "Spatiotemporal Region",
+        "Temporal Region",
+        "Process Profile",
+        "Generically Dependent Continuant",
+        "Specifically Dependent Continuant"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Gene Ontology",
+          "relationship": "provides top-level framework",
+          "details": "BFO serves as domain-neutral starting point for GO's 30,000 terms",
+          "source": "Chunk 1:190-195, 280-284"
+        },
+        {
+          "compared_to": "Aristotle's Ontological Square",
+          "relationship": "recapitulates and extends",
+          "details": "BFO extends to ontological sextet including occurrents",
+          "source": "Chunk 1:450-452, 853-854"
+        },
+        {
+          "compared_to": "Zemach's Four Ontologies",
+          "relationship": "adapts",
+          "details": "Adapts distinction between things (continuants) and events (occurrents)",
+          "source": "Chunk 1:348-354"
+        },
+        {
+          "compared_to": "DOLCE",
+          "relationship": "similar bicategorial approach",
+          "details": "Both use endurant/perdurant distinction",
+          "source": "Chunk 1:299-300"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (2012)",
+      "agentic_workflows": "N/A - paper predates agentic AI discussion",
+      "generative_ai_patterns": "N/A - paper predates LLM discussion",
+      "agent_ontology_integration": "N/A - paper predates AI agent discussion"
+    },
+    "09-OCEL_20_Specification": {
+      "paper_id": "09-OCEL_20_Specification",
+      "title": "OCEL (Object-Centric Event Log) 2.0 Specification",
+      "entity_types": [
+        "Event",
+        "Event Type (Activity)",
+        "Object",
+        "Object Type",
+        "Event-to-Object (E2O) Relationship",
+        "Object-to-Object (O2O) Relationship",
+        "Attribute",
+        "Qualifier"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "XES",
+          "relationship": "supersedes",
+          "details": "More expressive, less complicated, better readable than XES (Chunk 1:37-39)",
+          "source": "Chunk 1:37-39"
+        },
+        {
+          "compared_to": "OCEL 1.0",
+          "relationship": "extends",
+          "details": "Adds O2O relationships, dynamic object attributes, relationship qualifiers (Chunk 1:286-308)",
+          "source": "Chunk 1:142-144"
+        },
+        {
+          "compared_to": "Traditional event logs",
+          "relationship": "replaces",
+          "details": "Eliminates need for flattening, supports many-to-many event-object relations (Chunk 1:115-127)",
+          "source": "Chunk 1:115-127"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "AI taxonomy potential",
+          "description": "Inheritance-based taxonomies of object/event types enable generative and discriminative AI (Chunk 4:401-405)",
+          "source": "Chunk 4:401-405"
+        }
+      ],
+      "agentic_workflows": "N/A - Not addressed; focus is on event data standard, not agent orchestration",
+      "generative_ai_patterns": "N/A - Not addressed in this specification document",
+      "agent_ontology_integration": "N/A - Not addressed; however, structured OCEL 2.0 data could serve as grounding for agent memory/reasoning"
+    },
+    "10-OC-PM_Object-Centric_Process_Mining": {
+      "paper_id": "10-OC-PM_Object-Centric_Process_Mining",
+      "title": "OC-PM: analyzing object-centric event logs and process models",
+      "entity_types": [
+        "Event",
+        "Object",
+        "Activity",
+        "Object Type",
+        "Case",
+        "Attribute",
+        "Timestamp"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "XES",
+          "relationship": "extends",
+          "details": "OCEL resolves convergence/divergence problems in XES by allowing events to relate to multiple objects without replication",
+          "source": "Chunk 1:69-78"
+        },
+        {
+          "compared_to": "Artifact-Centric Process Mining",
+          "relationship": "related_to",
+          "details": "Similar focus on business artifacts but OCEL provides standardized format and avoids relational database dependency",
+          "source": "Chunk 2:315-352"
+        },
+        {
+          "compared_to": "Colored Petri Nets",
+          "relationship": "builds_on",
+          "details": "Object-centric Petri nets support subset of colored Petri net semantics with simpler discovery",
+          "source": "Chunk 2:376-450"
+        },
+        {
+          "compared_to": "Traditional DFG",
+          "relationship": "extends",
+          "details": "OC-DFG is a multigraph with typed edges for each object type, discovered via flattening",
+          "source": "Chunk 1:758-801"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (published 2022, focused on process mining foundations)",
+      "agentic_workflows": "N/A - paper focuses on process mining analysis, not agent orchestration",
+      "generative_ai_patterns": "N/A - no discussion of LLM patterns",
+      "agent_ontology_integration": "N/A - no AI agent integration discussed"
+    },
+    "11-Process_Mining_Event_Knowledge_Graphs": {
+      "paper_id": "11-Process_Mining_Event_Knowledge_Graphs",
+      "title": "Process Mining over Multiple Behavioral Dimensions with Event Knowledge Graphs",
+      "entity_types": [
+        "Event",
+        "Entity",
+        "Entity Type",
+        "Labeled Property Graph (LPG)",
+        "Event Knowledge Graph",
+        "Class (aggregated event type)",
+        "TaskInstance"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Classical Event Logs",
+          "relationship": "extends",
+          "details": "Replaces single case identifier with multi-entity correlation",
+          "source": "Chunk 1:119-144"
+        },
+        {
+          "compared_to": "OCEL",
+          "relationship": "formalizes",
+          "details": "Event tables with entity types formalize OCEL",
+          "source": "Chunk 1:234-239"
+        },
+        {
+          "compared_to": "RDF",
+          "relationship": "differs",
+          "details": "LPGs support attributed relationships; RDF does not",
+          "source": "Chunk 1:679-682"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (2022)",
+      "agentic_workflows": "N/A - paper focuses on descriptive process mining",
+      "generative_ai_patterns": "N/A - paper predates generative AI patterns",
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Graph-based knowledge representation",
+          "description": "Event knowledge graphs as LPGs enable ontology-like reasoning",
+          "source": "Chunk 1:550-603"
+        }
+      ]
+    },
+    "12-Foundations_of_Process_Event_Data": {
+      "paper_id": "12-Foundations_of_Process_Event_Data",
+      "title": "Foundations of Process Event Data",
+      "entity_types": [
+        "Event",
+        "Case",
+        "Activity",
+        "Trace",
+        "Log",
+        "Attribute"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "OCEL",
+          "relationship": "describes",
+          "details": "OCEL standard for object-centric event data with multiple case notions",
+          "source": "Chunk 1:431-433"
+        },
+        {
+          "compared_to": "BPMN 2.0",
+          "relationship": "references",
+          "details": "Uses BPMN 2.0 activity lifecycle model for event types",
+          "source": "Chunk 1:183-186"
+        },
+        {
+          "compared_to": "OnProm/ODBA",
+          "relationship": "references",
+          "details": "Discusses ontology-based data access for event log extraction from databases",
+          "source": "Chunk 1:428-431"
+        },
+        {
+          "compared_to": "XES",
+          "relationship": "defines",
+          "details": "Core paper for XES IEEE standard event data structure",
+          "source": "Chunk 1:163-175"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion",
+      "agentic_workflows": "N/A - paper predates agentic workflow patterns",
+      "generative_ai_patterns": "N/A - paper predates generative AI patterns",
+      "agent_ontology_integration": "N/A - paper predates AI-ontology integration patterns"
+    },
+    "14-RAG_Ontologic_Graph_Multiagent_LLM": {
+      "paper_id": "14-RAG_Ontologic_Graph_Multiagent_LLM",
+      "title": "A Statistical Study of Solar White-Light Flares Observed by WST at 360 nm",
+      "entity_types": "N/A - paper is about solar physics, not ontologies",
+      "framework_comparison": "N/A - paper is about solar physics, not ontologies",
+      "ai_integration": "N/A - paper is about solar physics, not AI",
+      "agentic_workflows": "N/A - paper is about solar physics, not agents",
+      "generative_ai_patterns": "N/A - paper is about solar physics, not AI",
+      "agent_ontology_integration": "N/A - paper is about solar physics, not AI/ontologies"
+    },
+    "15-SciAgents_Multi-Agent_Graph_Reasoning": {
+      "paper_id": "15-SciAgents_Multi-Agent_Graph_Reasoning",
+      "title": "SciAgents: Automating Scientific Discovery through Multi-Agent Intelligent Graph Reasoning",
+      "entity_types": [
+        "Agent",
+        "Activity",
+        "Entity",
+        "Knowledge Graph",
+        "Ontology",
+        "Tool",
+        "Role",
+        "Planner",
+        "Ontologist",
+        "Scientist",
+        "Hypothesis_agent",
+        "Outcome_agent",
+        "Mechanism_agent",
+        "Design_principles_agent",
+        "Unexpected_properties_agent",
+        "Comparison_agent",
+        "Novelty_agent",
+        "Critic_agent",
+        "Caller",
+        "User",
+        "Assistant"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Single-LLM agents",
+          "relationship": "extends",
+          "details": "Multi-agent systems overcome limitations of single agents for complex scientific discovery",
+          "source": "Chunk 1:113-120"
+        },
+        {
+          "compared_to": "AutoGen",
+          "relationship": "builds_upon",
+          "details": "Uses AutoGen framework for automated multi-agent collaboration",
+          "source": "Chunk 2:483-484"
+        },
+        {
+          "compared_to": "Human-driven research",
+          "relationship": "augments",
+          "details": "Provides scale, precision, and exploratory power surpassing traditional methods",
+          "source": "Chunk 1:34-36"
+        },
+        {
+          "compared_to": "LangChain",
+          "relationship": "extends concepts",
+          "details": "Uses tool calling and function invocation patterns; extends with domain-specific agents",
+          "source": "Chunk 7:478"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "In-context learning with knowledge graphs",
+          "description": "LLMs use sub-graphs from ontological knowledge graphs as context for reasoning",
+          "source": "Chunk 1:95-102"
+        },
+        {
+          "pattern": "Ontology-guided hypothesis generation",
+          "description": "Knowledge graph paths provide structured context for generating research hypotheses",
+          "source": "Chunk 1:133-148"
+        },
+        {
+          "pattern": "RAG with knowledge graphs",
+          "description": "Retrieval of relevant sub-graphs from comprehensive knowledge graphs to augment LLM capabilities",
+          "source": "Chunk 1:239-246"
+        },
+        {
+          "pattern": "Tool-augmented agents",
+          "description": "Agents equipped with external tools like Semantic Scholar API for novelty assessment",
+          "source": "Chunk 1:795-799"
+        },
+        {
+          "pattern": "Knowledge Graph Reasoning",
+          "description": "Uses generate_path function to create knowledge paths between concepts for research ideation",
+          "source": "Chunk 7:492-511"
+        },
+        {
+          "pattern": "Multi-agent Orchestration",
+          "description": "Specialized agents (planner, ontologist, scientist, etc.) collaborate in structured workflow",
+          "source": "Chunk 7:474-486"
+        },
+        {
+          "pattern": "Tool Calling",
+          "description": "Assistant agent calls functions like generate_path and rate_novelty_feasibility",
+          "source": "Chunk 7:510-511, 560-563"
+        },
+        {
+          "pattern": "Structured Output Generation",
+          "description": "Research proposals with seven standardized aspects (hypothesis, outcome, mechanism, design principles, unexpected properties, comparison, novelty)",
+          "source": "Chunk 8:549-554"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "Hierarchical task decomposition",
+          "description": "Discovery workflow systematically broken into manageable subtasks assigned to specialized agents",
+          "source": "Chunk 1:125-130"
+        },
+        {
+          "pattern": "Pre-programmed sequential interactions",
+          "description": "First approach with predefined sequence ensuring consistency and reliability",
+          "source": "Chunk 1:186-188"
+        },
+        {
+          "pattern": "Fully automated dynamic interactions",
+          "description": "Second approach with no predetermined order, flexible and adaptive framework",
+          "source": "Chunk 1:188-191"
+        },
+        {
+          "pattern": "Adversarial refinement",
+          "description": "Agents negotiate via adversarial interactions to produce sound predictions",
+          "source": "Chunk 1:318-319"
+        },
+        {
+          "pattern": "Swarm intelligence",
+          "description": "Modular, hierarchically organized swarm similar to biological systems",
+          "source": "Chunk 2:139-142"
+        },
+        {
+          "pattern": "Iterative hypothesis refinement",
+          "description": "Multiple iterations modeling process of negotiation during thinking and reflecting",
+          "source": "Chunk 2:140-141"
+        },
+        {
+          "pattern": "Research Proposal Pipeline",
+          "description": "6-step workflow: generate path -> define terms -> craft proposal -> expand aspects -> critique -> rate novelty/feasibility",
+          "source": "Chunk 7:489-500"
+        },
+        {
+          "pattern": "Aspect Expansion",
+          "description": "Seven specialized agents expand different aspects: hypothesis, outcome, mechanism, design_principles, unexpected_properties, comparison, novelty",
+          "source": "Chunk 7:493-497"
+        },
+        {
+          "pattern": "Knowledge Path Generation",
+          "description": "Random keywords generate knowledge paths between concepts for novel research ideation",
+          "source": "Chunk 7:505-511"
+        },
+        {
+          "pattern": "Caller-mediated Turn-taking",
+          "description": "Caller agent explicitly selects next agent to speak after each output",
+          "source": "Chunk 8:718-728"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "Complex prompting strategies",
+          "description": "Agents optimized through carefully crafted prompts for targeted expertise",
+          "source": "Chunk 1:127-128"
+        },
+        {
+          "pattern": "Structured JSON output generation",
+          "description": "Models generate structured output with hypothesis, outcome, mechanisms, design principles, unexpected properties, comparison, novelty",
+          "source": "Chunk 1:205-206"
+        },
+        {
+          "pattern": "Step-by-step reasoning",
+          "description": "Agents provide clear rationale and step-by-step reasoning for proposals",
+          "source": "Chunk 1:385-387"
+        },
+        {
+          "pattern": "Hierarchical expansion strategy",
+          "description": "Answers successively refined and improved through iterative prompting",
+          "source": "Chunk 1:200-210"
+        },
+        {
+          "pattern": "Chain-of-thought in multi-agent context",
+          "description": "Nuanced reasoning through multiple iterations vs zero-shot answers",
+          "source": "Chunk 2:141-142"
+        },
+        {
+          "pattern": "Structured Research Generation",
+          "description": "LLM generates research proposals with standardized sections: hypothesis, outcomes, mechanisms, design principles, unexpected properties, comparisons, novelty",
+          "source": "Chunk 8:549-554"
+        },
+        {
+          "pattern": "Function Calling",
+          "description": "Assistant calls generate_path and rate_novelty_feasibility functions",
+          "source": "Chunk 7:510-511"
+        },
+        {
+          "pattern": "Knowledge Synthesis",
+          "description": "Ontologist synthesizes definitions and relationships from knowledge graph paths",
+          "source": "Chunk 7:579-620"
+        },
+        {
+          "pattern": "Critical Review Generation",
+          "description": "Critic agent generates structured strengths/weaknesses/improvements analysis",
+          "source": "Chunk 8:557-571"
+        },
+        {
+          "pattern": "Quantitative Assessment",
+          "description": "Novelty and feasibility rated on numeric scales (e.g., Novelty: 8/10, Feasibility: 7/10)",
+          "source": "Chunk 7:442-456"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Knowledge graph path sampling",
+          "description": "Random path approach extracts diverse concepts from global knowledge graph",
+          "source": "Chunk 1:239-248"
+        },
+        {
+          "mechanism": "Ontologist agent for graph interpretation",
+          "description": "Dedicated agent applies advanced reasoning to synthesize and interpret knowledge graph data",
+          "source": "Chunk 1:289-296"
+        },
+        {
+          "mechanism": "Graph-to-hypothesis pipeline",
+          "description": "Sub-graph forms basis for generating structured research hypotheses",
+          "source": "Chunk 1:204-206"
+        },
+        {
+          "mechanism": "Shared memory across agents",
+          "description": "In automated approach, agents share memory with full visibility of collaboration history",
+          "source": "Chunk 1:786-788"
+        },
+        {
+          "mechanism": "Semantic Scholar novelty validation",
+          "description": "Tool assesses novelty of hypotheses against existing literature",
+          "source": "Chunk 1:797-799"
+        },
+        {
+          "mechanism": "Knowledge Graph Path Traversal",
+          "description": "Agents traverse knowledge graph to find relationships between concepts (e.g., 'collagen -- enhanced through -- mechanical properties')",
+          "source": "Chunk 7:576-577"
+        },
+        {
+          "mechanism": "Ontological Definition Extraction",
+          "description": "Ontologist agent extracts and defines terms from knowledge paths, establishing relationships",
+          "source": "Chunk 7:580-620"
+        },
+        {
+          "mechanism": "Relationship-based Reasoning",
+          "description": "Research proposals built on explicit relationships like 'allows for', 'achieved through', 'is a metric for'",
+          "source": "Chunk 7:601-620"
+        },
+        {
+          "mechanism": "Domain Knowledge Integration",
+          "description": "Knowledge graphs encode domain expertise (materials science, biology) that guides agent reasoning",
+          "source": "Chunk 8:803-806"
+        }
+      ]
+    },
+    "16-KG-Agent_Knowledge_Graph_Reasoning": {
+      "paper_id": "16-KG-Agent_Knowledge_Graph_Reasoning",
+      "title": "KG-Agent: An Efficient Autonomous Agent Framework for Complex Reasoning over Knowledge Graph",
+      "entity_types": [
+        "Entity",
+        "Relation",
+        "Triple",
+        "Query Graph",
+        "Agent",
+        "Tool",
+        "Knowledge Memory"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "ReAct",
+          "relationship": "extends",
+          "details": "KG-Agent applies ReAct-style reasoning-action loop specifically for KG traversal with specialized toolbox",
+          "source": "Chunk 1:154-158"
+        },
+        {
+          "compared_to": "AutoGPT",
+          "relationship": "similar_to",
+          "details": "Both use memory management and external tools, but KG-Agent specializes for KG with smaller LLM",
+          "source": "Chunk 1:158-166"
+        },
+        {
+          "compared_to": "StructGPT",
+          "relationship": "improves_upon",
+          "details": "KG-Agent uses autonomous reasoning vs StructGPT's pre-defined interaction patterns",
+          "source": "Chunk 1:486-494"
+        },
+        {
+          "compared_to": "ChatDB",
+          "relationship": "extends",
+          "details": "KG-Agent adds tool support and works with smaller open-source LLM",
+          "source": "Chunk 1:652-656"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "Tool-Augmented LLM",
+          "description": "LLM generates function calls to toolbox for KG operations",
+          "source": "Chunk 1:230-239"
+        },
+        {
+          "pattern": "Knowledge Memory State",
+          "description": "Four-part memory (question, toolbox, KG info, history) guides LLM decisions",
+          "source": "Chunk 1:546-551"
+        },
+        {
+          "pattern": "Code-Based Instruction Tuning",
+          "description": "Synthesize reasoning programs from KGQA datasets to fine-tune small LLM",
+          "source": "Chunk 1:99-105"
+        },
+        {
+          "pattern": "Small Model Enablement",
+          "description": "7B LLM achieves autonomous reasoning via specialized instruction tuning",
+          "source": "Chunk 1:83-89"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "Tool Selection Loop",
+          "description": "Planner selects tool from toolbox based on knowledge memory, executor runs it, memory updates",
+          "source": "Chunk 1:629-634"
+        },
+        {
+          "pattern": "Four-Component Architecture",
+          "description": "LLM planner + toolbox + KG executor + knowledge memory integrated framework",
+          "source": "Chunk 1:536-543"
+        },
+        {
+          "pattern": "Reasoning Chain Decomposition",
+          "description": "Complex query decomposed into sequential function calls traversing KG",
+          "source": "Chunk 1:436-456"
+        },
+        {
+          "pattern": "Autonomous Termination",
+          "description": "Agent uses 'end' tool to return final answers when reasoning complete",
+          "source": "Chunk 1:254-255"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "Code-as-Reasoning",
+          "description": "Reasoning steps formulated as executable function calls in code format",
+          "source": "Chunk 1:31-34"
+        },
+        {
+          "pattern": "Instruction Tuning from Programs",
+          "description": "SQL queries converted to reasoning programs then to instruction tuning data",
+          "source": "Chunk 1:278-293"
+        },
+        {
+          "pattern": "ReAct-Style Loop",
+          "description": "Interleaved reasoning (tool selection) and acting (tool execution) pattern",
+          "source": "Chunk 1:154-158"
+        },
+        {
+          "pattern": "Few-Shot Generalization",
+          "description": "10K training samples enable zero-shot transfer to new KGs and domains",
+          "source": "Chunk 1:34-38"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Knowledge Memory as Context",
+          "description": "Structured memory provides ontological context for LLM reasoning",
+          "source": "Chunk 1:546-551"
+        },
+        {
+          "mechanism": "Toolbox as KG Interface",
+          "description": "Tools abstract KG structure, providing typed operations on entities/relations",
+          "source": "Chunk 1:240-259"
+        },
+        {
+          "mechanism": "Query Graph Grounding",
+          "description": "Questions grounded to KG subgraph structure before reasoning",
+          "source": "Chunk 1:420-425"
+        },
+        {
+          "mechanism": "Relation-Guided Navigation",
+          "description": "Agent uses get_relation to discover traversal options from current entities",
+          "source": "Chunk 2:755-756"
+        }
+      ]
+    },
+    "17-KG_Reasoning_Logics_Embeddings_Survey": {
+      "paper_id": "17-KG_Reasoning_Logics_Embeddings_Survey",
+      "title": "Knowledge Graph Reasoning with Logics and Embeddings: Survey and Perspective",
+      "entity_types": [
+        "Entity (KG triple subject/object)",
+        "Relation (KG triple predicate)",
+        "Class (entity type)",
+        "Logic Rule",
+        "Ontological Schema",
+        "Embedding (vector representation)"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "OWL 2 / Description Logics",
+          "relationship": "foundational",
+          "details": "OWL 2 based on SROIQ DL provides schema language for KGs with rich expressive power",
+          "source": "Chunk 1:86-92"
+        },
+        {
+          "compared_to": "TransE",
+          "relationship": "embedding_method",
+          "details": "Translation-based embedding using ||h+r-t|| as score function",
+          "source": "Chunk 1:102-107"
+        },
+        {
+          "compared_to": "ComplEx",
+          "relationship": "embedding_method",
+          "details": "Complex vector space for asymmetric relations",
+          "source": "Chunk 1:244-245"
+        },
+        {
+          "compared_to": "RotatE",
+          "relationship": "embedding_method",
+          "details": "Rotation in complex space for compositional relations",
+          "source": "Chunk 1:245-246"
+        },
+        {
+          "compared_to": "SPARQL",
+          "relationship": "query_language",
+          "details": "Structured query language for KG retrieval and manipulation",
+          "source": "Chunk 1:359-361"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "Neural-Symbolic Integration",
+          "description": "Combining logic-based and embedding-based reasoning for robust KG inference",
+          "source": "Chunk 1:57-71"
+        },
+        {
+          "pattern": "Embedding-based uncertainty handling",
+          "description": "Embeddings deal with data noise and predict plausible but non-determined knowledge",
+          "source": "Chunk 1:54-58"
+        },
+        {
+          "pattern": "Differentiable theorem proving",
+          "description": "NTP enables Prolog to learn embeddings and compare symbols via vector similarity",
+          "source": "Chunk 1:418-430"
+        },
+        {
+          "pattern": "Embedding-guided rule mining",
+          "description": "Use embeddings to guide/prune search during rule learning",
+          "source": "Chunk 1:463-468"
+        }
+      ],
+      "agentic_workflows": "N/A - paper predates modern agentic AI discussion",
+      "generative_ai_patterns": "N/A - paper predates LLM/generative AI era",
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Ontological reasoning for KG completion",
+          "description": "SIC uses ontological reasoning within iterative KG completion to infer triples and filter schema-incorrect ones",
+          "source": "Chunk 1:258-259, 294-298"
+        },
+        {
+          "mechanism": "Schema-aware negative sampling",
+          "description": "ReasonKGE uses schema-incorrect triples for negative sampling",
+          "source": "Chunk 1:296-298"
+        },
+        {
+          "mechanism": "Embedding-based query answering",
+          "description": "GQE embeds entities as vectors, relations as projection operators, queries as vectors",
+          "source": "Chunk 1:396-398"
+        },
+        {
+          "mechanism": "Complex query support",
+          "description": "Query2box, BetaE, ConE support conjunction, disjunction, negation via geometric embeddings",
+          "source": "Chunk 1:400-410"
+        }
+      ]
+    },
+    "18-Multi-Agent_Architecture_Taxonomy_LLM": {
+      "paper_id": "18-Multi-Agent_Architecture_Taxonomy_LLM",
+      "title": "Balancing Autonomy and Alignment: A Multi-Dimensional Taxonomy for Autonomous LLM-Powered Multi-Agent Architectures",
+      "entity_types": [
+        "Agent",
+        "Task",
+        "Goal",
+        "Action",
+        "Role",
+        "Memory",
+        "Context",
+        "Network",
+        "Communication Protocol",
+        "Tools",
+        "Data",
+        "Foundation Models",
+        "Artefact",
+        "Activity Log",
+        "Library"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Kruchten's 4+1 View Model",
+          "relationship": "adapts",
+          "details": "Adapts the 4+1 view model to LLM-powered multi-agent systems with four viewpoints: Goal-driven Task Management, Agent Composition, Multi-Agent Collaboration, Context Interaction",
+          "source": "Chunk 2:641-643"
+        },
+        {
+          "compared_to": "Prior Autonomous System Taxonomies",
+          "relationship": "extends",
+          "details": "Extends beyond Wooldridge/Jennings, Brustoloni, Maes, Franklin/Graesser taxonomies by incorporating LLM-specific aspects and autonomy-alignment interplay",
+          "source": "Chunk 1:243-266"
+        },
+        {
+          "compared_to": "Prior Multi-Agent Taxonomies",
+          "relationship": "extends",
+          "details": "Extends beyond Bird, Dudek, Van Dyke Parunak, Moya taxonomies developed pre-LLM era",
+          "source": "Chunk 1:269-293"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "LLM as Reasoning Engine",
+          "description": "Agents derive reasoning capabilities from LLMs for reflecting, planning, and processing tasks",
+          "source": "Chunk 1:471-474"
+        },
+        {
+          "pattern": "Prompt Augmentation",
+          "description": "Agent prompts undergo augmentation integrating role, memory, context information, and prompt templates before LLM processing",
+          "source": "Chunk 1:959-967"
+        },
+        {
+          "pattern": "Context Utilization",
+          "description": "Agents leverage contextual resources (tools, data, foundation models) via API integration",
+          "source": "Chunk 2:174-182"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "Divide and Conquer",
+          "description": "Systems tackle user-prompted goals by breaking them into smaller manageable tasks assigned to specialized agents",
+          "source": "Chunk 1:65-71"
+        },
+        {
+          "pattern": "Task-Management Activity",
+          "description": "Three core phases: Decomposition (breaking down goals), Orchestration (distributing tasks), Synthesis (combining results)",
+          "source": "Chunk 1:856-868"
+        },
+        {
+          "pattern": "Strict Finite Processes",
+          "description": "Execution chains with predefined action sequences and well-defined endpoints",
+          "source": "Chunk 2:82-84"
+        },
+        {
+          "pattern": "Dialogue Cycles",
+          "description": "Alternating DelegateTask and ExecuteTask actions between two agents creating instruction-execution feedback loops",
+          "source": "Chunk 2:87-88"
+        },
+        {
+          "pattern": "Multi-cycle Process Frameworks",
+          "description": "Interactions between generic agent types allowing greater dynamism",
+          "source": "Chunk 2:91-92"
+        },
+        {
+          "pattern": "Autonomy Levels",
+          "description": "L0 Static (rule-based), L1 Adaptive (framework-guided), L2 Self-Organizing (LLM-driven decisions)",
+          "source": "Chunk 2:331-352"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "Prompt-driven Communication",
+          "description": "Direct agent collaborations rely on prompt-driven message exchange sequences or cycles",
+          "source": "Chunk 2:71-74"
+        },
+        {
+          "pattern": "LLM Multi-directional Reasoning",
+          "description": "LLM capabilities employed for reflecting memories, observing results, planning steps, weighing options",
+          "source": "Chunk 2:54-58"
+        },
+        {
+          "pattern": "Prompt Engineering by Agents",
+          "description": "Agent-driven prompt engineering pivotal for multi-agent systems",
+          "source": "Chunk 2:67-68"
+        },
+        {
+          "pattern": "Single-turn Goal Prompting",
+          "description": "Systems employ single-turn prompting to convey intricate goals with instructions, exemplifications, role specifications",
+          "source": "Chunk 1:849-851"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Domain Ontology Model",
+          "description": "UML class diagram structuring architectural concepts and relations for LLM-powered multi-agent systems",
+          "source": "Chunk 1:795-798"
+        },
+        {
+          "mechanism": "Conceptual Modeling",
+          "description": "Domain ontologies devised as conceptual models to support human understanding of the addressed domain",
+          "source": "Chunk 1:812-813"
+        },
+        {
+          "mechanism": "Feature Diagram",
+          "description": "Taxonomic structure organized through feature diagrams expressing hierarchical structure and dependencies",
+          "source": "Chunk 3:53-55"
+        }
+      ]
+    },
+    "19-Graph_of_Thoughts_LLM_Reasoning": {
+      "paper_id": "19-Graph_of_Thoughts_LLM_Reasoning",
+      "title": "Graph of Thoughts: Solving Elaborate Problems with Large Language Models",
+      "entity_types": [
+        "Thought",
+        "Graph",
+        "Vertex",
+        "Edge",
+        "Transformation",
+        "Operation",
+        "Controller",
+        "Prompter",
+        "Parser",
+        "Scorer"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Chain-of-Thought (CoT)",
+          "relationship": "generalizes",
+          "details": "GoT generalizes CoT from linear chain to arbitrary graph, enabling aggregation and more complex reasoning patterns",
+          "source": "Chunk 1:81-82"
+        },
+        {
+          "compared_to": "Tree of Thoughts (ToT)",
+          "relationship": "generalizes",
+          "details": "GoT generalizes ToT from tree to arbitrary graph, enabling thought aggregation and feedback loops",
+          "source": "Chunk 1:58-61, 81-82"
+        },
+        {
+          "compared_to": "CoT-SC (Self-Consistency with CoT)",
+          "relationship": "extends",
+          "details": "GoT encompasses CoT-SC's multiple chains but adds ability to aggregate and combine thoughts",
+          "source": "Chunk 1:55-57, 109"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "Graph-based prompt engineering",
+          "description": "Models LLM reasoning as arbitrary graph where thoughts are vertices and dependencies are edges, enabling novel transformations",
+          "source": "Chunk 1:73-79"
+        },
+        {
+          "pattern": "Modular architecture for prompting",
+          "description": "Controller, Prompter, Parser, Scorer modules enable extensible prompt engineering with different LLMs (GPT-3.5, GPT-4, Llama-2)",
+          "source": "Chunk 1:383-396"
+        },
+        {
+          "pattern": "Task decomposition via graph",
+          "description": "Complex tasks decomposed into subtasks solved independently, then merged via graph aggregation",
+          "source": "Chunk 2:94-97"
+        },
+        {
+          "pattern": "Multi-step reasoning with scoring",
+          "description": "LLM generates multiple candidate solutions (k=5 or k=10), scores them locally, keeps best N",
+          "source": "Chunk 7:643-649"
+        },
+        {
+          "pattern": "Divide-and-conquer decomposition",
+          "description": "Complex problems split into subproblems (e.g., 128 elements into 8 parts of 16)",
+          "source": "Chunk 7:685-687"
+        },
+        {
+          "pattern": "Iterative refinement",
+          "description": "Generate operations try to improve solutions after aggregation",
+          "source": "Chunk 7:749-752"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "Graph of Operations (GoO)",
+          "description": "Static structure prescribing execution plan of thought operations with predecessor/successor relationships",
+          "source": "Chunk 1:433-438"
+        },
+        {
+          "pattern": "Graph Reasoning State (GRS)",
+          "description": "Dynamic structure maintaining state of ongoing LLM reasoning process including executed operations and thought states",
+          "source": "Chunk 1:438-443"
+        },
+        {
+          "pattern": "Generate-Score-Aggregate workflow",
+          "description": "Workflow pattern: generate multiple thoughts, score each, keep best, then aggregate for final solution",
+          "source": "Chunk 3:810-817"
+        },
+        {
+          "pattern": "Hierarchical merge workflow",
+          "description": "Multi-level aggregation: split into 8 parts, merge pairwise in 3 levels",
+          "source": "Chunk 7:681-735"
+        },
+        {
+          "pattern": "Score-and-select loop",
+          "description": "After each operation, score results locally and keep best N",
+          "source": "Chunk 7:644-648"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "Graph of Thoughts (GoT)",
+          "description": "Framework modeling LLM reasoning as arbitrary graph, enabling aggregation, refinement loops, and complex thought transformations",
+          "source": "Chunk 1:17-28"
+        },
+        {
+          "pattern": "Thought Aggregation",
+          "description": "Combining arbitrary thoughts into new ones by creating vertices with multiple incoming edges, reinforcing advantages while eliminating disadvantages",
+          "source": "Chunk 1:344-352"
+        },
+        {
+          "pattern": "Thought Refinement",
+          "description": "Iterative improvement of a thought via self-loop in graph: V+ = {} and E+ = {(v, v)}",
+          "source": "Chunk 1:355-357"
+        },
+        {
+          "pattern": "Thought Generation",
+          "description": "Generating one or more new thoughts from existing thought, embracing ToT/CoT-SC generation patterns",
+          "source": "Chunk 1:360-364"
+        },
+        {
+          "pattern": "Latency-Volume Tradeoff",
+          "description": "GoT achieves both low latency (log_k N) and high volume (N) through aggregation, unlike ToT which has low volume",
+          "source": "Chunk 1:743-753"
+        },
+        {
+          "pattern": "Decompose-Solve-Merge",
+          "description": "Tasks decomposed into subtasks, solved individually, then incrementally merged for final result",
+          "source": "Chunk 2:94-97"
+        },
+        {
+          "pattern": "Graph-based prompting",
+          "description": "Prompts structured as operations in a directed graph (Generate, Score, Aggregate)",
+          "source": "Chunk 7:630-651"
+        },
+        {
+          "pattern": "Multi-sample generation",
+          "description": "Generate(k=N) produces N candidate solutions for subsequent scoring",
+          "source": "Chunk 7:640-644"
+        },
+        {
+          "pattern": "Harmonic mean scoring",
+          "description": "Final score computed as harmonic mean of redundancy and retained information",
+          "source": "Chunk 7:580-583"
+        },
+        {
+          "pattern": "Tagged output extraction",
+          "description": "Outputs wrapped in XML-like tags for extraction (e.g., <Merged>, <Redundancy>, <Retained>)",
+          "source": "Chunk 7:29-31, 417-419"
+        },
+        {
+          "pattern": "LLM-as-judge",
+          "description": "LLM scores merged documents on redundancy and retained information criteria",
+          "source": "Chunk 7:405-419"
+        },
+        {
+          "pattern": "Iterative improvement prompting",
+          "description": "Prompt asks to improve merged result by adding information and removing redundancy",
+          "source": "Chunk 7:29-30"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Graph abstraction for reasoning",
+          "description": "Graph structure provides ontological framework for organizing and relating LLM thoughts and their dependencies",
+          "source": "Chunk 1:73-82"
+        },
+        {
+          "mechanism": "Heterogeneous graph modeling",
+          "description": "Supports heterogeneous graphs G = (V, E, c) where c maps vertices to different classes (e.g., plans vs paragraphs)",
+          "source": "Chunk 1:253-259"
+        },
+        {
+          "mechanism": "Scoring and ranking functions",
+          "description": "Evaluation function E(v, G, p_theta) and ranking function R(G, p_theta, h) for thought quality assessment",
+          "source": "Chunk 1:370-377"
+        }
+      ]
+    },
+    "20-Agentic_RAG_Survey": {
+      "paper_id": "20-Agentic_RAG_Survey",
+      "title": "Agentic Retrieval-Augmented Generation: A Survey on Agentic RAG",
+      "entity_types": [
+        "Agent",
+        "Activity",
+        "Entity",
+        "Tool",
+        "Memory",
+        "Goal",
+        "Data"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Traditional RAG",
+          "relationship": "extends",
+          "details": "Agentic RAG overcomes static workflows and limited contextual adaptability through autonomous agents",
+          "source": "Chunk 1:461-472"
+        },
+        {
+          "compared_to": "Graph RAG",
+          "relationship": "integrates_with",
+          "details": "Agent-G and GeAR combine graph knowledge bases with agentic retrieval",
+          "source": "Chunk 2:449-452, 586-600"
+        },
+        {
+          "compared_to": "Modular RAG",
+          "relationship": "builds_upon",
+          "details": "Agentic RAG builds on modularity while adding agent-based autonomy",
+          "source": "Chunk 1:344-346"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "Dynamic Retrieval",
+          "description": "Agents autonomously manage retrieval strategies based on query complexity",
+          "source": "Chunk 1:357-358"
+        },
+        {
+          "pattern": "Query Reformulation",
+          "description": "Query Refinement Agent rewrites queries to improve retrieval precision",
+          "source": "Chunk 2:208-209, 236-237"
+        },
+        {
+          "pattern": "Multi-Step Reasoning",
+          "description": "Iterative retrieval and refinement for complex queries",
+          "source": "Chunk 2:342-344"
+        },
+        {
+          "pattern": "Knowledge Graph Integration",
+          "description": "Agent-G integrates graph knowledge bases with document retrieval",
+          "source": "Chunk 2:449-452"
+        }
+      ],
+      "agentic_workflows": [
+        {
+          "pattern": "Prompt Chaining",
+          "description": "Sequential processing where each step builds on previous output",
+          "source": "Chunk 1:620-632"
+        },
+        {
+          "pattern": "Routing",
+          "description": "Classification-based input direction to specialized processes",
+          "source": "Chunk 1:644-655"
+        },
+        {
+          "pattern": "Parallelization",
+          "description": "Concurrent execution of independent tasks (sectioning/voting)",
+          "source": "Chunk 1:671-676"
+        },
+        {
+          "pattern": "Orchestrator-Workers",
+          "description": "Central orchestrator delegates to specialized worker agents",
+          "source": "Chunk 1:696-707"
+        },
+        {
+          "pattern": "Evaluator-Optimizer",
+          "description": "Iterative refinement through evaluation feedback",
+          "source": "Chunk 1:721-731"
+        }
+      ],
+      "generative_ai_patterns": [
+        {
+          "pattern": "Reflection",
+          "description": "Agents iteratively evaluate and refine outputs through self-feedback",
+          "source": "Chunk 1:512-531"
+        },
+        {
+          "pattern": "Planning",
+          "description": "Autonomous task decomposition into manageable subtasks",
+          "source": "Chunk 1:540-549"
+        },
+        {
+          "pattern": "Tool Use",
+          "description": "External tool/API interaction for extended capabilities",
+          "source": "Chunk 1:555-569"
+        },
+        {
+          "pattern": "Multi-Agent Collaboration",
+          "description": "Task specialization and parallel processing via agent communication",
+          "source": "Chunk 1:575-592"
+        },
+        {
+          "pattern": "Self-Refine",
+          "description": "Iterative refinement with self-feedback mechanisms",
+          "source": "Chunk 1:531"
+        },
+        {
+          "pattern": "ReAct",
+          "description": "Referenced as agentic pattern foundation",
+          "source": "Chunk 1:71"
+        }
+      ],
+      "agent_ontology_integration": [
+        {
+          "mechanism": "Vector Database Querying",
+          "description": "Agents query vector databases for semantic retrieval",
+          "source": "Chunk 1:161-163"
+        },
+        {
+          "mechanism": "Knowledge Graph Integration",
+          "description": "Agent-G integrates graph knowledge bases with document retrieval",
+          "source": "Chunk 2:449-478"
+        },
+        {
+          "mechanism": "Graph Expansion",
+          "description": "GeAR expands retrieval to include graph-structured entity relationships",
+          "source": "Chunk 2:595-597"
+        },
+        {
+          "mechanism": "Ontology-Guided Retrieval",
+          "description": "Graph hierarchies structure multi-hop reasoning",
+          "source": "Chunk 2:466-467"
+        },
+        {
+          "mechanism": "Hybrid Structured-Unstructured",
+          "description": "Combining graph data with document retrieval for comprehensive answers",
+          "source": "Chunk 2:450-451"
+        }
+      ]
+    },
+    "21-LLM_Smart_Contracts_from_BPMN": {
+      "paper_id": "21-LLM_Smart_Contracts_from_BPMN",
+      "title": "On LLM-Assisted Generation of Smart Contracts from Business Processes",
+      "entity_types": "N/A - Paper focuses on LLM code generation evaluation, not ontology design",
+      "framework_comparison": [
+        {
+          "compared_to": "Traditional rule-based code generation",
+          "relationship": "evaluates_alternative",
+          "details": "LLMs outperform traditional rule-based approaches in code-to-code translation but lack reliability for smart contracts",
+          "source": "Chunk 1:54-61"
+        },
+        {
+          "compared_to": "Proprietary vs Open-source LLMs",
+          "relationship": "compares",
+          "details": "Proprietary models (GPT-4.1, Claude Sonnet 4, Grok 3) generally outperform open-source (Llama, DeepSeek, Qwen) but introduce data sovereignty risks",
+          "source": "Chunk 1:164-170"
+        }
+      ],
+      "ai_integration": [
+        {
+          "pattern": "BPMN-to-Solidity code generation",
+          "description": "LLMs transform BPMN 2.0 choreography models into executable Solidity smart contracts for EVM blockchain",
+          "source": "Chunk 1:92-100"
+        },
+        {
+          "pattern": "Automated evaluation framework",
+          "description": "Framework generates conforming/non-conforming traces to benchmark LLM-generated smart contract correctness",
+          "source": "Chunk 1:230-241"
+        },
+        {
+          "pattern": "LLM integration in BPM lifecycle",
+          "description": "LLMs evaluated across modeling, prediction, automation phases of business process management",
+          "source": "Chunk 1:180-186"
+        }
+      ],
+      "agentic_workflows": "N/A - Paper focuses on single-LLM code generation, not multi-agent orchestration",
+      "generative_ai_patterns": [
+        {
+          "pattern": "Zero-shot prompting",
+          "description": "Models complete tasks based solely on instructions without prior examples",
+          "source": "Chunk 1:145-147"
+        },
+        {
+          "pattern": "Few-shot prompting (one-shot, two-shot)",
+          "description": "Providing illustrative examples within input; tested one-shot and two-shot variants",
+          "source": "Chunk 1:145-147, 464-470"
+        },
+        {
+          "pattern": "Temperature control",
+          "description": "Set to 0 for quasi-deterministic outputs; lower values produce more predictable results",
+          "source": "Chunk 1:171-174, 478"
+        },
+        {
+          "pattern": "Token-based processing",
+          "description": "Input/output as tokens influences computational load; model size (parameters) affects performance",
+          "source": "Chunk 1:148-163"
+        }
+      ],
+      "agent_ontology_integration": "N/A - Paper does not address ontology-guided LLM reasoning"
+    },
+    "22-RPA_Framework_BPM_Activities": {
+      "paper_id": "22-RPA_Framework_BPM_Activities",
+      "title": "A framework to evaluate the viability of robotic process automation for business process activities",
+      "entity_types": [
+        "Activity",
+        "Task",
+        "Agent/Robot",
+        "Resource",
+        "Data",
+        "System"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "Process Mining",
+          "relationship": "integrates_with",
+          "details": "Uses event logs and process mining software (Celonis) to evaluate RPA viability criteria",
+          "source": "Chunk 1:422-426"
+        },
+        {
+          "compared_to": "BPM",
+          "relationship": "extends",
+          "details": "Framework specifically targets BPM activities for RPA assessment",
+          "source": "Chunk 1:16-23"
+        }
+      ],
+      "ai_integration": "N/A - paper published 2020, predates LLM/AI integration discussion",
+      "agentic_workflows": "N/A - paper focuses on single-task RPA automation rather than multi-agent orchestration",
+      "generative_ai_patterns": "N/A - paper predates LLM/generative AI discussion",
+      "agent_ontology_integration": "N/A - no ontology-AI integration discussed"
+    },
+    "23-UFO_Story_Ontological_Foundations": {
+      "paper_id": "23-UFO_Story_Ontological_Foundations",
+      "title": "Towards ontological foundations for conceptual modeling: The unified foundational ontology (UFO) story",
+      "entity_types": [
+        {
+          "name": "Endurant",
+          "description": "Entities wholly present at any time they exist (objects, substances)",
+          "chunk_ref": "1:173-181",
+          "quote": "UFO-A: An Ontology of Endurants dealing with structural conceptual modeling..."
+        },
+        {
+          "name": "Perdurant",
+          "description": "Entities that unfold in time, having temporal parts (events, processes)",
+          "chunk_ref": "1:183-185",
+          "quote": "UFO-B: An Ontology of Perdurants dealing with Mereology, Temporal Ordering..."
+        },
+        {
+          "name": "Intentional Entity",
+          "description": "Mental states and intentional phenomena (beliefs, desires, intentions, goals)",
+          "chunk_ref": "1:191-193",
+          "quote": "notions such as Beliefs, Desires, Intentions, Goals, Actions..."
+        },
+        {
+          "name": "Social Entity",
+          "description": "Social constructs and relational complexes (commitments, claims, social roles)",
+          "chunk_ref": "1:191-193",
+          "quote": "Commitments and Claims, Social Roles and Social Particularized Relational Complexes..."
+        },
+        {
+          "name": "Moment (Trope/Mode/Quality)",
+          "description": "Particularized properties - existentially dependent on bearers",
+          "chunk_ref": "1:127-133",
+          "quote": "accidents (particularized properties, moments, qualities, modes, tropes)..."
+        },
+        {
+          "name": "Substance Sortal (Kind)",
+          "description": "Types that supply identity criteria to their instances",
+          "chunk_ref": "1:366-368",
+          "quote": "substance sortals (kinds), phased-sortals (roles and phases)..."
+        },
+        {
+          "name": "Relator",
+          "description": "Particularized relational properties that ground material relations",
+          "chunk_ref": "1:192",
+          "quote": "Social Particularized Relational Complexes (Social Relators)"
+        }
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "BWW (Bunge-Wand-Weber)",
+          "relationship": "critiques and extends",
+          "details": "BWW based on Bunge's philosophy of science inadequate for conceptual modeling which requires descriptive metaphysics accounting for cognition and linguistic competence",
+          "source": "Chunk 1:105-125"
+        },
+        {
+          "compared_to": "DOLCE",
+          "relationship": "unifies with GFO to create UFO",
+          "details": "Both DOLCE and GFO based on Aristotelian Square (Four-Category Ontologies), but DOLCE lacks universals as category and rich theory of relations",
+          "source": "Chunk 1:138-162"
+        },
+        {
+          "compared_to": "GFO",
+          "relationship": "unifies with DOLCE to create UFO",
+          "details": "GFO theory of relations subject to Bradley Regress making it unsuitable for conceptual modeling applications",
+          "source": "Chunk 1:137-162"
+        },
+        {
+          "compared_to": "OntoClean",
+          "relationship": "extends with richer type theory",
+          "details": "UFO systematizes notions pervasive in conceptual modeling (types, roles, phases, mixins) that OntoClean addresses partially",
+          "source": "Chunk 1:152-156"
+        },
+        {
+          "compared_to": "UML",
+          "relationship": "provides ontological foundations for",
+          "details": "OntoUML is ontologically well-founded version of UML 2.0 class diagrams",
+          "source": "Chunk 1:213-222"
+        },
+        {
+          "compared_to": "TOGAF, ArchiMate, RM-ODP, TROPOS, AORML, ARIS, BPMN",
+          "relationship": "used to analyze and reengineer",
+          "details": "UFO employed as basis for analyzing, reengineering and integrating many modeling languages and standards",
+          "source": "Chunk 1:196-198"
+        }
+      ],
+      "ai_integration": "N/A - paper published 2015, predates LLM/AI integration discussion",
+      "agentic_workflows": "N/A - paper predates agentic AI workflow discussion",
+      "generative_ai_patterns": "N/A - paper published 2015, predates generative AI",
+      "agent_ontology_integration": "N/A - paper predates AI agent-ontology integration patterns"
+    },
+    "24-Enterprise_Ontoloty": {
+      "paper_id": "24-Enterprise_Ontoloty",
+      "title": "Enterprise Ontology (CORRUPTED - Content Unreadable)",
+      "entity_types": [],
+      "framework_comparison": [],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (based on filename)",
+      "agentic_workflows": [],
+      "generative_ai_patterns": [],
+      "agent_ontology_integration": []
+    },
+    "31-BBO_BPMN_Ontology": {
+      "paper_id": "31-BBO_BPMN_Ontology",
+      "title": "BBO: BPMN 2.0 Based Ontology for Business Process Representation",
+      "entity_types": [
+        "Process",
+        "Activity",
+        "Task",
+        "SubProcess",
+        "CallActivity",
+        "Agent",
+        "Event",
+        "Gateway",
+        "SequenceFlow",
+        "Resource",
+        "HumanResource",
+        "SoftwareResource",
+        "MaterialResource",
+        "WorkProduct",
+        "ManufacturingFacility",
+        "Station",
+        "Cell",
+        "Shop",
+        "Factory",
+        "Role",
+        "Job",
+        "InputOutputSpecification",
+        "Parameter",
+        "ParameterValue"
+      ],
+      "framework_comparison": [
+        {
+          "compared_to": "BPMN 2.0",
+          "relationship": "extends",
+          "details": "BBO extracts and extends BPMN 2.0 process-execution fragment, adding resource taxonomies, manufacturing facilities, and enhanced agent modeling not supported by BPMN",
+          "source": "Chunk 1:89-92"
+        },
+        {
+          "compared_to": "Enterprise Ontology (Uschold)",
+          "relationship": "related",
+          "details": "Both address business process representation, but Enterprise Ontology is more general",
+          "source": "Chunk 1:110-116"
+        },
+        {
+          "compared_to": "SUPER project ontologies",
+          "relationship": "related",
+          "details": "Both emerged from BP representation research, BBO focuses on process execution",
+          "source": "Chunk 1:110-112"
+        },
+        {
+          "compared_to": "Karray maintenance ontology",
+          "relationship": "reuses",
+          "details": "BBO resource taxonomy inspired by Karray's industrial maintenance process ontology",
+          "source": "Chunk 1:302-303"
+        },
+        {
+          "compared_to": "Chungoora manufacturing ontology",
+          "relationship": "reuses",
+          "details": "ManufacturingFacility taxonomy reused from Chungoora's model-driven ontology",
+          "source": "Chunk 1:309-310"
+        },
+        {
+          "compared_to": "EPC (Event Process Chain)",
+          "relationship": "superior",
+          "details": "BPMN offers finer grained representation than EPC and an execution logic for its elements",
+          "source": "Chunk 1:113-115"
+        }
+      ],
+      "ai_integration": "N/A - paper predates LLM/AI integration discussion (2019)",
+      "agentic_workflows": "N/A - paper predates multi-agent AI systems discussion",
+      "generative_ai_patterns": "N/A - paper predates LLM/generative AI patterns",
+      "agent_ontology_integration": "N/A - paper predates AI-ontology integration patterns"
+    }
+  }
+}

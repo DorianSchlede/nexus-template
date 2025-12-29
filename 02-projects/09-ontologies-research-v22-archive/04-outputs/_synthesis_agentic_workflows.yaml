@@ -1,0 +1,133 @@
+field: agentic_workflows
+aggregated_at: '2025-12-29T11:26:22.941614'
+batches_merged: 1
+patterns_input: 14
+patterns_output: 14
+patterns:
+- name: Agentic Workflow Paradigm Definition
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:51-54)
+    quote: agentic workflows, where autonomous agents make decisions, plan tasks,
+      and coordinate with humans and other agents
+  description: Defines agentic workflows as a new paradigm where AI agents operate
+    autonomously to make decisions, plan tasks, and coordinate with both humans and
+    other agents. This represents a shift from static, deterministic workflows to
+    dynamic, agent-driven execution patterns.
+- name: Non-Deterministic Dynamic Workflow Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:81-84)
+    quote: agentic workflows are non-deterministic, shaped by near real-time data,
+      adaptive decisions, and evolving interactions
+  description: Agentic workflows exhibit non-deterministic behavior, distinguishing
+    them from traditional workflows with static, deterministic paths. They are shaped
+    by real-time data, adaptive decisions, and continuously evolving interactions.
+    They display dynamic, cyclic behavior where agent outputs inform subsequent decisions
+    or feedback loops.
+- name: Multi-Agent Framework Orchestration
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:141-147)
+    quote: LangChain, AutoGen, LangGraph, Academy, and CrewAI support multi-agent
+      systems that interact through prompt exchanges
+  description: Identifies key multi-agent orchestration frameworks including LangChain,
+    AutoGen, LangGraph, Academy, and CrewAI. These frameworks support multi-agent
+    systems that interact through prompt exchanges, calls to foundation models, and
+    shared context. They implement the Model Context Protocol (MCP) standard.
+- name: MCP Protocol for Agent Coordination
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:145-150)
+    quote: MCP defines core agentic AI development concepts, including tools, prompts,
+      resources, context management, and agent-client architecture
+  description: 'The Model Context Protocol (MCP) defines core agentic AI concepts:
+    tools, prompts, resources, context management, and agent-client architecture.
+    Agents can communicate with external sources like knowledge bases or web pages
+    for Retrieval-Augmented Generation (RAG) to dynamically augment prompts.'
+- name: Cross-Facility Distributed Agent Execution
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:151-159)
+    quote: managing execution across physically and logically distributed facilities
+      that include edge devices, cloud services, and HPC systems
+  description: Agentic workflows span a computing continuum including edge devices,
+    cloud services, and HPC systems. Data streams in near real-time from experimental
+    facilities to HPC systems, with AI agents interacting with this data across systems.
+    This requires reliable data movement and coherent understanding of agent interactions.
+- name: Agent-Workflow Integration Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:254-256)
+    quote: provenance model for representing AI agent interactions, model invocations,
+      and their relationships to non-agentic tasks and data in agentic workflows
+  description: PROV-AGENT models AI agent interactions alongside traditional workflow
+    components. It extends W3C PROV to unify agents and traditional components as
+    first-class elements, enabling representation of both agentic and non-agentic
+    tasks within a single workflow provenance graph.
+- name: Multi-Agent Workflow Instantiation
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:281-284)
+    quote: Multi-agentic workflows, with other AI agents, each with their own tools
+      and reasoning paths, can be instantiated within the same provenance graph
+  description: The provenance model supports multi-agent scenarios where multiple
+    AI agents with their own tools and reasoning paths can be instantiated in the
+    same workflow. This enables representation of collaborative or parallel agent
+    behaviors within a workflow.
+- name: Agent Tool Execution Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:285-291)
+    quote: an AI agent can be associated with one or many tool executions (AgentTool)
+      and each tool may be informed by one or many AIModelInvocations
+  description: Following MCP terminology, an AI agent can be associated with multiple
+    tool executions. Each tool execution (AgentTool) may be informed by one or many
+    AIModelInvocations. Each invocation uses a Prompt and specific AIModel, generating
+    a ResponseData object attributed to the agent.
+- name: Iterative Agent Decision Loop
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:439-445)
+    quote: the decision made for each layer informs the decision logic in the next,
+      enabling the system to learn over the course of a print
+  description: Describes iterative agent decision-making where each decision informs
+    the next iteration. This creates feedback loops where agent outputs at iteration
+    i influence iteration i+1. The pattern enables continuous learning within workflow
+    execution but also risk of error propagation.
+- name: Agent Context and RAG Integration
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:304-306)
+    quote: data can be used by the agent as part of reasoning or planning, for example
+      through RAG strategies to enhance prompts with relevant contextual knowledge
+  description: Agents can consume system-level and contextual data (SchedulingData,
+    TelemetryData) as part of reasoning or planning. RAG strategies enhance prompts
+    with relevant contextual knowledge, enabling agents to make decisions informed
+    by workflow context.
+- name: Hierarchical Agent-Workflow Association
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:263-268)
+    quote: Campaign, Workflow, and Task, modeled as subclasses of PROV Activities.
+      Campaigns are associated with Person or Organization agents
+  description: Hierarchical workflow structure with Campaign > Workflow > Task, all
+    modeled as PROV Activities. Campaigns are associated with Person or Organization
+    agents. Tasks consume and produce domain-specific data, with agentic tools integrated
+    at the task level.
+- name: Agent Error Propagation and Traceability
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:88-91)
+    quote: risks are amplified in workflows where agent decisions influence other
+      agents or downstream tasks, potentially affecting scientific conclusions
+  description: In multi-agent workflows, risks are amplified when agent decisions
+    influence other agents or downstream tasks. Errors can propagate through the workflow,
+    compounding and potentially affecting scientific conclusions or operational outcomes.
+    This necessitates provenance tracking for traceability.
+- name: Agent Accountability Query Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:493-509)
+    quote: Q1. Given an agent decision, what was the complete lineage until the first
+      input data?
+  description: 'Defines key provenance queries for agent accountability: (Q1) complete
+    lineage from decision to first input, (Q2) agent decision with reasoning context,
+    (Q3) LLM prompt/response for surprising decisions, (Q4) downstream influence of
+    decisions, (Q5) error origin and propagation paths.'
+- name: Agent-Prompted LLM Invocation Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:354-366)
+    quote: Tool executions are often informed by one or more AIModel calls... wrapper
+      captures the prompt, response, model metadata
+  description: Agent tools execute by invoking LLM services (e.g., OpenAI, SambaNova).
+    A wrapper captures prompt, response, model metadata (provider, name, temperature),
+    and telemetry. The tool is linked to AIModelInvocation via wasInformedBy relationship,
+    connecting tool execution to LLM reasoning.

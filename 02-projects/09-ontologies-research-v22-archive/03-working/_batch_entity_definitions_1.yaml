@@ -1,0 +1,177 @@
+---
+batch_id: "entity_definitions_1"
+field: entity_definitions
+extracted_at: "2025-12-29T12:00:00Z"
+chunks_read: 6
+patterns_found: 32
+---
+
+patterns:
+  # Core Knowledge Graph Definition
+  - name: "Knowledge Graph Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:138-142)"
+    quote: "a knowledge graph as a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations"
+    description: "Formal definition of a knowledge graph as a data structure where nodes represent entities and edges represent relations between entities. This establishes the fundamental entity-relation paradigm that underpins all knowledge graph structures."
+
+  - name: "Data Graph Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:77-82)"
+    quote: "a data graph as a collection of data represented as nodes and edges using one of the models discussed in Section 2. We refer to a knowledge graph as a data graph potentially enhanced with representations"
+    description: "Distinguishes data graph (raw structure) from knowledge graph (data graph enhanced with schema, identity, context, ontologies, rules). Establishes that knowledge graphs are layered structures with a data graph foundation."
+
+  # Node Types and Representations
+  - name: "Entity Node Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:140-142)"
+    quote: "whose nodes represent entities of interest and whose edges represent relations between these entities"
+    description: "Nodes in knowledge graphs represent entities - real-world things of interest. This is the fundamental building block for entity representation in graph-based knowledge structures."
+
+  - name: "Datatype Nodes (Literals)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:712-720)"
+    quote: "Most practical data models for graphs allow for defining nodes that are datatype values. RDF utilises XML Schema Datatypes (XSD), amongst others, where a datatype node is given as a pair (l,d)"
+    description: "Datatype nodes (literals) represent typed values like strings, integers, dates. They consist of a lexical string and a datatype IRI. These nodes cannot have outgoing edges and represent atomic values rather than entities."
+
+  - name: "Blank Nodes (Existential Nodes)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:779-806)"
+    quote: "some graph models permit the use of existential nodes... These edges denote that there exists a common venue... without identifying it. Existential nodes are supported in RDF as blank nodes"
+    description: "Blank nodes represent anonymous entities whose identity is unknown or unspecified. They support modeling incomplete information by asserting existence without identification."
+
+  # Class and Type Definitions
+  - name: "Class Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:106-118)"
+    quote: "we may decide to define classes to denote these groupings, such as Event, City, etc... a class hierarchy for events where children are defined to be subclasses of their parents"
+    description: "Classes define natural groupings of entities sharing common characteristics. Classes can form hierarchies through subclass relationships, enabling type inheritance and categorization."
+
+  - name: "Subclass Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:116-118)"
+    quote: "children are defined to be subclasses of their parents such that if we find an edge EID15 type Food Festival... we may also infer that EID15 type Festival and EID15 type Event"
+    description: "Subclass relationships create hierarchical taxonomies where membership in a child class implies membership in all parent classes. Enables type inference through class hierarchies."
+
+  # Property Definitions
+  - name: "Property (Edge Label) Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:120-127)"
+    quote: "we may also wish to define the semantics of edge labels, aka properties. Returning to Figure 1, we may consider that the properties city and venue are sub-properties of a more general property location"
+    description: "Properties are edge labels that define the types of relations between entities. Properties can form hierarchies through sub-property relationships and have defined domains and ranges."
+
+  - name: "Domain and Range"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:127-174)"
+    quote: "We may further define the domain of properties, indicating the class(es) of entities for nodes from which edges with that property extend... Conversely, we may define the range of properties"
+    description: "Domain specifies the class of subject entities for a property; range specifies the class of object entities. These constraints enable type inference from property usage."
+
+  # Ontology Entity Types
+  - name: "Individual Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:473-479)"
+    quote: "Individuals (e.g., Santiago, EID16), sometimes distinguished from classes and properties. First, we can assert (binary) relations between individuals using edges"
+    description: "Individuals are concrete entities (instances) that can have properties asserted about them. Distinguished from classes (categories) and properties (relations). Fundamental unit of assertion in ontologies."
+
+  - name: "Same As Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:481-484)"
+    quote: "OWL further allows for defining relations to explicitly state that two terms refer to the same entity, where, e.g., Region V same as Region de Valparaiso states that both refer to the same region"
+    description: "Same-as relations declare that two different identifiers refer to the same real-world entity. Essential for entity resolution and data integration across knowledge graphs."
+
+  - name: "Different From Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:485-487)"
+    quote: "two terms refer to different entities, where, e.g., Valparaiso diff. from Region de Valparaiso distinguishes the city from the region of the same name"
+    description: "Different-from relations explicitly declare that two identifiers refer to distinct entities. Disambiguates entities that might otherwise be confused due to similar names."
+
+  # Property Characteristics
+  - name: "Transitive Property"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:498-499)"
+    quote: "We can further define a particular property to denote a transitive, symmetric, asymmetric, reflexive, or irreflexive relation"
+    description: "Transitive properties propagate through chains: if A relates to B and B relates to C, then A relates to C. Example: 'part of' - if X is part of Y and Y is part of Z, then X is part of Z."
+
+  - name: "Symmetric Property"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:595)"
+    quote: "Symmetric: p type Symmetric, x p y iff y p x, nearby type Symmetric"
+    description: "Symmetric properties hold in both directions: if X relates to Y, then Y relates to X. Example: 'nearby' - if A is nearby B, then B is nearby A."
+
+  - name: "Functional Property"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:500-503)"
+    quote: "define the multiplicity of the relation denoted by properties, based on being functional (many-to-one) or inverse-functional (one-to-many)"
+    description: "Functional properties have at most one value for any subject (many-to-one). Inverse-functional properties have at most one subject for any value (one-to-many). Enable identity inference."
+
+  - name: "Property Chain"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:508-511)"
+    quote: "we can relate a property to a chain (a path expression only allowing concatenation of properties) such that pairs of entities related by the chain are also related by the given property"
+    description: "Property chains define composite relations: if X-p1-Y-p2-Z, then X-p3-Z where p3 is defined as the chain of p1 and p2. Enables inference over multi-hop paths."
+
+  # Class Construction Features
+  - name: "Class Equivalence"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:656-658)"
+    quote: "Given a pair of classes, OWL allows for defining that they are equivalent, or disjoint"
+    description: "Class equivalence declares that two class definitions denote the same set of individuals. Enables vocabulary alignment across different ontologies and data sources."
+
+  - name: "Class Disjointness"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:657-658)"
+    quote: "OWL allows for defining that they are equivalent, or disjoint"
+    description: "Class disjointness declares that two classes cannot share any instances. Example: DomesticAirport and InternationalAirport might be defined as disjoint (no airport can be both)."
+
+  - name: "Class Complement"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:659-661)"
+    quote: "one can define a novel class as the complement of another class, the union or intersection of a list"
+    description: "Complement defines a class containing all individuals NOT in another class. Example: 'Dead' as complement of 'Alive' - anything not alive is dead."
+
+  - name: "Class Union"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:663-664)"
+    quote: "the union or intersection of a list (of arbitrary length) of other classes"
+    description: "Union defines a class containing all individuals in ANY of a set of classes. Example: 'Artwork' as union of 'Painting', 'Sculpture', 'Installation'."
+
+  - name: "Class Intersection"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:663-664)"
+    quote: "the union or intersection of a list (of arbitrary length) of other classes"
+    description: "Intersection defines a class containing only individuals in ALL of a set of classes. Example: 'WorkingStudent' as intersection of 'Worker' and 'Student'."
+
+  - name: "Class Enumeration"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:664-665)"
+    quote: "or as an enumeration of all of its instances"
+    description: "Enumeration explicitly lists all members of a class. Example: 'Continent' enumerated as {Africa, Antarctica, Asia, Australia, Europe, North America, South America}."
+
+  # Property Restrictions
+  - name: "Some Values Restriction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:666-668)"
+    quote: "by placing restrictions on a particular property p, one can define classes whose instances are all of the entities that have: some value from a given class on p"
+    description: "Existential restriction: class of entities having at least one value from a specified class for a property. Example: 'EUCitizen' as having some 'nationality' value from 'EUState'."
+
+  - name: "All Values Restriction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:668-669)"
+    quote: "all values from a given class on p"
+    description: "Universal restriction: class of entities where ALL values for a property come from a specified class. Note: satisfied vacuously if no values exist for the property."
+
+  - name: "Has Value Restriction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:669-670)"
+    quote: "have a specific individual as a value on p (has value)"
+    description: "Has-value restriction: class of entities having a specific individual as value. Example: 'ChileanCitizen' as having 'nationality' value 'Chile'."
+
+  - name: "Cardinality Restriction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:671-673)"
+    quote: "have at least, at most or exactly some number of values on p (cardinality)"
+    description: "Cardinality restrictions constrain the number of values an entity can have for a property. Can specify minimum, maximum, or exact count. Example: 'Polyglot' as having at least 2 values for 'fluent'."
+
+  # Interpretation and Semantics
+  - name: "Interpretation Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:373-377)"
+    quote: "we can abstractly define an interpretation of a data graph as being composed of two elements: a domain graph, and a mapping from the terms (nodes and edge-labels) of the data graph to those of the domain graph"
+    description: "Interpretation maps data graph terms to a domain graph of real-world entities and relations. The domain graph follows the same model as the data graph. Foundation for formal semantics."
+
+  - name: "Entity vs Node Distinction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:381-388)"
+    quote: "we will speak of directed edge-labelled graphs and refer to the nodes of the domain graph as entities, and the edges of the domain graph as relations"
+    description: "Critical distinction: nodes are syntactic elements in data graphs; entities are semantic elements in domain graphs. Multiple nodes can map to one entity. Edges map to relations."
+
+  - name: "Open World Assumption"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:404-411)"
+    quote: "under the Open World Assumption (OWA), we cannot be certain that this relation does not exist as this could be part of some knowledge not (yet) described by the graph"
+    description: "OWA assumes that absence of information does not imply falsehood. Unknown statements could be true or false. Standard assumption for incomplete knowledge graphs."
+
+  - name: "Closed World Assumption"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:405-408)"
+    quote: "Under the Closed World Assumption (CWA), if we do not have additional knowledge, then the answer is a definite no - since what is not known is assumed to be false"
+    description: "CWA assumes completeness: anything not stated or derivable is false. Traditional database assumption. Conflicts with incomplete, evolving knowledge graphs."
+
+  - name: "Unique Name Assumption"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:413-415)"
+    quote: "under the Unique Name Assumption (UNA), the data graph describes at least two flights to Santiago (since Vina del Mar and Arica are assumed to be different entities)"
+    description: "UNA assumes different identifiers denote different entities. Simplifies reasoning but prevents recognizing that two terms refer to the same entity without explicit same-as assertion."
+
+  - name: "Model Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:714-717)"
+    quote: "The interpretations that satisfy a graph are called models of the graph"
+    description: "A model is an interpretation that satisfies all axioms in a graph. Entailment is defined as: G entails G' if every model of G is also a model of G'. Foundation for deductive reasoning."

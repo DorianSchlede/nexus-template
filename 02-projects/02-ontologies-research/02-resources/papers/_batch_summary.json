@@ -1,0 +1,719 @@
+{
+  "processed_at": "2025-12-27T22:54:51.291916",
+  "total_pdfs": 23,
+  "successful": 23,
+  "failed": 0,
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "results": [
+    {
+      "source_pdf": "01-UFO_Unified_Foundational_Ontology.pdf",
+      "processed_at": "2025-12-27T22:50:29.114112",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 4,
+      "total_lines": 3240,
+      "total_chars": 181793,
+      "chunks": [
+        {
+          "filename": "01-UFO_Unified_Foundational_Ontology_1.md",
+          "chunk_number": 1,
+          "line_count": 1000,
+          "char_count": 54331
+        },
+        {
+          "filename": "01-UFO_Unified_Foundational_Ontology_2.md",
+          "chunk_number": 2,
+          "line_count": 989,
+          "char_count": 45990
+        },
+        {
+          "filename": "01-UFO_Unified_Foundational_Ontology_3.md",
+          "chunk_number": 3,
+          "line_count": 981,
+          "char_count": 57151
+        },
+        {
+          "filename": "01-UFO_Unified_Foundational_Ontology_4.md",
+          "chunk_number": 4,
+          "line_count": 270,
+          "char_count": 24321
+        }
+      ]
+    },
+    {
+      "source_pdf": "02-Knowledge_Graphs.pdf",
+      "processed_at": "2025-12-27T22:51:34.771038",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 15,
+      "total_lines": 14677,
+      "total_chars": 647843,
+      "chunks": [
+        {
+          "filename": "02-Knowledge_Graphs_1.md",
+          "chunk_number": 1,
+          "line_count": 999,
+          "char_count": 39624
+        },
+        {
+          "filename": "02-Knowledge_Graphs_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 41670
+        },
+        {
+          "filename": "02-Knowledge_Graphs_3.md",
+          "chunk_number": 3,
+          "line_count": 999,
+          "char_count": 35157
+        },
+        {
+          "filename": "02-Knowledge_Graphs_4.md",
+          "chunk_number": 4,
+          "line_count": 1000,
+          "char_count": 40867
+        },
+        {
+          "filename": "02-Knowledge_Graphs_5.md",
+          "chunk_number": 5,
+          "line_count": 999,
+          "char_count": 45892
+        },
+        {
+          "filename": "02-Knowledge_Graphs_6.md",
+          "chunk_number": 6,
+          "line_count": 1000,
+          "char_count": 43704
+        },
+        {
+          "filename": "02-Knowledge_Graphs_7.md",
+          "chunk_number": 7,
+          "line_count": 999,
+          "char_count": 44136
+        },
+        {
+          "filename": "02-Knowledge_Graphs_8.md",
+          "chunk_number": 8,
+          "line_count": 999,
+          "char_count": 45137
+        },
+        {
+          "filename": "02-Knowledge_Graphs_9.md",
+          "chunk_number": 9,
+          "line_count": 999,
+          "char_count": 50983
+        },
+        {
+          "filename": "02-Knowledge_Graphs_10.md",
+          "chunk_number": 10,
+          "line_count": 1000,
+          "char_count": 51328
+        },
+        {
+          "filename": "02-Knowledge_Graphs_11.md",
+          "chunk_number": 11,
+          "line_count": 999,
+          "char_count": 50686
+        },
+        {
+          "filename": "02-Knowledge_Graphs_12.md",
+          "chunk_number": 12,
+          "line_count": 1000,
+          "char_count": 49749
+        },
+        {
+          "filename": "02-Knowledge_Graphs_13.md",
+          "chunk_number": 13,
+          "line_count": 999,
+          "char_count": 39869
+        },
+        {
+          "filename": "02-Knowledge_Graphs_14.md",
+          "chunk_number": 14,
+          "line_count": 999,
+          "char_count": 40878
+        },
+        {
+          "filename": "02-Knowledge_Graphs_15.md",
+          "chunk_number": 15,
+          "line_count": 686,
+          "char_count": 28163
+        }
+      ]
+    },
+    {
+      "source_pdf": "03-PROV-AGENT_Unified_Provenance_for_AI_Agents.pdf",
+      "processed_at": "2025-12-27T22:51:37.305873",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 707,
+      "total_chars": 35761,
+      "chunks": [
+        {
+          "filename": "03-PROV-AGENT_Unified_Provenance_for_AI_Agents_1.md",
+          "chunk_number": 1,
+          "line_count": 707,
+          "char_count": 35761
+        }
+      ]
+    },
+    {
+      "source_pdf": "04-PROV-O_to_BFO_Semantic_Mapping.pdf",
+      "processed_at": "2025-12-27T22:51:45.373819",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 2,
+      "total_lines": 1691,
+      "total_chars": 95413,
+      "chunks": [
+        {
+          "filename": "04-PROV-O_to_BFO_Semantic_Mapping_1.md",
+          "chunk_number": 1,
+          "line_count": 995,
+          "char_count": 59816
+        },
+        {
+          "filename": "04-PROV-O_to_BFO_Semantic_Mapping_2.md",
+          "chunk_number": 2,
+          "line_count": 696,
+          "char_count": 35597
+        }
+      ]
+    },
+    {
+      "source_pdf": "05-DOLCE_Descriptive_Ontology.pdf",
+      "processed_at": "2025-12-27T22:51:49.977150",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 2,
+      "total_lines": 1577,
+      "total_chars": 79717,
+      "chunks": [
+        {
+          "filename": "05-DOLCE_Descriptive_Ontology_1.md",
+          "chunk_number": 1,
+          "line_count": 999,
+          "char_count": 48675
+        },
+        {
+          "filename": "05-DOLCE_Descriptive_Ontology_2.md",
+          "chunk_number": 2,
+          "line_count": 578,
+          "char_count": 31042
+        }
+      ]
+    },
+    {
+      "source_pdf": "06-BFO_Function_Role_Disposition.pdf",
+      "processed_at": "2025-12-27T22:51:51.523265",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 591,
+      "total_chars": 27359,
+      "chunks": [
+        {
+          "filename": "06-BFO_Function_Role_Disposition_1.md",
+          "chunk_number": 1,
+          "line_count": 591,
+          "char_count": 27359
+        }
+      ]
+    },
+    {
+      "source_pdf": "07-Classifying_Processes_Barry_Smith.pdf",
+      "processed_at": "2025-12-27T22:51:54.127082",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 2,
+      "total_lines": 1339,
+      "total_chars": 54081,
+      "chunks": [
+        {
+          "filename": "07-Classifying_Processes_Barry_Smith_1.md",
+          "chunk_number": 1,
+          "line_count": 998,
+          "char_count": 42060
+        },
+        {
+          "filename": "07-Classifying_Processes_Barry_Smith_2.md",
+          "chunk_number": 2,
+          "line_count": 341,
+          "char_count": 12021
+        }
+      ]
+    },
+    {
+      "source_pdf": "09-OCEL_20_Specification.pdf",
+      "processed_at": "2025-12-27T22:52:06.806252",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 4,
+      "total_lines": 3450,
+      "total_chars": 102199,
+      "chunks": [
+        {
+          "filename": "09-OCEL_20_Specification_1.md",
+          "chunk_number": 1,
+          "line_count": 1000,
+          "char_count": 42056
+        },
+        {
+          "filename": "09-OCEL_20_Specification_2.md",
+          "chunk_number": 2,
+          "line_count": 999,
+          "char_count": 27387
+        },
+        {
+          "filename": "09-OCEL_20_Specification_3.md",
+          "chunk_number": 3,
+          "line_count": 957,
+          "char_count": 17776
+        },
+        {
+          "filename": "09-OCEL_20_Specification_4.md",
+          "chunk_number": 4,
+          "line_count": 494,
+          "char_count": 14980
+        }
+      ]
+    },
+    {
+      "source_pdf": "10-OC-PM_Object-Centric_Process_Mining.pdf",
+      "processed_at": "2025-12-27T22:52:12.707668",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 2,
+      "total_lines": 1682,
+      "total_chars": 70089,
+      "chunks": [
+        {
+          "filename": "10-OC-PM_Object-Centric_Process_Mining_1.md",
+          "chunk_number": 1,
+          "line_count": 991,
+          "char_count": 36631
+        },
+        {
+          "filename": "10-OC-PM_Object-Centric_Process_Mining_2.md",
+          "chunk_number": 2,
+          "line_count": 691,
+          "char_count": 33458
+        }
+      ]
+    },
+    {
+      "source_pdf": "11-Process_Mining_Event_Knowledge_Graphs.pdf",
+      "processed_at": "2025-12-27T22:52:26.867003",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 3,
+      "total_lines": 2224,
+      "total_chars": 126304,
+      "chunks": [
+        {
+          "filename": "11-Process_Mining_Event_Knowledge_Graphs_1.md",
+          "chunk_number": 1,
+          "line_count": 1000,
+          "char_count": 54032
+        },
+        {
+          "filename": "11-Process_Mining_Event_Knowledge_Graphs_2.md",
+          "chunk_number": 2,
+          "line_count": 991,
+          "char_count": 54713
+        },
+        {
+          "filename": "11-Process_Mining_Event_Knowledge_Graphs_3.md",
+          "chunk_number": 3,
+          "line_count": 233,
+          "char_count": 17559
+        }
+      ]
+    },
+    {
+      "source_pdf": "12-Foundations_of_Process_Event_Data.pdf",
+      "processed_at": "2025-12-27T22:52:31.320718",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 853,
+      "total_chars": 55143,
+      "chunks": [
+        {
+          "filename": "12-Foundations_of_Process_Event_Data_1.md",
+          "chunk_number": 1,
+          "line_count": 853,
+          "char_count": 55143
+        }
+      ]
+    },
+    {
+      "source_pdf": "14-RAG_Ontologic_Graph_Multiagent_LLM.pdf",
+      "processed_at": "2025-12-27T22:52:40.904690",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 3,
+      "total_lines": 2207,
+      "total_chars": 69283,
+      "chunks": [
+        {
+          "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_1.md",
+          "chunk_number": 1,
+          "line_count": 1000,
+          "char_count": 57898
+        },
+        {
+          "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 10051
+        },
+        {
+          "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_3.md",
+          "chunk_number": 3,
+          "line_count": 207,
+          "char_count": 1334
+        }
+      ]
+    },
+    {
+      "source_pdf": "15-SciAgents_Multi-Agent_Graph_Reasoning.pdf",
+      "processed_at": "2025-12-27T22:53:27.858455",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 10,
+      "total_lines": 9629,
+      "total_chars": 549414,
+      "chunks": [
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_1.md",
+          "chunk_number": 1,
+          "line_count": 998,
+          "char_count": 59296
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 53195
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_3.md",
+          "chunk_number": 3,
+          "line_count": 1000,
+          "char_count": 65778
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_4.md",
+          "chunk_number": 4,
+          "line_count": 997,
+          "char_count": 58366
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_5.md",
+          "chunk_number": 5,
+          "line_count": 1000,
+          "char_count": 59294
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_6.md",
+          "chunk_number": 6,
+          "line_count": 999,
+          "char_count": 56603
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_7.md",
+          "chunk_number": 7,
+          "line_count": 999,
+          "char_count": 52293
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_8.md",
+          "chunk_number": 8,
+          "line_count": 998,
+          "char_count": 51187
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_9.md",
+          "chunk_number": 9,
+          "line_count": 996,
+          "char_count": 55337
+        },
+        {
+          "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_10.md",
+          "chunk_number": 10,
+          "line_count": 642,
+          "char_count": 38065
+        }
+      ]
+    },
+    {
+      "source_pdf": "16-KG-Agent_Knowledge_Graph_Reasoning.pdf",
+      "processed_at": "2025-12-27T22:53:37.123199",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 2,
+      "total_lines": 1839,
+      "total_chars": 77694,
+      "chunks": [
+        {
+          "filename": "16-KG-Agent_Knowledge_Graph_Reasoning_1.md",
+          "chunk_number": 1,
+          "line_count": 994,
+          "char_count": 44490
+        },
+        {
+          "filename": "16-KG-Agent_Knowledge_Graph_Reasoning_2.md",
+          "chunk_number": 2,
+          "line_count": 845,
+          "char_count": 33204
+        }
+      ]
+    },
+    {
+      "source_pdf": "17-KG_Reasoning_Logics_Embeddings_Survey.pdf",
+      "processed_at": "2025-12-27T22:53:39.510738",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 850,
+      "total_chars": 46826,
+      "chunks": [
+        {
+          "filename": "17-KG_Reasoning_Logics_Embeddings_Survey_1.md",
+          "chunk_number": 1,
+          "line_count": 850,
+          "char_count": 46826
+        }
+      ]
+    },
+    {
+      "source_pdf": "18-Multi-Agent_Architecture_Taxonomy_LLM.pdf",
+      "processed_at": "2025-12-27T22:54:00.246239",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 4,
+      "total_lines": 3766,
+      "total_chars": 190554,
+      "chunks": [
+        {
+          "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_1.md",
+          "chunk_number": 1,
+          "line_count": 1000,
+          "char_count": 44838
+        },
+        {
+          "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 56716
+        },
+        {
+          "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_3.md",
+          "chunk_number": 3,
+          "line_count": 999,
+          "char_count": 45173
+        },
+        {
+          "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_4.md",
+          "chunk_number": 4,
+          "line_count": 767,
+          "char_count": 43827
+        }
+      ]
+    },
+    {
+      "source_pdf": "19-Graph_of_Thoughts_LLM_Reasoning.pdf",
+      "processed_at": "2025-12-27T22:54:32.174500",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 7,
+      "total_lines": 6855,
+      "total_chars": 183781,
+      "chunks": [
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_1.md",
+          "chunk_number": 1,
+          "line_count": 995,
+          "char_count": 32849
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_2.md",
+          "chunk_number": 2,
+          "line_count": 996,
+          "char_count": 28342
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_3.md",
+          "chunk_number": 3,
+          "line_count": 1000,
+          "char_count": 21259
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_4.md",
+          "chunk_number": 4,
+          "line_count": 1000,
+          "char_count": 27802
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_5.md",
+          "chunk_number": 5,
+          "line_count": 1000,
+          "char_count": 31234
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_6.md",
+          "chunk_number": 6,
+          "line_count": 1000,
+          "char_count": 19157
+        },
+        {
+          "filename": "19-Graph_of_Thoughts_LLM_Reasoning_7.md",
+          "chunk_number": 7,
+          "line_count": 864,
+          "char_count": 23138
+        }
+      ]
+    },
+    {
+      "source_pdf": "20-Agentic_RAG_Survey.pdf",
+      "processed_at": "2025-12-27T22:54:37.380670",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 3,
+      "total_lines": 2830,
+      "total_chars": 120203,
+      "chunks": [
+        {
+          "filename": "20-Agentic_RAG_Survey_1.md",
+          "chunk_number": 1,
+          "line_count": 998,
+          "char_count": 42930
+        },
+        {
+          "filename": "20-Agentic_RAG_Survey_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 34490
+        },
+        {
+          "filename": "20-Agentic_RAG_Survey_3.md",
+          "chunk_number": 3,
+          "line_count": 832,
+          "char_count": 42783
+        }
+      ]
+    },
+    {
+      "source_pdf": "21-LLM_Smart_Contracts_from_BPMN.pdf",
+      "processed_at": "2025-12-27T22:54:39.341460",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 838,
+      "total_chars": 47175,
+      "chunks": [
+        {
+          "filename": "21-LLM_Smart_Contracts_from_BPMN_1.md",
+          "chunk_number": 1,
+          "line_count": 838,
+          "char_count": 47175
+        }
+      ]
+    },
+    {
+      "source_pdf": "22-RPA_Framework_BPM_Activities.pdf",
+      "processed_at": "2025-12-27T22:54:40.630265",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 728,
+      "total_chars": 41327,
+      "chunks": [
+        {
+          "filename": "22-RPA_Framework_BPM_Activities_1.md",
+          "chunk_number": 1,
+          "line_count": 728,
+          "char_count": 41327
+        }
+      ]
+    },
+    {
+      "source_pdf": "23-UFO_Story_Ontological_Foundations.pdf",
+      "processed_at": "2025-12-27T22:54:42.261498",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 649,
+      "total_chars": 58925,
+      "chunks": [
+        {
+          "filename": "23-UFO_Story_Ontological_Foundations_1.md",
+          "chunk_number": 1,
+          "line_count": 649,
+          "char_count": 58925
+        }
+      ]
+    },
+    {
+      "source_pdf": "24-Enterprise_Ontoloty.pdf",
+      "processed_at": "2025-12-27T22:54:48.177424",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 5,
+      "total_lines": 4912,
+      "total_chars": 158941,
+      "chunks": [
+        {
+          "filename": "24-Enterprise_Ontoloty_1.md",
+          "chunk_number": 1,
+          "line_count": 986,
+          "char_count": 42143
+        },
+        {
+          "filename": "24-Enterprise_Ontoloty_2.md",
+          "chunk_number": 2,
+          "line_count": 1000,
+          "char_count": 30894
+        },
+        {
+          "filename": "24-Enterprise_Ontoloty_3.md",
+          "chunk_number": 3,
+          "line_count": 992,
+          "char_count": 39791
+        },
+        {
+          "filename": "24-Enterprise_Ontoloty_4.md",
+          "chunk_number": 4,
+          "line_count": 1000,
+          "char_count": 34927
+        },
+        {
+          "filename": "24-Enterprise_Ontoloty_5.md",
+          "chunk_number": 5,
+          "line_count": 934,
+          "char_count": 11186
+        }
+      ]
+    },
+    {
+      "source_pdf": "31-BBO_BPMN_Ontology.pdf",
+      "processed_at": "2025-12-27T22:54:51.282419",
+      "max_lines_per_chunk": 1000,
+      "overlap_lines": 100,
+      "total_chunks": 1,
+      "total_lines": 644,
+      "total_chars": 39916,
+      "chunks": [
+        {
+          "filename": "31-BBO_BPMN_Ontology_1.md",
+          "chunk_number": 1,
+          "line_count": 644,
+          "char_count": 39916
+        }
+      ]
+    }
+  ]
+}

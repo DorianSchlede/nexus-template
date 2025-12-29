@@ -1,0 +1,147 @@
+---
+batch_id: "quality_metric_1"
+field: quality_metric
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 9
+patterns_found: 28
+---
+
+patterns:
+  # ACE Paper (01-ACE-2510.04618) Quality Metrics
+
+  - name: "Agent Benchmark Performance Improvement"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:126-127)"
+    quote: "ACE consistently outperforms strong baselines, yielding average gains of 10.6% on agents and 8.6% on domain-specific benchmarks"
+    description: "ACE framework demonstrates measurable performance improvements across agent and domain-specific benchmarks. The 10.6% gain on agent tasks and 8.6% on domain-specific benchmarks represents a quantifiable quality metric for context adaptation effectiveness."
+
+  - name: "AppWorld Benchmark Accuracy Improvement"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:331)"
+    quote: "It boosts accuracy on the AppWorld benchmark by up to 17.1% by learning to engineer better contexts from execution feedback alone"
+    description: "ACE enables self-improving agents that achieve 17.1% accuracy improvement on AppWorld through context engineering, demonstrating quality metrics can be achieved without ground-truth labels using execution feedback signals."
+
+  - name: "Adaptation Latency Reduction"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:139-141)"
+    quote: "ACE requires significantly fewer rollouts and lower dollar costs, and achieves 86.9% lower adaptation latency (on average)"
+    description: "Quality metric measuring efficiency of context adaptation. ACE achieves 86.9% reduction in adaptation latency compared to existing methods, enabling scalable self-improvement with higher accuracy and lower overhead."
+
+  - name: "Context Collapse Performance Degradation"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 1:189-196)"
+    quote: "at step 60 the context contained 18,282 tokens and achieved an accuracy of 66.7, but at the very next step it collapsed to just 122 tokens, with accuracy dropping to 57.1"
+    description: "Negative quality metric demonstrating context collapse failure mode. Accuracy degradation from 66.7% to 57.1% (below baseline 63.7%) when monolithic context rewriting causes information loss."
+
+  - name: "Offline Adaptation Latency and Rollouts"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 2:99-100)"
+    quote: "ReAct + ACE 9517(-82.3%) 357(-75.1%)"
+    description: "Quality metrics for offline adaptation: ACE achieves 82.3% reduction in adaptation latency and 75.1% reduction in number of rollouts compared to GEPA, demonstrating significant efficiency improvements."
+
+  - name: "Online Adaptation Token Cost Reduction"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 2:111)"
+    quote: "ACE 5503(-91.5%) 2.9(-83.6%)"
+    description: "Quality metrics for online adaptation on FiNER: 91.5% reduction in adaptation latency and 83.6% reduction in token dollar cost compared to Dynamic Cheatsheet (DC)."
+
+  - name: "Self-Improving Without Labels"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 2:44-45)"
+    quote: "ReAct + ACE achieves an average improvement of 14.8% over the ReAct baseline in this setting"
+    description: "Quality metric demonstrating effectiveness without ground-truth labels. ACE achieves 14.8% average improvement using only execution feedback signals, enabling self-improvement in scenarios where labeled supervision is unavailable."
+
+  - name: "Leaderboard Competitive Performance"
+    chunk_ref: "01-ACE-2510.04618 (Chunk 2:52-54)"
+    quote: "ReAct + ACE (59.4%) matches the top-ranked IBM CUGA (60.3%), a production-level GPT-4.1-based agent"
+    description: "Quality metric comparing against production systems. ACE with smaller open-source model (DeepSeek-V3.1) achieves competitive 59.4% average accuracy matching GPT-4.1-based production agent."
+
+  # Context Survey Paper (02-ContextSurvey-2507.13334) Quality Metrics
+
+  - name: "Chain-of-Thought Accuracy Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:312-313)"
+    quote: "Zero-shot CoT uses trigger phrases like 'Let's think step by step,' improving MultiArith accuracy from 17.7% to 78.7%"
+    description: "Quality metric for reasoning prompting technique. Chain-of-Thought with zero-shot trigger phrases achieves 61 percentage point accuracy improvement on MultiArith mathematical reasoning benchmark."
+
+  - name: "Tree-of-Thoughts Success Rate"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:318)"
+    quote: "Tree-of-Thoughts (ToT) organizes reasoning as hierarchical structures...increasing Game of 24 success rates from 4% to 74%"
+    description: "Quality metric for hierarchical reasoning. ToT achieves 70 percentage point improvement in Game of 24 success rates through exploration, lookahead, and backtracking capabilities."
+
+  - name: "Graph-of-Thoughts Quality and Cost"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:320)"
+    quote: "Graph-of-Thoughts (GoT) models reasoning as arbitrary graphs...improving quality by 62% and reducing costs by 31% compared to ToT"
+    description: "Dual quality metrics for graph-based reasoning: 62% quality improvement and 31% cost reduction compared to Tree-of-Thoughts approach."
+
+  - name: "Cognitive Prompting AIME Performance"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 2:332-333)"
+    quote: "GPT-4.1 performance on AIME2024 increasing from 26.7% to 43.3% through structured cognitive operation sequences"
+    description: "Quality metric for cognitive architecture integration. Structured cognitive operations achieve 16.6 percentage point improvement on AIME2024 mathematical competition benchmark."
+
+  - name: "Automated Prompt Engineering NLP Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:50-51)"
+    quote: "LM-BFF introduces automated pipelines combining prompt-based fine-tuning with dynamic demonstration incorporation, achieving up to 30% absolute improvement across NLP tasks"
+    description: "Quality metric for automated prompt optimization. LM-BFF achieves up to 30% absolute improvement across NLP tasks through automated prompt engineering and dynamic demonstration selection."
+
+  - name: "Self-Refine Performance Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:56-58)"
+    quote: "Self-refine enables iterative output improvement through self-critique and revision across multiple iterations, with GPT-4 achieving approximately 20% absolute performance improvement"
+    description: "Quality metric for self-refinement mechanisms. GPT-4 achieves 20% absolute performance improvement through iterative self-critique and revision cycles."
+
+  - name: "Multi-Agent Pass@1 Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:58-60)"
+    quote: "Multi-agent collaborative frameworks simulate specialized team dynamics with agents assuming distinct roles...resulting in 29.9-47.1% relative improvement in Pass@1 metrics"
+    description: "Quality metric for multi-agent collaboration. Specialized team dynamics with role-based agents achieve 29.9-47.1% relative improvement in Pass@1 code generation metrics."
+
+  - name: "FlashAttention Speed Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:129-130)"
+    quote: "FlashAttention-2 providing approximately twice the speed through reduced non-matrix multiplication operations and optimized work distribution"
+    description: "Quality metric for attention computation efficiency. FlashAttention-2 achieves 2x speed improvement through memory hierarchy optimization and reduced non-matmul operations."
+
+  - name: "Linear Attention Speedup"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:105-107)"
+    quote: "Linear attention mechanisms reduce complexity from O(N^2) to O(N)...achieving up to 4000x speedup when processing very long sequences"
+    description: "Quality metric for computational efficiency. Linear attention mechanisms achieve up to 4000x speedup for very long sequences by reducing quadratic to linear complexity."
+
+  - name: "StreamingLLM Speedup"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:155-157)"
+    quote: "StreamingLLM enables processing infinitely long sequences...demonstrating up to 22.2x speedup over sliding window recomputation with sequences up to 4 million tokens"
+    description: "Quality metric for infinite context processing. StreamingLLM achieves 22.2x speedup for sequences up to 4 million tokens by retaining attention sink tokens with recent KV cache entries."
+
+  - name: "Heavy Hitter Oracle Throughput"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:162-164)"
+    quote: "Heavy Hitter Oracle (H2O) presents efficient KV cache eviction policies...improving throughput by up to 29x while reducing latency by up to 1.9x"
+    description: "Dual quality metrics for KV cache optimization: H2O achieves 29x throughput improvement and 1.9x latency reduction through intelligent cache eviction based on attention contribution."
+
+  - name: "GraphToken Reasoning Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 3:379-381)"
+    quote: "GraphToken demonstrates substantial improvements by explicitly representing structural information, achieving up to 73 percentage points enhancement on graph reasoning tasks"
+    description: "Quality metric for structured data integration. GraphToken achieves 73 percentage point improvement on graph reasoning tasks through explicit structural representation encoding."
+
+  - name: "Structured Knowledge Summarization"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:61-62)"
+    quote: "structured knowledge representations can improve summarization performance by 40% and 14% across public datasets compared to unstructured memory approaches"
+    description: "Quality metric for knowledge organization. Structured knowledge representations achieve 40% and 14% summarization improvements across datasets compared to unstructured approaches."
+
+  - name: "Lost-in-the-Middle Performance Degradation"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 4:103-107)"
+    quote: "the 'lost-in-the-middle' phenomenon, where LLMs struggle to access information positioned in middle sections...with performance degrading drastically by as much as 73%"
+    description: "Negative quality metric for positional bias. LLMs exhibit up to 73% performance degradation when critical information appears in middle sections of long contexts rather than at beginning or end."
+
+  - name: "LongMemEval Commercial Degradation"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 5:396-399)"
+    quote: "LongMemEval assess five fundamental long-term memory capabilities...demonstrating 30% accuracy degradation in commercial assistants throughout prolonged interactions"
+    description: "Quality metric for memory persistence. Commercial AI assistants show 30% accuracy degradation during extended interactions, revealing critical limitations in long-term memory capabilities."
+
+  - name: "ReTool AIME Accuracy"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 6:251-253)"
+    quote: "ReTool...achieving 67.0% accuracy on AIME2024 benchmarks after only 400 training steps, substantially outperforming text-based RL baselines reaching 40.0% accuracy"
+    description: "Quality metric for tool-integrated reasoning. ReTool achieves 67.0% AIME2024 accuracy with 400 training steps, 27 percentage points higher than text-based RL baselines at 40.0%."
+
+  - name: "GTA Benchmark Human vs AI Gap"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:195-196)"
+    quote: "GPT-4 completing less than 50% of tasks in the GTA benchmark, compared to human performance of 92%"
+    description: "Quality metric revealing AI-human performance gap. GPT-4 achieves less than 50% task completion on GTA benchmark compared to 92% human performance, indicating 42+ percentage point capability gap."
+
+  - name: "GAIA Benchmark Human-AI Gap"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:324-325)"
+    quote: "The GAIA benchmark demonstrates that while humans achieve 92% accuracy on general assistant tasks, advanced models like GPT-4 achieve only 15% accuracy"
+    description: "Quality metric for general assistant capability. GAIA benchmark shows 77 percentage point gap between human (92%) and GPT-4 (15%) performance on general assistant tasks."
+
+  - name: "Self-Refinement Iteration Improvement"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:147)"
+    quote: "GPT-4 achieving approximately 20% improvement through iterative self-refinement processes"
+    description: "Quality metric for self-contextualization. GPT-4 demonstrates 20% performance improvement through iterative self-refinement cycles using Self-Refine, Reflexion, and N-CRITICS frameworks."

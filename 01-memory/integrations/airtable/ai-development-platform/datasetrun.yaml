@@ -1,0 +1,340 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblOrJsp3sqWPGmD6
+table_name: DatasetRun
+exported_at: '2025-12-28T14:12:03.677156'
+field_count: 48
+fields:
+- id: fldmQ1KhkHBEW5uIX
+  name: DatasetRun Name
+  type: singleLineText
+  description: null
+- id: fldyxamqL80wLoMYx
+  name: Datasets
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbltUrvSBnfOb4S8v
+  prefer_single_record_link: false
+  inverse_link_field_id: fld0eqxuFjAVUOd3e
+- id: fldUyZ4PC31HhgK7e
+  name: Count Of Tasks
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldeFCTyUUFQB6jD6
+  name: Count of Tasks With EO
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldq508aRg5Jp4tiZ
+  name: Count of Tasks With DatasetTask
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldNL6muMDw2DRjWy
+  name: Count of Tasks With Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldIG20cVxRKLdnnR
+  name: Avg Variable Accuracy (from AgentTasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldFTPkFIHiTPs4XT
+  referenced_field_ids: []
+- id: fldjawwVRRFy6G3Hg
+  name: Count of Tasks With KeyV
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldv3JQehcFoJmgYD
+  name: Avg KeyV Accuracy (from AgentTasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fld3OOiTnt0QXA3zd
+  referenced_field_ids: []
+- id: fldjP8Cg2dZlH9MEA
+  name: Count of Tasks with AddV
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fld6RIH9enSGd97sB
+  referenced_field_ids: []
+- id: fldC2vC5mrNSs3icG
+  name: Avg AddV Accuracy (from AgentTasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fld6RIH9enSGd97sB
+  referenced_field_ids: []
+- id: fldgsYI3Wkffyk4zx
+  name: Count of Tasks with OtherV
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldMdIPoidXJnUIIV
+  referenced_field_ids: []
+- id: fldIuswW8lAsl0HWP
+  name: Avg OtherV Accuracy (from AgentTasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldMdIPoidXJnUIIV
+  referenced_field_ids: []
+- id: fldiYoY73bR51aUci
+  name: DatasetTask AID (from DatasetTasks) (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fld4bDDHRrWI6WuCo
+- id: fldLZrNujuETqpiR6
+  name: Webhook ID (from Agents) (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fldgniJh4ISQ9wVA3
+- id: fldVTWhttjFNRqFIs
+  name: DatasetTasks (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: flduodJlkvU6Mt4RA
+- id: fldmssTd5IcBlFrZM
+  name: Agents (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fld63cNmqBfQO6ozR
+- id: fldAobuK4bhGvx1o6
+  name: Workspace (from Agents) (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fldKm3OKIGt0PB5p5
+- id: fldUNK8Yy1Nl2td8U
+  name: AgentTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldPvGaaxL741s2vs
+- id: fldgnglwEQLD8uPlI
+  name: VariableTasks (from AgentTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldo11koJZunOWBwy
+- id: fldVPpIqnmmuIlwkb
+  name: VariableTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblKhpqLs06kI01yv
+  prefer_single_record_link: false
+  inverse_link_field_id: fld1278JXvxDvrhX2
+- id: fldePatGrDpjjUd1X
+  name: 'VariableTask UID '
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldVPpIqnmmuIlwkb
+  lookup_field_id: fldizuwX6QjLfWBKe
+- id: fldx6uhzfEcZjyN5Q
+  name: DatasetVariables (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldwoErevq5ahVRho
+  lookup_field_id: flddTNNmKNzG2Oe5r
+- id: fldesgqQEHIalzhIr
+  name: DatasetVariable
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldup7J3hOuuVlgz2
+- id: fldoDfOMkHQwJ1r4Y
+  name: DatasetVariable UID (from DatasetVariable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldesgqQEHIalzhIr
+  lookup_field_id: fldTZ8zU2z8P6HzWs
+- id: fldO69orzmqzPtxco
+  name: Total Tasks
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fld63qMapUuSjhm1l
+  name: Total Variables
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldx7BWMCJ4Nre3vS
+  referenced_field_ids: []
+- id: fld9p7qjg8UIHDRQo
+  name: Avg. Accuracy of All Tasks
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldIG20cVxRKLdnnR
+  formula: AVERAGE({fldIG20cVxRKLdnnR})
+- id: fldzobXKxWnsO1ggI
+  name: Webhook ID
+  type: singleLineText
+  description: null
+- id: fldF9uKQkQn8uTAUP
+  name: DatasetRun AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fldvFEvNwWHFmunmn
+  name: Active AgentVersion (from Datasets)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fldplribrFKOV5pch
+- id: fldhpziX2XEGGvIoO
+  name: Task Type
+  type: singleSelect
+  description: null
+  choices:
+  - id: selQxgWZwN4O0r00p
+    name: Agent Evaluation
+    color: blueLight2
+  - id: selqfJ3fwJmSfZxSG
+    name: Node Evaluation
+    color: cyanLight2
+- id: fld6GiqL8M9y2sNDP
+  name: AgentVersion
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: false
+  inverse_link_field_id: flddD77o85a1dKwip
+- id: fldNsAwQbfHXXrnFP
+  name: NodeVersions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblh0GsN5Et3ApzLS
+  prefer_single_record_link: false
+  inverse_link_field_id: fldCKJkA1Hfw3sDHR
+- id: fldR9LW13Wm2N29TB
+  name: NodeTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldu9AH8UIfiDOdO2
+- id: fldwoErevq5ahVRho
+  name: DatasetTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl9lACSI4fDUzAv4
+  prefer_single_record_link: true
+  inverse_link_field_id: fldDV2DZ8DNWner86
+- id: fldFJwwWf0wUEyJyt
+  name: Task Input
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldwoErevq5ahVRho
+  lookup_field_id: fldTi4FsCd0EW3Lk3
+- id: fldzaMUvVbJwgEAPb
+  name: Node to Run
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblPJ9VKG74mKv7JK
+  prefer_single_record_link: false
+  inverse_link_field_id: fld9V6kz2i0lfPNoJ
+- id: fld1sED9APsjiEbN2
+  name: Active AgentVersion Task Input
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldyxamqL80wLoMYx
+  lookup_field_id: fldmaL07HlEO94bt4
+- id: fldn7RCS6HaoGiCZH
+  name: Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: selBzek1oBiksiC02
+    name: Todo
+    color: redLight2
+  - id: selsSFGYcYeCMwncu
+    name: In progress
+    color: yellowLight2
+  - id: sel2NADBxzpIFQJko
+    name: Done
+    color: greenLight2
+- id: fldbvDwrsOlzixLcH
+  name: Total Analyzed Variables
+  type: rollup
+  description: null
+  record_link_field_id: fldUNK8Yy1Nl2td8U
+  lookup_field_id: fldIUbzo9WnlkKo1O
+  referenced_field_ids: []
+- id: fld0I4TcSM2AjiOwh
+  name: DatasetRunImprovements
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblT1mIwLx9JECKd8
+  prefer_single_record_link: false
+  inverse_link_field_id: fldkU8RhoBddBayJa
+- id: fld503YPixRvr4aNa
+  name: Accuracy Rollup (from VariableTasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldVPpIqnmmuIlwkb
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fldNedeCSIurHy21d
+  name: NodeTasks 2
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fld885iND9iFP0V5x
+- id: fldtRTwnx0HZBxXKv
+  name: Count (DatasetTasks)
+  type: count
+  description: null
+  record_link_field_id: fldwoErevq5ahVRho
+  lookup_field_id: null
+- id: fldnc2KuVU15k8PGS
+  name: Dynamic Prompt Name
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldmd4hZUEo2mfZ89
+  lookup_field_id: fldK52LQ9AhfFbUgZ
+- id: fld9PkuGgk47tn6r9
+  name: Created
+  type: createdTime
+  description: null
+- id: fldmd4hZUEo2mfZ89
+  name: Case Study
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblLKJ7zurjJD80bi
+  prefer_single_record_link: false
+  inverse_link_field_id: fldzVXPzHBddJp2Gd
+views:
+- id: viwlEWJnxodM9qGAU
+  name: TZV
+  type: grid
+- id: viw4mM6j773gF4Lou
+  name: Moverii
+  type: grid
+- id: viwEM7wMqLHWQ0NyW
+  name: Grid view
+  type: grid

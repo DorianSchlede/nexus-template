@@ -1,0 +1,154 @@
+---
+batch_id: "entity_definitions_2"
+field: entity_definitions
+extracted_at: "2025-12-29T12:00:00Z"
+chunks_read: 6
+patterns_found: 28
+---
+
+patterns:
+  # Chunk 7: Quality Dimensions and Data Entities
+  - name: "Syntactic Accuracy Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:27-28)"
+    quote: "Syntactic accuracy is the degree to which the data are accurate with respect to the grammatical rules defined for the domain and/or data model"
+    description: "Defines syntactic accuracy as a quality dimension for knowledge graph entities. This relates to entity definitions by establishing that entities must conform to defined schema rules (e.g., datatype compatibility, proper formatting). Relevant for validating entity properties against ontological constraints."
+
+  - name: "Semantic Accuracy Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:50-51)"
+    quote: "Semantic accuracy is the degree to which data values correctly represent real world phenomena, which may be affected by imprecise extraction results"
+    description: "Defines semantic accuracy as the correspondence between data entities and real-world phenomena they represent. Critical for entity definitions because entities must accurately model their real-world counterparts. Highlights that entities can be syntactically valid but semantically incorrect."
+
+  - name: "Timeliness Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:68-70)"
+    quote: "Timeliness is the degree to which the knowledge graph is currently up-to-date with the real world state"
+    description: "Defines timeliness as a temporal quality dimension for entities. Entities may become semantically inaccurate over time if not updated. This introduces a temporal aspect to entity definitions - entities have temporal validity that affects their accuracy."
+
+  - name: "Completeness Definition (Schema, Property, Population)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:97-107)"
+    quote: "Completeness refers to the degree to which all required information is present... schema completeness, property completeness, population completeness, and linkability completeness"
+    description: "Defines four types of completeness for entity coverage: schema completeness (classes/properties represented), property completeness (values present), population completeness (real-world entities captured), linkability completeness (instances interlinked). These sub-dimensions define what makes an entity definition complete."
+
+  - name: "Representativeness Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:120-124)"
+    quote: "Representativeness is a related dimension that, instead of focusing on the ratio of domain-relevant elements that are missing, rather focuses on assessing high-level biases"
+    description: "Defines representativeness as the assessment of biases in entity coverage. Entities may be incomplete in systematic ways (geographic, linguistic, social biases). This affects how entity definitions should account for sampling bias in knowledge graphs."
+
+  - name: "Consistency Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:168-169)"
+    quote: "Consistency means that a knowledge graph is free of (logical/formal) contradictions with respect to the particular logical entailment considered"
+    description: "Defines consistency as freedom from logical contradictions. Entity definitions must be internally consistent - entities cannot simultaneously belong to disjoint classes or have contradictory properties. Ties entity definitions to formal logic and entailment."
+
+  - name: "Validity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:179-181)"
+    quote: "Validity means that the knowledge graph is free of constraint violations, such as captured by shape expressions"
+    description: "Defines validity as conformance to shape constraints. Distinct from consistency (logical contradictions), validity concerns constraint satisfaction. Entity definitions can be validated against shapes specifying cardinality, value ranges, and structural requirements."
+
+  - name: "Conciseness Definition (Intensional/Extensional)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:202-208)"
+    quote: "Conciseness refers to avoiding the inclusion of schema and data elements that are irrelevant to the domain... intensional conciseness (schema level)... extensional conciseness (data level)"
+    description: "Defines conciseness at two levels: intensional (no redundant schema elements like properties/classes) and extensional (no redundant entity instances). Entity definitions should avoid unnecessary duplication and irrelevant elements."
+
+  - name: "Understandability Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:243-247)"
+    quote: "Understandability refers to the ease with which data can be interpreted without ambiguity by human users, which involves... the provision of human-readable labels and descriptions"
+    description: "Defines understandability as interpretability by humans through labels and descriptions. Entity definitions must include human-readable metadata for disambiguation. Multilingual support enhances understandability across language contexts."
+
+  # Chunk 7-8: Refinement and Completion Entities
+  - name: "Knowledge Graph Completion Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:295-299)"
+    quote: "knowledge graph completion aims at filling in the missing edges (aka missing links) of a knowledge graph, i.e., edges that are deemed correct but are neither given nor entailed"
+    description: "Defines knowledge graph completion as predicting missing relationships between entities. Entities in knowledge graphs are inherently incomplete, and completion techniques infer new edges (general links, type links, identity links) to enhance entity connectivity."
+
+  - name: "Type-Link Prediction Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:337-345)"
+    quote: "Type links are of particular importance to a knowledge graph, where dedicated techniques can be leveraged taking into account the specific semantics of such links"
+    description: "Defines type-link prediction as classification of entities into semantic classes. Type links assign entities to classes (e.g., City, Person) based on features like edge patterns. This is fundamental to entity definition - determining what kind of entity something is."
+
+  - name: "Identity-Link Prediction Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:358-364)"
+    quote: "Predicting identity links involves searching for nodes that refer to the same entity; this is analogous to the task of entity matching"
+    description: "Defines identity-link prediction as determining when different nodes represent the same real-world entity. Uses value matchers (comparing attribute similarity) and context matchers (comparing neighborhood structure). Critical for entity consolidation."
+
+  - name: "Fact Validation Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:426-428)"
+    quote: "The task of fact validation (aka fact checking) involves assigning plausibility or veracity scores to facts/edges, typically between 0 and 1"
+    description: "Defines fact validation as scoring the plausibility of entity relationships. Facts about entities can be validated against external sources (structured or unstructured). Relates to entity definition correctness - ensuring stated relationships are accurate."
+
+  # Chunk 8: Publication and Access
+  - name: "FAIR Principles - Findability Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:636-647)"
+    quote: "Findability refers to the ease with which external agents who might benefit from the dataset can initially locate the dataset... globally unique and persistent identifier"
+    description: "Defines findability as locatability through unique identifiers and rich metadata. Entities must have globally unique, persistent identifiers (F1) and be described with searchable metadata. IRIs in RDF provide this identification scheme for entities."
+
+  - name: "FAIR Principles - Accessibility Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:648-658)"
+    quote: "Accessibility refers to the ease with which external agents (once they have located the dataset) can access the dataset... retrievable by their identifier using a standard protocol"
+    description: "Defines accessibility as retrievability via standard protocols with authentication support. Entities must be accessible through open protocols (HTTP), with metadata remaining accessible even when data is unavailable. Relates to how entity definitions are exposed."
+
+  - name: "FAIR Principles - Interoperability Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:660-668)"
+    quote: "Interoperability refers to the ease with which the dataset can be exploited (in conjunction with other datasets) using standard tools... use an accessible, shared, and general knowledge representation formalism"
+    description: "Defines interoperability as exploitability using shared formalisms and vocabularies. Entity definitions should use FAIR-compliant vocabularies and include qualified references to other data. Ontologies serve as the knowledge representation formalism."
+
+  - name: "FAIR Principles - Reusability Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:670-677)"
+    quote: "Reusability refers to the ease with which the dataset can be re-used in conjunction with other datasets... richly described with a plurality of accurate and relevant attributes"
+    description: "Defines reusability as richness of description with licensing, provenance, and community standards. Entity definitions must include usage licenses, provenance information, and domain-relevant metadata to enable legitimate reuse."
+
+  - name: "Linked Data Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:737-745)"
+    quote: "Use IRIs as names for things. Use HTTP IRIs so those names can be looked up. When a HTTP IRI is looked up, provide useful content about the entity"
+    description: "Defines entities in Linked Data as named with HTTP IRIs that can be dereferenced to retrieve entity descriptions. The four Linked Data principles establish that entities should be identified (IRI), locatable (HTTP), described (useful content), and linked (references)."
+
+  # Chunk 10-11: Open Knowledge Graphs
+  - name: "Knowledge Graph Core Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:855-859)"
+    quote: "a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"
+    description: "Defines knowledge graph as a data graph where nodes are entities representing real-world things and edges are relationships. This is the fundamental definition of what entities are in knowledge graphs - representations of real-world objects connected by relations."
+
+  # Chunks 12-13: Historical Definitions
+  - name: "Entity as Real-World Representation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:104-110)"
+    quote: "a graph that understands real-world entities and their relationships to one another... mainly describes real world entities and their interrelations, organized in a graph"
+    description: "Defines entities as representations of real-world things with mutual relationships. From Google's 2012 announcement and subsequent academic definitions. Entities are the fundamental unit of knowledge graphs, modeling real-world phenomena in graph structure."
+
+  - name: "Knowledge Graph Category I Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:127-134)"
+    quote: "The first category simply defines the knowledge graph as a graph where nodes represent entities, and edges represent relationships between those entities"
+    description: "Defines the simplest characterization of entities: nodes in a directed edge-labelled graph representing things with relationships. This Category I definition (from embedding literature) treats entities as the basic structural elements without requiring schema."
+
+  - name: "Knowledge Graph Category II Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:144-162)"
+    quote: "a knowledge graph is a graph-structured knowledge base... What, then is a knowledge base? The phrase knowledge base was popularised in the 70s... rule-based expert systems"
+    description: "Defines knowledge graph entities in terms of knowledge bases from expert systems tradition. Entities exist within a knowledge base that may include ontological structures and rules. Links entity definition to formal knowledge representation traditions."
+
+  - name: "Entity Grounding in Schema"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:175-183)"
+    quote: "a knowledge graph mainly describes real world entities and their interrelations, organized in a graph; defines possible classes and relations of entities in a schema"
+    description: "Defines entities as organized under a schema that specifies possible classes and relations. From Paulheim's criteria - entities are grounded in class hierarchies and relation types. This distinguishes knowledge graphs from unstructured graphs."
+
+  # Chunks 13-14: Formal Definitions
+  - name: "Directed Edge-Labelled Graph Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:316-323)"
+    quote: "A directed edge-labelled graph is a tuple G = (V, E, L), where V is a set of nodes, L is a set of edge labels, and E is a subset of V x L x V is a set of edges"
+    description: "Formal definition of entities as nodes V in a directed edge-labelled graph. Entities (nodes) are connected by labeled edges from the set E. This mathematical definition underlies RDF and most knowledge graph implementations."
+
+  - name: "Heterogeneous Graph Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:352-354)"
+    quote: "A heterogeneous graph is a tuple G = (V, E, L, l), where... l: V -> L maps each node to a label"
+    description: "Defines entities in heterogeneous graphs as nodes with type labels. Each entity node is mapped to a type label, enabling typed entities (e.g., City, Country). This extends basic graph model with explicit entity typing."
+
+  - name: "Property Graph Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:375-385)"
+    quote: "A property graph is a tuple G = (V, E, L, P, U, e, l, p), where V is a set of node ids, E is a set of edge ids... p: V union E -> 2^(P x U) maps a node or edge id to a set of property-value pairs"
+    description: "Defines entities in property graphs as nodes with IDs, labels, and property-value pairs. Entities have rich attribute structures beyond just labels. This model (used by Neo4j) supports complex entity definitions with multiple properties."
+
+  - name: "Graph Pattern Entity Variables"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:457-460)"
+    quote: "We define a directed edge-labelled graph pattern as a tuple Q = (V, E, L), where V is a set of node terms, L is a set of edge terms"
+    description: "Defines entity variables in graph patterns for querying. Entity terms can be constants (specific entities) or variables (entity placeholders). This enables pattern matching over entity structures for retrieval and inference."
+
+  - name: "DL Individual/Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:354-359)"
+    quote: "A DL interpretation I is defined as a pair... The interpretation function accepts a definition of either an individual a, a class C, or a relation R, mapping them... to an element of the domain"
+    description: "Defines entities (individuals) in Description Logics as elements of an interpretation domain mapped by an interpretation function. Entities belong to classes (subsets of domain) and participate in relations (pairs from domain). Provides formal semantics for entity definitions."

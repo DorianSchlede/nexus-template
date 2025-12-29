@@ -1,0 +1,217 @@
+﻿{
+  "loaded_at": "2025-12-28T02:34:33.902703",
+  "bundle": "startup",
+  "system_state": "operational_with_active_projects",
+  "memory_content": {
+    "system-map.md": "# Nexus System Map\n\n<!-- AI CONTEXT FILE -->\n<!-- Purpose: System structure reference (NOT behavior rules) -->\n<!-- For AI behavior/routing: See orchestrator.md -->\n\n**System structure reference for Nexus-v4.**\n\n> **Purpose**: Help AI navigate system structure and file locations\n>\n> **For AI behavior rules**: See [orchestrator.md](core/orchestrator.md)\n>\n> **Maintenance**: Static (part of system framework)\n\n---\n\n## ≡ƒù║∩╕Å Navigation Hub\n\n| Document | Purpose |\n|----------|---------|\n| **[Orchestrator](core/orchestrator.md)** | AI behavior rules, routing, menu display |\n| **[Framework Overview](documentation/framework-overview.md)** | Complete system guide (detailed) |\n| **[Memory Map](../01-memory/memory-map.md)** | Context persistence system |\n| **[Workspace Map](../04-workspace/workspace-map.md)** | User's custom folders |\n\n---\n\n## ≡ƒôü System Structure\n\n```\nNexus-v4/\nΓöé\nΓö£ΓöÇΓöÇ CLAUDE.md                       # ≡ƒÜÇ Entry point (loads orchestrator)\nΓöé\nΓö£ΓöÇΓöÇ 00-system/                      # SYSTEM FRAMEWORK\nΓöé   Γö£ΓöÇΓöÇ system-map.md               # THIS FILE\nΓöé   Γö£ΓöÇΓöÇ core/\nΓöé   Γöé   Γö£ΓöÇΓöÇ orchestrator.md         # AI behavior rules\nΓöé   Γöé   ΓööΓöÇΓöÇ nexus-loader.py         # Master controller script\nΓöé   Γö£ΓöÇΓöÇ skills/                     # System skills\nΓöé   Γöé   Γö£ΓöÇΓöÇ create-project/\nΓöé   Γöé   Γö£ΓöÇΓöÇ execute-project/\nΓöé   Γöé   Γö£ΓöÇΓöÇ create-skill/\nΓöé   Γöé   Γö£ΓöÇΓöÇ setup-goals/\nΓöé   Γöé   Γö£ΓöÇΓöÇ setup-workspace/\nΓöé   Γöé   Γö£ΓöÇΓöÇ learn-integrations/\nΓöé   Γöé   Γö£ΓöÇΓöÇ learn-projects/\nΓöé   Γöé   Γö£ΓöÇΓöÇ learn-skills/\nΓöé   Γöé   Γö£ΓöÇΓöÇ learn-nexus/\nΓöé   Γöé   Γö£ΓöÇΓöÇ close-session/\nΓöé   Γöé   ΓööΓöÇΓöÇ ...more\nΓöé   ΓööΓöÇΓöÇ documentation/\nΓöé       Γö£ΓöÇΓöÇ framework-overview.md\nΓöé       ΓööΓöÇΓöÇ product-overview.md\nΓöé\nΓö£ΓöÇΓöÇ 01-memory/                      # CONTEXT PERSISTENCE\nΓöé   Γö£ΓöÇΓöÇ goals.md                    # User objectives\nΓöé   Γö£ΓöÇΓöÇ user-config.yaml            # Preferences\nΓöé   Γö£ΓöÇΓöÇ core-learnings.md           # Accumulated insights\nΓöé   ΓööΓöÇΓöÇ session-reports/            # Historical sessions\nΓöé\nΓö£ΓöÇΓöÇ 02-projects/                    # TEMPORAL WORK\nΓöé   ΓööΓöÇΓöÇ {ID}-{name}/                # User projects\nΓöé       Γö£ΓöÇΓöÇ 01-planning/\nΓöé       Γöé   Γö£ΓöÇΓöÇ overview.md         # YAML metadata\nΓöé       Γöé   ΓööΓöÇΓöÇ steps.md            # Task checkboxes\nΓöé       Γö£ΓöÇΓöÇ 02-resources/\nΓöé       Γö£ΓöÇΓöÇ 03-working/\nΓöé       ΓööΓöÇΓöÇ 04-outputs/\nΓöé\nΓö£ΓöÇΓöÇ 03-skills/                      # USER SKILLS (priority over system)\nΓöé   ΓööΓöÇΓöÇ {skill-name}/\nΓöé       Γö£ΓöÇΓöÇ SKILL.md                # YAML + workflow\nΓöé       Γö£ΓöÇΓöÇ references/\nΓöé       ΓööΓöÇΓöÇ scripts/\nΓöé\nΓööΓöÇΓöÇ 04-workspace/                   # USER CONTENT\n    Γö£ΓöÇΓöÇ workspace-map.md            # Folder structure documentation\n    ΓööΓöÇΓöÇ [Your folders]/\n```\n\n---\n\n## ≡ƒùé∩╕Å YAML Metadata\n\n### Project YAML (overview.md)\n```yaml\n---\nid: 10-website-redesign\nname: Website Redesign\nstatus: IN_PROGRESS\ndescription: Load when user mentions \"website\", \"redesign\"\ncreated: 2025-11-01\n---\n```\n**Note**: `tasks_total`, `tasks_completed`, `progress` auto-calculated from steps.md\n\n### Skill YAML (SKILL.md)\n```yaml\n---\nname: weekly-status-report\ndescription: Load when user says \"status report\", \"weekly update\"\n---\n```\n\n---\n\n## ≡ƒôé File Naming\n\n| Type | Format | Example |\n|------|--------|---------|\n| Projects | `{ID}-{name}` | `10-website-redesign` |\n| Skills | `{skill-name}` | `weekly-status-report` |\n| Memory | Fixed names | `goals.md`, `user-config.yaml` |\n\n**Naming rules**: lowercase-with-hyphens, verb-based for skills\n\n---\n\n## ≡ƒöº CLI Reference\n\n```bash\npython 00-system/core/nexus-loader.py --startup    # Load session context\npython 00-system/core/nexus-loader.py --project ID # Load specific project\npython 00-system/core/nexus-loader.py --skill name # Load specific skill\n```\n\n**Output**: JSON with `system_state`, `memory_content`, `instructions`, `metadata`\n\n---\n\n**Version**: 4.0 | **Updated**: 2025-12-11\n",
+    "memory-map.md": "# Memory Map\n\n<!-- AI CONTEXT FILE -->\n<!-- Purpose: Help AI navigate the memory system -->\n<!-- Updated by: System (static framework documentation) -->\n\n> **Purpose**: Help AI navigate the memory system\n>\n> **Audience**: AI agent (loaded every session via --startup)\n>\n> **Maintenance**: Static system documentation\n\n---\n\n## Memory System Overview\n\nThe `01-memory/` folder contains context that persists across all sessions:\n\n### Core Files (Always Loaded)\n\n**goals.md** - What you want to achieve\n- Current role and work context\n- Short-term goal (3 months)\n- Long-term vision (1-3 years)\n- Success metrics\n\n**roadmap.md** - How you'll get there\n- Goal breakdown into milestones\n- Timeline and sequencing\n- Key activities per milestone\n\n**core-learnings.md** - What you've learned\n- What works well (successes)\n- What to avoid (mistakes)\n- Best practices (patterns)\n- Insights (strategic realizations)\n\n**memory-map.md** - This file\n- System navigation for AI\n- Structure explanation\n\n**user-config.yaml** - Your preferences\n- Language preference\n- Timezone\n- Date format\n\n---\n\n## Session Reports (Historical)\n\n**session-reports/** - Generated after each session\n- Dated session summaries\n- Progress tracking\n- Key decisions and outcomes\n- Never loaded automatically (only on request)\n\n---\n\n## When AI Loads Memory Files\n\n**Every Session** (via --startup):\n- goals.md\n- memory-map.md\n- user-config.yaml\n\n**Strategic Discussion**:\n- roadmap.md (when talking about milestones, timeline, planning)\n\n**Pattern Recognition**:\n- core-learnings.md (when similar situations arise)\n\n**Historical Context**:\n- session-reports/ (only when user explicitly asks about past sessions)\n\n---\n\n## How Memory Evolves\n\n**Quick Start** (Smart Defaults):\n- Template files auto-created on first run\n- User can work immediately\n- Personalize anytime with \"setup goals\" skill\n\n**Personalized** (After setup-goals skill):\n- goals.md -> Populated with user's actual goals\n- roadmap.md -> Created with milestones\n- user-config.yaml -> Language and preferences set\n- core-learnings.md -> Grows over time via close-session\n\n---\n\n**This map helps the AI understand your memory system structure.**\n",
+    "goals.md": "---\n---\n# Your Goals\n\n> **Purpose**: Define what you want to achieve (for AI context)\n>\n> **Updated**: Set via 'setup goals' skill, revised as needed\n\n---\n\n## Current Role\n\nCo-founder at Mutagent (pre-launch), focused on hypothesis validation, ICP definition, and customer interview analysis for an AI agent optimization platform.\n\n---\n\n## Short-Term Goal (3 months)\n\n100+ customer interviews to validate hypotheses + 5 pilot customers\n\n**Why This Matters**:\nBuild and test more hypotheses - de-risk before building, find real PMF through evidence. Product is ready in 2 weeks, but the focus is on understanding the problem and pain first.\n\n**Success Metrics**:\n- [ ] 100 interviews completed\n- [ ] Hypotheses validated/invalidated (D1, D2, D9, V1 + new ones)\n- [ ] 5 pilot customers using MVP\n- [ ] Clear ICP definition based on data\n\n---\n\n## Long-Term Vision (1-3 years)\n\nNot prioritized at this stage - focus is on validation first.\n\n---\n\n## Work Style & Preferences\n\n**Focus Areas**: Interview analysis, Hypothesis building/testing, ICP definition\n\n---\n\n**Last Updated**: 2025-12-24\n",
+    "user-config.yaml": "---\n# User Configuration\n# Purpose: Store persistent user preferences (loaded every session)\n# Updated: Set during onboarding, modified anytime\n\nsmart_default: false\n\nuser_preferences:\n  language: \"English\"\n  timezone: \"\"\n  date_format: \"YYYY-MM-DD\"\n\n  system:\n    python_cmd: \"python\"\n\nonboarding:\n  status: \"skipped\"\n  current_session: 0\n  last_completed: null\n  sessions_completed: []\n\nlearning_tracker:\n  session_count: 0\n  completed:\n    setup_memory: true\n    setup_workspace: true\n    learn_integrations: false\n    learn_projects: false\n    learn_skills: false\n    learn_nexus: false\n  dismissed: []\n  last_suggested: null\n  suggestion_preference: \"normal\"\n\ncreated: null\nupdated: null\n---\n\n# Instructions for AI\n\nWhen this file is loaded (every session via --startup):\n1. Respect the language preference throughout ALL interactions\n2. Use timezone for accurate session timestamps\n3. Format dates according to user preference\n4. Check learning_tracker for onboarding skill suggestions\n\nIf smart_default is true:\n- System is using default templates (not personalized)\n- Suggest onboarding skills when contextually appropriate\n- User can work immediately without setup\n\nIf language is not set (empty string):\n- Default to English\n- Prompt user to set preference during setup-memory skill\n"
+  },
+  "instructions": {
+    "action": "display_menu",
+    "execution_mode": "interactive",
+    "message": "Welcome back! You have 1 active project(s)",
+    "reason": "Active projects detected: 02-ontologies-research",
+    "workflow": [
+      "Display Nexus banner",
+      "Show user goals (from goals.md)",
+      "Highlight 1 active projects",
+      "Show available skills",
+      "Wait for user input (can resume projects or start new work)"
+    ],
+    "display_hints": [
+      "ONBOARDING_INCOMPLETE: 4 skills pending"
+    ]
+  },
+  "metadata": {
+    "note": "Use --metadata for full project/skill data"
+  },
+  "stats": {
+    "display_hints": [
+      "ONBOARDING_INCOMPLETE: 4 skills pending"
+    ],
+    "files_embedded": 4,
+    "mandatory_maps_loaded": 1,
+    "mandatory_maps_total": 1,
+    "total_projects": 5,
+    "active_projects": 1,
+    "non_complete_projects": 5,
+    "total_skills": 0,
+    "user_skills": 0,
+    "goals_personalized": true,
+    "workspace_configured": true,
+    "integrations_configured": false,
+    "configured_integrations": [
+      {
+        "name": "airtable",
+        "slug": "airtable",
+        "skills": [
+          "airtable-connect",
+          "airtable-master"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "AIRTABLE_API_KEY"
+      },
+      {
+        "name": "beam",
+        "slug": "beam",
+        "skills": [
+          "beam-connect",
+          "beam-debug-issue-tasks",
+          "beam-master"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "BEAM_API_KEY"
+      },
+      {
+        "name": "google",
+        "slug": "google",
+        "skills": [
+          "gmail",
+          "google-calendar",
+          "google-connect",
+          "google-docs",
+          "google-drive",
+          "google-master",
+          "google-sheets",
+          "google-slides",
+          "google-tasks"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "heyreach",
+        "slug": "heyreach",
+        "skills": [
+          "heyreach-connect",
+          "heyreach-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "hubspot",
+        "slug": "hubspot",
+        "skills": [
+          "hubspot-connect",
+          "hubspot-create-company",
+          "hubspot-create-contact",
+          "hubspot-create-deal",
+          "hubspot-create-meeting",
+          "hubspot-create-note",
+          "hubspot-get-associations",
+          "hubspot-list-calls",
+          "hubspot-list-companies",
+          "hubspot-list-contacts",
+          "hubspot-list-deals",
+          "hubspot-list-emails",
+          "hubspot-list-meetings",
+          "hubspot-list-notes",
+          "hubspot-log-call",
+          "hubspot-log-email",
+          "hubspot-master",
+          "hubspot-search-companies",
+          "hubspot-search-contacts",
+          "hubspot-search-deals",
+          "hubspot-update-contact",
+          "hubspot-update-deal"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "HUBSPOT_ACCESS_TOKEN"
+      },
+      {
+        "name": "notebooklm",
+        "slug": "notebooklm",
+        "skills": [
+          "notebooklm-connect",
+          "notebooklm-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "notion",
+        "slug": "notion",
+        "skills": [
+          "notion-connect",
+          "notion-master"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "NOTION_API_KEY"
+      },
+      {
+        "name": "slack",
+        "slug": "slack",
+        "skills": [
+          "slack-connect",
+          "slack-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      }
+    ],
+    "learning_completed": {
+      "setup_memory": true,
+      "setup_workspace": true,
+      "learn_integrations": false,
+      "learn_projects": false,
+      "learn_skills": false,
+      "learn_nexus": false
+    },
+    "pending_onboarding": [
+      {
+        "key": "learn_projects",
+        "name": "learn-projects",
+        "trigger": "learn projects",
+        "priority": "high",
+        "time": "8-10 min"
+      },
+      {
+        "key": "learn_skills",
+        "name": "learn-skills",
+        "trigger": "learn skills",
+        "priority": "high",
+        "time": "10-12 min"
+      },
+      {
+        "key": "learn_integrations",
+        "name": "learn-integrations",
+        "trigger": "learn integrations",
+        "priority": "high",
+        "time": "10-12 min"
+      },
+      {
+        "key": "learn_nexus",
+        "name": "learn-nexus",
+        "trigger": "learn nexus",
+        "priority": "medium",
+        "time": "15-18 min"
+      }
+    ],
+    "onboarding_complete": false,
+    "update_available": false,
+    "update_info": {
+      "checked": true,
+      "update_available": false,
+      "local_version": "0.14.3",
+      "upstream_version": "0.14.3",
+      "error": null,
+      "upstream_url": "https://github.com/DorianSchlede/nexus-template.git"
+    }
+  },
+  "_output": {
+    "chars": 14072,
+    "truncation_risk": false,
+    "split_recommended": false
+  }
+}

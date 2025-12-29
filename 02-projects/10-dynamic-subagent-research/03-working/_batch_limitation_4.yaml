@@ -1,0 +1,255 @@
+---
+batch_id: "limitation_4"
+field: limitation
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 14
+patterns_found: 42
+---
+
+patterns:
+  # === 12-CollabSurvey-2501.06322 (Chunk 6) ===
+
+  - name: "Training Data Bias Limitation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:28-30)"
+    quote: "biases in training data that lack global psychological diversity, cautioning against treating stand-alone LLMs as universal solutions"
+    description: "LLMs are limited by biases in training data that lack global psychological diversity. This constrains their ability to represent diverse perspectives and cultural contexts, making them unsuitable as universal solutions for social science applications."
+
+  - name: "Information Asymmetry Limitation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:87-90)"
+    quote: "limitations of using LLMs as human replacements in social science experiments, particularly in scenarios involving information asymmetry"
+    description: "LLMs face fundamental limitations in scenarios requiring information asymmetry where agents have unequal access to private mental states or goals. This restricts their effectiveness in social science experiments and competitive/conflict resolution tasks."
+
+  - name: "Hallucination Propagation in MAS"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:125-128)"
+    quote: "A single agent's hallucination can be spread and reinforced by other agents, leading to minor inaccuracies into critical and cascading effects"
+    description: "In multi-agent systems, hallucinations are not contained to individual agents but can propagate and amplify through agent interactions, transforming minor inaccuracies into critical cascading failures."
+
+  - name: "LLM Overconfidence Problem"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:173-177)"
+    quote: "LLM overconfidence problem, where LLMs persistently assert the correctness of their outputs despite inaccuracies"
+    description: "LLMs exhibit an overconfidence problem where they persistently assert correctness despite inaccuracies. This limitation, combined with misunderstandings between agents during collaboration, amplifies safety risks in multi-agent systems."
+
+  - name: "Scalability and Resource Bottlenecks"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:131-135)"
+    quote: "Managing resources (memory, processing time), coordination and collaboration channels among a growing number of agents introduces additional complexities"
+    description: "Increasing agent population creates significant resource management challenges including memory, processing time, and coordination channel overhead. This introduces complexities like maintaining efficiency and preventing bottlenecks."
+
+  - name: "Limited Decision-Making Methods"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:119-122)"
+    quote: "Current LLM-based MASs commonly utilize limited decision-making methods, such as dictatorial or popular voting, which may not capture different aspects of agent preferences"
+    description: "Current MAS implementations rely on limited decision-making approaches (dictatorial/voting) that fail to capture diverse agent preferences and may aggregate overconfidence of LLMs."
+
+  - name: "Inconsistent Evaluation Results"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:163-168)"
+    quote: "evaluations of MASs are often conducted in narrow scenarios with different configurations, leading to inconsistent and incomparable results"
+    description: "MAS evaluations suffer from inconsistency due to narrow scenarios and varying configurations, preventing objective comparison between systems and tracking progress across the field."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 1) ===
+
+  - name: "Context Window Limitation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 1:388-390)"
+    quote: "due to LLMs' context window limitations, practical implementations require active information compression and impose many constraints on multi-turn interaction depth"
+    description: "LLM context window limitations force practical implementations to use information compression (summarization, selective retention) and constrain multi-turn interaction depth to prevent performance degradation."
+
+  - name: "Short-term Memory Transience"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 1:377-382)"
+    quote: "its transient nature limits knowledge retention beyond immediate contexts—intermediate reasoning traces often dissipate after task completion and cannot be directly transferred"
+    description: "Short-term memory is inherently transient, causing intermediate reasoning traces to dissipate after task completion. This prevents direct knowledge transfer to new scenarios."
+
+  - name: "Single-path Chaining Inflexibility"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 1:452-456)"
+    quote: "it may suffer from a lack of flexibility and error accumulation during chaining, as the agent is required to follow the pre-defined plan without any deviation"
+    description: "Single-path planning chaining lacks flexibility and causes error accumulation because agents must follow pre-defined plans without deviation during problem-solving."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 2) ===
+
+  - name: "Centralized Control Bottleneck"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 2:244-246)"
+    quote: "centralized architectures where a single control node often becomes a bottleneck due to handling all inter-agent communication, task scheduling, and contention resolution"
+    description: "Centralized architectures create bottlenecks at the single control node which must handle all inter-agent communication, task scheduling, and contention resolution."
+
+  - name: "Weak Discriminator Controller Limitation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 2:237-240)"
+    quote: "WJudge demonstrates that even controllers with limited discriminative power can also significantly enhance the overall performance of agent systems"
+    description: "While weak discriminators can still improve performance, controllers with limited discriminative power represent a constraint on optimal task allocation and decision aggregation."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 4) ===
+
+  - name: "Adversarial Attack Vulnerability"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:82-84)"
+    quote: "Adversarial attacks aim to compromise the reliability of the agents, rendering them ineffective in specific tasks"
+    description: "LLM agents are vulnerable to adversarial attacks targeting Perception, Brain, and Action components, which can compromise reliability and render agents ineffective in specific tasks."
+
+  - name: "Backdoor Attack Vulnerability"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:139-141)"
+    quote: "Backdoor attacks implant specific triggers to cause the model to produce preset errors when encountering these triggers while performing normally under normal inputs"
+    description: "LLM agents are vulnerable to backdoor attacks that implant specific triggers causing preset errors upon activation while appearing normal under regular inputs."
+
+  - name: "Model Collaboration Attack Vulnerability"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:163-167)"
+    quote: "attackers manipulate the interaction or collaboration mechanisms between multiple models to disrupt the overall functionality of the system"
+    description: "Multi-agent systems face collaboration attacks where adversaries exploit contagion and recursion in agent interactions, disrupting communications and system functionality in ways hard to mitigate via alignment."
+
+  - name: "Privacy Leakage from Memorization"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:408-412)"
+    quote: "privacy concerns...mainly caused by the memory capacity of LLMs, which may lead to the leakage of private information during conversations or when completing tasks"
+    description: "LLM memory capacity creates privacy vulnerabilities where private information may leak during conversations or task completion, particularly severe in multi-agent systems with multiple sensitive data sources."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 5) ===
+
+  - name: "Data Extraction Attack Risk"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 5:43-51)"
+    quote: "The risk of data extraction increases with model size, frequency of repeated data, and context length"
+    description: "Data extraction attacks exploit LLM memory to extract sensitive PII. Risk increases with model size, data repetition frequency, and context length, making larger models more vulnerable."
+
+  - name: "Membership Inference Vulnerability"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 5:54-66)"
+    quote: "fine-tuning the model head makes it more vulnerable to such attacks...particularly dangerous in multi-agent systems, as the training data may originate from multiple sources"
+    description: "Fine-tuned LLMs are more vulnerable to membership inference attacks. This is especially dangerous in MAS where training data comes from multiple sensitive sources."
+
+  - name: "Bias and Discrimination in LLMs"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 5:237-248)"
+    quote: "LLM agents inherently inherit biases present in their training datasets and may even amplify them during the learning process, leading to skewed outputs"
+    description: "LLM agents inherit and potentially amplify biases from training data, leading to skewed outputs and reinforced stereotypes. This limits fairness and ethical deployment."
+
+  - name: "Lack of Semantic Understanding"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 5:283-288)"
+    quote: "LLM agents lack true semantic and contextual understanding, relying purely on statistical word associations. This limitation is often misinterpreted and overestimated"
+    description: "LLM agents lack true semantic understanding, relying on statistical word associations. This fundamental limitation is frequently overestimated, leading to undue reliance on models."
+
+  - name: "Carbon Footprint and Computational Costs"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 5:288-291)"
+    quote: "concerns have been raised about the significant carbon footprint of LLM agents, posing environmental challenges, alongside the high computational costs"
+    description: "LLM agents pose environmental challenges due to significant carbon footprint and high computational costs associated with training large models."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 6) ===
+
+  - name: "Medical AI Validation Complexity"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 6:205-208)"
+    quote: "the multi-agent paradigm in medicine holds promise for improving AI reliability by introducing redundancy, specialization, and oversight. However, it also complicates the system, requiring rigorous validation"
+    description: "While multi-agent medical systems improve reliability through redundancy and specialization, they introduce system complexity that demands rigorous validation before deployment."
+
+  # === 15-AgentSurvey-2503.21460 (Chunk 7) ===
+
+  - name: "Static Benchmark Inadequacy"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 7:3-11)"
+    quote: "Traditional AI evaluation frameworks, designed for static datasets and single-turn tasks, fail to capture the complexities of LLM agents in dynamic, multi-turn, and multi-agent environments"
+    description: "Static benchmarks and single-turn evaluation frameworks are inadequate for assessing LLM agents in dynamic multi-turn, multi-agent environments, risking data contamination and memorization-based performance."
+
+  - name: "Role-playing Training Data Limitation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 7:41-45)"
+    quote: "LLMs are predominantly trained on web-based corpora, they struggle to emulate roles with insufficient representation online and often produce conversations lacking diversity"
+    description: "LLMs trained on web corpora struggle with role-playing scenarios lacking sufficient online representation, producing conversations that lack diversity."
+
+  - name: "Scalability and Coordination Challenges"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 7:61)"
+    quote: "significant challenges remain, including scalability limitations, memory constraints, reliability concerns, and inadequate evaluation frameworks"
+    description: "LLM agent systems face persistent challenges including scalability limitations, memory constraints, reliability concerns, and inadequate evaluation frameworks."
+
+  # === 18-HallucinationSurvey-2509.18970 (Chunk 1) ===
+
+  - name: "Agent Hallucination Type Diversity"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:192-196)"
+    quote: "Rather than the straightforward response errors of a single model, agent hallucinations are compound behaviors arising from interactions among multiple modules"
+    description: "Agent hallucinations are more diverse than single-model errors, arising as compound behaviors from multi-module interactions, resulting in broader and more varied hallucination types."
+
+  - name: "Hallucination Propagation Chains"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:196-201)"
+    quote: "agent hallucinations often span multiple steps and involve multi-state transitions...may also arise during intermediate processes such as perception and reasoning, where they can propagate and accumulate"
+    description: "Agent hallucinations span multiple steps with multi-state transitions, propagating and accumulating through intermediate perception and reasoning processes rather than being localized single-step errors."
+
+  - name: "Physically Consequential Errors"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:201-205)"
+    quote: "Agent hallucinations involve 'physically consequential' errors, where incorrect embodied actions can directly affect task execution, system devices, and user experiences in the real world"
+    description: "Agent hallucinations carry higher stakes than text errors because they involve physically consequential outcomes - incorrect actions directly affect real-world task execution, devices, and user experiences."
+
+  # === 18-HallucinationSurvey-2509.18970 (Chunk 2) ===
+
+  - name: "Problematic Objective Expression"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:127-132)"
+    quote: "when the expression of goal information carries a certain degree of semantic vagueness, it can easily lead to erroneous parsing of user intention and induce reasoning hallucinations"
+    description: "Semantic vagueness in goal expressions from incomplete specifications or ambiguous content causes erroneous parsing of user intentions, triggering reasoning hallucinations."
+
+  - name: "Instruction-following Deviation"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:141-148)"
+    quote: "the agent struggles to segment critical fields and extract key information from instructions, leading to distorted understanding and reasoning hallucinations"
+    description: "Agents with instruction-following deviation struggle to segment critical fields and extract key information, leading to distorted understanding and context window over-reliance on recent tokens."
+
+  - name: "Sub-intention Modeling Deficiency"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:154-175)"
+    quote: "Inadequate modeling of dependency relationships among these sub-intentions can give rise to three types of errors: Sub-intention Omission, Sub-intention Redundancy and Sub-intentions Disorder"
+    description: "Deficient dependency modeling in intention decomposition causes sub-intention omission (missing critical steps), redundancy (task-irrelevant additions), and disorder (wrong sequencing), compromising reasoning integrity."
+
+  - name: "Self-knowledge Boundary Overconfidence"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:191-196)"
+    quote: "When confronted with planning problems beyond its knowledge boundary, the agent tends to respond with excessive confidence, generating answers that sound certain but are actually incorrect"
+    description: "Agents overconfidently generate seemingly certain but incorrect answers when faced with problems beyond their knowledge boundaries, causing planning generation hallucinations."
+
+  - name: "Tool Documentation Limitation"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:253-261)"
+    quote: "deficiencies may include redundant information, incomplete or inaccurate descriptions, or a lack of standardization, all of which impair the agent's ability to properly use tools"
+    description: "Tool documentation limitations including redundancy, incompleteness, inaccuracy, and lack of standardization cause execution hallucinations where agents believe they correctly use tools despite misleading documentation."
+
+  - name: "Shallow Tool Pattern Understanding"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:262-276)"
+    quote: "LLM-based agents are typically trained with insufficient exposure to diverse and complex tool-use scenarios...prone to hallucinating tool invocations that may appear plausible"
+    description: "Insufficient training on diverse tool-use scenarios causes shallow pattern understanding, making agents prone to plausible-appearing but invalid tool invocations, especially for complex or novel tasks."
+
+  - name: "Weak Tool Dynamic Adaptability"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:277-287)"
+    quote: "When an agent lacks sufficient adaptability to these Tool Dynamics, its tool-use behavior becomes misaligned with the actual environment"
+    description: "Agents trained on static datasets lack adaptability to evolving tool functionalities, API modifications, and deprecations, causing misalignment between learned behavior and current environment state."
+
+  - name: "Lack of Tool Solvability Awareness"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:298-312)"
+    quote: "A lack of solvability awareness in LLM-based agents can also lead to execution hallucinations, where the agent mistakenly assumes that pt is solvable"
+    description: "Agents lacking solvability awareness mistakenly assume plans are executable, leading to retrieval of irrelevant/fabricated tools or parameter hallucination when suitable tools are unavailable or plans are unclear."
+
+  - name: "Limited Multimodal Encoding Capability"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:329-341)"
+    quote: "Agents struggle to extract the key information of individual modality...Agents lack an effective mechanism to integrate semantic associations across different modalities"
+    description: "Perception hallucinations arise from insufficient unimodal representation (failing to extract key modality information) and weak cross-modal collaboration (failing to integrate semantic associations across modalities)."
+
+  # === 18-HallucinationSurvey-2509.18970 (Chunk 3) ===
+
+  - name: "Memory Priority Assignment Failures"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:9-20)"
+    quote: "poorly assigned priorities can result in the elimination of important information or the retention of irrelevant content...merged memory containing inherent conflicts"
+    description: "Imperfect memory priority assignment causes elimination of important information, retention of irrelevant content, and conflicting merged memories with implicit semantic differences."
+
+  - name: "Information Compression Distortion"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:21-30)"
+    quote: "generated summaries may be overly general, omit crucial details, or introduce distortions due to imperfect abstraction...Memory Capacity Constraints exacerbate these challenges"
+    description: "Memory update processes suffer from information compression issues where summaries become overly general, omit details, or introduce abstraction distortions, exacerbated by capacity constraints and non-standardized formats."
+
+  - name: "Erroneous Message Propagation in MAS"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:45-60)"
+    quote: "some agents may produce messages containing inaccurate facts, misinterpretations of shared knowledge, or misleading inferences...Content Redundancy is also an important cause"
+    description: "Communication hallucinations arise from LLM factuality/faithfulness issues propagating through MAS, compounded by content redundancy that obscures signals and information asymmetry causing incomplete instructions."
+
+  - name: "Uncoordinated Communication Protocols"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:61-78)"
+    quote: "Without a unified and effective protocol, agents may 'talk past each other'...Asynchronous Scheduling...information loss and information overload"
+    description: "Lack of unified communication protocols causes agents to 'talk past each other'. Asynchronous scheduling leads to information loss/overload, while natural language formats introduce ambiguity requiring structured alternatives."
+
+  # === 18-HallucinationSurvey-2509.18970 (Chunk 4) ===
+
+  - name: "Deep Layer Detection Difficulty"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:128-142)"
+    quote: "memory and communication are part of the deeper layers of the agent, where the final outputs are coupled with computations from numerous intermediate modules. This makes hallucination detection...more challenging"
+    description: "Hallucination detection for memory and communication is more challenging than perception because these deeper layers couple final outputs with numerous intermediate module computations, complicating localization."
+
+  - name: "Hallucinatory Accumulation Challenge"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:153-161)"
+    quote: "hallucinations can accumulate and amplify over time. In such cases, hallucinations may initially appear as minor issues, but their iterative accumulation can ultimately lead to severe consequences"
+    description: "Multi-step agent decision-making allows hallucinations to accumulate and amplify over time, transforming initially minor issues into severe consequences through iterative accumulation."
+
+  - name: "Full-chain Error Propagation Complexity"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:170-182)"
+    quote: "agent hallucinations are far more complex, involving full-chain error propagation across multiple interdependent components...may arise at any stage...and often exhibit complex characteristics"
+    description: "Agent hallucinations involve full-chain error propagation across interdependent components, arising at any pipeline stage with characteristics like hallucinatory accumulation and inter-module dependency."
+
+  - name: "Transformer Architecture Limitations"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:232-241)"
+    quote: "this architecture faces challenges in handling long-context information and suffers from high computational complexity, which have gradually revealed performance bottlenecks"
+    description: "Transformer architecture limitations in handling long-context information and high computational complexity create performance bottlenecks contributing to hallucination issues."

@@ -1,0 +1,164 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tbltUrvSBnfOb4S8v
+table_name: Datasets
+exported_at: '2025-12-28T14:12:03.671941'
+field_count: 23
+fields:
+- id: fldmaL07HlEO94bt4
+  name: Dataset Name
+  type: singleLineText
+  description: null
+- id: fldVecGNM6MjjYML9
+  name: AirtableDatasetID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fldJGhSenMgn9GQaB
+  name: Description
+  type: multilineText
+  description: null
+- id: fldFSKy73FjXbdnf4
+  name: Type
+  type: singleSelect
+  description: null
+  choices:
+  - id: selbcNqNoErJNR7bu
+    name: Small
+    color: cyanLight2
+  - id: selx2OaCAohsLWVNL
+    name: Edge Case
+    color: blueLight2
+  - id: selkSh75KATqkoxQ0
+    name: Full Agent
+    color: tealLight2
+- id: fld63cNmqBfQO6ozR
+  name: Agents
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fld9B2t6YWzRo767v
+- id: fldgniJh4ISQ9wVA3
+  name: Webhook ID (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld63cNmqBfQO6ozR
+  lookup_field_id: fldOHAIvxZNmXxmoT
+- id: fldKm3OKIGt0PB5p5
+  name: Workspace (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld63cNmqBfQO6ozR
+  lookup_field_id: fldItXOU8yc1YbCdu
+- id: fldplribrFKOV5pch
+  name: Active AgentVersion
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: false
+  inverse_link_field_id: fldgydCqAcxM06Mlv
+- id: fldEjJvLsS5Cle9uI
+  name: Active NodeVersions
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldplribrFKOV5pch
+  lookup_field_id: fldFsXt3lTx1wu4yf
+- id: fld7xspVxTrTxAuWi
+  name: Agent Tasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldpadv6gm83kinEQ
+- id: fldIKuLMY1qATH3pP
+  name: NodeTasks (from Agent Tasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld7xspVxTrTxAuWi
+  lookup_field_id: fld6QEKrZ2DY0kAXj
+- id: fldeoTRfkMNTIkq8K
+  name: VariableTasks (from Agent Tasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld7xspVxTrTxAuWi
+  lookup_field_id: fldo11koJZunOWBwy
+- id: flduodJlkvU6Mt4RA
+  name: DatasetTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl9lACSI4fDUzAv4
+  prefer_single_record_link: false
+  inverse_link_field_id: fldp9x5PoR4kvfBMS
+- id: fld4bDDHRrWI6WuCo
+  name: DatasetTask AID (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flduodJlkvU6Mt4RA
+  lookup_field_id: fldJSKxexM41Vqsva
+- id: fldDfsu87i8BSizzf
+  name: DatasetVariables (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flduodJlkvU6Mt4RA
+  lookup_field_id: flddTNNmKNzG2Oe5r
+- id: fldmtSmweerjjrDXV
+  name: DatasetNodes (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flduodJlkvU6Mt4RA
+  lookup_field_id: fldfgLQXuqWsqbrEJ
+- id: fld0eqxuFjAVUOd3e
+  name: DatasetRuns
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldyxamqL80wLoMYx
+- id: fld1driKqpLcwmqNo
+  name: Dataset Record ID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: flduPDyKpjUgyMaMR
+  name: Created By
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl6mvvqpU4AOIpVS
+  prefer_single_record_link: true
+  inverse_link_field_id: fldSD5pihcTPlJye6
+- id: fld6RMCtfj0Mzq6U0
+  name: Created At
+  type: date
+  description: null
+  date_format:
+    name: local
+    format: l
+- id: fldO6BSeab64GgrZO
+  name: DatasetVariables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: false
+  inverse_link_field_id: fld8VspWSZTZmafol
+- id: fldmbXSZxvVpojlr6
+  name: Count (Agent Tasks)
+  type: count
+  description: null
+  record_link_field_id: fld7xspVxTrTxAuWi
+  lookup_field_id: null
+- id: fld1nHdNA55vRdGVM
+  name: Count (DatasetRuns)
+  type: count
+  description: null
+  record_link_field_id: fld0eqxuFjAVUOd3e
+  lookup_field_id: null
+views:
+- id: viwFltfl643rmApXr
+  name: Grid view
+  type: grid
+- id: viwPz0LZBLsQInA6z
+  name: Moverii
+  type: grid

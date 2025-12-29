@@ -1,0 +1,23 @@
+{
+  "source_pdf": "08-LACP-2510.13821.pdf",
+  "processed_at": "2025-12-28T16:48:20.357350",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 964,
+  "total_chars": 47645,
+  "chunks": [
+    {
+      "filename": "08-LACP-2510.13821_1.md",
+      "chunk_number": 1,
+      "line_count": 496,
+      "char_count": 23973
+    },
+    {
+      "filename": "08-LACP-2510.13821_2.md",
+      "chunk_number": 2,
+      "line_count": 468,
+      "char_count": 23672
+    }
+  ]
+}

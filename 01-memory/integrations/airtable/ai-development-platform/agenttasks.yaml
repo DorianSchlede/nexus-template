@@ -1,0 +1,536 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblsEzGhn4XJjNrkt
+table_name: AgentTasks
+exported_at: '2025-12-28T14:12:03.635308'
+field_count: 64
+fields:
+- id: fldsCjtBCdaLBtWtM
+  name: Task ID
+  type: singleLineText
+  description: null
+- id: fldlHELS5UjsXZIGI
+  name: Custom ID
+  type: multilineText
+  description: null
+- id: fldVLDYZJcdSB8ofR
+  name: Actual Task Input
+  type: multilineText
+  description: null
+- id: fldYacQEGdeKGQqmE
+  name: Task Type
+  type: singleSelect
+  description: null
+  choices:
+  - id: selAZH13GQ1Cjj6W3
+    name: Task
+    color: blueLight2
+  - id: selatTPl7oLnM6uvt
+    name: Agent Evaluation
+    color: cyanLight2
+- id: fldzXMT7t5qCeRRct
+  name: Actual Attachments
+  type: multipleAttachments
+  description: null
+- id: fldYJJzBWkcb23dwX
+  name: Workspace (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldTWIqazqiMollCT
+  lookup_field_id: fldItXOU8yc1YbCdu
+- id: fldW0oI4zIm1WjicZ
+  name: Created At
+  type: dateTime
+  description: null
+  date_format:
+    name: local
+    format: l
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldcaJ1MVO12OrxF1
+  name: Updated At
+  type: dateTime
+  description: null
+  date_format:
+    name: local
+    format: l
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldTMwv761bbLGhcx
+  name: Duration Mins
+  type: number
+  description: null
+  precision: 1
+- id: fld2CZc1jCR6swyr7
+  name: Actual Last Node
+  type: singleLineText
+  description: null
+- id: fldrRLLOTgYJQ9rVI
+  name: Actual Task Output
+  type: multilineText
+  description: null
+- id: fld6QEKrZ2DY0kAXj
+  name: NodeTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldIdn9oIk3X61rEy
+- id: fldo11koJZunOWBwy
+  name: VariableTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblKhpqLs06kI01yv
+  prefer_single_record_link: false
+  inverse_link_field_id: fldHKmJO3vfBBEsCc
+- id: fldWSl6TIcA70RjQa
+  name: AgentVersion
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: true
+  inverse_link_field_id: fld9TlCbOspIO34fr
+- id: fldpadv6gm83kinEQ
+  name: Dataset
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbltUrvSBnfOb4S8v
+  prefer_single_record_link: false
+  inverse_link_field_id: fld7xspVxTrTxAuWi
+- id: fldPvGaaxL741s2vs
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldUNK8Yy1Nl2td8U
+- id: fldheOCPuzonZjCm8
+  name: Expected Last Node
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld98YlcjD7sIMQaF
+  lookup_field_id: fldkOIWVbKKkDWfJ5
+- id: fldTbbJPQLDBQCAPK
+  name: Last Node Match
+  type: formula
+  description: Checks if the Actual Last Node matches the Expected Last Node and returns
+    1 if they match, or 2 if they don't.
+  referenced_field_ids:
+  - fld2CZc1jCR6swyr7
+  - fldheOCPuzonZjCm8
+  formula: "IF(\n  SUBSTITUTE(ENCODE_URL_COMPONENT({fld2CZc1jCR6swyr7}), \"%22\",\
+    \ \"\") = \n  SUBSTITUTE(ENCODE_URL_COMPONENT({fldheOCPuzonZjCm8}), \"%22\", \"\
+    \"),\n  1, 0\n)"
+- id: fld98YlcjD7sIMQaF
+  name: DatasetTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl9lACSI4fDUzAv4
+  prefer_single_record_link: false
+  inverse_link_field_id: fldAcBJcEqNG1KOgw
+- id: fldEm6Om46STlktkW
+  name: NodeVersions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblh0GsN5Et3ApzLS
+  prefer_single_record_link: false
+  inverse_link_field_id: fldraGRjKKRCKNLUZ
+- id: fldW19UR8EXGlfu0q
+  name: Actual URLs
+  type: singleLineText
+  description: null
+- id: fldkp3NCSCnrCAGEY
+  name: DatasetNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblflNTX3tR0onX13
+  prefer_single_record_link: false
+  inverse_link_field_id: fld9EP2fxjskE1JU4
+- id: fldGUuLs3vGfOiM4r
+  name: DatasetVariables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: false
+  inverse_link_field_id: fld1PllKSJs3CfwXZ
+- id: fldgm0fYyRECBG8a1
+  name: Avg Node Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldkVVUX118jgJ7MW
+  referenced_field_ids: []
+- id: fldYOMijPPqb12C58
+  name: AirtableTaskID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fldnXRarAuKGCjjiC
+  name: DatasetRunAirtableID (from DatasetRun)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldPvGaaxL741s2vs
+  lookup_field_id: fldF9uKQkQn8uTAUP
+- id: fldx7BWMCJ4Nre3vS
+  name: Total Variables
+  type: rollup
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldjy2u599iaw987f
+  referenced_field_ids: []
+- id: fldIUbzo9WnlkKo1O
+  name: Total Analyzed Variables
+  type: rollup
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldjy2u599iaw987f
+  referenced_field_ids: []
+- id: flddtWcEYVRTWDeCr
+  name: AirtableNodIeDs
+  type: rollup
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldvAwzLoUxk8aI7H
+  referenced_field_ids: []
+- id: fldi0YHCgYJrjRbr8
+  name: Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: seloIkv5fmkGQkHYx
+    name: COMPLETED
+    color: greenLight1
+  - id: sel8CXHkg2IpX2CNj
+    name: FAILED
+    color: redLight1
+  - id: selJqNBB3zvC9UOef
+    name: USER_INPUT_REQUIRED
+    color: yellowLight1
+  - id: selz4RpbvoLh5lE28
+    name: IN_PROGRESS
+    color: blueLight1
+  - id: selZgwAW1az5Sr9G7
+    name: QUEUED
+    color: grayLight1
+  - id: selCO4alWwEBv07Bg
+    name: CONSENT_REQUIRED
+    color: orangeLight1
+- id: fldTWIqazqiMollCT
+  name: Agent
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fld6yGmd8u0yMju5d
+- id: fldnLd7COv9r8JwCa
+  name: Monitor Task (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldTWIqazqiMollCT
+  lookup_field_id: fldcCva8ptVidwzz3
+- id: fldfElcX6QtPD4144
+  name: Sync To Platform
+  type: singleSelect
+  description: null
+  choices:
+  - id: seliGzVv9aiuDxGDw
+    name: 'TRUE'
+    color: greenLight1
+  - id: selR6tZqHriXrvyuJ
+    name: 'FALSE'
+    color: grayLight1
+- id: fldgaYj0g3qEJ7JCj
+  name: Week Num
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldW0oI4zIm1WjicZ
+  formula: WEEKNUM({fldW0oI4zIm1WjicZ})
+- id: fldV1nj47S40rNMNl
+  name: Synced Task
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldHAuq4n2lleduI1
+- id: fldHAuq4n2lleduI1
+  name: 'From field: Synced Task'
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldV1nj47S40rNMNl
+- id: fldCrhUM8gH3ENk4j
+  name: BID Case ID
+  type: singleLineText
+  description: null
+- id: fld4xi9Fs19VHPBpS
+  name: TotalNodeTasks
+  type: rollup
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldjy2u599iaw987f
+  referenced_field_ids: []
+- id: fld0DAtkZyfq6NgHn
+  name: VariableTaskRaw (from NodeTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld6QEKrZ2DY0kAXj
+  lookup_field_id: fldH4yDyt2cubvEcq
+- id: fldLUSWR4Turqftq8
+  name: Expected Output Status (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld98YlcjD7sIMQaF
+  lookup_field_id: fldPbTjUBAkJ0widH
+- id: fldFTPkFIHiTPs4XT
+  name: Avg Variable Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fld3OOiTnt0QXA3zd
+  name: Avg. KeyV Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fld6RIH9enSGd97sB
+  name: Avg. AddV Accuracy
+  type: rollup
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fldMdIPoidXJnUIIV
+  name: Avg. OtherV Accuracy copy
+  type: rollup
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fld0APSm6K0sKxIoz
+  name: DatasetVariables (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld98YlcjD7sIMQaF
+  lookup_field_id: flddTNNmKNzG2Oe5r
+- id: fldLUtvQCwzFiekD8
+  name: VariableMapping Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: selJbRZDKP6mEzDXh
+    name: Complete
+    color: greenBright
+  - id: selbm3A96GotooK81
+    name: No Mappings Found
+    color: yellowBright
+  - id: selGkFJf3EqXuITes
+    name: Processing Error
+    color: orangeBright
+- id: fldUsd7QoG3df6xtm
+  name: DatasetRunText
+  type: singleLineText
+  description: null
+- id: fldqn1cqAjPRahgPl
+  name: Extracted BID Case ID
+  type: formula
+  description: Extracts the case_id value from the JSON in Actual Task Input.
+  referenced_field_ids:
+  - fldHoNpdNGwGHft4y
+  formula: "REGEX_EXTRACT(\r\n  {fldHoNpdNGwGHft4y},\r\n  '\"case_id\"\\\\s*:\\\\\
+    s*\"([a-fA-F0-9\\\\-]+)\"'\r\n)"
+- id: fldHoNpdNGwGHft4y
+  name: Cleaned TaskInput
+  type: formula
+  description: Removes all backslash characters from the Actual Task Input field.
+  referenced_field_ids:
+  - fldVLDYZJcdSB8ofR
+  formula: SUBSTITUTE({fldVLDYZJcdSB8ofR}, "\\", "")
+- id: fld6WzgMMs7CV9JfY
+  name: AirtableCreated
+  type: createdTime
+  description: null
+- id: fldmI6EZ6Bp8xVzoY
+  name: Workspace BID (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldTWIqazqiMollCT
+  lookup_field_id: fldocIPTHNm7dOMKJ
+- id: fldSnGoU8sXMdaopL
+  name: Agent BID (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldTWIqazqiMollCT
+  lookup_field_id: fldljEp5sdywX0omr
+- id: fldCwTwzdcj1xR0QN
+  name: LangfuseURL
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldsCjtBCdaLBtWtM
+  formula: '"https://tracing.beamstudio.ai/project/clw5gbhuy0003u3rv4jzzoesh/sessions/"&{fldsCjtBCdaLBtWtM}'
+- id: fldufQyNjOPFHKgre
+  name: BeamURL
+  type: formula
+  description: Generates a Beam task URL using Workspace BID, Agent BID, and Task
+    ID fields.
+  referenced_field_ids:
+  - fldmI6EZ6Bp8xVzoY
+  - fldSnGoU8sXMdaopL
+  - fldsCjtBCdaLBtWtM
+  formula: '"https://app.beam.ai/" & {fldmI6EZ6Bp8xVzoY} & "/" & {fldSnGoU8sXMdaopL}
+    & "/tasks/" & {fldsCjtBCdaLBtWtM}'
+- id: fldd9hvRISA7oxH9r
+  name: ReviewNote
+  type: multilineText
+  description: null
+- id: fldb79hriMLDaoksg
+  name: Path Selection
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldheOCPuzonZjCm8
+  - fld2CZc1jCR6swyr7
+  formula: "IF(\n  OR(\n    {fldheOCPuzonZjCm8} = BLANK(),\n    {fld2CZc1jCR6swyr7}\
+    \ = BLANK()\n  ),\n  BLANK(),\n  IF(\n    {fldheOCPuzonZjCm8} = {fld2CZc1jCR6swyr7},\n\
+    \    \"Right\",\n    \"Wrong\"\n  )\n)"
+- id: fldDI8LS7h6RUVk3d
+  name: Nodes (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldTWIqazqiMollCT
+  lookup_field_id: fldnt1IfujyoHRIQm
+- id: fldWn7FuYBgGWbfYX
+  name: AIValue (from VariableTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: flduB9HRcICOjSFqf
+- id: fldU3kraibChcssF9
+  name: DatasetVariable (from VariableTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldo11koJZunOWBwy
+  lookup_field_id: fldx6jhfF87U8UjkD
+- id: fldhvltZgDzY4nbFG
+  name: Duration Mins _ New
+  type: formula
+  description: Calculates the duration in minutes from Created At to Updated At, with
+    format 0.00
+  referenced_field_ids:
+  - fldW0oI4zIm1WjicZ
+  - fldcaJ1MVO12OrxF1
+  formula: "IF(\n  AND({fldW0oI4zIm1WjicZ}, {fldcaJ1MVO12OrxF1}),\n    DATETIME_DIFF({fldcaJ1MVO12OrxF1},\
+    \ {fldW0oI4zIm1WjicZ}, 'seconds') / 60,\n  BLANK()\n)"
+- id: fldTPH1Tu4eXHVhk7
+  name: AIRecomBooth
+  type: singleLineText
+  description: null
+- id: fldrad9qSjGJMjgmp
+  name: Test Case
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl1u70powCW0rPTm
+  prefer_single_record_link: false
+  inverse_link_field_id: fld5vUgjf3GkQyANn
+- id: fldY3QakYWVF5OD91
+  name: Group (from Test Case)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldrad9qSjGJMjgmp
+  lookup_field_id: fldY465vvlu2Avwts
+- id: fldocM6KHBRqB6Bjb
+  name: URLs
+  type: multilineText
+  description: null
+views:
+- id: viwj42iyrJcx3SiHW
+  name: Round 16
+  type: grid
+- id: viwOOoJpEjR3mnxBH
+  name: Round 18
+  type: grid
+- id: viw5eFMbTIRESi2pV
+  name: Send Data from BID to Main
+  type: grid
+- id: viwr56zDtdf7ovEzU
+  name: Add Dataset to Main
+  type: grid
+- id: viwJE1sK9PtSAwdE7
+  name: Round 15 with EP
+  type: grid
+- id: viwme3oihiwKuouVR
+  name: Dataset Run Sonnet
+  type: grid
+- id: viwycYCE31Xp7fjAl
+  name: Test Automation
+  type: grid
+- id: viwWjxzbPEFBWDOrn
+  name: TZV
+  type: grid
+- id: viwFhY2uxx3LgeQ2I
+  name: TZV 03.09
+  type: grid
+- id: viwrYSA4Vi1oTs2IL
+  name: Zuruck
+  type: grid
+- id: viwMSstBzUFtVuNje
+  name: Zuruck copy
+  type: grid
+- id: viw2jh03kg1W6xHOn
+  name: schuldner
+  type: grid
+- id: viwuiWWbQ9uV09eVg
+  name: Uniday
+  type: grid
+- id: viwswcZd5vvzmnbSn
+  name: First Email Dataset
+  type: grid
+- id: viw5e1UseJrAwL8pH
+  name: EnBW
+  type: grid
+- id: viwkMFvtlsAOwaUvh
+  name: Deal Breaker
+  type: grid
+- id: viwji884j2JGzcnS3
+  name: 1NCE
+  type: grid
+- id: viwPjKLEYVRq7poqu
+  name: All
+  type: grid
+- id: viwfVziXaXj4jnEMA
+  name: Latest 7 days
+  type: grid
+- id: viw0NImbZpVX30J2e
+  name: BP
+  type: grid
+- id: viwZI3tWbVfZe77uG
+  name: BID Instance
+  type: grid
+- id: viw2gRtxOTe61Vqr0
+  name: Fraisa - All Tasks
+  type: grid
+- id: viw6pLJRMfbMebqU1
+  name: JJ - Deprecated
+  type: grid
+- id: viwfHstpMPcbHQsVI
+  name: JJ - Live
+  type: grid
+- id: viwOj0vxd8cF9yjIa
+  name: Coolback
+  type: grid
+- id: viwjERHTrF8oshVUI
+  name: Fraisa Filtered
+  type: grid
+- id: viwr8FnLEtVrXQcGB
+  name: Moverii
+  type: grid

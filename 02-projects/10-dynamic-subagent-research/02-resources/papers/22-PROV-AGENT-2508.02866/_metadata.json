@@ -1,0 +1,23 @@
+{
+  "source_pdf": "22-PROV-AGENT-2508.02866.pdf",
+  "processed_at": "2025-12-28T16:49:36.344948",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 807,
+  "total_chars": 41523,
+  "chunks": [
+    {
+      "filename": "22-PROV-AGENT-2508.02866_1.md",
+      "chunk_number": 1,
+      "line_count": 500,
+      "char_count": 25729
+    },
+    {
+      "filename": "22-PROV-AGENT-2508.02866_2.md",
+      "chunk_number": 2,
+      "line_count": 307,
+      "char_count": 15794
+    }
+  ]
+}

@@ -21,8 +21,9 @@ The Python script (`nexus-loader.py`) is the **MASTER CONTROLLER**. It analyzes 
 
 ## Startup (MANDATORY)
 
-```bash
-python 00-system/core/nexus-loader.py --startup
+```powershell
+./00-system/startup.ps1
+# Then read: 00-system/.cache/context_core.json AND 00-system/.cache/context_metadata.json
 ```
 
 **Then:** Use `memory_content` → Follow `instructions.action`

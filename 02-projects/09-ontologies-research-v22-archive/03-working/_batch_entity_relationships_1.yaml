@@ -1,0 +1,240 @@
+---
+batch_id: "entity_relationships_1"
+field: entity_relationships
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 6
+patterns_found: 42
+---
+
+patterns:
+  # === CHUNK 1 PATTERNS ===
+
+  - name: "Node-Edge-Node Triple Structure"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:138-142)"
+    quote: "a knowledge graph as a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"
+    description: "The fundamental entity relationship pattern in knowledge graphs: nodes represent entities, edges represent relations. This establishes the basic structural relationship where entities are connected via typed edges expressing semantic relationships."
+
+  - name: "Directed Edge-Labelled Graph Model"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:404-408)"
+    quote: "A directed edge-labelled graph (also known as a multi-relational graph) is defined as a set of nodes and a set of directed labelled edges between those nodes, like [Santa Lucia] city Santiago"
+    description: "Entity relationships are modeled as directed, labeled edges connecting source and target nodes. The edge label specifies the relationship type (e.g., 'city'), enabling multi-relational semantics."
+
+  - name: "Binary Relation Pattern"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:395-399)"
+    quote: "By instead adopting a graph data model from the outset, the board could forgo the need for an upfront schema, and could define any (binary) relation between any pair of entities at any time"
+    description: "Entity relationships are fundamentally binary - connecting exactly two entities. This binary relation pattern allows flexible, schema-free definition of relationships between entity pairs."
+
+  - name: "Heterogeneous Graph Entity-Type Assignment"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:483-490)"
+    quote: "A heterogeneous graph (or heterogeneous information network) is a graph where each node and edge is assigned one type. Heterogeneous graphs are thus akin to del graphs with edge labels corresponding to edge types"
+    description: "Entities and their relationships can be typed, enabling partitioning of nodes by entity type. Edges can be homogeneous (between same-type nodes) or heterogeneous (between different-type nodes)."
+
+  - name: "Property Graph Edge Attributes"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:548-552)"
+    quote: "The property graph model was thus proposed to offer additional flexibility when modelling data as a graph. A property graph allows a set of property-value pairs and a label to be associated with both nodes and edges"
+    description: "Entity relationships can carry additional attribute metadata as property-value pairs. This extends the basic edge with contextual information about the relationship itself."
+
+  - name: "Named Graph Dataset Structure"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:583-609)"
+    quote: "A graph dataset then consists of a set of named graphs and a default graph. Each named graph is a pair of a graph ID and a graph... nodes and edges can be repeated across graphs, where the same node in different graphs will typically refer to the same entity"
+    description: "Multiple sub-graphs can share entities across named graph boundaries. Same nodes in different graphs reference the same real-world entity, enabling entity integration when merging graphs."
+
+  # === CHUNK 2 PATTERNS ===
+
+  - name: "Schema-Identity-Context Enhancement"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:78-86)"
+    quote: "We refer to a knowledge graph as a data graph potentially enhanced with representations of schema, identity, context, ontologies and/or rules. These additional representations may be embedded in the data graph, or layered above it"
+    description: "Entity relationships can be enhanced with three key dimensions: schema (structural definitions), identity (entity disambiguation), and context (scope of truth). These layers add semantic depth to basic relationships."
+
+  - name: "Subclass Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:107-118)"
+    quote: "We may subsequently observe some natural relations between some of these classes that we would like to capture... we present a class hierarchy for events where children are defined to be subclasses of their parents"
+    description: "Hierarchical classification relationship where child classes inherit from parent classes. If entity is type Food Festival, it implies entity is also type Festival and type Event through subclass inference."
+
+  - name: "Subproperty Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:120-125)"
+    quote: "we may consider that the properties city and venue are sub-properties of a more general property location, such that given an edge [Santa Lucia] city Santiago, we may also infer that [Santa Lucia] location Santiago"
+    description: "Property hierarchy where specific properties imply more general ones. Subproperty relationships enable inference of broader relationship types from specific edge labels."
+
+  - name: "Domain and Range Constraints"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:127-174)"
+    quote: "We may further define the domain of properties, indicating the class(es) of entities for nodes from which edges with that property extend... Conversely, we may define the range of properties, indicating the class(es) of entities for nodes to which edges with that property extend"
+    description: "Entity relationships constrain entity types at endpoints. Domain specifies valid source entity types; range specifies valid target entity types. These constraints enable type inference from relationships."
+
+  - name: "Shape-Based Relationship Validation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:250-277)"
+    quote: "A shape targets a set of nodes in a data graph and specifies constraints on those nodes. The shape's target can be defined in many ways... Constraints can then be defined on the targetted nodes, such as to restrict the number or types of values taken on a given property"
+    description: "Entity relationships can be validated via shape constraints that specify cardinality, type requirements, and structural patterns. Shapes define expected relationship patterns for entity types."
+
+  - name: "Quotient Graph Structural Equivalence"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:439-457)"
+    quote: "quotient graphs partition groups of nodes in the data graph according to some equivalence relation while preserving some structural properties of the graph... the nodes of this quotient graph are the partitions of nodes from the data graph"
+    description: "Entity relationships can be abstracted via quotient graphs that group structurally equivalent entities. Preserves edge connectivity patterns between entity partitions."
+
+  - name: "Persistent Identifier Entity References"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:551-567)"
+    quote: "To avoid such clashes, long-lasting persistent identifiers (PIDs) can be created in order to uniquely identify an entity. Prominent examples of PID schemes include Digital Object Identifiers (DOIs) for papers, ORCID iDs for authors"
+    description: "Entity relationships require unique, persistent identifiers to avoid naming clashes during graph merging. PIDs ensure entities maintain consistent identity across knowledge graph boundaries."
+
+  - name: "Same-As Identity Link"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:686-698)"
+    quote: "A second option is to use identity links to state that a local entity has the same identity as another coreferent entity found in an external source; an instantiation of this concept can be found in the OWL standard, which defines the owl:sameAs property relating coreferent entities"
+    description: "Explicit relationship declaring two entity nodes refer to the same real-world entity. Enables entity consolidation across knowledge graphs and data integration."
+
+  # === CHUNK 3 PATTERNS ===
+
+  - name: "Temporal Context on Relationships"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:8-21)"
+    quote: "As an alternative to reification, we can rather use higher-arity representations for modelling context. Taking again the edge Santiago flight Arica, Figure 19 illustrates three higher-arity representations of temporal context"
+    description: "Entity relationships can be annotated with temporal validity periods. Context constrains when a relationship holds true, enabling temporal reasoning over edges."
+
+  - name: "Annotated Relationship with Meet/Join Operators"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:107-127)"
+    quote: "Annotated RDF allows for representing various forms of context modelled as semi-rings: algebraic structures consisting of domain values (e.g., temporal intervals, fuzzy values, etc.) and two main operators to combine domain values: meet and join"
+    description: "Entity relationships can carry algebraic annotations supporting intersection (meet) and union (join) operations. Enables querying relationships with automatic context intersection/combination."
+
+  - name: "Ontology-Based Entailment"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:264-270)"
+    quote: "an answer (Nam) could be automatically entailed were we to state that x being a Food Festival entails that x is a Festival, or that x having venue y in city z entails that x has location z"
+    description: "Complex entity relationships can be inferred through ontological entailment rules. Chained relationships (venue -> city -> location) enable transitive inference of implicit relationships."
+
+  - name: "Assertion Relationship Axiom"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:528-530)"
+    quote: "Assertion: x y z implies x y z. Example: Chile capital Santiago"
+    description: "Basic entity relationship assertion pattern where edge (x, y, z) in data graph implies corresponding relation in domain graph. The foundational mechanism for stating entity relationships."
+
+  - name: "Same-As Equality Axiom"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:565)"
+    quote: "Same As: x1 same as x2 implies x1 = x2. Example: Region V same as Region de Valparaiso"
+    description: "Identity relationship axiom declaring entity equivalence. Two nodes referring to same entity share all relationships - enables entity consolidation."
+
+  - name: "Different-From Inequality Axiom"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:567)"
+    quote: "Different From: x1 diff. from x2 implies x1 != x2. Example: Valparaiso diff. from Region de Valparaiso"
+    description: "Explicit non-identity relationship stating two nodes refer to distinct entities. Prevents incorrect entity merging when nodes share similar names."
+
+  - name: "Inverse Property Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:583)"
+    quote: "Inverse: p inv. of q means x p y iff y q x. Example: venue inv. of hosts"
+    description: "Bidirectional relationship pattern where one property is the inverse of another. If A venue B, then B hosts A - enables bidirectional navigation of entity relationships."
+
+  - name: "Transitive Property Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:587)"
+    quote: "Transitive: p type Transitive means x p y p z implies x p z. Example: part of type Transitive"
+    description: "Relationship that chains through intermediate entities. If A part-of B and B part-of C, then A part-of C. Enables path-based inference across entity chains."
+
+  - name: "Symmetric Property Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:595)"
+    quote: "Symmetric: p type Symmetric means x p y iff y p x. Example: nearby type Symmetric"
+    description: "Bidirectional relationship where order of entities is irrelevant. If A nearby B, then B nearby A. Common for spatial, similarity, and association relationships."
+
+  - name: "Functional Property Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:603)"
+    quote: "Functional: p type Functional means y1 p x p y2 implies y1 = y2. Example: population type Functional"
+    description: "Many-to-one entity relationship where an entity can have at most one value for the property. Constrains relationship cardinality and can infer entity identity."
+
+  - name: "Inverse Functional Property"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:605)"
+    quote: "Inv. Functional: p type Inv. Functional means x1 p y p x2 implies x1 = x2. Example: capital type Inv. Functional"
+    description: "One-to-many entity relationship where a value uniquely identifies the source entity. If A capital B and C capital B, then A = C. Enables entity identification through unique relationships."
+
+  - name: "Property Chain Composition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:508-511)"
+    quote: "Finally, we can relate a property to a chain (a path expression only allowing concatenation of properties) such that pairs of entities related by the chain are also related by the given property"
+    description: "Complex entity relationship defined as composition of simpler relationships. If chain venue -> city holds, a single 'location' relationship can be inferred. Enables shortcut relationships."
+
+  # === CHUNK 4 PATTERNS ===
+
+  - name: "Rule-Based Relationship Inference"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:21-35)"
+    quote: "A rule is composed of a body (if) and a head (then). Both the body and head are given as graph patterns. A rule indicates that if we can replace the variables of the body with terms from the data graph and form a subgraph of a given data graph, then using the same replacement of variables in the head will yield a valid entailment"
+    description: "Entity relationships can be inferred through if-then rules. Graph pattern matching in body triggers creation of relationships specified in head. Corresponds to Datalog/Horn clauses."
+
+  - name: "Subclass Inference Rule"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:84-86)"
+    quote: "Subclass (I): ?x type ?c subc. of ?d => ?x type ?d. Subclass (II): ?c subc. of ?d subc. of ?e => ?c subc. of ?e"
+    description: "Type relationships propagate through class hierarchy. Entity typed as subclass automatically has type of superclass. Subclass chains are transitive."
+
+  - name: "Subproperty Inference Rule"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:88-89)"
+    quote: "Subproperty (II): ?p subp. of ?q subp. of ?r => ?p subp. of ?r"
+    description: "Property relationships form transitive hierarchies. Relationship using subproperty implies relationship using all superproperty ancestors."
+
+  - name: "Description Logic Assertional Relationships"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:149-155)"
+    quote: "DLs are based on three types of elements: individuals, such as Santiago; classes (aka concepts) such as City; and properties (aka roles) such as flight. Assertional axioms can be either unary class relations on individuals, such as City(Santiago), or binary property relations on individuals, such as flight(Santiago,Arica)"
+    description: "Entity relationships in DL framework: unary type assertions (entity-class) and binary property assertions (entity-property-entity). Forms the Assertional Box (A-Box)."
+
+  - name: "Existential Class Restriction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:166-170)"
+    quote: "we can define a class EXISTS nearby . Airport as the class of individuals that have some airport nearby. We can then add a class axiom EXISTS flight . TOP SUBCLASSOF EXISTS nearby . Airport"
+    description: "Entity membership in class defined by existence of specific relationships. Entities with outgoing 'flight' edge must also have relationship to some Airport via 'nearby'."
+
+  - name: "Translational Embedding Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:907-918)"
+    quote: "Translational models interpret edge labels as transformations from subject nodes to object nodes... Over all positive edges [s] p -, TransE learns vectors es, rp, and eo aiming to make es + rp as close as possible to eo"
+    description: "Entity relationships modeled as vector translations in embedding space. Relation vector transforms source entity embedding toward target entity embedding. Enables numeric relationship reasoning."
+
+  # === CHUNK 6 PATTERNS ===
+
+  - name: "Disjointness Class Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:19-26)"
+    quote: "the disjointness axiom DomesticAirport INTERSECTION InternationalAirport EQUIV BOTTOM states that the intersection of the two classes is equivalent to the empty class, or in simpler terms, no node can be simultaneously of type Domestic Airport and International Airport"
+    description: "Mutual exclusion relationship between entity classes. An entity cannot be an instance of both disjoint classes simultaneously. Enables consistency checking of type relationships."
+
+  - name: "Entity Linking Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:233-241)"
+    quote: "The EL task associates mentions of entities in a text with the existing nodes of a target knowledge graph... EL may then link the given mentions to these nodes"
+    description: "Relationship connecting textual entity mentions to canonical knowledge graph entities. Handles alias resolution (Rapa Nui -> Easter Island) and disambiguation of entity references."
+
+  - name: "Relation Extraction Binary Pattern"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:274-277)"
+    quote: "The RE task extracts relations between entities in the text. The simplest case is that of extracting binary relations in a closed setting wherein a fixed set of relation types are considered"
+    description: "Entity relationships extracted from text as binary subject-predicate-object triples. Closed extraction uses predefined relation vocabulary; open extraction discovers relation types."
+
+  - name: "N-ary Relation with Context"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:298-305)"
+    quote: "A variety of RE methods have been proposed to extract n-ary relations that capture further context for how entities are related... we see how an n-ary relation captures additional temporal context, denoting when Rapa Nui was named a World Heritage site"
+    description: "Entity relationships extended beyond binary to capture additional contextual participants. Uses reification/anonymous nodes to attach temporal, locative, or causal context to relationships."
+
+  - name: "Direct Mapping Row-to-Edge Pattern"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:596-600)"
+    quote: "A direct mapping automatically generates a graph from a table... which creates an edge [x] y z for each (non-header, non-empty, non-null) cell of the table, such that [x] represents the row of the cell, y the column name of the cell, and [z] the value of the cell"
+    description: "Entity relationships generated from tabular data: row entity connected to cell value via column-name relationship. Table structure maps to graph structure preserving semantic relationships."
+
+  - name: "Foreign Key Entity Reference"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:615-620)"
+    quote: "In case of a foreign key between two tables such as Report.claimant referencing Claimant.id we can link, for example, to [Claimant-XY12SDA] rather than [XY12SDA], where the former node also has the name and country of the claimant"
+    description: "Entity relationships derived from relational foreign key constraints. Foreign key reference becomes edge connecting source entity to referenced entity, preserving relational integrity."
+
+  - name: "Ontology Design Pattern Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:829-846)"
+    quote: "Ontology Design Patterns (ODPs) are another common feature of modern methodologies, specifying generalisable ontology modelling patterns that can be used as inspiration for modelling similar patterns"
+    description: "Reusable entity relationship templates codifying domain patterns. Event pattern specifies spatio-temporal extent, sub-events, and participant relationships as standardized structure."
+
+  # === CHUNK 7 PATTERNS ===
+
+  - name: "Identity Link Prediction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:310-315)"
+    quote: "type links involving edges with label type, indicating the type of an entity; and identity links involving edges with label same as, indicating that two nodes refer to the same entity"
+    description: "Entity relationship prediction targeting same-as identity links. Predicts when two distinct nodes should be unified as referring to identical real-world entity."
+
+  - name: "Value Matcher Entity Similarity"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:364-378)"
+    quote: "Such techniques are generally based on two types of matchers: value matchers determine how similar the values of two entities on a given property are... while context matchers consider the similarity of entities based on various nodes and edges"
+    description: "Entity relationship discovery through similarity matching. Value matchers compare property values; context matchers compare relationship neighborhoods. Combined for identity link prediction."
+
+  - name: "Fact Validation Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:426-433)"
+    quote: "The task of fact validation (aka fact checking) involves assigning plausibility or veracity scores to facts/edges, typically between 0 and 1. An ideal fact-checking function assumes a hypothetical reference universe and would return 1 for the fact [Santa Lucia] city Santiago (being true)"
+    description: "Entity relationships assigned plausibility scores indicating likelihood of truth. External reference sources used to validate or refute stated relationships."
+
+  - name: "Metapath Relationship Evidence"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:515-518)"
+    quote: "An important set of features are metapaths, which encode sequences of predicates that correlate positively with the edge label of the input edge"
+    description: "Entity relationship validation via path patterns. Metapaths are sequences of relationship types that evidence a target relationship. Path presence supports relationship plausibility."
+
+  - name: "Link Discovery Cross-Graph Relationship"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:809-825)"
+    quote: "the link discovery task considers adding such links from one knowledge graph to another... link discovery aims to discover links across knowledge graphs, which involves unique aspects: first, link discovery typically considers disjoint sets of source (local) nodes and target (remote) nodes"
+    description: "Entity relationships spanning multiple knowledge graphs. Links connect local entities to remote coreferent entities, enabling cross-graph integration and data federation."

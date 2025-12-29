@@ -1,0 +1,184 @@
+# Research Pipeline Skill-Chain Contract
+# Version: 1.0
+# Created: 2025-12-27
+#
+# This contract defines the structure, skills, outputs, and gates
+# for the research pipeline skill-chain.
+
+name: research-pipeline
+version: "1.0"
+description: "Academic paper research, analysis, and synthesis"
+created: "2025-12-27"
+author: "Nexus System"
+
+# Nested structure definition
+structure:
+  type: nested
+  parent_skill: SKILL.md
+  subfolders:
+    - orchestrators
+    - skills
+    - shared
+    - validation
+
+# Skill definitions with paths
+skills:
+  # Phase 1 Orchestrator
+  - id: create-research-project
+    phase: 1
+    type: orchestrator
+    path: orchestrators/create-research-project/SKILL.md
+    description: "Phase 1: Planning & Acquisition"
+    sub_skills:
+      - paper-search
+      - pdf-preprocess
+    produces:
+      - path: "02-resources/_briefing.md"
+        required: true
+        schema: briefing
+      - path: "02-resources/_analysis_kit.md"
+        required: true
+      - path: "03-working/_selection_log.md"
+        required: true
+        validates:
+          - field: "approved_by_user"
+            equals: true
+      - path: "02-resources/papers/*/_metadata.json"
+        required: true
+        min_count: 1
+    gate: readiness-gate
+
+  # Phase 2 Orchestrator
+  - id: execute-research-project
+    phase: 2
+    type: orchestrator
+    path: orchestrators/execute-research-project/SKILL.md
+    description: "Phase 2: Analysis & Synthesis"
+    requires:
+      - skill: create-research-project
+        outputs: all
+    sub_skills:
+      - paper-analyze
+      - paper-synthesize
+    produces:
+      - path: "02-resources/papers/*/index.md"
+        required: true
+        validates:
+          - has_yaml_frontmatter: true
+      - path: "02-resources/papers/*/_analysis_log.md"
+        required: true
+        validates:
+          - field: "schema_version"
+            in: ["2.0", "2.1", "2.2"]
+      - path: "04-outputs/_synthesis.md"
+        required: true
+      - path: "04-outputs/_validation_report.md"
+        required: true
+    gate: completion-gate
+
+  # Sub-skills
+  - id: paper-search
+    type: skill
+    path: skills/paper-search/SKILL.md
+    description: "Search 9 academic APIs for papers"
+    produces:
+      - path: "02-resources/_search_results.md"
+        required: false
+
+  - id: pdf-preprocess
+    type: skill
+    path: skills/pdf-preprocess/SKILL.md
+    description: "Convert PDF to markdown chunks"
+    produces:
+      - path: "02-resources/papers/*/*_[0-9].md"
+        required: true
+        min_count: 1
+      - path: "02-resources/papers/*/_metadata.json"
+        required: true
+
+  - id: paper-analyze
+    type: skill
+    path: skills/paper-analyze/SKILL.md
+    description: "Spawn subagents for paper analysis"
+    uses_shared:
+      - paper-analyze-core
+    produces:
+      - path: "02-resources/papers/*/index.md"
+        required: true
+      - path: "02-resources/papers/*/_analysis_log.md"
+        required: true
+
+  - id: paper-synthesize
+    type: skill
+    path: skills/paper-synthesize/SKILL.md
+    description: "Cross-paper synthesis"
+    produces:
+      - path: "04-outputs/_synthesis.md"
+        required: true
+
+  - id: paper-query
+    type: skill
+    path: skills/paper-query/SKILL.md
+    description: "Query analyzed papers"
+    produces: []
+
+  - id: paper-manage
+    type: skill
+    path: skills/paper-manage/SKILL.md
+    description: "Collection management"
+    produces: []
+
+  # Shared methodology
+  - id: paper-analyze-core
+    type: shared
+    path: shared/paper-analyze-core/SKILL.md
+    description: "SHARED METHODOLOGY - DO NOT LOAD DIRECTLY. Loaded by subagents spawned by paper-analyze."
+    produces: []
+
+# Schema definitions
+schemas:
+  briefing:
+    required_fields:
+      - research_question
+      - extraction_schema
+    optional_fields:
+      - focus_areas
+      - skip_sections
+      - must_include_papers
+      - exclude_keywords
+
+  analysis_log:
+    required_fields:
+      - schema_version
+      - steps
+      - outputs
+    validates:
+      - field: "schema_version"
+        in: ["2.0", "2.1", "2.2"]
+
+# Gate definitions
+gates:
+  readiness-gate:
+    description: "Must pass before Phase 2 can start"
+    checks:
+      - "papers_with_chunks > 0"
+      - "_briefing.md exists"
+      - "_analysis_kit.md exists"
+      - "overview.md status == READY_FOR_EXECUTION"
+
+  completion-gate:
+    description: "Must pass for project completion"
+    checks:
+      - "all papers have index.md"
+      - "_synthesis.md exists"
+      - "_validation_report.md exists"
+      - "validation pass rate > 80%"
+
+# Validation scripts
+validation:
+  - script: validation/validate_analysis.py
+    validates: paper-analyze
+    schema: analysis_log
+
+  - script: validation/validate_synthesis.py
+    validates: paper-synthesize

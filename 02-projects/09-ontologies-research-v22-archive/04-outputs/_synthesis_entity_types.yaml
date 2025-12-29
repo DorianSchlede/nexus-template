@@ -1,0 +1,449 @@
+field: entity_types
+aggregated_at: '2025-12-29T11:26:25.075737'
+batches_merged: 2
+patterns_input: 54
+patterns_output: 50
+patterns:
+- name: Entity-Relation Graph Core Model
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:138-142)
+    quote: a knowledge graph as a graph of data intended to accumulate and convey
+      knowledge of the real world, whose nodes represent entities of interest and
+      whose edges represent relations
+  description: The foundational entity type in knowledge graphs is the 'Entity' -
+    nodes represent entities of interest and edges represent relations between entities.
+    This defines the core duality of entity-relation modeling in knowledge graphs.
+- name: Node-Edge Directed Graph Entities
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:404-408)
+    quote: A directed edge-labelled graph is defined as a set of nodes and a set of
+      directed labelled edges between those nodes
+  description: Knowledge graphs model entities as nodes and relations as directed
+    labelled edges. The entity types are determined by the domain - in the tourism
+    example, entity types include events, venues, cities, date-times.
+- name: Class-Based Entity Types (Type Hierarchy)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:106-118)
+    quote: We may thus decide to define classes to denote these groupings, such as
+      Event, City, etc. In fact, Figure 1 already illustrates three low-level classes
+      - Open Market, Food Market, Drinks Festival
+  description: Entity types are formalized through classes that denote groupings of
+    similar nodes. Classes form hierarchies where children are subclasses of parents,
+    enabling type inference (e.g., if EID15 is type Food Festival, infer it is also
+    type Festival and type Event).
+- name: Event Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:135-152)
+    quote: Festival, Food Festival, Drinks Festival, Music Festival... Event, Periodic
+      Market, Open Market, Closed Market
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:99-101)
+    quote: schema completeness refers to the degree to which the classes and properties
+      of a schema are represented in the data graph
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:179-181)
+    quote: Validity means that the knowledge graph is free of constraint violations,
+      such as captured by shape expressions
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:500-501)
+    quote: DBpedia ontology with classes such as Person, Place, Organisation, and
+      Work
+  description: Merged from 4 sources. Event is a core entity type with sub-types including
+    Festival (Food Festival, Drinks Festival, Music Festival) and Periodic Market
+    (Open Market, Closed Market). Events have properties like name, venue, start date,
+    end date.
+- name: Place Entity Type (City, Venue)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:160-174)
+    quote: we may define the domain of connects to is a class Place... we may define
+      that the range of city is a class City, inferring that Arica type City
+  description: Place is a core entity type encompassing geographic entities. Subtypes
+    include City and Venue. Place entities can have properties like latitude, longitude,
+    and relations like flight, bus, city.
+- name: Property Entity Type (Relations)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:120-125)
+    quote: we may also wish to define the semantics of edge labels, aka properties.
+      Returning to Figure 1, we may consider that the properties city and venue are
+      sub-properties of a more general property location
+  description: Properties (edge labels) form their own type hierarchy. Properties
+    like city and venue are sub-properties of location. Properties like bus and flight
+    are sub-properties of connects_to. Properties have domain and range constraints.
+- name: Semantic Schema Entity Types
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:176-191)
+    quote: A prominent standard for defining a semantic schema for (RDF) graphs is
+      the RDF Schema (RDFS) standard, which allows for defining subclasses, subproperties,
+      domains, and ranges
+  description: 'RDFS and OWL define meta-entity types for schemas: Class, Property,
+    with features like subclass, subproperty, domain, range. The Web Ontology Language
+    (OWL) extends these with richer semantics.'
+- name: Individual Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:473-476)
+    quote: In Table 3, we list the main features supported by OWL for describing individuals
+      (e.g., Santiago, EID16), sometimes distinguished from classes and properties
+  description: 'Individuals are concrete instances of classes - distinct from classes
+    (types) and properties (relations). Examples: Santiago (individual city), EID16
+    (individual event). Individuals can be asserted as same-as or different-from each
+    other.'
+- name: DL Tripartite Entity Types (Individual-Class-Property)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:149-155)
+    quote: 'Description Logics are based on three types of elements: individuals,
+      such as Santiago; classes (aka concepts) such as City; and properties (aka roles)
+      such as flight'
+  description: 'Description Logics formalize the foundational entity type triad: Individuals
+    (concrete entities), Classes/Concepts (types/categories), and Properties/Roles
+    (relations). This forms the ontological foundation for knowledge graphs.'
+- name: Assertional vs Terminological Entities (A-Box/T-Box)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:152-159)
+    quote: Assertional axioms can be either unary class relations on individuals,
+      such as City(Santiago), or binary property relations on individuals... class
+      axioms (forming the Terminology Box)
+  description: Knowledge graphs distinguish between A-Box (Assertional Box) containing
+    instances/individuals and T-Box (Terminology Box) containing class axioms. A third
+    R-Box (Role Box) contains property axioms.
+- name: Endurant/Perdurant Distinction (Not Explicit)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:303-311)
+    quote: both nodes - according to the class hierarchy of Figure 11 - are considered
+      to be events. But what if, for example, we wish to define two pairs of start
+      and end dates... what precisely do we mean by an event?
+  description: The paper implicitly addresses the endurant/perdurant distinction through
+    event modeling. Events are time-dependent entities (perdurants) that unfold over
+    intervals, contrasting with static entities like places (endurants).
+- name: Agent Entity Type (Implicit)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:864-870)
+    quote: entities (e.g., graphs, nodes, physical document) are derived from other
+      entities, are generated and/or used by activities (e.g., extraction, authorship),
+      and are attributed to agents (e.g., people, software, organisations)
+  description: The PROV Data Model defines Agent as a core entity type - entities
+    that are responsible for activities and to which other entities are attributed.
+    Agents include people, software, and organizations.
+- name: Activity Entity Type (PROV-O)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:864-870)
+    quote: entities... are generated and/or used by activities (e.g., extraction,
+      authorship)
+  description: 'Activity is a core entity type in the PROV Data Model. Activities
+    are things that occur over time, use or generate entities, and are associated
+    with agents. Examples: extraction, authorship.'
+- name: Entity (PROV-O Generic)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:866-867)
+    quote: entities (e.g., graphs, nodes, physical document) are derived from other
+      entities
+  description: In PROV-O, Entity is the most generic type - a thing with some fixed
+    aspects that can be physical, digital, or conceptual. Entities can be derived
+    from other entities and are used/generated by activities.
+- name: Datatype Value Entities
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:713-730)
+    quote: RDF utilises XML Schema Datatypes (XSD), amongst others, where a datatype
+      node is given as a pair (l,d) where l is a lexical string... and d is an IRI
+      denoting the datatype, such as xsd:dateTime
+  description: 'Datatype values are a special entity category - literals that represent
+    data values like strings, integers, dates. They differ from object/entity nodes
+    as they cannot have outgoing edges (in RDF). Common types: xsd:string, xsd:integer,
+    xsd:dateTime.'
+- name: Named Graph Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:583-611)
+    quote: A graph dataset then consists of a set of named graphs and a default graph.
+      Each named graph is a pair of a graph ID and a graph
+  description: Named Graphs are meta-level entities that group edges into identifiable
+    sub-graphs. They support context, provenance tracking, and graph-level metadata.
+    Graph names can themselves be nodes in other graphs.
+- name: Existential/Blank Node Entities
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:793-810)
+    quote: some graph models permit the use of existential nodes... Existential nodes
+      are supported in RDF as blank nodes, which are also commonly used to support
+      modelling complex elements
+  description: Blank nodes (existential nodes) represent entities whose identity is
+    unknown but whose existence is asserted. They enable modeling incomplete information
+    and complex structures like RDF lists.
+- name: Class Definition Entity Types (OWL Complex)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:658-682)
+    quote: OWL provides a variety of features for defining novel classes by applying
+      set operators on other classes... complement of another class, the union or
+      intersection of a list
+  description: 'OWL supports complex class definitions as entity types: Complement
+    classes (negation), Union classes (disjunction), Intersection classes (conjunction),
+    Enumerated classes (explicit instance lists), and Restriction classes (property
+    constraints).'
+- name: Restriction-Based Entity Types
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:666-676)
+    quote: 'by placing restrictions on a particular property p, one can define classes
+      whose instances are all of the entities that have: some value from a given class
+      on p; all values from a given class'
+  description: 'Entity types can be defined via property restrictions: SomeValuesFrom
+    (existential), AllValuesFrom (universal), HasValue (specific value), HasSelf (reflexive),
+    Cardinality constraints (min/max/exact counts).'
+- name: Heterogeneous Graph Node/Edge Types
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:483-502)
+    quote: A heterogeneous graph is a graph where each node and edge is assigned one
+      type. Heterogeneous graphs are thus akin to del graphs with edge labels corresponding
+      to edge types
+  description: Heterogeneous graphs explicitly type both nodes and edges as part of
+    the graph model itself. Node types partition nodes for tasks like machine learning.
+    Edge types can be homogeneous (same node types) or heterogeneous (different node
+    types).
+- name: Property Graph Entities (Nodes with Properties)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:548-561)
+    quote: A property graph allows a set of property-value pairs and a label to be
+      associated with both nodes and edges
+  description: Property graphs extend entity modeling by allowing nodes and edges
+    to have property-value pairs in addition to labels. This enables richer entity
+    representation (e.g., cities with latitude/longitude properties).
+- name: Quotient Graph Entity Types (Emergent Schema)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:439-457)
+    quote: 'we could consider six partitions of nodes: event, name, venue, class,
+      date-time, city. In practice, these partitions may be computed based on the
+      class or shape of the node'
+  description: Emergent schemas derive entity types from graph structure through quotient
+    graphs. Partitions like event, venue, city, date-time emerge from analyzing node
+    contexts and relationships, providing data-driven entity type discovery.
+- name: Shape-Based Entity Types (Validating Schema)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:250-288)
+    quote: A shape targets a set of nodes in a data graph and specifies constraints
+      on those nodes... shapes graph based on Figure 1, defining constraints on four
+      interrelated shapes
+  description: Shapes define entity types through structural constraints rather than
+    class membership. Shape types (Place, Event, Venue, City) specify required properties,
+    cardinalities, and value types. Shapes can inherit constraints from parent shapes.
+- name: Temporal/Context Entity Types
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:859-863)
+    quote: One example is the Time Ontology, which specifies how temporal entities,
+      intervals, time instants, etc. - and relations between them such as before,
+      overlaps
+  description: 'The Time Ontology defines specialized temporal entity types: Temporal
+    Entity, Interval, Instant. These support temporal context modeling with relations
+    like before, after, overlaps, enabling temporal reasoning in knowledge graphs.'
+- name: Entity as Graph Node Representation
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:20-22)
+    quote: Accuracy refers to the extent to which entities and relations - encoded
+      by nodes and edges in the graph - correctly represent real-life phenomena.
+  description: Entity is defined as a fundamental ontological unit encoded as nodes
+    in knowledge graphs, representing real-world phenomena. Entities are the core
+    data type that relations connect.
+- name: Property Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:100-102)
+    quote: schema completeness refers to the degree to which the classes and properties
+      of a schema are represented in the data graph
+  description: Property is a schema-level entity type representing relationships or
+    attributes that connect entities. Properties are part of the intensional (schema)
+    layer of knowledge graphs.
+- name: Node Entity Type (Identity Links)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:358-362)
+    quote: Predicting identity links involves searching for nodes that refer to the
+      same entity; this is analogous to the task of entity matching
+  description: Node is a core entity type representing individual entities in the
+    graph. Identity links connect nodes that refer to the same real-world entity,
+    addressing deduplication and entity resolution.
+- name: Agent as Access Protocol Client
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:16-20)
+    quote: for agents that wish to maintain a full local copy of a knowledge graph.
+      If an agent were rather only interested in, for example, all food festivals
+  description: Agent is referenced as an entity that interacts with knowledge graphs
+    through access protocols. Agents can maintain copies, query, and navigate knowledge
+    graphs as autonomous clients.
+- name: Graph Pattern Entity
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:40-46)
+    quote: mechanisms for answering graph patterns can be implemented on top of a
+      node lookup interface by traversing from node to node
+  description: Graph Pattern is an entity type used for querying knowledge graphs.
+    Patterns define structural templates with variables that match against the data
+    graph to retrieve solutions.
+- name: Edge Pattern Entity
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:65-70)
+    quote: Edge patterns - also known as triple patterns in the case of directed,
+      edge labelled graphs - are singleton graph patterns
+  description: Edge Pattern (Triple Pattern) is an entity type representing the atomic
+    unit of graph queries. Each edge pattern consists of subject, predicate, and object
+    positions that can be constants or variables.
+- name: Person Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:500-501)
+    quote: DBpedia ontology with classes such as Person, Place, Organisation, and
+      Work
+  description: Person is a domain entity type in knowledge graph ontologies. It represents
+    human individuals and is one of the core classes for organizing entities in cross-domain
+    knowledge graphs like DBpedia.
+- name: Organisation Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:500-501)
+    quote: DBpedia ontology with classes such as Person, Place, Organisation, and
+      Work
+  description: Organisation is a domain entity type representing collective entities
+    like companies, institutions, and groups. Organizations are agents in many foundational
+    ontologies.
+- name: Work Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:500-501)
+    quote: DBpedia ontology with classes such as Person, Place, Organisation, and
+      Work
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:274-276)
+    quote: A rule is a pair R = (B, H) such that B and H are graph patterns and Var(H)
+      subset B. We call B the body of the rule while we call H the head
+  description: Merged from 2 sources. Work is a domain entity type representing creative
+    or productive outputs such as publications, artworks, or products. Works are key
+    entities in cultural and academic knowledge graphs.
+- name: Goal Entity Type (Plan Knowledge Graphs)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:5-9)
+    quote: plan knowledge graphs where nodes represent goals and edges dependencies
+      between goals, further encoding supporting degrees that can change upon further
+      evidence
+  description: Goal is an entity type in plan-oriented knowledge graphs. Goals are
+    represented as nodes with dependencies and supporting degrees, enabling planning
+    and task decomposition reasoning.
+- name: Knowledge Actor Entity Type
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:11-15)
+    quote: a knowledge graph to represent the flow of knowledge in an organisation,
+      with nodes representing knowledge actors (creators, sharers, users)
+  description: Knowledge Actor is an entity type representing agents in organizational
+    knowledge flow. Actors can be creators, sharers, or users of knowledge, forming
+    a role-based categorization of agents.
+- name: Event Entity Type (Causal Knowledge)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:37-42)
+    quote: knowledge graphs to capture explanation knowledge - the knowledge of why
+      something is the way it is - by representing events as nodes and causal relationships
+      as edges
+  description: Event is an entity type used in causal/explanation knowledge graphs.
+    Events are nodes connected by causal relationships, enabling reasoning about why
+    phenomena occur.
+- name: Knowledge Graph Definition Categories
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:127-131)
+    quote: The first category simply defines the knowledge graph as a graph where
+      nodes represent entities, and edges represent relationships between those entities
+  description: Entity and Relationship are the two fundamental entity types in knowledge
+    graph definitions. Category I definitions establish entities as nodes and relationships
+    as edges as the minimal ontological commitment.
+- name: Directed Edge-Labelled Graph Components
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:45-51)
+    quote: 'a graph G = (V, E, L) is a quotient graph of G if and only if: V is a
+      partition of V without the empty set'
+  description: V (Nodes), E (Edges), and L (Labels) are the three fundamental entity
+    types in formal directed edge-labelled graph definitions. These form the structural
+    basis for knowledge graph data models.
+- name: Annotation Domain Entity
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:116-118)
+    quote: An annotation domain is defined as an idempotent, commutative semi-ring
+      D = (A, +, x, bottom, top)
+  description: Annotation is an entity type for contextual metadata attached to graph
+    elements. Annotation domains enable temporal, spatial, and probabilistic contextualization
+    of knowledge graph facts.
+- name: Interpretation Domain Entity
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:193-196)
+    quote: A (graph) interpretation I is defined as a pair I = (Gamma, I) where Gamma
+      = (V_Gamma, E_Gamma, L_Gamma) is a domain graph
+  description: Interpretation is a semantic entity type that maps graph constants
+    to domain elements. Interpretations define the model-theoretic semantics underlying
+    knowledge graph reasoning.
+- name: Description Logic Classes
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:335-339)
+    quote: Table 7 provides definitions for all of the constructs typically found
+      in Description Logics. The syntax column denotes how the construct is expressed
+      in DL
+  description: Description Logic provides formal entity type definitions including
+    Atomic Class, Class Negation, Class Intersection, Class Union, Nominal, and various
+    Restrictions as entity type constructors.
+- name: A-Box, T-Box, R-Box Entities
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:342-345)
+    quote: 'A DL knowledge base K is defined as a tuple (A, T, R), where A is the
+      A-Box: a set of assertional axioms; T is the T-Box: a set of class axioms; and
+      R is the R-Box: a set of relation axioms'
+  description: A-Box (assertions), T-Box (terminology/classes), and R-Box (relations)
+    are three entity type categories organizing Description Logic knowledge bases.
+    This tripartite structure parallels data/schema/rule distinctions.
+- name: Tensor/Vector Entity Types (Embeddings)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:4-7)
+    quote: We use indexed parentheses - such as (x)_i, (X)_ij, or (X)_i1...in - to
+      denote elements of vectors, matrices, and tensors
+  description: Tensor, Matrix, and Vector are numeric entity types used in knowledge
+    graph embeddings. These represent nodes and relations in continuous vector spaces
+    for machine learning applications.
+- name: Graph Neural Network Entity
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:378-382)
+    quote: We now provide high-level definitions for graph neural networks (GNNs)
+      inspired by the definitions provided by Xu et al.
+  description: Graph Neural Network (GNN) is a computational entity type that processes
+    knowledge graphs. GNNs use aggregation functions to compute node representations
+    for classification and prediction tasks.
+- name: Hypothesis Entity Type (Symbolic Learning)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:530-534)
+    quote: We provide some abstract formal definitions for the tasks of rule mining
+      and axiom mining over graphs, which we generically call hypothesis mining
+  description: Hypothesis is an entity type representing learned patterns in symbolic
+    learning. Hypotheses include mined rules and axioms that extend knowledge graph
+    entailment capabilities.
+- name: 'W3C PROV Core Triad: Agent, Activity, Entity'
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:199-204)
+    quote: the W3C PROV standard already defines Agent, the central abstraction in
+      this work, as one of its three core classes, alongside Entity (data) and Activity
+      (process)
+  description: Agent, Activity, and Entity are the three core entity types in W3C
+    PROV. Agent represents actors responsible for activities, Activity represents
+    processes, and Entity represents data. This triad is foundational for provenance
+    modeling.
+- name: AIAgent Entity Type
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:278-281)
+    quote: We extend the abstract W3C PROV Agent by modeling AIAgent as its subclass,
+      enabling a natural integration of agent actions and interactions into the broader
+      workflow provenance graph
+  description: AIAgent is an entity type extending W3C PROV Agent for AI-specific
+    provenance. AIAgent captures autonomous AI agents that make decisions, plan tasks,
+    and interact with other agents and humans in agentic workflows.
+- name: AgentTool Entity Type
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:285-288)
+    quote: Following the MCP terminology, an AI agent can be associated with one or
+      many tool executions (AgentTool) and each tool may be informed by one or many
+      AIModelInvocations
+  description: AgentTool is an entity type representing tool executions by AI agents.
+    Tools are the actionable capabilities agents use to interact with the world, following
+    Model Context Protocol (MCP) concepts.
+- name: AIModelInvocation Entity Type
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:287-292)
+    quote: each tool may be informed by one or many AIModelInvocations. Each AIModelInvocation
+      uses a Prompt and a specific AIModel... and generates a ResponseData object
+  description: AIModelInvocation is an entity type representing LLM/foundation model
+    calls. It captures the prompt, model metadata, and response triad essential for
+    tracking AI reasoning in agentic workflows.
+- name: DataObject Entity Type Hierarchy
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:298-302)
+    quote: The data used or generated by agents, including prompts, responses, are
+      represented as subclasses of the DataObject Entity. This allows agents to consume
+      and produce... DomainData, SchedulingData and TelemetryData
+  description: DataObject is a parent entity type with subtypes DomainData, SchedulingData,
+    TelemetryData, Prompt, and ResponseData. This hierarchy structures the different
+    data types flowing through agentic workflows.

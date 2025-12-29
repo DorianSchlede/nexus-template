@@ -442,6 +442,7 @@ def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
         "references_loaded": [],
         "scripts_loaded": [],
         "assets_available": [],
+        "resume_instructions": None,  # Populated if skill has context checkpoint requirements
     }
 
     # Load SKILL.md with full content
@@ -461,6 +462,10 @@ def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
             "metadata": metadata,
             "content": content,
         }
+
+        # Extract resume_instructions if present (for context checkpoint requirements)
+        if metadata and "resume_instructions" in metadata:
+            result["resume_instructions"] = metadata["resume_instructions"]
 
         # AUTO-LOAD references declared in YAML (with content)
         if metadata and "load_references" in metadata:

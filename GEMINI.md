@@ -12,8 +12,10 @@
 ## Step 2: Run startup script (ALWAYS)
 
 **Fresh Session** (first message):
-```bash
-python 00-system/core/nexus-loader.py --startup
+**Fresh Session** (first message):
+```powershell
+./00-system/startup.ps1
+# Then read: 00-system/.cache/context_core.json AND 00-system/.cache/context_metadata.json
 ```
 
 **MANDATORY After Context Summary** (resuming from summary):

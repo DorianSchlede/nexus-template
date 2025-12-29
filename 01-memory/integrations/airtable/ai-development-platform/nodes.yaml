@@ -1,0 +1,182 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblPJ9VKG74mKv7JK
+table_name: Nodes
+exported_at: '2025-12-28T14:12:03.614116'
+field_count: 24
+fields:
+- id: fldmOlfKqHcT9FM9p
+  name: Name
+  type: multilineText
+  description: null
+- id: fldZRdDsfotao5gP0
+  name: Tool BID
+  type: singleLineText
+  description: null
+- id: fldpQbg1xpTgiGGVc
+  name: Active Tool Type
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld18Hw8htVYZWc8g
+  lookup_field_id: fld4Enqlv9Dk2F53U
+- id: fldEpeI3o5mZv22BU
+  name: Agent
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fldnt1IfujyoHRIQm
+- id: fldcFCTwMjQ60ioGW
+  name: Workspace (from Agent)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldEpeI3o5mZv22BU
+  lookup_field_id: fldItXOU8yc1YbCdu
+- id: fldQH5IXAQqZNpUoP
+  name: Active Prompt
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld18Hw8htVYZWc8g
+  lookup_field_id: fld3IIgIlnSsSG2qC
+- id: fldQVrlmo8eB4Tap7
+  name: Active Model
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld18Hw8htVYZWc8g
+  lookup_field_id: fldsUbWFq15iSgAQ2
+- id: fldRQGszWJHvfSSok
+  name: Active Require Consent
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld18Hw8htVYZWc8g
+  lookup_field_id: fldxO0w3EdO0uUuh5
+- id: flda6PF6Er42YXCrE
+  name: Index
+  type: number
+  description: null
+  precision: 0
+- id: fldR2sfxbslrSmWGT
+  name: Variables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblf2ohTHmsucjVUj
+  prefer_single_record_link: false
+  inverse_link_field_id: fld2n2BGhxw6J65IU
+- id: fldOTKeI0z6Gjf1aY
+  name: DatasetNodes
+  type: singleLineText
+  description: null
+- id: fld18Hw8htVYZWc8g
+  name: Active Node Version
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblh0GsN5Et3ApzLS
+  prefer_single_record_link: true
+  inverse_link_field_id: fldtrkMWHzJTQ9m6T
+- id: fldKb27rpgSaOp9us
+  name: TaskNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldZCbA2dQGTIopjv
+- id: fld03O9q0vHNTstcS
+  name: DatasetTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl9lACSI4fDUzAv4
+  prefer_single_record_link: false
+  inverse_link_field_id: fldkOIWVbKKkDWfJ5
+- id: fldzRK1atiASu2b7c
+  name: NodeVersions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblh0GsN5Et3ApzLS
+  prefer_single_record_link: false
+  inverse_link_field_id: fldTJJrEEniaGX2l2
+- id: fldCsxQRpYneaxSmt
+  name: Active Version Number
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld18Hw8htVYZWc8g
+  lookup_field_id: fldiWwOQuSy40umfO
+- id: fldFKeI1Rgr4fBwQD
+  name: Node AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fld9V6kz2i0lfPNoJ
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldzaMUvVbJwgEAPb
+- id: fldrb5xOq40Z3qnZ7
+  name: NodeLevel
+  type: number
+  description: null
+  precision: 1
+- id: fldZupfCXCA8dSzns
+  name: DatasetRunImprovements
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblT1mIwLx9JECKd8
+  prefer_single_record_link: false
+  inverse_link_field_id: fld4Y6TQRTdMvbH9G
+- id: fldBwgMm1vDr2dARG
+  name: Node UID
+  type: singleLineText
+  description: null
+- id: fld6XOFug0cVghYjT
+  name: Created
+  type: createdTime
+  description: null
+- id: fldfnaIAEy63VMLdY
+  name: DatasetVariables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: false
+  inverse_link_field_id: fldK2iUkv3dRkIwzU
+- id: fldZ1svZihZvjMNRj
+  name: Variable Type (from Variables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldR2sfxbslrSmWGT
+  lookup_field_id: fldaJBYAJTts9xdq5
+views:
+- id: viwxhXPrRhyMVZ5RH
+  name: ADRES
+  type: grid
+- id: viwLZSZdfbYprOGag
+  name: JJ
+  type: grid
+- id: viwvEcmLhbpsYTVW0
+  name: BID MAGA
+  type: grid
+- id: viwSISELki5MEExVU
+  name: BID
+  type: grid
+- id: viwl75w11cO3D5d4A
+  name: BID Instance
+  type: grid
+- id: viwiakH5iDiC8GLj0
+  name: TZV
+  type: grid
+- id: viw1kS3HEsuKOxgvi
+  name: Unidays
+  type: grid
+- id: viwpu8P8OpDLyhk4I
+  name: All
+  type: grid
+- id: viw4cmBaYHnJ6gooy
+  name: OLd
+  type: grid
+- id: viwKZsdAGX7lb2YuH
+  name: Booth & Partner
+  type: grid
+- id: viwzcvKFQEGUlKNDp
+  name: MOverii
+  type: grid

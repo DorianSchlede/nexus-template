@@ -1,0 +1,148 @@
+---
+batch_id: "tools_standards_1"
+field: tools_standards
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 6
+patterns_found: 28
+---
+
+patterns:
+  - name: "RDF Data Model Standard"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:435-442)"
+    quote: "A standardised data model based on directed edge-labelled graphs is the Resource Description Framework (RDF) [111], which has been recommended by the W3C"
+    description: "RDF is a W3C-recommended standardized data model for directed edge-labelled graphs. It defines different types of nodes including IRIs for global identification, literals for strings and datatype values, and blank nodes for anonymous entities."
+
+  - name: "Internationalized Resource Identifiers (IRIs)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:439-441)"
+    quote: "The RDF model defines different types of nodes, including Internationalized Resource Identifiers (IRIs) which allow for global identification of entities on the Web"
+    description: "IRIs are used in RDF to globally identify entities on the Web, enabling persistent identification distinct from URLs used for information resources. This supports the Linked Data vision of interconnected knowledge graphs."
+
+  - name: "Property Graph Model and Neo4j"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:548-562)"
+    quote: "Property graphs are most prominently used in popular graph databases, such as Neo4j. In choosing between graph models, it is important to note that property graphs can be translated to/from directed edge-labelled graphs"
+    description: "Property graphs are used in graph databases like Neo4j, offering a more flexible model with property-value pairs and labels on both nodes and edges. They can be translated to/from directed edge-labelled graphs without loss of information."
+
+  - name: "SPARQL Query Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:664-665)"
+    quote: "the SPARQL query language for RDF graphs; and Cypher, Gremlin, and G-CORE for querying property graphs"
+    description: "SPARQL is the standard query language for RDF graphs, providing graph patterns, relational operators, and path expressions. Cypher, Gremlin, and G-CORE are query languages for property graphs."
+
+  - name: "Cypher Query Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 1:665-666)"
+    quote: "Cypher [165], Gremlin [445], and G-CORE [15] for querying property graphs"
+    description: "Cypher is a query language for property graphs, notably used by Neo4j. It adopts isomorphism-based semantics for graph pattern evaluation, requiring variables on edges to map to unique terms."
+
+  - name: "RDF Schema (RDFS) Standard"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:176-182)"
+    quote: "A prominent standard for defining a semantic schema for (RDF) graphs is the RDF Schema (RDFS) standard [70], which allows for defining subclasses, subproperties, domains, and ranges"
+    description: "RDFS is a standard for defining semantic schemas for RDF graphs, supporting subclass/subproperty hierarchies and domain/range definitions. Definitions can be serialized as a graph and embedded into the data graph."
+
+  - name: "Web Ontology Language (OWL)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:187-191)"
+    quote: "More generally, the semantics of terms used in a graph can be defined in much more depth than seen here, as is supported by the Web Ontology Language (OWL) standard [239] for RDF graphs"
+    description: "OWL is a W3C standard that extends RDFS to define more expressive ontological semantics for RDF graphs. It provides features for defining classes, properties, individuals, and complex axioms for reasoning."
+
+  - name: "Shape Expressions (ShEx)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:380-385)"
+    quote: "Two shapes languages have recently emerged for RDF graphs: Shape Expressions (ShEx), published as a W3C Community Group Report [423]; and SHACL (Shapes Constraint Language)"
+    description: "ShEx is a shapes language for RDF graphs published as a W3C Community Group Report. It allows defining constraints on node shapes for validation, used in domains like health-care, scientific literature, and spatial data."
+
+  - name: "SHACL Shapes Constraint Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:383-389)"
+    quote: "SHACL (Shapes Constraint Language), published as a W3C Recommendation [296]. These languages support the discussed features (and more) and have been adopted for validating graphs"
+    description: "SHACL is a W3C Recommendation for defining validating schemas using shapes. It targets sets of nodes and specifies constraints on those nodes, supporting open and closed shapes, boolean features, and more."
+
+  - name: "XML Schema Datatypes (XSD)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:712-722)"
+    quote: "RDF utilises XML Schema Datatypes (XSD) [411], amongst others, where a datatype node is given as a pair where l is a lexical string...and d is an IRI denoting the datatype such as xsd:dateTime"
+    description: "XSD provides the datatype system for RDF, including types like xsd:string, xsd:integer, xsd:decimal, xsd:boolean, xsd:dateTime. Applications can parse, normalize, order, and transform values according to these standard definitions."
+
+  - name: "Time Ontology"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:860-862)"
+    quote: "One example is the Time Ontology [107], which specifies how temporal entities, intervals, time instants, etc. and relations between them such as before, overlaps, etc. can be described in RDF graphs"
+    description: "The Time Ontology is a specification for representing temporal context in RDF graphs in an interoperable manner, defining temporal entities, intervals, time instants, and temporal relations like before and overlaps."
+
+  - name: "PROV Data Model"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 2:864-870)"
+    quote: "Another example is the PROV Data Model [188], which specifies how provenance can be described in RDF graphs, where entities are derived from other entities, are generated and/or used by activities"
+    description: "PROV-DM is a W3C specification for describing provenance in RDF graphs. It models entities derived from other entities, generated/used by activities, and attributed to agents (people, software, organizations)."
+
+  - name: "Temporal RDF"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:111-113)"
+    quote: "Temporal RDF [210] allows for annotating edges with time intervals, such as [Chile] [2006, 2010] M. Bachelet"
+    description: "Temporal RDF is an extension that enables annotating edges with time intervals for temporal context, allowing queries that reason over temporal validity of statements."
+
+  - name: "Fuzzy RDF"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:114-118)"
+    quote: "Fuzzy RDF [502] allows for annotating edges with a degree of truth such as [Santiago] 0.8 Semi-Arid, indicating that it is more-or-less true with a degree of 0.8"
+    description: "Fuzzy RDF extends RDF to support edges annotated with degrees of truth (fuzzy values), enabling representation of uncertain or approximate knowledge."
+
+  - name: "Annotated RDF"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:120-124)"
+    quote: "Annotated RDF [130, 530, 583] allows for representing various forms of context modelled as semi-rings: algebraic structures consisting of domain values and two main operators to combine domain values: meet and join"
+    description: "Annotated RDF is a domain-independent framework for contextual annotation using semi-rings. It supports various context types (temporal, fuzzy, etc.) with meet and join operators for combining annotations."
+
+  - name: "RDF* Extension"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:17-19)"
+    quote: "Third, we can use RDF* [218]: an extension of RDF that allows edges to be defined as nodes"
+    description: "RDF* (RDF-star) is an extension of RDF that allows edges to be treated as nodes, enabling direct annotation of edges with contextual values without requiring reification patterns."
+
+  - name: "Notation3 (N3) Rules"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:122)"
+    quote: "Notation3 (N3) [42], Rule Interchange Format (RIF) [288], Semantic Web Rule Language (SWRL) [254], and SPARQL Inferencing Notation (SPIN) [295]"
+    description: "N3 is a rules language that allows expressing inference rules over graphs, either independently or alongside ontology languages, for automated reasoning and entailment."
+
+  - name: "Rule Interchange Format (RIF)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:122-123)"
+    quote: "Rule Interchange Format (RIF) [288], Semantic Web Rule Language (SWRL) [254], and SPARQL Inferencing Notation (SPIN) [295]"
+    description: "RIF is a W3C standard for interchanging rules between rule systems, supporting rule-based reasoning over knowledge graphs."
+
+  - name: "Semantic Web Rule Language (SWRL)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:123-124)"
+    quote: "Semantic Web Rule Language (SWRL) [254], and SPARQL Inferencing Notation (SPIN) [295]"
+    description: "SWRL combines OWL DL/Lite with a subset of the Rule Markup Language, allowing Horn-like rules to be combined with OWL ontologies for enhanced reasoning capabilities."
+
+  - name: "SPARQL Inferencing Notation (SPIN)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:124)"
+    quote: "SPARQL Inferencing Notation (SPIN) [295]"
+    description: "SPIN allows expressing inference rules using SPARQL constructs, bridging the gap between SPARQL queries and rule-based reasoning over RDF graphs."
+
+  - name: "OWL 2 RL/RDF Rules"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:44-46)"
+    quote: "A more comprehensive set of rules for the OWL features of Tables 3-5 have been defined as OWL 2 RL/RDF [363]"
+    description: "OWL 2 RL/RDF defines a comprehensive set of rules for OWL features that can be implemented using rule-based reasoning systems, though incomplete for some features like negation, existentials, and cardinality."
+
+  - name: "OWL 2 QL Profile"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:107-109)"
+    quote: "The OWL 2 QL profile [363] is a subset of OWL designed specifically for query rewriting of this form"
+    description: "OWL 2 QL is an OWL 2 profile designed for query rewriting, allowing ontological entailments to be captured through query expansion without materialisation."
+
+  - name: "Graph Parallel Frameworks"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:496-502)"
+    quote: "Apache Spark (GraphX) [119, 563], GraphLab [326], Pregel [335], Signal-Collect [503], Shark [564], etc. These graph parallel frameworks apply a systolic abstraction based on a directed graph"
+    description: "Graph parallel frameworks like Apache Spark GraphX, GraphLab, Pregel, Signal-Collect enable large-scale distributed graph analytics using systolic computation with message passing between nodes."
+
+  - name: "Open Biomedical Ontologies Format (OBOF)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:352-356)"
+    quote: "Amongst the most popular ontology languages used in practice are the Web Ontology Language (OWL) [239], recommended by the W3C and compatible with RDF graphs; and the Open Biomedical Ontologies Format (OBOF) [366]"
+    description: "OBOF is a popular ontology language used primarily in the biomedical domain. It shares many similar features with OWL for defining ontological knowledge."
+
+  - name: "R2RML Mapping Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:649-655)"
+    quote: "A standard language along these lines is the RDB2RDF Mapping Language (R2RML) [118], which allows for mapping from individual rows of a table to one or more custom edges"
+    description: "R2RML is a W3C standard for defining custom mappings from relational databases to RDF graphs, supporting templates, constants, and SQL queries for generating edges."
+
+  - name: "JSON-LD Standard"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:710-712)"
+    quote: "the JSON-LD standard [494] allows for mapping from JSON to (RDF) graphs"
+    description: "JSON-LD is a W3C standard for representing Linked Data in JSON format, enabling mapping from JSON tree-structured data to RDF graphs."
+
+  - name: "GRDDL Standard for XML"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:709-711)"
+    quote: "the GRDLL standard [99] allows for mapping from XML to (RDF) graphs, while the JSON-LD standard [494] allows for mapping from JSON to (RDF) graphs"
+    description: "GRDDL (Gleaning Resource Descriptions from Dialects of Languages) is a W3C standard for extracting RDF from XML documents using transformations."
+
+  - name: "XSPARQL Hybrid Query Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:713-716)"
+    quote: "hybrid query languages such as XSPARQL [47] allow for querying XML and RDF in an integrated fashion, thus supporting both materialisation and virtualisation of graphs over tree-structured sources"
+    description: "XSPARQL is a hybrid query language combining XQuery and SPARQL for querying both XML and RDF, supporting materialisation and virtualisation of graphs from tree-structured legacy data."

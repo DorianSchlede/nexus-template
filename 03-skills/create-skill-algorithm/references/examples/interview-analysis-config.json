@@ -1,0 +1,86 @@
+{
+  "name": "interview-analysis",
+  "description": "Analyze interview transcripts for themes and insights",
+  "version": "1.0",
+  "phases": [
+    {
+      "name": "preparation",
+      "description": "Import and preprocess interview transcripts",
+      "orchestrator": "prepare-interview-project",
+      "sub_skills": [
+        "transcript-import",
+        "transcript-preprocess"
+      ],
+      "outputs": [
+        {
+          "path": "02-resources/_briefing.md",
+          "required": true
+        },
+        {
+          "path": "02-resources/_interview_kit.md",
+          "required": true
+        },
+        {
+          "path": "02-resources/transcripts/*/_metadata.json",
+          "required": true,
+          "min_count": 1
+        }
+      ],
+      "gate": {
+        "name": "readiness-gate",
+        "conditions": [
+          "transcripts_preprocessed > 0",
+          "_briefing.md exists",
+          "_interview_kit.md exists"
+        ]
+      }
+    },
+    {
+      "name": "analysis",
+      "description": "Analyze transcripts and synthesize themes",
+      "orchestrator": "execute-interview-analysis",
+      "sub_skills": [
+        "transcript-analyze",
+        "theme-synthesize"
+      ],
+      "outputs": [
+        {
+          "path": "02-resources/transcripts/*/index.md",
+          "required": true
+        },
+        {
+          "path": "02-resources/transcripts/*/_analysis_log.md",
+          "required": true,
+          "validates": [
+            "has_yaml_frontmatter: true"
+          ]
+        },
+        {
+          "path": "04-outputs/_synthesis.md",
+          "required": true
+        },
+        {
+          "path": "04-outputs/_validation_report.md",
+          "required": true
+        }
+      ],
+      "gate": {
+        "name": "completion-gate",
+        "conditions": [
+          "all transcripts have index.md",
+          "_synthesis.md exists",
+          "validation_pass_rate > 80%"
+        ]
+      }
+    }
+  ],
+  "shared_skills": [
+    "transcript-analyze-core"
+  ],
+  "schemas": {
+    "briefing": {
+      "required_fields": ["research_question", "analysis_focus"],
+      "optional_fields": ["skip_sections", "theme_hints"]
+    }
+  }
+}

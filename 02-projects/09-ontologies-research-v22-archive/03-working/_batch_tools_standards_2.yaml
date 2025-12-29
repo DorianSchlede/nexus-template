@@ -1,0 +1,281 @@
+---
+batch_id: "tools_standards_2"
+field: tools_standards
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 6
+patterns_found: 47
+---
+
+patterns:
+  # Chunk 7 Patterns (Quality and Refinement)
+  - name: "XSD DateTime for Syntactic Validation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:32-41)"
+    quote: "a property start is defined with the range xsd:dateTime, taking a value such as 'March 29, 2019, 20:00'^xsd:string would be incompatible"
+    description: "XSD datatypes (xsd:dateTime, xsd:string) used for syntactic accuracy validation in knowledge graphs. The range constraint mechanism enforces data type compatibility."
+
+  - name: "Validation Tools for Syntactic Accuracy"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:47)"
+    quote: "Such forms of syntactic accuracy can typically be assessed using validation tools [167, 248]."
+    description: "Reference to validation tools for assessing syntactic accuracy in knowledge graphs. These tools check compliance with grammatical rules defined for the domain and data model."
+
+  - name: "SPARQL for Knowledge Graph Querying"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:128)"
+    quote: "public services offering such a protocol (most often supporting SPARQL queries [217]) have been found to often exhibit downtimes"
+    description: "SPARQL identified as the most common protocol for complex graph pattern queries in knowledge graph access."
+
+  - name: "Link Prediction via Statistical Relational Learning"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:301-302)"
+    quote: "This task is often addressed with link prediction techniques proposed in the area of Statistical Relational Learning [184]"
+    description: "Statistical Relational Learning as methodology for knowledge graph completion through link prediction techniques."
+
+  - name: "Graph Neural Networks for Type Prediction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:355-356)"
+    quote: "Graph neural networks (see Section 5.3) can also be used for node classification/type prediction."
+    description: "Graph neural networks as a technical approach for type-link prediction in knowledge graphs, used for node classification tasks."
+
+  - name: "String Similarity Metrics for Identity Matching"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:364-368)"
+    quote: "value matchers determine how similar the values of two entities on a given property are, which may involve similarity metrics on strings, numbers, dates"
+    description: "String, numeric, and date similarity metrics used for value matching in identity-link prediction for entity matching/deduplication."
+
+  - name: "Blocking for Efficient Entity Matching"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:381-388)"
+    quote: "blocking can be used to group similar entities into (possibly overlapping, possibly disjoint) 'blocks' based on similarity-preserving keys"
+    description: "Blocking technique for efficient entity matching, reducing O(n^2) pairwise comparisons by grouping entities into similarity-preserving blocks."
+
+  - name: "Minimal Hitting Sets for Inconsistency Repair"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:556-558)"
+    quote: "Bonatti et al. [58] propose an automated method to repair inconsistencies based on minimal hitting sets [436]"
+    description: "Minimal hitting sets algorithm used for automated inconsistency repair in knowledge graphs, where each set is a minimal explanation for an inconsistency."
+
+  - name: "FAIR Principles for Data Publication"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:617-619)"
+    quote: "the FAIR Principles proposed by Wilkinson et al. [556], and the Linked Data Principles proposed by Berners-Lee [41]"
+    description: "FAIR Principles (Findability, Accessibility, Interoperability, Reusability) as foundational standard for publishing knowledge graph data on the Web."
+
+  - name: "IRIs for Global Identifiers"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:700-702)"
+    quote: "In terms of Findability, as discussed in Section 2, IRIs are built into the RDF model, providing a general schema for global identifiers"
+    description: "IRIs (Internationalized Resource Identifiers) as the standard mechanism for global identifiers in RDF-based knowledge graphs."
+
+  - name: "VoID for Dataset Metadata"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:702-705)"
+    quote: "resources such as the Vocabulary of Interlinked Datasets (VoID) [11] allow for representing meta-data about graphs"
+    description: "VoID (Vocabulary of Interlinked Datasets) as standard vocabulary for representing metadata about knowledge graph datasets."
+
+  - name: "PROV Data Model for Provenance"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:715-717)"
+    quote: "regarding Reusability, licensing will be discussed in Section 9.3, while the PROV Data Model [188] discussed in Section 3 allows for capturing detailed provenance"
+    description: "PROV Data Model as W3C standard for capturing detailed provenance information in knowledge graphs."
+
+  - name: "HTTP Linked Data Dereferencing"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:737-741)"
+    quote: "Use HTTP IRIs so those names can be looked up. When a HTTP IRI is looked up, provide useful content about the entity"
+    description: "HTTP IRIs with dereferencing capability as core Linked Data principle for making knowledge graph content retrievable on the Web."
+
+  - name: "RDF Standards for Web of Data"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:747-750)"
+    quote: "for principle (3), the standards based on RDF (including RDFS, OWL, etc.) are currently recommended for use"
+    description: "RDF, RDFS, and OWL standards recommended as the foundation for Linked Data publication, enabling naming entities using HTTP IRIs."
+
+  # Chunk 8 Patterns (Publication and Access)
+  - name: "RDF Graph Serialization Standards"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:899-902)"
+    quote: "for RDF graphs there are various standard syntaxes available based on XML [172], JSON [494], custom syntaxes [422]"
+    description: "Multiple standard serialization formats for RDF graphs: XML-based (RDF/XML), JSON-based (JSON-LD), and custom syntaxes (N-Triples, Turtle)."
+
+  - name: "GZIP/BZip2 Compression for Graph Dumps"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:905-909)"
+    quote: "While standard compression such as GZIP or BZip2 can be straightforwardly applied on any file, custom compression methods have been proposed for graphs"
+    description: "Standard compression methods (GZIP, BZip2) and custom graph compression methods for efficient knowledge graph dump publication."
+
+  - name: "Triple Pattern Fragments Protocol"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:64-66)"
+    quote: "Edge patterns - also known as triple patterns in the case of directed, edge-labelled graphs - are singleton graph patterns"
+    description: "Triple Pattern Fragments as access protocol for edge-pattern queries, providing balance between server cost and query expressivity."
+
+  - name: "ODRL for Machine-Readable Licenses"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:186-190)"
+    quote: "the W3C Open Digital Rights Language (ODRL) [261] provides an information model and related vocabularies that can be used to specify permissions, duties, and prohibitions"
+    description: "ODRL (Open Digital Rights Language) as W3C standard for specifying machine-readable licenses with permissions, duties, and prohibitions."
+
+  - name: "WebAccessControl for Graph Security"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:217-219)"
+    quote: "Access control policies based on edge patterns can be used to restrict access to parts of a knowledge graph [162, 290, 435]. WebAccessControl (WAC)"
+    description: "WebAccessControl (WAC) as framework for access control in graphs, using WebID for authentication and providing vocabulary for access control policies."
+
+  - name: "CryptOntology for Encryption Metadata"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:282-286)"
+    quote: "The CryptOntology [182] can further be used to embed details about the encryption mechanism used within the knowledge graph"
+    description: "CryptOntology as vocabulary for embedding encryption mechanism details (algorithm, key-length) within knowledge graphs."
+
+  - name: "k-Anonymity for Graph Privacy"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:322-328)"
+    quote: "A first approach to anonymisation is to suppress and generalise knowledge in a graph such that individuals cannot be identified, based on k-anonymity [459]"
+    description: "k-anonymity technique for graph anonymization, suppressing quasi-identifiers to ensure individuals cannot be distinguished from k-1 others."
+
+  - name: "Differential Privacy for Query Anonymization"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:395-397)"
+    quote: "One approach is to apply epsilon-differential privacy [137] for querying graphs [483]"
+    description: "Epsilon-differential privacy as technique for anonymous aggregate queries on graphs, adding noise to prevent leaks about individuals."
+
+  # Chunk 8 (Knowledge Graphs in Practice)
+  - name: "DBpedia Extraction Framework"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:459-475)"
+    quote: "The DBpedia extraction framework consists of several components, corresponding to abstractions of Wikipedia article sources, graph storage and serialisation destinations"
+    description: "DBpedia extraction framework with components for wiki-markup extraction, parsing, and extraction management from Wikipedia to knowledge graph."
+
+  - name: "SKOS for Category Representation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:492-494)"
+    quote: "These schemata include a Simple Knowledge Organization System (SKOS) representation of Wikipedia categories"
+    description: "SKOS (Simple Knowledge Organization System) used for representing category hierarchies in knowledge graphs like DBpedia."
+
+  - name: "YAGO RDFS Model"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:528-531)"
+    quote: "A schema - called the YAGO model - provides a vocabulary defined in RDFS; this model allows for representing words as entities, capturing synonymy and ambiguity"
+    description: "YAGO model defined in RDFS for vocabulary representation, supporting reification, n-ary relations, and data types."
+
+  - name: "Metaweb Query Language (MQL)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:556-558)"
+    quote: "an API that could be queried using the Metaweb Query Language (MQL); a Web user interface; and a lightweight typing system"
+    description: "Metaweb Query Language (MQL) as query interface for Freebase knowledge graph, supporting API-based access."
+
+  - name: "Wikidata Qxx/Pxx Identifier Scheme"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:607-609)"
+    quote: "nodes and edges are assigned language-agnostic Qxx and Pxx codes (see Figure 36) and are subsequently associated with labels, aliases, and descriptions"
+    description: "Wikidata identifier scheme using language-agnostic Qxx (entities) and Pxx (properties) codes for multilingual support."
+
+  # Chunk 10 Patterns (References and Standards)
+  - name: "RDF 1.1 XML Syntax Standard"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 10:152-154)"
+    quote: "RDF 1.1 XML Syntax, W3C Recommendation 25 February 2014. W3C Recommendation. World Wide Web Consortium"
+    description: "RDF 1.1 XML Syntax as W3C Recommendation standard for serializing RDF graphs in XML format."
+
+  - name: "PROV Model Primer"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 10:238-242)"
+    quote: "PROV Model Primer, W3C Working Group Note 30 April 2013. W3C Working Group Note. World Wide Web Consortium"
+    description: "PROV Model as W3C standard for provenance representation, enabling tracking of data lineage in knowledge graphs."
+
+  - name: "SPARQL 1.1 Query Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 10:401-405)"
+    quote: "SPARQL 1.1 Query Language, W3C Recommendation 21 March 2013. W3C Recommendation. World Wide Web Consortium"
+    description: "SPARQL 1.1 as W3C Recommendation for querying RDF knowledge graphs, supporting graph pattern matching."
+
+  - name: "ODRL Information Model 2.2"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 10:670-672)"
+    quote: "ODRL Information Model 2.2. W3C Recommendation. World Wide Web Consortium"
+    description: "ODRL Information Model 2.2 as W3C Recommendation for digital rights expression in knowledge graphs."
+
+  - name: "SHACL Shapes Constraint Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 10:849-851)"
+    quote: "Shapes Constraint Language (SHACL), W3C Recommendation 20 July 2017. W3C Recommendation"
+    description: "SHACL as W3C Recommendation for validating RDF graphs against shape constraints, enabling schema validation."
+
+  # Chunk 13 Patterns (Historical and Definitions)
+  - name: "Knowledge Graph as Weighted Directed Edge-Labelled Graph"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:19-23)"
+    quote: "propose a search engine for knowledge graphs, defined to be weighted directed edge-labelled graphs, where weights denote confidence scores"
+    description: "Knowledge graph definition as weighted directed edge-labelled graph with confidence scores based on centrality of source documents."
+
+  - name: "Wikipedia-based Knowledge Graph Construction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:29-35)"
+    quote: "construct a knowledge graph from Wikipedia, where nodes represent Wikipedia articles and categories, while edges represent the proximity of nodes"
+    description: "Pattern for constructing knowledge graphs from Wikipedia using article/category nodes and proximity-based edges."
+
+  - name: "Category I Definition: Directed Edge-Labelled Graph"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:127-134)"
+    quote: "The first category simply defines the knowledge graph as a graph where nodes represent entities, and edges represent relationships... a directed edge labelled graph is assumed"
+    description: "Category I knowledge graph definition using directed edge-labelled graph structure, popularized by knowledge graph embedding papers."
+
+  - name: "Category II Definition: Graph-Structured Knowledge Base"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:144-152)"
+    quote: "A second common definition goes as follows: 'a knowledge graph is a graph-structured knowledge base'"
+    description: "Category II definition linking knowledge graphs to knowledge bases, raising questions about logical formalism requirements."
+
+  - name: "Category III Technical Characteristics"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:170-184)"
+    quote: "The third category of definitions outline additional, technical characteristics... mainly describes real world entities... defines possible classes and relations... allows for potentially interrelating arbitrary entities"
+    description: "Category III definition with technical criteria: real-world entities, schema with classes/relations, arbitrary entity interrelation, multi-domain coverage."
+
+  # Chunk 13 Patterns (Formal Definitions)
+  - name: "Formal Graph Tuple Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:319-322)"
+    quote: "A directed edge-labelled graph is a tuple G = (V, E, L), where V is a set of nodes, L is a set of edge labels, and E is a set of edges"
+    description: "Formal mathematical definition of directed edge-labelled graph as tuple with nodes V, edges E, and labels L."
+
+  - name: "Property Graph Formal Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:375-385)"
+    quote: "A property graph is a tuple G = (V, E, L, P, U, e, l, p), where V is a set of node ids, E is a set of edge ids, L is a set of labels"
+    description: "Formal property graph definition with node ids, edge ids, labels, properties, values, and mapping functions for labels and property-value pairs."
+
+  - name: "RDF Dataset as Graph Dataset Model"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:436-438)"
+    quote: "An RDF dataset is a graph dataset model standardised by the W3C [111] where each graph is an RDF graph, and graph names can be blank nodes or IRIs"
+    description: "RDF dataset as W3C-standardized graph dataset model supporting named graphs with blank node or IRI identifiers."
+
+  # Chunk 14 Patterns (Schema and Validation)
+  - name: "Shapes Schema for Validation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:35-39)"
+    quote: "Shapes languages in practice may support other forms of constraints, such as counting on paths [296]. In terms of implementing validation with respect to shapes"
+    description: "Shapes languages (SHACL, ShEx) for implementing graph validation with path constraints and recursive constraint checking."
+
+  - name: "Quotient Graph for Schema Extraction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:42-52)"
+    quote: "Emergent schemata are often based on the notion of a quotient graph... a quotient graph can merge multiple nodes into one node"
+    description: "Quotient graph technique for emergent schema extraction, merging nodes while preserving edge structure through partitioning."
+
+  - name: "Simulation and Bisimulation for Schema"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:74-93)"
+    quote: "One way to formally define this idea is through simulation and bisimulation... If a simulation exists on G and G', we say that G' simulates G"
+    description: "Simulation and bisimulation relations for defining schema quotient graphs that preserve graph topology."
+
+  - name: "Annotation Domain Semi-Ring"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:116-118)"
+    quote: "An annotation domain is defined as an idempotent, commutative semi-ring D = (A, +, x, bottom, top)"
+    description: "Idempotent commutative semi-ring as mathematical structure for defining annotation domains in contextual knowledge graphs."
+
+  - name: "Rule Interchange Format (RIF)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:313-317)"
+    quote: "rules can be directly specified in a rule language such as Notation3 (N3) [42], Rule Interchange Format (RIF) [288], Semantic Web Rule Language (SWRL) [254], or SPARQL Inferencing Notation (SPIN)"
+    description: "Multiple rule languages for knowledge graphs: N3, RIF, SWRL, and SPIN - with SPIN allowing rules to be embedded in data graphs."
+
+  - name: "Description Logic Knowledge Base Structure"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:342-344)"
+    quote: "A DL knowledge base K is defined as a tuple (A, T, R), where A is the A-Box: a set of assertional axioms; T is the T-Box: a set of class axioms; and R is the R-Box"
+    description: "Description Logic knowledge base structure with A-Box (assertions), T-Box (terminological/class axioms), and R-Box (relation axioms)."
+
+  - name: "OWL 2 DL Correspondence to SROIQ"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:467-469)"
+    quote: "DLs have been very influential in the definition of OWL, where the OWL 2 DL fragment (roughly) corresponds to the DL SROIQ"
+    description: "OWL 2 DL standard corresponding to SROIQ Description Logic, providing decidable ontology language for knowledge graphs."
+
+  # Chunk 15 Patterns (Embeddings and Neural Networks)
+  - name: "Knowledge Graph Embedding Tensor Operations"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:296-303)"
+    quote: "Given two tensors X and Y, the tensor product X x Y is defined as a tensor... with each element computed as (X x Y)_i1...im j1...jn"
+    description: "Tensor product operation as foundational mathematical tool for knowledge graph embeddings, enabling multi-dimensional representation."
+
+  - name: "Convolution Operation for Graph Neural Networks"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:337-344)"
+    quote: "ConvE [127] and HypER [28] - are based on convolutional architectures using the convolution operator"
+    description: "Convolution operator used in ConvE and HypER embedding models for knowledge graph representation learning."
+
+  - name: "Recursive GNN Architecture"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:388-396)"
+    quote: "A recursive graph neural network (RecGNN) is a pair of functions (Agg, Out), such that Agg computes a new feature vector for a node"
+    description: "Recursive Graph Neural Network architecture with Agg (aggregation) and Out (output) functions for node feature computation."
+
+  - name: "Non-Recursive GNN with Multiple Layers"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:478-481)"
+    quote: "A non-recursive graph neural network (NRecGNN) with l layers is an l-tuple of functions... for different aggregation function at each layer"
+    description: "Non-recursive GNN architecture with l layers of different aggregation functions, enabling layer-wise feature transformation."
+
+  - name: "AMIE Rule Mining System"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:668-672)"
+    quote: "Systems such as AMIE [170], RuLES [241], CARL [406], DL-Learner [73], etc., propose discrete mining that recursively generates candidate formulae"
+    description: "AMIE and related systems for discrete rule mining through recursive formula generation with refinement operators."
+
+  - name: "NeuralLP Differentiable Rule Mining"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:677-680)"
+    quote: "systems such as NeuralLP [569] and DRUM [455] apply differentiable mining that allows for learning (path-like) rules and their scores in a more continuous fashion"
+    description: "NeuralLP and DRUM for differentiable rule mining using gradient descent to learn path-like rules continuously."

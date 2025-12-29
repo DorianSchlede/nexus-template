@@ -1,0 +1,83 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tbl6LEK3wd4mKAfhp
+table_name: AgentTaskList
+exported_at: '2025-12-28T14:12:03.602762'
+field_count: 10
+fields:
+- id: fldpuvSUfrlnha7SP
+  name: Name
+  type: singleLineText
+  description: null
+- id: fld1rNbDLduiskm1w
+  name: Agents
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fldWIKLRjTzMhuIbC
+- id: fldMb5ep6VBYt0Ptt
+  name: Workspace (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1rNbDLduiskm1w
+  lookup_field_id: fldItXOU8yc1YbCdu
+- id: fldq721ljuGFnTJbC
+  name: Monitor Task (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1rNbDLduiskm1w
+  lookup_field_id: fldcCva8ptVidwzz3
+- id: fldQSNzREekcexq07
+  name: Pages
+  type: number
+  description: null
+  precision: 1
+- id: fldU217RCbXWw828r
+  name: Max Items Per Page
+  type: number
+  description: null
+  precision: 1
+- id: fldDRIx5zcJDm4LHw
+  name: Start From
+  type: dateTime
+  description: null
+  date_format:
+    name: european
+    format: D/M/YYYY
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldQb2G3HP4RIhoSO
+  name: End At
+  type: dateTime
+  description: null
+  date_format:
+    name: european
+    format: D/M/YYYY
+  time_format:
+    name: 24hour
+    format: HH:mm
+  time_zone: client
+- id: fldjgErrVrRpyqCp1
+  name: WithContent
+  type: singleSelect
+  description: null
+  choices:
+  - id: selr73Y9dMsn9NiZ5
+    name: With Full Agent Task Content
+    color: greenLight1
+  - id: selTgyGFQatMqMUSy
+    name: Without Task Detail
+    color: grayLight1
+- id: fldDKSXq0LAKBq6jj
+  name: Agent AIDs
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1rNbDLduiskm1w
+  lookup_field_id: fld4s48pRlMfPotPd
+views:
+- id: viw1rqqrDjztZgv6q
+  name: Grid view
+  type: grid

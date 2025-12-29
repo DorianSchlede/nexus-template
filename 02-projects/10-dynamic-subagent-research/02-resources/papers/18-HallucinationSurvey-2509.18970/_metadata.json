@@ -1,0 +1,59 @@
+{
+  "source_pdf": "18-HallucinationSurvey-2509.18970.pdf",
+  "processed_at": "2025-12-28T16:49:25.957933",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 8,
+  "total_lines": 3681,
+  "total_chars": 169495,
+  "chunks": [
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_1.md",
+      "chunk_number": 1,
+      "line_count": 500,
+      "char_count": 19496
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_2.md",
+      "chunk_number": 2,
+      "line_count": 496,
+      "char_count": 24062
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_3.md",
+      "chunk_number": 3,
+      "line_count": 494,
+      "char_count": 21683
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_4.md",
+      "chunk_number": 4,
+      "line_count": 498,
+      "char_count": 23513
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_5.md",
+      "chunk_number": 5,
+      "line_count": 498,
+      "char_count": 25083
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_6.md",
+      "chunk_number": 6,
+      "line_count": 497,
+      "char_count": 24698
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_7.md",
+      "chunk_number": 7,
+      "line_count": 492,
+      "char_count": 22889
+    },
+    {
+      "filename": "18-HallucinationSurvey-2509.18970_8.md",
+      "chunk_number": 8,
+      "line_count": 206,
+      "char_count": 8071
+    }
+  ]
+}

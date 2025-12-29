@@ -1,0 +1,144 @@
+---
+batch_id: "failure_mode_2"
+field: failure_mode
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 13
+patterns_found: 24
+---
+
+patterns:
+  # From 04-GCC-2508.00031 Chunk 2
+  - name: "CLI-Produced CLI Performance Degradation Without GCC"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 2:53-58)"
+    quote: "the same agent is prompted to reproduce this CLI from scratch without GCC, the resulting system performs drastically worse, resolving only 11.7% of tasks"
+    description: "Failure mode where an agent attempting to reproduce a CLI system without the GCC (Git-Context-Controller) scaffolding achieves dramatically lower performance (11.7% vs 72.7% original), demonstrating that capability loss occurs when structured memory management is absent."
+
+  - name: "RAG-based Memory Failure in Branch Exploration"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 2:164-170)"
+    quote: "the agent itself concluded that the RAG-based approach introduced more drawbacks than benefits. It proved fragile—minor bugs in serialization or indexing logic led to unpredictable behaviors"
+    description: "Failure mode where RAG-based memory approaches prove fragile and computationally expensive, with minor serialization or indexing bugs causing unpredictable system behaviors. The system underperformed compared to simpler memory approaches."
+
+  - name: "One-Shot Ephemeral Context Limitation"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 2:176-178)"
+    quote: "Such reflective behavior did not emerge in non-GCC environments, where agents tended to solve tasks in one shot, operating within narrow, ephemeral contexts"
+    description: "Failure mode in non-structured environments where agents cannot develop reflective, iterative behaviors and are confined to narrow, ephemeral contexts that prevent architectural exploration and learning."
+
+  # From 07-ProtocolBench-2510.17149 Chunk 2
+  - name: "Pre/Post Fault Answer Discovery Degradation"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:103-106)"
+    quote: "We measure Answer Discovery Rate as the percentage of queries successfully resolved in each window, Latency as the median task completion time, and Recovery Time as the duration from fault injection to system stabilization"
+    description: "Failure mode measurement framework for multi-agent systems under fault conditions. Discovery rate measures query resolution capability, with systems showing degraded performance post-fault (e.g., AGORA preserves only 81.29% of pre-failure performance)."
+
+  - name: "Protocol Security Capability Gaps"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:318-320)"
+    quote: "ACP and A2A offer partial security capabilities, lacking TLS transport layer protection and tunnel sniffing resistance while maintaining session hijacking protection"
+    description: "Failure mode where certain protocols (ACP, A2A) have security gaps lacking TLS transport and tunnel sniffing resistance, creating vulnerabilities for privacy-sensitive deployments in healthcare or finance domains."
+
+  - name: "A2A-ACP Protocol Confusion"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:373-374)"
+    quote: "The spec-only baseline attains 53.5% scenario accuracy and 71.2% module accuracy, with errors dominated by A2A to ACP confusions"
+    description: "Failure mode in protocol router selection where A2A and ACP protocols are frequently confused due to similar capability profiles, leading to incorrect protocol assignments in 46.5% of scenarios."
+
+  # From 07-ProtocolBench-2510.17149 Chunk 4
+  - name: "TLS Downgrade Attack Vulnerability"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 4:55-61)"
+    quote: "Conducts 3 rounds of TLS downgrade attacks using weak cipher suites, obsolete TLS versions, and HTTP plaintext fallback, recording success and block rates for each attempt"
+    description: "Failure mode where protocols may fail security tests involving TLS downgrade attacks with weak cipher suites, obsolete TLS versions, expired/self-signed certificates, or hostname mismatches leading to security breaches."
+
+  - name: "Session Hijack and Replay Attack Failure"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 4:72-75)"
+    quote: "For session hijack, injects privilege-escalation tokens (e.g., expired_session_*, admin_session_*), measuring interception rates via denials or 404s"
+    description: "Failure mode where systems fail to block privilege-escalation tokens or replay attacks with old messages, potentially allowing unauthorized access or duplicate message processing."
+
+  # From 07-ProtocolBench-2510.17149 Chunk 5
+  - name: "Malformed Module Record Exclusion"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 5:103-106)"
+    quote: "If a module record is malformed or absent, the entire scenario is list-wise excluded and the exclusion is logged; no zero-filling"
+    description: "Failure mode handling where malformed or missing module records cause entire scenario exclusion from evaluation, requiring proper logging and preventing silent data corruption through zero-filling."
+
+  # From 07-ProtocolBench-2510.17149 Chunk 6
+  - name: "Unified Error Taxonomy for Adapter Failures"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:85-87)"
+    quote: "Adapter exceptions are normalized by PAL into: E_TIMEOUT, E_HTTP, E_CONN, E_PROTOCOL, E_ENCODE/DECODE, E_UNSUPPORTED. PAL increments failure counters and re-raises"
+    description: "Standardized failure mode taxonomy normalizing adapter exceptions into categories: timeout, HTTP errors, connection failures, protocol errors, encode/decode failures, and unsupported operations, enabling consistent error handling across protocols."
+
+  - name: "A2A Inbox Implementation Absence"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:310-311)"
+    quote: "A2AAdapter: /inbox is not universally implemented (PAL keeps a negative cache); receive_message() is a compatibility stub"
+    description: "Known failure mode where A2A protocol's inbox endpoint is not universally implemented, requiring negative caching and compatibility stubs for receive_message operations."
+
+  - name: "ANP DID Verification Bypass Risk"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 6:318-320)"
+    quote: "ANPAdapter: Test configs may enable DID verification bypass; if no DID service is available, use HTTP fallback POST /anp/message"
+    description: "Failure mode risk where test configurations may bypass DID verification for interoperability, requiring strict enforcement in production and fallback to HTTP when DID services are unavailable."
+
+  # From 07-ProtocolBench-2510.17149 Chunk 7
+  - name: "Heterogeneous Link Bridge Failure"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 7:103-106)"
+    quote: "We enforce 'change transport, not semantics or security.' Homogeneous links use the chosen protocol natively. Heterogeneous links install stateless bridges around the UTE"
+    description: "Failure prevention pattern requiring that cross-protocol bridges only perform transport translation without altering business content or security attributes, maintaining semantic integrity during protocol transitions."
+
+  - name: "Circuit Breaking and Bulkhead Saturation"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 7:168-177)"
+    quote: "Testing matrix: Policy conformance: selection, sticky sessions, hedging, retry categories. Failure drills: open circuit, half-open probes, bulkhead saturation"
+    description: "Failure mode testing framework including circuit breaker states (open/half-open/close), bulkhead saturation scenarios, and retry policy verification to ensure system resilience under various failure conditions."
+
+  # From 08-LACP-2510.13821 Chunk 1
+  - name: "Ad-Hoc Protocol Communication Chasm"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:39-46)"
+    quote: "This fragmentation creates a persistent communication chasm—hindering interoperability, compromising security, and impeding reproducible scientific progress"
+    description: "Failure mode in fragmented LLM agent ecosystems where lack of standardization leads to ambiguous semantics, security vulnerabilities, unreliable information exchange, and task failures."
+
+  - name: "Security as Afterthought Vulnerability"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:106-109)"
+    quote: "Security is often not a core, mandatory component of existing protocols. This design choice exposes systems to significant risks, including data tampering, agent spoofing"
+    description: "Critical failure mode where security is treated as optional rather than mandatory, exposing multi-agent systems to data tampering, agent spoofing, and adversarial attacks in safety-critical applications."
+
+  - name: "Monolithic Design Transaction Integrity Failure"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 1:112-116)"
+    quote: "Current approaches often tightly couple communication logic with core agent implementation. This leads to monolithic systems... the general absence of built-in support for atomic transactions undermines reliability"
+    description: "Failure mode where tightly coupled monolithic architectures lack atomic transaction support, making complex multi-step operations unreliable and systems difficult to maintain and extend."
+
+  # From 08-LACP-2510.13821 Chunk 2
+  - name: "Tampering Attack Detection via Signature Mismatch"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 2:149-151)"
+    quote: "Upon receiving the tampered message, the server's cryptographic verification step immediately failed. The server logged a signature mismatch error and returned an HTTP 403 Forbidden"
+    description: "Failure mode detection where payload tampering after signing is caught through cryptographic signature verification, resulting in HTTP 403 rejection and preventing fraudulent transactions."
+
+  - name: "Replay Attack Prevention via Transaction ID Tracking"
+    chunk_ref: "08-LACP-2510.13821 (Chunk 2:165-168)"
+    quote: "The server's signature verification passed, but its Transactional Layer logic identified the transaction_id as a duplicate. The server rejected the request and returned an HTTP 409 Conflict"
+    description: "Failure mode handling where replay attacks are detected through transaction ID tracking, with duplicate IDs triggering HTTP 409 Conflict responses to prevent double-processing of operations."
+
+  # From 09-SEMAP-2510.12120 Chunk 1
+  - name: "Under-Specification Failure Category"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:69-71)"
+    quote: "Cemri et al. introduced the Multi-Agent System Failure Taxonomy (MAST) and identified three recurring issue categories: under-specification, inter-agent misalignment, and inappropriate verification"
+    description: "Systematic failure mode taxonomy (MAST) identifying three core failure categories in multi-agent LLM systems: under-specification of requirements, misalignment between agents, and inappropriate verification mechanisms."
+
+  - name: "Lifecycle Stage Transition Failure"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:246-266)"
+    quote: "S: a set of lifecycle stages (e.g., initialized, implementing, reviewing, completed, failed); Sigma: verification outcomes (e.g., pass, fail); delta: S x Sigma -> S: a transition function"
+    description: "Failure mode modeling through finite state machine where lifecycle stages include explicit 'failed' state, with verification outcomes (pass/fail) governing transitions and enabling recovery or reassignment actions."
+
+  - name: "SEMAP Failure Reduction Results"
+    chunk_ref: "09-SEMAP-2510.12120 (Chunk 1:344-351)"
+    quote: "SEMAP reduces the total number of failures by 64.1% with ChatGPT... The largest reduction occurs in under-specification, where ChatGPT drops from 137 to 39 (71.5%)"
+    description: "Quantified failure reduction through SEMAP protocol showing 64-69% total failure reduction, with under-specification failures reduced by 71-73% through explicit behavioral contract modeling."
+
+  # From 10-TalkHier-2502.11098 Chunk 1
+  - name: "Disorganized Text Communication Failure"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 1:103-112)"
+    quote: "communication often becomes disorganized because it requires explicitly describing agent tasks, providing background context, and specifying required output formats. These factors lead to lengthy and unstructured exchanges"
+    description: "Failure mode in multi-agent systems where text-based communication becomes disorganized, making it difficult for agents to manage subgoals, maintain output structures, and retrieve independent memories from prior actions."
+
+  - name: "Feedback Summarization Bias and Order Effects"
+    chunk_ref: "10-TalkHier-2502.11098 (Chunk 1:118-123)"
+    quote: "As the number of agents increases, LLM-MA systems face challenges in effectively summarizing opinions or feedback. They often fail to balance these inputs, frequently overlooking some or exhibiting biases based on the order"
+    description: "Failure mode where increasing agent count leads to feedback summarization failures, with systems exhibiting positional bias based on feedback order and failing to balance diverse inputs appropriately."
+
+  # From 12-CollabSurvey-2501.06322 Chunk 1
+  - name: "Cascading Hallucination in Multi-Agent Interactions"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 1:353-354)"
+    quote: "Issues such as cascading hallucinations — where one erroneous output leads to compounding mistakes pose challenges in sustained multi-agent interactions"
+    description: "Critical failure mode in multi-agent LLM systems where a single erroneous or hallucinated output propagates through the system, causing compounding mistakes across sustained agent interactions."

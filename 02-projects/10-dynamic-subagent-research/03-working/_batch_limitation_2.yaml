@@ -1,0 +1,189 @@
+---
+batch_id: "limitation_2"
+field: limitation
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 13
+patterns_found: 32
+---
+
+patterns:
+  # ==========================================
+  # Paper 02: ContextSurvey-2507.13334 (Chunks 7-9)
+  # ==========================================
+
+  - name: "Transaction Support Insufficiency"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:38-43)"
+    quote: "LangGraph provides basic state management while lacking atomicity guarantees and systematic compensation mechanisms"
+    description: "Contemporary orchestration frameworks like LangGraph, AutoGen, and CAMEL demonstrate insufficient transaction support. LangGraph lacks atomicity guarantees, AutoGen prioritizes flexible interactions without adequate compensatory action management, leading to inconsistent system states following partial failures."
+
+  - name: "LLM Self-Validation Dependency"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:41-43)"
+    quote: "validation limitations emerge as many frameworks rely exclusively on large language models' inherent self-validation capabilities without implementing independent validation procedures"
+    description: "Multi-agent systems often rely exclusively on LLMs' self-validation capabilities without independent validation procedures, exposing systems to reasoning errors, hallucinations, and inter-agent inconsistencies."
+
+  - name: "Long-term Context Maintenance Failure"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:46-47)"
+    quote: "agents struggle with long-term context maintenance encompassing both episodic and semantic information"
+    description: "Context handling failures compound challenges as agents struggle to maintain long-term context that encompasses both episodic (event-based) and semantic (meaning-based) information across extended interactions."
+
+  - name: "Non-deterministic Execution Path Complexity"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:47-49)"
+    quote: "central orchestrator topologies introduce non-deterministic, runtime-dependent execution paths that enhance adaptability while complicating anomaly detection"
+    description: "Central orchestrator topologies create non-deterministic, runtime-dependent execution paths that while enhancing adaptability, significantly complicate anomaly detection and require dynamic graph reconstruction rather than simple path matching."
+
+  - name: "Goal Deviation Amplification"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:50-53)"
+    quote: "environmental misconfigurations and LLM hallucinations can distract agentic systems, with poor recovery leading to goal deviation that becomes amplified in multi-agent setups"
+    description: "Environmental misconfigurations and LLM hallucinations distract agentic systems. Poor recovery leads to goal deviation that becomes amplified in multi-agent setups with distributed subtasks."
+
+  - name: "Inter-agent Dependency Opacity"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 7:56-58)"
+    quote: "agents may operate on inconsistent assumptions or conflicting data without explicit constraints or validation layers"
+    description: "Inter-agent dependency opacity means agents may operate on inconsistent assumptions or conflicting data without explicit constraints or validation layers, necessitating anomaly detection incorporating reasoning over orchestration intent and planning coherence."
+
+  - name: "Quadratic Context Scaling"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 8:93-97)"
+    quote: "current attention mechanisms scaling quadratically (O(n^2)) with sequence length, creating prohibitive memory and computational requirements for ultra-long sequences"
+    description: "Context scaling efficiency faces fundamental computational challenges with current attention mechanisms scaling O(n^2) with sequence length, creating prohibitive memory and computational requirements for ultra-long sequences."
+
+  - name: "Comprehension-Generation Gap"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 8:71-78)"
+    quote: "fundamental asymmetry between LLMs' remarkable comprehension capabilities and their pronounced generation limitations"
+    description: "There is a fundamental asymmetry between LLMs' remarkable comprehension capabilities and their pronounced generation limitations. This comprehension-generation gap manifests across dimensions including long-form output coherence, factual consistency maintenance, and planning sophistication."
+
+  - name: "Extended Generation Performance Degradation"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 8:83-87)"
+    quote: "Current systems exhibit significant performance degradation in extended generation tasks, highlighting the need for architectural innovations beyond traditional transformer paradigms"
+    description: "Current systems exhibit significant performance degradation in extended generation tasks. State space models like Mamba demonstrate potential for efficient long sequence processing but require substantial development to match transformer performance across diverse tasks."
+
+  - name: "Multi-modal Coordination Gap"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 8:103-108)"
+    quote: "Current approaches typically employ modality-specific encoders with limited cross-modal interaction, failing to capture the rich interdependencies"
+    description: "Multi-modal integration presents fundamental challenges. Current approaches employ modality-specific encoders with limited cross-modal interaction, failing to capture rich interdependencies. Systems show substantial performance gaps when processing video, audio, and text simultaneously."
+
+  - name: "Absence of Unified Theoretical Foundations"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 8:40-47)"
+    quote: "Context Engineering currently operates without unified theoretical foundations that connect disparate techniques and provide principled design guidelines"
+    description: "Context Engineering lacks unified theoretical foundations connecting disparate techniques. The absence of mathematical frameworks characterizing capabilities, limitations, and optimal design principles impedes both fundamental understanding and practical optimization."
+
+  - name: "Tool-integrated Reasoning Performance Gap"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 9:33-35)"
+    quote: "substantial performance gaps revealed by evaluation frameworks like GAIA (human 92% vs AI 15%) highlight the importance of transparent capability communication"
+    description: "Tool-integrated reasoning systems show substantial performance gaps. The GAIA benchmark reveals human achievement of 92% accuracy compared to AI 15%, indicating fundamental limitations in current reasoning and planning capabilities."
+
+  - name: "Memory System Privacy Challenges"
+    chunk_ref: "02-ContextSurvey-2507.13334 (Chunk 9:27-30)"
+    quote: "Memory systems face particular privacy challenges due to their persistent information storage and retrieval capabilities, requiring advanced frameworks for secure memory management"
+    description: "Memory systems face particular privacy challenges due to persistent information storage and retrieval capabilities, requiring advanced frameworks for secure memory management and selective forgetting mechanisms."
+
+  # ==========================================
+  # Paper 03: ClaudeCode-2508.08322 (Chunks 1-2)
+  # ==========================================
+
+  - name: "Fixed Static Context Limitation"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 1:46-48)"
+    quote: "A key limitation of default code assistants is their reliance on a fixed static context...a single prompt cannot capture all relevant details for every possible task"
+    description: "Default code assistants rely on fixed static context. A single CLAUDE.md file cannot capture all relevant details for every possible task, leading to incomplete or incorrect solutions for non-trivial features."
+
+  - name: "Context Window Limitation"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 1:44-45)"
+    quote: "Purely prompt-driven single-agent solutions struggle with these challenges due to limited context windows and the risk of hallucinations"
+    description: "Purely prompt-driven single-agent solutions struggle due to limited context windows and the risk of hallucinations when confronted with unfamiliar APIs or frameworks."
+
+  - name: "Incomplete Multi-file Edits"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 1:49-51)"
+    quote: "a default Claude Code agent with a basic CLAUDE.md prompt often produced incomplete or incorrect solutions...It might miss necessary edits in distant files"
+    description: "Single-agent Claude with basic CLAUDE.md often produces incomplete solutions for non-trivial features, missing necessary edits in distant files or misusing unfamiliar libraries due to insufficient context comprehension."
+
+  - name: "Multi-agent Token Cost Overhead"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:76-85)"
+    quote: "the multi-agent method used about 3-5x more tokens on successful tasks. However, the baseline often needed multiple attempts"
+    description: "Multi-agent approaches consume approximately 3-5x more tokens than single-agent methods. However, this overhead is justified when single-agent baselines require multiple attempts or lengthy debugging, pushing token counts to similar levels."
+
+  - name: "Irrelevant External Knowledge Injection"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:125-128)"
+    quote: "Elicit returned an irrelevant research paper due to an ambiguous query, and although NotebookLM summarized it faithfully, that summary added noise to the context"
+    description: "External knowledge retrieval can return irrelevant documents due to ambiguous queries. Even faithful summarization of irrelevant content adds noise to context and can confuse the Planner agent."
+
+  - name: "Brittle Orchestrator Logic"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:129-133)"
+    quote: "the current orchestrator logic is relatively brittle; it follows a predetermined sequence...if an unexpected situation arises, the system is not yet equipped to dynamically re-plan"
+    description: "Current orchestrator logic is brittle, following predetermined sequences (plan->code->test->review). If unexpected situations arise or new requirements emerge mid-way, the system cannot dynamically re-plan from scratch."
+
+  - name: "Computational Cost at Scale"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:134-136)"
+    quote: "the computational cost, while acceptable for our use, might become problematic on very large projects or if many agents run in parallel"
+    description: "Computational cost becomes problematic on very large projects or with many parallel agents. Techniques like context compression, caching vector search results, or using smaller specialized models could help reduce overhead."
+
+  - name: "Test Suite Dependency"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:137-140)"
+    quote: "we relied heavily on the presence of a comprehensive test suite. If tests are sparse, the system might incorrectly judge a task as complete"
+    description: "Heavy reliance on comprehensive test suites means if tests are sparse, the system might incorrectly judge a task as complete. Static analysis tools and spec verification agents could partially address this gap."
+
+  - name: "Multi-agent Error Tracing Difficulty"
+    chunk_ref: "03-ClaudeCode-2508.08322 (Chunk 2:140-143)"
+    quote: "error tracing can be challenging in a multi-agent context; if a final result is wrong, it takes careful log analysis to pinpoint which agent's action led to the mistake"
+    description: "Error tracing is challenging in multi-agent contexts. Pinpointing which agent's action or which piece of context led to a mistake requires careful log analysis. Visualization tools like SeaView could aid debugging."
+
+  # ==========================================
+  # Paper 04: GCC-2508.00031 (Chunks 1-2)
+  # ==========================================
+
+  - name: "Session Context Loss"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 1:47-49)"
+    quote: "closing a session and starting a new one typically erases the agent's memory of prior goals, user preferences, and task-specific instruction"
+    description: "Closing a session and starting a new one erases the agent's memory of prior goals, user preferences, and task-specific instructions. Users must repeatedly 're-teach' the model from scratch across sessions."
+
+  - name: "Context Truncation Information Loss"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 1:50-53)"
+    quote: "truncate older context once the token limit is reached...this risks discarding important historical details—especially problematic when the agent needs to revisit earlier decisions"
+    description: "Context truncation when token limits are reached risks discarding important historical details, especially problematic when agents need to revisit earlier decisions or maintain consistency across multi-step plans."
+
+  - name: "Summary Compression Detail Loss"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 1:54-58)"
+    quote: "relying on a simple compression means removing the fine-grained details, weakening the agent's ability to ground its actions in specific prior thoughts"
+    description: "Summary-based compression approaches (e.g., memory.md) remove fine-grained details, weakening the agent's ability to ground actions in specific prior thoughts. Context becomes either too verbose or too abstract."
+
+  - name: "Session Latency Increase"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 1:45-47)"
+    quote: "sessions become increasingly slow and costly as context grows, since longer histories are passed as tokens"
+    description: "In CLI-based usage, sessions become increasingly slow and costly as context grows, since longer histories are passed as tokens, creating a context management bottleneck."
+
+  - name: "RAG Memory Fragility"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 2:164-170)"
+    quote: "the RAG-based approach introduced more drawbacks than benefits. It proved fragile—minor bugs in serialization or indexing logic led to unpredictable behaviors"
+    description: "RAG-based memory approaches can prove fragile, with minor bugs in serialization or indexing leading to unpredictable behaviors. They require non-trivial overhead for embedding and storing every intermediate step."
+
+  - name: "Self-reproduction Performance Gap"
+    chunk_ref: "04-GCC-2508.00031 (Chunk 2:53-59)"
+    quote: "when the same agent is prompted to reproduce this CLI from scratch without GCC, the resulting system performs drastically worse, resolving only 11.7% of tasks"
+    description: "Without structured context management (GCC), agent-produced CLI systems perform drastically worse (11.7% vs 72.7% original, 40.7% with GCC), demonstrating how capability scaffolding matters more than raw model capability."
+
+  # ==========================================
+  # Paper 07: ProtocolBench-2510.17149 (Chunks 1-4)
+  # ==========================================
+
+  - name: "Protocol Selection Intuition-driven"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 1:41-42)"
+    quote: "protocol selection in practice is often intuition-driven and lacks standardized guidance"
+    description: "Despite proliferation of multi-agent protocols (A2A, ACP, ANP, Agora), selection remains intuition-driven without standardized guidance. Trade-offs remain under-characterized in existing benchmarks."
+
+  - name: "No Single Protocol Dominance"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:84-88)"
+    quote: "protocol choice significantly impacts system behavior across multiple dimensions—no single protocol dominates universally"
+    description: "No single protocol dominates universally across all scenarios. Protocol choice significantly impacts system behavior, creating tightly coupled trade-offs between task success, latency, overhead, and robustness."
+
+  - name: "Security-Performance Trade-off"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:311-321)"
+    quote: "ACP and A2A offer partial security capabilities, lacking TLS transport layer protection and tunnel sniffing resistance"
+    description: "Security-performance trade-offs exist between protocol families. ACP and A2A lack TLS transport protection and tunnel sniffing resistance, while ANP and Agora provide comprehensive security at the cost of increased latency overhead."
+
+  - name: "Router A2A-ACP Confusion"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 2:373-375)"
+    quote: "the spec-only baseline attains 53.5% scenario accuracy...with errors dominated by A2A/ACP confusions"
+    description: "Protocol router selection shows systematic confusions, particularly between A2A and ACP protocols. Spec-only baseline achieves only 53.5% scenario accuracy with errors dominated by A2A-ACP confusion."
+
+  - name: "ProtocolRouter Workload Assumption"
+    chunk_ref: "07-ProtocolBench-2510.17149 (Chunk 3:302-304)"
+    quote: "ProtocolRouter's learning approach assumes stationary or slowly-changing workload distributions. Rapid context switches or rare events may not provide sufficient signal for adaptation"
+    description: "ProtocolRouter assumes stationary or slowly-changing workload distributions. Rapid context switches or rare events may not provide sufficient signal for adaptation. Computational overhead of maintaining multiple protocol states could become prohibitive at very large scales."
