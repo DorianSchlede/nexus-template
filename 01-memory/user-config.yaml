@@ -32,6 +32,12 @@ learning_tracker:
   last_suggested: null
   suggestion_preference: "normal"
 
+# Slack Power Skill Configuration
+slack_power:
+  auto_save: "ask"      # "ask", "always", "never" - whether to save extractions to workspace
+  default_days: 7       # How far back to search by default
+  confirm_post: true    # Always confirm before posting to Slack
+
 created: null
 updated: null
 ---
