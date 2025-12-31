@@ -146,20 +146,58 @@ def build_instructions(
             research_keywords = ["research", "paper", "ontolog", "analysis", "synthesis", "academic"]
             is_research_project = any(kw in project_name.lower() or kw in project_desc for kw in research_keywords)
 
-            # Build skill loading step based on project type
+            # Check for _resume.md to get last active skill/phase
+            last_skill = None
+            last_phase = None
+            project_file_path = most_recent.get("_file_path", "")
+            if project_file_path:
+                project_dir = Path(project_file_path).parent.parent
+                resume_file = project_dir / "_resume.md"
+                if resume_file.exists():
+                    try:
+                        resume_content = resume_file.read_text(encoding="utf-8")
+                        if resume_content.startswith("---"):
+                            parts = resume_content.split("---", 2)
+                            if len(parts) >= 2:
+                                resume_yaml = yaml.safe_load(parts[1])
+                                if resume_yaml:
+                                    last_skill = resume_yaml.get("last_skill")
+                                    last_phase = resume_yaml.get("phase")
+                    except Exception:
+                        pass
+
+            # Build skill loading step based on project type and last phase
             if is_research_project:
+                # Determine skill from phase
+                if last_phase == "synthesis":
+                    skill_name = "synthesize-research-project"
+                    skill_why = "Research project in SYNTHESIS phase"
+                elif last_phase == "analysis":
+                    skill_name = "analyze-research-project"
+                    skill_why = "Research project in ANALYSIS phase"
+                else:
+                    skill_name = "analyze-research-project"
+                    skill_why = "Research project - loads paper analysis methodology"
+
                 skill_step = {
                     "step": 2,
                     "action": "RUN",
-                    "command": "python 00-system/core/nexus-loader.py --skill analyze-research-project",
-                    "why": "Research project - loads paper analysis and synthesis methodology",
+                    "command": f"python 00-system/core/nexus-loader.py --skill {skill_name}",
+                    "why": skill_why,
                     "REQUIRED": True,
-                    "OR_ALTERNATIVE": {
-                        "command": "python 00-system/core/nexus-loader.py --skill synthesize-research-project",
-                        "when": "If synthesis phase (analysis already complete)",
-                    },
+                    "detected_phase": last_phase,
                 }
                 project_type = "research"
+            elif last_skill:
+                # Use last active skill from _resume.md
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": f"python 00-system/core/nexus-loader.py --skill {last_skill}",
+                    "why": f"Last active skill from _resume.md",
+                    "REQUIRED": True,
+                }
+                project_type = "standard"
             else:
                 skill_step = {
                     "step": 2,
