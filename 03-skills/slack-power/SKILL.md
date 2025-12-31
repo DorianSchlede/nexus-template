@@ -1,11 +1,11 @@
 ---
 name: slack-power
-description: "Power workflows for Slack: extract schemas, find action items, meeting prep, post updates. Load when user says 'slack power', 'extract from slack', 'meeting prep', 'slack actions', 'post update', 'get thread', 'find schemas', 'what did I promise', or any slack workflow trigger."
+description: "Power workflows for Slack: extract schemas, find action items, meeting prep, channel digests, link collection, query transcripts. Load when user says 'slack power', 'extract from slack', 'meeting prep', 'channel digest', 'collect links', 'query meeting', 'was haben wir besprochen', or any slack workflow trigger."
 ---
 
 # Slack Power
 
-Advanced Slack workflows for knowledge extraction, meeting preparation, and team communication.
+Advanced Slack workflows for knowledge extraction, meeting analysis, and team communication.
 
 ## When This Triggers
 
@@ -14,6 +14,9 @@ Advanced Slack workflows for knowledge extraction, meeting preparation, and team
 - "what did I promise" / "action items from slack"
 - "meeting prep with @user" / "prep for call"
 - "post update to #channel" / "share to slack"
+- "channel digest #channel" / "was lief in #channel"
+- "collect links from #channel" / "alle links aus"
+- "query meeting" / "was haben wir besprochen"
 
 ## Prerequisites
 
@@ -36,9 +39,10 @@ python 03-skills/slack-power/scripts/select_workflow.py --format brief
 
 | Category | Workflows | Triggers |
 |----------|-----------|----------|
-| **extraction** | get-thread, extract-schemas, extract-actions | "get", "extract", "find", "pull" |
+| **extraction** | get-thread, extract-schemas, extract-actions, link-collector | "get", "extract", "find", "pull", "collect links" |
 | **preparation** | meeting-prep | "prep", "prepare", "before meeting" |
 | **broadcast** | post-update | "post", "share", "send", "update" |
+| **analysis** | channel-digest, query-transcript | "digest", "summary", "query", "was lief", "was haben wir" |
 
 ### Step 3: Load Specific Workflow
 
@@ -86,6 +90,14 @@ Default paths:
 | **get-thread** | `get dm with @burak` | Conversation history |
 | **extract-schemas** | `extract schemas from @burak` | Code blocks, interfaces |
 | **extract-actions** | `what did I promise to burak` | Action items, commitments |
+| **link-collector** | `collect links from #agent-dump` | Organized link collection |
+
+### Analysis Workflows
+
+| Workflow | Command | Output |
+|----------|---------|--------|
+| **channel-digest** | `channel digest #research this week` | Weekly/daily channel summary |
+| **query-transcript** | `was haben wir über X besprochen?` | Answer from meeting summaries |
 
 ### Preparation Workflows
 
