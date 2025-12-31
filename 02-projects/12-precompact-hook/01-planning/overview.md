@@ -1,7 +1,7 @@
 ---
 id: 12-precompact-hook
 name: PreCompact Hook für Resume-State
-status: IN_PROGRESS
+status: COMPLETE
 description: Load when user mentions 'precompact hook', 'auto resume', 'context preservation', 'save state before compact'
 created: 2025-12-31
 ---

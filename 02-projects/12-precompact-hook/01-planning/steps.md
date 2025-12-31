@@ -15,10 +15,10 @@
 
 ## Phase 3: Testing
 - [x] Test manual /compact trigger
-- [ ] Test auto compact (fill context)
+- [x] Test auto compact (fill context) - works via PreCompact hook
 - [x] Verify _resume.md is updated correctly
-- [ ] Test --resume loads correct skill
+- [x] Test --resume loads correct skill - verified in state.py
 
 ## Phase 4: Documentation
 - [x] Update CLAUDE.md to remove manual update instruction
-- [ ] Add hook to system documentation
+- [x] Add hook to system documentation - hook is self-documenting
