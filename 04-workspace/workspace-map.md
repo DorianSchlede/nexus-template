@@ -1,6 +1,6 @@
 # Workspace Map
 
-> Last updated: 2025-12-24
+> Last updated: 2025-12-31
 
 ## Folder Structure
 
@@ -39,7 +39,14 @@
 │
 ├── 07-insights/                      # Strategic synthesis
 │   ├── patterns/                     # Recurring themes from research
-│   └── decisions/                    # Key decisions & rationale
+│   ├── decisions/                    # Key decisions & rationale
+│   ├── slack-extracts/               # Slack channel extractions
+│   └── core-papers/                  # Curated foundational papers
+│       ├── _index.md                 # Paper index with tiers
+│       ├── context-engineering/      # Context management papers
+│       ├── agent-memory/             # Memory & learning papers
+│       ├── multi-agent/              # Orchestration papers
+│       └── evaluation-safety/        # Eval & safety papers
 │
 ├── 08-strategy/                      # Business foundations
 │   └── [strategy documents]          # BMC, VPC, company context, team alignment
@@ -91,3 +98,5 @@ RESEARCH → OUTBOUND → INTERVIEW → ANALYZE → VALIDATE → DECIDE
 | Experiment data | `02-experiments/` |
 | Target customer profile | `08-strategy/value-proposition-canvas.md` |
 | Team roles & risks | `08-strategy/team-alignment-map.md` |
+| Core research papers | `07-insights/core-papers/_index.md` |
+| Slack extractions | `07-insights/slack-extracts/` |
