@@ -1,41 +1,16 @@
-# ⚠️ CRITICAL: INITIALIZATION REQUIRED ⚠️
+# ⚠️ MANDATORY: RUN NEXUS LOADER FIRST ⚠️
 
-**THIS FILE IS LOADED AT THE START OF EVERY SESSION AND AFTER EVERY CONTEXT SUMMARY!**
+**BEFORE doing ANYTHING else, you MUST run the startup script. No exceptions.**
 
-# ⚠️ LOADING SEQUENCE (ALWAYS RUN) ⚠️
-
-## Step 1: Read orchestrator (ALWAYS)
-```
-00-system/core/orchestrator.md
-```
-
-## Step 2: Run startup script (ALWAYS)
-
-**Fresh Session** (first message):
 ```bash
 python 00-system/core/nexus-loader.py --startup
 ```
 
-**MANDATORY After Context Summary** (MANDATORY IF INITIAL USER CONTENT STARTS WITH: "This session is being continued from a previous conversation that ran out of context. The conversation is summarized below:"):
+**After Context Summary** (if user message starts with "This session is being continued from a previous conversation"):
 ```bash
 python 00-system/core/nexus-loader.py --resume
 ```
 
-## Step 3: Follow `instructions.action`
-
-| Action | Behavior |
-|--------|----------|
-| `display_menu` | Show Nexus menu, wait for user input |
-| `continue_working` | Skip menu, continue from summary context |
-| `load_and_execute_project` | Load and execute specified project |
-
-**The `--resume` flag returns `continue_working` action** - this tells you to skip the menu and continue working based on the summary instructions.
-
-## Step 4: Process user message
-
-After initialization, respond to the user's actual request.
-
-
 ---
 
-**DO THIS BEFORE RESPONDING TO THE USER OR DOING ANY OTHER ACTIONS.**
+The loader output tells you exactly what to do next. Follow its instructions.

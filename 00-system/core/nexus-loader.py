@@ -26,7 +26,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from nexus import NexusService
-from nexus.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING
+from nexus.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING, CACHE_DIR, CACHE_STARTUP_FILE
 from nexus.utils import calculate_bundle_tokens
 
 # =============================================================================
@@ -166,16 +166,37 @@ def main():
     output = json.dumps(result, indent=2, ensure_ascii=False)
     output_chars = len(output)
 
-    # Add truncation detection metadata at the very end
-    result['_output'] = {
-        'chars': output_chars,
-        'truncation_risk': output_chars > BASH_OUTPUT_LIMIT * 0.9,
-        'split_recommended': output_chars > BASH_OUTPUT_LIMIT,
-    }
+    # Check if output exceeds bash limit - if so, cache to file
+    if output_chars > BASH_OUTPUT_LIMIT:
+        # Create cache directory if needed
+        cache_dir = detected_nexus_root / CACHE_DIR
+        cache_dir.mkdir(parents=True, exist_ok=True)
 
-    # Re-serialize with metadata
-    final_output = json.dumps(result, indent=2, ensure_ascii=False)
-    print(final_output)
+        # Write full output to cache file
+        cache_file = cache_dir / CACHE_STARTUP_FILE
+        cache_file.write_text(output, encoding='utf-8')
+
+        # Return clear instruction for Claude to read the cached file
+        cache_path = str(cache_file.relative_to(detected_nexus_root)).replace("\\", "/")
+        cache_result = {
+            "cached": True,
+            "reason": f"Output {output_chars} chars exceeds {BASH_OUTPUT_LIMIT} bash limit",
+            "next_step": f"READ THIS FILE NOW: {cache_path}",
+            "cache_file": cache_path,
+            "instructions": result.get("instructions", {}),
+        }
+        print(json.dumps(cache_result, indent=2, ensure_ascii=False))
+    else:
+        # Add truncation detection metadata at the very end
+        result['_output'] = {
+            'chars': output_chars,
+            'truncation_risk': output_chars > BASH_OUTPUT_LIMIT * 0.9,
+            'split_recommended': output_chars > BASH_OUTPUT_LIMIT,
+        }
+
+        # Re-serialize with metadata
+        final_output = json.dumps(result, indent=2, ensure_ascii=False)
+        print(final_output)
 
 
 if __name__ == "__main__":

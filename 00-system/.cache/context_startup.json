@@ -1,0 +1,978 @@
+{
+  "loaded_at": "2025-12-31T00:59:58.060752",
+  "bundle": "resume",
+  "system_state": "resume",
+  "memory_content": {
+    "system-map.md": "# Nexus System Map\n\n<!-- AI CONTEXT FILE -->\n<!-- Purpose: System structure reference (NOT behavior rules) -->\n<!-- For AI behavior/routing: See orchestrator.md -->\n\n**System structure reference for Nexus-v4.**\n\n> **Purpose**: Help AI navigate system structure and file locations\n>\n> **For AI behavior rules**: See [orchestrator.md](core/orchestrator.md)\n>\n> **Maintenance**: Static (part of system framework)\n\n---\n\n## 🗺️ Navigation Hub\n\n| Document | Purpose |\n|----------|---------|\n| **[Orchestrator](core/orchestrator.md)** | AI behavior rules, routing, menu display |\n| **[Framework Overview](documentation/framework-overview.md)** | Complete system guide (detailed) |\n| **[Memory Map](../01-memory/memory-map.md)** | Context persistence system |\n| **[Workspace Map](../04-workspace/workspace-map.md)** | User's custom folders |\n\n---\n\n## 📁 System Structure\n\n```\nNexus-v4/\n│\n├── CLAUDE.md                       # 🚀 Entry point (loads orchestrator)\n│\n├── 00-system/                      # SYSTEM FRAMEWORK\n│   ├── system-map.md               # THIS FILE\n│   ├── core/\n│   │   ├── orchestrator.md         # AI behavior rules\n│   │   └── nexus-loader.py         # Master controller script\n│   ├── skills/                     # System skills\n│   │   ├── create-project/\n│   │   ├── execute-project/\n│   │   ├── create-skill/\n│   │   ├── setup-goals/\n│   │   ├── setup-workspace/\n│   │   ├── learn-integrations/\n│   │   ├── learn-projects/\n│   │   ├── learn-skills/\n│   │   ├── learn-nexus/\n│   │   ├── close-session/\n│   │   └── ...more\n│   └── documentation/\n│       ├── framework-overview.md\n│       └── product-overview.md\n│\n├── 01-memory/                      # CONTEXT PERSISTENCE\n│   ├── goals.md                    # User objectives\n│   ├── user-config.yaml            # Preferences\n│   ├── core-learnings.md           # Accumulated insights\n│   └── session-reports/            # Historical sessions\n│\n├── 02-projects/                    # TEMPORAL WORK\n│   └── {ID}-{name}/                # User projects\n│       ├── 01-planning/\n│       │   ├── overview.md         # YAML metadata\n│       │   └── steps.md            # Task checkboxes\n│       ├── 02-resources/\n│       ├── 03-working/\n│       └── 04-outputs/\n│\n├── 03-skills/                      # USER SKILLS (priority over system)\n│   └── {skill-name}/\n│       ├── SKILL.md                # YAML + workflow\n│       ├── references/\n│       └── scripts/\n│\n└── 04-workspace/                   # USER CONTENT\n    ├── workspace-map.md            # Folder structure documentation\n    └── [Your folders]/\n```\n\n---\n\n## 🗂️ YAML Metadata\n\n### Project YAML (overview.md)\n```yaml\n---\nid: 10-website-redesign\nname: Website Redesign\nstatus: IN_PROGRESS\ndescription: Load when user mentions \"website\", \"redesign\"\ncreated: 2025-11-01\n---\n```\n**Note**: `tasks_total`, `tasks_completed`, `progress` auto-calculated from steps.md\n\n### Skill YAML (SKILL.md)\n```yaml\n---\nname: weekly-status-report\ndescription: Load when user says \"status report\", \"weekly update\"\n---\n```\n\n---\n\n## 📂 File Naming\n\n| Type | Format | Example |\n|------|--------|---------|\n| Projects | `{ID}-{name}` | `10-website-redesign` |\n| Skills | `{skill-name}` | `weekly-status-report` |\n| Memory | Fixed names | `goals.md`, `user-config.yaml` |\n\n**Naming rules**: lowercase-with-hyphens, verb-based for skills\n\n---\n\n## 🔧 CLI Reference\n\n```bash\npython 00-system/core/nexus-loader.py --startup    # Load session context\npython 00-system/core/nexus-loader.py --project ID # Load specific project\npython 00-system/core/nexus-loader.py --skill name # Load specific skill\n```\n\n**Output**: JSON with `system_state`, `memory_content`, `instructions`, `metadata`\n\n---\n\n**Version**: 4.0 | **Updated**: 2025-12-11\n",
+    "memory-map.md": "# Memory Map\n\n<!-- AI CONTEXT FILE -->\n<!-- Purpose: Help AI navigate the memory system -->\n<!-- Updated by: System (static framework documentation) -->\n\n> **Purpose**: Help AI navigate the memory system\n>\n> **Audience**: AI agent (loaded every session via --startup)\n>\n> **Maintenance**: Static system documentation\n\n---\n\n## Memory System Overview\n\nThe `01-memory/` folder contains context that persists across all sessions:\n\n### Core Files (Always Loaded)\n\n**goals.md** - What you want to achieve\n- Current role and work context\n- Short-term goal (3 months)\n- Long-term vision (1-3 years)\n- Success metrics\n\n**roadmap.md** - How you'll get there\n- Goal breakdown into milestones\n- Timeline and sequencing\n- Key activities per milestone\n\n**core-learnings.md** - What you've learned\n- What works well (successes)\n- What to avoid (mistakes)\n- Best practices (patterns)\n- Insights (strategic realizations)\n\n**memory-map.md** - This file\n- System navigation for AI\n- Structure explanation\n\n**user-config.yaml** - Your preferences\n- Language preference\n- Timezone\n- Date format\n\n---\n\n## Session Reports (Historical)\n\n**session-reports/** - Generated after each session\n- Dated session summaries\n- Progress tracking\n- Key decisions and outcomes\n- Never loaded automatically (only on request)\n\n---\n\n## When AI Loads Memory Files\n\n**Every Session** (via --startup):\n- goals.md\n- memory-map.md\n- user-config.yaml\n\n**Strategic Discussion**:\n- roadmap.md (when talking about milestones, timeline, planning)\n\n**Pattern Recognition**:\n- core-learnings.md (when similar situations arise)\n\n**Historical Context**:\n- session-reports/ (only when user explicitly asks about past sessions)\n\n---\n\n## How Memory Evolves\n\n**Quick Start** (Smart Defaults):\n- Template files auto-created on first run\n- User can work immediately\n- Personalize anytime with \"setup goals\" skill\n\n**Personalized** (After setup-goals skill):\n- goals.md -> Populated with user's actual goals\n- roadmap.md -> Created with milestones\n- user-config.yaml -> Language and preferences set\n- core-learnings.md -> Grows over time via close-session\n\n---\n\n**This map helps the AI understand your memory system structure.**\n",
+    "goals.md": "---\n---\n# Your Goals\n\n> **Purpose**: Define what you want to achieve (for AI context)\n>\n> **Updated**: Set via 'setup goals' skill, revised as needed\n\n---\n\n## Current Role\n\nCo-founder at Mutagent (pre-launch), focused on hypothesis validation, ICP definition, and customer interview analysis for an AI agent optimization platform.\n\n---\n\n## Short-Term Goal (3 months)\n\n100+ customer interviews to validate hypotheses + 5 pilot customers\n\n**Why This Matters**:\nBuild and test more hypotheses - de-risk before building, find real PMF through evidence. Product is ready in 2 weeks, but the focus is on understanding the problem and pain first.\n\n**Success Metrics**:\n- [ ] 100 interviews completed\n- [ ] Hypotheses validated/invalidated (D1, D2, D9, V1 + new ones)\n- [ ] 5 pilot customers using MVP\n- [ ] Clear ICP definition based on data\n\n---\n\n## Long-Term Vision (1-3 years)\n\nNot prioritized at this stage - focus is on validation first.\n\n---\n\n## Work Style & Preferences\n\n**Focus Areas**: Interview analysis, Hypothesis building/testing, ICP definition\n\n---\n\n**Last Updated**: 2025-12-24\n",
+    "user-config.yaml": "---\n# User Configuration\n# Purpose: Store persistent user preferences (loaded every session)\n# Updated: Set during onboarding, modified anytime\n\nsmart_default: false\n\nuser_preferences:\n  language: \"English\"\n  timezone: \"\"\n  date_format: \"YYYY-MM-DD\"\n\n  system:\n    python_cmd: \"python\"\n\nonboarding:\n  status: \"skipped\"\n  current_session: 0\n  last_completed: null\n  sessions_completed: []\n\nlearning_tracker:\n  session_count: 0\n  completed:\n    setup_memory: true\n    setup_workspace: true\n    learn_integrations: false\n    learn_projects: false\n    learn_skills: false\n    learn_nexus: false\n  dismissed: []\n  last_suggested: null\n  suggestion_preference: \"normal\"\n\ncreated: null\nupdated: null\n---\n\n# Instructions for AI\n\nWhen this file is loaded (every session via --startup):\n1. Respect the language preference throughout ALL interactions\n2. Use timezone for accurate session timestamps\n3. Format dates according to user preference\n4. Check learning_tracker for onboarding skill suggestions\n\nIf smart_default is true:\n- System is using default templates (not personalized)\n- Suggest onboarding skills when contextually appropriate\n- User can work immediately without setup\n\nIf language is not set (empty string):\n- Default to English\n- Prompt user to set preference during setup-memory skill\n"
+  },
+  "instructions": {
+    "action": "continue_working",
+    "execution_mode": "immediate",
+    "message": "Context restored. Loading project context now.",
+    "reason": "Resumed from context summary with active project",
+    "workflow": [
+      "1. Read cache file for full context",
+      "2. Load execute-project skill",
+      "3. Load project 02-ontologies-research with all files",
+      "4. Continue working from summary instructions",
+      "DO NOT skip any step - context integrity depends on this"
+    ],
+    "display_hints": [
+      "SHOW_UPDATE_BANNER: v0.14.3 → v0.14.3",
+      "ONBOARDING_INCOMPLETE: 4 skills pending"
+    ],
+    "suggest_project": "02-ontologies-research",
+    "critical_warning": "⚠️ FAILURE TO LOAD PROJECT FILES CAUSES CONTEXT LOSS AND ERRORS",
+    "loading_sequence": [
+      {
+        "step": 1,
+        "action": "READ_CACHE_FILE",
+        "description": "Read cached startup context for full metadata",
+        "file": "00-system/.cache/context_startup.json"
+      },
+      {
+        "step": 2,
+        "action": "LOAD_SKILL",
+        "description": "Load execute-project skill for project interaction",
+        "command": "python 00-system/core/nexus-loader.py --skill execute-project"
+      },
+      {
+        "step": 3,
+        "action": "LOAD_PROJECT",
+        "description": "Load full project context (overview, plan, steps)",
+        "command": "python 00-system/core/nexus-loader.py --project 02-ontologies-research"
+      }
+    ]
+  },
+  "metadata": {
+    "projects": [
+      {
+        "id": "01-icp-definition",
+        "name": "ICP Definition",
+        "description": "Load when user mentions ICP, ideal customer, customer profile, target customer, buyer persona, customer segmentation",
+        "status": "PLANNING",
+        "onboarding": false,
+        "created": "2025-12-24",
+        "updated": null,
+        "progress": 0.025,
+        "tasks_total": 118,
+        "tasks_completed": 3,
+        "current_task": "Review Open Questions mit Team",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\01-icp-definition\\01-planning\\overview.md"
+      },
+      {
+        "id": "02-ontologies-research",
+        "name": "Ontologies Research",
+        "description": "Load when user mentions 'ontology', 'foundational ontology', 'UFO', 'DOLCE', 'BFO', 'entity types', '8-entity hypothesis', 'UDWO'",
+        "status": "IN_PROGRESS",
+        "onboarding": false,
+        "created": "2025-12-27",
+        "updated": null,
+        "progress": 0.517,
+        "tasks_total": 29,
+        "tasks_completed": 15,
+        "current_task": "Run `validate_analysis.py --check-chunk-index` on all papers",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\02-ontologies-research\\01-planning\\overview.md"
+      },
+      {
+        "id": "03-notebooklm-integration",
+        "name": "NotebookLM Integration",
+        "description": "Load when user mentions 'notebooklm', 'notebook lm', 'create notebook', 'audio overview', 'podcast', 'add sources to notebook'",
+        "status": "PLANNING",
+        "onboarding": false,
+        "created": "2025-12-27",
+        "updated": null,
+        "progress": 0.781,
+        "tasks_total": 32,
+        "tasks_completed": 25,
+        "current_task": "Run config check script",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\03-notebooklm-integration\\01-planning\\overview.md"
+      },
+      {
+        "id": "04-skill-chain-validation-system",
+        "name": "Skill-Chain Validation System",
+        "description": "ARCHIVED - Validation kann manuell erfolgen. Over-Engineering für das Problem.",
+        "status": "ARCHIVED",
+        "onboarding": false,
+        "created": "2025-12-27",
+        "updated": null,
+        "progress": 0.051,
+        "tasks_total": 59,
+        "tasks_completed": 3,
+        "current_task": "Review planning documents",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\04-skill-chain-validation-system\\01-planning\\overview.md"
+      },
+      {
+        "id": "05-create-algorithm-skill",
+        "name": "Create Algorithm Skill",
+        "description": "Load when user mentions 'create algorithm', 'new algorithm', 'define pipeline', 'create workflow', 'algorithm wizard'. META-SKILL for generating nested skill structures.",
+        "status": "ACTIVE",
+        "onboarding": false,
+        "created": "2025-12-27",
+        "updated": "2025-12-28",
+        "progress": 0.283,
+        "tasks_total": 166,
+        "tasks_completed": 47,
+        "current_task": "Update internal references in SKILL.md files",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\05-create-algorithm-skill\\01-planning\\overview.md"
+      },
+      {
+        "id": "06-synthesis-pipeline-improvements",
+        "name": "Synthesis Pipeline Improvements",
+        "description": "Load when user mentions 'improve synthesis', 'fix synthesis accuracy', 'subagent allocation', 'synthesis script', 'programmatic subagents', 'chunk allocation'",
+        "status": "IN_PROGRESS",
+        "onboarding": false,
+        "created": "2025-12-28",
+        "updated": null,
+        "progress": 0.743,
+        "tasks_total": 140,
+        "tasks_completed": 104,
+        "current_task": "Run `validate_analysis.py` on all papers",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\06-synthesis-pipeline-improvements\\01-planning\\overview.md"
+      },
+      {
+        "id": "07-airtable-test-dataset-builder",
+        "name": "Airtable Test Dataset Builder",
+        "description": "Load when user mentions 'test datasets', 'airtable datasets', 'metatuner testing', 'algorithm testing', 'export datasets', 'inventory datasets'",
+        "status": "PLANNING",
+        "onboarding": false,
+        "created": "2025-12-28",
+        "updated": null,
+        "progress": 0.695,
+        "tasks_total": 59,
+        "tasks_completed": 41,
+        "current_task": "By Workspace",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\07-airtable-test-dataset-builder\\01-planning\\overview.md"
+      },
+      {
+        "id": "08-langfuse-integration",
+        "name": "Langfuse Integration",
+        "description": "Load when user mentions 'langfuse', 'traces', 'observations', 'llm tracing', 'observability', 'langfuse scores', 'langfuse sessions'",
+        "status": "COMPLETE",
+        "onboarding": false,
+        "created": "2025-12-28",
+        "updated": null,
+        "progress": 1.0,
+        "tasks_total": 41,
+        "tasks_completed": 41,
+        "current_task": null,
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\08-langfuse-integration\\01-planning\\overview.md"
+      },
+      {
+        "id": "09-ontologies-research-v22-archive",
+        "name": "Ontologies Research (Migration Test)",
+        "description": "MIGRATION TEST PROJECT - Testing Schema v2.3 migration on copy of Project 02. Has 23 papers with v2.2 analysis, ready for v2.3 re-analysis.",
+        "status": "IN_PROGRESS",
+        "onboarding": false,
+        "created": "2025-12-27",
+        "updated": null,
+        "progress": 0.773,
+        "tasks_total": 22,
+        "tasks_completed": 17,
+        "current_task": "Analyze 21 remaining papers with Schema v2.3",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\09-ontologies-research-v22-archive\\01-planning\\overview.md"
+      },
+      {
+        "id": "10-dynamic-subagent-research",
+        "name": "Dynamic Subagent Handover Patterns",
+        "description": "Load when user mentions 'dynamic subagent', 'handover patterns', 'forced reading', 'ULTRASEARCH', 'subagent verification', 'high quality data transfer'",
+        "status": "COMPLETE",
+        "onboarding": false,
+        "created": "2025-12-28",
+        "updated": null,
+        "progress": 0.769,
+        "tasks_total": 26,
+        "tasks_completed": 20,
+        "current_task": "Level 4: Spawn batch extraction subagents (14/38 running)",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\10-dynamic-subagent-research\\01-planning\\overview.md"
+      },
+      {
+        "id": "11-airtable-skill-development",
+        "name": "Airtable Skill Development",
+        "description": "Load when user mentions 'airtable skill', 'expand airtable', 'airtable table creation', 'airtable field management', 'multi-token airtable', 'AIRTABLE_API_KEY_MUTAGENT'",
+        "status": "PLANNING",
+        "onboarding": false,
+        "created": "2025-12-31",
+        "updated": null,
+        "progress": 0.068,
+        "tasks_total": 44,
+        "tasks_completed": 3,
+        "current_task": "Review planning docs",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\02-projects\\11-airtable-skill-development\\01-planning\\overview.md"
+      }
+    ],
+    "skills": [
+      {
+        "name": "create-skill",
+        "description": "Create reusable workflow skills. Load when user wants to automate repeating work. Keywords: create skill, new skill, automate this, make reusable, save workflow. Suggest when user describes patterns (every week I..., I always...).",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\create-skill\\SKILL.md"
+      },
+      {
+        "name": "create-project",
+        "description": "Create new projects. Load when user wants to START something new with a deliverable endpoint. Keywords: create project, new project, start project, plan project.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\projects\\create-project\\SKILL.md"
+      },
+      {
+        "name": "execute-project",
+        "description": "The ONLY way to interact with existing projects. Load when user references ANY project by name, ID, or number. Includes: continue, resume, status, progress, check, review, work on [existing project]. NEVER read project files directly.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\projects\\execute-project\\SKILL.md"
+      },
+      {
+        "name": "learn-integrations",
+        "description": "Learn about Nexus integrations and MCP. Load when user mentions: learn integrations, what is MCP, connect tools, integration tutorial, add integration, external tools, API connections, third party, how to integrate. 10-12 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\learn-integrations\\SKILL.md"
+      },
+      {
+        "name": "learn-nexus",
+        "description": "Master Nexus philosophy and best practices. Load when user mentions: learn nexus, nexus tutorial, system mastery, nexus best practices, how nexus works, nexus philosophy, nexus design, understand nexus, nexus deep dive. 15-18 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\learn-nexus\\SKILL.md"
+      },
+      {
+        "name": "learn-projects",
+        "description": "Learn how Nexus projects work. Load when user mentions: learn projects, how do projects work, projects vs skills, project tutorial, what is a project, project structure, project lifecycle, understand projects, explain projects. 8-10 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\learn-projects\\SKILL.md"
+      },
+      {
+        "name": "learn-skills",
+        "description": "Learn how Nexus skills work. Load when user mentions: learn skills, how do skills work, what is a skill, skill tutorial, skill structure, understand skills, explain skills, when to create skill, skill vs project. 10-12 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\learn-skills\\SKILL.md"
+      },
+      {
+        "name": "setup-memory",
+        "description": "Configure Nexus memory with your role, goals, and preferences. Load when user wants to personalize the system or teach Nexus about themselves. Keywords: setup memory, personalize, configure, my goals, my role, about me, preferences. 8 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\setup-memory\\SKILL.md"
+      },
+      {
+        "name": "setup-workspace",
+        "description": "Organize your 04-workspace/ folder structure. Load when user mentions: setup workspace, organize folders, folder structure, configure workspace, my files, file organization, where to put files, workspace setup, directories, storage. 5-8 min.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\learning\\setup-workspace\\SKILL.md"
+      },
+      {
+        "name": "create-skill-algorithm",
+        "description": "Create a new nested skill-chain. Load when user mentions 'create skill chain', 'new skill chain', 'build algorithm', 'generate skill chain'. Interactive workflow that defines phases, orchestrators, and sub-skills, then generates the complete nested folder structure.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\create-skill-algorithm\\SKILL.md"
+      },
+      {
+        "name": "research-pipeline",
+        "description": "Academic paper research, analysis, and synthesis skill-chain. Load when user mentions 'research papers', 'analyze papers', 'paper synthesis', 'academic research', 'literature review', 'create research project', 'execute research project', 'search papers', 'preprocess pdf', 'paper query', 'paper manage'. This is the MASTER entry point - routes to appropriate child skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\SKILL.md"
+      },
+      {
+        "name": "paper-analyze",
+        "description": "Orchestrate paper analysis by spawning Claude Code subagents. Load when user says \"analyze papers\", \"analyze collection\", \"process papers\", or \"run analysis on papers\". Spawns subagents that follow paper-analyze-core methodology to produce index.md for each paper.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\paper-analyze\\SKILL.md"
+      },
+      {
+        "name": "paper-manage",
+        "description": "Manage paper collections - list, rebuild indexes, view stats. Load when user says \"list collections\", \"rebuild index\", \"paper stats\", \"collection status\", or \"manage papers\". Scans collection folders and generates _collection.md indexes.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\paper-manage\\SKILL.md"
+      },
+      {
+        "name": "paper-query",
+        "description": "Query paper collections with 3-level progressive disclosure. Load when user says \"query papers\", \"find papers about\", \"search collection\", \"what papers discuss\", or asks questions about analyzed papers. Uses lightweight frontmatter scan (Level 1), full index.md reading (Level 2), and chunk loading (Level 3).",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\paper-query\\SKILL.md"
+      },
+      {
+        "name": "paper-search",
+        "description": "Search and download academic papers from 9 open access APIs. Load when user says \"find paper\", \"search paper\", \"download paper\", \"get paper\", \"batch download\", or provides a paper title/DOI. Uses Semantic Scholar, OpenAlex, Unpaywall, arXiv, CrossRef, PubMed, CORE, BASE, and DOAJ. Includes automated batch download with fallback resolution.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\paper-search\\SKILL.md"
+      },
+      {
+        "name": "paper-synthesize",
+        "description": "Synthesize insights across analyzed papers in a collection. Load when user says \"synthesize collection\", \"cross-paper analysis\", \"compare papers\", \"aggregate findings\", or \"generate synthesis\". Reads all index.md YAML frontmatter and produces synthesis documents.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\paper-synthesize\\SKILL.md"
+      },
+      {
+        "name": "pdf-preprocess",
+        "description": "Convert PDFs to clean markdown for LLM consumption. Load when user says \"preprocess pdf\", \"convert pdf to markdown\", \"chunk pdf\", or wants to prepare academic papers for analysis. Preserves headings and tables, auto-chunks to max 1000 lines.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\skills\\pdf-preprocess\\SKILL.md"
+      },
+      {
+        "name": "paper-analyze-core",
+        "description": "SHARED METHODOLOGY for paper analysis subagents. DO NOT LOAD DIRECTLY. This skill is loaded by the paper-analyze orchestrator and provides the analysis methodology, index.md template, file reading rules, and quality criteria for all paper analysis subagents.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\shared\\paper-analyze-core\\SKILL.md"
+      },
+      {
+        "name": "analyze-research-project",
+        "description": "Analyze research papers (Phase 2: analysis only). Load when user says 'analyze research project', 'execute research project', 'continue research', 'run analysis', or mentions a research project by name after planning is complete. Expects analysis-ready chunks from create-research-project. After analysis, use synthesize-research-project for synthesis.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\analyze-research-project\\SKILL.md"
+      },
+      {
+        "name": "create-research-project",
+        "description": "Create research projects with paper selection, download, and preprocessing (Phase 1). Load when user says 'create research project', 'new research', 'start research on [topic]'. Delivers analysis-ready chunks. For EXECUTING analysis, use 'execute-research-project' skill.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\create-research-project\\SKILL.md"
+      },
+      {
+        "name": "synthesize-research-project",
+        "description": "Synthesize analyzed research papers into comprehensive reports (Phase 3). Load when user says 'synthesize research project', 'generate synthesis', 'create synthesis report', or wants cross-paper synthesis. Expects analyzed papers with index.md from analyze-research-project.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\synthesize-research-project\\SKILL.md"
+      },
+      {
+        "name": "google-integration",
+        "description": "Complete Google Workspace integration (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides). Load when user mentions 'google', 'gmail', 'email', 'google docs', 'google sheets', 'spreadsheet', 'google calendar', 'schedule meeting', 'calendar', 'google drive', 'upload file', 'download file', 'google tasks', 'todo', 'google slides', 'presentation', or any Google service operation.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\SKILL.md"
+      },
+      {
+        "name": "heyreach",
+        "description": "HeyReach LinkedIn automation integration. Load when user mentions 'heyreach', 'linkedin outreach', 'linkedin campaigns', 'list campaigns', 'add leads', 'campaign stats', or any LinkedIn automation operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\heyreach\\SKILL.md"
+      },
+      {
+        "name": "notebooklm",
+        "description": "Complete NotebookLM Enterprise integration (notebooks, sources, audio overviews). Load when user mentions 'notebooklm', 'notebook lm', 'create notebook', 'audio overview', 'podcast', 'add sources to notebook', or any NotebookLM operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\notebooklm\\SKILL.md"
+      },
+      {
+        "name": "slack",
+        "description": "Complete Slack integration skill. Load when user wants to send messages, search Slack, manage channels, list users, upload files, add reactions, set reminders, or interact with Slack workspace.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\slack\\SKILL.md"
+      },
+      {
+        "name": "generate-philosophy-doc",
+        "description": "Generate comprehensive philosophy and standards documents for any domain (UX design, landing pages, email outbound, API design, etc.). Load when user says \"create philosophy doc\", \"generate standards for [domain]\", \"build best practices guide\", or \"create benchmarking document\". Conducts deep research, synthesizes findings, and produces structured philosophy documents with principles, frameworks, anti-patterns, checklists, case studies, and metrics.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\tools\\generate-philosophy-doc\\SKILL.md"
+      },
+      {
+        "name": "mental-models",
+        "description": "Load when user says \"mental model\", \"think through this\", \"structured thinking\", \"help me decide\", \"analyze this problem\", \"first principles\", \"pre-mortem\", \"stakeholder mapping\", \"what framework should I use\", or any specific model name. Provides 59 thinking frameworks for decision-making, problem decomposition, and strategic analysis.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\tools\\mental-models\\SKILL.md"
+      },
+      {
+        "name": "add-integration",
+        "description": "Build a new API integration for Nexus. Load when user mentions \"add integration\", \"new integration\", \"integrate with\", \"connect to [service]\", or \"build [service] integration\". Interactive workflow that discovers API endpoints, plans the integration, and creates a project for implementation.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\add-integration\\SKILL.md"
+      },
+      {
+        "name": "close-session",
+        "description": "Load when user says \"done\", \"finish\", \"complete\", \"close\", \"wrap up\", \"end session\", or any system skill/project completes",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\close-session\\SKILL.md"
+      },
+      {
+        "name": "explain-nexus",
+        "description": "Explain what Nexus is and how it works. Load when user says \"explain nexus\", \"what is nexus\", \"how does nexus work\", \"nexus overview\", \"about nexus\", or asks for help understanding the system.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\explain-nexus\\SKILL.md"
+      },
+      {
+        "name": "list-skills",
+        "description": "List all available skills in Nexus with descriptions. Load when user says \"list skills\", \"show skills\", \"what skills\", \"available skills\", \"skill list\", \"all skills\", or asks what they can do with Nexus.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\list-skills\\SKILL.md"
+      },
+      {
+        "name": "update-nexus",
+        "description": "Update Nexus system files from upstream repository. Load when user says \"update nexus\", \"sync nexus\", \"get nexus updates\", \"check for updates\", \"upgrade nexus\". Safely pulls system updates while protecting user data.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\update-nexus\\SKILL.md"
+      },
+      {
+        "name": "update-workspace-map",
+        "description": "Validate workspace-map.md accuracy against actual 04-workspace/ structure (3 levels deep). Load when user says \"validate workspace map\", \"update workspace map\", \"check workspace map\", or from close-session. Ensures deep structure validation with comprehensive documentation.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\update-workspace-map\\SKILL.md"
+      },
+      {
+        "name": "validate-docs-implementation",
+        "description": "Load when user says \"validate docs\", \"check documentation consistency\", \"docs vs implementation\", or \"find documentation mismatches\". Systematically compares implementation code against documentation to identify and fix inconsistencies.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\validate-docs-implementation\\SKILL.md"
+      },
+      {
+        "name": "validate-system",
+        "description": "Validate Nexus-v3 system integrity and fix common issues automatically. Load when user mentions \"validate system\", \"check system\", or \"fix problems\". Runs comprehensive checks on folder structure, metadata files, and framework consistency with auto-repair capabilities.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\system\\validate-system\\SKILL.md"
+      },
+      {
+        "name": "slack-connect",
+        "description": "Connect to Slack workspace for messaging and channel management. Load when user mentions 'slack', 'connect slack', 'slack message', 'slack channel', 'send to slack', or any Slack operations. Meta-skill that validates config, discovers workspace, and routes to appropriate operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\slack\\slack-connect\\SKILL.md"
+      },
+      {
+        "name": "slack-master",
+        "description": "Shared resource library for Slack integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, authentication) and scripts used by slack-connect and individual Slack skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\slack\\slack-master\\SKILL.md"
+      },
+      {
+        "name": "create-master-skill",
+        "description": "Create a master system skill (shared resource library) for any integration. Load when user mentions \"create master skill\", \"new master skill\", \"shared skill library\", \"integration master\", or wants to build a reusable skill foundation for multiple related skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\create-master-skill\\SKILL.md"
+      },
+      {
+        "name": "import-skill",
+        "description": "Import a skill from Notion (or other source) into local Nexus. Load when user mentions \"import skill\", \"download skill\", \"add skill to nexus\", \"pull skill from notion\", or selects a skill to import after querying.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\import-skill\\SKILL.md"
+      },
+      {
+        "name": "search-skill-database",
+        "description": "Query ALL available Skills database in Notion with filters. Load when user mentions \"search skill database\", \"query notion\", \"search skills database\", \"find skills in notion\", or \"browse notion skills\".",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\search-skill-database\\SKILL.md"
+      },
+      {
+        "name": "share-skill",
+        "description": "Push a local skill to the Notion skills database. Load when user mentions \"share skill\", \"export skill\", \"push to notion\", \"add skill to database\", or after creating a new skill with create-skill.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\share-skill\\SKILL.md"
+      },
+      {
+        "name": "validate-skill-functionality",
+        "description": "Load when user says \"validate skill\", \"validate this skill\", \"review skill execution\", \"check skill\", or \"skill validation\" at the end of executing a skill. Post-execution review workflow for validating that a skill worked correctly, documenting findings, and identifying issues.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\skill-dev\\validate-skill-functionality\\SKILL.md"
+      },
+      {
+        "name": "archive-project",
+        "description": "Load when user says \"archive project\", \"archive [project-name]\", \"move to archived\". Moves completed projects to 05-archived/ folder for clean project list.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\projects\\archive-project\\SKILL.md"
+      },
+      {
+        "name": "bulk-complete",
+        "description": "Bulk-complete tasks/steps in a project. Load when user says \"bulk complete [project]\", \"mark all done\", \"complete phase X\", or needs to finish project tasks efficiently. Works with both steps.md and tasks.md formats.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\projects\\bulk-complete\\SKILL.md"
+      },
+      {
+        "name": "notion-connect",
+        "description": "Connect to any Notion database by name. Load when user mentions 'notion', 'connect notion', 'setup notion', 'query [database-name]', 'add to [database]', 'notion databases', or any database name from persistent context. Meta-skill that discovers workspace, caches schemas, and routes to appropriate operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\notion\\notion-connect\\SKILL.md"
+      },
+      {
+        "name": "notion-master",
+        "description": "Shared resource library for Notion integration skills. DO NOT load directly - this provides common references (setup, API docs, error handling, database schema) and scripts used by notion-connect, query-notion-db, import-skill-to-nexus, and export-skill-to-notion.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\notion\\notion-master\\SKILL.md"
+      },
+      {
+        "name": "notebooklm-connect",
+        "description": "Connect to NotebookLM Enterprise for notebook and audio overview operations. Load when user mentions 'notebooklm', 'notebook lm', 'create notebook', 'audio overview', 'podcast', 'add sources to notebook', or any NotebookLM operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\notebooklm\\notebooklm-connect\\SKILL.md"
+      },
+      {
+        "name": "notebooklm-master",
+        "description": "Shared resource library for NotebookLM Enterprise integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, authentication) and scripts used by notebooklm-connect and individual NotebookLM skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\notebooklm\\notebooklm-master\\SKILL.md"
+      },
+      {
+        "name": "langfuse-connect",
+        "description": "Complete Langfuse integration (traces, observations, sessions, scores, models). Load when user mentions 'langfuse', 'traces', 'observations', 'llm tracing', 'observability', 'langfuse scores', 'langfuse sessions', 'list traces', 'get trace'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-connect\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-model",
+        "description": "Get specific Langfuse model. Load when user says 'get model', 'model details', 'show model {id}'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-model\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-observation",
+        "description": "Get specific Langfuse observation. Load when user says 'get observation', 'observation details', 'show span {id}'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-observation\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-project",
+        "description": "Get Langfuse project info. Load when user says 'get project', 'current project', 'project info', 'langfuse project'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-project\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-score",
+        "description": "Get specific Langfuse score. Load when user says 'get score', 'score details', 'show score {id}'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-score\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-session",
+        "description": "Get specific Langfuse session. Load when user says 'get session', 'session details', 'show session {id}'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-session\\SKILL.md"
+      },
+      {
+        "name": "langfuse-get-trace",
+        "description": "Get specific Langfuse trace. Load when user says 'get trace', 'trace details', 'show trace {id}'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-get-trace\\SKILL.md"
+      },
+      {
+        "name": "langfuse-list-models",
+        "description": "List Langfuse models. Load when user says 'list models', 'show models', 'model costs'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-list-models\\SKILL.md"
+      },
+      {
+        "name": "langfuse-list-observations",
+        "description": "List Langfuse observations (spans, generations, events). Load when user says 'list observations', 'show spans', 'get generations'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-list-observations\\SKILL.md"
+      },
+      {
+        "name": "langfuse-list-scores",
+        "description": "List Langfuse scores. Load when user says 'list scores', 'show scores', 'get evaluations'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-list-scores\\SKILL.md"
+      },
+      {
+        "name": "langfuse-list-sessions",
+        "description": "List Langfuse sessions. Load when user says 'list sessions', 'show sessions', 'get sessions'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-list-sessions\\SKILL.md"
+      },
+      {
+        "name": "langfuse-list-traces",
+        "description": "List Langfuse traces. Load when user says 'list traces', 'show traces', 'get traces', 'recent traces'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-list-traces\\SKILL.md"
+      },
+      {
+        "name": "langfuse-master",
+        "description": "SHARED RESOURCES - DO NOT LOAD DIRECTLY. Contains Langfuse API client, config checker, and reference documentation. Used by langfuse-connect and all operation skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\langfuse\\langfuse-master\\SKILL.md"
+      },
+      {
+        "name": "hubspot-connect",
+        "description": "Connect to HubSpot CRM for contact, company, deal, and engagement management. Load when user mentions 'hubspot', 'crm', 'contacts', 'companies', 'deals', 'list contacts', 'create contact', 'search deals', or any HubSpot CRM operations. Meta-skill that validates config, discovers CRM objects, and routes to appropriate operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-connect\\SKILL.md"
+      },
+      {
+        "name": "hubspot-create-company",
+        "description": "Create a new company in HubSpot CRM. Load when user says 'create company', 'add company', 'new company'. Requires name, optional domain, industry, city.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-create-company\\SKILL.md"
+      },
+      {
+        "name": "hubspot-create-contact",
+        "description": "Create a new contact in HubSpot CRM. Load when user says 'create contact', 'add contact', 'new contact'. Requires email, optional firstname, lastname, phone, company.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-create-contact\\SKILL.md"
+      },
+      {
+        "name": "hubspot-create-deal",
+        "description": "Create a new deal in HubSpot CRM. Load when user says 'create deal', 'add deal', 'new deal', 'new opportunity'. Requires name, optional amount, stage, closedate.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-create-deal\\SKILL.md"
+      },
+      {
+        "name": "hubspot-create-meeting",
+        "description": "Create a meeting engagement in HubSpot CRM. Load when user says 'create meeting', 'add meeting', 'schedule meeting', 'new meeting'. Requires title, start and end times.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-create-meeting\\SKILL.md"
+      },
+      {
+        "name": "hubspot-create-note",
+        "description": "Create a note engagement in HubSpot CRM. Load when user says 'create note', 'add note', 'new note', 'record note'. Requires body content.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-create-note\\SKILL.md"
+      },
+      {
+        "name": "hubspot-get-associations",
+        "description": "Get associated records in HubSpot CRM. Load when user says 'get associations', 'linked records', 'contacts on deal', 'company contacts', 'related records', 'who is on this deal'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-get-associations\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-calls",
+        "description": "List call engagements from HubSpot CRM. Load when user says 'list calls', 'show calls', 'call history', 'hubspot calls'. Returns logged call records.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-calls\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-companies",
+        "description": "List companies from HubSpot CRM. Load when user says 'list companies', 'show companies', 'get companies', 'hubspot companies'. Returns paginated company list.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-companies\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-contacts",
+        "description": "List contacts from HubSpot CRM. Load when user says 'list contacts', 'show contacts', 'get contacts', 'hubspot contacts'. Returns paginated contact list with email, name, phone, company.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-contacts\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-deals",
+        "description": "List deals from HubSpot CRM. Load when user says 'list deals', 'show deals', 'show pipeline', 'get deals', 'hubspot deals'. Returns paginated deal list.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-deals\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-emails",
+        "description": "List email engagements from HubSpot CRM. Load when user says 'list emails', 'show emails', 'email history', 'hubspot emails'. Returns logged email records.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-emails\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-meetings",
+        "description": "List meeting engagements from HubSpot CRM. Load when user says 'list meetings', 'show meetings', 'meeting history', 'hubspot meetings'. Returns scheduled meeting records.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-meetings\\SKILL.md"
+      },
+      {
+        "name": "hubspot-list-notes",
+        "description": "List note engagements from HubSpot CRM. Load when user says 'list notes', 'show notes', 'note history', 'hubspot notes'. Returns logged note records.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-list-notes\\SKILL.md"
+      },
+      {
+        "name": "hubspot-log-call",
+        "description": "Log a call engagement in HubSpot CRM. Load when user says 'log call', 'record call', 'add call', 'call made'. Requires title, optional body and duration.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-log-call\\SKILL.md"
+      },
+      {
+        "name": "hubspot-log-email",
+        "description": "Log an email engagement in HubSpot CRM. Load when user says 'log email', 'record email', 'add email', 'email sent'. Requires subject and body.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-log-email\\SKILL.md"
+      },
+      {
+        "name": "hubspot-master",
+        "description": "Shared resource library for HubSpot integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, authentication) and scripts used by hubspot-connect and individual HubSpot skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-master\\SKILL.md"
+      },
+      {
+        "name": "hubspot-search-companies",
+        "description": "Search companies in HubSpot CRM by name or domain. Load when user says 'search companies', 'find company', 'lookup company', 'search for [company]'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-search-companies\\SKILL.md"
+      },
+      {
+        "name": "hubspot-search-contacts",
+        "description": "Search contacts in HubSpot CRM by email, name, or company. Load when user says 'search contacts', 'find contact', 'lookup contact', 'search for [name]'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-search-contacts\\SKILL.md"
+      },
+      {
+        "name": "hubspot-search-deals",
+        "description": "Search deals in HubSpot CRM by name or amount. Load when user says 'search deals', 'find deal', 'lookup deal', 'deals over $X', 'search for [deal]'.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-search-deals\\SKILL.md"
+      },
+      {
+        "name": "hubspot-update-contact",
+        "description": "Update an existing contact in HubSpot CRM. Load when user says 'update contact', 'edit contact', 'modify contact', 'change contact'. Requires contact ID.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-update-contact\\SKILL.md"
+      },
+      {
+        "name": "hubspot-update-deal",
+        "description": "Update an existing deal in HubSpot CRM. Load when user says 'update deal', 'edit deal', 'change deal stage', 'move deal', 'close deal'. Requires deal ID.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\hubspot\\hubspot-update-deal\\SKILL.md"
+      },
+      {
+        "name": "heyreach-connect",
+        "description": "Connect to HeyReach for LinkedIn automation. Load when user mentions 'heyreach', 'linkedin outreach', 'linkedin campaigns', 'heyreach campaigns', 'add leads', 'campaign stats'. Meta-skill that validates config and routes to operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\heyreach\\heyreach-connect\\SKILL.md"
+      },
+      {
+        "name": "heyreach-master",
+        "description": "Internal resource library for HeyReach integration. Contains shared API client, operation scripts, and reference documentation.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\heyreach\\heyreach-master\\SKILL.md"
+      },
+      {
+        "name": "gmail",
+        "description": "Read, send, and manage Gmail emails. Load when user mentions 'gmail', 'email', 'send email', 'check email', 'inbox', 'draft', or references sending/reading emails.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\gmail\\SKILL.md"
+      },
+      {
+        "name": "google-calendar",
+        "description": "Read, create, and manage Google Calendar events. Load when user mentions 'google calendar', 'calendar', 'schedule', 'meeting', 'event', 'appointment', 'book time', 'check availability', 'find slots', 'free time', or references scheduling/calendar operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-calendar\\SKILL.md"
+      },
+      {
+        "name": "google-connect",
+        "description": "Connect to Google Workspace services (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides). Load when user mentions 'connect google', 'setup google', 'configure google', 'google integration', or needs to set up Google OAuth credentials.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-connect\\SKILL.md"
+      },
+      {
+        "name": "google-docs",
+        "description": "Read, write, and manage Google Docs. Load when user mentions 'google docs', 'google document', 'create doc', 'read doc', 'write doc', 'edit document', or references creating/editing text documents in Google Drive.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-docs\\SKILL.md"
+      },
+      {
+        "name": "google-drive",
+        "description": "Manage Google Drive files and folders. Load when user mentions 'google drive', 'drive', 'upload file', 'download file', 'share file', 'create folder', or references cloud file storage operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-drive\\SKILL.md"
+      },
+      {
+        "name": "google-master",
+        "description": "Shared resource library for Google integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, authentication) and scripts used by gmail, google-docs, google-sheets, google-calendar, and future Google skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-master\\SKILL.md"
+      },
+      {
+        "name": "google-sheets",
+        "description": "Read and write Google Sheets data. Load when user mentions 'google sheets', 'spreadsheet', 'update sheet', 'read sheet', 'append to sheet', or references extracting data to update a tracking sheet.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-sheets\\SKILL.md"
+      },
+      {
+        "name": "google-slides",
+        "description": "Create and manage Google Slides presentations. Load when user mentions 'google slides', 'slides', 'presentation', 'create presentation', 'add slide', or references creating/editing slide decks.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-slides\\SKILL.md"
+      },
+      {
+        "name": "google-tasks",
+        "description": "Manage Google Tasks and task lists. Load when user mentions 'google tasks', 'tasks', 'todo list', 'create task', 'complete task', or references task/todo management.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\google\\google-tasks\\SKILL.md"
+      },
+      {
+        "name": "beam-connect",
+        "description": "Connect to Beam AI workspace for agent management. Load when user mentions 'beam', 'beam agent', 'beam task', 'beam analytics', 'list agents', 'create task', or any Beam AI operations. Meta-skill that validates config, discovers agents, and routes to appropriate operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\beam\\beam-connect\\SKILL.md"
+      },
+      {
+        "name": "beam-debug-issue-tasks",
+        "description": "Debug failed/issue tasks from Beam.ai using Langfuse traces. Load when user says \"debug issue tasks\", \"check failed tasks\", \"why did task fail\", \"task errors\", \"debug agent\", or needs to investigate task failures.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\beam\\beam-debug-issue-tasks\\SKILL.md"
+      },
+      {
+        "name": "beam-master",
+        "description": "Shared resource library for Beam AI integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, authentication) and scripts used by beam-connect and individual Beam skills.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\beam\\beam-master\\SKILL.md"
+      },
+      {
+        "name": "airtable-connect",
+        "description": "Connect to any Airtable base by name. Load when user mentions 'airtable', 'connect airtable', 'setup airtable', 'query [base-name]', 'add to [table]', 'airtable bases', or any base name from persistent context. Meta-skill that discovers workspace, caches schemas, and routes to appropriate operations.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\airtable\\airtable-connect\\SKILL.md"
+      },
+      {
+        "name": "airtable-master",
+        "description": "Shared resource library for Airtable integration skills. DO NOT load directly - provides common references (setup, API docs, error handling, field types) and scripts used by airtable-connect, airtable-query, and airtable-sync.",
+        "_file_path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\00-system\\skills\\airtable\\airtable-master\\SKILL.md"
+      }
+    ]
+  },
+  "stats": {
+    "display_hints": [
+      "SHOW_UPDATE_BANNER: v0.14.3 → v0.14.3",
+      "ONBOARDING_INCOMPLETE: 4 skills pending"
+    ],
+    "files_embedded": 4,
+    "mandatory_maps_loaded": 1,
+    "mandatory_maps_total": 1,
+    "total_projects": 11,
+    "active_projects": 3,
+    "non_complete_projects": 9,
+    "total_skills": 99,
+    "user_skills": 12,
+    "goals_personalized": true,
+    "workspace_configured": true,
+    "integrations_configured": false,
+    "configured_integrations": [
+      {
+        "name": "airtable",
+        "slug": "airtable",
+        "skills": [
+          "airtable-connect",
+          "airtable-master"
+        ],
+        "active": true,
+        "status": "configured",
+        "required_env": "AIRTABLE_API_KEY"
+      },
+      {
+        "name": "beam",
+        "slug": "beam",
+        "skills": [
+          "beam-connect",
+          "beam-debug-issue-tasks",
+          "beam-master"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "BEAM_API_KEY"
+      },
+      {
+        "name": "google",
+        "slug": "google",
+        "skills": [
+          "gmail",
+          "google-calendar",
+          "google-connect",
+          "google-docs",
+          "google-drive",
+          "google-master",
+          "google-sheets",
+          "google-slides",
+          "google-tasks"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "heyreach",
+        "slug": "heyreach",
+        "skills": [
+          "heyreach-connect",
+          "heyreach-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "hubspot",
+        "slug": "hubspot",
+        "skills": [
+          "hubspot-connect",
+          "hubspot-create-company",
+          "hubspot-create-contact",
+          "hubspot-create-deal",
+          "hubspot-create-meeting",
+          "hubspot-create-note",
+          "hubspot-get-associations",
+          "hubspot-list-calls",
+          "hubspot-list-companies",
+          "hubspot-list-contacts",
+          "hubspot-list-deals",
+          "hubspot-list-emails",
+          "hubspot-list-meetings",
+          "hubspot-list-notes",
+          "hubspot-log-call",
+          "hubspot-log-email",
+          "hubspot-master",
+          "hubspot-search-companies",
+          "hubspot-search-contacts",
+          "hubspot-search-deals",
+          "hubspot-update-contact",
+          "hubspot-update-deal"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "HUBSPOT_ACCESS_TOKEN"
+      },
+      {
+        "name": "langfuse",
+        "slug": "langfuse",
+        "skills": [
+          "langfuse-connect",
+          "langfuse-get-model",
+          "langfuse-get-observation",
+          "langfuse-get-project",
+          "langfuse-get-score",
+          "langfuse-get-session",
+          "langfuse-get-trace",
+          "langfuse-list-models",
+          "langfuse-list-observations",
+          "langfuse-list-scores",
+          "langfuse-list-sessions",
+          "langfuse-list-traces",
+          "langfuse-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "notebooklm",
+        "slug": "notebooklm",
+        "skills": [
+          "notebooklm-connect",
+          "notebooklm-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      },
+      {
+        "name": "notion",
+        "slug": "notion",
+        "skills": [
+          "notion-connect",
+          "notion-master"
+        ],
+        "active": false,
+        "status": "available",
+        "required_env": "NOTION_API_KEY"
+      },
+      {
+        "name": "slack",
+        "slug": "slack",
+        "skills": [
+          "slack-connect",
+          "slack-master"
+        ],
+        "active": null,
+        "status": "available",
+        "required_env": null
+      }
+    ],
+    "learning_completed": {
+      "setup_memory": true,
+      "setup_workspace": true,
+      "learn_integrations": false,
+      "learn_projects": false,
+      "learn_skills": false,
+      "learn_nexus": false
+    },
+    "pending_onboarding": [
+      {
+        "key": "learn_projects",
+        "name": "learn-projects",
+        "trigger": "learn projects",
+        "priority": "high",
+        "time": "8-10 min"
+      },
+      {
+        "key": "learn_skills",
+        "name": "learn-skills",
+        "trigger": "learn skills",
+        "priority": "high",
+        "time": "10-12 min"
+      },
+      {
+        "key": "learn_integrations",
+        "name": "learn-integrations",
+        "trigger": "learn integrations",
+        "priority": "high",
+        "time": "10-12 min"
+      },
+      {
+        "key": "learn_nexus",
+        "name": "learn-nexus",
+        "trigger": "learn nexus",
+        "priority": "medium",
+        "time": "15-18 min"
+      }
+    ],
+    "onboarding_complete": false,
+    "update_available": true,
+    "update_info": {
+      "checked": true,
+      "update_available": true,
+      "local_version": "0.14.3",
+      "upstream_version": "0.14.3",
+      "error": null,
+      "upstream_url": "https://github.com/DorianSchlede/nexus-template.git",
+      "changed_files": [
+        "00-system/core/nexus/loaders.py",
+        "00-system/core/orchestrator.md",
+        "00-system/documentation/create-skill-chain-algorithm-en.md",
+        "00-system/documentation/research-algorithm-de.md",
+        "00-system/documentation/research-algorithm-en.md",
+        "00-system/skills/airtable/airtable-master/scripts/discover_bases.py",
+        "00-system/skills/airtable/airtable-master/scripts/export_base_schema.py",
+        "00-system/skills/langfuse/langfuse-connect/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-model/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-model/scripts/get_model.py",
+        "00-system/skills/langfuse/langfuse-get-observation/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-observation/scripts/get_observation.py",
+        "00-system/skills/langfuse/langfuse-get-project/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-project/scripts/get_project.py",
+        "00-system/skills/langfuse/langfuse-get-score/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-score/scripts/get_score.py",
+        "00-system/skills/langfuse/langfuse-get-session/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-session/scripts/get_session.py",
+        "00-system/skills/langfuse/langfuse-get-trace/SKILL.md",
+        "00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py",
+        "00-system/skills/langfuse/langfuse-list-models/SKILL.md",
+        "00-system/skills/langfuse/langfuse-list-models/scripts/list_models.py",
+        "00-system/skills/langfuse/langfuse-list-observations/SKILL.md",
+        "00-system/skills/langfuse/langfuse-list-observations/scripts/list_observations.py",
+        "00-system/skills/langfuse/langfuse-list-scores/SKILL.md",
+        "00-system/skills/langfuse/langfuse-list-scores/scripts/list_scores.py",
+        "00-system/skills/langfuse/langfuse-list-sessions/SKILL.md",
+        "00-system/skills/langfuse/langfuse-list-sessions/scripts/list_sessions.py",
+        "00-system/skills/langfuse/langfuse-list-traces/SKILL.md",
+        "00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py",
+        "00-system/skills/langfuse/langfuse-master/SKILL.md",
+        "00-system/skills/langfuse/langfuse-master/references/api-reference.md",
+        "00-system/skills/langfuse/langfuse-master/references/authentication.md",
+        "00-system/skills/langfuse/langfuse-master/references/error-handling.md",
+        "00-system/skills/langfuse/langfuse-master/references/setup-guide.md",
+        "00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py",
+        "00-system/skills/langfuse/langfuse-master/scripts/langfuse_client.py",
+        "00-system/skills/langfuse/tests/__init__.py",
+        "00-system/skills/langfuse/tests/conftest.py",
+        "00-system/skills/langfuse/tests/test_api_endpoints.py",
+        "00-system/skills/langfuse/tests/test_config_check.py",
+        "00-system/skills/langfuse/tests/test_integration.py",
+        "00-system/skills/langfuse/tests/test_langfuse_client.py",
+        "00-system/skills/notebooklm/SKILL.md",
+        "00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py",
+        "00-system/skills/notebooklm/notebooklm-connect/SKILL.md",
+        "00-system/skills/notebooklm/notebooklm-create-audio/scripts/create_audio.py",
+        "00-system/skills/notebooklm/notebooklm-create-notebook/scripts/create_notebook.py",
+        "00-system/skills/notebooklm/notebooklm-delete-audio/scripts/delete_audio.py",
+        "00-system/skills/notebooklm/notebooklm-delete-notebooks/scripts/delete_notebooks.py",
+        "00-system/skills/notebooklm/notebooklm-delete-sources/scripts/delete_sources.py",
+        "00-system/skills/notebooklm/notebooklm-get-notebook/scripts/get_notebook.py",
+        "00-system/skills/notebooklm/notebooklm-get-source/scripts/get_source.py",
+        "00-system/skills/notebooklm/notebooklm-list-notebooks/scripts/list_notebooks.py",
+        "00-system/skills/notebooklm/notebooklm-master/SKILL.md",
+        "00-system/skills/notebooklm/notebooklm-master/references/api-reference.md",
+        "00-system/skills/notebooklm/notebooklm-master/references/authentication.md",
+        "00-system/skills/notebooklm/notebooklm-master/references/error-handling.md",
+        "00-system/skills/notebooklm/notebooklm-master/references/setup-guide.md",
+        "00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py",
+        "00-system/skills/notebooklm/notebooklm-master/scripts/notebooklm_client.py",
+        "00-system/skills/notebooklm/notebooklm-master/scripts/setup_notebooklm.py",
+        "00-system/skills/notebooklm/notebooklm-share-notebook/scripts/share_notebook.py",
+        "00-system/skills/notebooklm/notebooklm-upload-file/scripts/upload_file.py",
+        "00-system/startup.ps1"
+      ],
+      "changes_count": 65
+    }
+  }
+}

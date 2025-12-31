@@ -137,18 +137,40 @@ def build_instructions(
     elif state == SystemState.RESUME:
         if active_projects:
             most_recent = active_projects[0]
+            project_id = most_recent["id"]
             instructions.update({
                 "action": "continue_working",
                 "execution_mode": "immediate",
-                "suggest_project": most_recent["id"],
-                "message": "Context restored. Continue where you left off.",
-                "reason": "Resumed from context summary - skip menu, continue work",
+                "suggest_project": project_id,
+                "message": "Context restored. Loading project context now.",
+                "reason": "Resumed from context summary with active project",
+                "critical_warning": "⚠️ FAILURE TO LOAD PROJECT FILES CAUSES CONTEXT LOSS AND ERRORS",
+                "loading_sequence": [
+                    {
+                        "step": 1,
+                        "action": "READ_CACHE_FILE",
+                        "description": "Read cached startup context for full metadata",
+                        "file": "00-system/.cache/context_startup.json",
+                    },
+                    {
+                        "step": 2,
+                        "action": "LOAD_SKILL",
+                        "description": "Load execute-project skill for project interaction",
+                        "command": "python 00-system/core/nexus-loader.py --skill execute-project",
+                    },
+                    {
+                        "step": 3,
+                        "action": "LOAD_PROJECT",
+                        "description": "Load full project context (overview, plan, steps)",
+                        "command": f"python 00-system/core/nexus-loader.py --project {project_id}",
+                    },
+                ],
                 "workflow": [
-                    "Context has been restored from summary",
-                    "DO NOT display menu - continue working on previous task",
-                    f"Active project available: {most_recent['name']} ({most_recent.get('progress', 0)*100:.0f}% complete)",
-                    "Continue from previous conversation context",
-                    "If user gives new instructions, follow them",
+                    "1. Read cache file for full context",
+                    "2. Load execute-project skill",
+                    f"3. Load project {project_id} with all files",
+                    "4. Continue working from summary instructions",
+                    "DO NOT skip any step - context integrity depends on this",
                 ],
             })
         else:
@@ -156,12 +178,19 @@ def build_instructions(
                 "action": "continue_working",
                 "execution_mode": "immediate",
                 "message": "Context restored. Ready to continue.",
-                "reason": "Resumed from context summary - skip menu, await instructions",
+                "reason": "Resumed from context summary - no active project",
+                "loading_sequence": [
+                    {
+                        "step": 1,
+                        "action": "READ_CACHE_FILE",
+                        "description": "Read cached startup context for full metadata",
+                        "file": "00-system/.cache/context_startup.json",
+                    },
+                ],
                 "workflow": [
-                    "Context has been restored from summary",
-                    "DO NOT display menu",
-                    "Continue from previous conversation context",
-                    "Follow user instructions from summary",
+                    "1. Read cache file for full context",
+                    "2. Continue from previous conversation context",
+                    "3. Follow user instructions from summary",
                 ],
             })
 
