@@ -73,14 +73,17 @@ class NexusService:
         Returns:
             Complete startup result with state, instructions, memory, and metadata
         """
+        # ATTENTION OPTIMIZATION: Instructions at START for primacy effect
+        # They will also be repeated at END for recency effect (see below)
         result = {
             "loaded_at": datetime.now().isoformat(),
             "bundle": "resume" if resume_mode else "startup",
+            ">>> EXECUTE_FIRST <<<": None,  # Placeholder - filled with instructions below
             "system_state": None,
             "memory_content": {},
-            "instructions": None,
             "metadata": {},
             "stats": {},
+            ">>> EXECUTE_AFTER_READING <<<": None,  # Repeated at end for recency
         }
 
         # Track files to embed
@@ -171,7 +174,11 @@ class NexusService:
             projects=projects,
             display_hints=stats.get("display_hints", []),
         )
-        result["instructions"] = instructions
+
+        # ATTENTION SANDWICH: Instructions at START and END of result
+        # This exploits both primacy and recency effects in LLM attention
+        result[">>> EXECUTE_FIRST <<<"] = instructions
+        result[">>> EXECUTE_AFTER_READING <<<"] = instructions  # Repeated for recency
 
         # Step 9: Embed memory content
         if files_to_embed:

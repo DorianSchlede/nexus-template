@@ -27,8 +27,9 @@ CACHE_METADATA_FILE = "context_metadata.json"
 # =============================================================================
 
 # These files provide core system navigation and context
-# Always loaded at startup
+# Always loaded at startup - ORDER MATTERS (orchestrator first!)
 MANDATORY_MAPS: List[str] = [
+    "00-system/core/orchestrator.md",  # AI behavior rules, routing, menu display - LOAD FIRST
     "00-system/system-map.md",  # System structure and navigation hub
 ]
 

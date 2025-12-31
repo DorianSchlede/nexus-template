@@ -33,6 +33,24 @@ def find_nexus_root() -> Path:
     return Path.cwd()
 
 
+def cleanup_session_cache(nexus_root: Path, session_id: str) -> bool:
+    """Delete session-specific cache before compaction (new one will be created after)."""
+    if not session_id or session_id == "unknown":
+        return False
+
+    try:
+        import hashlib
+        session_hash = hashlib.md5(session_id.encode()).hexdigest()[:8]
+        cache_file = nexus_root / "00-system" / ".cache" / f"context_startup_{session_hash}.json"
+
+        if cache_file.exists():
+            cache_file.unlink()
+            return True
+        return False
+    except Exception:
+        return False
+
+
 def load_cache_context(nexus_root: Path) -> dict:
     """Load the cached startup context to get the active project."""
     cache_file = nexus_root / "00-system" / ".cache" / "context_startup.json"
@@ -144,12 +162,16 @@ def main():
         print(f"Error: Invalid JSON input: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # Get transcript path and trigger type
+    # Get session info
+    session_id = input_data.get("session_id", "unknown")
     transcript_path = input_data.get("transcript_path", "")
     trigger = input_data.get("trigger", "unknown")
 
     # Find Nexus root
     nexus_root = find_nexus_root()
+
+    # Clean up old session cache (new one will be created after compaction)
+    cleanup_session_cache(nexus_root, session_id)
 
     # Load cached context for active project
     cache_context = load_cache_context(nexus_root)
@@ -188,14 +210,19 @@ def main():
     success = write_resume_file(project_path, last_skill, phase, project_id)
 
     if success:
-        output = {
-            "message": f"Resume state saved for {project_id}",
-            "project_id": project_id,
-            "last_skill": last_skill,
-            "phase": phase,
-            "trigger": trigger
-        }
-        print(json.dumps(output))
+        # Output context for the compacted conversation
+        # This becomes part of the summary that Claude sees after compaction
+        compact_context = f"""<NexusResumeContext>
+CONTINUE PROJECT: {project_id}
+PHASE: {phase}
+LAST SKILL: {last_skill}
+
+MANDATORY NEXT STEP:
+Run: python 00-system/core/nexus-loader.py --resume --session {session_id}
+Then read the cache file and continue working on {project_id}.
+</NexusResumeContext>"""
+
+        print(compact_context)
         sys.exit(0)
     else:
         sys.exit(1)

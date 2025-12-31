@@ -117,6 +117,7 @@ def main():
     parser.add_argument('--sync', action='store_true', help='Sync system files from upstream')
     parser.add_argument('--dry-run', action='store_true', help='Show what would change without changing (use with --sync)')
     parser.add_argument('--force', action='store_true', help='Skip confirmation prompts (use with --sync)')
+    parser.add_argument('--session', help='Unique session ID for multi-instance support (prevents cache collisions)')
 
     args = parser.parse_args()
 
@@ -172,18 +173,39 @@ def main():
         cache_dir = detected_nexus_root / CACHE_DIR
         cache_dir.mkdir(parents=True, exist_ok=True)
 
+        # Determine cache filename (session-specific if --session provided)
+        if args.session:
+            # Use hash of session ID for unique, fixed-length suffix
+            import hashlib
+            session_hash = hashlib.md5(args.session.encode()).hexdigest()[:8]
+            cache_filename = f"context_startup_{session_hash}.json"
+        else:
+            cache_filename = CACHE_STARTUP_FILE
+
         # Write full output to cache file
-        cache_file = cache_dir / CACHE_STARTUP_FILE
+        cache_file = cache_dir / cache_filename
         cache_file.write_text(output, encoding='utf-8')
 
-        # Return clear instruction for Claude to read the cached file
+        # Return CLEAR instruction for Claude to read the cached file
+        # The cache contains orchestrator.md, memory files, and full metadata
         cache_path = str(cache_file.relative_to(detected_nexus_root)).replace("\\", "/")
+
+        # Extract dynamic instructions from result
+        instructions = result.get("instructions", {})
+        mode = "resume" if args.resume else "startup"
+
         cache_result = {
+            "⚠️ MANDATORY": f"Use Read tool on '{cache_path}' NOW - contains orchestrator.md with AI behavior rules",
+            "mode": mode,
             "cached": True,
-            "reason": f"Output {output_chars} chars exceeds {BASH_OUTPUT_LIMIT} bash limit",
-            "next_step": f"READ THIS FILE NOW: {cache_path}",
             "cache_file": cache_path,
-            "instructions": result.get("instructions", {}),
+            "instructions": instructions,  # Dynamic next steps based on --startup/--resume
+            "contains": [
+                "orchestrator.md - AI behavior rules, routing, menu display (CRITICAL)",
+                "system-map.md - Navigation structure",
+                "memory files - goals.md, user-config.yaml, memory-map.md",
+                "metadata - all projects and skills"
+            ],
         }
         print(json.dumps(cache_result, indent=2, ensure_ascii=False))
     else:
