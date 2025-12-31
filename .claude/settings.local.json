@@ -4,5 +4,18 @@
       "Bash(git add:*)",
       "Bash(python:*)"
     ]
+  },
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/save_resume_state.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
   }
 }
