@@ -138,60 +138,72 @@ def build_instructions(
         if active_projects:
             most_recent = active_projects[0]
             project_id = most_recent["id"]
+            project_name = most_recent.get("name", project_id)
+            progress = most_recent.get("progress", 0) * 100
             instructions.update({
-                "action": "continue_working",
-                "execution_mode": "immediate",
-                "suggest_project": project_id,
-                "message": "Context restored. Loading project context now.",
-                "reason": "Resumed from context summary with active project",
-                "critical_warning": "⚠️ FAILURE TO LOAD PROJECT FILES CAUSES CONTEXT LOSS AND ERRORS",
-                "loading_sequence": [
+                "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
+                "execution_mode": "blocking",
+                "project_id": project_id,
+                "project_name": project_name,
+                "project_progress": f"{progress:.0f}%",
+
+                # CRITICAL ENFORCEMENT
+                "STOP": "🛑 DO NOT CONTINUE WORKING WITHOUT LOADING CONTEXT FIRST",
+                "MANDATORY": "You MUST execute ALL steps below BEFORE continuing work",
+                "REASON": "Context summary lost project details. Without loading, you will hallucinate.",
+
+                "EXECUTE_NOW": [
                     {
                         "step": 1,
-                        "action": "READ_CACHE_FILE",
-                        "description": "Read cached startup context for full metadata",
-                        "file": "00-system/.cache/context_startup.json",
+                        "action": "READ",
+                        "target": "00-system/.cache/context_startup.json",
+                        "why": "Contains full metadata, skills list, project states",
+                        "REQUIRED": True,
                     },
                     {
                         "step": 2,
-                        "action": "LOAD_SKILL",
-                        "description": "Load execute-project skill for project interaction",
+                        "action": "RUN",
                         "command": "python 00-system/core/nexus-loader.py --skill execute-project",
+                        "why": "Skill defines HOW to interact with projects",
+                        "REQUIRED": True,
                     },
                     {
                         "step": 3,
-                        "action": "LOAD_PROJECT",
-                        "description": "Load full project context (overview, plan, steps)",
+                        "action": "RUN",
                         "command": f"python 00-system/core/nexus-loader.py --project {project_id}",
+                        "why": "Loads overview.md, plan.md, steps.md - the actual project state",
+                        "REQUIRED": True,
                     },
                 ],
-                "workflow": [
-                    "1. Read cache file for full context",
-                    "2. Load execute-project skill",
-                    f"3. Load project {project_id} with all files",
-                    "4. Continue working from summary instructions",
-                    "DO NOT skip any step - context integrity depends on this",
+
+                "AFTER_LOADING": f"Continue working on '{project_name}' from context summary instructions",
+
+                "FAILURE_CONSEQUENCES": [
+                    "You will not know current task progress",
+                    "You will not know which steps are done vs pending",
+                    "You will make up file contents that don't exist",
+                    "User will lose trust when you contradict previous work",
                 ],
             })
         else:
             instructions.update({
-                "action": "continue_working",
-                "execution_mode": "immediate",
-                "message": "Context restored. Ready to continue.",
-                "reason": "Resumed from context summary - no active project",
-                "loading_sequence": [
+                "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
+                "execution_mode": "blocking",
+
+                "STOP": "🛑 DO NOT CONTINUE WORKING WITHOUT LOADING CONTEXT FIRST",
+                "MANDATORY": "You MUST execute the step below BEFORE continuing work",
+
+                "EXECUTE_NOW": [
                     {
                         "step": 1,
-                        "action": "READ_CACHE_FILE",
-                        "description": "Read cached startup context for full metadata",
-                        "file": "00-system/.cache/context_startup.json",
+                        "action": "READ",
+                        "target": "00-system/.cache/context_startup.json",
+                        "why": "Contains full metadata, skills list, system state",
+                        "REQUIRED": True,
                     },
                 ],
-                "workflow": [
-                    "1. Read cache file for full context",
-                    "2. Continue from previous conversation context",
-                    "3. Follow user instructions from summary",
-                ],
+
+                "AFTER_LOADING": "Continue from context summary instructions",
             })
 
     return instructions
