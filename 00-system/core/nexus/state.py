@@ -139,12 +139,43 @@ def build_instructions(
             most_recent = active_projects[0]
             project_id = most_recent["id"]
             project_name = most_recent.get("name", project_id)
+            project_desc = most_recent.get("description", "").lower()
             progress = most_recent.get("progress", 0) * 100
+
+            # Detect if this is a research project
+            research_keywords = ["research", "paper", "ontolog", "analysis", "synthesis", "academic"]
+            is_research_project = any(kw in project_name.lower() or kw in project_desc for kw in research_keywords)
+
+            # Build skill loading step based on project type
+            if is_research_project:
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": "python 00-system/core/nexus-loader.py --skill analyze-research-project",
+                    "why": "Research project - loads paper analysis and synthesis methodology",
+                    "REQUIRED": True,
+                    "OR_ALTERNATIVE": {
+                        "command": "python 00-system/core/nexus-loader.py --skill synthesize-research-project",
+                        "when": "If synthesis phase (analysis already complete)",
+                    },
+                }
+                project_type = "research"
+            else:
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": "python 00-system/core/nexus-loader.py --skill execute-project",
+                    "why": "Skill defines HOW to interact with projects",
+                    "REQUIRED": True,
+                }
+                project_type = "standard"
+
             instructions.update({
                 "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
                 "execution_mode": "blocking",
                 "project_id": project_id,
                 "project_name": project_name,
+                "project_type": project_type,
                 "project_progress": f"{progress:.0f}%",
 
                 # CRITICAL ENFORCEMENT
@@ -160,13 +191,7 @@ def build_instructions(
                         "why": "Contains full metadata, skills list, project states",
                         "REQUIRED": True,
                     },
-                    {
-                        "step": 2,
-                        "action": "RUN",
-                        "command": "python 00-system/core/nexus-loader.py --skill execute-project",
-                        "why": "Skill defines HOW to interact with projects",
-                        "REQUIRED": True,
-                    },
+                    skill_step,
                     {
                         "step": 3,
                         "action": "RUN",
