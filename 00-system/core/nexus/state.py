@@ -142,10 +142,6 @@ def build_instructions(
             project_desc = most_recent.get("description", "").lower()
             progress = most_recent.get("progress", 0) * 100
 
-            # Detect if this is a research project
-            research_keywords = ["research", "paper", "ontolog", "analysis", "synthesis", "academic"]
-            is_research_project = any(kw in project_name.lower() or kw in project_desc for kw in research_keywords)
-
             # Check for _resume.md to get last active skill/phase
             last_skill = None
             last_phase = None
@@ -166,54 +162,50 @@ def build_instructions(
                     except Exception:
                         pass
 
-            # Build skill loading step based on project type and last phase
-            if is_research_project:
-                # Determine skill from phase
-                if last_phase == "synthesis":
-                    skill_name = "synthesize-research-project"
-                    skill_why = "Research project in SYNTHESIS phase"
-                elif last_phase == "analysis":
-                    skill_name = "analyze-research-project"
-                    skill_why = "Research project in ANALYSIS phase"
-                else:
-                    skill_name = "analyze-research-project"
-                    skill_why = "Research project - loads paper analysis methodology"
-
-                skill_step = {
-                    "step": 2,
-                    "action": "RUN",
-                    "command": f"python 00-system/core/nexus-loader.py --skill {skill_name}",
-                    "why": skill_why,
-                    "REQUIRED": True,
-                    "detected_phase": last_phase,
-                }
-                project_type = "research"
-            elif last_skill:
-                # Use last active skill from _resume.md
+            # Build skill loading step from _resume.md
+            if last_skill:
+                # Explicit skill from _resume.md
                 skill_step = {
                     "step": 2,
                     "action": "RUN",
                     "command": f"python 00-system/core/nexus-loader.py --skill {last_skill}",
-                    "why": f"Last active skill from _resume.md",
+                    "why": f"Last active skill: {last_skill}" + (f" (phase: {last_phase})" if last_phase else ""),
                     "REQUIRED": True,
+                    "detected_from": "_resume.md",
                 }
-                project_type = "standard"
+            elif last_phase:
+                # Phase but no skill - map phase to skill
+                phase_skill_map = {
+                    "analysis": "analyze-research-project",
+                    "synthesis": "synthesize-research-project",
+                    "planning": "execute-project",
+                    "execution": "execute-project",
+                }
+                skill_name = phase_skill_map.get(last_phase, "execute-project")
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": f"python 00-system/core/nexus-loader.py --skill {skill_name}",
+                    "why": f"Phase '{last_phase}' from _resume.md",
+                    "REQUIRED": True,
+                    "detected_from": "_resume.md",
+                }
             else:
+                # No _resume.md or empty - fallback
                 skill_step = {
                     "step": 2,
                     "action": "RUN",
                     "command": "python 00-system/core/nexus-loader.py --skill execute-project",
-                    "why": "Skill defines HOW to interact with projects",
+                    "why": "Default skill (no _resume.md found)",
                     "REQUIRED": True,
                 }
-                project_type = "standard"
 
             instructions.update({
                 "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
                 "execution_mode": "blocking",
                 "project_id": project_id,
                 "project_name": project_name,
-                "project_type": project_type,
+                "project_phase": last_phase,
                 "project_progress": f"{progress:.0f}%",
 
                 # CRITICAL ENFORCEMENT
