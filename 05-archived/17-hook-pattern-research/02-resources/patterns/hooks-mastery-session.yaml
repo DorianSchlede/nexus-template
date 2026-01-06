@@ -1,0 +1,776 @@
+# Hook Patterns: claude-code-hooks-mastery (Session/Stop Focus)
+# Extracted: 2024-12-31
+# Source: https://github.com/*/claude-code-hooks-mastery
+# Focus: SessionStart, Stop, SubagentStop, PreCompact hooks
+
+---
+patterns:
+
+  # ============================================
+  # SESSION START PATTERNS
+  # ============================================
+
+  - pattern_name: "session-start-logging"
+    hook_event: "SessionStart"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Logs all session start events to a JSON file, appending each event with full input data for audit trail."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Appends session start input data to a JSON array file in logs/session_start.json for persistent event logging."
+      code_snippet: |
+        def log_session_start(input_data):
+            """Log session start event to logs directory."""
+            log_dir = Path("logs")
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / 'session_start.json'
+
+            if log_file.exists():
+                with open(log_file, 'r') as f:
+                    try:
+                        log_data = json.load(f)
+                    except (json.JSONDecodeError, ValueError):
+                        log_data = []
+            else:
+                log_data = []
+
+            log_data.append(input_data)
+
+            with open(log_file, 'w') as f:
+                json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to track session history, debug session behavior, or audit session events"
+      when_not_to_use: "If logging overhead is a concern or disk space is limited"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python-dotenv"]
+
+  - pattern_name: "session-start-context-loading"
+    hook_event: "SessionStart"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Loads development context at session start including git status, project files (TODO.md, CONTEXT.md), and GitHub issues."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Gathers git branch, uncommitted changes, project context files, and GitHub issues into a combined context string returned via hookSpecificOutput."
+      code_snippet: |
+        def load_development_context(source):
+            """Load relevant development context based on session source."""
+            context_parts = []
+
+            context_parts.append(f"Session started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            context_parts.append(f"Session source: {source}")
+
+            branch, changes = get_git_status()
+            if branch:
+                context_parts.append(f"Git branch: {branch}")
+                if changes > 0:
+                    context_parts.append(f"Uncommitted changes: {changes} files")
+
+            context_files = [
+                ".claude/CONTEXT.md",
+                ".claude/TODO.md",
+                "TODO.md",
+                ".github/ISSUE_TEMPLATE.md"
+            ]
+
+            for file_path in context_files:
+                if Path(file_path).exists():
+                    with open(file_path, 'r') as f:
+                        content = f.read().strip()
+                        if content:
+                            context_parts.append(f"\n--- Content from {file_path} ---")
+                            context_parts.append(content[:1000])
+
+            issues = get_recent_issues()
+            if issues:
+                context_parts.append("\n--- Recent GitHub Issues ---")
+                context_parts.append(issues)
+
+            return "\n".join(context_parts)
+    context_loading:
+      mechanism: "hookSpecificOutput.additionalContext"
+      what_loaded: "Git branch/status, project TODO/CONTEXT files, recent GitHub issues"
+    use_case:
+      category: "Context"
+      when_to_use: "When Claude needs project awareness at session start; for development workflows with git and GitHub"
+      when_not_to_use: "For simple one-off tasks where project context is irrelevant"
+    quality:
+      complexity: "medium"
+      performance: "50-100ms"
+      dependencies: ["python-dotenv", "git", "gh CLI (optional)"]
+
+  - pattern_name: "session-start-tts-announcement"
+    hook_event: "SessionStart"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Announces session start via text-to-speech with different messages for startup, resume, and clear session types."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Uses pyttsx3 TTS to speak context-aware messages based on session source (startup/resume/clear)."
+      code_snippet: |
+        if args.announce:
+            try:
+                script_dir = Path(__file__).parent
+                tts_script = script_dir / "utils" / "tts" / "pyttsx3_tts.py"
+
+                if tts_script.exists():
+                    messages = {
+                        "startup": "Claude Code session started",
+                        "resume": "Resuming previous session",
+                        "clear": "Starting fresh session"
+                    }
+                    message = messages.get(source, "Session started")
+
+                    subprocess.run(
+                        ["uv", "run", str(tts_script), message],
+                        capture_output=True,
+                        timeout=5
+                    )
+            except Exception:
+                pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio output only"
+    use_case:
+      category: "Communication"
+      when_to_use: "When you want audio feedback for session lifecycle events; accessibility scenarios; hands-free operation"
+      when_not_to_use: "In shared/quiet environments; when low latency is critical"
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["pyttsx3"]
+
+  - pattern_name: "session-start-git-status-check"
+    hook_event: "SessionStart"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Retrieves current git branch and count of uncommitted changes at session start for development awareness."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Runs git rev-parse and git status --porcelain commands to extract branch name and count modified files."
+      code_snippet: |
+        def get_git_status():
+            """Get current git status information."""
+            try:
+                branch_result = subprocess.run(
+                    ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                current_branch = branch_result.stdout.strip() if branch_result.returncode == 0 else "unknown"
+
+                status_result = subprocess.run(
+                    ['git', 'status', '--porcelain'],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if status_result.returncode == 0:
+                    changes = status_result.stdout.strip().split('\n') if status_result.stdout.strip() else []
+                    uncommitted_count = len(changes)
+                else:
+                    uncommitted_count = 0
+
+                return current_branch, uncommitted_count
+            except Exception:
+                return None, None
+    context_loading:
+      mechanism: "hookSpecificOutput.additionalContext"
+      what_loaded: "Git branch name and uncommitted file count"
+    use_case:
+      category: "Context"
+      when_to_use: "When Claude needs git repository awareness; for development workflows"
+      when_not_to_use: "For non-git projects or when git info is irrelevant"
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: ["git"]
+
+  - pattern_name: "session-start-github-issues-fetch"
+    hook_event: "SessionStart"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Fetches recent open GitHub issues using gh CLI to provide project task awareness at session start."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Checks for gh CLI availability and fetches up to 5 recent open issues for context injection."
+      code_snippet: |
+        def get_recent_issues():
+            """Get recent GitHub issues if gh CLI is available."""
+            try:
+                gh_check = subprocess.run(['which', 'gh'], capture_output=True)
+                if gh_check.returncode != 0:
+                    return None
+
+                result = subprocess.run(
+                    ['gh', 'issue', 'list', '--limit', '5', '--state', 'open'],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    return result.stdout.strip()
+            except Exception:
+                pass
+            return None
+    context_loading:
+      mechanism: "hookSpecificOutput.additionalContext"
+      what_loaded: "List of 5 most recent open GitHub issues"
+    use_case:
+      category: "Context"
+      when_to_use: "When Claude should be aware of open issues/tasks; for issue-driven development"
+      when_not_to_use: "For non-GitHub projects; when issue list is very large or irrelevant"
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["gh CLI"]
+
+  # ============================================
+  # STOP PATTERNS
+  # ============================================
+
+  - pattern_name: "stop-event-logging"
+    hook_event: "Stop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/stop.py"
+    description: "Logs all session stop events to a JSON file for audit trail and debugging."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Appends stop event input data to logs/stop.json array for persistent session end tracking."
+      code_snippet: |
+        # Ensure log directory exists
+        log_dir = os.path.join(os.getcwd(), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, "stop.json")
+
+        if os.path.exists(log_path):
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        log_data.append(input_data)
+
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "When tracking session duration, frequency, or debugging session termination issues"
+      when_not_to_use: "If log file growth is a concern"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python-dotenv"]
+
+  - pattern_name: "stop-transcript-export"
+    hook_event: "Stop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/stop.py"
+    description: "Exports the session transcript from JSONL format to a formatted JSON array file for easier reading/processing."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Reads transcript_path JSONL file, parses each line, and writes as formatted JSON array to logs/chat.json."
+      code_snippet: |
+        if args.chat and 'transcript_path' in input_data:
+            transcript_path = input_data['transcript_path']
+            if os.path.exists(transcript_path):
+                chat_data = []
+                try:
+                    with open(transcript_path, 'r') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line:
+                                try:
+                                    chat_data.append(json.loads(line))
+                                except json.JSONDecodeError:
+                                    pass
+
+                    chat_file = os.path.join(log_dir, 'chat.json')
+                    with open(chat_file, 'w') as f:
+                        json.dump(chat_data, f, indent=2)
+                except Exception:
+                    pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - exports transcript"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to analyze, archive, or process session transcripts; for building chat history features"
+      when_not_to_use: "When transcripts contain sensitive data that shouldn't be duplicated"
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: []
+
+  - pattern_name: "stop-tts-completion-announcement"
+    hook_event: "Stop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/stop.py"
+    description: "Announces task completion via text-to-speech when Claude stops, with optional LLM-generated dynamic messages."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Uses tiered TTS (ElevenLabs > OpenAI > pyttsx3) with optional LLM-generated completion messages including personalization."
+      code_snippet: |
+        def announce_completion():
+            """Announce completion using the best available TTS service."""
+            try:
+                tts_script = get_tts_script_path()
+                if not tts_script:
+                    return
+
+                completion_message = get_llm_completion_message()
+
+                subprocess.run([
+                    "uv", "run", tts_script, completion_message
+                ],
+                capture_output=True,
+                timeout=10
+                )
+
+            except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError):
+                pass
+            except Exception:
+                pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio output"
+    use_case:
+      category: "Communication"
+      when_to_use: "When audio notification of task completion is desired; accessibility; hands-free workflows"
+      when_not_to_use: "In quiet/shared environments; when fast session turnover is needed"
+    quality:
+      complexity: "medium"
+      performance: ">100ms"
+      dependencies: ["pyttsx3 or elevenlabs or openai", "python-dotenv"]
+
+  - pattern_name: "stop-tiered-tts-selection"
+    hook_event: "Stop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/stop.py"
+    description: "Selects best available TTS service based on API key presence: ElevenLabs > OpenAI > pyttsx3 (offline fallback)."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Checks environment for API keys and returns path to appropriate TTS script, gracefully falling back to offline pyttsx3."
+      code_snippet: |
+        def get_tts_script_path():
+            """
+            Determine which TTS script to use based on available API keys.
+            Priority order: ElevenLabs > OpenAI > pyttsx3
+            """
+            script_dir = Path(__file__).parent
+            tts_dir = script_dir / "utils" / "tts"
+
+            if os.getenv('ELEVENLABS_API_KEY'):
+                elevenlabs_script = tts_dir / "elevenlabs_tts.py"
+                if elevenlabs_script.exists():
+                    return str(elevenlabs_script)
+
+            if os.getenv('OPENAI_API_KEY'):
+                openai_script = tts_dir / "openai_tts.py"
+                if openai_script.exists():
+                    return str(openai_script)
+
+            pyttsx3_script = tts_dir / "pyttsx3_tts.py"
+            if pyttsx3_script.exists():
+                return str(pyttsx3_script)
+
+            return None
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - service selection"
+    use_case:
+      category: "Communication"
+      when_to_use: "When you want best-available TTS quality with graceful degradation"
+      when_not_to_use: "When a specific TTS service is required"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python-dotenv"]
+
+  - pattern_name: "stop-llm-generated-completion-message"
+    hook_event: "Stop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/stop.py"
+    description: "Generates dynamic completion messages using available LLM services with personalization support via ENGINEER_NAME env var."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Calls OpenAI/Anthropic/Ollama to generate unique completion messages, with optional personalization and fallback to predefined messages."
+      code_snippet: |
+        def get_llm_completion_message():
+            """
+            Generate completion message using available LLM services.
+            Priority order: OpenAI > Anthropic > Ollama > fallback
+            """
+            script_dir = Path(__file__).parent
+            llm_dir = script_dir / "utils" / "llm"
+
+            if os.getenv('OPENAI_API_KEY'):
+                oai_script = llm_dir / "oai.py"
+                if oai_script.exists():
+                    try:
+                        result = subprocess.run([
+                            "uv", "run", str(oai_script), "--completion"
+                        ],
+                        capture_output=True,
+                        text=True,
+                        timeout=10
+                        )
+                        if result.returncode == 0 and result.stdout.strip():
+                            return result.stdout.strip()
+                    except (subprocess.TimeoutExpired, subprocess.SubprocessError):
+                        pass
+
+            # ... similar for Anthropic and Ollama ...
+
+            messages = get_completion_messages()
+            return random.choice(messages)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - generates output message"
+    use_case:
+      category: "Communication"
+      when_to_use: "When varied, personalized completion feedback is desired"
+      when_not_to_use: "When deterministic messages are needed; when LLM latency is a concern"
+    quality:
+      complexity: "medium"
+      performance: ">100ms"
+      dependencies: ["openai or anthropic or ollama", "python-dotenv"]
+
+  # ============================================
+  # SUBAGENT STOP PATTERNS
+  # ============================================
+
+  - pattern_name: "subagent-stop-logging"
+    hook_event: "SubagentStop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Logs all subagent stop events to a dedicated JSON file for multi-agent workflow tracking."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Appends subagent stop input data to logs/subagent_stop.json for tracking delegated task completions."
+      code_snippet: |
+        log_dir = os.path.join(os.getcwd(), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, "subagent_stop.json")
+
+        if os.path.exists(log_path):
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        log_data.append(input_data)
+
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Coordination"
+      when_to_use: "When tracking subagent task completions in multi-agent workflows; debugging agent delegation"
+      when_not_to_use: "When not using subagent/Task tool functionality"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python-dotenv"]
+
+  - pattern_name: "subagent-stop-transcript-export"
+    hook_event: "SubagentStop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Exports subagent transcript from JSONL to formatted JSON array, same as main Stop hook."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Reads subagent transcript_path JSONL file and writes formatted JSON to logs/chat.json (shared with main Stop)."
+      code_snippet: |
+        if args.chat and 'transcript_path' in input_data:
+            transcript_path = input_data['transcript_path']
+            if os.path.exists(transcript_path):
+                chat_data = []
+                try:
+                    with open(transcript_path, 'r') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line:
+                                try:
+                                    chat_data.append(json.loads(line))
+                                except json.JSONDecodeError:
+                                    pass
+
+                    chat_file = os.path.join(log_dir, 'chat.json')
+                    with open(chat_file, 'w') as f:
+                        json.dump(chat_data, f, indent=2)
+                except Exception:
+                    pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - exports transcript"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to review subagent conversation history; debugging multi-agent workflows"
+      when_not_to_use: "When subagent transcripts are not relevant or contain sensitive data"
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: []
+
+  - pattern_name: "subagent-stop-tts-notification"
+    hook_event: "SubagentStop"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Announces subagent task completion via TTS with a fixed 'Subagent Complete' message."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Uses same tiered TTS selection as Stop hook but with fixed message to notify when delegated tasks finish."
+      code_snippet: |
+        def announce_subagent_completion():
+            """Announce subagent completion using the best available TTS service."""
+            try:
+                tts_script = get_tts_script_path()
+                if not tts_script:
+                    return
+
+                completion_message = "Subagent Complete"
+
+                subprocess.run([
+                    "uv", "run", tts_script, completion_message
+                ],
+                capture_output=True,
+                timeout=10
+                )
+
+            except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError):
+                pass
+            except Exception:
+                pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio notification"
+    use_case:
+      category: "Communication"
+      when_to_use: "When you want audio notification when subagent tasks complete; long-running delegated tasks"
+      when_not_to_use: "When subagents complete frequently causing notification fatigue"
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["pyttsx3 or elevenlabs or openai"]
+
+  # ============================================
+  # PRE-COMPACT PATTERNS
+  # ============================================
+
+  - pattern_name: "pre-compact-event-logging"
+    hook_event: "PreCompact"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Logs all pre-compact events to track when context compaction occurs (manual or auto-triggered)."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Appends pre-compact input data including trigger type to logs/pre_compact.json for compaction tracking."
+      code_snippet: |
+        def log_pre_compact(input_data):
+            """Log pre-compact event to logs directory."""
+            log_dir = Path("logs")
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / 'pre_compact.json'
+
+            if log_file.exists():
+                with open(log_file, 'r') as f:
+                    try:
+                        log_data = json.load(f)
+                    except (json.JSONDecodeError, ValueError):
+                        log_data = []
+            else:
+                log_data = []
+
+            log_data.append(input_data)
+
+            with open(log_file, 'w') as f:
+                json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "When tracking context window usage patterns; debugging compaction frequency"
+      when_not_to_use: "If compaction events are very frequent and logs grow too large"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python-dotenv"]
+
+  - pattern_name: "pre-compact-transcript-backup"
+    hook_event: "PreCompact"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Creates timestamped backup of the full transcript before compaction to preserve complete conversation history."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Copies transcript file to logs/transcript_backups/ with timestamp and trigger type in filename before context is compressed."
+      code_snippet: |
+        def backup_transcript(transcript_path, trigger):
+            """Create a backup of the transcript before compaction."""
+            try:
+                if not os.path.exists(transcript_path):
+                    return
+
+                backup_dir = Path("logs") / "transcript_backups"
+                backup_dir.mkdir(parents=True, exist_ok=True)
+
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                session_name = Path(transcript_path).stem
+                backup_name = f"{session_name}_pre_compact_{trigger}_{timestamp}.jsonl"
+                backup_path = backup_dir / backup_name
+
+                import shutil
+                shutil.copy2(transcript_path, backup_path)
+
+                return str(backup_path)
+            except Exception:
+                return None
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - creates backup file"
+    use_case:
+      category: "Context"
+      when_to_use: "When you need to preserve full conversation history; for long sessions with valuable context; audit requirements"
+      when_not_to_use: "When disk space is limited; when conversation history has no long-term value"
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: ["shutil"]
+
+  - pattern_name: "pre-compact-verbose-feedback"
+    hook_event: "PreCompact"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Provides verbose console output about compaction event including trigger type, session ID, and custom instructions."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Prints human-readable status about the compaction event with different messages for manual vs auto triggers."
+      code_snippet: |
+        if args.verbose:
+            if trigger == "manual":
+                message = f"Preparing for manual compaction (session: {session_id[:8]}...)"
+                if custom_instructions:
+                    message += f"\nCustom instructions: {custom_instructions[:100]}..."
+            else:  # auto
+                message = f"Auto-compaction triggered due to full context window (session: {session_id[:8]}...)"
+
+            if backup_path:
+                message += f"\nTranscript backed up to: {backup_path}"
+
+            print(message)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - console output"
+    use_case:
+      category: "Observability"
+      when_to_use: "For debugging compaction behavior; understanding when/why context window fills up"
+      when_not_to_use: "In production where console output is not visible"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+# ============================================
+# SUMMARY
+# ============================================
+summary:
+  total_patterns: 16
+  by_hook:
+    SessionStart: 5
+    Stop: 5
+    SubagentStop: 3
+    PreCompact: 3
+  by_category:
+    Observability: 6
+    Context: 4
+    Communication: 5
+    Coordination: 1
+  key_techniques:
+    - "JSON array file logging for event persistence"
+    - "Tiered service selection with graceful fallback"
+    - "Transcript JSONL to JSON conversion"
+    - "Pre-event backup for data preservation"
+    - "Environment-based API key detection"
+    - "LLM-generated dynamic content"
+    - "Git/GitHub CLI integration for context"
+  context_loading_mechanisms_used:
+    - "hookSpecificOutput.additionalContext (SessionStart context loading)"
+  dependencies_overview:
+    required:
+      - "python-dotenv"
+    optional:
+      - "pyttsx3 (offline TTS)"
+      - "elevenlabs (premium TTS)"
+      - "openai (TTS and LLM)"
+      - "anthropic (LLM)"
+      - "git (version control context)"
+      - "gh CLI (GitHub integration)"
+      - "shutil (file backup)"

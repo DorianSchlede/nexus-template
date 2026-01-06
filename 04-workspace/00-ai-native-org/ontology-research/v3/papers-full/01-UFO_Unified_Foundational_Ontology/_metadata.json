@@ -1,0 +1,35 @@
+{
+  "source_pdf": "01-UFO_Unified_Foundational_Ontology.pdf",
+  "processed_at": "2025-12-27T22:50:29.114112",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 4,
+  "total_lines": 3240,
+  "total_chars": 181793,
+  "chunks": [
+    {
+      "filename": "01-UFO_Unified_Foundational_Ontology_1.md",
+      "chunk_number": 1,
+      "line_count": 1000,
+      "char_count": 54331
+    },
+    {
+      "filename": "01-UFO_Unified_Foundational_Ontology_2.md",
+      "chunk_number": 2,
+      "line_count": 989,
+      "char_count": 45990
+    },
+    {
+      "filename": "01-UFO_Unified_Foundational_Ontology_3.md",
+      "chunk_number": 3,
+      "line_count": 981,
+      "char_count": 57151
+    },
+    {
+      "filename": "01-UFO_Unified_Foundational_Ontology_4.md",
+      "chunk_number": 4,
+      "line_count": 270,
+      "char_count": 24321
+    }
+  ]
+}

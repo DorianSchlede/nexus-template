@@ -1,0 +1,229 @@
+---
+batch_id: "entity_relationships_5"
+field: entity_relationships
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 7
+patterns_found: 42
+---
+
+patterns:
+  # ============================================================
+  # Paper 07: Classifying Processes (Barry Smith) - BFO
+  # ============================================================
+
+  - name: "is_a Subtype Relation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:104-106)"
+    quote: "the most important (illustrated in Figure 1) are is_a (abbreviating 'is a subtype of') and part_of"
+    description: "BFO uses is_a as the primary hierarchical relationship between types/universals. When two nodes are joined by is_a, it represents that all instances of the first type are also instances of the second type. This is a fundamental structural relationship in ontology graphs."
+
+  - name: "part_of Mereological Relation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:135-147)"
+    quote: "When two nodes are joined together by the part_of relation... this represents an assertion to the effect that every instance of the first type is a part of some instance of the second type"
+    description: "BFO's part_of relation holds between instances at the particular level, representing mereological composition. Distinguished between types and instances - the type-level relation implies an instance-level parthood relation."
+
+  - name: "Continuant-Occurrent Categorical Division"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:430-440)"
+    quote: "The distinction between continuants and occurrents is for BFO categorical. All the parts of continuants are continuants, and any whole to which a continuant belongs is also a continuant"
+    description: "BFO enforces strict categorical separation between continuants (3D entities existing wholly at any time) and occurrents (4D entities that unfold in time). Parthood relations are constrained within each category - no cross-category parts allowed."
+
+  - name: "Participation Relation (Continuant-Occurrent Bridge)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:437-440)"
+    quote: "Certainly there are manifold connections between continuants and occurrents, but they are secured in BFO not through parthood relations, but rather through relations of participation"
+    description: "BFO uses participation as the key relation connecting continuants and occurrents. Continuants participate in occurrents - this bridges the categorical divide without violating the parthood constraint."
+
+  - name: "Bearer-Quality Dependence"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:498-500)"
+    quote: "They are entities which are dependent on the independent continuant entities (such as molecules, organisms, planets) which are their bearers"
+    description: "Qualities in BFO are specifically dependent on their bearers (independent continuants). This dependence relationship is fundamental - qualities cannot exist without their bearers."
+
+  - name: "Determinable-Determinate Quality Hierarchy"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:500-502)"
+    quote: "Qualities instantiate quality universals, which are divided into determinable (such as temperature, length and mass) and determinate (such as 37.0C temperature, 1.6 meter length)"
+    description: "Quality universals are organized in a determinable-determinate hierarchy. Determinable universals (like temperature) are rigid - if exemplified at any time, exemplified at every time the bearer exists. Determinates are specific values under determinables."
+
+  - name: "Process-Participant Specific Dependence"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:847-852)"
+    quote: "Processes themselves stand to the independent continuants which are their participants in a relation that is analogous to that in which qualities stand to the independent continuants which are their bearers. In both cases we have to deal with the relation of what BFO calls specific dependence"
+    description: "Processes are specifically dependent on their participants (independent continuants). This is analogous to quality-bearer dependence but in the occurrent realm. Processes depend on participants for existence."
+
+  - name: "Temporal Part Relation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:574-593)"
+    quote: "a temporal_part_of b =Def. a occurrent_part_of b & for some temporal region r (a spans r..."
+    description: "BFO defines temporal parthood for occurrents as a restriction of occurrent parthood to a temporal region. First quarter of a game is temporal part of whole game. Distinguished from mere occurrent parts that don't fill entire temporal slice."
+
+  - name: "Occupies Relation (Process-Spatiotemporal Region)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:549-552)"
+    quote: "BFO uses 'occupies' to refer to the relation that holds between an occurrent and the spatiotemporal region which it exactly fills"
+    description: "Processes occupy spatiotemporal regions - the occupies relation links occurrents to their spatiotemporal extension. This is distinct from continuants which exist at spatial regions at times."
+
+  - name: "Spans Relation (Process-Temporal Region)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:549-563)"
+    quote: "Processes and process boundaries occupy spatiotemporal regions and they span temporal intervals and temporal instants, respectively"
+    description: "Processes span temporal intervals while process boundaries span temporal instants. The spans relation connects occurrents to their temporal projections."
+
+  - name: "Instance-Universal Instantiation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:789-801)"
+    quote: "motion p instance_of universal motion with speed v... where the universal motion with speed v is a specification of the universal motion"
+    description: "BFO uses instantiation as the relation between particulars and their universals. Process attributions are treated in terms of instantiation rather than qualities - a motion instantiates the universal 'motion with speed v'."
+
+  - name: "Process Profile Comparison Dimension"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:119-125)"
+    quote: "When comparing two heart beating processes as being for example of the same rate... there is something in each of the two processes which is not numerically but qualitatively 'the same'. This something which the two processes share in common we shall refer to as a process profile"
+    description: "Process profiles are shareable aspects of processes along specific dimensions of comparison (rate, speed, etc.). Two processes can share the same process profile universal even though numerically distinct."
+
+  # ============================================================
+  # Paper 09: OCEL 2.0 Specification
+  # ============================================================
+
+  - name: "Event-to-Object (E2O) Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:178-185)"
+    quote: "Event-to-Object (E2O) Relationships: Events are associated with objects. This relationship describes that an object affects an event or that an event affects an object... events can be related to multiple objects"
+    description: "OCEL 2.0 defines E2O as many-to-many relationships between events and objects. Unlike traditional logs where events relate to single cases, E2O allows events to relate to multiple objects of different types. Relationships can be qualified to describe the role an object plays."
+
+  - name: "Object-to-Object (O2O) Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:191-194)"
+    quote: "Object-to-Object (O2O) Relationships: Objects can also be related to other objects outside the context of an event. For example, an employee may be part of an organizational unit"
+    description: "OCEL 2.0 introduces O2O relationships to capture structural relationships between objects independent of events. These can be qualified with relationship types like part-of, reports-to, or belongs-to."
+
+  - name: "Event Type Assignment"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:408)"
+    quote: "evtype: E -> U_etype assigns types to events"
+    description: "Every event is assigned exactly one event type (activity) via the evtype function. This is a many-to-one relationship from events to event types."
+
+  - name: "Object Type Assignment"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:424)"
+    quote: "objtype: O -> U_otype assigns types to objects"
+    description: "Every object is assigned exactly one object type via the objtype function. This is a many-to-one relationship from objects to object types."
+
+  - name: "Qualified E2O Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:306-308)"
+    quote: "E2O relationship qualifiers describe in which role an object takes part in an event, while O2O relationship qualifiers can further characterize the association between two objects"
+    description: "OCEL 2.0 enriches relationships with qualifiers. E2O qualifiers describe object roles in events (e.g., organizer vs participant). O2O qualifiers characterize object associations (e.g., part-of, reports-to)."
+
+  - name: "Event Attribute Type Mapping"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:416-417)"
+    quote: "eatype: EA -> U_etype assigns event types to event attributes"
+    description: "Event attributes are scoped to specific event types via eatype function. An attribute is only valid for events of the corresponding type, ensuring type-consistent attribute assignments."
+
+  - name: "Object Attribute Type Mapping"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:430)"
+    quote: "oatype: OA -> U_otype assigns object types to object attributes"
+    description: "Object attributes are scoped to specific object types via oatype function. This ensures attributes are only assigned to objects of appropriate types."
+
+  - name: "Dynamic Object Attribute Values (Temporal)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:293-297)"
+    quote: "OCEL 2.0 adopts a dynamic approach where attribute values can change over time. Instead of having a single, fixed value, an object attribute may have a value that changes during the process"
+    description: "OCEL 2.0 introduces temporal relationships for object attributes - attribute values are indexed by time, allowing tracking of object state changes throughout process execution."
+
+  - name: "Foreign Key Event-Object Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 2:276-283)"
+    quote: "The event_object table contains the event-to-object relationships (E2O in Definition 2). Therefore, it contains the correlated event identifier and object identifier (foreign key to event.ocel_id and object.ocel_id respectively) with a qualifier"
+    description: "In relational implementation, E2O relationships are captured via a junction table with foreign keys to both event and object tables plus a qualifier column. Primary key spans all three columns to prevent duplicates."
+
+  - name: "Foreign Key Object-Object Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 2:319-325)"
+    quote: "The object_object table contains the object-to-object relationships (O2O in Definition 2). Therefore, it contains the correlated object identifiers (source and target; both are foreign keys to object.ocel_id) with a qualifier"
+    description: "O2O relationships stored in junction table with source and target object foreign keys plus qualifier. Same object pair can have multiple qualified relationships."
+
+  # ============================================================
+  # Paper 10: OC-PM Object-Centric Process Mining
+  # ============================================================
+
+  - name: "Event-Object Many-to-Many Mapping"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:502-505)"
+    quote: "pi_omap: E -> P(O) is the function associating an event (identifier) to a set of related object identifiers. Example: the first event in Table 1 is related to three objects pi_omap(e1) = {o1, i1, i2}"
+    description: "Object-centric event logs define pi_omap function mapping each event to a set of related objects. This is the formal basis for many-to-many event-object relationships, distinguishing OCEL from case-centric logs."
+
+  - name: "Object Type Partitioning"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:510-512)"
+    quote: "pi_otyp in O -> OT assigns precisely one object type to each object identifier. Example: for the first object in Table 2, pi_otyp(o1) = order"
+    description: "Every object has exactly one type, creating a partition of the object set by type. This type assignment is fundamental for flattening operations and object lifecycle analysis."
+
+  - name: "Object Lifecycle (Event Sequence)"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:609-611)"
+    quote: "The lifecycle of an object o in O as the sequence of events to which the object is related: lif(o) = case_FL(L,pi_otyp(o))(o)"
+    description: "An object's lifecycle is defined as the ordered sequence of events it participates in. This temporal relationship sequence captures how an object evolves through the process."
+
+  - name: "Object Trace (Activity Sequence)"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:613-614)"
+    quote: "The trace of an object o in O as the sequence of activities of the events belonging to its lifecycle: trace(o) = trace_FL(L,pi_otyp(o))(o)"
+    description: "Object trace is the sequence of activities from lifecycle events, abstracting from specific event instances to activity types. Enables comparison of object behaviors."
+
+  - name: "Object Start/End Activity Relationships"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:616-620)"
+    quote: "The start activity of an object o in O as the first activity of its trace: start(o)... The end activity of an object o in O as the last activity of its trace: end(o)"
+    description: "Objects have distinguished start and end activities marking lifecycle boundaries. These are used for identifying incomplete/improperly terminated objects and process endpoints."
+
+  - name: "Object-Centric Directly-Follows Typed Edge"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:781)"
+    quote: "F subset of N x OT x N is a set of typed arcs"
+    description: "OC-DFG edges are typed by object type. An arc (n1, ot, n2) indicates activities n1 and n2 are directly-follows for object type ot. Enables multi-perspective process models."
+
+  - name: "Flattening Transformation"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:582-597)"
+    quote: "FL(L, ot) = (E^ot, pi_act^ot, pi_time^ot, pi_case^ot, <=^ot) where E^ot = {e in E | exists o in O pi_otyp(o) = ot and o in pi_omap(e)}"
+    description: "Flattening transforms object-centric log to traditional log by selecting an object type as case notion. Events are filtered to those involving objects of chosen type, and cases are defined by object identifiers."
+
+  # ============================================================
+  # Paper 11: Process Mining Event Knowledge Graphs
+  # ============================================================
+
+  - name: "Entity Correlation Relationship"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:265-269)"
+    quote: "Event e is correlated to entity n, written (e,n) in corr_ent,T iff n = e.ent or n in e.ent. We write corr(n, ent, T) = {e in E | (e,n) in corr_ent,T}"
+    description: "Correlation is the formal relationship between events and entities. An event is correlated to entity n if n appears in the entity attribute. This is the foundation for local directly-follows relations."
+
+  - name: "Entity-to-Entity Relation Inference"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:293-297)"
+    quote: "A record e in Table 1 containing two identifiers n1, n2 of two different types implicitly relates n1 and n2... We can write this as a relation R(Invoice,Order) = {(O1, I1), (O2, I2)}"
+    description: "Relations between entity types are inferred from event data when events contain multiple entity identifiers. Co-occurrence of identifiers in events implies relationship between those entities."
+
+  - name: "Relation Cardinality (1-to-1, n-to-1, n-to-m)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:307-322)"
+    quote: "each relation R(ent1,ent2) has a cardinality describing how many entities of type ent1 are related to each entity of type ent2... R(Invoice,Order) is a 1-to-1 relation... R(Item,Order) is an n-to-1 relation"
+    description: "Entity relations have cardinalities inferred from data - 1-to-1, n-to-1, or n-to-m. Cardinality affects how behavior is structured when flattening and can cause convergence/divergence issues."
+
+  - name: "Transitive Entity Relation"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:325-329)"
+    quote: "Entities are also transitively related by concatenating or joining the relations on a shared entity type... R(Order,Payment) = R(Invoice,Order) join R(Invoice,Payment)"
+    description: "Entity relations compose transitively via join operations. Order relates to Payment through Invoice. This enables computing case entities for complex multi-entity processes."
+
+  - name: "Local Directly-Follows (Per Entity)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:519-529)"
+    quote: "e2 directly follows e1 from the perspective of n, written e1 <n,T e2 iff (e1,n),(e2,n) in corr_ent,T (both are correlated to n), e1.time < e2.time (e1 occurred before e2), and there is no other event..."
+    description: "Directly-follows is defined locally per entity rather than globally. e2 follows e1 from n's perspective only if both are correlated to n and no intervening event exists for n. Foundation for event knowledge graphs."
+
+  - name: "Labeled Property Graph Node Label"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:579)"
+    quote: "Each node n in N carries a label lambda(n) in Lambda_N"
+    description: "In labeled property graphs, every node has a type label (Event, Entity). This enables typed graph traversal and distinguishing events from entities structurally."
+
+  - name: "Labeled Property Graph Edge Label"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:580-581)"
+    quote: "Each relationship r in R carries a label lambda(r) in Lambda_R and defines a directed edge r_arrow = (n_source, n_target)"
+    description: "Relationships in LPGs have labels (df, corr, related) and are directed. This enables typed edge traversal for different behavioral dimensions."
+
+  - name: "Event-Entity Correlation Relationship (Graph)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:633-635)"
+    quote: "Every correlation relationship r in R[corr], r_arrow = (e,n) is defined from an event node to an entity node, e in N[Event], n in N[Entity]; we write n in corr(e) and e in corr(n)"
+    description: "In event knowledge graphs, correlation is a directed relationship type from events to entities. Enables bidirectional lookup - entities correlated to event and events correlated to entity."
+
+  - name: "Directly-Follows Relationship with Entity Reference"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:636-642)"
+    quote: "Any directly-follows relationship df in R[df], df_arrow = (e1, e2) is defined between event nodes e1, e2 in N[Event] and refers to a specific entity df.ent = n in N[Entity]"
+    description: "DF relationships in event knowledge graphs carry entity reference as property. This enables multi-dimensional behavior analysis - same event pair may have DF relationships for different entities."
+
+  - name: "DF-Path for Entity"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:668-670)"
+    quote: "A path r = <r1,...,rk> in (R[df])* of df-relationships is a directly-follows path (df-path) iff all relationships are defined for the same entity, i.e., for all 1<=i<k, ri.ent = ri+1.ent = n"
+    description: "A DF-path is a sequence of DF-relationships all for the same entity. Corresponds to a trace in classical event logs but allows paths to meet at events correlated to multiple entities."
+
+  - name: "Derived Entity from Relation Reification"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:893-898)"
+    quote: "We reify the relation between two entity types ent1 and ent2 into a new derived entity type (ent1, ent2). That is, we make each pair (n1, n2) in R[related] an entity node (n1, n2) in N[Entity]"
+    description: "Relations between entities can be reified into derived entity nodes. This enables inferring DF-relationships for entity interactions (e.g., Order-Payment) that cross entity boundaries."
+
+  - name: "Derived Relationship Traceability"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:897-898)"
+    quote: "For traceability, we add a new relationship d in R[derived] with label derived from entity (n1, n2) to n1 and to n2"
+    description: "Derived entities link back to their source entities via derived relationships. Maintains provenance of reified relationships for tracing entity interactions."

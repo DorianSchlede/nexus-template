@@ -1,0 +1,553 @@
+# Hook Pattern Extraction: claude-code-hooks-mastery
+# Focus: PreToolUse and PostToolUse implementations
+# Extracted: 2025-12-31
+
+patterns:
+  # =============================================================================
+  # PreToolUse Patterns
+  # =============================================================================
+
+  - pattern_name: "dangerous-rm-command-blocker"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Comprehensive detection and blocking of dangerous rm commands including rm -rf, rm -fr, and variants targeting dangerous paths like root, home, or parent directories."
+    implementation:
+      matcher: ""  # Matches all tools (empty matcher)
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Uses regex patterns to match dangerous rm command variations and dangerous path targets, exiting with code 2 to block execution."
+      code_snippet: |
+        def is_dangerous_rm_command(command):
+            normalized = ' '.join(command.lower().split())
+
+            patterns = [
+                r'\brm\s+.*-[a-z]*r[a-z]*f',  # rm -rf, rm -fr, rm -Rf
+                r'\brm\s+.*-[a-z]*f[a-z]*r',  # rm -fr variations
+                r'\brm\s+--recursive\s+--force',
+                r'\brm\s+--force\s+--recursive',
+                r'\brm\s+-r\s+.*-f',
+                r'\brm\s+-f\s+.*-r',
+            ]
+
+            for pattern in patterns:
+                if re.search(pattern, normalized):
+                    return True
+
+            dangerous_paths = [r'/', r'/\*', r'~', r'~/', r'\$HOME', r'\.\.', r'\*', r'\.']
+            if re.search(r'\brm\s+.*-[a-z]*r', normalized):
+                for path in dangerous_paths:
+                    if re.search(path, normalized):
+                        return True
+            return False
+
+        if is_dangerous_rm_command(command):
+            print("BLOCKED: Dangerous rm command detected", file=sys.stderr)
+            sys.exit(2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - uses stderr output for blocking message"
+    use_case:
+      category: "Safety"
+      when_to_use: "Prevent accidental or malicious recursive deletion commands that could destroy system or project files."
+      when_not_to_use: "When you need to allow legitimate cleanup operations in controlled environments."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: ["re", "json", "sys"]
+
+  - pattern_name: "env-file-access-blocker"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Blocks access to .env files containing sensitive data across multiple tools (Read, Edit, Write, Bash), while allowing .env.sample template files."
+    implementation:
+      matcher: ""  # Matches all tools
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Checks file_path for file-based tools and command content for Bash, using regex to detect .env access while exempting .env.sample."
+      code_snippet: |
+        def is_env_file_access(tool_name, tool_input):
+            if tool_name in ['Read', 'Edit', 'MultiEdit', 'Write', 'Bash']:
+                if tool_name in ['Read', 'Edit', 'MultiEdit', 'Write']:
+                    file_path = tool_input.get('file_path', '')
+                    if '.env' in file_path and not file_path.endswith('.env.sample'):
+                        return True
+
+                elif tool_name == 'Bash':
+                    command = tool_input.get('command', '')
+                    env_patterns = [
+                        r'\b\.env\b(?!\.sample)',
+                        r'cat\s+.*\.env\b(?!\.sample)',
+                        r'echo\s+.*>\s*\.env\b(?!\.sample)',
+                        r'touch\s+.*\.env\b(?!\.sample)',
+                        r'cp\s+.*\.env\b(?!\.sample)',
+                        r'mv\s+.*\.env\b(?!\.sample)',
+                    ]
+                    for pattern in env_patterns:
+                        if re.search(pattern, command):
+                            return True
+            return False
+
+        if is_env_file_access(tool_name, tool_input):
+            print("BLOCKED: Access to .env files prohibited", file=sys.stderr)
+            print("Use .env.sample for template files instead", file=sys.stderr)
+            sys.exit(2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - uses stderr for guidance message"
+    use_case:
+      category: "Safety"
+      when_to_use: "Protect sensitive environment variables and API keys from being read, modified, or exposed."
+      when_not_to_use: "When you need to manage .env files programmatically with proper secrets management."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: ["re", "json", "sys"]
+
+  - pattern_name: "pre-tool-use-json-logger"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Logs all PreToolUse events to a JSON file for auditing, appending each tool call with full input data."
+    implementation:
+      matcher: ""  # Matches all tools
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Reads stdin JSON, appends to logs/pre_tool_use.json file, creating directory if needed. Uses append pattern to preserve history."
+      code_snippet: |
+        input_data = json.load(sys.stdin)
+
+        log_dir = Path.cwd() / 'logs'
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_path = log_dir / 'pre_tool_use.json'
+
+        if log_path.exists():
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        log_data.append(input_data)
+
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+
+        sys.exit(0)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "Track all tool usage for compliance, debugging, or analytics. Understand what Claude is attempting to do."
+      when_not_to_use: "When disk I/O overhead is a concern or when sensitive data shouldn't be logged."
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: ["json", "sys", "pathlib"]
+
+  - pattern_name: "dangerous-command-pattern-validator"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "README.md (documented pattern)"
+    description: "Extended pattern for blocking multiple categories of dangerous shell commands including sudo rm, chmod 777, and writes to system directories."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Uses a list of regex patterns to detect various dangerous command categories and blocks with informative error messages."
+      code_snippet: |
+        dangerous_patterns = [
+            r'rm\s+.*-[rf]',           # rm -rf variants
+            r'sudo\s+rm',              # sudo rm commands
+            r'chmod\s+777',            # Dangerous permissions
+            r'>\s*/etc/',              # Writing to system directories
+        ]
+
+        for pattern in dangerous_patterns:
+            if re.search(pattern, command, re.IGNORECASE):
+                print(f"BLOCKED: {pattern} detected", file=sys.stderr)
+                sys.exit(2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Safety"
+      when_to_use: "Comprehensive protection against multiple categories of dangerous shell operations."
+      when_not_to_use: "When legitimate system administration tasks require these commands."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["re"]
+
+  - pattern_name: "file-protection-inline-hook"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "ai_docs/cc_hooks_docs.md"
+    description: "Inline Python one-liner that blocks edits to sensitive files like .env, package-lock.json, and .git/ directories."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Python one-liner using json.load on stdin, checking file_path against a list of protected path patterns."
+      code_snippet: |
+        python3 -c "import json, sys; data=json.load(sys.stdin); path=data.get('tool_input',{}).get('file_path',''); sys.exit(2 if any(p in path for p in ['.env', 'package-lock.json', '.git/']) else 0)"
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Safety"
+      when_to_use: "Quick inline protection for sensitive files without creating separate script files."
+      when_not_to_use: "When you need more complex logic or better error messages."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["python3"]
+
+  - pattern_name: "bash-command-logger-jq"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "ai_docs/cc_hooks_docs.md"
+    description: "Simple jq-based command that logs Bash commands with their descriptions to a text file."
+    implementation:
+      matcher: "Bash"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Uses jq to extract command and description from stdin JSON, appending to a log file."
+      code_snippet: |
+        jq -r '"\(.tool_input.command) - \(.tool_input.description // "No description")"' >> ~/.claude/bash-command-log.txt
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "Lightweight command auditing with human-readable output. Good for quick debugging."
+      when_not_to_use: "When you need structured JSON logs or when jq is not available."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["jq"]
+
+  # =============================================================================
+  # PostToolUse Patterns
+  # =============================================================================
+
+  - pattern_name: "post-tool-use-json-logger"
+    hook_event: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: ".claude/hooks/post_tool_use.py"
+    description: "Logs all PostToolUse events including tool responses to a JSON file for auditing and debugging."
+    implementation:
+      matcher: ""  # Matches all tools
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Reads stdin JSON containing tool_name, tool_input, and tool_response, appends to logs/post_tool_use.json."
+      code_snippet: |
+        input_data = json.load(sys.stdin)
+
+        log_dir = Path.cwd() / 'logs'
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_path = log_dir / 'post_tool_use.json'
+
+        if log_path.exists():
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        log_data.append(input_data)
+
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+
+        sys.exit(0)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "Capture tool execution results for debugging, compliance, or building analytics dashboards."
+      when_not_to_use: "When tool outputs contain sensitive data that shouldn't be logged."
+    quality:
+      complexity: "low"
+      performance: "10-50ms"
+      dependencies: ["json", "sys", "pathlib"]
+
+  - pattern_name: "typescript-auto-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "ai_docs/cc_hooks_docs.md"
+    description: "Automatically runs Prettier on TypeScript files after they are edited by Claude."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Extracts file_path from stdin, checks if it ends with .ts, runs npx prettier --write on matching files."
+      code_snippet: |
+        jq -r '.tool_input.file_path' | {
+          read file_path;
+          if echo "$file_path" | grep -q '\.ts$'; then
+            npx prettier --write "$file_path";
+          fi;
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - modifies file directly"
+    use_case:
+      category: "Quality"
+      when_to_use: "Ensure consistent code formatting in TypeScript projects without manual intervention."
+      when_not_to_use: "When prettier is not configured or when formatting would break intentional formatting."
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["jq", "npx", "prettier"]
+
+  - pattern_name: "markdown-auto-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "ai_docs/cc_hooks_docs.md"
+    description: "Automatically fixes missing language tags and formatting issues in markdown files after edits."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Python script that detects programming languages in unlabeled code blocks and adds appropriate language tags."
+      code_snippet: |
+        def detect_language(code):
+            s = code.strip()
+            if re.search(r'^\s*[{\[]', s):
+                try:
+                    json.loads(s)
+                    return 'json'
+                except:
+                    pass
+            if re.search(r'^\s*def\s+\w+\s*\(', s, re.M):
+                return 'python'
+            if re.search(r'\b(function\s+\w+\s*\(|const\s+\w+\s*=)', s):
+                return 'javascript'
+            if re.search(r'^#!.*\b(bash|sh)\b', s, re.M):
+                return 'bash'
+            return 'text'
+
+        def format_markdown(content):
+            def add_lang_to_fence(match):
+                indent, info, body, closing = match.groups()
+                if not info.strip():
+                    lang = detect_language(body)
+                    return f"{indent}```{lang}\n{body}{closing}\n"
+                return match.group(0)
+
+            fence_pattern = r'(?ms)^([ \t]{0,3})```([^\n]*)\n(.*?)(\n\1```)\s*$'
+            content = re.sub(fence_pattern, add_lang_to_fence, content)
+            return content
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - modifies file directly"
+    use_case:
+      category: "Quality"
+      when_to_use: "Improve markdown quality by ensuring code blocks have proper syntax highlighting."
+      when_not_to_use: "When intentionally using unlabeled code blocks or when language detection would be incorrect."
+    quality:
+      complexity: "medium"
+      performance: "10-50ms"
+      dependencies: ["json", "sys", "re", "os"]
+
+  - pattern_name: "post-tool-result-validation"
+    hook_event: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    source_file: "README.md (documented pattern)"
+    description: "Validates tool execution results and provides feedback to Claude using the decision/reason JSON output."
+    implementation:
+      matcher: "Write"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Checks tool_response for success status, returns JSON with decision:block and reason to prompt Claude to retry."
+      code_snippet: |
+        if tool_name == "Write" and not tool_response.get("success"):
+            output = {
+                "decision": "block",
+                "reason": "File write operation failed, please check permissions and retry"
+            }
+            print(json.dumps(output))
+            sys.exit(0)
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Error explanation and retry guidance via the 'reason' field"
+    use_case:
+      category: "Quality"
+      when_to_use: "Automatically detect and handle failed tool operations, prompting Claude to take corrective action."
+      when_not_to_use: "When failures should be silently ignored or handled differently."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["json"]
+
+# =============================================================================
+# Architecture Patterns
+# =============================================================================
+
+architecture_patterns:
+  - pattern_name: "uv-single-file-scripts"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Uses UV single-file scripts with embedded dependency declarations for isolated, portable hooks."
+    technique: |
+      Each hook is a standalone Python script with shebang and UV script metadata:
+      ```python
+      #!/usr/bin/env -S uv run --script
+      # /// script
+      # requires-python = ">=3.8"
+      # ///
+      ```
+    benefits:
+      - "Isolation from project dependencies"
+      - "Each hook declares its own requirements"
+      - "No virtual environment management needed"
+      - "Fast execution with UV dependency resolution"
+      - "Self-contained and portable"
+
+  - pattern_name: "graceful-error-handling"
+    source_repo: "claude-code-hooks-mastery"
+    description: "All hooks wrap main logic in try/except, exiting 0 on errors to avoid disrupting Claude."
+    technique: |
+      ```python
+      try:
+          # Hook logic
+          sys.exit(0)
+      except json.JSONDecodeError:
+          sys.exit(0)  # Gracefully handle JSON errors
+      except Exception:
+          sys.exit(0)  # Handle any other errors
+      ```
+    benefits:
+      - "Prevents hook failures from blocking Claude"
+      - "Silent degradation rather than hard failure"
+
+  - pattern_name: "empty-matcher-catch-all"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Uses empty string matcher to match all tools, then filters by tool_name in code."
+    technique: |
+      settings.json: "matcher": ""
+      Python code: if tool_name == 'Bash': ...
+    benefits:
+      - "Single hook handles multiple tool types"
+      - "Conditional logic within the hook"
+      - "Simpler configuration"
+
+# =============================================================================
+# JSON Output Control Patterns
+# =============================================================================
+
+json_output_patterns:
+  - pattern_name: "pretooluse-decision-control"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "JSON output format for PreToolUse hooks to approve, block, or use normal permission flow."
+    schema: |
+      {
+        "decision": "approve" | "block" | undefined,
+        "reason": "Explanation for decision"
+      }
+    behavior:
+      approve: "Bypasses permission system, reason shown to user"
+      block: "Prevents tool execution, reason shown to Claude"
+      undefined: "Normal permission flow, reason ignored"
+
+  - pattern_name: "posttooluse-decision-control"
+    hook_event: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "JSON output format for PostToolUse hooks to provide feedback to Claude."
+    schema: |
+      {
+        "decision": "block" | undefined,
+        "reason": "Explanation for decision"
+      }
+    behavior:
+      block: "Automatically prompts Claude with reason"
+      undefined: "No action, reason ignored"
+
+# =============================================================================
+# Use Case Catalog
+# =============================================================================
+
+use_case_catalog:
+  - use_case: "Block rm -rf commands"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Prevent dangerous recursive deletion commands"
+    category: "Safety"
+
+  - use_case: "Block .env file access"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Protect sensitive environment configuration"
+    category: "Safety"
+
+  - use_case: "Log all tool calls"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Audit trail of Claude's tool usage"
+    category: "Observability"
+
+  - use_case: "Log all tool results"
+    hook_type: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Capture tool outputs for debugging"
+    category: "Observability"
+
+  - use_case: "Auto-format TypeScript files"
+    hook_type: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Run prettier after file edits"
+    category: "Quality"
+
+  - use_case: "Auto-format Markdown files"
+    hook_type: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Add language tags to code blocks"
+    category: "Quality"
+
+  - use_case: "Validate tool results"
+    hook_type: "PostToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Check for failures and prompt retry"
+    category: "Quality"
+
+  - use_case: "Protect sensitive files"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Block edits to .git, package-lock.json"
+    category: "Safety"
+
+  - use_case: "Block sudo commands"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Prevent privilege escalation"
+    category: "Safety"
+
+  - use_case: "Block chmod 777"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Prevent dangerous permission changes"
+    category: "Safety"
+
+  - use_case: "Block writes to /etc"
+    hook_type: "PreToolUse"
+    source_repo: "claude-code-hooks-mastery"
+    description: "Protect system configuration"
+    category: "Safety"

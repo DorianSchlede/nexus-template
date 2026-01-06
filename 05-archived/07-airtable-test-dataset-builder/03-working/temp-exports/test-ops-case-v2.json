@@ -1,0 +1,121 @@
+{
+  "name": "Extract All Case Information From ADM's Email 1-gold",
+  "description": "Node: Extract All Case Information From ADM's Email 1. Agent: Ops Case Handler (Prod). Quality tier: gold. Total items: 2",
+  "items": [
+    {
+      "id": "1edcd5de-2230-426f-86de-1e3aca3e25a8",
+      "input": {
+        "ADM_Email": {
+          "message": "Records fetched successfully",
+          "records": [
+            {
+              "id": "recFPLSe3SCdwqgqx",
+              "createdTime": "2025-09-11T09:18:17.000Z",
+              "fields": {
+                "Thread_ID": "199380eb81f6ecef",
+                "Original_Email": "delivered-to: beam.ai@myunidays.com\nmime-version: 1.0\nfrom: Saf Burki <safwan.burki@myunidays.com>\ndate: Thu, 11 Sep 2025 10:14:59 +0100\nsubject: Test Shark Ninja Incomplete\nto: beam ai <beam.ai@myunidays.com>\ncontent-type: multipart/mixed; boundary=\"0000000000006f7c21063e82f9a8\"\n\n---------- Forwarded message ---------\nFrom: Elliot Horn <EHorn@sharkninja.com>\nDate: Thu, 20 Mar 2025 at 14:23\nSubject: Shark discount - student exclusive!\nTo: Lilli Lickert <lilli.lickert@myunidays.com>\n\nHi Lilli,\n\n I hope you are well!\n\n\n Its not a cryoglow (yet!) but we do have a student exclusive offer to\nshare with you;\n\n\n Shark Classic Anti Hair Wrap Cordless Stick Pet Vacuum (Double Battery)\nIZ251UKT RRP 479.99, on sale at 299.99, Unidays price 249.99.\n\n\n This offer is valid until 25/04 (or while stock lasts)\n\n\n Please let me know once its live on the platform 😊\n\n Thanks\n\n Elliot\n\n-- \n*Saf Burki*\nSenior Salesforce Administrator\n\n[image: UNiDAYS]\n\nVisit our corporate site <https://hubs.ly/H0gSrg80>\nRead our Gen Z Insights <https://hubs.ly/H0cXWGQ0> blog\n\n*UNiDAYS* is the world’s largest Student Affinity Network, with 20 million\nverified members in 115 markets and driving more than $5bn GMV in the last\n3 years.\n\nThis email and any files transmitted with or attached to it contain\ninformation that is private, confidential and privileged. This information\nis intended solely for the use of the intended recipient to whom it is\naddressed. If you are not the intended recipient, you are hereby notified\nthat any disclosure, copying, distribution, or the taking of any action in\nreliance on the contents of this electronic transmission is strictly\nprohibited and that the information should be returned to MyUnidays Limited\nimmediately. If you have received this email in error please notify the\nsender immediately and permanently delete the original and any copies of\nthis email and any attachments thereto. Thank you.",
+                "Attachment_Key": "6ae24506-631c-4e41-b297-33d7e01fb753_892defc1-a552-4c02-8ce9-b48b86fe259e_My-Uber-Attachment-For-This-Demo.jpg"
+              }
+            },
+            {
+              "id": "recPgiHQ5QlkEdDes",
+              "createdTime": "2025-09-16T12:44:35.000Z",
+              "fields": {
+                "Thread_ID": "199380eb81f6ecef",
+                "Original_Email": "delivered-to: beam.ai@myunidays.com\nmime-version: 1.0\nfrom: Saf Burki <safwan.burki@myunidays.com>\ndate: Thu, 11 Sep 2025 10:14:59 +0100\nsubject: Test Shark Ninja Incomplete\nto: beam ai <beam.ai@myunidays.com>\ncontent-type: multipart/mixed; boundary=\"0000000000006f7c21063e82f9a8\"\n\n---------- Forwarded message ---------\nFrom: Elliot Horn <EHorn@sharkninja.com>\nDate: Thu, 20 Mar 2025 at 14:23\nSubject: Shark discount - student exclusive!\nTo: Lilli Lickert <lilli.lickert@myunidays.com>\n\nHi Lilli,\n\n I hope you are well!\n\n\n Its not a cryoglow (yet!) but we do have a student exclusive offer to\nshare with you;\n\n\n Shark Classic Anti Hair Wrap Cordless Stick Pet Vacuum (Double Battery)\nIZ251UKT RRP 479.99, on sale at 299.99, Unidays price 249.99.\n\n\n This offer is valid until 25/04 (or while stock lasts)\n\n\n Please let me know once its live on the platform 😊\n\n Thanks\n\n Elliot\n\n-- \n*Saf Burki*\nSenior Salesforce Administrator\n\n[image: UNiDAYS]\n\nVisit our corporate site <https://hubs.ly/H0gSrg80>\nRead our Gen Z Insights <https://hubs.ly/H0cXWGQ0> blog\n\n*UNiDAYS* is the world’s largest Student Affinity Network, with 20 million\nverified members in 115 markets and driving more than $5bn GMV in the last\n3 years.\n\nThis email and any files transmitted with or attached to it contain\ninformation that is private, confidential and privileged. This information\nis intended solely for the use of the intended recipient to whom it is\naddressed. If you are not the intended recipient, you are hereby notified\nthat any disclosure, copying, distribution, or the taking of any action in\nreliance on the contents of this electronic transmission is strictly\nprohibited and that the information should be returned to MyUnidays Limited\nimmediately. If you have received this email in error please notify the\nsender immediately and permanently delete the original and any copies of\nthis email and any attachments thereto. Thank you.",
+                "Attachment_Key": "6ae24506-631c-4e41-b297-33d7e01fb753_ee0795b2-7379-4f6a-b9c7-e2f4ffbc2d33_6ae24506-631c-4e41-b297-33d7e01fb753_892defc1-a552-4c02-8ce9-b48b86fe259e_My-Uber-Attachment-For-This-Demo.jpg"
+              }
+            },
+            {
+              "id": "recpIISSEklvMf7bP",
+              "createdTime": "2025-09-11T19:08:56.000Z",
+              "fields": {
+                "Thread_ID": "199380eb81f6ecef",
+                "Original_Email": "delivered-to: beam.ai@myunidays.com\nmime-version: 1.0\nfrom: Saf Burki <safwan.burki@myunidays.com>\ndate: Thu, 11 Sep 2025 10:14:59 +0100\nsubject: Test Shark Ninja Incomplete\nto: beam ai <beam.ai@myunidays.com>\ncontent-type: multipart/mixed; boundary=\"0000000000006f7c21063e82f9a8\"\n\n---------- Forwarded message ---------\nFrom: Elliot Horn <EHorn@sharkninja.com>\nDate: Thu, 20 Mar 2025 at 14:23\nSubject: Shark discount - student exclusive!\nTo: Lilli Lickert <lilli.lickert@myunidays.com>\n\nHi Lilli,\n\n I hope you are well!\n\n\n Its not a cryoglow (yet!) but we do have a student exclusive offer to\nshare with you;\n\n\n Shark Classic Anti Hair Wrap Cordless Stick Pet Vacuum (Double Battery)\nIZ251UKT RRP 479.99, on sale at 299.99, Unidays price 249.99.\n\n\n This offer is valid until 25/04 (or while stock lasts)\n\n\n Please let me know once its live on the platform 😊\n\n Thanks\n\n Elliot\n\n-- \n*Saf Burki*\nSenior Salesforce Administrator\n\n[image: UNiDAYS]\n\nVisit our corporate site <https://hubs.ly/H0gSrg80>\nRead our Gen Z Insights <https://hubs.ly/H0cXWGQ0> blog\n\n*UNiDAYS* is the world’s largest Student Affinity Network, with 20 million\nverified members in 115 markets and driving more than $5bn GMV in the last\n3 years.\n\nThis email and any files transmitted with or attached to it contain\ninformation that is private, confidential and privileged. This information\nis intended solely for the use of the intended recipient to whom it is\naddressed. If you are not the intended recipient, you are hereby notified\nthat any disclosure, copying, distribution, or the taking of any action in\nreliance on the contents of this electronic transmission is strictly\nprohibited and that the information should be returned to MyUnidays Limited\nimmediately. If you have received this email in error please notify the\nsender immediately and permanently delete the original and any copies of\nthis email and any attachments thereto. Thank you.",
+                "Attachment_Key": "6ae24506-631c-4e41-b297-33d7e01fb753_94449257-0d26-4d4d-a544-89865e25c9d0_6ae24506-631c-4e41-b297-33d7e01fb753_892defc1-a552-4c02-8ce9-b48b86fe259e_My-Uber-Attachment-For-This-Demo.jpg"
+              }
+            },
+            {
+              "id": "reczirpN51m1JcJfW",
+              "createdTime": "2025-09-16T20:44:47.000Z",
+              "fields": {
+                "Thread_ID": "199380eb81f6ecef",
+                "Original_Email": "delivered-to: beam.ai@myunidays.com\nmime-version: 1.0\nfrom: Saf Burki <safwan.burki@myunidays.com>\ndate: Thu, 11 Sep 2025 10:14:59 +0100\nsubject: Test Shark Ninja Incomplete\nto: beam ai <beam.ai@myunidays.com>\ncontent-type: multipart/mixed; boundary=\"0000000000006f7c21063e82f9a8\"\n\n---------- Forwarded message ---------\nFrom: Elliot Horn <EHorn@sharkninja.com>\nDate: Thu, 20 Mar 2025 at 14:23\nSubject: Shark discount - student exclusive!\nTo: Lilli Lickert <lilli.lickert@myunidays.com>\n\nHi Lilli,\n\n I hope you are well!\n\n\n Its not a cryoglow (yet!) but we do have a student exclusive offer to\nshare with you;\n\n\n Shark Classic Anti Hair Wrap Cordless Stick Pet Vacuum (Double Battery)\nIZ251UKT RRP 479.99, on sale at 299.99, Unidays price 249.99.\n\n\n This offer is valid until 25/04 (or while stock lasts)\n\n\n Please let me know once its live on the platform 😊\n\n Thanks\n\n Elliot\n\n-- \n*Saf Burki*\nSenior Salesforce Administrator\n\n[image: UNiDAYS]\n\nVisit our corporate site <https://hubs.ly/H0gSrg80>\nRead our Gen Z Insights <https://hubs.ly/H0cXWGQ0> blog\n\n*UNiDAYS* is the world’s largest Student Affinity Network, with 20 million\nverified members in 115 markets and driving more than $5bn GMV in the last\n3 years.\n\nThis email and any files transmitted with or attached to it contain\ninformation that is private, confidential and privileged. This information\nis intended solely for the use of the intended recipient to whom it is\naddressed. If you are not the intended recipient, you are hereby notified\nthat any disclosure, copying, distribution, or the taking of any action in\nreliance on the contents of this electronic transmission is strictly\nprohibited and that the information should be returned to MyUnidays Limited\nimmediately. If you have received this email in error please notify the\nsender immediately and permanently delete the original and any copies of\nthis email and any attachments thereto. Thank you.",
+                "Attachment_Key": "6ae24506-631c-4e41-b297-33d7e01fb753_6c76a792-3e4f-4a85-936c-a36ecc3d3b7a_6ae24506-631c-4e41-b297-33d7e01fb753_892defc1-a552-4c02-8ce9-b48b86fe259e_My-Uber-Attachment-For-This-Demo.jpg"
+              }
+            }
+          ]
+        }
+      },
+      "expectedOutput": {
+        "Contact Email": "EHorn@sharkninja.com",
+        "Contact Name": "Elliot Horn",
+        "Email Subject": "Shark discount - student exclusive!",
+        "End Date": "25/04/2025",
+        "End Time": "23:59",
+        "Production Ops Type": "Perk Changes",
+        "Requested By": "safwan.burki@myunidays.com"
+      },
+      "actualOutput": {
+        "Contact Email": "EHorn@sharkninja.com",
+        "Contact Name": "Elliot Horn",
+        "Email Subject": "Shark discount - student exclusive!",
+        "End Date": "25/04/2025",
+        "End Time": "23:59",
+        "Production Ops Type": "Perk Changes",
+        "Requested By": "safwan.burki@myunidays.com"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "ca25a987-ac88-45bd-bc32-56519698085a",
+      "input": {
+        "ADM_Email": "delivered-to: beam.ai@myunidays.com\nmime-version: 1.0\nfrom: Saf Burki <safwan.burki@myunidays.com>\ndate: Thu, 11 Sep 2025 10:17:44 +0100\nsubject: Test AWIN SMARTY Incomplete\nto: beam ai <beam.ai@myunidays.com>\ncontent-type: multipart/mixed; boundary=\"0000000000002bca31063e8303b4\"\n\n---------- Forwarded message ---------\nFrom: Henry Foster <henry.foster@awin.com>\nDate: Tue, 1 Apr 2025 at 09:15\nSubject: New SMARTY Promo for Unidays\nTo: Callum Chambers <callum.chambers@myunidays.com>\nCc: UK-Smarty <uk-smarty@awin.com>, George Howe <george.howe@three.co.uk>,\nJak McLoughlin <jak.mcloughlin@summitmedia.com>\n\n\nHi Callum,\n\nHope all is well!\n\nSMARTY has a new promo live; can you schedule its upload for us, please? 😊\n\nPromo: 60GB for £8 (40GB plan with £2 off + 20GB promo data add on)\n\nEnd: 30/4/25\n\nURL:\nhttps://www.awin1.com/cread.php?awinmid=10933&awinaffid=122965&ued=https%3A%2F%2Fsmarty.co.uk%2Fplans%2F40gb-data%3Fvc%3D15Mth60GB8Apr25AffALL\n\n\n\nLet me know if you have any questions!\n\nBest,\nHenry\n\n-- \nSaf Burki\nSenior Salesforce Administrator\n\n[image: UNiDAYS]\n\nVisit our corporate site <https://hubs.ly/H0gSrg80>\nRead our Gen Z Insights <https://hubs.ly/H0cXWGQ0> blog\n\nUNiDAYS is the world’s largest Student Affinity Network, with 20 million\nverified members in 115 markets and driving more than $5bn GMV in the last\n3 years.\n\nThis email and any files transmitted with or attached to it contain\ninformation that is private, confidential and privileged. This information\nis intended solely for the use of the intended recipient to whom it is\naddressed. If you are not the intended recipient, you are hereby notified\nthat any disclosure, copying, distribution, or the taking of any action in\nreliance on the contents of this electronic transmission is strictly\nprohibited and that the information should be returned to MyUnidays Limited\nimmediately. If you have received this email in error please notify the\nsender immediately and permanently delete the original and any copies of\nthis email and any attachments thereto. Thank you."
+      },
+      "expectedOutput": {
+        "Attachments (Y/N)": "Y",
+        "Contact Email": "henry.foster@awin.com",
+        "Contact Name": "Henry Foster",
+        "Deploy When Ready (True/False)": "false",
+        "Email Subject": "New SMARTY Promo for Unidays",
+        "End Date": "30/04/2025",
+        "End Time": "23:59",
+        "Go-Live Time": "00:01",
+        "Production Ops Type": "Perk Changes",
+        "Region": "United Kingdom",
+        "Requested By": "safwan.burki@myunidays.com",
+        "URL": "https://www.awin1.com/cread.php?awinmid=10933&awinaffid=122965&ued=https%3A%2F%2Fsmarty.co.uk%2Fplans%2F40gb-data%3Fvc%3D15Mth60GB8Apr25AffALL"
+      },
+      "actualOutput": {
+        "Attachments (Y/N)": "N",
+        "Contact Email": "henry.foster@awin.com",
+        "Contact Name": "Henry Foster",
+        "Deploy When Ready (True/False)": "false",
+        "Email Subject": "New SMARTY Promo for Unidays",
+        "End Date": "30/04/2025",
+        "End Time": "23:59",
+        "Go-Live Time": "00:01",
+        "Production Ops Type": "Perk Changes",
+        "Requested By": "safwan.burki@myunidays.com",
+        "URL": "https://www.awin1.com/cread.php?awinmid=10933&awinaffid=122965&ued=https%3A%2F%2Fsmarty.co.uk%2Fplans%2F40gb-data%3Fvc%3D15Mth60GB8Apr25AffALL"
+      },
+      "metadata": {
+        "score": 0.83
+      }
+    }
+  ],
+  "metadata": {
+    "prompt": "# Role & Task\nYou are an expert Salesforce Operations Analyst tasked with extracting key partner request information from raw email data submitted as part of a Salesforce case.\nYou are provided with:\n- An unstructured email body containing details related to a promotional or perk request by a partner.\n- Optional (extra fields) pertaining to the missing information which was not available within the original email.\n\n# Objective\nYour goal is to extract and structure key information required for the processing of partner cases. The fields that need to be extracted are:  \nEmail Subject, Email Body, Production Ops Type, Contact Name, Contact Email, Perk Type, Deploy When Ready (True/False), Region, Go-Live Date, Go-Live Time, End Date, End Time, Member Target, Code Batch To Be Used, Attachments (Y/N), Requested By, URL, T&Cs, Misc Change.",
+    "agent": "Ops Case Handler (Prod)",
+    "node": "Extract All Case Information From ADM's Email 1",
+    "tier": "gold",
+    "generated_at": "2026-01-02T00:09:03.582393",
+    "source": "airtable-export"
+  },
+  "tags": [
+    "gold",
+    "extract-all-case-information-from-adm's-email-1"
+  ]
+}

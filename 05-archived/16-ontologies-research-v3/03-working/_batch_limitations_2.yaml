@@ -1,0 +1,148 @@
+---
+batch_id: "limitations_2"
+field: limitations
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 28
+---
+
+patterns:
+  - name: "Differentiable Rule Mining Limited to Path-Like Rules"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:6-10)"
+    quote: "These differentiable rule mining techniques are, however, currently limited to learning path-like rules."
+    description: "Neural approaches to rule mining using bidirectional recurrent neural networks can learn sequences of relations and their confidences, but are constrained to path-like rule structures. This limits their ability to capture more complex relational patterns that may exist in knowledge graphs."
+
+  - name: "Human Collaboration Incurs High Costs"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:146-154)"
+    quote: "Though human involvement incurs high costs [401], some prominent knowledge graphs have been primarily based on direct contributions from human editors"
+    description: "Creating and enriching knowledge graphs through direct human contributions is costly. Additionally, human-based approaches face drawbacks including human error, disagreement, bias, and vandalism. Successful collaborative creation raises challenges concerning licensing, tooling, and culture."
+
+  - name: "Text Extraction Precision-Recall Tradeoff"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:170-176)"
+    quote: "extracting such information with high precision and recall for the purposes of creating or enriching a knowledge graph is a non-trivial challenge"
+    description: "Extracting knowledge from text corpora (newspapers, books, articles, social media, etc.) with both high precision and high recall simultaneously is inherently difficult. Techniques from NLP and Information Extraction can be applied but do not fully solve this limitation."
+
+  - name: "Named Entity Recognition Requires Manual Labeling or Seeds"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:214-220)"
+    quote: "Supervised methods [46, 160, 307] require manually labelling all entity mentions in a training corpus, whereas bootstrapping-based approaches...require a small set of seed examples"
+    description: "NER approaches have inherent limitations: supervised methods require expensive manual labeling of training data, while bootstrapping approaches require seed examples. Distant supervision uses known entities as seeds but may introduce noise from imprecise matching."
+
+  - name: "Entity Linking Ambiguity Challenge"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:241-257)"
+    quote: "First, there may be multiple ways to mention the same entity...Secondly, the same mention in different contexts can refer to distinct entities"
+    description: "Entity linking faces two fundamental challenges: (1) the same entity can be mentioned in multiple ways (aliases, multilingual labels), and (2) the same mention can refer to different entities in different contexts. Both require disambiguation which may not always be accurate."
+
+  - name: "Wrapper-Based Extraction Brittleness"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:457-464)"
+    quote: "the traditional approach was to define such wrappers manually - a task for which a variety of declarative languages and tools have been defined - such approaches are brittle to changes in a website's layout"
+    description: "Manual wrapper-based extraction from markup documents is fragile and breaks when website layouts change. Semi-automatic wrapper induction attempts to address this but still relies on structural patterns that may evolve."
+
+  - name: "Web Tables Human vs Machine Readability Conflict"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:515-522)"
+    quote: "web tables are designed to enhance human readability, which often conflicts with machine readability. Many web tables are used for layout and page structure"
+    description: "Web tables prioritize human readability over machine readability. Many tables serve layout purposes rather than containing data. Data tables may have column spans, row spans, inner tables, or be split vertically, requiring normalization before extraction."
+
+  - name: "Knowledge Graph Incompleteness is Inherent"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:92-94)"
+    quote: "Coverage refers to avoiding the omission of domain-relevant elements, which otherwise may yield incomplete query results or entailments, biased models, etc."
+    description: "Knowledge graphs inherently face coverage limitations. Incomplete coverage leads to incomplete query results, incorrect entailments, and biased machine learning models trained on the data."
+
+  - name: "Completeness Measurement Requires Ideal Reference"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:109-117)"
+    quote: "Measuring completeness directly is non-trivial as it requires knowledge of a hypothetical ideal knowledge graph that contains all the elements that the knowledge graph should ideally represent"
+    description: "Assessing completeness of a knowledge graph requires comparison against an ideal complete graph that does not exist. Practical strategies involve gold standards or measuring extraction recall, but these are approximations."
+
+  - name: "Representativeness Bias in Knowledge Graphs"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:120-148)"
+    quote: "Representativeness...focuses on assessing high-level biases in what is included/excluded from the knowledge graph...Examples of data biases include geographic biases"
+    description: "Knowledge graphs contain systematic biases: geographic biases under-representing certain regions, linguistic biases under-representing certain languages, social biases under-representing certain demographics. Schema biases may result from biased data. These biases can have adverse real-world effects."
+
+  - name: "Timeliness vs Accuracy Tradeoff"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:68-86)"
+    quote: "a knowledge graph may be semantically accurate now, but may quickly become inaccurate (outdated) if no procedures are in place to keep it up-to-date in a timely manner"
+    description: "Knowledge graphs face a timeliness limitation where data becomes stale relative to underlying sources. Update frequency may lag behind real-world changes, causing temporal accuracy issues."
+
+  - name: "Semantic Accuracy Assessment is Challenging"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:50-65)"
+    quote: "Assessing the level of semantic inaccuracies is challenging. While one option is to apply manual verification, an automatic option may be to check the stated relation against several sources"
+    description: "Determining semantic accuracy (whether data correctly represents real-world phenomena) is difficult. Manual verification is expensive; automatic cross-source validation may not always be feasible or reliable."
+
+  - name: "Inconsistency Repair is Non-Trivial"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:526-545)"
+    quote: "techniques are also required to repair such inconsistencies, which itself is not a trivial task. In the simplest case, we may have an instance of two disjoint classes"
+    description: "Repairing logical inconsistencies in knowledge graphs is complex because determining which conflicting edge to remove requires additional knowledge about correctness. One edge can be involved in many inconsistencies, and one inconsistency can involve many edges, complicating automated repair."
+
+  - name: "Complex Graph Pattern Query Intractability"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:120-134)"
+    quote: "the problem of evaluating such queries is known to be intractable [16]. Perhaps for this reason, public services offering such a protocol...have been found to often exhibit downtimes, timeouts, partial results, slow performance"
+    description: "Evaluating complex graph patterns is computationally intractable in the worst case. Public SPARQL endpoints frequently exhibit downtimes, timeouts, partial results, and slow performance due to this complexity."
+
+  - name: "Edge Pattern Queries Require Statistics for Optimization"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:88-98)"
+    quote: "This issue is further aggravated if the client does not have access to statistics about the knowledge graph in order to plan how to best perform the join"
+    description: "Edge pattern queries may transfer irrelevant intermediate results. Without statistics about the knowledge graph, clients cannot optimize query planning, leading to inefficient joins and excessive data transfer."
+
+  - name: "Node Lookup Protocol Limitations"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:53-62)"
+    quote: "such an approach may not be feasible if no starting node is declared (e.g., if all nodes are variables), if the node lookup service does not return incoming edges, etc."
+    description: "Node lookup protocols for accessing knowledge graphs have structural limitations: they require known starting nodes, may not return incoming edges, and often transfer irrelevant data. This affects query efficiency and flexibility."
+
+  - name: "Privacy-Utility Tradeoff in Anonymization"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:409-417)"
+    quote: "These approaches require information loss for stronger guarantees of privacy; which to choose is thus heavily application dependent"
+    description: "Anonymization techniques for knowledge graphs (k-anonymity, l-diversity, differential privacy) inherently require information loss. Stronger privacy guarantees mean greater utility loss. No single approach works for all applications."
+
+  - name: "Neighborhood Attacks on Graph Anonymization"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:336-352)"
+    quote: "neighbourhood attacks [581] - using information about neighbours - can also break k-anonymity, where we also suppress the day and time of the flight"
+    description: "Graph structure enables neighborhood attacks that can break traditional anonymization. Attackers can use information about connected nodes to deanonymize individuals, requiring graph-specific anonymization guarantees like k-isomorphic neighbor anonymity or k-automorphism."
+
+  - name: "Encryption-Based Access Control Efficiency"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:299-305)"
+    quote: "A key limitation of this approach, however, is that it requires attempting to decrypt all edges to find all possible solutions"
+    description: "Fine-grained encryption of knowledge graph edges for access control has efficiency limitations. Finding query solutions requires attempting decryption on all edges, which does not scale well for large graphs."
+
+  - name: "Scalability Challenge for Knowledge Graph Techniques"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 9:19-27)"
+    quote: "more general challenges for knowledge graphs include scalability, particularly for deductive and inductive reasoning; quality, not only in terms of data, but also the models induced"
+    description: "Scalability remains a fundamental challenge for knowledge graphs, especially for reasoning tasks. Quality issues extend beyond data to include the quality of induced models. Diversity (multi-modal, contextual data), dynamicity (temporal, streaming), and usability are additional ongoing challenges."
+
+  - name: "Unsolved Challenges as Ongoing Dimensions"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 9:27-31)"
+    quote: "Though techniques are continuously being proposed to address precisely these challenges, they are unlikely to ever be completely solved; rather they serve as dimensions along which knowledge graphs, and their techniques, tools, etc., will continue to mature"
+    description: "Fundamental challenges like scalability, quality, diversity, dynamicity, and usability are recognized as perpetual rather than solvable problems. They represent ongoing dimensions of improvement rather than problems with definitive solutions."
+
+  - name: "Knowledge Graph Definition Ambiguity"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:116-124)"
+    quote: "Given that knowledge graphs were gaining more and more attention in the academic literature, formal definitions were becoming a necessity in order to precisely characterise what they were, how they were structured, how they could be used"
+    description: "The term 'knowledge graph' lacks a universally accepted formal definition. At least four distinct categories of definitions exist in academic literature, creating confusion and limiting precise scientific discourse about knowledge graphs."
+
+  - name: "Category I Definition Fails to Distinguish from Graph Databases"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:140-142)"
+    quote: "Though simple, the Category I definition raises some doubts: How is a knowledge graph different from a graph (database)? Where does knowledge come into play?"
+    description: "Simple definitions of knowledge graphs (as graphs with entities and relationships) fail to distinguish them from ordinary graph databases or explain what makes them 'knowledge' graphs, limiting their conceptual utility."
+
+  - name: "Category III Definitions May Not Match Practice"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:236-244)"
+    quote: "While having a specific, technical definition for knowledge graphs provides a more solid grounding for their study, as Bergman remarks, many of these definitions do not seem to fit the current practice of knowledge graphs"
+    description: "Highly technical Category III definitions provide precision but may not reflect actual practice. It remains unclear which definitions the Google Knowledge Graph itself would meet, and many criteria are orthogonal to knowledge graph embedding work."
+
+  - name: "Early Knowledge Graphs Limited by Computational Resources"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:87-95)"
+    quote: "papers from 1970-2000 tend to have worked with small graphs, which contrasts with modern practice where knowledge graphs can reach scales of millions or billions of nodes: during this period, computational resources were more limited"
+    description: "Historical knowledge graph research was constrained to small-scale graphs due to computational limitations. This restricted both practical applicability and development of techniques now needed for modern billion-node knowledge graphs."
+
+  - name: "DL Entailment Undecidability with Full Expressiveness"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:410-418)"
+    quote: "the problem of deciding entailment for knowledge bases expressed in the DL composed of the unrestricted use of all of the axioms of Table 7 combined is undecidable"
+    description: "Description Logic entailment using all available axiom types unrestricted is undecidable (reducible from Halting Problem). Practical DLs must restrict feature usage, creating tradeoffs between expressivity and computational complexity of reasoning."
+
+  - name: "OWL Translation Limitations"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:471-473)"
+    quote: "Hence only a subset of graphs can be translated into well-formed DL ontologies"
+    description: "Not all knowledge graphs can be translated into well-formed Description Logic or OWL ontologies. Some graph patterns (like property hierarchies) cannot be expressed in DL syntax, limiting interoperability between graph models and formal ontology languages."
+
+  - name: "Knowledge Graph Embedding Full Expressiveness Requirements"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:878-886)"
+    quote: "TuckER with dimensions dr = |L| and de = |V| trivially satisfies full expressivity since its core tensor then has sufficient capacity to store the full one-hot encoding of any graph"
+    description: "Achieving full expressiveness in knowledge graph embeddings (correctly partitioning any positive/negative edge sets) often requires impractically high dimensions. While useful as a theoretical property, the dimensions needed for full expressivity are often impractical or undesirable in practice."

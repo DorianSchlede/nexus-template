@@ -1,0 +1,253 @@
+---
+batch_id: "tools_standards_6"
+field: tools_standards
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 5
+patterns_found: 42
+---
+
+patterns:
+  # Paper 11 - Process Mining Event Knowledge Graphs (Chunk 1)
+
+  - name: "Neo4j Graph Database for Event Knowledge Graphs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:182-184)"
+    quote: "All concepts for constructing and analyzing event knowledge graphs presented in this chapter are implemented as Cypher queries on the graph database system Neo4j"
+    description: "Neo4j is identified as the primary graph database system for implementing event knowledge graphs. The paper references a GitHub repository with tutorial implementations using Cypher queries."
+
+  - name: "Cypher Query Language for Graph Operations"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:182-183)"
+    quote: "All concepts for constructing and analyzing event knowledge graphs presented in this chapter are implemented as Cypher queries"
+    description: "Cypher is the query language used for constructing, querying, and analyzing event knowledge graphs in Neo4j. Used for all graph operations including entity inference and directly-follows relationship construction."
+
+  - name: "Labeled Property Graphs (LPG) Data Model"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:550-552)"
+    quote: "A typed graph data model such as labeled property graphs allows to distinguish different types of nodes (events, entities) and relationships (directly-follows, correlated-to)"
+    description: "Labeled property graphs serve as the foundational data model for event knowledge graphs, allowing typed nodes with labels (Event, Entity) and typed relationships (df, corr) with properties attached to both."
+
+  - name: "LPG Formal Definition Standard"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:574-583)"
+    quote: "A labeled property graph (LPG) G = (N, R, lambda, #) is a graph with nodes N, and relationships R with... Each node n carries a label... Each relationship r carries a label"
+    description: "Formal mathematical definition of labeled property graphs with nodes carrying labels from set Lambda_N, relationships carrying labels from Lambda_R, and both supporting attribute-value pairs as properties."
+
+  - name: "RDF Comparison and Limitations"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:681-682)"
+    quote: "While the nodes and relationships of Definition 8 can also be encoded in RDF, the df-paths rely on attributes of relationships which are not supported by RDF but by LPGs"
+    description: "RDF is identified as an alternative encoding for event knowledge graphs, but LPGs are preferred because RDF does not support attributes on relationships, which are essential for df-paths with entity type properties."
+
+  - name: "OCEL Object-Centric Event Logs Standard"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:236-239)"
+    quote: "Note that Definition 2 formalizes the object-centric event logs (OCEL) described in Sect. 3.4 of [1]; we here use the more general term 'entity' instead of 'object'"
+    description: "OCEL (Object-Centric Event Logs) is a standard format for multi-entity event data. The paper's event table with entity types formalizes and extends the OCEL concept using 'entity' as a more general term."
+
+  - name: "XOC Event Logs for Dynamic Relations"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:341-342)"
+    quote: "Modeling such dynamics requires additional concepts as defined in XOC event logs"
+    description: "XOC event logs are an extension that captures dynamically changing relationships between entities over time, addressing limitations of static relation views in standard event logs."
+
+  - name: "GitHub Repository Implementation"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:183-184)"
+    quote: "at https://github.com/multi-dimensional-process-mining/eventgraph_tutorial"
+    description: "Reference implementation of event knowledge graph concepts available as open-source tutorial with Cypher queries for Neo4j graph database."
+
+  # Paper 11 - Process Mining Event Knowledge Graphs (Chunk 2)
+
+  - name: "Cypher Queries for Graph Construction"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:60-62)"
+    quote: "All steps of the method can be implemented as a series of Cypher queries to construct event knowledge graphs in a graph database"
+    description: "Cypher queries enable implementation of the complete event knowledge graph construction method, from entity inference to directly-follows relationship creation, in production graph databases."
+
+  - name: "Causal Event Graph Extraction from Relational Databases"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:63-65)"
+    quote: "A variant of event knowledge graphs, called causal event graph that only models events but not the entities, can be extracted automatically from relational databases"
+    description: "Causal event graphs are a simplified variant of event knowledge graphs that model only events without explicit entity nodes, supporting automatic extraction from relational database sources."
+
+  - name: "Real-Life Dataset References with DOIs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:62-63)"
+    quote: "several event knowledge graphs of real-life processes are available [19-24]"
+    description: "Multiple real-life event knowledge graph datasets are available with DOI references (BPI Challenges 2014-2019), providing empirical validation resources for process mining research."
+
+  - name: "Inductive Miner Process Discovery"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:458-461)"
+    quote: "the directly-follows graph (DFG) of the log in Table 2 and the corresponding process model discovered with the Inductive Miner (IM) annotated with the mean waiting times"
+    description: "Inductive Miner is a process discovery algorithm that produces process models from event logs, used for comparison to demonstrate limitations of traditional single-case-identifier approaches."
+
+  - name: "Multi-Entity Directly-Follows Graph (DFG)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:366-367)"
+    quote: "The resulting graph is a multi-entity directly-follows graph, also called multi-viewpoint DFG or artifact-centric model"
+    description: "Multi-entity DFG is a process model representation that respects local directly-follows relations per entity type, enabling accurate multi-dimensional process discovery."
+
+  - name: "Synchronous Proclets Multi-Entity Model"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:383-391)"
+    quote: "An alternative representation of the multi-entity DFG is the proclet model... constructed by creating a Class node per unique pair of activity name and entity type"
+    description: "Synchronous proclets are a multi-entity extension of Petri nets where each proclet describes behavior of one entity type, with synchronization edges indicating which transitions occur together."
+
+  - name: "Event and DF Aggregation Queries"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:380-382)"
+    quote: "Event and df-aggregation can be implemented as simple, scalable queries over standard graph databases, enabling efficient in-database process discovery"
+    description: "Aggregation operations for discovering multi-entity process models can be implemented as efficient, scalable queries directly within graph databases."
+
+  - name: "Performance Spectrum Visual Analytics"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:521-522)"
+    quote: "Setting the x-coordinate of each event by its time property and the y-coordinate by its Activity entity results in the graph in Fig. 17, which is called the Performance Spectrum"
+    description: "The Performance Spectrum is a visual analytics technique for analyzing process performance over time, implemented as a specialized graph layout with time on x-axis and activity on y-axis."
+
+  - name: "Performance Spectrum Mining Tool"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:590-591)"
+    quote: "It is also implemented as a visual analytics tool over event data and in combination with process models"
+    description: "Performance Spectrum has been implemented as a dedicated visual analytics tool for fine-grained performance analysis, revealing patterns like batching, FIFO violations, and bottlenecks."
+
+  # Paper 11 - Process Mining Event Knowledge Graphs (Chunk 3)
+
+  - name: "Object-Centric Petri Nets"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:17-20)"
+    quote: "An alternative formalization of this concept are object-centric Petri nets. Object-centric Petri nets also first discover one Petri net per entity type, then annotate the places and arcs with entity identifiers"
+    description: "Object-centric Petri nets are formal process models that discover separate Petri nets per entity type, then compose them using entity identifiers on places and arcs, resulting in coloured Petri net models."
+
+  - name: "Coloured Petri Nets for Multi-Entity Analysis"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:19-21)"
+    quote: "then compose all entity nets along transitions for the same activity, resulting in a coloured Petri net model that is accessible for analysis and measuring model quality"
+    description: "Coloured Petri nets result from composing object-centric Petri nets, enabling formal analysis and quality measurement of multi-entity process models."
+
+  - name: "Modular DCR Graphs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:29-32)"
+    quote: "Extensions of declarative models (see [10]) such as modular DCR graphs, that apply similar principles as synchronous proclets, could be more suitable"
+    description: "Modular DCR (Dynamic Condition Response) graphs are declarative process models that apply modular composition principles, potentially better suited for complex entity interaction patterns than procedural models."
+
+  - name: "Scenario-Based Models for Partial Orders"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:33-34)"
+    quote: "Alternatively, scenario-based models that specify conditional partial orders of events over multiple entities could be applied"
+    description: "Scenario-based models specify conditional partial orders of events across multiple entities, providing an alternative formalism for describing complex multi-entity interactions."
+
+  - name: "BPI Challenge Datasets with DOIs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:112-123)"
+    quote: "Event Graph of BPI Challenge 2014. Dataset. https://doi.org/10.4121/14169494... Event Graph of BPI Challenge 2019. Dataset. https://doi.org/10.4121/14169614"
+    description: "BPI Challenge datasets (2014-2019) are available as event knowledge graphs with persistent DOI identifiers, providing standardized benchmark datasets for process mining research."
+
+  - name: "Zenodo Dataset Repository"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:122-123)"
+    quote: "Event Data and Queries for Multi-Dimensional Event Data in the Neo4j Graph Database, April 2021. https://doi.org/10.5281/zenodo.4708117"
+    description: "Zenodo is used as a repository for sharing multi-dimensional event data and query implementations, supporting reproducible process mining research."
+
+  # Paper 12 - Foundations of Process Event Data
+
+  - name: "XES Standard (IEEE 1849-2016)"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:163-168)"
+    quote: "This observation drove the development of the eXtensible Event Stream (XES) standard, an IEEE Standards Association-approved language to transport, store, and exchange event data. Its metadata structure is represented in Fig. 2. XES uses the W3C XML Schema definition language"
+    description: "XES (eXtensible Event Stream) is the IEEE 1849-2016 standard for event log interchange, using W3C XML Schema for defining event log structure with logs, traces, events, and extensible attributes."
+
+  - name: "XES Extensions Mechanism"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:172-175)"
+    quote: "it does allow for extensions. An extension can be used to define a set of attributes for events, traces and/or logs. For instance, a common set of attributes can be defined for event logs within a particular application domain"
+    description: "XES supports domain-specific extensions that define standardized attribute sets for events, traces, or logs, enabling interoperability within specific application domains."
+
+  - name: "XES Lifecycle Extension"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:185-186)"
+    quote: "Also in IEEE XES, a lifecycle extension has been approved, which specifies a default activity lifecycle"
+    description: "The XES lifecycle extension provides a standardized activity lifecycle state machine for representing event types like start, complete, suspend, resume within process execution."
+
+  - name: "BPMN 2.0 Activity Lifecycle"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:183-184)"
+    quote: "One example of such a transactional lifecycle model is shown in Fig. 3a. This is the transition lifecycle model of the BPMN 2.0 standard"
+    description: "BPMN 2.0 defines a transactional lifecycle model for activities with standardized state transitions, providing a reference model for event type semantics in process-aware systems."
+
+  - name: "OCEL Standard for Object-Centric Event Data"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:431-433)"
+    quote: "Finally, the recently introduced OCEL standard is another relevant piece of work, putting forward a general standard to interchange object-centric event data with multiple case notions"
+    description: "OCEL (Object-Centric Event Log) standard provides a format for exchanging event data with multiple case notions, addressing limitations of single-case-identifier formats."
+
+  - name: "BPMS Event Logging"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:217-218)"
+    quote: "When retrieving data from process-aware information system, especially from Business Process Management Systems (BPMS), a large collection of event types might be readily available"
+    description: "Business Process Management Systems (BPMS) provide native event logging with rich event type information, representing the most process-aware source for event data extraction."
+
+  - name: "Ontology-Based Data Access (OBDA) for Event Extraction"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:428-431)"
+    quote: "One noteworthy scientific initiative in this context is ontology-based data access (ODBA) for event log extraction. The approach is based on an ontological view of the domain of interest and linking it as such to a database schema and has been implemented in the Onprom tool"
+    description: "OBDA (Ontology-Based Data Access) uses ontological domain views linked to database schemas for event log extraction, implemented in the Onprom tool for semantic event extraction."
+
+  - name: "ProM Import Framework"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:416-419)"
+    quote: "One of the first tools stemming from scientific research was the ProM Import Framework. Already in these early days, the idea of an extensible plug-in architecture allowing to develop adapters to hook into a large variety of systems was proposed"
+    description: "ProM Import Framework pioneered extensible plug-in architecture for connecting to diverse source systems, establishing the pattern for process mining tool integration."
+
+  - name: "XESame Event Log Extraction Tool"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:419-420)"
+    quote: "With the uptake of XES, XESame was developed as a more flexible successor to the ProM Import Framework"
+    description: "XESame is a flexible event log extraction tool developed as successor to ProM Import Framework, aligned with XES standard for improved interoperability."
+
+  - name: "EVS Model Builder and XTract for ERP Extraction"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:421-422)"
+    quote: "Other researchers have focused on extraction from ERP systems, e.g. the EVS Model Builder and XTract, or other operational systems, e.g. Eventifier"
+    description: "EVS Model Builder and XTract are specialized tools for extracting event logs from ERP systems, while Eventifier handles other operational systems."
+
+  - name: "ETL Processing for Event Data Integration"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:464-466)"
+    quote: "Hereto, especially when an organizational data warehousing architecture is present, Extract-Transform-Load (ETL) processing would be a default technology to resort to. ETL tools are perfectly equipped to derive and deploy matching schemes to integrate data"
+    description: "ETL (Extract-Transform-Load) tools are standard technology for integrating event data from non-integrated sources, particularly within data warehousing architectures."
+
+  - name: "Data Federation for Event Log Integration"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:467-470)"
+    quote: "Increasingly, companies start to focus on the introduction of data virtualization layers in order to realize a more federation-oriented data integration. Data federation can prevent the creation of yet another duplicated database"
+    description: "Data federation and virtualization layers provide an alternative to ETL consolidation, enabling flexible querying across multiple source systems without data duplication."
+
+  - name: "JSON for Web Event Data"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:313-315)"
+    quote: "in many cases, including for instance learning environments such as MOOCs, a default standard for web-based platforms to store data is JSON (JavaScript Object Notation)"
+    description: "JSON is the default data format for event data from web-based platforms like MOOCs, requiring transformation for process mining compatibility."
+
+  - name: "SAP ECC/S4 HANA and Salesforce as Top Sources"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:327-329)"
+    quote: "In an online survey with 289 participants spanning the roles of practitioners, researchers, software vendors, and end-users, SAP ECC (R/3), SAP S/4 HANA, and Salesforce are selected as the top three most analyzed source systems"
+    description: "SAP ECC, SAP S/4 HANA, and Salesforce are empirically validated as the three most common source systems for process mining, based on a 289-participant industry survey."
+
+  - name: "PM2 Process Mining Methodology"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:370-373)"
+    quote: "When making an assessment of one of the most recently introduced process mining methodologies, i.e. PM2, four event data preprocessing tasks are defined: (1) creating views, (2) filtering logs, (3) enriching logs, and (4) aggregating events"
+    description: "PM2 is a process mining methodology that defines four specialized preprocessing tasks for event data, distinct from traditional data analytics pipelines like CRISP-DM."
+
+  - name: "CRISP-DM Adaptation for Process Mining"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:374-375)"
+    quote: "Several process mining case studies such as the one presented in [6] adapted CRISP-DM to work with healthcare datasets"
+    description: "CRISP-DM (Cross-Industry Standard Process for Data Mining) has been adapted for process mining projects, particularly in healthcare domains, bridging traditional data science and process analytics."
+
+  # Paper 15 - SciAgents Multi-Agent Graph Reasoning
+
+  - name: "GPT-4 LLM API for Multi-Agent Systems"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:708-709)"
+    quote: "The automated multi-agent system consists of a team of AI agents, each powered by a state-of-the-art general purpose large language model from the GPT-4 family, accessed via the OpenAI API"
+    description: "GPT-4 family models accessed via OpenAI API serve as the foundation for multi-agent scientific discovery systems, powering specialized agents with distinct roles."
+
+  - name: "Semantic Scholar API for Novelty Assessment"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:195-197)"
+    quote: "For instance, we have empowered our automated multi-agent model with the Semantic Scholar API as a tool that provides it with an ability to check the novelty of the generated hypothesis against the existing literature"
+    description: "Semantic Scholar API integration enables automated novelty assessment of generated research hypotheses against existing scientific literature."
+
+  - name: "Ontological Knowledge Graphs from Scientific Papers"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:31-34)"
+    quote: "the use of large-scale ontological knowledge graphs to organize and interconnect diverse scientific concepts... Applied to biologically inspired materials"
+    description: "Large-scale ontological knowledge graphs constructed from scientific papers (around 1,000 papers) provide structured interconnection of concepts as nodes and relationships as edges."
+
+  - name: "GROMACS and AMBER Molecular Dynamics Software"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:396-398)"
+    quote: "The model suggests using Molecular Dynamics (MD) Simulations to explore interactions at the molecular level. Specifically, it proposes employing software like GROMACS or AMBER"
+    description: "GROMACS and AMBER are recommended molecular dynamics simulation tools for modeling molecular interactions in bio-inspired materials research."
+
+  - name: "CHARMM and AMBER Force Fields"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:623-625)"
+    quote: "Appropriate force fields, such as CHARMM or AMBER, are selected, with parameters defined using tools like CGenFF"
+    description: "CHARMM and AMBER force fields with CGenFF parameterization are used for molecular dynamics simulations of silk fibroin and pigment interactions."
+
+  - name: "VMD and PyMOL Molecular Visualization"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:625-626)"
+    quote: "using VMD or GROMACS for setup... using tools like PyMOL, Chimera, and GROMACS"
+    description: "VMD, PyMOL, and Chimera are molecular visualization tools used for system setup and post-simulation structure analysis in scientific discovery workflows."
+
+  - name: "Finite Element Analysis (FEA) for Material Modeling"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:596-598)"
+    quote: "Use FEA to simulate the mechanical behavior of the composite under different loading conditions. Use dynamic mechanical analysis (DMA) to study the viscoelastic properties"
+    description: "Finite Element Analysis (FEA) and Dynamic Mechanical Analysis (DMA) are used for simulating mechanical behavior and viscoelastic properties of composite materials."
+
+  - name: "Life Cycle Assessment (LCA) for Sustainability"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:602-604)"
+    quote: "Use life cycle assessment (LCA) to evaluate the environmental impact and energy efficiency of the production process"
+    description: "Life Cycle Assessment (LCA) methodology is recommended for evaluating environmental sustainability and energy efficiency of bio-inspired material production."

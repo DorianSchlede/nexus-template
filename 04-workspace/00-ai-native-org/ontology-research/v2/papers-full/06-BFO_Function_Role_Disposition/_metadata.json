@@ -1,0 +1,17 @@
+{
+  "source_pdf": "06-BFO_Function_Role_Disposition.pdf",
+  "processed_at": "2025-12-27T22:51:51.523265",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 1,
+  "total_lines": 591,
+  "total_chars": 27359,
+  "chunks": [
+    {
+      "filename": "06-BFO_Function_Role_Disposition_1.md",
+      "chunk_number": 1,
+      "line_count": 591,
+      "char_count": 27359
+    }
+  ]
+}

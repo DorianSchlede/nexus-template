@@ -1,0 +1,604 @@
+project: c:\Users\dsber\infinite\auto-company\strategy-nexus\02-projects\09-ontologies-research-v22-archive
+generated_at: '2025-12-29T11:10:52.624534'
+token_budget_per_batch: 70000
+standard_formula: chars // 4
+level4_batches:
+- batch_id: entity_types_1
+  field: entity_types
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: partial
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: partial
+    token_count: 10926
+  total_tokens: 61727
+  estimated_duration: 4 min
+- batch_id: entity_types_2
+  field: entity_types
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: partial
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: partial
+    token_count: 7040
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 58504
+  estimated_duration: 3 min
+- batch_id: entity_definitions_1
+  field: entity_definitions
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: partial
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: 'true'
+    token_count: 10926
+  total_tokens: 61727
+  estimated_duration: 4 min
+- batch_id: entity_definitions_2
+  field: entity_definitions
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: partial
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 12
+    fields_found_state: partial
+    token_count: 12437
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: partial
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: partial
+    token_count: 7040
+  total_tokens: 61981
+  estimated_duration: 4 min
+- batch_id: entity_definitions_3
+  field: entity_definitions
+  chunks:
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 8960
+  estimated_duration: 1 min
+- batch_id: entity_relationships_1
+  field: entity_relationships
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: 'true'
+    token_count: 10926
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  total_tokens: 61288
+  estimated_duration: 4 min
+- batch_id: entity_relationships_2
+  field: entity_relationships
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: partial
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: partial
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: partial
+    token_count: 10219
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 40430
+  estimated_duration: 2 min
+- batch_id: abstraction_level_1
+  field: abstraction_level
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: partial
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: partial
+    token_count: 10926
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: partial
+    token_count: 9967
+  total_tokens: 60221
+  estimated_duration: 4 min
+- batch_id: abstraction_level_2
+  field: abstraction_level
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: partial
+    token_count: 10219
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 19179
+  estimated_duration: 1 min
+- batch_id: framework_comparison_1
+  field: framework_comparison
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: 'true'
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: 'true'
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: partial
+    token_count: 10926
+  total_tokens: 61727
+  estimated_duration: 4 min
+- batch_id: framework_comparison_2
+  field: framework_comparison
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: partial
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: 'true'
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 10
+    fields_found_state: partial
+    token_count: 12832
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 12
+    fields_found_state: partial
+    token_count: 12437
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  total_tokens: 67773
+  estimated_duration: 4 min
+- batch_id: framework_comparison_3
+  field: framework_comparison
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: partial
+    token_count: 7040
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 16000
+  estimated_duration: 1 min
+- batch_id: methodology_1
+  field: methodology
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: partial
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: partial
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: 'true'
+    token_count: 10926
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: partial
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: partial
+    token_count: 11284
+  total_tokens: 63722
+  estimated_duration: 4 min
+- batch_id: methodology_2
+  field: methodology
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: partial
+    token_count: 7040
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: partial
+    token_count: 8960
+  total_tokens: 36186
+  estimated_duration: 2 min
+- batch_id: ai_integration_1
+  field: ai_integration
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: partial
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: 'true'
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: 'true'
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: 'true'
+    token_count: 7040
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 66603
+  estimated_duration: 4 min
+- batch_id: agent_modeling_1
+  field: agent_modeling
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: partial
+    token_count: 7040
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 25906
+  estimated_duration: 1 min
+- batch_id: agentic_workflows_1
+  field: agentic_workflows
+  chunks:
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 8960
+  estimated_duration: 1 min
+- batch_id: generative_ai_patterns_1
+  field: generative_ai_patterns
+  chunks:
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 8960
+  estimated_duration: 1 min
+- batch_id: agent_ontology_integration_1
+  field: agent_ontology_integration
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: partial
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: 'true'
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: 'true'
+    token_count: 11473
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 49344
+  estimated_duration: 3 min
+- batch_id: empirical_evidence_1
+  field: empirical_evidence
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: partial
+    token_count: 10926
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: 'true'
+    token_count: 11284
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 42204
+  estimated_duration: 2 min
+- batch_id: limitations_1
+  field: limitations
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: partial
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: partial
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: partial
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: partial
+    token_count: 10926
+  total_tokens: 61727
+  estimated_duration: 4 min
+- batch_id: limitations_2
+  field: limitations
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: partial
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 9
+    fields_found_state: 'true'
+    token_count: 12745
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: 'true'
+    token_count: 7040
+  total_tokens: 62289
+  estimated_duration: 4 min
+- batch_id: limitations_3
+  field: limitations
+  chunks:
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: partial
+    token_count: 8960
+  total_tokens: 8960
+  estimated_duration: 1 min
+- batch_id: tools_standards_1
+  field: tools_standards
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 9906
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 2
+    fields_found_state: 'true'
+    token_count: 10417
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 3
+    fields_found_state: 'true'
+    token_count: 8789
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 4
+    fields_found_state: 'true'
+    token_count: 10216
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 5
+    fields_found_state: 'true'
+    token_count: 11473
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 6
+    fields_found_state: 'true'
+    token_count: 10926
+  total_tokens: 61727
+  estimated_duration: 4 min
+- batch_id: tools_standards_2
+  field: tools_standards
+  chunks:
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 7
+    fields_found_state: 'true'
+    token_count: 11034
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 8
+    fields_found_state: 'true'
+    token_count: 11284
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 10
+    fields_found_state: partial
+    token_count: 12832
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 13
+    fields_found_state: 'true'
+    token_count: 9967
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 14
+    fields_found_state: 'true'
+    token_count: 10219
+  - paper_id: 02-Knowledge_Graphs
+    chunk: 15
+    fields_found_state: 'true'
+    token_count: 7040
+  total_tokens: 62376
+  estimated_duration: 4 min
+- batch_id: tools_standards_3
+  field: tools_standards
+  chunks:
+  - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+    chunk: 1
+    fields_found_state: 'true'
+    token_count: 8960
+  total_tokens: 8960
+  estimated_duration: 1 min
+level7_budget:
+  methodology: 3000
+  briefing: 2050
+  synthesis_files_estimated: 45000
+  output_reservation: 20000
+  total_available: 100000
+  usable: 29950
+  requires_split: false
+  split_strategy: null
+stats:
+  total_batches: 26
+  max_concurrent: 15
+  estimated_total_time: 6 min

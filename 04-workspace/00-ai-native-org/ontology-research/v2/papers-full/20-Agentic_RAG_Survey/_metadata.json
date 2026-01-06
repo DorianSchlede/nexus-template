@@ -1,0 +1,29 @@
+{
+  "source_pdf": "20-Agentic_RAG_Survey.pdf",
+  "processed_at": "2025-12-27T22:54:37.380670",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 3,
+  "total_lines": 2830,
+  "total_chars": 120203,
+  "chunks": [
+    {
+      "filename": "20-Agentic_RAG_Survey_1.md",
+      "chunk_number": 1,
+      "line_count": 998,
+      "char_count": 42930
+    },
+    {
+      "filename": "20-Agentic_RAG_Survey_2.md",
+      "chunk_number": 2,
+      "line_count": 1000,
+      "char_count": 34490
+    },
+    {
+      "filename": "20-Agentic_RAG_Survey_3.md",
+      "chunk_number": 3,
+      "line_count": 832,
+      "char_count": 42783
+    }
+  ]
+}

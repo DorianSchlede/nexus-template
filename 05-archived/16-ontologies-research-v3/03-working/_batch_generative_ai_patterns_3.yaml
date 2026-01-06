@@ -1,0 +1,156 @@
+---
+batch_id: "generative_ai_patterns_3"
+field: generative_ai_patterns
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 5
+patterns_found: 28
+---
+
+patterns:
+  # SciAgents Paper (Chunks 9-10) - Multi-Agent Research Proposal Generation
+
+  - name: "Sequential Agent Calling Pattern"
+    chunk_ref: "15-SciAgents (Chunk 9:34-37)"
+    quote: "Agent caller, please proceed by calling the hypothesis_agent to expand on the 'hypothesis' aspect of the research proposal."
+    description: "A structured multi-agent workflow where a caller agent orchestrates sequential invocations of specialized agents (hypothesis_agent, outcome_agent, mechanism_agent, design_principles_agent, etc.) to iteratively expand and refine outputs. Each agent has a specific role in the generation pipeline."
+
+  - name: "Role-Based Agent Specialization"
+    chunk_ref: "15-SciAgents (Chunk 9:673-679)"
+    quote: "planner: Who can suggest a step-by-step plan... ontologist: I can define each of the terms... scientist: I can craft the research proposal... critic_agent: I can summarize, critique"
+    description: "LLM agents are assigned distinct personas and specialized roles (planner, ontologist, scientist, critic, hypothesis_agent, outcome_agent, etc.) that constrain and guide their outputs. Each role has defined responsibilities and output expectations."
+
+  - name: "Structured Research Proposal Generation"
+    chunk_ref: "15-SciAgents (Chunk 9:497-511)"
+    quote: "The key aspects of the proposal include: 1. Hypothesis... 2. Outcome... 3. Mechanisms... 4. Design Principles... 5. Unexpected Properties... 6. Comparison... 7. Novelty..."
+    description: "A systematic framework for generating research proposals through seven distinct aspects, each handled by a specialized agent. The structured output ensures comprehensive coverage of all research dimensions through templated generation."
+
+  - name: "Novelty and Feasibility Rating Pattern"
+    chunk_ref: "15-SciAgents (Chunk 9:639-646)"
+    quote: "Novelty: 7/10 - The idea of mimicking nacre's hierarchical structure to enhance mechanical properties is well-explored... Feasibility: 8/10 - The feasibility of creating nacre-like structures using modern fabrication techniques"
+    description: "A quantitative evaluation pattern where LLM agents assess generated research ideas using numerical scores (1-10 scale) for novelty and feasibility, providing structured justification for each rating."
+
+  - name: "Literature Review Integration"
+    chunk_ref: "15-SciAgents (Chunk 9:562-635)"
+    quote: "Literature Review Summary: 1. Fusion of Seashell Nacre and Marine Bioadhesive Analogs... 2. Peptide-Polymer Conjugates... 3. Materiomics: Biological Protein Materials"
+    description: "Integration of structured literature review into the generation pipeline, where the LLM synthesizes existing research to inform and validate novel hypothesis generation, providing evidence-based grounding."
+
+  - name: "Critical Scientific Review Pattern"
+    chunk_ref: "15-SciAgents (Chunk 9:517-546)"
+    quote: "Strengths: 1. Innovative Approach... 2. Comprehensive Design... Weaknesses: 1. Complexity... 2. Scalability... Suggested Improvements: 1. Simplification..."
+    description: "A structured critique pattern where the critic_agent evaluates generated content through systematic analysis of strengths, weaknesses, and suggested improvements, enabling iterative refinement."
+
+  - name: "Knowledge Path Generation"
+    chunk_ref: "15-SciAgents (Chunk 9:688-703)"
+    quote: "Generate Knowledge Path: Identify the key concepts and relationships between graphene and proteins... Assistant will call the functions.generate_path function with 'graphene' and 'proteins' as keywords"
+    description: "A pattern for generating conceptual knowledge paths between entities using function calling, establishing relationships that inform subsequent research proposal generation."
+
+  - name: "Ontologist Definition Pattern"
+    chunk_ref: "15-SciAgents (Chunk 9:759-789)"
+    quote: "Definitions: Graphene: A single layer of carbon atoms... Relationships: Graphene -- bind -- Amyloid Fibrils: Graphene can interact with amyloid fibrils"
+    description: "Structured extraction of definitions and relationships from knowledge graphs, where an ontologist agent provides formal semantic grounding for terms used in the generation process."
+
+  # SciAgents Paper (Chunk 10) - Advanced Generation Patterns
+
+  - name: "Quantitative Hypothesis Specification"
+    chunk_ref: "15-SciAgents (Chunk 10:22-29)"
+    quote: "Conductivity Mechanism: The hypothesis posits that the incorporation of amyloid fibrils into graphene will create conductive pathways... Quantitative Conductivity Improvement: We anticipate that the electrical conductivity... will be significantly higher"
+    description: "A pattern for generating specific, quantitative predictions within hypotheses, transforming vague claims into measurable expectations with numerical targets."
+
+  - name: "Molecular Modeling Integration Pattern"
+    chunk_ref: "15-SciAgents (Chunk 10:505-566)"
+    quote: "Select Appropriate Modeling Techniques: Molecular Dynamics (MD) Simulations... Density Functional Theory (DFT)... Monte Carlo Simulations... Set Up the Simulation Environment: Force Fields: Choose suitable force fields"
+    description: "A structured pattern for generating computational methodology, including technique selection, parameter specification, and validation approaches, enabling LLM-guided scientific workflow generation."
+
+  - name: "Emergent Properties Prediction"
+    chunk_ref: "15-SciAgents (Chunk 10:253-274)"
+    quote: "Expanded Unexpected Properties: 1. Emergent Electrical Properties: Quantum Effects... 2. Enhanced Mechanical Properties: Synergistic Reinforcement... Self-Healing Ability"
+    description: "A generative pattern for predicting emergent and unexpected properties in novel materials, encouraging creative extrapolation beyond explicitly stated hypotheses."
+
+  - name: "Comparative Analysis Generation"
+    chunk_ref: "15-SciAgents (Chunk 10:313-364)"
+    quote: "Expanded Comparison: 1. Electrical Conductivity: Graphene vs. Amyloid Fibrils... Graphene Composites... 2. Mechanical Properties... 3. Biocompatibility"
+    description: "Structured generation of multi-dimensional comparisons across relevant benchmarks, providing systematic evaluation of novel proposals against existing approaches."
+
+  - name: "Novelty Assessment with Evidence"
+    chunk_ref: "15-SciAgents (Chunk 10:619-631)"
+    quote: "Novelty: 8/10 - The hypothesis presents a novel integration of graphene and amyloid fibrils for bioelectronic applications, with an innovative approach of using engineered gene circuits... Feasibility: 7/10"
+    description: "A rating pattern that combines quantitative scores with explicit reasoning chains, grounding novelty and feasibility assessments in specific evidence from the literature review."
+
+  # KG-Agent Paper (Chunk 1) - Tool Use and Reasoning Patterns
+
+  - name: "Autonomous Tool Selection Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:26-29)"
+    quote: "we integrate the LLM, multifunctional toolbox, KG-based executor, and knowledge memory, and develop an iteration mechanism that autonomously selects the tool then updates the memory"
+    description: "An autonomous agent pattern where the LLM iteratively selects appropriate tools from a toolbox, executes them, and updates memory state without human intervention in the reasoning loop."
+
+  - name: "Code-Based Instruction Synthesis"
+    chunk_ref: "16-KG-Agent (Chunk 1:31-34)"
+    quote: "we leverage program language to formulate the multi-hop reasoning process over the KG, and synthesize a code-based instruction dataset to fine-tune the base LLM"
+    description: "A pattern for converting natural language reasoning into structured code-like function calls, enabling more precise and executable reasoning traces that can be used for LLM fine-tuning."
+
+  - name: "Three-Tool-Type Architecture"
+    chunk_ref: "16-KG-Agent (Chunk 1:239-259)"
+    quote: "Extraction tools aim to facilitate the access to information from KG... Logic tools aim to support basic manipulation operations... Semantic tools are developed by utilizing pre-trained models"
+    description: "A systematic toolbox organization pattern with extraction tools (get_relation, get_entity), logic tools (count, intersect, judge, end), and semantic tools (retrieve_relation, disambiguate_entity) for structured KG reasoning."
+
+  - name: "Knowledge Memory Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:546-551)"
+    quote: "The knowledge memory preserves the currently useful information to support the LLM-based planner for making decisions. It mainly contains four parts of information: natural language question, toolbox definition, current KG information, and history reasoning program"
+    description: "A structured memory architecture for LLM agents containing question context, available tools, retrieved KG information, and execution history to support informed decision-making."
+
+  - name: "Function Call Generation Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:437-456)"
+    quote: "we reformulate the triples into several function calls with the code format, which represents the tool invocation and can be executed to obtain the corresponding triples... get_relation(e) function call to obtain the current candidate relations"
+    description: "A pattern for LLMs to generate structured function calls (e.g., get_relation, get_tail_entity, get_entity_by_constraint) that can be programmatically executed against knowledge graphs."
+
+  - name: "Iterative Planner-Executor Loop"
+    chunk_ref: "16-KG-Agent (Chunk 1:629-638)"
+    quote: "The KG-Agent framework autonomously iterates the above tool selection and memory updation process to perform step-by-step reasoning, where the knowledge memory is used to maintain the accessed information"
+    description: "An iterative reasoning pattern where planning (tool selection) and execution (memory update) alternate until the agent determines reasoning is complete, enabling multi-hop inference."
+
+  - name: "Query Graph to Program Conversion"
+    chunk_ref: "16-KG-Agent (Chunk 1:419-433)"
+    quote: "the query graph has a tree-like structure that can be directly mapped to a logical form... starting from the mentioned entity in the question, we adopt breadth-first search (BFS) to visit all the nodes on the query graph"
+    description: "A systematic conversion pattern from structured query graphs to executable reasoning programs through BFS traversal, generating ordered function call sequences."
+
+  # Multi-Agent Architecture Taxonomy Paper (Chunks 1-2) - Architectural Patterns
+
+  - name: "Divide and Conquer Goal Decomposition"
+    chunk_ref: "18-Multi-Agent (Chunk 1:66-71)"
+    quote: "Such systems tackle user-prompted goals by employing a divide & conquer strategy, by breaking them down into smaller manageable tasks. These tasks are then assigned to specialized agents"
+    description: "A fundamental LLM-powered multi-agent pattern where complex goals are decomposed into subtasks assigned to specialized agents, mimicking Minsky's 'society of mind' theory for collective problem-solving."
+
+  - name: "Prompt Augmentation Pattern"
+    chunk_ref: "18-Multi-Agent (Chunk 1:959-968)"
+    quote: "Before the LLM receives the Agent Prompt, it may undergo Prompt Augmentation. This process can integrate additional specifics like the aspects or parts of the agent's Role or Memory, Context Information... or chosen Prompt Templates"
+    description: "A systematic pattern for enriching agent prompts with role context, memory contents, retrieved information, and templates before LLM processing, enabling more informed and contextual responses."
+
+  - name: "Task-Management Agent Types"
+    chunk_ref: "18-Multi-Agent (Chunk 2:2-12)"
+    quote: "Task-Creation Agent: Generating new tasks, which optionally also includes deriving tasks by breaking down complex tasks. Task-Prioritization Agent: Assigning urgency... Task-Execution Agent: Ensuring efficient task completion"
+    description: "A taxonomy of specialized agent types for task management: creation agents (decomposition), prioritization agents (dependency resolution), and execution agents (task completion), each with distinct LLM-powered capabilities."
+
+  - name: "Action Type Taxonomy"
+    chunk_ref: "18-Multi-Agent (Chunk 2:38-49)"
+    quote: "DecomposeTask: Breaking down a task into multiple sub-tasks... Create Task... DelegateTask: Delegating a task to another agent... ExecuteTask... EvaluateResult... MergeResult"
+    description: "A comprehensive taxonomy of agent actions enabling structured collaboration: task decomposition, creation, delegation, execution, evaluation, and result merging, forming the vocabulary of multi-agent coordination."
+
+  - name: "Communication Protocol Patterns"
+    chunk_ref: "18-Multi-Agent (Chunk 2:82-96)"
+    quote: "Strict finite processes or execution chains with predefined action sequences... Dialogue cycles characterized by alternating DelegateTask and ExecuteTask actions... Multi-cycle process frameworks with interactions between generic agent types"
+    description: "Three distinct communication protocol patterns for multi-agent LLM systems: (1) strict sequential chains, (2) two-agent dialogue cycles, and (3) flexible multi-cycle frameworks, each suited to different task complexities."
+
+  - name: "Contextual Resource Integration"
+    chunk_ref: "18-Multi-Agent (Chunk 2:104-171)"
+    quote: "Tools: Search and Analysis Tools... Execution Tools... Reasoning Tools... Development Tools... Communication Tools... Data types: Structured Text Data... Unstructured Text Data... Multimodal Data... Foundation Models"
+    description: "A comprehensive framework for integrating contextual resources into LLM agents, categorizing tools (search, execution, reasoning, development, communication), data types (structured, unstructured, multimodal, domain-specific), and foundation models."
+
+  - name: "Autonomy-Alignment Balance Matrix"
+    chunk_ref: "18-Multi-Agent (Chunk 2:278-297)"
+    quote: "L2: Real-time: User-Supervised Automation / User-Collaborative Adaptation / User-Responsive Autonomy... L1: User-Guided... L0: Integrated: Rule-Driven Automation / Pre-Configured Adaptation / Bounded Autonomy"
+    description: "A nine-cell matrix categorizing LLM multi-agent systems by autonomy levels (static/adaptive/self-organizing) and alignment levels (integrated/user-guided/real-time), providing systematic architectural classification."
+
+  - name: "Slow Thinking via Multi-Agent Deliberation"
+    chunk_ref: "18-Multi-Agent (Chunk 1:56-60)"
+    quote: "LLMs struggle with maintaining consistent logic across extended chains of reasoning. This deficiency hinders their ability to engage in a deliberate, in-depth, and iterative thought process (aka slow thinking)"
+    description: "Multi-agent architectures address LLM limitations in extended reasoning by distributing cognitive load across specialized agents, enabling deliberate 'slow thinking' through iterative collaboration and mutual feedback."

@@ -1,0 +1,183 @@
+---
+batch_id: "tools_standards_7"
+field: tools_standards
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 4
+patterns_found: 35
+---
+
+patterns:
+  - name: "AutoGen Multi-Agent Framework"
+    chunk_ref: "15-SciAgents (Chunk 2:483-484)"
+    quote: "We design AI agents using the general-purpose LLM GPT-4 family models. The automated multi-agent collaboration is implemented in the AutoGen framework"
+    description: "AutoGen is used as the core framework for implementing automated multi-agent collaboration. It provides an open-source ecosystem for agent-based AI modeling, enabling the construction of complex multi-agent systems with specialized roles."
+
+  - name: "AutoGen UserProxyAgent Class"
+    chunk_ref: "15-SciAgents (Chunk 2:487-488)"
+    quote: "In our multi-agent system, the human agent is constructed using UserProxyAgent class from Autogen, and Assistant, Planner, Ontologist..."
+    description: "UserProxyAgent is used to construct human agent proxies in the multi-agent system, enabling human-in-the-loop interactions within the AutoGen framework."
+
+  - name: "AutoGen AssistantAgent Class"
+    chunk_ref: "15-SciAgents (Chunk 2:488)"
+    quote: "Assistant, Planner, Ontologist, Scientist 1, Scientist 2, and Critic agents are created via AssistantAgent class from Autogen"
+    description: "AssistantAgent class is used for creating specialized LLM agents with distinct roles (planner, ontologist, scientist, critic) in the multi-agent system."
+
+  - name: "AutoGen GroupChatManager"
+    chunk_ref: "15-SciAgents (Chunk 2:489)"
+    quote: "and the group chat manager is created using GroupChatManager class"
+    description: "GroupChatManager class enables coordination and management of group conversations between multiple agents in the AutoGen framework."
+
+  - name: "Python Function-Based Tool Design"
+    chunk_ref: "15-SciAgents (Chunk 2:498-499)"
+    quote: "All the tools implemented in this work are defined as python functions. Each function is characterized by a name, a description, and input properties"
+    description: "Tools are implemented as Python functions with well-defined names, descriptions, and typed input properties, enabling structured function calling by LLM agents."
+
+  - name: "Semantic Scholar API Integration"
+    chunk_ref: "15-SciAgents (Chunk 2:505-510)"
+    quote: "We use the Semantic Scholar API, an AI-powered search engine for academic resources, to search for related publications using a set of keywords"
+    description: "Semantic Scholar API is integrated as an external tool for novelty assessment, enabling agents to search academic literature and compare research hypotheses against existing publications."
+
+  - name: "BAAI/bge-large-en-v1.5 Embedding Model"
+    chunk_ref: "15-SciAgents (Chunk 2:239)"
+    quote: "We use the `BAAI/bge-large-en-v1.5` embedding model"
+    description: "The BAAI/bge-large-en-v1.5 embedding model is used for generating node embeddings in the knowledge graph, enabling semantic similarity calculations for pathfinding algorithms."
+
+  - name: "GPT-4 Family Models"
+    chunk_ref: "15-SciAgents (Chunk 2:483)"
+    quote: "We design AI agents using the general-purpose LLM GPT-4 family models"
+    description: "GPT-4 family of large language models serves as the foundation for agent intelligence, providing natural language understanding and generation capabilities."
+
+  - name: "GitHub Code Repository"
+    chunk_ref: "15-SciAgents (Chunk 2:529-530)"
+    quote: "All data and codes are available on GitHub at `https://github.com/lamm-mit/SciAgentsDiscovery` and `https://github.com/lamm-mit/GraphReasoning/`"
+    description: "Open-source code repositories on GitHub provide implementation reference for the SciAgents framework and graph reasoning components."
+
+  - name: "Ontological Knowledge Graph"
+    chunk_ref: "15-SciAgents (Chunk 2:134)"
+    quote: "leveraging LLMs and a comprehensive ontological knowledge graph"
+    description: "Large-scale ontological knowledge graphs (33,159 nodes, 48,753 edges, 92 communities) serve as the substrate for multi-agent reasoning and hypothesis generation."
+
+  - name: "JSON Structured Output Format"
+    chunk_ref: "15-SciAgents (Chunk 2:305-306)"
+    quote: "The output, in JSON format, provides key fields such as `mechanisms`, `unexpected_properties`, and `comparison`"
+    description: "JSON format is used for structured output from agents, enabling standardized representation of research hypotheses with fields like hypothesis, outcome, mechanisms, design_principles."
+
+  - name: "Dijkstra Algorithm Variant"
+    chunk_ref: "15-SciAgents (Chunk 2:250-251)"
+    quote: "the algorithm uses a modified version of Dijkstra's algorithm that introduces a randomness factor to the priority queue"
+    description: "Modified Dijkstra's algorithm with randomness factor (0.2) is used for heuristic pathfinding in knowledge graphs, enabling diverse path exploration."
+
+  - name: "PDF and CSV Output Generation"
+    chunk_ref: "15-SciAgents (Chunk 2:458-459)"
+    quote: "The entire research concept, expanded and reviewed, is then compiled into a final document which is saved as both a PDF and CSV file"
+    description: "Final research documents are exported in both PDF and CSV formats for further analysis and dissemination."
+
+  - name: "Molecular Dynamics Simulation Tools"
+    chunk_ref: "15-SciAgents (Chunk 3:104-105)"
+    quote: "Molecular Dynamics (MD) Simulations: Use MD simulations to model the interactions between silk fibroin and dandelion pigments... Software such as GROMACS or AMBER"
+    description: "GROMACS and AMBER molecular dynamics simulation software are recommended for modeling molecular interactions in materials science applications."
+
+  - name: "Finite Element Analysis Software"
+    chunk_ref: "15-SciAgents (Chunk 3:106-107)"
+    quote: "Finite Element Analysis (FEA): Apply FEA to simulate the mechanical behavior... Software like ANSYS or COMSOL Multiphysics"
+    description: "ANSYS and COMSOL Multiphysics are used for finite element analysis to simulate mechanical behavior of composite materials under various loading conditions."
+
+  - name: "FTIR Spectroscopy"
+    chunk_ref: "15-SciAgents (Chunk 3:113)"
+    quote: "Fourier Transform Infrared Spectroscopy (FTIR): To confirm the formation of beta-sheets in silk fibroin"
+    description: "FTIR spectroscopy is used as an analytical technique to characterize molecular structures and confirm chemical compositions in biomaterials."
+
+  - name: "X-ray Diffraction Analysis"
+    chunk_ref: "15-SciAgents (Chunk 3:114)"
+    quote: "X-ray Diffraction (XRD): To analyze the crystalline structure of the composite material"
+    description: "XRD is used for crystalline structure analysis of composite materials, providing insights into molecular organization."
+
+  - name: "Thermogravimetric Analysis"
+    chunk_ref: "15-SciAgents (Chunk 3:115)"
+    quote: "Thermogravimetric Analysis (TGA): To assess the thermal stability of the composite material"
+    description: "TGA is used to assess thermal stability of materials by measuring weight changes as a function of temperature."
+
+  - name: "UV-Vis Spectroscopy"
+    chunk_ref: "15-SciAgents (Chunk 3:294)"
+    quote: "UV-Vis Spectroscopy: To monitor the distribution of pigments within the silk matrix"
+    description: "UV-Vis spectroscopy is used for optical characterization, monitoring pigment distribution and analyzing absorption spectra."
+
+  - name: "Atomic Force Microscopy"
+    chunk_ref: "15-SciAgents (Chunk 3:295)"
+    quote: "Atomic Force Microscopy (AFM) and Scanning Electron Microscopy (SEM): To observe the microstructure and distribution"
+    description: "AFM is used for nanoscale surface characterization and studying hierarchical organization of materials."
+
+  - name: "Scanning Electron Microscopy"
+    chunk_ref: "15-SciAgents (Chunk 3:295)"
+    quote: "Scanning Electron Microscopy (SEM): To observe the microstructure and distribution of pigments"
+    description: "SEM is used for microstructure visualization and characterizing material morphology at high resolution."
+
+  - name: "Transmission Electron Microscopy"
+    chunk_ref: "15-SciAgents (Chunk 3:296)"
+    quote: "Transmission Electron Microscopy (TEM) and Small-angle X-ray Scattering (SAXS): To analyze the nanoscale structures"
+    description: "TEM is used for nanoscale structure analysis, revealing internal organization of composite materials."
+
+  - name: "Small-Angle X-ray Scattering"
+    chunk_ref: "15-SciAgents (Chunk 3:296)"
+    quote: "Small-angle X-ray Scattering (SAXS): To analyze the nanoscale structures formed by self-assembly"
+    description: "SAXS is used to analyze nanoscale periodic structures and self-assembled organizations in materials."
+
+  - name: "Synchrotron Micro-CT"
+    chunk_ref: "15-SciAgents (Chunk 3:243)"
+    quote: "synchrotron radiation-based micro-computed tomography (SR-microCT)"
+    description: "Synchrotron-based micro-computed tomography is used for high-resolution 3D imaging of hierarchical material structures."
+
+  - name: "FDTD Optical Simulations"
+    chunk_ref: "15-SciAgents (Chunk 3:343)"
+    quote: "Finite-difference time-domain (FDTD) simulations to model light interaction with the composite material"
+    description: "FDTD simulations are used for modeling optical properties and predicting structural coloration in materials."
+
+  - name: "Dynamic Mechanical Analysis"
+    chunk_ref: "15-SciAgents (Chunk 3:355)"
+    quote: "Use dynamic mechanical analysis (DMA) to study the viscoelastic properties"
+    description: "DMA is used to study viscoelastic properties of materials and ensure balance between strength and flexibility."
+
+  - name: "Life Cycle Assessment"
+    chunk_ref: "15-SciAgents (Chunk 3:364)"
+    quote: "Use life cycle assessment (LCA) to evaluate the environmental impact and energy efficiency"
+    description: "LCA methodology is used for evaluating environmental impact and sustainability of production processes."
+
+  - name: "Response Surface Methodology"
+    chunk_ref: "15-SciAgents (Chunk 3:365-366)"
+    quote: "Apply process optimization algorithms such as response surface methodology (RSM) to identify the optimal conditions"
+    description: "RSM is used as a process optimization technique to identify optimal processing conditions for material fabrication."
+
+  - name: "MEEP Electromagnetic Simulations"
+    chunk_ref: "15-SciAgents (Chunk 3:753-754)"
+    quote: "using finite-difference time-domain (FDTD) simulations. Software like MEEP (MIT Electromagnetic Equation Propagation)"
+    description: "MEEP software is used for electromagnetic equation propagation and predicting reflectance spectra of photonic structures."
+
+  - name: "VMD Molecular Visualization"
+    chunk_ref: "15-SciAgents (Chunk 3:718)"
+    quote: "Use tools like VMD (Visual Molecular Dynamics) or GROMACS for this step"
+    description: "VMD is used for molecular visualization and system preparation in molecular dynamics simulations."
+
+  - name: "MDAnalysis and Cluster Analysis"
+    chunk_ref: "15-SciAgents (Chunk 3:742-743)"
+    quote: "Perform cluster analysis to identify and categorize different self-assembled structures... Tools like GROMACS or MDAnalysis"
+    description: "MDAnalysis and GROMACS tools are used for cluster analysis and identifying self-assembled molecular structures."
+
+  - name: "PyMOL and Chimera Visualization"
+    chunk_ref: "15-SciAgents (Chunk 3:736)"
+    quote: "Use visualization tools like PyMOL or Chimera to analyze the binding interfaces"
+    description: "PyMOL and Chimera are used for molecular visualization and analyzing binding interfaces between molecules."
+
+  - name: "LAMMPS Molecular Dynamics"
+    chunk_ref: "15-SciAgents (Chunk 3:751)"
+    quote: "Use software like LAMMPS or custom scripts to simulate light interaction with the nanostructures"
+    description: "LAMMPS molecular dynamics software is used for simulating material properties and light interaction with nanostructures."
+
+  - name: "Computational Fluid Dynamics"
+    chunk_ref: "15-SciAgents (Chunk 5:699-700)"
+    quote: "Computational Fluid Dynamics (CFD): Use CFD to simulate fluid flow within the microfluidic channels"
+    description: "CFD simulations are used to model fluid flow, pressure drop, and heat transfer efficiency in microfluidic systems."
+
+  - name: "Particle Image Velocimetry"
+    chunk_ref: "15-SciAgents (Chunk 5:756-757)"
+    quote: "Conduct fluid dynamics experiments using particle image velocimetry (PIV) to visualize and quantify the flow patterns"
+    description: "PIV is used as an experimental technique to visualize and quantify flow patterns within microfluidic channels."

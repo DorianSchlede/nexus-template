@@ -1,0 +1,117 @@
+---
+batch_id: "agent_modeling_3"
+field: agent_modeling
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 5
+patterns_found: 21
+---
+
+patterns:
+  # Paper 11 - Process Mining Event Knowledge Graphs
+
+  - name: "Actor as Organizational Entity"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:83-86)"
+    quote: "This process relies on 7 different types of entities. Actors (human workers) and machines (an automated warehouse) together handle 5 types of objects"
+    description: "Actors are modeled as one of the core entity types in process execution, distinguished from machines and objects. Human workers (Actors) are organizational entities that execute the process alongside automated systems. This represents a basic agent classification separating human agents from automated agents."
+
+  - name: "Resource Entity Inference"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:233-234)"
+    quote: "we can consider Table 1 is an event table with entity types ENT = {Resource, Order, Supplier Order, Item, Invoice, Payment}"
+    description: "Resource is explicitly identified as an entity type in event data, representing actors/agents that perform activities. This shows how agents are modeled as first-class entities in event knowledge graphs, correlated to events through entity type attributes."
+
+  - name: "Actor Entity Inference from Events"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:595-604)"
+    quote: "Workers are performing this actual work. Often called 'resources' in process management literature, we prefer the term Actor used in organizations research, as each actor follows its own behavior"
+    description: "Agents are modeled as Actor entities with autonomous behavior patterns. The paper explicitly distinguishes Actor from Resource terminology, emphasizing that each actor has individual behavioral characteristics. Actors are inferred from event data and their df-paths reveal unique behavioral patterns."
+
+  - name: "Actor Behavioral df-paths"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:604-608)"
+    quote: "To study actor behavior in the graph of Fig. 6, we only have to (1) infer the Actor entities from the event nodes (see Table 1), and (2) infer each actor's df-path"
+    description: "Agent modeling involves constructing directly-follows paths for each actor entity. These df-paths capture the sequential behavior of individual agents across different process entities, enabling analysis of how specific workers execute activities over time."
+
+  - name: "Actor Intertwined Work Patterns"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:605-607)"
+    quote: "We can see actors R1, R2, R3 working 'intertwined' in the same part of the process. In contrast, R4 and R5 work more separated from the other actors"
+    description: "Agents exhibit different collaboration patterns that can be discovered from event data. Some agents work intertwined on shared process areas while others work in isolation. This reveals organizational patterns of agent collaboration and specialization."
+
+  - name: "Agent Specialization Patterns"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:150-152)"
+    quote: "individual Actors (R1, ..., R5) are specialized in specific activities across multiple different entities, e.g., R2 specializes receiving, updating, and unpacking Supplier Orders and handling Items"
+    description: "Agents exhibit specialization behaviors where individual actors focus on specific activity types across multiple entity instances. This represents role-based agent modeling where agents have defined competencies and responsibilities."
+
+  - name: "Task Instance as Agent-Entity Interaction"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:618-627)"
+    quote: "A task instance of an actor R working on an entity X materializes in an event knowledge graph as a specific subgraph over event nodes e1, ..., ek: (1) the df-paths of R and X both meet in e1, (2) diverge in ek, (3) synchronize in each event node"
+    description: "Agent behavior is modeled through task instances - specific subgraphs where an actor's df-path and an entity's df-path synchronize over consecutive events. This formally captures the concept of an agent performing a coherent unit of work on a specific object."
+
+  - name: "Agent Singleton vs Multi-Activity Tasks"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:631-639)"
+    quote: "Actor R1 only performs a series of singleton tasks ti1, ti2, ti3, ti4... Actor R4 performs two instances ti27 and ti31 of the same task (first Pack Shipment then Ship) directly after each other"
+    description: "Agents exhibit different task execution styles - some perform single-activity tasks in sequence while others perform multi-activity tasks. This captures variability in how agents structure their work into coherent units."
+
+  - name: "Agent Task Interruption"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:639-642)"
+    quote: "Actor R2 also performs two instances ti6 and ti19 of the same task... however R2 interrupts ti6 on A to perform ti9 (Update Invoice) on I2"
+    description: "Agents can exhibit task interruption behavior where they pause work on one entity to handle another before resuming. This models context-switching and multi-tasking behaviors of agents in complex processes."
+
+  - name: "Agent Handover Patterns"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:644-648)"
+    quote: "The df-relationships between task instances also reveal patterns of how work is handed over between actors. For example R1 hands work over to R2 in all Supplier Orders, to R3 in all Orders, and to R4 in O2"
+    description: "Agent collaboration is modeled through handover patterns visible in df-relationships between task instances. These patterns reveal the organizational workflow structure showing which agents transfer work to which other agents."
+
+  - name: "Agent Routines via Proclets"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:7-11)"
+    quote: "The proclets for the Actors however are created manually, describing the intended routine for each actor based on the insights in Sect. 6.3. Bold-bordered initial transitions describe the creation of a new entity; note that the proclets for actors do not have an initial transition but an initial marking as actors are not created in the process"
+    description: "Agent behavioral models (proclets) describe intended routines for each actor. Unlike object entities, actors have initial markings rather than initial transitions because they pre-exist the process. This captures the persistent nature of agent entities versus transient object entities."
+
+  - name: "Agent Synchronization with Multiplicity"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:12-16)"
+    quote: "Dashed synchronization edges between transitions describe that the transitions have to occur together; the multiplicity annotations indicate how many entities of each type have to be involved. For instance, R1 creates 1 new Order in each occurrence of Create Order, but R4 always packs 2-3 Items into 1 Shipment"
+    description: "Agent-entity synchronization is modeled with multiplicity constraints. Different agents interact with different numbers of entities per activity - some work on single entities while others batch multiple entities. This captures cardinality relationships in agent-object interactions."
+
+  # Paper 15 - SciAgents Multi-Agent Graph Reasoning
+
+  - name: "Specialized Agent Roles in Multi-Agent System"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:125-131)"
+    quote: "Each agent in the system is assigned a distinct role, optimized through complex prompting strategies to ensure that every subtask is tackled with targeted expertise and precision. This strategic division of labor allows the AI system to proficiently manage the complexities of scientific research"
+    description: "Agents are modeled with distinct specialized roles, each optimized for specific subtasks through prompting strategies. The multi-agent system achieves complexity management through strategic division of labor, enabling targeted expertise and precision across the discovery workflow."
+
+  - name: "Agent Team Composition"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:720-737)"
+    quote: "'Human': human user that poses the task... 'Planner': suggests a detailed plan... 'Ontologist': responsible to define the relationships... 'Scientist 1': crafts the initial draft... 'Scientist 2': expands and refines... 'Critic': conducts thorough review... 'Assistant': has access to external tools... 'Group chat manager': chooses the next speaker"
+    description: "Multi-agent systems are modeled with explicit role assignments including Human, Planner, Ontologist, Scientists, Critic, Assistant, and Manager. Each agent has defined responsibilities creating a collaborative framework with clear division of cognitive labor."
+
+  - name: "Pre-programmed vs Autonomous Agent Interactions"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:186-194)"
+    quote: "In the first approach, the interactions between agents are pre-programmed and follow a predefined sequence of tasks... In contrast, the second approach features fully automated agent interactions without any predetermined order... This second strategy also incorporates human-in-the-loop interactions"
+    description: "Agent coordination is modeled through two paradigms: pre-programmed sequential interactions for consistency, or fully automated dynamic interactions for flexibility. Human-in-the-loop is supported in the autonomous model for expert feedback and strategic guidance."
+
+  - name: "Agent as Knowledge Graph Navigator"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:289-296)"
+    quote: "the role of the ontologist agent is instrumental. It applies advanced reasoning and inference techniques to synthesize and interpret the complex web of data. This capability allows it to extract significant insights that might not be obvious at first glance"
+    description: "The Ontologist agent is modeled as a knowledge navigator that applies reasoning and inference techniques to interpret relationships in ontological knowledge graphs. This agent transitions static knowledge retrieval to dynamic knowledge generation."
+
+  - name: "Scientist Agent for Hypothesis Generation"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:356-365)"
+    quote: "The scientist agent harnesses the extensive knowledge parsed from the knowledge graph and further refined by the ontologist to propose novel research ideas. Through complex prompting... the agent is tasked with synthesizing a novel research proposal that integrates all key concepts"
+    description: "Scientist agents are modeled as hypothesis generators that synthesize novel proposals from knowledge graphs. They receive refined knowledge from upstream agents and produce structured outputs addressing hypothesis, outcomes, mechanisms, design principles, and novelty."
+
+  - name: "Critic Agent for Adversarial Review"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:511-516)"
+    quote: "the Critic agent, responsible for thoroughly reviewing the research proposal, summarizing its key points, and recommending improvements. This agent delivers a comprehensive scientific critique, highlighting both the strengths and weaknesses of the research idea"
+    description: "The Critic agent is modeled as an adversarial reviewer that evaluates proposals for strengths, weaknesses, and improvements. It identifies impactful scientific questions for molecular modeling and experimentation, representing peer-review dynamics in multi-agent collaboration."
+
+  - name: "Agent Tool Integration"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:195-197)"
+    quote: "the second approach provides a more robust framework where additional tools could be readily incorporated. For instance, we have empowered our automated multi-agent model with the Semantic Scholar API as a tool that provides it with an ability to check the novelty of the generated hypothesis"
+    description: "Agents are modeled with tool integration capabilities enabling access to external resources like APIs. The Assistant agent can invoke functions to assess novelty against literature, demonstrating how agents extend their capabilities through tool use."
+
+  - name: "Autonomous Agent Self-Organization"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:152-154)"
+    quote: "A notable feature was the finding that the autonomous multi-agent system can develop sophisticated problem solving strategies on its own"
+    description: "Autonomous multi-agent systems exhibit emergent self-organization, developing sophisticated problem-solving strategies without explicit programming. This demonstrates how agent teams can autonomously coordinate to solve complex tasks."
+
+  - name: "Swarm Intelligence Model"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:138-142)"
+    quote: "The proposed approach, harnessing a modular, hierarchically organized swarm of intelligence similar to biological systems with multiple iterations to model the process of negotiation a solution during the process of thinking and reflecting about a problem"
+    description: "Multi-agent systems are modeled as swarm intelligence analogous to biological systems. Agents engage in iterative negotiation, thinking, and reflection processes to collaboratively solve problems, offering more nuanced reasoning than single-agent approaches."

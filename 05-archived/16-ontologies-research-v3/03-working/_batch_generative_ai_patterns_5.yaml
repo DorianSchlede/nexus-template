@@ -1,0 +1,182 @@
+---
+batch_id: "generative_ai_patterns_5"
+field: generative_ai_patterns
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 4
+patterns_found: 32
+---
+
+patterns:
+  # Paper 20: Agentic RAG Survey - Chunk 1
+  - name: "Reflection Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:512-531)"
+    quote: "Reflection is a foundational design pattern in agentic workflows, enabling agents to iteratively evaluate and refine their outputs"
+    description: "A core agentic pattern where agents incorporate self-feedback mechanisms to identify and address errors, inconsistencies, and areas for improvement. Involves prompting an agent to critique its outputs for correctness, style, and efficiency, then incorporating this feedback into subsequent iterations. External tools like unit tests or web searches can validate results. In multi-agent systems, distinct roles can be assigned where one agent generates outputs while another critiques them."
+
+  - name: "Planning Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:537-549)"
+    quote: "Planning is a key design pattern in agentic workflows that enables agents to autonomously decompose complex tasks into smaller, manageable subtasks"
+    description: "An agentic pattern essential for multi-hop reasoning and iterative problem-solving in dynamic and uncertain scenarios. Agents dynamically determine the sequence of steps needed to accomplish a larger objective. This adaptability allows agents to handle tasks that cannot be predefined. While powerful, Planning can produce less predictable outcomes compared to deterministic workflows like Reflection."
+
+  - name: "Tool Use Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:552-569)"
+    quote: "Tool Use enables agents to extend their capabilities by interacting with external tools, APIs, or computational resources"
+    description: "A pattern allowing agents to gather information, perform computations, and manipulate data beyond their pre-trained knowledge. Includes information retrieval, computational reasoning, and interfacing with external systems. Has evolved significantly with advancements like GPT-4's function calling capabilities. Techniques inspired by RAG, such as heuristic-based selection, address challenges in optimizing tool selection when many options are available."
+
+  - name: "Multi-Agent Collaboration Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:572-597)"
+    quote: "Multi-agent collaboration is a key design pattern in agentic workflows that enables task specialization and parallel processing"
+    description: "A design pattern where agents communicate and share intermediate results while maintaining workflow efficiency and coherence. Distributes subtasks among specialized agents to improve scalability and adaptability. Each agent operates with its own memory and workflow, which can include the use of tools, reflection, or planning. Frameworks such as AutoGen, Crew AI, and LangGraph provide implementations for multi-agent solutions."
+
+  - name: "Prompt Chaining"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:620-642)"
+    quote: "Prompt chaining decomposes a complex task into multiple steps, where each step builds upon the previous one"
+    description: "An agentic workflow pattern that improves accuracy by simplifying each subtask before moving forward. Most effective when a task can be broken down into fixed subtasks, each contributing to the final output. Particularly useful in scenarios where step-by-step reasoning enhances accuracy. May increase latency due to sequential processing. Example applications include generating marketing content and translating it, or structuring document creation through outline-verify-develop phases."
+
+  - name: "Routing Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:644-668)"
+    quote: "Routing involves classifying an input and directing it to an appropriate specialized prompt or process"
+    description: "An agentic workflow pattern ensuring distinct queries or tasks are handled separately, improving efficiency and response quality. Ideal for scenarios where different types of input require distinct handling strategies. Example applications include directing customer service queries into categories (technical support, refund requests, general inquiries) or assigning simple queries to smaller models for cost efficiency while routing complex requests to advanced models."
+
+  - name: "Parallelization Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:671-694)"
+    quote: "Parallelization divides a task into independent processes that run simultaneously, reducing latency and improving throughput"
+    description: "An agentic workflow pattern that can be categorized into sectioning (independent subtasks) and voting (multiple outputs for accuracy). Useful when tasks can be executed independently to enhance speed or when multiple outputs improve confidence. Example applications include splitting tasks like content moderation (one model screens input while another generates response) or using multiple models to cross-check code for vulnerabilities."
+
+  - name: "Orchestrator-Workers Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:696-719)"
+    quote: "This workflow features a central orchestrator model that dynamically breaks tasks into subtasks, assigns them to specialized worker models, and compiles the results"
+    description: "An agentic workflow pattern where unlike parallelization, it adapts to varying input complexity. Best suited for tasks requiring dynamic decomposition and real-time adaptation, where subtasks are not predefined. Example applications include automatically modifying multiple files in a codebase based on the nature of requested changes, or conducting real-time research by gathering and synthesizing relevant information from multiple sources."
+
+  - name: "Evaluator-Optimizer Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:721-741)"
+    quote: "The evaluator-optimizer workflow iteratively improves content by generating an initial output and refining it based on feedback from an evaluation model"
+    description: "An agentic workflow pattern effective when iterative refinement significantly enhances response quality, especially when clear evaluation criteria exist. Example applications include improving literary translations through multiple evaluation and refinement cycles, or conducting multi-round research queries where additional iterations refine search results."
+
+  - name: "Single-Agent Router Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:752-827)"
+    quote: "A Single-Agent Agentic RAG serves as a centralized decision-making system where a single agent manages the retrieval, routing, and integration of information"
+    description: "An architecture that simplifies the system by consolidating retrieval, routing, and integration tasks into one unified agent. Particularly effective for setups with limited number of tools or data sources. The coordinating agent evaluates queries and selects from retrieval options including structured databases (Text-to-SQL), semantic search, web search, and recommendation systems. Features centralized simplicity, efficiency, resource optimization, dynamic routing, and versatility across tools."
+
+  # Paper 20: Agentic RAG Survey - Chunk 2
+  - name: "Multi-Agent RAG Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:1-99)"
+    quote: "Multi-Agent RAG represents a modular and scalable evolution of single-agent architectures, designed to handle complex workflows and diverse query types"
+    description: "A modular architecture that distributes responsibilities across multiple specialized agents instead of relying on a single agent. A coordinator agent delegates queries to specialized retrieval agents based on requirements. Features modularity (seamless addition/removal of agents), scalability (parallel processing), task specialization, and efficiency. Challenges include coordination complexity, computational overhead, and data integration from diverse sources."
+
+  - name: "Hierarchical Agentic RAG"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:100-188)"
+    quote: "Hierarchical Agentic RAG systems employ a structured, multi-tiered approach to information retrieval and processing, enhancing both efficiency and strategic decision-making"
+    description: "An architecture where agents are organized in a hierarchy with higher-level agents overseeing and directing lower-level agents. Top-tier agents evaluate query complexity and prioritize data sources. Enables multi-level decision-making, strategic prioritization, and scalability for complex multi-faceted queries. Challenges include coordination complexity across multiple levels and efficient resource allocation to avoid bottlenecks."
+
+  - name: "Corrective RAG Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:190-312)"
+    quote: "Corrective RAG introduces mechanisms to self-correct retrieval results, enhancing document utilization and improving response generation quality"
+    description: "A pattern embedding intelligent agents for iterative refinement of context documents and responses. Core principle lies in ability to evaluate retrieved documents dynamically, perform corrective actions, and refine queries. Built on five key agents: Context Retrieval Agent, Relevance Evaluation Agent, Query Refinement Agent, External Knowledge Retrieval Agent, and Response Synthesis Agent. Features iterative correction, dynamic adaptability, agentic modularity, and factuality assurance."
+
+  - name: "Adaptive RAG Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:314-441)"
+    quote: "Adaptive Retrieval-Augmented Generation (Adaptive RAG) enhances the flexibility and efficiency of large language models by dynamically adjusting query handling strategies"
+    description: "A pattern employing a classifier to assess query complexity and determine the most appropriate approach, ranging from single-step retrieval to multi-step reasoning, or bypassing retrieval altogether. For straightforward queries, generates answers using pre-existing knowledge. For simple queries, performs single-step retrieval. For complex queries, employs multi-step retrieval with progressive refinement. Features dynamic adaptability, resource efficiency, enhanced accuracy through iterative refinement, and flexibility for domain-specific extensions."
+
+  - name: "Agent-G Graph RAG Framework"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:443-581)"
+    quote: "Agent-G introduces a novel agentic architecture that integrates graph knowledge bases with unstructured document retrieval"
+    description: "An agentic framework combining structured and unstructured data sources for improved reasoning and retrieval accuracy. Employs modular retriever banks, dynamic agent interaction, and feedback loops. Core components: Retriever Bank (modular agents for graph/unstructured data), Critic Module (validates relevance and quality), Dynamic Agent Interaction (task-specific collaboration), and LLM Integration (synthesizes validated data). Features enhanced reasoning, dynamic adaptability, improved accuracy, and scalable modularity."
+
+  - name: "GeAR Graph-Enhanced Agent Framework"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:583-699)"
+    quote: "GeAR introduces an agentic framework that enhances traditional Retrieval-Augmented Generation (RAG) systems by incorporating graph-based retrieval mechanisms"
+    description: "A framework advancing RAG through Graph Expansion (enhances base retrievers by expanding to include graph-structured data) and Agent Framework (agent-based architecture for dynamic, autonomous decision-making in retrieval). Graph Expansion Module integrates graph-based data, allowing system to consider entity relationships during retrieval. Agent-Based Retrieval enables dynamic selection and combination of retrieval strategies. Features enhanced multi-hop retrieval, agentic decision-making, improved accuracy, and scalability."
+
+  - name: "Agentic Document Workflows (ADW)"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:701-803)"
+    quote: "Agentic Document Workflows (ADW) extend traditional Retrieval-Augmented Generation (RAG) paradigms by enabling end-to-end knowledge work automation"
+    description: "A pattern orchestrating complex document-centric processes, integrating document parsing, retrieval, reasoning, and structured outputs with intelligent agents. Addresses limitations of Intelligent Document Processing (IDP) and RAG by maintaining state, coordinating multi-step workflows, and applying domain-specific logic. Workflow: Document Parsing/Structuring, State Maintenance, Knowledge Retrieval, Agentic Orchestration, Actionable Output Generation. Features state maintenance, multi-step orchestration, domain-specific intelligence, scalability, and enhanced productivity."
+
+  # Paper 20: Agentic RAG Survey - Chunk 3
+  - name: "Real-Time Adaptability in Agentic Systems"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:14-21)"
+    quote: "Real-Time Adaptability: Dynamically integrates evolving data, such as live service outages or pricing updates"
+    description: "A key benefit of agentic RAG systems enabling dynamic integration of evolving data in real-time applications. Customer support systems can incorporate live service outages, pricing updates, or other changing information into responses without requiring system reconfiguration. This enables personalized, context-aware replies that enhance user engagement."
+
+  - name: "Patient-Specific Data Integration Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:24-46)"
+    quote: "Agentic RAG systems enable this by retrieving real-time clinical guidelines, medical literature, and patient history to assist clinicians"
+    description: "A healthcare application pattern where agentic RAG integrates electronic health records (EHR) and up-to-date medical literature to generate comprehensive summaries for clinicians. Enables personalized care tailored to individual patient needs, time efficiency through streamlined retrieval of relevant research, and accuracy through recommendations based on latest evidence and patient-specific parameters."
+
+  - name: "Legal Contract Analysis Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:49-71)"
+    quote: "A legal agentic RAG system can analyze contracts, extract critical clauses, and identify potential risks"
+    description: "An application pattern combining semantic search capabilities with legal knowledge graphs to automate contract review. Automatically flags clauses that deviate from standard terms, reduces time spent on contract review processes, and handles large volumes of contracts simultaneously. Ensures compliance and mitigates risks through automated analysis."
+
+  - name: "Financial Risk Analysis with Multi-Step Reasoning"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:74-98)"
+    quote: "These systems integrate live data streams, historical trends, and predictive modeling to generate actionable outputs"
+    description: "A finance application pattern for investment decisions, market analysis, and risk management. Delivers real-time analytics based on live market data, identifies potential risks using predictive analysis and multi-step reasoning, and combines historical and live data for comprehensive strategies. In auto insurance, can automate claim processing by retrieving policy details and combining with accident data."
+
+  - name: "Adaptive Learning Pattern"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:101-121)"
+    quote: "These systems enable adaptive learning by generating explanations, study materials, and feedback tailored to the learner's progress and preferences"
+    description: "An education application pattern where agentic RAG assists researchers by synthesizing key findings from multiple sources. Provides tailored learning paths adapted to individual student needs and performance levels, engaging interactions with interactive explanations and personalized feedback, and scalability supporting large-scale deployments for diverse educational environments."
+
+  - name: "Graph-Enhanced Multimodal Workflows"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:124-150)"
+    quote: "Graph-Enhanced Agentic RAG (GEAR) combines graph structures with retrieval mechanisms, making it particularly effective in multimodal workflows"
+    description: "A pattern combining graph structures with retrieval for workflows requiring interconnected data sources. Enables synthesis of text, images, and videos for marketing campaigns. Features multi-modal capabilities integrating text, image, and video data; enhanced creativity generating innovative ideas and solutions; and dynamic adaptability to evolving market trends and customer needs."
+
+  - name: "LangGraph Workflow Orchestration"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:164-167)"
+    quote: "LangGraph complements this by introducing graph-based workflows that support loops, state persistence, and human-in-the-loop interactions"
+    description: "A framework providing modular components for building RAG pipelines with graph-based workflows. Enables sophisticated orchestration and self-correction mechanisms in agentic systems. Supports loops for iterative processing, state persistence for maintaining context across steps, and human-in-the-loop interactions for validation and oversight."
+
+  - name: "Meta-Agent Document Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:169-172)"
+    quote: "It introduces a meta-agent architecture where sub-agents manage smaller document sets, coordinating through a top-level agent for tasks such as compliance analysis"
+    description: "LlamaIndex's Agentic Document Workflows (ADW) pattern enabling end-to-end automation of document processing, retrieval, and structured reasoning. Sub-agents manage smaller document sets and coordinate through a top-level agent for complex tasks like compliance analysis and contextual understanding."
+
+  - name: "Adaptive Vector Search"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:174-176)"
+    quote: "Qdrant enhances retrieval workflows with adaptive vector search capabilities, allowing agents to optimize performance by dynamically switching between sparse and dense vector methods"
+    description: "A retrieval pattern where agents dynamically switch between sparse and dense vector methods to optimize performance. Combined with Hugging Face pre-trained models for embedding and generation tasks, enables flexible, context-aware retrieval optimization."
+
+  - name: "Multi-Agent Orchestration Frameworks"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:182-189)"
+    quote: "CrewAI supports hierarchical and sequential processes, robust memory systems, and tool integrations. AG2 excels in multi-agent collaboration with advanced support for code generation, tool execution, and decision-making"
+    description: "Frameworks emphasizing multi-agent architectures. CrewAI supports hierarchical and sequential processes with robust memory systems and tool integrations. AG2 (formerly AutoGen) excels in multi-agent collaboration with advanced support for code generation, tool execution, and decision-making. OpenAI Swarm provides educational, lightweight multi-agent orchestration emphasizing agent autonomy and structured collaboration."
+
+  - name: "Semantic Kernel Agentic Patterns"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:198-203)"
+    quote: "Semantic Kernel is an open-source SDK by Microsoft that integrates large language models (LLMs) into applications. It supports agentic patterns, enabling the creation of autonomous AI agents"
+    description: "Microsoft's open-source SDK integrating LLMs into applications with support for agentic patterns. Enables creation of autonomous AI agents for natural language understanding, task automation, and decision-making. Used in scenarios like ServiceNow's P1 incident management to facilitate real-time collaboration, automate task execution, and retrieve contextual information seamlessly."
+
+  # Paper 21: LLM Smart Contracts from BPMN - Chunk 1
+  - name: "Zero-Shot Prompting"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:145-146)"
+    quote: "In zero-shot prompting, models complete tasks based solely on instructions without prior examples"
+    description: "An LLM prompting pattern where models complete tasks based solely on instructions without prior examples. Demonstrates that LLMs can perform complex tasks beyond language understanding and generation, including analyzing and creating business process models and smart contracts, without task-specific training."
+
+  - name: "Few-Shot Prompting"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:146-147)"
+    quote: "few-shot prompting involves providing a handful of illustrative examples directly within the input"
+    description: "An LLM prompting pattern providing illustrative examples within the input. Augmenting the generation process by a formalized model improves results in smart contract generation. Studies show that moving from zero-shot to one-shot and two-shot prompts can improve performance, though not consistently."
+
+  - name: "LLM-Driven Code Generation from Process Models"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:54-61)"
+    quote: "LLMs are similarly prospected to have the potential to drive automation. This hope can draw on seminal results from the related field of code-to-code translation (transpilers)"
+    description: "A pattern using LLMs for model-driven engineering where process descriptions are transformed into executable artifacts. LLM-based approaches outperform traditional rule-based approaches in code-to-code translation. Applied to blockchain-based business process execution where BPMN choreographies are transformed into smart contracts. Challenges include non-determinism, hallucination, security vulnerabilities, and biases."
+
+  - name: "LLM Temperature Control for Determinism"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:171-174)"
+    quote: "Temperature is a setting for LLMs that controls the randomness of generated text; lower temperatures make outputs more predictable and focused"
+    description: "A configuration pattern controlling LLM output randomness. Lower temperatures select most probable tokens for predictable, focused outputs. Higher temperatures select less probable tokens for creative, varied responses. For smart contract generation requiring reliability, temperature is set to 0 for quasi-deterministic inference results, though tie-breaking and floating point variability may still cause stochasticity."
+
+  - name: "Automated Evaluation Framework for LLM Code Generation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:229-241)"
+    quote: "To assess the capabilities of LLMs for smart contract generation, we designed a configurable benchmarking framework"
+    description: "A pattern for systematically evaluating LLM-generated code through automated testing. Replays all possible conforming traces (which the smart contract must accept) and non-conforming traces (which it must reject). Framework components include test runner, simulator (generates conforming/non-conforming traces), LLM provider interface, log replayer, and blockchain environment. Enables repeatable benchmarks as LLM capabilities evolve rapidly."
+
+  - name: "LLM Integration with Verification Pipelines"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:650-659)"
+    quote: "LLM integration must rely on extensive evaluation and robust verification of generated outcomes. This could involve using LLMs to propose code snippets or modifications, which are then rigorously checked"
+    description: "A responsible integration pattern for high-security contexts like smart contracts. LLMs propose code snippets checked against formal specifications or verified using automated theorem provers. LLMs also generate test cases or identify potential vulnerabilities, augmenting existing verification processes. Combines reliability of traditional code generation tools with flexibility and natural language understanding of LLMs."

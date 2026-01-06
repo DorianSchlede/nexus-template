@@ -1,0 +1,153 @@
+---
+batch_id: "entity_types_11"
+field: entity_types
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 6
+patterns_found: 28
+notes: "Paper 24 (Enterprise Ontology) had severe encoding issues with garbled/corrupted text, limiting extraction. Paper 31 (BBO) was fully readable and provided rich entity type patterns."
+---
+
+patterns:
+  # ============================================================
+  # Paper 31: BBO BPMN Ontology - Entity Types
+  # ============================================================
+
+  - name: "Process as Key Entity"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:185-187)"
+    quote: "Process: it is the key concept. The ontology should enable (i) to represent the decomposition of a given process in activities"
+    description: "Process is identified as the central entity type in BBO. It supports hierarchical decomposition into sub-processes and tasks, with ordering constraints controlled by events and conditions. This maps to the Activity entity in the 8-entity hypothesis."
+
+  - name: "Activity Entity Type with Three Subclasses"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:229-234)"
+    quote: "Activity is the work to be performed. Activity class has three sub-classes: Task: an atomic task, Sub-Process: complex task that contains several Tasks, CallActivity"
+    description: "Activity is defined as the work entity with a clear taxonomy: Task (atomic), Sub-Process (composite), and CallActivity (reusable). This supports the Task entity type in the 8-entity hypothesis with clear atomic/composite distinction."
+
+  - name: "Event Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:236-239)"
+    quote: "Event is something that 'happens' during the course of a process. Events affect the flow of the process and usually have a cause or an impact"
+    description: "Event is defined as an occurrence that happens during process execution, affecting flow and requiring reactions. This directly validates the Event entity in the 8-entity hypothesis. BPMN distinguishes interrupting vs non-interrupting events and multiple types (TimerEvent, ConditionalEvent, etc.)."
+
+  - name: "Gateway Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:241)"
+    quote: "Gateway is used to control how SequenceFlows interact as they converge or diverge within a Process"
+    description: "Gateway is a flow control entity type that manages branching and merging of process flows. Four subtypes: ConvergingGateway, DivergingGateway, MixedGateway, UnspecifiedGateway. This relates to Rule entity type as gateways encode decision logic."
+
+  - name: "Agent Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:191-192)"
+    quote: "Agent: the actor that performs a given process activity. Indeed, it is important to specify who is responsible for the accomplishment of a given activity"
+    description: "Agent is explicitly defined as the actor/performer responsible for activity accomplishment. This directly validates the Agent entity in the 8-entity hypothesis and emphasizes responsibility/accountability."
+
+  - name: "Agent Subclasses - Human and Software"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:346-347)"
+    quote: "An Agent may be a HumanResource or a SoftwareResource. The concept Job with the two relations 'subordinated' and 'superior' represent the organizational model"
+    description: "Agent is taxonomized into HumanResource and SoftwareResource. This supports AI agent integration patterns where software agents are first-class entities alongside human actors. Job entity captures organizational hierarchy."
+
+  - name: "Role Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:350-353)"
+    quote: "we differentiated Job from Role to offer more flexibility. Indeed, two persons that have the same Job, may have different authorization levels to execute Activities"
+    description: "Role is explicitly distinguished from Job as an entity type providing authorization levels and activity permissions. Supports indirect assignment of agents to activities via roles. Validates Role entity in 8-entity hypothesis."
+
+  - name: "Resource Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:290-293)"
+    quote: "The Resource concept exists in the BPMN meta-model. However, its semantics and definition are ambiguous... we adopt the first definition of Resource, that englobes all resource types"
+    description: "Resource is defined broadly to encompass all resource types (not just agents). BBO adopts a comprehensive Resource taxonomy including MaterialResource, SoftwareResource, HumanResource, etc. Validates Resource entity in 8-entity hypothesis."
+
+  - name: "Resource Taxonomy"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:300-303)"
+    quote: "Hence, we may define a resource taxonomy (Figure 6). This taxonomy actually is relevant to answer to some competency questions like 'What is the type of a given resource?'"
+    description: "BBO defines a formal Resource taxonomy with multiple types including MaterialResource, SoftwareResource, ExecutableScript, Tool, DataResource. This provides rich typing for the Resource entity."
+
+  - name: "Input/Output Specifications Entity"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:188-190)"
+    quote: "Input/output specifications: tasks may require some input requirements (resources or parameter values) before being performed, or they may produce outcomes"
+    description: "InputOutputSpecification is an entity type that captures data flow - what resources/parameters flow into and out of activities. This relates to the Data entity in 8-entity hypothesis."
+
+  - name: "Data Resource Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:282-284)"
+    quote: "we need to represent the input and output of each activity. In BPMN meta-model, an activity may have at most one InputOutputSpecification that is related to the required Input/Output Data"
+    description: "DataResource is a subtype of Resource representing data objects that flow between activities. Combined with InputOutputSpecification, this validates the Data entity type in 8-entity hypothesis."
+
+  - name: "WorkProduct Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:326-331)"
+    quote: "the term Product is defined as follows 'Thing or substance produced by a natural or artificial process.' We adopt this definition for the WorkProduct concept"
+    description: "WorkProduct is an entity type representing outputs of processes. Defined as a subtype of MaterialResource since products can become inputs for subsequent activities. Relates to Data/Resource entities."
+
+  - name: "ManufacturingFacility Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:193-195)"
+    quote: "Manufacturing facility: the place where the process activities should be performed"
+    description: "ManufacturingFacility is an entity type for location/place where activities occur. Taxonomy includes Station, Cell, Shop, Factory. This could be considered a specialized Resource type."
+
+  - name: "ManufacturingFacility Taxonomy"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:311-313)"
+    quote: "A workstation, Station, is where a particular job is performed. Cell is the place that groups a set of related operations in the production flow, while Shop is the area where production is carried out"
+    description: "ManufacturingFacility has a hierarchical taxonomy: Station (workstation), Cell (grouped operations), Shop (production area), Factory (overall facility). Provides granular location modeling."
+
+  - name: "FlowElement Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:220-223)"
+    quote: "Describing a process consists in defining the FlowElements that compose it. FlowElements class has two subclasses: SequenceFlow and FlowNode"
+    description: "FlowElement is a supertype for process components with two main subclasses: SequenceFlow (transitions) and FlowNode (activities, events, gateways). This provides structural organization for process entities."
+
+  - name: "SequenceFlow Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:221-222)"
+    quote: "SequenceFlow represents transitions that ensure the move from the source FlowNode to the target one. A SequenceFlow may depend on a given condition"
+    description: "SequenceFlow is an entity type representing directed transitions between process nodes. Can be conditional, default, or normal. Encodes process flow logic."
+
+  - name: "SequenceFlow Subtypes"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:259)"
+    quote: "SequenceFlow: ConditionalSequenceFlow, DefaultSequenceFlow, NormalSequenceFlow"
+    description: "SequenceFlow has three subtypes based on conditionality: ConditionalSequenceFlow (condition-dependent), DefaultSequenceFlow (fallback path), NormalSequenceFlow (unconditional transition)."
+
+  - name: "Expression Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:222-223)"
+    quote: "A SequenceFlow may depend on a given condition, which is represented as an instance of Expression class"
+    description: "Expression is an entity type for conditions and constraints. Used to define conditional logic for sequence flows and events. Relates to Rule entity in 8-entity hypothesis."
+
+  - name: "Event Subtypes"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:263)"
+    quote: "Event: cancelEvent, conditionalEvent, ErrorEvent, MultipleEvent, NoneEvent, TimerEvent, etc."
+    description: "Event entity has extensive subtyping: CancelEvent, ConditionalEvent, ErrorEvent, MultipleEvent, NoneEvent, TimerEvent, and more. StartEvent and EndEvent are positional subtypes."
+
+  - name: "Parameter Entity Types"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:287-288)"
+    quote: "we have added the concepts: ParameterValueBinding, Parameter and its subclasses QualitativeParameter and QuantitativeParameter, ParameterValue, ParameterExpectedValue"
+    description: "Parameter is an entity type with two subtypes: QualitativeParameter and QuantitativeParameter. Related entities include ParameterValue, ParameterExpectedValue, and ParameterValueBinding for value specifications."
+
+  - name: "UnitOfMeasure Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:288-289)"
+    quote: "The UnitOfMeasure class is specified using the two concepts Unit and Prefix of the unit measures ontology UO"
+    description: "UnitOfMeasure is an entity type for measurement units, composed of Unit and Prefix. Reused from external UO ontology for standardization."
+
+  - name: "Job Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:346-348)"
+    quote: "The concept Job with the two relations 'subordinated' and 'superior' represent the organizational model of the company"
+    description: "Job is an entity type representing organizational positions with hierarchical relationships (subordinated/superior). Distinct from Role which handles authorization levels."
+
+  - name: "LoopCharacteristics Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:234)"
+    quote: "Activity class is related to LoopCharacteristics to represent iteration specifications"
+    description: "LoopCharacteristics is an entity type that captures iteration/repetition specifications for activities. Enables modeling of loops and repeated task execution."
+
+  - name: "FlowElementsContainer Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:220)"
+    quote: "Process is a sub-class of FlowElementsContainer. Describing a process consists in defining the FlowElements that compose it"
+    description: "FlowElementsContainer is a supertype for entities that contain flow elements. Process is its primary subclass. Provides containment semantics for process structure."
+
+  - name: "BBO Entity Count - 106 Classes"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:471-473)"
+    quote: "Concepts: 106, Relationships others than isA: 125, isA relations: 83, Metrics: RD = 125/(125+83) = 0.60, SD = 83/106 = 0.78"
+    description: "BBO contains 106 ontology classes (entity types), 125 non-inheritance relationships, and 83 isA (inheritance) relationships. The relationship diversity (0.60) indicates rich semantic connections beyond taxonomy."
+
+  - name: "Five Main Concept Categories"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:183-196)"
+    quote: "we have identified five main concepts that must be covered by BBO ontology: Process, Input/output specifications, Agent, Work product, Manufacturing facility"
+    description: "BBO identifies five main entity categories from specification analysis: Process (activities), Input/Output Specifications (data flow), Agent (performers), Work Product (outputs), Manufacturing Facility (locations). Maps partially to 8-entity hypothesis."
+
+  - name: "GlobalTask Entity Type"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:232-233)"
+    quote: "CallActivity: an activity that calls a CallableElement that may be a GlobalTask (i.e., a reusable task) or Sub-Process"
+    description: "GlobalTask is an entity type representing reusable task definitions that can be called from multiple processes via CallActivity. Enables task reuse patterns."
+
+  - name: "SubProcess Subtypes"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:260)"
+    quote: "SubProcess: EventBasedSubProcess"
+    description: "SubProcess has a subtype EventBasedSubProcess for processes triggered by events. Combined with AdHocSubProcess (mentioned in constraints), provides flexible subprocess modeling."

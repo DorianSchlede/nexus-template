@@ -1,0 +1,98 @@
+---
+batch_id: "agent_modeling_5"
+field: agent_modeling
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 5
+patterns_found: 18
+---
+
+patterns:
+  - name: "Multi-Agent Team Composition Pattern"
+    chunk_ref: "15-SciAgents (Chunk 7:474-486)"
+    quote: "user: An attentive HUMAN user who can answer questions...planner: A planner who can suggest a plan...assistant: An assistant who calls the appropriate tools..."
+    description: "SciAgents defines a multi-agent team with specialized roles including: user (human interface), planner (task decomposition), assistant (tool invocation), ontologist (term definition), scientist (proposal crafting), and multiple domain-specific agents (hypothesis_agent, outcome_agent, mechanism_agent, design_principles_agent, unexpected_properties_agent, comparison_agent, novelty_agent, critic_agent). Each agent has a clearly defined responsibility in the collaborative research process."
+
+  - name: "Specialized Agent Role Definitions"
+    chunk_ref: "15-SciAgents (Chunk 7:477-486)"
+    quote: "ontologist: An ontologist who defines each of the terms and discusses the relationships in the path. scientist: A scientist who can craft the research proposal..."
+    description: "Agents are modeled with specific domain expertise: ontologist handles terminology and relationships, scientist creates proposals based on ontologist input, hypothesis_agent expands hypothesis aspects, outcome_agent expands outcome aspects, mechanism_agent expands mechanisms, and critic_agent provides summary and improvement suggestions. This represents a role-based agent modeling approach."
+
+  - name: "Sequential Agent Coordination Pattern"
+    chunk_ref: "15-SciAgents (Chunk 7:489-499)"
+    quote: "1. Generate Random Keywords and Knowledge Path...2. Define Terms and Relationships...3. Craft the Research Proposal...4. Expand the Research Proposal...5. Critique and Suggest Improvements"
+    description: "The multi-agent system follows a sequential workflow where agents are invoked in a specific order: path generation -> ontologist definitions -> scientist proposal -> specialized expansion agents -> critic review -> novelty/feasibility rating. This represents a pipeline-based orchestration model for agent coordination."
+
+  - name: "Caller Agent Orchestration Pattern"
+    chunk_ref: "15-SciAgents (Chunk 8:700-704)"
+    quote: "caller: I am responsible for selecting the next role to speak. Call this agent immediately after each output or conversation is returned."
+    description: "SciAgents employs a dedicated 'caller' agent that acts as an orchestrator responsible for selecting which agent speaks next. This agent must be called immediately after each output, implementing a centralized control mechanism for multi-agent coordination."
+
+  - name: "Agent Tool Integration Pattern"
+    chunk_ref: "15-SciAgents (Chunk 7:510-511)"
+    quote: "The assistant will call the generate_path function with keyword_1 and keyword_2 set to None to generate a path between randomly selected nodes."
+    description: "The assistant agent is modeled as a tool invoker that calls specific functions (like generate_path, rate_novelty_feasibility) to interact with external systems. This represents the function-calling paradigm where agents interface with tools through structured function invocations."
+
+  - name: "Constraint-Based Agent Speaking Order"
+    chunk_ref: "15-SciAgents (Chunk 8:702-703)"
+    quote: "scientist: I can craft the research proposal with key aspects based on the definitions and relationships acquired by the ontologist. I am ONLY allowed to speak after Ontologist"
+    description: "Agents have explicit constraints on when they can participate in the conversation. The scientist agent is explicitly constrained to speak ONLY after the ontologist, enforcing a dependency-based execution order in the multi-agent workflow."
+
+  - name: "Agent Knowledge Path Reasoning"
+    chunk_ref: "15-SciAgents (Chunk 8:755-757)"
+    quote: "graphene -- bind -- amyloid fibrils -- Allow for analysis through extension of model -- amyloid protofilaments..."
+    description: "Agents operate on knowledge paths that represent relationships between concepts. The system generates semantic paths between entities (e.g., graphene to proteins) that agents then interpret and expand upon. This represents graph-based knowledge reasoning as a foundation for agent decision-making."
+
+  - name: "Ontologist Agent Definition Role"
+    chunk_ref: "15-SciAgents (Chunk 8:759-787)"
+    quote: "Graphene: A single layer of carbon atoms arranged in a two-dimensional honeycomb lattice...Amyloid Fibrils: Insoluble fibrous protein aggregates..."
+    description: "The ontologist agent is specifically modeled to provide formal definitions of terms and explicit relationships between concepts. This agent bridges domain knowledge and agent reasoning by structuring semantic information for downstream agents to use."
+
+  - name: "Scientist Agent Proposal Generation"
+    chunk_ref: "15-SciAgents (Chunk 8:814-817)"
+    quote: "We hypothesize that the interaction between graphene and amyloid fibrils can be harnessed to create novel bioelectronic devices with enhanced electrical properties."
+    description: "The scientist agent is modeled to synthesize information from the ontologist into structured research proposals. It generates hypotheses, objectives, and methodology based on the semantic relationships provided, demonstrating knowledge synthesis as an agent capability."
+
+  - name: "Hypothesis Agent Expansion Pattern"
+    chunk_ref: "15-SciAgents (Chunk 10:5-8)"
+    quote: "We hypothesize that the interaction between graphene and amyloid fibrils can be harnessed...which can be further controlled and optimized through engineered gene circuits"
+    description: "The hypothesis_agent is modeled to take initial hypotheses and expand them with detailed specifics including chemical interactions, quantitative binding affinity, conductivity mechanisms, and control parameters. This represents depth-first elaboration as an agent behavior pattern."
+
+  - name: "Critic Agent Review Function"
+    chunk_ref: "15-SciAgents (Chunk 10:437-448)"
+    quote: "Strengths: 1. Innovative Combination: The proposal explores a novel combination of graphene and amyloid fibrils...Weaknesses: 1. Complexity of Gene Circuits..."
+    description: "The critic_agent is modeled as an evaluative agent that summarizes proposals, identifies strengths and weaknesses, and suggests improvements. This represents meta-cognitive agent capabilities for quality assessment and iterative refinement."
+
+  - name: "KG-Agent Autonomous Framework"
+    chunk_ref: "16-KG-Agent (Chunk 1:23-29)"
+    quote: "we propose an autonomous LLM-based agent framework, called KG-Agent, which enables a small LLM to actively make decisions until finishing the reasoning process over KGs."
+    description: "KG-Agent models agents as autonomous decision-makers that iterate through tool selection and memory updates without human assistance. The agent integrates LLM, toolbox, KG-based executor, and knowledge memory components for independent reasoning."
+
+  - name: "Agent Toolbox Design Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:241-259)"
+    quote: "Extraction tools aim to facilitate the access to information from KG...Logic tools aim to support basic manipulation operations...Semantic tools are developed by utilizing pre-trained models"
+    description: "KG-Agent defines three categories of tools for agent operation: extraction tools (get_relation, get_entity), logic tools (count, intersect, union, judge, end), and semantic tools (retrieve_relation, disambiguate_entity). This represents a typed toolbox approach to agent capability modeling."
+
+  - name: "Agent Knowledge Memory Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:546-551)"
+    quote: "The knowledge memory preserves the currently useful information to support the LLM-based planner for making decisions. It mainly contains four parts: question, toolbox definition, current KG information, and history reasoning program."
+    description: "KG-Agent models agent memory as a structured container with four components: the natural language question, tool definitions, current knowledge graph context, and historical reasoning steps. This episodic memory pattern enables context-aware decision making."
+
+  - name: "Agent Planner-Executor Separation"
+    chunk_ref: "16-KG-Agent (Chunk 1:554-565)"
+    quote: "Based on the current knowledge memory, the LLM-based planner selects a tool to interact with KG at each step...the planner needs to invoke tools from the pre-defined toolbox"
+    description: "KG-Agent separates agent functions into a planner (LLM-based decision maker that selects tools) and an executor (program compiler that runs tool invocations). This architectural separation enables modular agent design with clear responsibility boundaries."
+
+  - name: "Iterative Autonomous Reasoning Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:629-638)"
+    quote: "The KG-Agent framework autonomously iterates the above tool selection and memory updation process to perform step-by-step reasoning, where the knowledge memory is used to maintain the accessed information from KG."
+    description: "KG-Agent models the agent reasoning loop as an iterative cycle of tool selection and memory update, with the agent autonomously continuing until reaching answer entities. This represents a self-terminating loop pattern for agent execution."
+
+  - name: "Code-Based Agent Instruction Tuning"
+    chunk_ref: "16-KG-Agent (Chunk 1:270-275)"
+    quote: "we first leverage existing KG based question answering (KGQA) datasets to generate the KG reasoning program, and then decompose it into multiple steps. Finally, each step is formulated as the instruction data"
+    description: "KG-Agent uses code-based instruction data to train the agent LLM, where reasoning chains are converted to function calls that represent tool invocations. This demonstrates program synthesis as an approach to agent capability learning."
+
+  - name: "Small LLM Agent Competence"
+    chunk_ref: "16-KG-Agent (Chunk 1:88-90)"
+    quote: "enabling relatively small models (e.g., 7B LLM) to effectively perform complex reasoning, without reliance on close-sourced LLM APIs"
+    description: "KG-Agent demonstrates that autonomous agent capabilities can be achieved with smaller 7B parameter LLMs through proper instruction tuning, rather than requiring large closed-source models. This pattern challenges assumptions about agent model size requirements."

@@ -1,0 +1,249 @@
+---
+batch_id: "entity_types_9"
+field: entity_types
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 47
+---
+
+patterns:
+  # Paper 17: KG Reasoning Logics Embeddings Survey (Chunk 1)
+
+  - name: "Knowledge Graph Triple Structure"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:35-39)"
+    quote: "Knowledge graph (KG), representing facts in the form of triples, with vocabulary defined in a schema (also known as ontology)"
+    description: "Defines the fundamental entity structure of knowledge graphs - facts represented as triples with schema-defined vocabulary. The triple is the atomic unit of knowledge representation."
+
+  - name: "Entity and Relation Embeddings"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:52-54)"
+    quote: "KG embedding, which represents entities and relations as vectors (embeddings) with their relationships reflected"
+    description: "Entities and relations are core entity types in knowledge graphs, represented as vector embeddings that preserve semantic relationships in vector space."
+
+  - name: "Logic Rule Atoms"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:79-85)"
+    quote: "One rule, which can be simply represented as B1 B2 ... Bn, means that the head atom H can be inferred H by the body atoms B1, ..., Bn"
+    description: "Atoms are the basic entity types in logical rules - head atoms and body atoms form the structure of inference rules for knowledge graph reasoning."
+
+  - name: "OWL Class Hierarchies"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:86-92)"
+    quote: "OWL 2 schema can be used to define class hierarchies, complex classes and relations, domain and range for relations"
+    description: "Classes and relations are core ontological entity types defined through OWL 2 schema, with class hierarchies providing structural organization."
+
+  - name: "Entity Types in KG Schema"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:200-202)"
+    quote: "Class hierarchies classify entity types, denoting entities as instantiations of classes"
+    description: "Entity types are fundamental categories in knowledge graphs, organized through class hierarchies where entities instantiate classes."
+
+  - name: "Relation Hierarchies"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:224-228)"
+    quote: "Relation hierarchies contain subsumption relationships between relations; for example, hasFather is a sub-relation of hasParents"
+    description: "Relations form hierarchical structures through subsumption, creating taxonomic organization of relationship types in knowledge graphs."
+
+  - name: "Relation Properties"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:237-250)"
+    quote: "Ontological schemas often define quite a few relation properties (and constraints)... domain and range of relations... Asymmetric relations... Composition... Transitive relations"
+    description: "Relations have multiple typed properties including domain, range, asymmetry, composition, transitivity, reflexivity, and symmetry - defining the behavioral characteristics of relationships."
+
+  - name: "Query Answering Entity Types"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:359-365)"
+    quote: "Query answering returns correct entities in a KG as answers of a given structured query, where reasoning is usually considered for hidden answers"
+    description: "Entities and structured queries are interacting entity types in knowledge graph query answering tasks."
+
+  - name: "Logic Quantification Types"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:393-410)"
+    quote: "To support a complete set of first-order logical operations, including conjunction, disjunction and negation... further supports queries including Difference"
+    description: "First-order logical operations (conjunction, disjunction, negation, difference) are entity types that structure complex queries over knowledge graphs."
+
+  # Paper 18: Multi-Agent Architecture Taxonomy LLM (Chunks 1-4)
+
+  - name: "LLM-Powered Intelligent Agent"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:467-474)"
+    quote: "At the core of these systems, intelligent agents structure the system as the foundational components. Each agent is endowed with a unique set of competencies"
+    description: "Agent is the foundational entity type in LLM-powered multi-agent systems, possessing role, memory, and access to contextual resources as defining competencies."
+
+  - name: "Goal Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:453-461)"
+    quote: "Autonomous LLM-powered multi-agent systems are designed to accomplish user-prompted goals or complex tasks. For this purpose, the system employs an interactive and multi-perspective strategy"
+    description: "Goal is a primary entity type that drives multi-agent system behavior - user-prompted objectives that the system autonomously decomposes and accomplishes."
+
+  - name: "Task Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:854-861)"
+    quote: "Internally, this user-prompted Goal (which might represent a directive, problem, question, or mission) undergoes decomposition into Tasks or Sub-Tasks to be manageable by the Agents"
+    description: "Task is a core entity type derived from goals through decomposition - manageable units of work assigned to agents for execution."
+
+  - name: "Role Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:876)"
+    quote: "Actions within this activity are delegated to specialized Agents - each characterized by a distinct Role, Type, and further competencies"
+    description: "Role is an entity type that defines agent specialization - distinct characteristics determining an agent's responsibilities and competencies."
+
+  - name: "Memory Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:893-897)"
+    quote: "each agent is differentiated by its unique Role in the activity and possesses an individual Memory - a repository that encompasses condensed experiences and knowledge gained by the agent"
+    description: "Memory is an entity type representing agent state - repository of experiences and knowledge that can manifest as textual records, structured databases, or embeddings."
+
+  - name: "Action Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:34-49)"
+    quote: "the Agents execute different kinds of Actions which in sum aim at achieving the user-prompted Goal... DecomposeTask, Create Task, DelegateTask, ExecuteTask, EvaluateResult, MergeResult"
+    description: "Action is an entity type with multiple subtypes (DecomposeTask, CreateTask, DelegateTask, ExecuteTask, EvaluateResult, MergeResult) representing discrete operations performed by agents."
+
+  - name: "Task-Management Agent Types"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:902-913)"
+    quote: "Task-Management Agents: These agents are specialized in organizing the processes... Task-Creation Agent... Task-Prioritization Agent... Task-Execution Agent"
+    description: "Task-Management Agents are specialized entity types including Task-Creation, Task-Prioritization, and Task-Execution agents that organize multi-agent workflows."
+
+  - name: "Domain Role Agent Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:14-17)"
+    quote: "Domain Role Agents: These agents are domain-specific experts. They excel in specialized roles within the application domain... project manager, software architect, developer, or QA engineer"
+    description: "Domain Role Agents are entity types representing domain experts with specialized roles such as project manager, software architect, developer, or QA engineer."
+
+  - name: "Technical Agent Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:19-21)"
+    quote: "Technical Agents: These agents are tech-savvies, typically tasked with interfacing with technical platforms or development tools. Exemplary technical agents are represented by the SQL Agent"
+    description: "Technical Agents are entity types specialized for technical platform integration, exemplified by SQL Agent for database interactions or Python Agent for script development."
+
+  - name: "Tool Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:104-124)"
+    quote: "Tools in terms of contextual resources for multi-agent systems can be categorized into... Search and Analysis Tools... Execution Tools... Reasoning Tools... Development Tools... Communication Tools"
+    description: "Tool is an entity type categorized into Search/Analysis, Execution, Reasoning, Development, and Communication tools that extend agent capabilities."
+
+  - name: "Data Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:127-144)"
+    quote: "Data types in multi-agent architectures encompass: Structured Text Data... Unstructured Text Data... Multimodal Data... Domain-specific Data"
+    description: "Data is an entity type with subtypes: Structured Text, Unstructured Text, Multimodal (video, pictures, audio), and Domain-specific data serving agent operations."
+
+  - name: "Foundation Model Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:150-166)"
+    quote: "Foundation Models refer to expansive machine learning models trained on vast amounts of data... NLP Models... Computer Vision Models... Audio Models... Multimodal Models"
+    description: "Foundation Model is an entity type categorized by modality: NLP Models (including LLMs), Computer Vision, Audio, and Multimodal models providing agent reasoning capabilities."
+
+  - name: "Agent Prompt Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:56-60)"
+    quote: "an Agent Prompt generated by an Agent and triggered within a certain Action is send to and then processed by the LLM, which generates a Response"
+    description: "Agent Prompt is an entity type representing the structured communication from agents to LLMs, triggering reasoning and response generation within actions."
+
+  - name: "Communication Protocol Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:75-84)"
+    quote: "A Communication Protocol provides a structured framework and methodology for agents' collaboration, guiding the execution of specific Actions by establishing rules and mechanisms"
+    description: "Communication Protocol is an entity type that structures inter-agent collaboration through predefined rules and mechanisms for message exchanges."
+
+  - name: "Context Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:99-101)"
+    quote: "LLM-powered agents are able to leverage specialized competencies and further information provided by additional Context which can be distinguished into Tools, Data, and Foundation Models"
+    description: "Context is a composite entity type encompassing Tools, Data, and Foundation Models that agents utilize for task execution."
+
+  - name: "Result Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:867-868)"
+    quote: "Synthesis: Evaluating and combining Task Results as well as finally presenting a unified Total Result"
+    description: "Result is an entity type with Task Results (partial) and Total Result (final) subtypes representing outputs of task execution and synthesis."
+
+  - name: "Artefact Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:879-881)"
+    quote: "This result might also include multiple Artefacts, encompassing text, graphics, multimedia, and more"
+    description: "Artefact is an entity type representing tangible outputs including text, graphics, multimedia created or modified during task execution."
+
+  - name: "Human User Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:848-850)"
+    quote: "Typically, a Human User initiates system operations via a User Prompt through the User Interface"
+    description: "Human User is an entity type representing the external actor who initiates goals and provides alignment through prompts and preferences."
+
+  - name: "Preference Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:189-191)"
+    quote: "The user-prompted Goal can be further refined pre-runtime through supplementary Preferences provided by the Human User via the User Interface"
+    description: "Preference is an entity type representing user-specified alignment parameters that refine goal execution and system behavior."
+
+  - name: "Activity Log Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:871-873)"
+    quote: "each Task-Management Activity embodies an Activity Log and an Activity Memory. To maintain transparency and traceability of all Actions performed"
+    description: "Activity Log is an entity type for maintaining transparency by capturing all action details throughout task-management activity."
+
+  - name: "Library Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:874-875)"
+    quote: "systems might feature a Library, a repository storing best practices, lessons learned, or reusable knowledge, such as Prompt Templates or specific information like API credentials"
+    description: "Library is an entity type serving as repository for best practices, prompt templates, and reusable knowledge including API credentials."
+
+  - name: "Network Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:889-891)"
+    quote: "Within each Task-Management Activity, a set of intelligent Agents collaborate, forming a multi-agent Network"
+    description: "Network is an entity type representing the collaborative structure of multiple agents with relationships and communication patterns."
+
+  - name: "Prompt Template Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:66-68)"
+    quote: "chosen Prompt Templates prepared and/or adapted for certain kinds of actions. Such agent-driven prompt engineering is pivotal for LLM-powered multi-agent systems"
+    description: "Prompt Template is an entity type representing pre-prepared prompts that can be augmented and adapted for specific action types in agent workflows."
+
+  - name: "Autonomy Level Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:303-315)"
+    quote: "The degree of autonomy refers to the extent to which an AI system can make decisions and act independently of rules and mechanisms defined by humans"
+    description: "Autonomy is an entity type with levels (L0 Static, L1 Adaptive, L2 Self-Organizing) characterizing the degree of agent self-organization capability."
+
+  - name: "Alignment Level Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:362-370)"
+    quote: "alignment techniques can be seen as a detailed calibration of conditions tied to user-specified objectives or complex tasks. This includes preferences, policies, constraints, and boundaries"
+    description: "Alignment is an entity type with levels (L0 Integrated, L1 User-Guided, L2 Real-Time Responsive) characterizing human influence over system behavior."
+
+  - name: "Task-Management Activity Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 1:857-858)"
+    quote: "Task decomposition is the first of three core phases within the Task-Management Activity: Decomposition... Orchestration... Synthesis"
+    description: "Task-Management Activity is an entity type comprising three phases (Decomposition, Orchestration, Synthesis) that structure goal accomplishment."
+
+  - name: "Impact Entity Type"
+    chunk_ref: "18-Multi-Agent_Taxonomy (Chunk 2:179-182)"
+    quote: "Context Utilization might involve the creation or modification of Artefacts. Beyond mere artefact manipulation, this utilization can manifest as external Impact, such as initiating external processes"
+    description: "Impact is an entity type representing external effects of agent actions, including triggering workflows and influencing broader systems."
+
+  # Paper 19: Graph of Thoughts LLM Reasoning (Chunk 1)
+
+  - name: "Thought Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:20-22)"
+    quote: "units of information ('LLM thoughts') are vertices, and edges correspond to dependencies between these vertices"
+    description: "Thought is the fundamental entity type in Graph of Thoughts - units of LLM-generated information modeled as vertices in a reasoning graph."
+
+  - name: "Graph Structure for Reasoning"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:244-252)"
+    quote: "We model the reasoning process as a directed graph G = (V, E); V is a set of vertices and E is a set of edges. A vertex contains a solution to a problem at hand"
+    description: "The reasoning process is modeled as entity types: Graph (overall structure), Vertices (thoughts/solutions), and Edges (dependencies between thoughts)."
+
+  - name: "Thought Classes"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:253-259)"
+    quote: "In certain use cases, graph nodes belong to different classes. For example, in writing tasks, some vertices model plans of writing a paragraph, while other vertices model the actual paragraphs"
+    description: "Thought classes are entity subtypes categorizing thoughts by function - e.g., plan thoughts vs. content thoughts in heterogeneous reasoning graphs."
+
+  - name: "Thought Transformation Types"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:306-365)"
+    quote: "GoT enables novel transformations of thoughts... Aggregation Transformations... Refining Transformations... Generation Transformations"
+    description: "Transformation is an entity type with subtypes: Aggregation (combining thoughts), Refining (modifying thought content), and Generation (creating new thoughts from existing ones)."
+
+  - name: "Evaluator and Ranking Functions"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:370-374)"
+    quote: "Thoughts are scored to understand whether the current solution is good enough. A score is modeled as a general function E(v, G, p_theta). GoT can also rank thoughts... R(G, p_theta, h)"
+    description: "Evaluator (E) and Ranking (R) are entity types representing functions for scoring individual thoughts and selecting top-ranked thoughts in reasoning."
+
+  - name: "Controller Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:390-395)"
+    quote: "The Controller contains two further important elements: the Graph of Operations (GoO) and the Graph Reasoning State (GRS). GoO is a static structure that specifies the graph decomposition"
+    description: "Controller is an entity type coordinating reasoning, containing GoO (static operation graph) and GRS (dynamic reasoning state) as sub-entity types."
+
+  - name: "Graph of Operations Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:434-437)"
+    quote: "The user constructs a GoO instance, which prescribes the execution plan of thought operations. The GoO is a static structure that is constructed once, before the execution starts"
+    description: "Graph of Operations (GoO) is an entity type representing static execution plans that prescribe thought transformations and their dependencies."
+
+  - name: "Graph Reasoning State Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:438-443)"
+    quote: "during the execution, an instance of the GRS maintains the continually updated information about the LLM reasoning process. This includes which operation has been executed so far, the states of all generated LLM thoughts"
+    description: "Graph Reasoning State (GRS) is an entity type maintaining dynamic execution state including operation progress, thought states, validity, and scores."
+
+  - name: "Prompter Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:400-402)"
+    quote: "The Prompter prepares the prompts to be sent to the LLM. This module is responsible for the specifics of encoding the graph structure within the prompt"
+    description: "Prompter is an entity type responsible for preparing prompts and encoding graph structure for LLM communication."
+
+  - name: "Parser Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:406-410)"
+    quote: "The Parser extracts information from LLM thoughts. For each such thought, the Parser constructs the thought state, which contains this extracted information"
+    description: "Parser is an entity type that extracts information from LLM thoughts and constructs thought state representations for GRS updates."
+
+  - name: "Volume Metric Entity Type"
+    chunk_ref: "19-GoT_Reasoning (Chunk 1:734-741)"
+    quote: "We define volume - for a given thought t - as the number of preceding LLM thoughts that could have impacted t. Formally, the volume of t is the number of thoughts from which there exists a path to t"
+    description: "Volume is a metric entity type measuring the number of predecessor thoughts potentially contributing to a given thought through graph paths."

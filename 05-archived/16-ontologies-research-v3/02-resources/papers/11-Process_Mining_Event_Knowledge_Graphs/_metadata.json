@@ -1,0 +1,29 @@
+{
+  "source_pdf": "11-Process_Mining_Event_Knowledge_Graphs.pdf",
+  "processed_at": "2025-12-27T22:52:26.867003",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 3,
+  "total_lines": 2224,
+  "total_chars": 126304,
+  "chunks": [
+    {
+      "filename": "11-Process_Mining_Event_Knowledge_Graphs_1.md",
+      "chunk_number": 1,
+      "line_count": 1000,
+      "char_count": 54032
+    },
+    {
+      "filename": "11-Process_Mining_Event_Knowledge_Graphs_2.md",
+      "chunk_number": 2,
+      "line_count": 991,
+      "char_count": 54713
+    },
+    {
+      "filename": "11-Process_Mining_Event_Knowledge_Graphs_3.md",
+      "chunk_number": 3,
+      "line_count": 233,
+      "char_count": 17559
+    }
+  ]
+}

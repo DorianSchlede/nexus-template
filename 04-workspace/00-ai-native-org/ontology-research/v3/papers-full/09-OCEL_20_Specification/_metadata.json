@@ -1,0 +1,35 @@
+{
+  "source_pdf": "09-OCEL_20_Specification.pdf",
+  "processed_at": "2025-12-27T22:52:06.806252",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 4,
+  "total_lines": 3450,
+  "total_chars": 102199,
+  "chunks": [
+    {
+      "filename": "09-OCEL_20_Specification_1.md",
+      "chunk_number": 1,
+      "line_count": 1000,
+      "char_count": 42056
+    },
+    {
+      "filename": "09-OCEL_20_Specification_2.md",
+      "chunk_number": 2,
+      "line_count": 999,
+      "char_count": 27387
+    },
+    {
+      "filename": "09-OCEL_20_Specification_3.md",
+      "chunk_number": 3,
+      "line_count": 957,
+      "char_count": 17776
+    },
+    {
+      "filename": "09-OCEL_20_Specification_4.md",
+      "chunk_number": 4,
+      "line_count": 494,
+      "char_count": 14980
+    }
+  ]
+}

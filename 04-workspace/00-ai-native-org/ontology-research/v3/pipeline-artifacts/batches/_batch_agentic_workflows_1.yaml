@@ -1,0 +1,128 @@
+---
+batch_id: "agentic_workflows_1"
+field: agentic_workflows
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 5
+patterns_found: 24
+---
+
+patterns:
+  - name: "Agentic Workflow Definition"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:51-54)"
+    quote: "agentic workflows, where autonomous agents make decisions, plan tasks, and coordinate with humans and other agents"
+    description: "Defines agentic workflows as a paradigm where autonomous AI agents operate in dynamic environments, making decisions, planning tasks, and coordinating with both humans and other agents across heterogeneous computing platforms including edge devices, cloud systems, and HPC."
+
+  - name: "Non-Deterministic Workflow Behavior"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:81-84)"
+    quote: "agentic workflows are non-deterministic, shaped by near real-time data, adaptive decisions, and evolving interactions"
+    description: "Contrasts agentic workflows with traditional static workflows - agentic workflows display dynamic, cyclic behavior where agent outputs inform subsequent decisions through feedback loops, unlike deterministic traditional workflows."
+
+  - name: "Agent-Centric Provenance Integration"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:102-104)"
+    quote: "A unified provenance graph that considers AI agent actions as first-class components, on par with traditional workflow tasks"
+    description: "Pattern for treating AI agent actions as first-class elements in workflow provenance, enabling comprehensive traceability alongside traditional workflow tasks for root cause analysis and debugging."
+
+  - name: "Error Propagation Tracking"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:87-91)"
+    quote: "They may generate hallucinated or incorrect outputs...which can propagate through the workflow, compounding errors"
+    description: "Addresses the challenge of error propagation in agentic workflows where agent decisions influence downstream tasks, requiring provenance tracking to assess correctness and trace error origins."
+
+  - name: "Multi-Agent Coordination Frameworks"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:141-145)"
+    quote: "LangChain, AutoGen, LangGraph, Academy, and CrewAI support multi-agent systems that interact through prompt exchanges"
+    description: "Identifies established multi-agent orchestration frameworks that enable agent interaction through prompt exchanges, foundation model calls, and shared context using the Model Context Protocol (MCP)."
+
+  - name: "Agent-Tool Association Pattern"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:285-287)"
+    quote: "an AI agent can be associated with one or many tool executions (AgentTool) and each tool may be informed by...AIModelInvocations"
+    description: "PROV-AGENT pattern where agents are associated with tool executions, each tool informed by model invocations that use prompts, specific AI models, and generate response data attributed to the agent."
+
+  - name: "Cross-Facility Agent Distribution"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:151-159)"
+    quote: "managing execution across physically and logically distributed facilities that include edge devices, cloud services, and HPC systems"
+    description: "Pattern for agentic workflows spanning distributed infrastructure - edge devices for data collection, cloud for AI services, HPC for computation - requiring coherent understanding of agent interactions across systems."
+
+  - name: "Feedback Loop Decision Influence"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:439-445)"
+    quote: "the decision made for each layer informs the decision logic in the next, enabling the system to learn over the course of a print"
+    description: "Pattern where agent decisions in iterative workflows influence subsequent decisions, creating feedback loops where errors can propagate across iterations, demonstrated in additive manufacturing use case."
+
+  - name: "Multi-Agent Scientific Discovery System"
+    chunk_ref: "15-SciAgents (Chunk 1:30-34)"
+    quote: "SciAgents...leverages three core concepts: (1) large-scale ontological knowledge graphs, (2) a suite of large language models and data retrieval tools, and (3) multi-agent systems with in-situ learning"
+    description: "Framework combining ontological knowledge graphs, multiple LLMs with retrieval tools, and multi-agent systems with in-situ learning capabilities for autonomous scientific discovery and hypothesis generation."
+
+  - name: "Specialized Agent Role Assignment"
+    chunk_ref: "15-SciAgents (Chunk 1:126-130)"
+    quote: "Each agent in the system is assigned a distinct role, optimized through complex prompting strategies to ensure that every subtask is tackled with targeted expertise"
+    description: "Pattern of strategic division of labor where each agent has a distinct role optimized through prompting, enabling the AI system to manage scientific research complexity through effective collaboration."
+
+  - name: "Pre-Programmed vs Automated Agent Interactions"
+    chunk_ref: "15-SciAgents (Chunk 1:186-191)"
+    quote: "In the first approach...interactions between agents are pre-programmed and follow a predefined sequence...the second approach features fully automated agent interactions"
+    description: "Two distinct multi-agent strategies: pre-programmed sequential interactions ensuring consistency and reliability, versus fully automated flexible interactions that dynamically respond to evolving research context."
+
+  - name: "Human-in-the-Loop Agent Orchestration"
+    chunk_ref: "15-SciAgents (Chunk 1:191-194)"
+    quote: "This second strategy also incorporates human-in-the-loop interactions, enabling human intervention at various stages of research development"
+    description: "Pattern allowing expert feedback, hypothesis refinement, and strategic guidance within automated multi-agent systems, enhancing quality and relevance of AI-generated scientific ideas."
+
+  - name: "Knowledge Graph Path Sampling"
+    chunk_ref: "15-SciAgents (Chunk 1:239-246)"
+    quote: "our study employs a random path approach...the random approach infuses the path with a richer array of concepts and relationships"
+    description: "Novel sampling strategy using random paths rather than shortest paths to extract sub-graphs from knowledge graphs, enabling broader exploration and more novel hypothesis generation."
+
+  - name: "Ontologist Agent for Relationship Analysis"
+    chunk_ref: "15-SciAgents (Chunk 1:289-296)"
+    quote: "the role of the ontologist agent is instrumental. It applies advanced reasoning and inference techniques to synthesize and interpret the complex web of data"
+    description: "Specialized agent role that transitions from static knowledge retrieval to dynamic knowledge generation by examining connections, identifying research gaps, and proposing new angles of inquiry."
+
+  - name: "Hierarchical Hypothesis Generation"
+    chunk_ref: "15-SciAgents (Chunk 1:356-365)"
+    quote: "The scientist agent harnesses the extensive knowledge...to propose novel research ideas...addressing seven key aspects: hypothesis, outcome, mechanisms, design principles, unexpected properties, comparison, and novelty"
+    description: "Structured approach where scientist agent synthesizes knowledge graph data and ontologist refinements into comprehensive research proposals covering seven distinct scientific aspects."
+
+  - name: "Adversarial Critique Agent Pattern"
+    chunk_ref: "15-SciAgents (Chunk 1:511-516)"
+    quote: "the Critic agent, responsible for thoroughly reviewing the research proposal, summarizing its key points, and recommending improvements...highlighting both strengths and weaknesses"
+    description: "Adversarial pattern where critic agent reviews proposals, identifies strengths/weaknesses, suggests refinements, and poses impactful scientific questions for molecular modeling and experimentation."
+
+  - name: "Autonomous Group Chat Coordination"
+    chunk_ref: "15-SciAgents (Chunk 2:770-773)"
+    quote: "dynamic interactions as developed autonomously by the multi-agent team members, coordinated by the group chat manager"
+    description: "Pattern where a group chat manager selects working agents based on current context, fostering cooperation and mutual adjustments to solve problems through autonomous coordination."
+
+  - name: "Shared Memory Agent Collaboration"
+    chunk_ref: "15-SciAgents (Chunk 2:784-788)"
+    quote: "the second approach allows agents to share memory, giving them access to all the content generated in previous interactions...full visibility of the history of their collaboration"
+    description: "Contrasts filtered information passing with shared memory approach where agents access complete interaction history, enabling more sophisticated collaborative problem-solving."
+
+  - name: "Novelty Assessment Tool Integration"
+    chunk_ref: "15-SciAgents (Chunk 2:797-799)"
+    quote: "a tool that assesses the novelty of the proposed research ideas against current literature, using Semantic Scholar API"
+    description: "Pattern integrating external tools (Semantic Scholar API) to evaluate novelty against existing literature, enabling proactive elimination of ideas too similar to prior work."
+
+  - name: "Planner-Driven Task Decomposition"
+    chunk_ref: "15-SciAgents (Chunk 4:9-18)"
+    quote: "The planner who can suggest a plan to solve the task by breaking down the task into simpler sub-tasks"
+    description: "Agent role pattern where planner develops detailed plans, decomposes tasks into manageable sub-tasks, coordinating specialist agents through systematic execution steps."
+
+  - name: "Hierarchical Expansion Strategy"
+    chunk_ref: "15-SciAgents (Chunk 1:200-210)"
+    quote: "hierarchical expansion strategy where answers are successively refined and improved, enriched with retrieved data, critiqued and amended"
+    description: "Process pattern from keyword selection through path sampling, structured JSON generation, individual aspect expansion, critical review, and final integrated document production."
+
+  - name: "Specialized Expansion Agent Pattern"
+    chunk_ref: "15-SciAgents (Chunk 4:1-6)"
+    quote: "hypothesis_agent who can expand the 'hypothesis' aspect...outcome_agent who can expand the 'outcome' aspect...mechanism_agent"
+    description: "Pattern of seven specialized agents (hypothesis, outcome, mechanism, design_principles, unexpected_properties, comparison, novelty) each expanding specific aspects of research proposals."
+
+  - name: "Swarm Intelligence Modeling"
+    chunk_ref: "15-SciAgents (Chunk 2:139-142)"
+    quote: "harnessing a modular, hierarchically organized swarm of intelligence similar to biological systems with multiple iterations"
+    description: "Bio-inspired pattern modeling multi-agent negotiation as swarm intelligence, with iterative refinement during problem-solving that offers more nuanced reasoning than conventional zero-shot AI responses."
+
+  - name: "Iterative Agent Negotiation"
+    chunk_ref: "15-SciAgents (Chunk 1:317-319)"
+    quote: "Agentic reasoning carefully assesses the ideas and negotiate, via adverserial interactions between the agents, a sound prediction"
+    description: "Pattern where agents engage in adversarial interactions to negotiate and refine predictions, carefully delineating research ideas through collaborative yet competitive reasoning processes."

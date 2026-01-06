@@ -1,0 +1,233 @@
+---
+batch_id: "entity_relationships_2"
+field: entity_relationships
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 5
+patterns_found: 42
+---
+
+patterns:
+  # From UFO Chunk 3 (01-UFO_Unified_Foundational_Ontology_3.md)
+
+  - name: "Quality-Bearer Characterization Relationship"
+    chunk_ref: "01-UFO (Chunk 3:48-52)"
+    quote: "the quality type Flower Color characterizes the object type Flower: characterization(Flower, FlowerColor)"
+    description: "UFO defines a characterization relationship where quality types (like FlowerColor) characterize object types (like Flower). This is a structural relationship indicating that instances of the quality type inhere in instances of the object type."
+
+  - name: "Inherence Relationship (Quality to Bearer)"
+    chunk_ref: "01-UFO (Chunk 3:82-85)"
+    quote: "inherence is an existential dependence relation and, hence, the connection between a particular quality and its bearer is immutable"
+    description: "In UFO, inherence represents an immutable existential dependence between a quality and its bearer. Once a quality inheres in a bearer, this connection cannot change, though the quality's value can change."
+
+  - name: "HasValue Relationship (Quality to Quality Structure)"
+    chunk_ref: "01-UFO (Chunk 3:83-86)"
+    quote: "the relation of hasValue between a quality and its value (qualia) in a quality structure is one of generic dependence"
+    description: "UFO distinguishes hasValue as a generic dependence relation (mutable) from inherence (immutable). A quality's value in a quality structure can change from situation to situation."
+
+  - name: "Role-Person Specialization Relationship"
+    chunk_ref: "01-UFO (Chunk 3:129-135)"
+    quote: "Jogger is a role played by a Person when bearing a Jog mode... Role(Jogger) Jogger < Person"
+    description: "UFO models roles as specializations of object kinds that are played when certain mode conditions are met. The Jogger role specializes Person and is played when the Person bears a Jog mode."
+
+  - name: "Mode-Role Characterization Relationship"
+    chunk_ref: "01-UFO (Chunk 3:143-146)"
+    quote: "characterization(Jogger, Jog) forall x. (x :: Jog -> exists!y. (y :: JoggingTrack ^ externallyDependent(x,y)))"
+    description: "Modes characterize roles in UFO. The Jog mode characterizes the Jogger role and is externally dependent on a JoggingTrack, showing both characterization and external dependence relationships."
+
+  - name: "Event-Disposition Manifestation Relationship"
+    chunk_ref: "01-UFO (Chunk 3:149-152)"
+    quote: "we have Jogging Events, which are direct manifestations of the dispositions constituting a Jog, and Jogging Processes, which are constituted by Jogging Events"
+    description: "Events in UFO are manifestations of dispositions (bundles of moments). Jogging Events manifest dispositions in a Jog mode, while Jogging Processes are constituted by Jogging Events."
+
+  - name: "Process-Event Constitution Relationship"
+    chunk_ref: "01-UFO (Chunk 3:161-165)"
+    quote: "At each situation, we have a particular type of maximal Jogging Process (termed the life of a Jog) that is constituted by (exactly) the sum of Jogging Events"
+    description: "UFO defines a constitution relationship between processes and events. A Jogging Process (the life of a Jog) is constituted by exactly the sum of Jogging Events that manifest the underlying Jog mode."
+
+  - name: "Event Temporal Succession (Meet Relationship)"
+    chunk_ref: "01-UFO (Chunk 3:176-178)"
+    quote: "two Jogging Processes that are manifestations of the same Jog and that immediately follow each other, meeting in the Allen sense"
+    description: "UFO uses Allen's interval algebra for temporal relationships. Processes that meet in the Allen sense immediately follow each other, and constituents of the preceding process also constitute the succeeding process."
+
+  - name: "Event Type Partition Relationship"
+    chunk_ref: "01-UFO (Chunk 3:219-228)"
+    quote: "isPartitionedInto(JoggingEvent, JogState, JoggingLocomotion) isPartitionedInto(JoggingLocomotion, WalkWhileJogging, RunWhileJogging)"
+    description: "UFO supports partitioning of event types, where subsets completely cover and are disjoint from each other. JoggingEvent is partitioned into JogState and JoggingLocomotion, which is further partitioned."
+
+  - name: "Focus Relationship (Event-Endurant)"
+    chunk_ref: "01-UFO (Chunk 3:251-257)"
+    quote: "events cannot genuinely change... Alleged events change are either: (a) event variation... (b) the subject of change is the focus of the event, i.e., the underlying endurant"
+    description: "In UFO, events are modally fragile and cannot change. What appears as event change is either variation of temporal parts or change in the underlying endurant (the focus). Events are carved from scenes by their focus."
+
+  - name: "External Dependence Relationship (Mode to Object)"
+    chunk_ref: "01-UFO (Chunk 3:264-266)"
+    quote: "a Walk is modeled as an externally dependent mode that inheres in the Walker and that is externally dependent on Place"
+    description: "UFO distinguishes external dependence from inherence. A Walk mode inheres in a Walker but is also externally dependent on a Place (the destination), showing multiple dependency relationships."
+
+  - name: "Walk Phase Partition Relationship"
+    chunk_ref: "01-UFO (Chunk 3:320-328)"
+    quote: "isPartitionedInto(Walk, OngoingWalk, FinalizedWalk)... isPartitionedInto(FinalizedWalk, SuccessfulWalk, RedirectedWalk)"
+    description: "UFO models endurant phases as partitions. Walk is partitioned into OngoingWalk and FinalizedWalk, with FinalizedWalk further partitioned into SuccessfulWalk and RedirectedWalk."
+
+  - name: "Relator Mediation Relationship"
+    chunk_ref: "01-UFO (Chunk 3:454-457)"
+    quote: "forall x (x :: Spouse -> exists y (y :: ConjugalRelationship ^ mediates(y,x))) forall x (x :: ConjugalRelationship -> exists y,z (y :: Spouse ^ z :: Spouse ^ y != z ^ mediates(x,y) ^ mediates(x,z)))"
+    description: "UFO defines relators as entities that mediate between roles. A ConjugalRelationship relator mediates between at least two distinct Spouses, and each Spouse must be mediated by some ConjugalRelationship."
+
+  - name: "Higher-Order Type Categorization Relationship"
+    chunk_ref: "01-UFO (Chunk 3:432-439)"
+    quote: "categorizes(ConjugalRelationshipType, ConjugalRelationship)... categorizes(SpouseType, Spouse)"
+    description: "UFO supports higher-order types (types of types). The categorizes relation connects a second-order type to its base type, ensuring all instances of the higher-order type specialize the base type."
+
+  # From Knowledge Graphs Chunk 1 (02-Knowledge_Graphs_1.md)
+
+  - name: "Node-Edge-Node Directed Relationship"
+    chunk_ref: "02-KG (Chunk 1:140-143)"
+    quote: "a knowledge graph as a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"
+    description: "Knowledge graphs define the fundamental relationship pattern: nodes represent entities, edges represent binary relations between entities. This is the core structural relationship in KGs."
+
+  - name: "Entity-Entity Binary Relation"
+    chunk_ref: "02-KG (Chunk 1:393-400)"
+    quote: "the refined, flexible schema that the board ends up with... is modelling a set of binary relations between entities, which indeed can be viewed as modelling a graph"
+    description: "Knowledge graphs model relationships as binary relations between entities. This pattern emerged from refining relational schemas to maximize flexibility for incomplete/diverse data."
+
+  - name: "Edge-Label Semantic Relationship"
+    chunk_ref: "02-KG (Chunk 1:405-408)"
+    quote: "A directed edge-labelled graph... is defined as a set of nodes... and a set of directed labelled edges between those nodes, like Santa Lucia city Santiago"
+    description: "In directed edge-labelled graphs, relationships are typed by edge labels. The label (e.g., 'city') defines the semantic nature of the relationship between source and target nodes."
+
+  - name: "Homogeneous vs Heterogeneous Edge Relationship"
+    chunk_ref: "02-KG (Chunk 1:491-494)"
+    quote: "An edge is called homogeneous if it is between two nodes of the same type (e.g., borders); otherwise it is called heterogeneous (e.g., capital)"
+    description: "Heterogeneous graphs distinguish edge types based on whether they connect nodes of the same type (homogeneous) or different types (heterogeneous), affecting graph partitioning strategies."
+
+  - name: "Property-Value Annotation Relationship"
+    chunk_ref: "02-KG (Chunk 1:549-556)"
+    quote: "A property graph allows a set of property-value pairs and a label to be associated with both nodes and edges"
+    description: "Property graphs extend relationships beyond simple edges by allowing property-value annotations on both nodes and edges, enabling richer contextual descriptions of relationships."
+
+  - name: "Named Graph Container Relationship"
+    chunk_ref: "02-KG (Chunk 1:583-609)"
+    quote: "A graph dataset then consists of a set of named graphs and a default graph. Each named graph is a pair of a graph ID and a graph"
+    description: "Graph datasets establish containment relationships between named graphs and their constituent edges. Graph names can also be used as nodes, creating meta-level relationships."
+
+  # From Knowledge Graphs Chunk 2 (02-Knowledge_Graphs_2.md)
+
+  - name: "Subclass Inheritance Relationship"
+    chunk_ref: "02-KG (Chunk 2:115-118)"
+    quote: "In Figure 11, we present a class hierarchy for events where children are defined to be subclasses of their parents such that if we find an edge EID15 type Food Festival... we may also infer that EID15 type Festival"
+    description: "Semantic schema defines subclass relationships enabling type inference. If X is a subclass of Y, then instances of X are also instances of Y (inheritance pattern)."
+
+  - name: "Subproperty Inheritance Relationship"
+    chunk_ref: "02-KG (Chunk 2:121-125)"
+    quote: "the properties city and venue are sub-properties of a more general property location, such that given an edge Santa Lucia city Santiago... we may also infer that Santa Lucia location Santiago"
+    description: "Properties form hierarchies through subproperty relationships. If property P is a subproperty of Q, then any edge with label P also implies an edge with label Q between the same nodes."
+
+  - name: "Domain Typing Relationship"
+    chunk_ref: "02-KG (Chunk 2:127-131)"
+    quote: "We may further define the domain of properties, indicating the class(es) of entities for nodes from which edges with that property extend"
+    description: "Domain relationships connect properties to classes, enabling type inference. If property P has domain C, then any node with an outgoing P edge is inferred to be of type C."
+
+  - name: "Range Typing Relationship"
+    chunk_ref: "02-KG (Chunk 2:171-174)"
+    quote: "Conversely, we may define the range of properties, indicating the class(es) of entities for nodes to which edges with that property extend; for example, we may define that the range of city is a class City"
+    description: "Range relationships connect properties to classes for target nodes. If property P has range C, then any node that is the target of a P edge is inferred to be of type C."
+
+  - name: "Shape Target Relationship"
+    chunk_ref: "02-KG (Chunk 2:251-258)"
+    quote: "A shape targets a set of nodes in a data graph and specifies constraints on those nodes. The shape's target can be defined in many ways, such as targetting all instances of a class"
+    description: "Validating schemas use shape-target relationships to connect constraint specifications to sets of nodes. Shapes define structural requirements for nodes they target."
+
+  - name: "Shape Inheritance Relationship"
+    chunk_ref: "02-KG (Chunk 2:286-288)"
+    quote: "Shapes can inherit the constraints of parent shapes - denoted with a triangle connector - as in the case of City and Venue, whose conforming nodes must also conform to the Place shape"
+    description: "Shapes can inherit constraints from parent shapes, creating a shape hierarchy. Nodes conforming to child shapes must also conform to all parent shape constraints."
+
+  - name: "Quotient Graph Simulation Relationship"
+    chunk_ref: "02-KG (Chunk 2:464-471)"
+    quote: "every quotient graph simulates its input graph (based on the simulation relation of set membership between data nodes and quotient nodes)"
+    description: "Quotient graphs establish simulation relationships with their source data graphs. For every edge in the data graph, there must be a corresponding edge in the quotient graph preserving structure."
+
+  - name: "Bisimilarity Structural Preservation"
+    chunk_ref: "02-KG (Chunk 2:477-491)"
+    quote: "A stronger notion of structural preservation is given by bisimilarity, which... would further require that if [X] y Z is an edge in the quotient graph, then for all x in X, there must exist a z in Z such that [x] y z is in the data graph"
+    description: "Bisimilarity defines a stronger structural relationship between graphs than simulation. It requires that quotient graph edges are matched by data graph edges for all partition members."
+
+  - name: "Identity Link (Same-As) Relationship"
+    chunk_ref: "02-KG (Chunk 2:690-694)"
+    quote: "A second option is to use identity links to state that a local entity has the same identity as another coreferent entity found in an external source; an instantiation of this concept can be found in the OWL standard, which defines the owl:sameAs property"
+    description: "Identity links establish coreference relationships between nodes in different graphs. owl:sameAs indicates two identifiers refer to the same real-world entity."
+
+  - name: "Derivation Provenance Relationship"
+    chunk_ref: "02-KG (Chunk 2:866-870)"
+    quote: "entities (e.g., graphs, nodes, physical document) are derived from other entities, are generated and/or used by activities (e.g., extraction, authorship), and are attributed to agents (e.g., people, software, organisations)"
+    description: "PROV Data Model defines provenance relationships: derivation (entity-entity), generation/usage (activity-entity), and attribution (entity-agent). Forms the Agent-Activity-Entity triad."
+
+  # From Knowledge Graphs Chunk 3 (02-Knowledge_Graphs_3.md)
+
+  - name: "Reification Statement-About-Statement Relationship"
+    chunk_ref: "02-KG (Chunk 3:879-891)"
+    quote: "reification, which allows for making statements about statements in a generic manner... RDF reification defines a new node [e] to represent the edge and connects it to the source node (via subject), target node (via object), and edge label (via predicate)"
+    description: "Reification creates meta-level relationships, allowing edges to become subjects of other edges. RDF reification uses subject/predicate/object relationships to represent edges as nodes."
+
+  - name: "Annotation Context Relationship"
+    chunk_ref: "02-KG (Chunk 3:107-109)"
+    quote: "annotations that provide mathematical definitions of a contextual domain and key operations possible within that domain that can then be applied automatically"
+    description: "Annotations establish contextual relationships on edges, associating them with domain values (temporal intervals, fuzzy values). Operations like meet and join combine these contextual values."
+
+  - name: "Meet/Join Annotation Combination"
+    chunk_ref: "02-KG (Chunk 3:170-184)"
+    quote: "applying a conjunction of annotations on compatible flight and city edges, applying the meet operator to compute the annotation for which both edges hold... combine these two annotations for Arica using the join operator"
+    description: "Annotated RDF defines meet (intersection) and join (union) operations for combining contextual relationships. Meet computes when both edges hold; join computes when either holds."
+
+  # From Knowledge Graphs Chunk 4 (02-Knowledge_Graphs_4.md)
+
+  - name: "Ontological Assertion Relationship"
+    chunk_ref: "02-KG (Chunk 4:530-531)"
+    quote: "Assertional axioms can be either unary class relations on individuals, such as City(Santiago), or binary property relations on individuals, such as flight(Santiago,Arica)"
+    description: "Description Logics define two fundamental relationship types: unary class membership (type assertions) and binary property relations (edge assertions). These form the A-Box."
+
+  - name: "Same-As Identity Relationship"
+    chunk_ref: "02-KG (Chunk 3:565-567)"
+    quote: "Same As: x1 same as x2 implies x1 = x2. Example: Region V same as Region de Valparaiso"
+    description: "OWL same-as relationship establishes that two terms refer to identical entities in the domain. This enables merging data about the same entity from different sources."
+
+  - name: "Different-From Distinction Relationship"
+    chunk_ref: "02-KG (Chunk 3:567)"
+    quote: "Different From: x1 diff. from x2 implies x1 != x2. Example: Valparaiso diff. from Region de Valparaiso"
+    description: "OWL different-from relationship explicitly states that two terms refer to distinct entities, disambiguating cases where naming similarity might suggest identity."
+
+  - name: "Inverse Property Relationship"
+    chunk_ref: "02-KG (Chunk 3:583)"
+    quote: "Inverse: p inv. of q implies x p y iff y q x. Example: venue inv. of hosts"
+    description: "OWL inverse relationship defines properties that are symmetric converses. If P is inverse of Q, then [x] P y implies [y] Q x, enabling bidirectional navigation."
+
+  - name: "Transitive Property Relationship"
+    chunk_ref: "02-KG (Chunk 3:587)"
+    quote: "Transitive: p type Transitive implies x p y p z implies x p z. Example: part of type Transitive"
+    description: "Transitive relationships propagate across chains. If P is transitive and [x] P y and [y] P z, then [x] P z can be inferred, enabling path-based reasoning."
+
+  - name: "Functional Property Relationship"
+    chunk_ref: "02-KG (Chunk 3:603)"
+    quote: "Functional: p type Functional implies y1 p x p y2 implies y1 = y2. Example: population type Functional"
+    description: "Functional properties establish many-to-one relationships. If property P is functional, then any entity can have at most one value for P, enabling identity inference from shared values."
+
+  - name: "Property Chain Composition Relationship"
+    chunk_ref: "02-KG (Chunk 3:510-512)"
+    quote: "we can relate a property to a chain (a path expression only allowing concatenation of properties) such that pairs of entities related by the chain are also related by the given property"
+    description: "OWL property chains define composition relationships. If property P is defined as chain Q o R, then [x] Q y and [y] R z implies [x] P z, enabling complex path-based inferences."
+
+  - name: "Rule Body-Head Implication Relationship"
+    chunk_ref: "02-KG (Chunk 4:23-31)"
+    quote: "A rule is composed of a body (if) and a head (then). Both the body and head are given as graph patterns. A rule indicates that if we can replace the variables of the body with terms from the data graph and form a subgraph... then using the same replacement of variables in the head will yield a valid entailment"
+    description: "Rules define conditional relationships between graph patterns. If the body pattern matches, the head pattern is entailed, enabling inference of new relationships from existing ones."
+
+  - name: "Embedding Plausibility Relationship"
+    chunk_ref: "02-KG (Chunk 4:807-811)"
+    quote: "given an edge [s] p o, a specific embedding approach defines a scoring function that accepts es (the entity embedding of node s), rp (the relation embedding of edge label p) and eo... and computes the plausibility of the edge"
+    description: "Knowledge graph embeddings define plausibility relationships between entities and relations. The scoring function maps (subject, predicate, object) triples to plausibility scores indicating likelihood of truth."
+
+  - name: "Translational Transformation Relationship"
+    chunk_ref: "02-KG (Chunk 4:907-912)"
+    quote: "Translational models interpret edge labels as transformations from subject nodes... to object nodes; for example, in the edge San Pedro bus Moon Valley, the edge label bus is seen as transforming San Pedro to Moon Valley"
+    description: "TransE and related models interpret relationships as geometric translations in embedding space. Edge labels transform source entity vectors toward target entity vectors, es + rp approximates eo."

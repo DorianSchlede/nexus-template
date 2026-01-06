@@ -1,0 +1,161 @@
+---
+batch_id: "entity_types_8"
+field: entity_types
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 28
+---
+
+patterns:
+  # ============================================
+  # Paper 15: SciAgents Multi-Agent Graph Reasoning (Chunks 7-10)
+  # ============================================
+
+  - name: "Multi-Agent Role Taxonomy"
+    chunk_ref: "15-SciAgents (Chunk 7:474-486)"
+    quote: "user: An attentive HUMAN user... planner: A planner who can suggest a plan... assistant: An assistant who calls tools... ontologist: An ontologist who defines terms..."
+    description: "SciAgents defines a comprehensive multi-agent taxonomy with distinct entity roles: user (human interaction), planner (task decomposition), assistant (tool execution), ontologist (term definition), scientist (proposal crafting), hypothesis_agent, outcome_agent, mechanism_agent, design_principles_agent, unexpected_properties_agent, comparison_agent, novelty_agent, and critic_agent. Each agent has a specialized function in the research proposal workflow."
+
+  - name: "Ontologist Agent Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 7:479)"
+    quote: "ontologist: An ontologist who defines each of the terms and discusses the relationships in the path"
+    description: "The ontologist is defined as an entity type with the specific function of defining terminology and analyzing relationships. This represents a meta-ontological role - an agent whose purpose is ontology work itself, making explicit the connection between agent types and ontological reasoning."
+
+  - name: "Knowledge Path Entity Structure"
+    chunk_ref: "15-SciAgents (Chunk 7:576-577)"
+    quote: "tunable processability -- Allows for -- material extrusion -- Allows for Creation of -- controlled pore sizes -- Achieved through varying..."
+    description: "Entity relationships are represented as knowledge paths with typed edges connecting concept nodes. The path structure shows: Entity -- Relationship -- Entity patterns, representing both physical entities (material, scaffolds) and abstract concepts (processability, properties)."
+
+  - name: "Hierarchical Structure Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 7:196-199)"
+    quote: "Hierarchical 3D Porous Architecture: Engineering collagen into a multi-level structure that enhances crashworthiness and stiffness memory"
+    description: "Hierarchical structure is identified as an entity type that spans multiple abstraction levels (molecular, cellular, macroscale). This represents a key pattern for ontology design: entities that inherently contain nested sub-entities organized at different scales."
+
+  - name: "Agent-Tool-Executor Triad"
+    chunk_ref: "15-SciAgents (Chunk 7:477-478)"
+    quote: "assistant: An assistant who calls the appropriate tools and functions and returns the results"
+    description: "The assistant agent entity type is defined by its relationship to tools (calls/invokes) and results (returns). This establishes a fundamental pattern: Agent entities are characterized by their capacity to use Resource entities (tools) and produce Data entities (results)."
+
+  - name: "Design Principles Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 7:238-242)"
+    quote: "Design and Fabrication: Computational Modeling: Use finite element analysis (FEA) to design the hierarchical structure... Advanced Manufacturing: Fabricate using 3D printing..."
+    description: "Design principles emerge as a distinct entity type encompassing methodology, computational approaches, and manufacturing techniques. This represents Rule entities that constrain how other entities (materials, structures) can be created and combined."
+
+  - name: "Mechanism Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 7:289-290)"
+    quote: "The mechanisms involve collagen self-assembly, reversible deformation at the molecular and cellular levels, and energy absorption through the hierarchical structure"
+    description: "Mechanisms are identified as process-oriented entity types that explain causal relationships between other entities. They bridge structural entities (collagen, architecture) with behavioral outcomes (deformation, energy absorption)."
+
+  - name: "Novelty Rating Entity"
+    chunk_ref: "15-SciAgents (Chunk 7:442-445)"
+    quote: "Novelty: 8/10 The proposed hypothesis is quite novel, especially in the context of combining hierarchical collagen-based materials with dynamic 3D porous architectures"
+    description: "Novelty is quantified as a measurable entity attribute (8/10 scale), representing an evaluation dimension. This shows how abstract qualities can be reified as entity properties with defined value ranges."
+
+  - name: "Feasibility Entity Attribute"
+    chunk_ref: "15-SciAgents (Chunk 7:450-456)"
+    quote: "Feasibility: 7/10 The feasibility of this research is moderately high... integrating these components into a cohesive study... adds complexity"
+    description: "Feasibility is defined as an entity attribute with quantitative scoring (7/10) and qualitative justification. Paired with Novelty, these form evaluation dimensions that can be applied to Goal or Task entities."
+
+  - name: "Properties Entity Category"
+    chunk_ref: "15-SciAgents (Chunk 8:93-97)"
+    quote: "We predict that the integration of nanocomposites may lead to unexpected properties such as: 1. Self-Healing... 2. Enhanced Biocompatibility..."
+    description: "Properties form a distinct entity category that can be expected or unexpected. Each property (self-healing, biocompatibility, thermal stability) is an entity type that characterizes other entities (materials, scaffolds)."
+
+  - name: "Quantitative Metrics Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 8:108-112)"
+    quote: "Healing Efficiency: Measure the percentage of mechanical property recovery after damage... Healing Time: The time required for the scaffold to recover its mechanical properties"
+    description: "Quantitative metrics emerge as Data entities with measurement methods, units, and target values. Examples include healing efficiency (percentage), healing time (hours), tensile strength (MPa), establishing a pattern for how metrics are ontologically modeled."
+
+  - name: "Comparison Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 8:197-200)"
+    quote: "Compared to traditional collagen-based scaffolds: 1. Tensile Strength: Traditional Scaffolds: Typically exhibit tensile strengths in the range of 0.5-1 MPa"
+    description: "Comparison is defined as a relational entity type that links two or more entities through comparative analysis. It includes dimensions (tensile strength, elasticity), baseline values, and expected improvements."
+
+  - name: "Gene Circuit Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 9:44-47)"
+    quote: "Gene Circuit Regulation: The hypothesis extends to the use of synthetic biology to control the production of amyloid-forming proteins"
+    description: "Gene circuits represent a biological control entity type that regulates protein expression and assembly. This extends the Agent concept to include programmed biological systems that exhibit goal-directed behavior."
+
+  - name: "Knowledge Graph Entity Structure"
+    chunk_ref: "15-SciAgents (Chunk 9:803-805)"
+    quote: "hexagonally packed -- arranged in -- platelets -- constituent part of -- nacre -- example of -- biomaterials -- consists of -- hierarchical structure"
+    description: "Knowledge graphs are structured as Entity-Relationship-Entity paths where each node is an entity type (platelets, nacre, biomaterials) and edges are typed relationships (arranged_in, constituent_part_of, example_of, consists_of)."
+
+  - name: "Amyloid Fibrils Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 9:823)"
+    quote: "Amyloid Fibrils: Protein aggregates that form fibrous structures and are associated with various diseases"
+    description: "Amyloid fibrils are defined as a specific biological entity type with structural characteristics (fibrous) and functional associations (disease-related). This exemplifies domain-specific entity specialization."
+
+  - name: "AFM Imaging Entity Type"
+    chunk_ref: "15-SciAgents (Chunk 9:85-91)"
+    quote: "AFM Imaging: Nanoscale Analysis: Atomic Force Microscopy (AFM) allows for the measurement of mechanical properties at the nanoscale level"
+    description: "AFM imaging represents a measurement/observation entity type that produces Data entities (images, measurements). It is characterized by its scale (nanoscale), output type (images), and what it reveals (structure, properties)."
+
+  - name: "Researcher Team Entity Structure"
+    chunk_ref: "15-SciAgents (Chunk 9:697-709)"
+    quote: "user: An attentive HUMAN user... planner: I can suggest a plan... scientist: I can craft the research proposal... caller: I am responsible to pick the next agent"
+    description: "The research team is modeled as a collection of Agent entity types with specialized roles. The 'caller' role is particularly notable as a coordinator agent that manages the sequence of agent interactions."
+
+  # ============================================
+  # Paper 16: KG-Agent Knowledge Graph Reasoning (Chunks 1-2)
+  # ============================================
+
+  - name: "Knowledge Graph Triple Entity"
+    chunk_ref: "16-KG-Agent (Chunk 1:176-180)"
+    quote: "A knowledge graph typically consists of a large number of fact triples, expressed as G = {<e, r, e'>|e, e' in E, r in R}... A triple <e, r, e'> describes a factual knowledge"
+    description: "Knowledge graphs are formally defined using entity types E (entities), R (relations), and the triple structure <e, r, e'>. This provides a foundational entity model: Entity-Relation-Entity triples as atomic knowledge units."
+
+  - name: "Entity ID and Type Assignment"
+    chunk_ref: "16-KG-Agent (Chunk 1:180-182)"
+    quote: "Each entity e is assigned a unique entity ID (or string value), and belongs to one entity type t such as Country and Person"
+    description: "Entities have two key attributes: unique identifier (entity ID) and type classification (entity type t). Examples like Country and Person show how abstract types categorize concrete instances."
+
+  - name: "Neighboring Relations Entity Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:183-190)"
+    quote: "we introduce neighboring relations to denote both the incoming and outgoing relations for a set of entities {e}, denoted as R{e} = {r|<e, r, e'> in G} U {r|<e', r, e> in G}"
+    description: "Neighboring relations define the relational context of entities - both outgoing (entity as subject) and incoming (entity as object) edges. This captures how entities are embedded in a relational network."
+
+  - name: "Toolbox Entity Category"
+    chunk_ref: "16-KG-Agent (Chunk 1:227-239)"
+    quote: "we construct a supporting toolbox for easing the utilization of KG information... we design three types of tools for LLMs reasoning over KG, i.e., extraction, semantic, and logic tools"
+    description: "Tools are categorized into three entity types: extraction tools (access KG data), semantic tools (use pre-trained models), and logic tools (manipulate results). This tripartite classification enables structured agent-tool interaction."
+
+  - name: "Extraction Tool Entity Types"
+    chunk_ref: "16-KG-Agent (Chunk 1:241-249)"
+    quote: "Extraction tools aim to facilitate the access to information from KG... five tools to support the access to the relations (get_relation), the head/tail entities (get_head_entity/get_tail_entity)"
+    description: "Extraction tools are specialized entity types: get_relation, get_head_entity, get_tail_entity, get_entity_by_type, get_entity_by_constraint. Each tool operates on specific entity types (relations, entities) with defined input-output signatures."
+
+  - name: "Logic Tool Entity Types"
+    chunk_ref: "16-KG-Agent (Chunk 1:251-255)"
+    quote: "Logic tools aim to support basic manipulation operations on the extracted KG information, including entity counting (count), entity set intersection (intersect) and union (union)"
+    description: "Logic tools are operation-oriented entity types for KG manipulation: count, intersect, union, judge (condition verification), and end (terminal). These represent procedural entities that transform Data entities."
+
+  - name: "Semantic Tool Entity Types"
+    chunk_ref: "16-KG-Agent (Chunk 1:257-259)"
+    quote: "Semantic tools are developed by utilizing pre-trained models to implement specific functions, including relation retrieval (retrieve_relation) and entity disambiguation (disambiguate_entity)"
+    description: "Semantic tools leverage neural models for advanced operations: retrieve_relation (find relevant relations) and disambiguate_entity (resolve entity references). These bridge symbolic KG entities with neural representations."
+
+  - name: "Knowledge Memory Entity Structure"
+    chunk_ref: "16-KG-Agent (Chunk 1:537-551)"
+    quote: "The knowledge memory preserves the currently useful information... It mainly contains four parts: natural language question, toolbox definition, current KG information, and history reasoning program"
+    description: "Knowledge memory is a composite entity type containing: question (Data), toolbox definition (Resource), current KG information (Data), and history reasoning program (Data). This defines the agent's working memory structure."
+
+  - name: "Planner Entity Type"
+    chunk_ref: "16-KG-Agent (Chunk 1:554-565)"
+    quote: "Based on the current knowledge memory, the LLM-based planner selects a tool to interact with KG at each step... the LLM will generate one function call by selecting a tool and its arguments"
+    description: "The Planner is defined as an Agent entity type that performs tool selection based on knowledge memory state. It generates function calls (action specifications) by choosing tools and their parameters."
+
+  - name: "Executor Entity Type"
+    chunk_ref: "16-KG-Agent (Chunk 1:568-570)"
+    quote: "After the planner generates the function call, the KG-based executor will execute it using a program compiler. It can cache or operate the intermediate variables"
+    description: "The Executor is an Agent entity type that translates function calls into actual operations. It maintains state (caches intermediate variables) and produces results from KG queries, completing the plan-execute cycle."
+
+  - name: "Agent Framework Four-Component Model"
+    chunk_ref: "16-KG-Agent (Chunk 1:536-541)"
+    quote: "It mainly contains four components, i.e., the core instruction-tuned LLM (planner), the multifunctional toolbox, the KG-based executor, and the knowledge memory"
+    description: "The KG-Agent architecture defines four core entity types: LLM-based planner (reasoning Agent), toolbox (Resource collection), executor (action Agent), and knowledge memory (Data store). This provides a complete agent system ontology."
+
+  - name: "Autonomous Iteration Pattern"
+    chunk_ref: "16-KG-Agent (Chunk 1:629-638)"
+    quote: "The KG-Agent framework autonomously iterates the above tool selection and memory updation process... the multi-turn decision-making process of the agent is like walking on the KG along relations"
+    description: "Autonomous iteration defines a behavioral pattern where Agent entities cycle through: tool selection, execution, memory update, and termination check. This process is characterized as 'walking on the KG along relations'."

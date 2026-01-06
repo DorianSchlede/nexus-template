@@ -1,0 +1,249 @@
+---
+batch_id: "entity_types_10"
+field: entity_types
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 6
+patterns_found: 42
+---
+
+patterns:
+  # ========================================
+  # Paper 20: Agentic RAG Survey
+  # ========================================
+
+  - name: "AI Agent Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:104-107)"
+    quote: "Modern agents, including LLM-powered and mobile agents, are intelligent entities capable of perceiving, reasoning, and autonomously executing tasks"
+    description: "Defines AI agents as intelligent entities with perception, reasoning, and autonomous execution capabilities. This maps to the Agent entity type in the 8-entity hypothesis, with autonomous and intentional characteristics."
+
+  - name: "Agent Components - LLM Role and Task"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:487-488)"
+    quote: "LLM (with defined Role and Task): Serves as the agent's primary reasoning engine and dialogue interface. It interprets user queries, generates responses"
+    description: "Identifies Role and Task as core components of an AI agent. The LLM serves both a Role (reasoning engine) and executes Tasks (interpreting queries, generating responses). This supports the Task and Role entity types."
+
+  - name: "Agent Memory Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:491-493)"
+    quote: "Memory (Short-Term and Long-Term): Captures context and relevant data across interactions. Short-term memory tracks immediate conversation state, while long-term memory stores accumulated knowledge"
+    description: "Memory as a distinct entity type within agents, with temporal differentiation (short-term vs long-term). This relates to Data entity type as persistent information storage."
+
+  - name: "Agent Planning Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:496-497)"
+    quote: "Planning (Reflection & Self-Critique): Guides the agent's iterative reasoning process through reflection, query routing, or self-critique, ensuring that complex tasks are broken down effectively"
+    description: "Planning as an entity that decomposes complex tasks into subtasks. This directly supports the Goal and Task entity hierarchy, where plans bridge goals to executable tasks."
+
+  - name: "Agent Tools Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:500-501)"
+    quote: "Tools (Vector Search, Web Search, APIs, etc.): Expands the agent's capabilities beyond text generation, enabling access to external resources, real-time data, or specialized computations"
+    description: "Tools as distinct entities that extend agent capabilities. Maps to Resource entity type - external capabilities agents can invoke to accomplish tasks."
+
+  - name: "Retrieval Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:161-163)"
+    quote: "Retrieval: Responsible for querying external data sources such as knowledge bases, APIs, or vector databases. Advanced retrievers leverage dense vector search and transformer-based models"
+    description: "Retrieval as a core component entity in RAG architecture. Functions as a Resource/Tool that interfaces between agents and Data sources (knowledge bases, APIs, databases)."
+
+  - name: "Query Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:764-766)"
+    quote: "Query Submission and Evaluation: The process begins when a user submits a query. A coordinating agent (or master retrieval agent) receives the query and analyzes it"
+    description: "Query as an entity that initiates processing workflows. Represents a specific type of Event that triggers agent activities and retrieval processes."
+
+  - name: "Knowledge Base Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:98-99)"
+    quote: "These systems retrieve real-time information from sources such as knowledge bases, APIs, or the web, effectively bridging the gap between static training data and the demands of dynamic applications"
+    description: "Knowledge bases as Data entities that store structured information. Distinguishes from raw data by being organized, queryable repositories of domain knowledge."
+
+  - name: "Document Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:229)"
+    quote: "Context Retrieval Agent: Responsible for retrieving initial context documents from a vector database"
+    description: "Document as a Data entity type that contains textual content retrievable by agents. Documents are processed, evaluated for relevance, and used in response generation."
+
+  - name: "Graph Knowledge Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:466-467)"
+    quote: "Graph Knowledge Bases: Structured data is used to extract relationships, hierarchies, and connections (e.g., disease-to-symptom mappings in healthcare)"
+    description: "Graph knowledge bases as structured Data entities that encode relationships between concepts. Enables multi-hop reasoning through connected entity relationships."
+
+  - name: "Coordinator Agent Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:886-888)"
+    quote: "Query Submission: The process begins with a user query, which is received by a coordinator agent or master retrieval agent. This agent acts as the central orchestrator"
+    description: "Coordinator/Master agent as a specialized Agent entity type with orchestration responsibilities. Delegates work to specialized agents, embodying hierarchical Role patterns."
+
+  - name: "Specialized Retrieval Agent Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:890-904)"
+    quote: "Specialized Retrieval Agents: The query is distributed among multiple retrieval agents, each focusing on a specific type of data source or task"
+    description: "Specialized agents as Agent subtypes with domain-specific capabilities. Examples include SQL agent, semantic search agent, web search agent - each with distinct Resource access patterns."
+
+  - name: "Workflow Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:110-112)"
+    quote: "These agents employ agentic workflow patterns, such as prompt chaining, routing, parallelization, orchestrator-worker models, and evaluator-optimizer, to structure and optimize task execution"
+    description: "Workflow as a pattern entity that orchestrates Task sequences. Includes routing, parallelization, and evaluation patterns - procedural structures that organize agent activities."
+
+  - name: "Response Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:33-34)"
+    quote: "Output Generation: The system generates a comprehensive response, which is delivered back to the user in an actionable and concise format"
+    description: "Response/Output as a Data entity produced by agent processing. Represents synthesized information delivered to users after retrieval and generation steps."
+
+  - name: "Evaluation Agent Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:232-234)"
+    quote: "Relevance Evaluation Agent: Assesses the retrieved documents for relevance and flags any irrelevant or ambiguous documents for corrective actions"
+    description: "Evaluation agent as an Agent subtype that applies Rules (relevance criteria) to Data (documents). Implements quality control through judgment and classification activities."
+
+  - name: "Critic Module Entity"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:493-499)"
+    quote: "Critic Module: Validates retrieved data for relevance and quality. Flags low-confidence results for re-retrieval or refinement"
+    description: "Critic as a component entity that validates Data quality. Applies Rules (confidence thresholds) to filter and refine retrieved information."
+
+  # ========================================
+  # Paper 21: LLM Smart Contracts from BPMN
+  # ========================================
+
+  - name: "Large Language Model Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:131-133)"
+    quote: "Large Language Models (LLMs) are transformer-based neural network systems. LLMs are a specific class of Foundation Models, a class of machine learning models trained on extensive data sets"
+    description: "LLMs as a distinct Agent entity type - AI systems capable of code generation and natural language understanding. They can perform complex tasks including analyzing business process models."
+
+  - name: "Smart Contract Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:93-94)"
+    quote: "we present an exploratory study investigating the use of LLMs to generate smart contract code from business process descriptions"
+    description: "Smart contracts as executable Rule entities that enforce process logic on blockchain. They codify business Rules as immutable, automatically executed code."
+
+  - name: "Business Process Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:54-55)"
+    quote: "Blockchain-based business process execution relies on a model-driven paradigm, where process descriptions are transformed into executable artefacts based on rule-based transformation tools"
+    description: "Business process as a structured entity containing Tasks, control flow, and Rules. Process models serve as input specifications that can be transformed into executable artifacts."
+
+  - name: "BPMN Choreography Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:338-340)"
+    quote: "In the current instantiation of our framework, we support BPMN 2.0 Choreographies. This is a purely practical implementation choice"
+    description: "BPMN Choreography as a process model entity type representing multi-participant collaboration. Contains choreography tasks, start/end events, gateways, and sub-choreographies."
+
+  - name: "Task Entity in BPMN"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:467-469)"
+    quote: "enforcing: (i) the control flow, i.e., the order of tasks, (ii) that only the respective initiator can execute a task, and (iii) the autonomous enforcement of gateways"
+    description: "Task as the fundamental activity unit in business processes. Has ordering constraints (control flow), Resource assignment (initiator), and can be gated by conditions."
+
+  - name: "Participant Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:313-314)"
+    quote: "The simulator also generates an encoding that maps the events and participants to how they should be represented in the smart contract (taskIDs and participantIDs)"
+    description: "Participant as an Agent/Role entity in choreography models. Participants are mapped to blockchain addresses and authorized to execute specific tasks."
+
+  - name: "Gateway Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:355-358)"
+    quote: "As we also want to benchmark data-based exclusive gateways (XOR), we had to extend the playout functionality to generate appropriate data manipulation events"
+    description: "Gateway as a control flow entity that routes process execution based on Rules/conditions. XOR gateways make exclusive decisions based on data values."
+
+  - name: "Event Entity in Process"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:247-250)"
+    quote: "each event is associated with a case identifier that groups it into a case. A trace is the ordered sequence of events (activities) that occurred for a specific case"
+    description: "Event as an occurrence entity in process execution logs. Events represent task executions, grouped by case ID, forming traces that record process instances."
+
+  - name: "Trace Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:250)"
+    quote: "A trace can be said to be in conformance with a process model if it represents a valid execution path through that model"
+    description: "Trace as a sequence of Events that records one complete process execution. Traces are validated against process models for conformance checking."
+
+  - name: "Token Entity"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:148-150)"
+    quote: "Tokens are the units of input and output for LLMs. Tokens can be whole words, subwords (parts of words), individual characters, punctuation, or special characters"
+    description: "Token as the atomic Data unit for LLM processing. Tokens influence computational load and cost, serving as the currency of LLM interactions."
+
+  # ========================================
+  # Paper 22: RPA Framework for BPM Activities
+  # ========================================
+
+  - name: "Software Robot Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:88-90)"
+    quote: "This is achieved by the application of software algorithms known as software robots or bots, which are imitating the execution flow of humans on the front-end"
+    description: "Software robot as an Agent entity that automates human tasks. Bots interact with user interfaces through mouse clicks, keyboard interactions, and text interpretation."
+
+  - name: "Process Activity Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:62-63)"
+    quote: "What are the characteristics of a process activity, or a set of process activities, that facilitate viable robotic process automation?"
+    description: "Process activity as the fundamental Task entity for RPA evaluation. Activities have measurable characteristics (standardization, frequency, determinism) that determine automation viability."
+
+  - name: "User Interface Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:95-96)"
+    quote: "Just as a human user, robots can interact with the user interface through mouse clicks, key board interactions and interpretation of text and graphics"
+    description: "User interface as a Resource/tool entity that mediates between agents (human or robot) and information systems. The presentation layer through which activities are executed."
+
+  - name: "Information System Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:98-99)"
+    quote: "RPA usually does not require defined interfaces as the software sits on top of information systems and accesses applications only through the presentation layer"
+    description: "Information systems as Data/Resource infrastructure entities. Multiple systems may be involved in a process, requiring data transfer and interaction coordination."
+
+  - name: "Task Perspective Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:325-326)"
+    quote: "Task perspective: The task perspective refers to the execution of process activities. Its criteria are standardization, maturity, determinism, and failure rate"
+    description: "Task perspective as an evaluation framework dimension. Contains criteria for assessing Task entity characteristics: standardization, maturity, determinism, failure rate."
+
+  - name: "Time Perspective Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:347-349)"
+    quote: "Time perspective: The criteria listed under the time perspective focus on the duration and frequency of processes and process steps"
+    description: "Time perspective as an evaluation dimension focusing on temporal Event characteristics. Measures frequency, duration, and urgency of process activities."
+
+  - name: "Data Perspective Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:365-368)"
+    quote: "Data perspective: In many processes, information is processed in multiple systems. Therefore, the data perspective resembles the structuredness of data"
+    description: "Data perspective as an evaluation dimension for Data entity characteristics. Assesses structuredness, digital format, and accessibility of process data."
+
+  - name: "System Perspective Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:377-379)"
+    quote: "System perspective: The fourth perspective in the framework is related to the underlying systems. The perspective poses the interaction with interfaces, and the stability"
+    description: "System perspective as an evaluation dimension for Resource/infrastructure characteristics. Evaluates interface interactions, stability, and number of systems involved."
+
+  - name: "Human Perspective Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:397-398)"
+    quote: "Human perspective: The last perspective deals with humans computer interaction focusing on the human. The perspective comes with two peculiarities, resources and proneness to human error"
+    description: "Human perspective as an evaluation dimension for Role/Agent characteristics. Assesses human resource involvement and error proneness in process execution."
+
+  - name: "Exception Entity"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:146-148)"
+    quote: "Candidate processes suited for RPA show little or no amount of exceptions when tasks are being executed and do not require human intervention"
+    description: "Exception as an Event entity representing deviation from normal process flow. Exceptions indicate failure, require intervention, and reduce automation viability."
+
+  # ========================================
+  # Paper 23: UFO Story - Ontological Foundations
+  # ========================================
+
+  - name: "Endurant Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:173-178)"
+    quote: "UFO-A: An Ontology of Endurants dealing with aspects of structural conceptual modeling. It is organized as a Four-Category ontology comprising theories of Types and Taxonomic Structures"
+    description: "Endurant as a foundational entity type in UFO - entities wholly present at any time they exist. Includes objects, roles, and their properties. Distinguishes from perdurants (events/processes)."
+
+  - name: "Perdurant Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:183-185)"
+    quote: "UFO-B: An Ontology of Perdurants (Events, Processes) dealing with aspects such as Perdurant Mereology, Temporal Ordering of Perdurants, Object Participation in Perdurants, Causation"
+    description: "Perdurant as a foundational entity type - entities that unfold in time with temporal parts. Includes Events and Processes. Connected to endurants through participation and dispositions."
+
+  - name: "Intentional Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:191-193)"
+    quote: "UFO-C: An Ontology of Intentional and Social Entities, which is constructed on top of UFO-A and UFO-B, and which addresses notions such as Beliefs, Desires, Intentions, Goals, Actions"
+    description: "Intentional entities in UFO including Beliefs, Desires, Intentions, Goals, and Actions. These cognitive/volitional states underpin Goal and Agent entity types with mental content."
+
+  - name: "Social Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:192-193)"
+    quote: "notions such as Beliefs, Desires, Intentions, Goals, Actions, Commitments and Claims, Social Roles and Social Particularized Relational Complexes (Social Relators)"
+    description: "Social entities in UFO including Commitments, Claims, Social Roles, and Social Relators. These ground interpersonal relationships and organizational structures."
+
+  - name: "Universal Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:126-129)"
+    quote: "we needed an ontological theory that would countenance both individuals and universals and one that would include not only substantial individuals and universals but also accidents"
+    description: "Universal as a meta-entity type in Four-Category Ontology. Universals are types/classes that individuals instantiate. Required for modeling entity types and taxonomies."
+
+  - name: "Moment/Trope Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:128-129)"
+    quote: "we needed a Four-Category Ontology. We needed particularized properties not only because they were of great importance in making sense of language and cognition"
+    description: "Moments/tropes as particularized properties - individual instances of qualities or modes inhering in objects. Examples include specific color instances, relationships between individuals."
+
+  - name: "Relator Entity"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:132-133)"
+    quote: "particularized relations (relationships) and particularized intrinsic properties (e.g., often represented by the so-called weak entities) are frequently modeled as bearers of other particularized properties"
+    description: "Relator as a particularized relation entity that connects multiple individuals. Relators can bear their own properties and participate in relationships, grounding complex associations."
+
+  - name: "Role Entity in UFO"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:154-156)"
+    quote: "we needed something in the spirit of the ontology of universals underlying the OntoClean methodology in order to systematize a number of notions that were pervasive in the conceptual modeling literature (e.g., types, roles, phases or states, mixins)"
+    description: "Role as a type of universal in UFO with anti-rigid identity. Roles are relationally dependent types that entities instantiate contingently (e.g., Student, Employee)."
+
+  - name: "Kind Entity in UFO"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:367)"
+    quote: "These distinctions, however, were considered to be distinctions among object universals. However, consciously ignoring this rule, users of the language started to systematically employ these distinctions"
+    description: "Kind as a substance sortal in UFO that supplies identity criteria to individuals. Kinds are rigid types (Person, Organization) that define what something essentially is."

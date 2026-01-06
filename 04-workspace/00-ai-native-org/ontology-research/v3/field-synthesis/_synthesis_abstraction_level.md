@@ -1,0 +1,1430 @@
+# Abstraction Level
+
+**Source**: Project 16 Ontologies Research v3
+
+**Type**: Synthesis Analysis (UDWO-Primed)
+
+**Field**: abstraction_level
+
+**Aggregated**: 2026-01-01T16:22:08.361209
+
+**Batches Merged**: 8
+
+---
+
+## Table of Contents
+
+- [Patterns](#patterns)
+
+## Patterns
+
+**Total Patterns**: 128
+
+### 1. UFO as Foundational Ontology
+
+UFO is explicitly positioned as a foundational ontology - the highest level of abstraction in the ontology stack. Foundational ontologies provide domain-independent categories and principles that can be specialized for domain and application ontologies. This is the most abstract level, dealing with fundamental philosophical categories rather than domain-specific concepts.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:107)**
+  > UFO, OntoUML, foundational ontology, ontological analysis, formal ontology
+
+---
+
+### 2. Four-Category Ontology Structure
+
+UFO's abstraction level is characterized by its four-category structure based on the Aristotelian Square, distinguishing both substantials and accidents (particularized properties) at both the type and instance levels. This foundational structure enables domain-independent categorization of all possible entities.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:116-117)**
+  > UFO is a four-category ontology that addresses fundamental conceptual modeling notions via a set of micro-theories
+
+---
+
+### 3. Micro-Theory Architecture
+
+UFO's foundational abstraction is organized as a collection of micro-theories addressing fundamental ontological concepts: types and taxonomic structures, part-whole relations, particularized properties, relations, roles, events, and multi-level modeling. Each micro-theory provides foundational patterns that can be specialized at lower abstraction levels.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:117-142)**
+  > a theory of types and taxonomic structures... a theory of part-whole relations... a theory of particularized intrinsic properties
+
+---
+
+### 4. Three-Fragment Organization (UFO-A, UFO-B, UFO-C)
+
+UFO is organized into three main fragments at the foundational level: UFO-A (endurants/objects), UFO-B (perdurants/events), and UFO-C (social/intentional entities built on UFO-A and UFO-B). This modular organization at the foundational level enables selective specialization for domain ontologies.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:270-279)**
+  > UFO-A, which is an ontology of endurants; UFO-B, which is an ontology of perdurants; UFO-C, which is an ontology of social and intentional entities
+
+---
+
+### 5. Endurant-Perdurant Fundamental Distinction
+
+At the foundational abstraction level, UFO makes the fundamental distinction between endurants (entities existing wholly at any time) and perdurants (entities unfolding in time with temporal parts). This is a domain-independent ontological distinction that applies across all possible domains.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:283-289)**
+  > UFO is a 3D ontology having, as a fundamental distinction, the one between endurants... and perdurants
+
+---
+
+### 6. Substantial vs Moment Distinction
+
+The foundational level distinguishes between independent entities (substantials like objects) and dependent entities (moments/particularized properties). This Aristotelian Square structure provides the most abstract categorization framework for all entities.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:297-301)**
+  > UFO is an ontology based of the so-called Aristotelian Square, thus, accounting for both substantial individuals... as well as particularized properties
+
+---
+
+### 7. Universals and Particulars Hierarchy
+
+UFO's foundational abstraction includes both particulars (individual instances) and universals (types/patterns). The inclusion of higher-order types (types of types) demonstrates the multi-level abstraction capability of the ontology, supporting meta-modeling at the foundational level.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:363-367)**
+  > UFO is an ontology of both particulars and universals (or types)... UFO is an ontology that also countenances high-order types, i.e., types whose instances are also types
+
+---
+
+### 8. Kind as Identity Provider
+
+At the foundational level, Kinds provide the essential identity criteria for entities. This is a domain-independent abstraction that defines how any entity maintains identity through change. Person, Organization, and Marriage are examples of Kinds at a lower (domain) abstraction level.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:368-377)**
+  > a fundamental sort of endurant type is a kind, which provides uniform principles of individuation, identity, and persistence to its instances
+
+---
+
+### 9. Sortal vs Non-Sortal Type Distinction
+
+The foundational level distinguishes sortals (types with identity principles) from non-sortals (types crossing multiple Kinds). Categories, Phase Mixins, Role Mixins, and Mixins are foundational non-sortal patterns that enable abstraction across domain Kinds.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:378-395)**
+  > In contrast with sortals, non-sortals are types that represent common properties of individuals of multiple Kinds
+
+---
+
+### 10. Descriptive vs Revisionary Approach
+
+UFO's foundational abstraction takes a descriptive approach rather than revisionary, meaning it aims to capture how humans cognitively structure reality at the mesoscopic level. This positions UFO as providing foundational categories that align with human conceptualization rather than purely formal constructs.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:255-269)**
+  > UFO was constructed as a descriptive (as opposed to a revisionary) project... This means that it is an ontology that takes into full consideration both cognitive and linguistic aspects
+
+---
+
+### 11. Grounding for Domain Ontologies
+
+UFO's foundational abstraction level is validated by its use as grounding for domain-level modeling languages and standards. The foundational categories (Agent, Activity, Entity, etc.) are specialized in domain ontologies like BBO (BPMN-based) and enterprise architecture ontologies.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:202-208)**
+  > It has been employed as a basis for analyzing, reengineering, and integrating many modeling languages and standards in different domains (e.g., UML, BPMN, ArchiMate)
+
+---
+
+### 12. Calculus of Content Purpose
+
+UFO's foundational purpose is to serve as a 'Calculus of Content' - a domain-independent framework for analyzing and clarifying concepts. This meta-level purpose confirms UFO's position at the foundational abstraction layer, designed to support rather than replace domain-specific ontologies.
+
+**Sources**:
+
+- **01-UFO (Chunk 1:235-238)**
+  > The idea was to develop a 'Calculus of Content' aimed at supporting the ontological analysis, conceptual clarification, and semantic explicitation
+
+---
+
+### 13. UFO as Foundational Ontology for Domain Ontologies
+
+UFO operates at the foundational abstraction level, serving as a philosophical grounding layer from which core and domain ontologies are derived. This demonstrates the hierarchical relationship between abstraction levels where foundational ontologies enable the construction of lower-level domain-specific ontologies.
+
+**Sources**:
+
+- **01-UFO (Chunk 3:567-569)**
+  > Over the years, UFO has been used for the development of core and domain ontologies on a wide range of domains, both in academic and industrial contexts.
+
+---
+
+### 14. UFO Grounding of Multiple Domain Languages and Standards
+
+UFO at the foundational level provides the theoretical basis for analyzing and reengineering application-level modeling languages like ArchiMate, BPMN, TOGAF, UML. This shows how foundational abstraction enables standardization and integration across domain and application levels.
+
+**Sources**:
+
+- **01-UFO (Chunk 3:664-689)**
+  > Moreover, UFO and ontologies built with it have been used to analyze, reengineer, or integrate many modeling languages and standards in different domains: ArchiMate, ARIS, DEMO, ISO/IEC 24744...
+
+---
+
+### 15. OntoUML as Ontology-Driven Conceptual Modeling Bridge
+
+OntoUML serves as a modeling language at the application level that instantiates UFO's foundational concepts, demonstrating how foundational ontologies are operationalized through specialized modeling languages for practical conceptual modeling tasks.
+
+**Sources**:
+
+- **01-UFO (Chunk 3:690-696)**
+  > A recent study shows that UFO is the second-most used foundational ontology in conceptual modeling and the one with the fastest adoption rate. That study also shows that OntoUML is among the most used languages in ontology-driven conceptual modeling
+
+---
+
+### 16. Knowledge Graph Definition with Explicit Abstraction Hierarchy
+
+Knowledge graphs are defined at the application level as data structures that accumulate knowledge. They can be enhanced with representations of schema, identity, context, ontologies and/or rules - showing how application-level graphs can incorporate higher abstraction levels (ontologies, rules) for semantic enrichment.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 1:138-156)**
+  > we view a knowledge graph as a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities
+
+---
+
+### 17. Three-Level Schema Abstraction: Semantic, Validating, Emergent
+
+The paper identifies three distinct abstraction levels for graph schemata: semantic schemas (defining term meaning and enabling reasoning), validating schemas (prescribing structural constraints), and emergent schemas (automatically extracted patterns). This tripartite distinction represents different purposes and abstraction levels within schema design.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 1:997-998)**
+  > We discuss three types of graph schemata: semantic, validating, and emergent.
+
+---
+
+### 18. Semantic Schema for High-Level Term Definitions
+
+Semantic schemas operate at a higher abstraction level, defining vocabulary semantics (subclasses, subproperties, domains, ranges) that enable deductive reasoning. They represent the core/domain ontology level that provides semantic grounding for application-level data.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:101-104)**
+  > A semantic schema allows for defining the meaning of high-level terms (aka vocabulary or terminology) used in the graph, which facilitates reasoning over graphs using those terms.
+
+---
+
+### 19. Class Hierarchy as Foundational-to-Domain Abstraction
+
+Class hierarchies demonstrate vertical abstraction within ontologies - from specific application concepts (Food Festival) up through domain concepts (Festival) to general concepts (Event). This pattern shows how abstraction levels enable inference through subsumption.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:115-118)**
+  > we present a class hierarchy for events where children are defined to be subclasses of their parents such that if we find an edge EID15 type Food Festival in our graph, we may also infer that EID15 type Festival and EID15 type Event
+
+---
+
+### 20. RDFS and OWL as Core Ontology Standards
+
+RDFS operates at the core ontology level providing basic schema vocabulary, while OWL extends this to support more expressive domain and foundational ontology features. This layered approach demonstrates abstraction hierarchy within semantic web standards.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:176-190)**
+  > A prominent standard for defining a semantic schema for (RDF) graphs is the RDF Schema (RDFS) standard, which allows for defining subclasses, subproperties, domains, and ranges... More generally, the semantics of terms used in a graph can be defined in much more depth than seen here, as is supported by the Web Ontology Language (OWL)
+
+---
+
+### 21. Open World vs Closed World Assumption as Abstraction Choice
+
+The choice between OWA and CWA represents an abstraction-level decision about completeness assumptions. Foundational and domain ontologies typically adopt OWA (incomplete knowledge), while application databases often use CWA (complete knowledge), reflecting different abstraction purposes.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:192-222)**
+  > Semantic schema are typically defined for incomplete graph data, where the absence of an edge between two nodes... does not mean that the relation does not hold in the real world... the Open World Assumption (OWA)... Closed World Assumption (CWA)
+
+---
+
+### 22. Validating Schema as Application-Level Constraints
+
+Validating schemas operate at the application level, defining structural constraints for data quality rather than semantic meaning. This contrasts with semantic schemas that operate at domain/foundational levels for reasoning purposes.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:230-248)**
+  > We may wish to ensure that all events have at least a name, a venue, a start date, and an end date... We can define such constraints in a validating schema and validate the data graph with respect to the resulting schema
+
+---
+
+### 23. Shapes as Application-Level Validation Constructs
+
+Shape languages (ShEx, SHACL) provide application-level validation mechanisms that complement higher-level semantic schemas. Shapes define what data conformance means at the instance level, operating below the abstraction of semantic ontologies.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:250-261)**
+  > A standard way to define a validating schema for graphs is using shapes. A shape targets a set of nodes in a data graph and specifies constraints on those nodes.
+
+---
+
+### 24. Emergent Schema as Bottom-Up Abstraction
+
+Emergent schemas represent a bottom-up abstraction approach where patterns are induced from data rather than prescribed top-down. This contrasts with foundational/domain ontologies that are designed top-down, demonstrating methodology differences across abstraction levels.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:434-439)**
+  > Both semantic and validating schemata require a domain expert to explicitly specify definitions and constraints. However, a data graph will often exhibit latent structures that can be automatically extracted as an emergent schema (aka graph summary)
+
+---
+
+### 25. Quotient Graphs for Structural Abstraction
+
+Quotient graphs provide a formal mechanism for creating abstractions of data graphs, partitioning nodes into equivalence classes. This represents computational abstraction where complex graphs are simplified while preserving essential structural properties for analysis.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 2:439-458)**
+  > A framework often used for defining emergent schema is that of quotient graphs, which partition groups of nodes in the data graph according to some equivalence relation while preserving some structural properties of the graph.
+
+---
+
+### 26. Ontology as Formal Convention for Term Meaning
+
+Ontologies formalize meaning at their respective abstraction level - foundational ontologies define universal concepts, domain ontologies define domain-specific concepts, and application ontologies constrain terms for specific use cases. The abstraction level determines the scope of convention.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 3:311-339)**
+  > In the context of computing, an ontology is then a concrete, formal representation of what terms mean within the scope in which they are used (e.g., a given domain).
+
+---
+
+### 27. Interpretation as Abstraction Between Data and Domain
+
+The concept of interpretation formalizes the abstraction relationship between syntactic data graphs (application level) and semantic domain graphs (conceptual level). This mapping is fundamental to how ontologies at different abstraction levels relate to instance data.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 3:361-395)**
+  > we can abstractly define an interpretation of a data graph as being composed of two elements: a domain graph, and a mapping from the terms (nodes and edge-labels) of the data graph to those of the domain graph
+
+---
+
+### 28. OWL Language Profiles as Abstraction Trade-offs
+
+OWL profiles (OWL 2 RL, OWL 2 QL, OWL 2 EL) represent different abstraction trade-offs between expressivity and computability. Higher expressivity allows more foundational axioms but may sacrifice decidability, while restricted profiles enable efficient application-level reasoning.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 4:4-18)**
+  > on any input ontology but may miss entailments, returning false instead of true, (2) always halt with the correct answer but only accept input ontologies with restricted features, or (3) only return correct answers for any input ontology but may never halt
+
+---
+
+### 29. Rules vs Description Logics as Reasoning Abstraction
+
+Rules provide an operational abstraction for ontological entailment, translating high-level semantic axioms into executable if-then patterns. This represents the translation from declarative foundational/domain semantics to procedural application-level computation.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 4:21-52)**
+  > One of the most straightforward ways to provide automated access to deductive knowledge is through inference rules... Rules can be used to capture entailments under ontological conditions
+
+---
+
+### 30. Description Logics as Foundational-Level Formalism
+
+Description Logics operate at the foundational abstraction level, providing the logical formalism that underlies OWL and other ontology languages. The family of DLs (ALC, SHIQ, SROIQ, etc.) represents different points in the expressivity-complexity trade-off space for foundational representation.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 4:127-163)**
+  > Description Logics (DLs) were initially introduced as a way to formalise the meaning of frames and semantic networks... DLs form a family of logics rather than a particular logic. Initially, DLs were restricted fragments of First Order Logic (FOL)
+
+---
+
+### 31. Four-category definition hierarchy for knowledge graphs
+
+The paper identifies four distinct categories of knowledge graph definitions, each representing a different level of abstraction. Category I is the most basic (graph of entities/relations), Category II adds knowledge base structure, Category III adds technical characteristics, and Category IV uses extensional/example-based definitions. This hierarchy demonstrates how abstraction levels vary based on definitional purpose.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 13:127-142)**
+  > Category I: The first category simply defines the knowledge graph as a graph where nodes represent entities, and edges represent relationships
+
+---
+
+### 32. Foundational versus domain ontology distinction
+
+Explicit distinction between foundational/top-level ontologies (BFO) and domain ontologies. BFO provides abstract philosophical grounding while domain ontologies address specific application areas. This establishes the ontology stack abstraction levels: foundational -> core/mid-level (CCO) -> domain.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:75-84)**
+  > Basic Formal Ontology (BFO) is a top-level ontology ISO standard used to provide foundational classes to structure different domain ontologies
+
+---
+
+### 33. Mid-level ontology bridging role (CCO)
+
+CCO occupies a distinct 'mid-level' abstraction layer, explicitly positioned between foundational ontologies (BFO) and domain ontologies. This three-tier architecture (foundational-core-domain) is a key abstraction pattern for ontology design.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:82-84)**
+  > The Common Core Ontologies (CCO) are a suite of mid-level ontologies, used to span across different domain ontologies and intended to bridge the gap between domain ontologies and BFO
+
+---
+
+### 34. PROV-O as core/domain level ontology
+
+PROV-O is positioned as a core/domain level ontology that can be mapped to foundational ontologies (BFO). It is generic enough to span domains but specific enough to require grounding in higher-level abstractions.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:24-28)**
+  > The Provenance Ontology (PROV-O) is a World Wide Web Consortium (W3C) recommended ontology used to structure data about provenance across a wide variety of domains
+
+---
+
+### 35. Total alignment as maximum interoperability
+
+Total alignment represents complete mapping between abstraction levels. The paper provides formal criteria for evaluating how well lower-level ontologies (PROV-O) can be mapped to foundational ontologies (BFO), enabling interoperability across abstraction levels.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:277-284)**
+  > When every term in one ontology is surjectively mapped onto by at least one term in the other ontology, this constitutes a total alignment
+
+---
+
+### 36. Interpretability between ontology levels
+
+Formal definition of interpretability between ontologies at different abstraction levels. When a domain ontology is interpretable in a foundational ontology, all logical implications are preserved when translating 'up' the abstraction hierarchy.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:304-312)**
+  > An ontology O1 is interpretable in ontology O2 if and only if there exists a set of translation definitions (an alignment) for O1 into O2 such that O2 union with alignment entails O1
+
+---
+
+### 37. Synonymy as bidirectional interpretation
+
+Synonymy represents the theoretical limit of semantic interoperability between abstraction levels - when two ontologies can fully understand each other in both directions. This is the gold standard for ontology alignment across abstraction levels.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:333-346)**
+  > Two ontologies O1 and O2 are synonymous if and only if there exist two sets of translation definitions, respectively from O1 to O2 and from O2 to O1
+
+---
+
+### 38. Abstraction-specific mapping predicates
+
+Different predicate types (equivalence vs subsumption) enable different degrees of cross-level mapping. Equivalence provides bidirectional bridges while subsumption provides one-way bridges from lower to higher abstraction levels.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:146-164)**
+  > Equivalence relations represented by OWL equivalentClass and OWL equivalentProperty give necessary and sufficient conditions... Subsumption relations represented by RDFS subClassOf or RDFS subPropertyOf give sufficient conditions
+
+---
+
+### 39. PROV-AGENT as workflow-level provenance extension
+
+PROV-AGENT extends the W3C PROV standard to a new abstraction level specifically for agentic workflows. This demonstrates how core ontologies can be specialized downward to application-specific domains while maintaining compatibility with the parent abstraction.
+
+**Sources**:
+
+- **03-PROV-AGENT (Chunk 1:30-33)**
+  > we introduce PROV-AGENT, a provenance model that extends W3C PROV and leverages the Model Context Protocol (MCP) and data observability to integrate agent interactions
+
+---
+
+### 40. Three-level PROV architecture (Agent-Activity-Entity)
+
+W3C PROV establishes a foundational three-class abstraction (Agent-Activity-Entity) that serves as the basis for provenance modeling. This triad maps directly to fundamental ontological distinctions and provides a universal pattern for process/workflow abstraction.
+
+**Sources**:
+
+- **03-PROV-AGENT (Chunk 1:200-204)**
+  > the W3C PROV standard already defines Agent, the central abstraction in this work, as one of its three core classes, alongside Entity (data) and Activity (process)
+
+---
+
+### 41. Hierarchical class extension pattern
+
+AIAgent is modeled as a subclass of W3C PROV Agent, demonstrating how abstraction hierarchies are extended downward through subclassing. This pattern preserves compatibility with the parent abstraction while adding domain-specific semantics.
+
+**Sources**:
+
+- **03-PROV-AGENT (Chunk 1:278-284)**
+  > We extend the abstract W3C PROV Agent by modeling AIAgent as its subclass, enabling a natural integration of agent actions and interactions into the broader workflow provenance graph
+
+---
+
+### 42. DataObject as entity abstraction layer
+
+DataObject serves as an intermediate abstraction layer between the generic PROV Entity and specific data types (DomainData, SchedulingData, TelemetryData). This demonstrates multi-level specialization within a single ontology.
+
+**Sources**:
+
+- **03-PROV-AGENT (Chunk 1:298-302)**
+  > The data used or generated by agents, including prompts, responses, are represented as subclasses of the DataObject Entity. This allows agents to consume and produce not only DomainData, but also system-level and contextual data
+
+---
+
+### 43. Tensor order as mathematical abstraction levels
+
+Mathematical abstraction levels for representing knowledge graph data structures. Tensor order provides a formal hierarchy from scalars through vectors and matrices to arbitrary n-dimensional structures, enabling different levels of representational complexity.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 5:65-69)**
+  > A tensor is a multidimensional numeric field that generalises scalars (0-order tensors), vectors (1-order tensors) and matrices (2-order tensors) towards arbitrary dimension/order
+
+---
+
+### 44. Embedding dimensionality as abstraction granularity
+
+The dimensionality d of embeddings determines the abstraction granularity - higher dimensions capture more latent features but increase complexity. This trade-off between expressivity and tractability is a key abstraction design decision.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 5:196-198)**
+  > DistMult is a seminal method for computing knowledge graph embeddings based on rank decompositions, where each entity and relation is associated with a vector of dimension d
+
+---
+
+### 45. Expressivity-complexity trade-off in neural models
+
+Neural embedding models operate at different abstraction levels based on their expressivity. Simpler models (TransE, DistMult) provide coarser abstractions while complex models (NTN, ConvE) enable finer-grained representation at the cost of more parameters.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 5:282-291)**
+  > The presented approaches strike different balances in terms of expressivity and the number of parameters that need to be trained. While more expressive models...may better fit more complex plausibility functions
+
+---
+
+### 46. Symbolic versus subsymbolic abstraction levels
+
+Fundamental distinction between symbolic (interpretable rules/axioms) and subsymbolic (embeddings/neural) abstraction levels. Symbolic approaches provide human-interpretable abstractions while subsymbolic approaches provide continuous numerical representations.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 5:646-651)**
+  > The supervised techniques discussed thus far...learn numerical models over graphs. However, such models are often difficult to explain or understand
+
+---
+
+### 47. Rule abstraction from simple to complex
+
+Class learning represents abstraction from instance data to class-level descriptions. The refinement operator moves between more general and more specific classes, demonstrating how abstraction levels can be navigated within symbolic reasoning.
+
+**Sources**:
+
+- **02-Knowledge_Graphs (Chunk 6:59-75)**
+  > DL Learner, which is based on algorithms for class learning (aka concept learning), whereby given a set of positive nodes and negative nodes, the goal is to find a logical class description
+
+---
+
+### 48. Continuant-occurrent as foundational abstraction
+
+The BFO continuant/occurrent distinction represents a fundamental philosophical abstraction dividing entities that persist through time (continuants) from those that unfold in time (occurrents). This foundational-level abstraction constrains all downstream domain ontology design.
+
+**Sources**:
+
+- **04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:636-645)**
+  > We therefore map PROV Entity as a subclass of BFO continuant with one exception... This disjoint relationship is entailed by additionally mapping PROV Activity to a subclass of BFO occurrent because continuants and occurrents are disjoint
+
+---
+
+### 49. DOLCE Foundational Ontology Status
+
+DOLCE is explicitly identified as a foundational (top-level) ontology. Its purpose is to provide general categories and relations needed to give a coherent view of reality, integrate domain knowledge, and mediate across domains. It is not directly concerned with domain knowledge but serves as philosophical grounding for more specific ontologies.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 1:13-23)**
+  > DOLCE, the first top-level (foundational) ontology to be axiomatized, has remained stable for twenty years
+
+---
+
+### 50. Foundational to Domain Ontology Alignment
+
+DOLCE establishes a clear abstraction hierarchy: foundational ontologies enable interoperability between domain ontologies that are aligned to them. This demonstrates the layered abstraction approach where foundational ontologies sit above domain-specific ones.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 1:36-38)**
+  > when this strategy is applied to foundational ontologies, interoperability is possible also between the domain ontologies aligned to them
+
+---
+
+### 51. Mesoscopic Level Categories
+
+DOLCE's categories operate at a 'mesoscopic level' - between microscopic physical reality and macroscopic social constructs. This represents a foundational abstraction that captures commonsense human cognition rather than ultimate physical reality.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 1:40-43)**
+  > such categories are mostly situated at a mesoscopic level, and may change while scientific knowledge or social consensus evolve
+
+---
+
+### 52. Expressiveness vs Computability Trade-off
+
+Foundational ontologies face an inherent tension between abstraction level and practical use. Rich axiomatization in first-order modal logic provides semantic transparency but requires 'lite' versions for application-oriented languages, creating a cascade of abstraction levels.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 1:59-62)**
+  > richness greatly enhances expressiveness but, on the other hand, it makes foundational ontologies non computable, due to the well-known trade-off between formal expressiveness and computability
+
+---
+
+### 53. DOLCE-CORE Terminological Simplification
+
+DOLCE-CORE represents a move toward more intuitive terminology at the foundational level, using 'object' and 'event' instead of 'endurant' and 'perdurant'. This demonstrates how foundational ontologies can provide different terminological abstractions while maintaining the same ontological commitments.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 1:87-89)**
+  > most basic categories, which in DOLCE were called 'endurant' and 'perdurant' and which become 'object' and 'event' in DOLCE-CORE
+
+---
+
+### 54. Four Design Approaches for DOLCE
+
+DOLCE operates at multiple abstraction levels depending on use case: as a minimal upper ontology for agreement, as a detailed axiomatic theory for meaning negotiation, as a consistency checker, or as a source of reusable patterns. This multi-level application distinguishes foundational from domain ontologies.
+
+**Sources**:
+
+- **05-DOLCE_Descriptive_Ontology (Chunk 2:468-476)**
+  > DOLCE can be used to foster different design approaches: (1) as an upper ontology... (2) as an expressive axiomatic theory... (3) as a coherence/consistency stabilizer... (4) as a source of patterns
+
+---
+
+### 55. BFO Upper-Level Framework
+
+BFO is explicitly positioned as an upper-level (foundational) ontology designed to support integration of data from scientific research. It provides domain-neutral categories that serve as starting points for domain-specific ontology development.
+
+**Sources**:
+
+- **06-BFO_Function_Role_Disposition (Chunk 1:33-37)**
+  > Basic Formal Ontology (BFO) as an upper-level framework to assist in the organization and integration of biomedical and other types of information
+
+---
+
+### 56. BFO Deliberate Minimalism
+
+BFO's foundational abstraction level is characterized by deliberate minimalism - only 34 terms. This smallness reflects the principle that foundational ontologies should contain only the most general categories, leaving domain-specific concepts to lower-level ontologies.
+
+**Sources**:
+
+- **06-BFO_Function_Role_Disposition (Chunk 1:48-52)**
+  > BFO is deliberately designed to be very small, so that it may represent in a consistent fashion those upper-level categories common to domain ontologies developed by scientists in different fields
+
+---
+
+### 57. Continuant-Occurrent Top-Level Division
+
+BFO's foundational abstraction is built on a fundamental dichotomy between continuants (persisting entities) and occurrents (events/processes). This binary division at the highest abstraction level structures all domain-level categorization.
+
+**Sources**:
+
+- **06-BFO_Function_Role_Disposition (Chunk 1:54-57)**
+  > BFO adopts a view of reality as comprising (1) continuants, entities that continue or persist through time, such as objects, qualities, and functions, and (2) occurrents
+
+---
+
+### 58. Types vs Instances Abstraction
+
+BFO distinguishes between type-level (universal) and instance-level (particular) abstractions. Scientific theories concern types/universals, while experimental data concern instances. This type-instance hierarchy is orthogonal to the foundational-domain hierarchy.
+
+**Sources**:
+
+- **06-BFO_Function_Role_Disposition (Chunk 1:213-217)**
+  > The terms used in biological ontologies such as the Gene Ontology refer to types; experiments carried out by biologists in their labs refer to corresponding instances
+
+---
+
+### 59. BFO Domain-Neutral Starting Point
+
+BFO's abstraction level is explicitly 'domain-neutral' - it provides a top-level ontology that serves as a common starting point for domain-specific ontology development across different scientific fields.
+
+**Sources**:
+
+- **07-Classifying_Processes_Barry_Smith (Chunk 1:280-284)**
+  > Basic Formal Ontology (BFO) is a domain-neutral resource used by biologists and others to provide a top-level ontology that can serve as a common starting point for the creation of domain ontologies
+
+---
+
+### 60. Bicategorial Three/Four-Dimensionalist Synthesis
+
+BFO operates at a foundational abstraction level that synthesizes two competing philosophical frameworks (3D continuants and 4D occurrents) into a single coherent framework. This represents a high-level ontological decision that constrains all downstream domain modeling.
+
+**Sources**:
+
+- **07-Classifying_Processes_Barry_Smith (Chunk 1:339-342)**
+  > BFO, in contrast, is founded on a bicategorial approach which seeks to combine elements of both the three-dimensionalist and four-dimensionalist perspectives
+
+---
+
+### 61. Aristotle's Ontological Square in BFO
+
+BFO's foundational abstraction recapitulates Aristotle's ontological square: substances/accidents crossed with universals/particulars. This philosophical grounding places BFO at the most abstract metaphysical level.
+
+**Sources**:
+
+- **07-Classifying_Processes_Barry_Smith (Chunk 1:447-452)**
+  > BFO draws on Aristotle's ideas concerning the division of substances and accidents, which reappears in BFO as the division between independent and dependent continuants
+
+---
+
+### 62. Process Universals Hierarchy
+
+Within the occurrent branch, BFO allows for hierarchical abstraction of process types from determinable (speed profile) to determinate (2 mph constant speed profile). This demonstrates how foundational categories enable increasingly specific domain categorization.
+
+**Sources**:
+
+- **07-Classifying_Processes_Barry_Smith (Chunk 2:182-197)**
+  > we have to deal here with a hierarchy of process profile universals at successive levels, including: speed profile, constant speed profile, 2 mph constant speed profile...
+
+---
+
+### 63. OCEL Paradigm Shift from Case-Centric
+
+OCEL 2.0 represents a domain-level abstraction for process mining that moves from case-centric to object-centric modeling. This is an application-level ontology designed for a specific domain (process mining) rather than a foundational ontology.
+
+**Sources**:
+
+- **09-OCEL_20_Specification (Chunk 1:134-141)**
+  > Object-Centric Process Mining (OCPM) represents a paradigm shift, intended to address and overcome the inherent limitations of traditional case-centric process mining methods
+
+---
+
+### 64. OCEL Metamodel Core Entities
+
+OCEL 2.0 defines a domain-specific metamodel with core entities: Events, Event Types, Objects, Object Types, and their relationships. This is a domain/application level abstraction specifically designed for process mining, not a foundational ontology.
+
+**Sources**:
+
+- **09-OCEL_20_Specification (Chunk 1:149-171)**
+  > Events: Object-centric process mining works on discrete events... Event Types: Events are categorized into different types... Objects: In object-centric process mining, objects represent the entities
+
+---
+
+### 65. Object-Centric Event Log Definition
+
+Object-centric event logs represent a domain-level abstraction that resolves problems inherent in case-centric abstractions. This is an application-level ontological choice specific to process mining, demonstrating how domain ontologies make different abstraction decisions than foundational ones.
+
+**Sources**:
+
+- **10-OC-PM_Object-Centric_Process_Mining (Chunk 1:79-84)**
+  > Object-centric event logs have been proposed to resolve the convergence and divergence problems... where each event is related to different objects of different types
+
+---
+
+### 66. Flattening as Abstraction Transformation
+
+The 'flattening' operation demonstrates abstraction level transformation - converting richer object-centric representations to simpler case-centric ones. This shows how domain ontologies can move between abstraction levels based on analytical needs.
+
+**Sources**:
+
+- **10-OC-PM_Object-Centric_Process_Mining (Chunk 1:555-561)**
+  > A flattening operation transforms the object-centric event log into a traditional event log given the choice of an object type. This is useful because many process mining approaches are only available for traditional event logs
+
+---
+
+### 67. Multi-Entity Event Data Abstraction
+
+The paper introduces event knowledge graphs as a higher abstraction level than classical event logs. This represents a domain-level abstraction that enables process mining analyses across multiple behavioral dimensions simultaneously, moving beyond single-entity case identifier approaches to graph-based multi-entity representations.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:16-21)**
+  > We introduce event knowledge graphs as data structure that allows to naturally model behavior over multiple entities as a network of events
+
+---
+
+### 68. Entity Type Abstraction Hierarchy
+
+The paper establishes a hierarchical abstraction of entity types - distinguishing between actor entities (workers, machines) and object entities (Orders, Supplier Orders, Items, Invoices, Payments). This creates a domain-level ontological structure for categorizing process participants.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:83-85)**
+  > This process relies on 7 different types of entities. Actors (human workers) and machines (an automated warehouse) together handle 5 types of objects
+
+---
+
+### 69. Classical vs Graph-Based Abstraction Levels
+
+The paper contrasts two abstraction levels: classical event log abstraction (single case identifier, sequential traces) versus a higher graph-based abstraction (local directly-follows relations per entity). The graph approach represents a more expressive domain-level abstraction enabling richer behavioral analysis.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:158-164)**
+  > instead of constructing entire traces related to a single case identifier, we discuss a local directly-follows relation for each individual entity in the data
+
+---
+
+### 70. Labeled Property Graph Foundation
+
+The foundational data model abstraction using labeled property graphs provides the core-level abstraction for event knowledge graphs. This establishes formal semantics for distinguishing node types (Event, Entity) and relationship types (df, corr) as the building blocks of the framework.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:550-552)**
+  > A typed graph data model such as labeled property graphs allows to distinguish different types of nodes (events, entities) and relationships (directly-follows, correlated-to)
+
+---
+
+### 71. Event Knowledge Graph Formal Definition
+
+This is the core-level formal ontological definition establishing the abstraction level of event knowledge graphs. It specifies exactly two node types (Event, Entity) and two relationship types (directly-follows, correlation) as the fundamental abstractions for representing process behavior.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:624-627)**
+  > An event knowledge graph is an LPG G = (N, R, lambda, #) with node labels {Event, Entity} and relationship labels {df, corr}
+
+---
+
+### 72. Derived Entity Abstraction
+
+The paper introduces derived entities as a higher abstraction level - reifying relations between entity types into new composite entity types. This domain-level abstraction pattern enables analysis of inter-entity interactions not visible in the original entity structure.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:3-5)**
+  > we can treat any derived entity (n1, n2) just like any other entity and infer the df-relationships for (n1, n2), which results in a new path describing the interactions
+
+---
+
+### 73. Class-Level Event Aggregation
+
+The paper describes activity-level abstraction through aggregation - moving from individual event nodes to Class nodes representing activity types. This is a domain-level abstraction that enables process model discovery by abstracting temporal event instances into structural activity patterns.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:321-324)**
+  > aggregating sets of events into activities (or event classes), and aggregating df-relationships between events into corresponding relationships between activities
+
+---
+
+### 74. Multi-Entity Directly-Follows Graph Discovery
+
+Multi-entity DFG represents an application-level abstraction for process discovery - aggregating event-level behavior into process models that respect per-entity behavioral semantics. This abstraction level bridges raw event data with interpretable process models.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:362-367)**
+  > The resulting graph is a multi-entity directly-follows graph, also called multi-viewpoint DFG or artifact-centric model
+
+---
+
+### 75. Task Instance Abstraction Layer
+
+Task instances represent a domain-level abstraction that aggregates multiple related activities performed by an actor on an entity into a coherent 'unit of work'. This abstraction reveals higher-level work patterns not visible at the individual event level.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:621-627)**
+  > A task instance of an actor R working on an entity X materializes in an event knowledge graph as a specific subgraph over event nodes e1,...,ek
+
+---
+
+### 76. Multi-Layer Process Knowledge Graph
+
+The paper proposes multi-layered abstraction combining Event Entity Layer, Task Instance Layer, Task Layer, and Class Layer. Each layer represents a different abstraction level - from raw events up to discovered process models, enabling hierarchical analysis perspectives.
+
+**Sources**:
+
+- **11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:698-699)**
+  > An event knowledge graph extended with additional layers into a 'process knowledge graph'
+
+---
+
+### 77. Three Essential Event Log Requirements
+
+The paper establishes foundational-level data requirements for event logs: Case ID, Activity Label, and Timestamp. These three attributes form the minimal abstraction layer enabling process mining analysis, representing the core data model for process event data.
+
+**Sources**:
+
+- **12-Foundations_of_Process_Event_Data (Chunk 1:68-75)**
+  > each event should be linked to a case or process instance, typically by using a Case ID. This is 'Requirement 1'
+
+---
+
+### 78. Event Abstraction Granularity Transformation
+
+The paper addresses abstraction level mismatch - raw event data often at lower granularity than business-interpretable activity level. Event abstraction techniques transform fine-grained events into coarser activity-level representations suitable for process analysis.
+
+**Sources**:
+
+- **12-Foundations_of_Process_Event_Data (Chunk 1:103-109)**
+  > oftentimes, natural log data is stored at lower levels of granularity than desired for analysis purposes. Typically, one would prefer that the granularity level of activities
+
+---
+
+### 79. Extraction-Correlation-Abstraction Pipeline
+
+The paper identifies a three-stage abstraction pipeline: extraction (obtaining raw events from sources), correlation (mapping events to cases), and abstraction (transforming event granularity). This represents an application-level methodology for preparing process mining data.
+
+**Sources**:
+
+- **12-Foundations_of_Process_Event_Data (Chunk 1:383-384)**
+  > event log preparation often includes three types of techniques: extraction, correlation and abstraction
+
+---
+
+### 80. Object-Centric vs Flat Event Log Abstraction
+
+The paper contrasts object-centric data abstraction (as stored in source systems) with flattened event log abstraction (required for classical process mining). OCEL standard represents a domain-level abstraction bridging these two views.
+
+**Sources**:
+
+- **12-Foundations_of_Process_Event_Data (Chunk 1:424-433)**
+  > Many source systems, including popular ERP systems, store data at the logical level of objects instead of providing a true process perspective
+
+---
+
+### 81. Ontological Knowledge Graph Abstraction
+
+SciAgents uses ontological knowledge graphs as a foundational abstraction layer organizing scientific concepts and relationships. This provides the structural substrate for multi-agent graph reasoning, representing domain knowledge in a machine-processable form.
+
+**Sources**:
+
+- **15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:31-33)**
+  > the use of large-scale ontological knowledge graphs to organize and interconnect diverse scientific concepts
+
+---
+
+### 82. Hierarchical Multi-Agent Task Decomposition
+
+SciAgents employs hierarchical task abstraction - decomposing complex scientific discovery into subtasks (path generation, ontological analysis, hypothesis generation, critique). Each abstraction level corresponds to a specialized agent role in the multi-agent system.
+
+**Sources**:
+
+- **15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:125-130)**
+  > the discovery workflow is systematically broken down into more manageable subtasks. Each agent in the system is assigned a distinct role
+
+---
+
+### 83. Path-Based Subgraph Abstraction
+
+The paper uses path-based subgraph extraction as an abstraction mechanism - sampling random paths through the knowledge graph creates focused context for LLM reasoning. This domain-level abstraction filters the global graph into task-relevant local views.
+
+**Sources**:
+
+- **15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:241-246)**
+  > To augment the capabilities of our underlying large language model, we provide it with a sub-graph derived from this more extensive knowledge graph
+
+---
+
+### 84. Structured JSON Hypothesis Abstraction
+
+SciAgents defines a structured abstraction schema for research hypotheses with seven mandatory fields. This application-level abstraction provides a consistent format for AI-generated scientific proposals, enabling systematic comparison and critique across experiments.
+
+**Sources**:
+
+- **15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:362-364)**
+  > The agent creates a proposal that carefully addresses the following seven key aspects: hypothesis, outcome, mechanisms, design principles, unexpected properties, comparison, and novelty
+
+---
+
+### 85. Multi-level KG Toolbox Abstraction
+
+The paper presents a hierarchical tool abstraction for KG reasoning at three levels: (1) Extraction tools for low-level data access (get_relation, get_entity), (2) Logic tools for intermediate manipulation (count, intersect, union), and (3) Semantic tools for high-level understanding (relation retrieval, entity disambiguation). This represents a domain/application abstraction layer designed for practical agent-KG interaction.
+
+**Sources**:
+
+- **16-KG-Agent (Chunk 1:238-259)**
+  > we design three types of tools for LLMs reasoning over KG, i.e., extraction, semantic, and logic tools
+
+---
+
+### 86. Autonomous Agent Framework Abstraction
+
+KG-Agent operates at an application abstraction level, providing autonomous decision-making capabilities for complex reasoning without pre-defined interaction mechanisms. The framework abstracts away the complexity of KG traversal into an agent-controllable interface, representing an applied/practical level of ontological abstraction for agent-knowledge integration.
+
+**Sources**:
+
+- **16-KG-Agent (Chunk 1:83-89)**
+  > designing autonomous reasoning approaches that can actively make decisions during reasoning, without human assistance
+
+---
+
+### 87. Program Language Formulation for Multi-hop Reasoning
+
+The paper uses program language (code-based instructions) as an abstraction mechanism to represent multi-hop reasoning chains over knowledge graphs. This creates a bridge between high-level reasoning goals and low-level KG operations, serving as an intermediate abstraction layer that enables instruction tuning for smaller LLMs.
+
+**Sources**:
+
+- **16-KG-Agent (Chunk 1:31-33)**
+  > we leverage program language to formulate the multi-hop reasoning process over the KG
+
+---
+
+### 88. Three Integration Stages Abstraction
+
+The survey identifies three abstraction levels for integrating logics with embeddings based on temporal staging: pre-training (data preparation level), joint training (model integration level), and post-training (inference level). This temporal abstraction helps categorize different approaches to neural-symbolic integration in KG reasoning.
+
+**Sources**:
+
+- **17-KG_Reasoning (Chunk 1:136-141)**
+  > three stages: 1) Pre: conducting symbolic reasoning before learning embeddings. 2) Joint: injecting the logics during embedding learning. 3) Post: conducting symbolic reasoning after embeddings are learned
+
+---
+
+### 89. Logic Types Abstraction Hierarchy
+
+The paper distinguishes between two levels of logic abstraction: (1) Logic rules representing specific inference patterns at a domain level, and (2) Ontological schemas (OWL 2) representing foundational/core level constraints. This hierarchy reflects the relationship between foundational ontology languages and domain-specific rule systems.
+
+**Sources**:
+
+- **17-KG_Reasoning (Chunk 1:124-128)**
+  > We consider two mainstream logic forms used in KG reasoning: (1) logic rules and (2) Ontological schema, such as those supported by OWL 2
+
+---
+
+### 90. Foundational vs Domain KG Reasoning
+
+The paper positions KGs at a domain/application abstraction level where facts are represented as triples with schemas providing the foundational vocabulary. This places KG reasoning in the middle of the ontology stack - above foundational ontologies but below specific application implementations.
+
+**Sources**:
+
+- **17-KG_Reasoning (Chunk 1:36-39)**
+  > Knowledge graph (KG), representing facts in the form of triples, with vocabulary defined in a schema (also known as ontology)
+
+---
+
+### 91. Class and Relation Hierarchy Abstraction
+
+The survey describes ontological schema components at two abstraction levels: class hierarchies (entity type abstraction) and relation hierarchies (relationship type abstraction). Both operate at the domain/core ontology level to organize knowledge structure through taxonomic relationships.
+
+**Sources**:
+
+- **17-KG_Reasoning (Chunk 1:200-234)**
+  > Class hierarchies classify entity types, denoting entities as instantiations of classes... Relation hierarchies contain subsumption relationships between relations
+
+---
+
+### 92. Hybrid vs Neural Mechanism Abstraction
+
+The paper distinguishes two abstraction mechanisms for combining embeddings with logic: hybrid approaches that maintain symbolic abstraction layers, and purely neural approaches that translate all reasoning into vector space. This represents different levels of abstraction in neural-symbolic integration.
+
+**Sources**:
+
+- **17-KG_Reasoning (Chunk 1:350-351)**
+  > 1) Hybrid: after applying embeddings, methods still infer in a symbolic space. 2) Neural: using embeddings following the process of logic reasoning, and all inferences are conducted in vector space
+
+---
+
+### 93. Multi-dimensional Taxonomy with Three Autonomy Levels
+
+The taxonomy presents a three-level abstraction for autonomy in LLM multi-agent systems: L0 (static/rule-driven), L1 (adaptive within frameworks), L2 (self-organizing). This abstraction hierarchy enables systematic classification of how agents balance independence vs constraints at different architectural levels.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 1:166-168)**
+  > ranging from systems that strictly adhere to predefined mechanisms (rule-driven automation, L0/L0) to those that dynamically adapt in real-time, guided by evolving conditions and user feedback (user-responsive autonomy, L2/L2)
+
+---
+
+### 94. Four Architectural Viewpoints Abstraction
+
+The paper introduces four abstraction viewpoints for analyzing multi-agent systems: (1) functional viewpoint (goal-driven task management), (2) development viewpoint (agent composition), (3) process viewpoint (multi-agent collaboration), (4) physical viewpoint (context interaction). These viewpoints enable multi-level architectural analysis at different abstraction layers.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 1:172-175)**
+  > applied to multiple distinct architectural viewpoints, such as goal-driven task management, agent composition, multi-agent collaboration, and context interaction
+
+---
+
+### 95. Domain-Ontology Model for Agent Architectures
+
+The paper proposes a domain-ontology model at the domain/application abstraction level for LLM multi-agent systems. This conceptual model abstracts architectural concepts into a structured representation, positioning it between foundational software engineering concepts and specific system implementations.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 1:185-187)**
+  > a domain-ontology model represented as a UML class diagram structuring the architectural concepts and their interrelations relevant for our taxonomy
+
+---
+
+### 96. 108 Single Configuration Options Abstraction
+
+The taxonomy's 12 architectural aspects across 9 autonomy-alignment configurations create a highly granular abstraction space with 108 single options. This fine-grained abstraction enables nuanced classification of system behaviors at multiple levels, demonstrating how abstraction levels multiply when combining taxonomic dimensions.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 2:107-111)**
+  > mapping the autonomy-alignment matrix onto the identified aspects, our taxonomy captures 108 distinct single configuration options... 9^12 ≈ 282 billion combinations
+
+---
+
+### 97. Availability-driven vs Requirements-driven Dependencies
+
+The paper distinguishes two abstraction patterns for architectural dependencies: availability-driven (bottom-up, low autonomy - dependent on what's available) vs requirements-driven (top-down, high autonomy - adapting to what's needed). This represents different levels of abstraction in how system components relate.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 2:697-701)**
+  > In such systems, functionality largely relies on pre-configured rules and mechanisms. Thus, the functionality of such multi-agent system is contingent upon the predefined capabilities
+
+---
+
+### 98. Agent Type Abstraction Hierarchy
+
+The ontology model defines a three-tier agent type abstraction: (1) Task-Management Agents (meta-level orchestration), (2) Domain Role Agents (domain-specific expertise), (3) Technical Agents (platform/tool interfaces). This hierarchy represents abstraction levels from strategic coordination to technical execution.
+
+**Sources**:
+
+- **18-Multi-Agent_Taxonomy (Chunk 1:902-921)**
+  > Task-Management Agents... Domain Role Agents... Technical Agents
+
+---
+
+### 99. Graph-based Thought Abstraction
+
+GoT introduces a graph abstraction level for LLM reasoning that generalizes previous approaches (CoT, ToT). This abstraction represents thoughts as vertices and dependencies as edges, enabling arbitrary reasoning patterns at a higher abstraction level than linear chains or tree structures.
+
+**Sources**:
+
+- **19-Graph_of_Thoughts (Chunk 1:17-21)**
+  > The key idea and primary advantage of GoT is the ability to model the information generated by an LLM as an arbitrary graph, where units of information ('LLM thoughts') are vertices, and edges correspond to dependencies
+
+---
+
+### 100. Thought Transformation Abstraction Types
+
+GoT defines three abstraction levels for thought transformations: (1) Aggregation (combining multiple thoughts), (2) Refining (iterating on single thoughts), (3) Generation (creating new thoughts from existing ones). These represent different levels of reasoning abstraction applicable to the graph structure.
+
+**Sources**:
+
+- **19-Graph_of_Thoughts (Chunk 1:344-364)**
+  > Aggregation Transformations... Refining Transformations... Generation Transformations
+
+---
+
+### 101. Latency-Volume Tradeoff Abstraction
+
+The paper introduces 'volume' as a new abstraction metric measuring how many thoughts contribute to a final outcome. This metric provides a way to abstract and compare the reasoning depth across different prompting paradigms (CoT, ToT, GoT), enabling theoretical analysis at a higher level than implementation details.
+
+**Sources**:
+
+- **19-Graph_of_Thoughts (Chunk 1:732-743)**
+  > For a given thought t, the volume of t is the number of preceding LLM thoughts that could have impacted t... We assume that outputting a single thought costs O(1) time
+
+---
+
+### 102. Graph of Operations (GoO) Abstraction Layer
+
+The Graph of Operations (GoO) serves as an abstraction layer between task decomposition strategy and runtime execution. It provides a static, declarative abstraction for specifying how thoughts should be transformed, separate from the dynamic Graph Reasoning State (GRS) that tracks actual execution.
+
+**Sources**:
+
+- **19-Graph_of_Thoughts (Chunk 1:390-396)**
+  > GoO is a static structure that specifies the graph decomposition of a given task, i.e., it prescribes transformations to be applied to LLM thoughts, together with their order & dependencies
+
+---
+
+### 103. RAG Paradigm Evolution Abstraction Hierarchy
+
+The paper presents a clear abstraction hierarchy for RAG systems, progressing from simple to complex. Naive RAG represents the foundational/basic level, Advanced RAG adds semantic understanding, Modular RAG introduces component flexibility, Graph RAG adds relational reasoning, and Agentic RAG represents the highest application-level abstraction with autonomous decision-making. This demonstrates domain-level abstraction within AI systems.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 1:173-184)**
+  > This section examines the progression of RAG paradigms, presenting key stages of development - Naive RAG, Advanced RAG, Modular RAG, Graph RAG, and Agentic RAG
+
+---
+
+### 104. Agentic Pattern Abstraction Levels
+
+Four agentic patterns (Reflection, Planning, Tool Use, Multi-Agent) represent different abstraction levels for agent behavior. Reflection is foundational (self-evaluation), Planning adds task decomposition, Tool Use enables external capability extension, and Multi-Agent represents the highest orchestration level. This is a domain-level abstraction pattern for AI agent design.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 1:507-510)**
+  > Agentic Patterns provide structured methodologies that guide the behavior of agents in Agentic RAG systems. These patterns enable agents to dynamically adapt, plan, and collaborate
+
+---
+
+### 105. Single vs Multi vs Hierarchical Agent Architecture Abstraction
+
+The taxonomy presents three abstraction levels for agentic systems: single-agent (simplest, centralized), multi-agent (modular, distributed), and hierarchical (tiered with strategic oversight). This represents application-level abstraction for system architecture design, where higher levels add complexity and coordination capabilities.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 1:746-749)**
+  > Agentic RAG systems can be categorized into distinct architectural frameworks based on their complexity and design principles. These include single-agent, multi-agent, and hierarchical agentic architectures
+
+---
+
+### 106. Workflow Pattern Complexity Abstraction
+
+Workflow patterns (Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, Evaluator-Optimizer) represent different abstraction levels for task orchestration. Simpler patterns like Prompt Chaining are foundational, while Orchestrator-Workers and Evaluator-Optimizer represent higher application-level abstractions for complex task management.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 1:613-614)**
+  > Agentic workflow patterns structure LLM-based applications to optimize performance, accuracy, and efficiency. Different approaches are suitable depending on task complexity
+
+---
+
+### 107. Hierarchical Agent Tier Structure
+
+This describes a concrete application-level abstraction with explicit tiers: top-tier agents (strategic decision-making), mid-level agents (specialized retrieval), and lower-level agents (execution). The abstraction enables multi-level decision-making and task delegation based on query complexity.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 2:103-106)**
+  > Hierarchical Agentic RAG systems employ a structured, multi-tiered approach to information retrieval. Agents are organized in a hierarchy, with higher-level agents overseeing lower-level agents
+
+---
+
+### 108. Document Workflow Abstraction Layers
+
+ADW represents a domain-specific application-level abstraction that integrates document parsing, retrieval, reasoning, and structured outputs. It demonstrates how foundational RAG concepts are elevated to domain-specific workflow automation, with state maintenance across multi-step processes.
+
+**Sources**:
+
+- **20-Agentic_RAG_Survey (Chunk 2:704-708)**
+  > Agentic Document Workflows (ADW) extend traditional RAG paradigms by enabling end-to-end knowledge work automation. These workflows orchestrate complex document-centric processes
+
+---
+
+### 109. Process Model to Smart Contract Abstraction Bridge
+
+This describes abstraction bridging from domain-level (BPMN process models) to application-level (executable smart contracts). The transformation represents a vertical abstraction relationship where high-level business process descriptions are translated into low-level executable code, demonstrating how ontological concepts at one abstraction level map to implementation at another.
+
+**Sources**:
+
+- **21-LLM_Smart_Contracts_from_BPMN (Chunk 1:53-58)**
+  > Blockchain-based business process execution relies on a model-driven paradigm, where process descriptions are transformed into executable artefacts based on rule-based transformation tools
+
+---
+
+### 110. Foundation Model Abstraction for Code Generation
+
+Foundation Models represent a foundational abstraction level that serves as a base for multiple application-level uses. The paper describes how LLMs (foundational) can be applied to domain-specific tasks like smart contract generation (application level), demonstrating the foundational-to-application abstraction relationship.
+
+**Sources**:
+
+- **21-LLM_Smart_Contracts_from_BPMN (Chunk 1:131-137)**
+  > LLMs are a specific class of Foundation Models, a class of machine learning models trained on extensive data sets, not for one specific purpose but as a basis for many possible applications
+
+---
+
+### 111. BPMN Choreography as Domain Abstraction
+
+BPMN 2.0 Choreographies represent a domain-level abstraction for modeling inter-organizational business processes. The paper acknowledges this as one possible modeling paradigm, indicating that multiple domain-level abstractions exist for representing blockchain-based execution patterns.
+
+**Sources**:
+
+- **21-LLM_Smart_Contracts_from_BPMN (Chunk 1:338-341)**
+  > In the current instantiation of our framework, we support BPMN 2.0 Choreographies. This is a purely practical implementation choice, given that there is no consensus on the best fitting modelling paradigm
+
+---
+
+### 112. Process Characteristic Evaluation Framework Perspectives
+
+The PCEF represents a domain-level abstraction framework for RPA viability assessment. The five perspectives (task, time, data, system, human) provide orthogonal abstraction dimensions for evaluating process activities. Each perspective operates at a different abstraction level - from concrete task execution to abstract human factors.
+
+**Sources**:
+
+- **22-RPA_Framework_BPM_Activities (Chunk 1:234-237)**
+  > Table 2 visualizes the process characteristics evaluation framework (PCEF). We present five perspectives - task, time, data, system, and human - that contain several characteristics
+
+---
+
+### 113. Task Perspective Abstraction Hierarchy
+
+Within the task perspective, four criteria form an abstraction hierarchy: standardization (structural abstraction of process flow), maturity (temporal abstraction of process stability), determinism (behavioral abstraction of rule-based execution), and failure rate (operational abstraction of deviation frequency). This shows nested abstraction levels within a domain-level framework.
+
+**Sources**:
+
+- **22-RPA_Framework_BPM_Activities (Chunk 1:325-344)**
+  > The task perspective refers to the execution of process activities. Its criteria are standardization, maturity, determinism, and failure rate
+
+---
+
+### 114. System vs Human Abstraction Separation
+
+The framework separates system-level abstraction (interfaces, stability, number of systems) from human-level abstraction (resources, proneness to human error). This demonstrates how RPA viability requires analysis at multiple abstraction levels - from technical infrastructure to human behavioral patterns.
+
+**Sources**:
+
+- **22-RPA_Framework_BPM_Activities (Chunk 1:377-398)**
+  > The fourth perspective in the framework is related to the underlying systems... The last perspective deals with humans computer interaction focusing on the human
+
+---
+
+### 115. UFO Three-Strata Ontological Architecture
+
+UFO presents a foundational three-level abstraction architecture: UFO-A (structural/endurant foundation), UFO-B (temporal/perdurant extension), and UFO-C (social/intentional layer built on A and B). This is a canonical example of foundational ontology abstraction stratification, where each layer builds on lower layers while addressing distinct ontological concerns.
+
+**Sources**:
+
+- **23-UFO_Story_Ontological_Foundations (Chunk 1:170-193)**
+  > The ontology is divided in three strata dealing with different aspects of reality, namely: UFO-A: An Ontology of Endurants... UFO-B: An Ontology of Perdurants... UFO-C: An Ontology of Intentional and Social Entities
+
+---
+
+### 116. Four-Category Ontology Abstraction
+
+The Four-Category Ontology (individuals, universals, substantial individuals, accidents) represents a foundational abstraction level that distinguishes between things and their properties, particulars and universals. This Aristotelian Square provides the metaphysical foundation for higher-level conceptual modeling abstractions.
+
+**Sources**:
+
+- **23-UFO_Story_Ontological_Foundations (Chunk 1:127-129)**
+  > we needed a Four-Category Ontology. We needed particularized properties not only because they were of great importance in making sense of language and cognition
+
+---
+
+### 117. Conceptual Modeling Language Abstraction Purpose
+
+This defines the purpose of conceptual modeling abstraction: to represent reality at a level that promotes human understanding and communication. The abstraction level chosen must balance formal rigor with cognitive accessibility, making it a domain-level abstraction serving application-level communication needs.
+
+**Sources**:
+
+- **23-UFO_Story_Ontological_Foundations (Chunk 1:113-118)**
+  > Conceptual Modeling is about representing aspects of the physical and social world for the purpose of understanding and communication... the contribution of a conceptual modeling notation rests in its ability to promote understanding
+
+---
+
+### 118. OntoUML as Ontologically Well-Founded Language Abstraction
+
+OntoUML represents a domain-level abstraction that bridges foundational ontology (UFO-A) and application-level modeling (UML class diagrams). It demonstrates how foundational ontological distinctions can be lifted to a domain-level modeling language with explicit real-world semantics while maintaining formal syntactic constraints.
+
+**Sources**:
+
+- **23-UFO_Story_Ontological_Foundations (Chunk 1:213-222)**
+  > OntoUML was conceived as an ontologically well-founded version of the UML 2.0 fragment of class diagrams... the worldview embedded in the language through its conceptual primitives should be isomorphic to UFO-A
+
+---
+
+### 119. Types Taxonomy Abstraction (Kinds, Roles, Phases, Mixins)
+
+UFO provides a rich abstraction hierarchy for type classification: substance sortals (kinds - identity-bearing), phased-sortals (roles/phases - contingent), and non-sortals (categories/mixins - cross-cutting). This foundational abstraction enables precise modeling of how entities change and relate across different abstraction levels.
+
+**Sources**:
+
+- **23-UFO_Story_Ontological_Foundations (Chunk 1:366-370)**
+  > substance sortals (kinds), phased-sortals (roles and phases) and non-sortals (categories, mixins and role mixins). These distinctions were considered to be distinctions among object universals
+
+---
+
+### 120. Enterprise Ontology Document Encoding Issue
+
+Paper 24 (Enterprise Ontology) could not be properly analyzed due to character encoding issues in the PDF-to-markdown conversion. The file contains primarily garbled/corrupted text (shown as question mark symbols) rather than readable content. No abstraction_level patterns could be reliably extracted from this source. This represents a data quality limitation for this batch.
+
+**Sources**:
+
+- **24-Enterprise_Ontology (Chunk 1:1-50)**
+  > N/A - document contains encoding issues with garbled characters preventing reliable text extraction
+
+---
+
+### 121. Domain Ontology Built on Meta-model Foundation
+
+BBO represents a domain-level ontology that builds upon a foundational meta-model (BPMN 2.0). This demonstrates abstraction layering where domain ontologies reuse and extend lower-level foundational structures. The abstraction level is 'domain' - specific to business process representation while grounded in the BPMN 2.0 standard.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:44-50)**
+  > we developed the BBO (BPMN 2.0 Based Ontology) ontology for business process representation, by reusing existing ontologies and meta-models like BPMN 2.0
+
+---
+
+### 122. Ontology Stack Layering with Reuse Pattern
+
+Explicit statement of ontology abstraction layering principle. Higher abstraction levels (domain ontologies like BBO) should reuse lower abstraction levels (foundational meta-models) rather than reinventing base concepts. This is a methodological pattern for managing abstraction in ontology engineering.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:79-81)**
+  > We can benefit from previous formalization initiatives by reusing existing ontologies and models rather than developing a new ontology from scratch
+
+---
+
+### 123. Fragment Extraction from Comprehensive Meta-model
+
+BBO's abstraction approach involves extracting relevant fragments from a comprehensive foundational meta-model. This selective extraction creates an appropriate abstraction level for the target domain while maintaining semantic compatibility with the source meta-model.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:90-92)**
+  > The core of BBO is an ontological representation of a fragment extracted from the BPMN 2.0 meta-model. Hence, we exploited the process-execution specifications of BPMN 2.0
+
+---
+
+### 124. Multi-source Ontology Integration at Domain Level
+
+Domain-level ontologies integrate multiple concept fragments (Process, Input/Output, Agent, Work Product, Manufacturing Facility) into a coherent whole. This modular approach enables the ontology to maintain appropriate abstraction while covering diverse sub-domains.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:204-207)**
+  > we split BBO model into five fragments according to the five main concepts identified in the Specification stage
+
+---
+
+### 125. UML-to-OWL Abstraction Transformation
+
+BBO demonstrates abstraction level transformation from conceptual (UML class diagrams) to formal (OWL 2 DL). This multi-level representation approach allows the same domain knowledge to exist at different abstraction levels for different purposes.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:359-362)**
+  > We have formalized and implemented the conceptual model of BBO in OWL 2 DL using Protege. First, we designed and applied a set of conversion rules that automatically generated an OWL representation from the UML diagrams
+
+---
+
+### 126. Natural Language to Formal Ontology Abstraction
+
+Identifies a critical abstraction gap: formal representations (UML, XML) miss semantics expressed in natural language. Full formalization requires capturing these informal specifications and encoding them at the formal abstraction level. This highlights the challenge of abstraction level completeness.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:395-403)**
+  > BPMN 2.0 specification provides a meta-model for BPMN elements as a UML class diagram and in the form of an XML schema. However, the diagrams and XML schema do not reflect the whole specification... a large part of the specifications is in natural language
+
+---
+
+### 127. Schema Metrics for Abstraction Depth Evaluation
+
+Schema Deepness (SD) metric quantifies abstraction depth. Low SD indicates a 'deep' ontology with detailed coverage of a specific domain. BBO's SD of 0.78 positions it as a domain-specific ontology with rich detail rather than a broad foundational ontology.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:457-466)**
+  > SD = NH/NC. This measure describes the distribution of classes across different levels of the ontology class hierarchy. The SD value of BBO is low... it means that the ontology is deep (or vertical): it covers a knowledge domain in a detailed manner
+
+---
+
+### 128. Entity Count as Abstraction Indicator
+
+BBO contains 106 concepts/entities, placing it in the detailed domain ontology category. This entity count reflects its position as a comprehensive domain-level ontology (comparable to ArchiMate's 57 entities for enterprise architecture). The high relationship count (125 non-isA + 83 isA = 208 total) indicates rich semantic expressiveness at this abstraction level.
+
+**Sources**:
+
+- **31-BBO (Chunk 1:471-473)**
+  > Concepts: 106 | Relationships others than isA: 125 | isA relations: 83
+
+---
+

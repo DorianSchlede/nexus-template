@@ -1,0 +1,35 @@
+{
+  "source_pdf": "18-Multi-Agent_Architecture_Taxonomy_LLM.pdf",
+  "processed_at": "2025-12-27T22:54:00.246239",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 4,
+  "total_lines": 3766,
+  "total_chars": 190554,
+  "chunks": [
+    {
+      "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_1.md",
+      "chunk_number": 1,
+      "line_count": 1000,
+      "char_count": 44838
+    },
+    {
+      "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_2.md",
+      "chunk_number": 2,
+      "line_count": 1000,
+      "char_count": 56716
+    },
+    {
+      "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_3.md",
+      "chunk_number": 3,
+      "line_count": 999,
+      "char_count": 45173
+    },
+    {
+      "filename": "18-Multi-Agent_Architecture_Taxonomy_LLM_4.md",
+      "chunk_number": 4,
+      "line_count": 767,
+      "char_count": 43827
+    }
+  ]
+}

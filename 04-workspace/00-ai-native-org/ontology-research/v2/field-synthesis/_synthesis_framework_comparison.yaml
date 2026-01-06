@@ -1,0 +1,621 @@
+field: framework_comparison
+aggregated_at: '2025-12-29T11:26:25.520465'
+batches_merged: 3
+patterns_input: 65
+patterns_output: 64
+patterns:
+- name: RDF vs Property Graph Model Comparison
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:404-446)
+    quote: A standardised data model based on directed edge-labelled graphs is the
+      Resource Description Framework (RDF)...
+  description: The paper compares RDF (W3C standard for directed edge-labelled graphs)
+    with property graphs. RDF defines different types of nodes including IRIs for
+    global identification, literals for strings/datatypes, and blank nodes for anonymous
+    nodes. Property graphs (e.g., Neo4j) offer additional flexibility with property-value
+    pairs on both nodes and edges. The paper notes that property graphs can be translated
+    to/from directed edge-labelled graphs without loss of information.
+- name: Directed Edge-Labelled vs Heterogeneous Graphs
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:483-502)
+    quote: A heterogeneous graph is a graph where each node and edge is assigned one
+      type...akin to del graphs with edge labels corresponding to edge types
+  description: Framework comparison between directed edge-labelled graphs (DEL) and
+    heterogeneous graphs. Heterogeneous graphs partition nodes by type as part of
+    the model itself, whereas DEL graphs express type as a special relation. Heterogeneous
+    graphs benefit machine learning tasks through node partitioning, but typically
+    only support one-to-one node-type relations unlike DEL graphs which allow zero
+    or multiple types per node.
+- name: SPARQL vs Cypher Query Language Semantics
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 1:696-708)
+    quote: SPARQL adopts a homomorphism-based semantics, while Cypher adopts an isomorphism-based
+      semantics on edges
+  description: Comparison of graph pattern evaluation semantics between SPARQL (W3C
+    standard for RDF) and Cypher (Neo4j query language). Homomorphism-based semantics
+    (SPARQL) allows multiple variables to map to the same term. Isomorphism-based
+    semantics (Cypher) requires variables on edges to map to unique terms, thus excluding
+    certain mappings from results.
+- name: SPARQL vs Cypher vs G-CORE Path Handling
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:27-33)
+    quote: Cypher returns a string that encodes a path...G-CORE allows for returning
+      paths, and supports additional operators on them
+  description: Framework comparison of path expression handling across query languages.
+    SPARQL 1.1 returns pairs of nodes connected by matching paths. Cypher returns
+    paths without repeated nodes/edges as encoded strings with functions like length().
+    G-CORE supports returning paths as first-class objects with operators for projecting
+    as graphs, applying cost functions, etc.
+- name: Semantic Schema vs Validating Schema
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:92-98)
+    quote: 'We discuss three types of graph schemata: semantic, validating, and emergent'
+  description: Framework comparison of three schema types for knowledge graphs. Semantic
+    schemata (e.g., RDFS, OWL) define meaning of terms and enable reasoning/inference.
+    Validating schemata (e.g., ShEx, SHACL) define constraints for data validation.
+    Emergent schemata are automatically extracted patterns (graph summaries). Semantic
+    schemata infer new data; validating schemata validate existing data.
+- name: RDFS vs OWL Semantic Schema
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:176-190)
+    quote: A prominent standard for defining a semantic schema for (RDF) graphs is
+      the RDF Schema (RDFS) standard...More generally, the semantics of terms...can
+      be defined in much more depth...as is supported by the Web Ontology Language
+      (OWL)
+  description: Comparison between RDFS and OWL for semantic schema definition. RDFS
+    allows defining subclasses, subproperties, domains, and ranges. OWL extends RDFS
+    with richer semantic features for defining term meaning in greater depth. Both
+    can be serialized as graphs and support entailment.
+- name: Open World vs Closed World Assumption
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:192-221)
+    quote: Under the Closed World Assumption (CWA)...it would be assumed that the
+      data graph is a complete description of the world...Systems that do not adopt
+      the CWA are said to adopt the Open World Assumption (OWA)
+  description: Framework comparison of completeness assumptions. CWA (classical databases)
+    assumes missing edges are false. OWA (semantic web, OWL) does not assume missing
+    edges are false. Local Closed World Assumption (LCWA) is a compromise where portions
+    of the graph are assumed complete. OWL adopts NUNA (No Unique Name Assumption)
+    and OWA.
+- name: ShEx vs SHACL Validation Languages
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:379-395)
+    quote: 'Two shapes languages have recently emerged for RDF graphs: Shape Expressions
+      (ShEx)...and SHACL (Shapes Constraint Language)'
+  description: Comparison of two W3C standards for graph validation. ShEx is a W3C
+    Community Group Report; SHACL is a W3C Recommendation. Both support shapes-based
+    validation for RDF graphs with features like targeting, constraints, recursion.
+    A common basis language has been proposed revealing their similarities and differences.
+- name: Quotient Graph Simulation vs Bisimulation
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:463-498)
+    quote: Every quotient graph simulates its input graph...However, this quotient
+      graph seems to suggest (for instance) that EID16 would have a start and end
+      date...A stronger notion of structural preservation is given by bisimilarity
+  description: Framework comparison of graph summarization approaches. Simulation
+    preserves forward-directed paths but may suggest edges that don't exist. Bisimulation
+    is stronger, requiring that for every edge in quotient graph, corresponding edges
+    exist for all members. Bisimilarity preserves forward-directed path expressions
+    without inverses.
+- name: RDF Reification vs N-ary Relations vs Singleton Properties
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 2:873-905)
+    quote: RDF reification defines a new node to represent the edge and connects it
+      to the source node (via subject), target node (via object), and edge label (via
+      predicate)
+  description: Comparison of three reification patterns for modeling context on edges.
+    RDF reification creates a node representing the edge with subject/object/predicate
+    connections. N-ary relations connect source node directly to edge node with edge
+    label. Singleton properties use edge label as identifier connected to original
+    label via singleton. Each has different tradeoffs for expressing contextual information.
+- name: Named Graph vs Property Graph vs RDF* Context Representation
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:8-92)
+    quote: First, we can use a named graph...Second, we can use a property graph where
+      the temporal context is defined as an attribute on the edge. Third, we can use
+      RDF*
+  description: Framework comparison of higher-arity representations for modeling context.
+    Named graphs are most flexible, allowing context on multiple edges at once. Property
+    graphs define context as edge attributes. RDF* extends RDF to allow edges as nodes
+    but is least flexible - cannot pair different contextual values without creating
+    additional nodes. Named graphs and edge ids allow multiple context groups.
+- name: Temporal RDF vs Fuzzy RDF vs Annotated RDF
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:111-127)
+    quote: Temporal RDF allows for annotating edges with time intervals...Fuzzy RDF
+      allows for annotating edges with a degree of truth...Annotated RDF allows for
+      representing various forms of context modelled as semi-rings
+  description: Comparison of domain-specific and domain-independent annotation frameworks.
+    Temporal RDF annotates edges with time intervals. Fuzzy RDF annotates with degrees
+    of truth (0-1). Annotated RDF is domain-independent using semi-ring algebraic
+    structures with meet (conjunction) and join (disjunction) operators for combining
+    annotations across queries.
+- name: OWL vs OBOF Ontology Languages
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:349-356)
+    quote: Amongst the most popular ontology languages used in practice are the Web
+      Ontology Language (OWL)...and the Open Biomedical Ontologies Format (OBOF)
+  description: Framework comparison of major ontology languages. OWL is W3C recommended,
+    compatible with RDF graphs, and more widely adopted. OBOF is used mostly in the
+    biomedical domain. Many similar features are found in both. OWL heavily influenced
+    by Description Logics and builds upon RDFS.
+- name: Unique Name Assumption vs No Unique Name Assumption
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:413-429)
+    quote: Under the Unique Name Assumption (UNA), the data graph describes at least
+      two flights to Santiago...Conversely, under No Unique Name Assumption (NUNA),
+      we can only say that there is at least one such flight
+  description: Framework comparison of naming assumptions. UNA forbids interpretations
+    that map two data terms to the same domain term - different names mean different
+    entities. NUNA allows such interpretations - different names may refer to same
+    entity. OWL adopts NUNA, representing the most general case where multiple nodes
+    may refer to same entity.
+- name: If-Then vs If-And-Only-If Ontology Semantics
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:866-889)
+    quote: Under if-then semantics...the graphs do not entail each other...Conversely,
+      under if-and-only-if semantics...the graphs entail each other
+  description: 'Framework comparison of ontology semantics. If-then semantics: axiom
+    pattern implies condition but condition is not translated back to axioms. If-and-only-if
+    semantics: axiom pattern holds exactly when condition holds, allowing entailment
+    of more axioms. OWL generally applies if-and-only-if semantics.'
+- name: Materialisation vs Query Rewriting for Reasoning
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:953-999)
+    quote: Materialisation refers to the idea of applying rules recursively to a graph,
+      adding the conclusions generated back to the graph until a fixpoint...Another
+      strategy is to use rules for query rewriting
+  description: Framework comparison of reasoning strategies. Materialisation applies
+    rules recursively adding conclusions until fixpoint - can become unfeasibly large.
+    Query rewriting extends queries to find entailed solutions without modifying graph
+    - OWL 2 QL profile designed for this. Materialisation enhanced by Rete networks
+    or MapReduce.
+- name: OWL 2 RL vs OWL 2 QL Profiles
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:45-109)
+    quote: A more comprehensive set of rules for the OWL features...have been defined
+      as OWL 2 RL/RDF...The OWL 2 QL profile is a subset of OWL designed specifically
+      for query rewriting
+  description: Comparison of OWL 2 profiles for different reasoning strategies. OWL
+    2 RL/RDF defines rules for materialisation but cannot fully capture negation,
+    existentials, universals, or counting. OWL 2 QL is designed for query rewriting
+    approaches. Different profiles trade off expressivity for computational tractability.
+- name: Rules vs Description Logics
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:127-189)
+    quote: Description Logics (DLs) were initially introduced as a way to formalise
+      the meaning of frames and semantic networks...DLs form a family of logics rather
+      than a particular logic
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:269-324)
+    quote: A rule is a pair R=(B,H) such that B and H are graph patterns and Var(H)
+      subset B... Rules can be used to support graph entailments
+  description: Merged from 2 sources. Framework comparison of reasoning formalisms.
+    Rules encode if-then consequences with body/head graph patterns (Datalog, Horn
+    clauses). Description Logics are restricted FOL fragments permitting decidable
+    reasoning. DLs balance expressive power vs computational complexity. DLs heavily
+    influenced OWL; OWL 2 DL is restricted OWL ensuring decidable entailment.
+- name: Inductive vs Deductive Knowledge
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:212-227)
+    quote: While deductive knowledge is characterised by precise logical consequences,
+      inductively acquiring knowledge involves generalising patterns from a given
+      set of input observations
+  description: Framework comparison of knowledge acquisition paradigms. Deductive
+    knowledge provides precise logical consequences from premises and entailment regimes.
+    Inductive knowledge generalizes patterns from observations to generate potentially
+    imprecise predictions with confidence scores. Both approaches complement each
+    other in knowledge graph enrichment.
+- name: Graph Analytics vs Embeddings vs GNNs vs Symbolic Learning
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:230-359)
+    quote: In the case of unsupervised methods, there is a rich body of work on graph
+      analytics...knowledge graph embeddings can use self-supervision...graph neural
+      networks...symbolic learning can learn symbolic models
+  description: 'Framework comparison of inductive techniques for knowledge graphs.
+    Graph analytics (unsupervised): centrality, community detection, connectivity.
+    Embeddings (self-supervised): learn low-dimensional numeric models mapping edges
+    to plausibility scores. GNNs (supervised): leverage graph structure directly.
+    Symbolic learning (self-supervised): learn interpretable rules/axioms.'
+- name: TransE vs TransH vs TransR vs TransD Embedding Models
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 5:7-60)
+    quote: TransE learns vectors aiming to make es + rp as close as possible to eo...TransH
+      represents different relations using distinct hyperplanes...TransR generalises
+      this approach by projecting into a vector space specific to p
+  description: 'Framework comparison of translational embedding models. TransE: simplest,
+    learns es + rp close to eo but too simplistic for many-to-many relations. TransH:
+    projects onto relation-specific hyperplanes. TransR: projects into relation-specific
+    vector spaces using projection matrices. TransD: simplifies TransR using secondary
+    vectors. RotatE: uses complex space for symmetry/inversion. MuRP: hyperbolic space
+    embeddings.'
+- name: DistMult vs RESCAL vs HolE vs ComplEx vs TuckER
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 5:194-237)
+    quote: DistMult is a seminal method for computing knowledge graph embeddings based
+      on rank decompositions...RESCAL uses a matrix...HolE uses vectors...ComplEx
+      uses a complex vector...TuckER employs a different type of decomposition
+  description: 'Framework comparison of tensor decomposition embedding models. DistMult:
+    simple but symmetric (doesn''t consider edge direction). RESCAL: uses matrix for
+    relation embedding, captures direction but higher cost. HolE: uses circular correlation,
+    non-commutative. ComplEx: uses complex vectors to break symmetry. SimplE: averages
+    across X,Y,Z. TuckER: Tucker decomposition, current state-of-the-art on benchmarks.'
+- name: Recursive GNNs vs Convolutional GNNs
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 5:635-643)
+    quote: There are two main differences between RecGNNs and ConvGNNs. First, RecGNNs
+      aggregate information from neighbours recursively up to a fixpoint, whereas
+      ConvGNNs typically apply a fixed number of convolutional layers
+  description: 'Framework comparison of graph neural network architectures. RecGNNs:
+    aggregate neighbor information recursively until fixpoint, use same function/parameters
+    uniformly. ConvGNNs: apply fixed number of convolutional layers, different kernels/weights
+    at each step. Both build neural networks based on data graph topology for supervised
+    learning tasks.'
+- name: AMIE Rule Mining vs Differentiable Rule Mining
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 6:3-10)
+    quote: These differentiable rule mining techniques are, however, currently limited
+      to learning path-like rules
+  description: 'Framework comparison of rule mining approaches. AMIE: top-down discrete
+    expansion of candidate rules with PCA confidence, supports complex rules with
+    cycles. Differentiable rule mining (NeuralLP, DRUM): represents joins as matrix
+    multiplication, uses attention/RNN to learn rules end-to-end, but limited to path-like
+    rules. AMIE supports more complex rule patterns but discrete search; differentiable
+    methods enable end-to-end learning.'
+- name: Quality Dimensions Framework Comparison
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:4-14)
+    quote: quality dimensions that capture aspects of multifaceted data quality which
+      evolves from the traditional domain of databases to the domain of knowledge
+      graphs
+  description: Framework comparison showing how quality dimensions evolved from traditional
+    database domain to knowledge graph domain. References quality metrics from Batini
+    and Scannapieco as inspiration for grouping dimensions and metrics in KG context.
+- name: Accuracy Sub-dimension Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:17-24)
+    quote: 'Accuracy refers to the extent to which entities and relations correctly
+      represent real-life phenomena. Accuracy can be further sub-divided into three
+      dimensions: syntactic accuracy, semantic accuracy, and timeliness'
+  description: 'Framework for accuracy assessment in knowledge graphs with three sub-dimensions:
+    syntactic accuracy (grammar/data model conformance), semantic accuracy (real-world
+    correctness), and timeliness (currency of data). This provides a structured comparison
+    approach for quality assessment.'
+- name: Completeness Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:97-118)
+    quote: 'Completeness comprises the following aspects: (i) schema completeness
+      refers to the degree to which the classes and properties of a schema are represented
+      in the data graph'
+  description: 'Four-part completeness framework: schema completeness, property completeness,
+    population completeness, and linkability completeness. Comparison to ''ideal knowledge
+    graph'' concept for measuring completeness metrics.'
+- name: Representativeness vs Completeness
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:120-157)
+    quote: Representativeness is a related dimension that, instead of focusing on
+      the ratio of domain-relevant elements that are missing, rather focuses on assessing
+      high-level biases
+  description: Framework comparison between completeness (missing elements) and representativeness
+    (bias assessment). Addresses data biases, schema biases, and reasoning biases
+    as distinct concerns in quality assessment.
+- name: Coherency Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:160-192)
+    quote: Coherency refers to how well the knowledge graph conforms to the formal
+      semantics and constraints defined at the schema-level
+  description: Coherency framework comparing consistency (logical contradictions)
+    vs validity (constraint violations via shape expressions). Shows distinction between
+    ontological reasoning and shape-based validation approaches.
+- name: Succinctness Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:194-259)
+    quote: Succinctness refers to the inclusion only of relevant content avoiding
+      information overload
+  description: 'Three-part succinctness framework: conciseness (domain relevance),
+    representational-conciseness (compact representation), and understandability (human
+    interpretability). Distinguishes intensional (schema) from extensional (data)
+    conciseness.'
+- name: Knowledge Graph Completion vs Correction
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:274-289)
+    quote: refinement typically does not involve applying extraction or mapping techniques
+      over external sources in order to ingest their content into the local knowledge
+      graph. Instead, refinement typically targets improvement
+  description: Framework comparison between KG creation/enrichment (external source
+    ingestion) vs KG refinement (completion and correction of existing graph). Distinguishes
+    completion (adding missing edges) from correction (removing incorrect edges).
+- name: Link Prediction Settings Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 7:309-324)
+    quote: 'Link prediction may target three settings: general links involving edges
+      with arbitrary labels; type links involving edges with label type; and identity
+      links involving edges with label same as'
+  description: 'Three-setting framework for link prediction: general links (arbitrary
+    predicates), type links (classification), and identity links (entity matching).
+    Each setting can use general or custom techniques based on semantic specificity.'
+- name: FAIR Principles Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:621-675)
+    quote: 'FAIR Principles: Findability refers to the ease with which external agents
+      who might benefit from the dataset can initially locate the dataset'
+  description: 'FAIR framework with four foundational principles: Findability, Accessibility,
+    Interoperability, Reusability. Each has sub-goals (F1-F4, A1-A2, I1-I3, R1). Originally
+    for scientific data, now applied to knowledge graphs for machine-readability.'
+- name: Linked Data Principles vs FAIR
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:728-756)
+    quote: Wilkinson et al. state that FAIR Principles precede implementation choices...
+      Preceding the FAIR Principles by almost a decade are the Linked Data Principles
+  description: 'Framework comparison: FAIR principles are abstract goals while Linked
+    Data principles provide technical implementation. Four Linked Data principles:
+    use IRIs, use HTTP IRIs, provide useful content via dereferencing, include links
+    to related entities.'
+- name: Access Protocols Spectrum
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 8:870-891)
+    quote: access protocols that define the requests that agents can make and the
+      response that they can expect... varying from simple protocols that allow users
+      to simply download all content, towards protocols that accept complex requests
+  description: 'Framework for access protocols ranging from simple (dumps) to complex
+    (graph patterns). Trade-off between server computation and bandwidth efficiency.
+    Spectrum: Dumps -> Node Lookups -> Edge Patterns -> Complex Graph Patterns.'
+- name: Open KG Comparison Matrix
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 10:443-455)
+    quote: DBpedia, YAGO, Freebase, and Wikidata cover multiple domains, representing
+      a broad diversity of entities and relationships
+  description: 'Framework for comparing major open knowledge graphs. Cross-domain
+    KGs (DBpedia, YAGO, Freebase, Wikidata) vs domain-specific KGs. Common characteristics:
+    RDF modeling, Linked Data principles, multiple access protocols.'
+- name: DBpedia vs YAGO Approach
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 10:458-541)
+    quote: DBpedia project was developed to extract graph-structured representation
+      of semi-structured data embedded in Wikipedia... YAGO likewise extracts graph-structured
+      data from Wikipedia, which are then unified with hierarchical structure of WordNet
+  description: 'Framework comparison: DBpedia focuses on Wikipedia infobox extraction
+    with multilingual support and multiple classification schemas. YAGO unifies Wikipedia
+    with WordNet taxonomy for light-weight extensible ontology with high quality/coverage.'
+- name: Freebase vs Wikidata Model
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 10:544-622)
+    quote: Freebase solicited contributions directly from human editors... Wikidata
+      is also considered a secondary source containing claims that should reference
+      primary sources
+  description: 'Framework comparison: Freebase used direct human editing with loose
+    typing (incompatible types coexist). Wikidata uses centralized collaborative editing
+    with claims/references model, multilingual Qxx/Pxx identifiers, and schema editing
+    by users.'
+- name: Domain-Specific KG Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 10:657-682)
+    quote: 'Schmachtenberg et al. identify the most prominent domains in the context
+      of Linked Data as follows: media, government, publications, geographic, life
+      sciences, and user-generated content'
+  description: 'Six-domain taxonomy for domain-specific KGs: media (BBC), government
+    (US/UK), publications (OpenCitations), geographic (LinkedGeoData), life sciences
+    (Bio2RDF), user-generated content (Revyu). Applications vary by domain.'
+- name: Pre-2012 Knowledge Graph Evolution
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 12:817-895)
+    quote: the first reference to a knowledge graph of relevance to the modern meaning
+      was in a paper by Schneider (1973) in the area of computerised instructional
+      systems
+  description: 'Historical framework showing evolution of ''knowledge graph'' concept:
+    Schneider (1973) educational dependencies, Rada (1986) medical expert systems,
+    Bakker (1987) causal relations from text. Each framework had distinct entity/relation
+    semantics.'
+- name: Knowledge Graph Definition Categories
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:127-253)
+    quote: We can determine four general categories of definitions
+  description: 'Four-category taxonomy for KG definitions: Category I (graph of entities/relations),
+    Category II (graph-structured knowledge base), Category III (technical criteria),
+    Category IV (extensional/by example). Shows tension between formal and practical
+    definitions.'
+- name: Category III Definition Comparison
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:170-230)
+    quote: 'Paulheim lists four criteria that characterise the knowledge graphs...
+      Ehrlinger and Woss propose: A knowledge graph acquires and integrates information
+      into an ontology and applies a reasoner'
+  description: 'Comparison of Category III definitions: Paulheim''s criteria (real-world
+    entities, schema, arbitrary interrelation, cross-domain). Ehrlinger/Woss require
+    ontology+reasoner. Bellomarini requires ground+intensional+derived components.
+    Different restrictions on what qualifies as KG.'
+- name: Graph Data Model Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:302-376)
+    quote: Directed edge-labelled graph is a tuple G=(V,E,L)... Heterogeneous graph
+      is a tuple G=(V,E,L,l)... Property graph is a tuple G=(V,E,L,P,U,e,l,p)
+  description: 'Three-model framework for graph data: directed edge-labelled (nodes,
+    edges, labels), heterogeneous (adds node type function), property graph (adds
+    properties, values, edge IDs). Increasing expressivity but complexity trade-off.'
+- name: Graph Pattern Query Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:444-526)
+    quote: We formalise the notions of graph patterns first for directed edge-labelled
+      graphs, and subsequently for property graphs
+  description: 'Query framework comparison: directed edge-labelled graph patterns
+    vs property graph patterns. Both support variables in Term=Con U Var. Homomorphism-based
+    vs isomorphism-based semantics for result computation.'
+- name: Complex Graph Pattern Operators
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:528-597)
+    quote: Complex graph patterns are defined recursively... projection, selection,
+      join, union, difference, and anti-join
+  description: 'Relational algebra operators framework for complex graph patterns:
+    projection (pi), selection (sigma), join (bowtie), union, difference, anti-join.
+    Left-join as syntactic sugar. Forms basis for SPARQL-like query languages.'
+- name: Path Expression Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:603-663)
+    quote: 'A constant (edge label) c is a path expression. Furthermore: inverse (r-),
+      Kleene star (r*), concatenation (r1.r2), disjunction (r1|r2)'
+  description: 'Regular path expression framework with four operators: inverse, Kleene
+    star, concatenation, disjunction. Defines regular path queries (x,r,y) for navigational
+    patterns. SPARQL 1.1 style endpoint semantics.'
+- name: Semantic vs Validating Schema
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:709-721)
+    quote: We provide definitions that generalise semantic schemata... We define shapes
+      following conventions
+  description: 'Schema framework comparison: semantic schema (ontological semantics
+    via interpretations) vs validating schema (shapes/constraints). Shapes use SHACL-style
+    constraints with cardinality, type checking, and recursive references.'
+- name: Shape Evaluation Semantics
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:859-906)
+    quote: semantics of a shape phi is defined in terms of a shape evaluation function...
+      for a graph G, a node v, and a total shapes map sigma
+  description: 'Shapes evaluation framework: total vs partial shapes maps. Total map
+    assigns 0/1 to every (node,shape) pair. Kleene three-valued logic for partial
+    maps. Shapes target defines which nodes must satisfy which shapes for validity.'
+- name: Graph Interpretation Framework
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:186-227)
+    quote: A (graph) interpretation I is defined as a pair I=(Gamma, .I) where Gamma
+      is the domain graph and .I is a partial mapping from constants to terms
+  description: 'Interpretation framework for graph semantics: domain graph Gamma plus
+    interpretation function. UNA (unique name assumption) requires injective mapping.
+    Models satisfy graphs when all edge conditions hold in interpretation.'
+- name: Description Logic Hierarchy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:424-465)
+    quote: ALC (Attributive Language with Complement) supports atomic classes, top
+      and bottom classes, class intersection, union, negation... S extends ALC with
+      transitive closure
+  description: 'DL language hierarchy framework: base languages (ALC, S) with extensions
+    (H=relation inclusion, R=complex relations, O=nominals, I=inverse, F=functional,
+    N=number, Q=qualified number). OWL 2 DL roughly equals SROIQ.'
+- name: Knowledge Graph Embedding Taxonomy
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:759-834)
+    quote: 'A knowledge graph embedding of G is a pair of mappings (epsilon, rho)
+      such that epsilon: V -> T and rho: L -> T'
+  description: 'Embedding framework: entity embedding epsilon and relation embedding
+    rho map to tensors. Plausibility scoring function phi(s,p,o) ranks edges. Models
+    vary in expressivity (TransE simple vs NTN complex) and full expressiveness guarantees.'
+- name: Embedding Model Comparison
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:859-886)
+    quote: embeddings listed in Table 8 vary in complexity, ranging from simple models
+      such as TransE and DistMult, to more complex ones, such as SME Bilinear and
+      ConvE
+  description: 'Embedding model taxonomy by complexity: simple (TransE, DistMult)
+    vs complex (SME Bilinear, ConvE, NTN). Trade-off between parameters/computation
+    and expressiveness. Full expressiveness proven for ComplEx, SimplE, TuckER given
+    sufficient dimensionality.'
+- name: PROV-AGENT extends W3C PROV standard
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:117-121)
+    quote: PROV-AGENT, a provenance model that extends the W3C PROV standard and incorporates
+      concepts from the Model Context Protocol (MCP)
+  description: PROV-AGENT is positioned as a formal extension of W3C PROV. The extension
+    adds AI agent-specific concepts including tools, prompts, responses, and model
+    invocations while maintaining compatibility with the W3C standard. This demonstrates
+    how foundational provenance ontologies can be extended for new domains like agentic
+    AI.
+- name: W3C PROV Agent-Activity-Entity triad alignment
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:197-204)
+    quote: the W3C PROV standard already defines Agent, the central abstraction in
+      this work, as one of its three core classes, alongside Entity (data) and Activity
+      (process)
+  description: The paper explicitly validates the Agent-Activity-Entity triad from
+    W3C PROV as the foundational structure. Agents represent software or human actors
+    responsible for activities. This aligns with the research hypothesis about the
+    universality of the Agent-Activity-Entity pattern across foundational ontologies.
+- name: PROV-DfA comparison for human-steered workflows
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:212-214)
+    quote: PROV-DfA extends PROV to capture human actions in human-steered workflows,
+      while ProvONE adds workflow-specific metadata
+  description: Framework comparison showing PROV-DfA extends PROV for human-in-the-loop
+    scenarios, while ProvONE extends it for workflow management systems. PROV-AGENT
+    differentiates itself by focusing on AI agent actions rather than human actions,
+    filling a gap in the PROV extension landscape.
+- name: ProvONE workflow metadata extension
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:214-216)
+    quote: ProvONE adds workflow-specific metadata and aims at supporting existing
+      workflow management systems
+  description: ProvONE is identified as a PROV extension for workflow management systems.
+    It adds workflow-specific metadata but lacks semantics for agentic behavior. This
+    positions ProvONE as a domain extension while PROV-AGENT adds agent-centric semantics.
+- name: PROV-ML for AI/ML model training
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:240-241)
+    quote: PROV-ML combines general workflow concepts with ML-specific artifacts,
+      especially for model training and evaluation
+  description: PROV-ML extends PROV for machine learning workflows, focusing on model
+    training artifacts. The paper notes PROV-ML is orthogonal to PROV-AGENT as it
+    defines complementary concepts rather than representing AI agents that steer workflows.
+    This shows the ecosystem of PROV extensions for different AI use cases.
+- name: FAIR4ML model-centric approach
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:241-243)
+    quote: FAIR4ML adopts a model-centric approach to support the Findability, Accessibility,
+      Interoperability, and Reproducibility (FAIR) principles
+  description: 'FAIR4ML is compared as another provenance approach for AI, but focused
+    on FAIR principles for models rather than agent interactions. This framework comparison
+    highlights different objectives: FAIR4ML for model findability/reproducibility
+    vs PROV-AGENT for agent action traceability.'
+- name: Earlier agent PROV extensions predate agentic AI
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:244-246)
+    quote: Although the W3C PROV has been extended for agents and multi-agent systems,
+      these earlier efforts predate agentic workflows, lacking support for core agentic
+      AI concepts
+  description: 'Critical framework gap identification: previous W3C PROV agent extensions
+    (cited as [24], [25]) were designed before modern agentic AI workflows emerged.
+    They lack support for LLM prompts, responses, model invocations, and how agents
+    relate to broader workflows. PROV-AGENT fills this temporal gap.'
+- name: MCP integration with agentic workflow frameworks
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:141-150)
+    quote: LangChain, AutoGen, LangGraph, Academy, and CrewAI support multi-agent
+      systems that interact through prompt exchanges... These frameworks support MCP
+  description: Framework comparison across agentic AI development frameworks (LangChain,
+    AutoGen, LangGraph, Academy, CrewAI). All support MCP (Model Context Protocol)
+    as an emerging standard. PROV-AGENT leverages MCP concepts to ensure compatibility
+    with these frameworks while adding provenance capabilities.
+- name: MCP standard concepts integration
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:145-150)
+    quote: MCP defines core agentic AI development concepts, including tools, prompts,
+      resources, context management, and agent-client architecture
+  description: PROV-AGENT incorporates MCP's core concepts (tools, prompts, resources,
+    context management, agent-client architecture) into its provenance model. This
+    alignment with an emerging industry standard demonstrates how PROV-AGENT bridges
+    foundational ontology (W3C PROV) with practical AI agent standards (MCP).
+- name: Static vs dynamic workflow paradigm shift
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:163-168)
+    quote: Existing provenance techniques lack explicit representations of key agent
+      artifacts... They typically model workflows as static graphs, missing the semantics
+      needed to capture agentic behavior, dynamic decisions
+  description: 'Framework comparison identifying a paradigm gap: traditional provenance
+    systems model workflows as static graphs while agentic workflows are non-deterministic
+    with dynamic decisions and cyclic behavior. PROV-AGENT addresses this by adding
+    semantics for agent-driven dynamics.'
+- name: Knowledge graph embedding models comparison table
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:12-55)
+    quote: Table 8. Details for selected knowledge graph embeddings, including the
+      plausibility scoring function for edge
+  description: Technical comparison of knowledge graph embedding models (TransE, TransH,
+    TransR, TransD, RotatE, RESCAL, DistMult, HolE, ComplEx, SimplE, TuckER, etc.).
+    While not directly about ontology frameworks, this comparison shows how different
+    mathematical approaches model entity relationships in knowledge graphs, relevant
+    to understanding entity representation approaches.
+- name: RecGNN vs NRecGNN graph neural network architectures
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:385-504)
+    quote: A recursive graph neural network (RecGNN) is a pair of functions... A non-recursive
+      graph neural network (NRecGNN) with l layers is an l-tuple of functions
+  description: Comparison of recursive vs non-recursive graph neural network architectures.
+    RecGNNs apply the same aggregation function recursively until fixpoint, while
+    NRecGNNs use different aggregation functions at each layer up to fixed depth.
+    This architectural comparison is relevant to understanding how different AI/ML
+    approaches process graph-structured ontological data.

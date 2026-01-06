@@ -1,0 +1,187 @@
+---
+batch_id: "generative_ai_patterns_4"
+field: generative_ai_patterns
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 9
+patterns_found: 35
+---
+
+patterns:
+  # From Paper 18 - Multi-Agent Architecture Taxonomy LLM (Chunks 3-4)
+
+  - name: "Goal Decomposition Autonomy"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:118-124)"
+    quote: "Taxonomic aspects of Goal-driven Task Management comprise: Decomposition (how the goal or complex task is broken down into manageable sub-tasks)"
+    description: "LLM-powered agents autonomously decompose complex goals into manageable sub-tasks. This is a core generative AI pattern where the LLM reasons about task structure and generates a task decomposition strategy. Most systems achieve L2 (self-organizing) autonomy for decomposition."
+
+  - name: "Task Orchestration Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:122-123)"
+    quote: "Orchestration (how these tasks are distributed among the LLM-powered agents), and Synthesis (how the results of the tasks are finally combined)"
+    description: "Pattern for coordinating task distribution and result synthesis across multiple LLM agents. Includes decomposition, orchestration, and synthesis phases. Most current systems use predefined orchestration (L0) with autonomous execution."
+
+  - name: "Adaptive Prompt Engineering"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:162-165)"
+    quote: "Prompt Engineering (how prompts are applied during collaboration and executing the actions), and Action Management (how the different kinds of action performed by the agents are managed)"
+    description: "Pattern where LLM agents adapt prompt templates during execution based on scenario requirements. Systems typically use predefined but adaptable prompt templates (L1 autonomy), allowing agents to modify prompts within a defined framework."
+
+  - name: "Self-Organizing Collaboration Protocol"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:189-193)"
+    quote: "Agents operating at this level showcase the capability to independently strategize their collaboration for task execution...LLM-powered agents can self-organize protocols for collaboration"
+    description: "Pattern where LLM agents autonomously plan and execute collaboration strategies, self-organize communication protocols, negotiate action execution among the agent network. Represents L2 self-organizing autonomy in multi-agent collaboration."
+
+  - name: "Dynamic Role Definition"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:204-208)"
+    quote: "Agent Generation (how the agents are created), Role Definition (how agents' roles are specified), Memory Usage (how agents utilize their memory), and Network Management"
+    description: "Pattern for dynamically defining and adapting agent roles during execution. Agents can modify or extend their competencies, roles, and relationships based on scenario requirements. Some systems achieve L2 autonomy for role definition."
+
+  - name: "Contextual Resource Utilization"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:264-266)"
+    quote: "LLM-powered agents possess the autonomy to interface with a diverse pool of contextual resources. They can discerningly select, integrate, and harness these resources"
+    description: "Pattern where LLM agents autonomously select and utilize external resources (data, tools, models) based on task objectives. Represents self-organizing resource utilization where agents determine which resources to leverage for specific challenges."
+
+  - name: "Central LLM Controller Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:699-705)"
+    quote: "HUGGINGGPT follows a different strategy by leveraging the LLM as an autonomous controller that combines various multi-modal AI models to solve complex tasks"
+    description: "Pattern where a single central LLM acts as controller to orchestrate multiple specialized foundation models. The LLM breaks down tasks, selects appropriate models, and coordinates execution through prompting. Achieves L2 autonomy for most aspects."
+
+  - name: "Role-Agent Collaboration Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:51-58)"
+    quote: "Role-Agent Systems employ an interplay or simulation between multiple dedicated roles agents. This collaboration can serve different purposes, such as simulating a discussion"
+    description: "Pattern where multiple LLM agents take on dedicated roles with specific responsibilities and collaborate through dynamic exchange. Enables multi-perspective collaboration and domain simulation (e.g., software development project with different roles)."
+
+  - name: "Instructor-Executor Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:58-62)"
+    quote: "This collaboration is realized by communication protocols employing a dynamic exchange between agents with instructor and executor roles"
+    description: "Multi-agent pattern where one agent (AI-user/instructor) provides directives and another agent (AI-assistant/executor) performs execution. Used in CAMEL and similar systems for structured task collaboration between LLM agents."
+
+  - name: "Bounded Autonomy Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:76-78)"
+    quote: "these high-autonomy aspects are mostly combined with low alignment levels, resulting in bounded autonomy aspects"
+    description: "Architectural pattern where LLM agents have high autonomy (L2) in certain aspects (decomposition, action execution, resource utilization) but are constrained by low-autonomy predefined mechanisms in other aspects, creating a balance between agency and control."
+
+  - name: "Intertwined Dependencies Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:82-90)"
+    quote: "Autonomous decomposition directly depends on the user-prompted goal. Autonomous action management depends on strict or predefined communication protocol. Autonomous resource utilization depends on strict or predefined resource integration"
+    description: "Pattern describing how autonomous LLM behaviors depend on predefined mechanisms as constraints. High-autonomy aspects are balanced by low-autonomy aspects that provide integrated alignment and control, ensuring accurate operation."
+
+  - name: "Prompt-Driven Agent Communication"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:134-139)"
+    quote: "Collaboration between LLM-powered agents basically relies on prompt-driven message exchange, such as by delegating tasks, asking questions, or evaluating task results"
+    description: "Pattern where multi-agent collaboration is achieved through sequences of prompts for task delegation, questioning, and result evaluation. Susceptible to errors and hallucinations, requiring robust control mechanisms for quality checking."
+
+  - name: "Real-Time Responsive Alignment"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 4:169-172)"
+    quote: "the interaction layer allows the integration of interceptor mechanisms. This not only allows real-time monitoring...but also to implement effective feedback and intervention options"
+    description: "Pattern for enabling dynamic realignment of LLM agents during runtime through interceptor mechanisms. Supports explainable AI, feedback loops, and human intervention. Key for hybrid teamwork between autonomous agents and human co-workers."
+
+  - name: "Self-Reflection and Planning Pattern"
+    chunk_ref: "18-Multi-Agent_Architecture_Taxonomy_LLM (Chunk 3:647-654)"
+    quote: "the agent evaluates the intermediate results, engaging in self-criticism. The tasks are optionally re-prioritized. The final result represents an aggregate of all partial results"
+    description: "Pattern where LLM agents evaluate their own outputs, engage in self-criticism, and adjust task prioritization based on intermediate results. Enables iterative improvement through autonomous reflection on execution outcomes."
+
+  # From Paper 19 - Graph of Thoughts LLM Reasoning (Chunks 1-7)
+
+  - name: "Graph of Thoughts (GoT)"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:17-28)"
+    quote: "The key idea and primary advantage of GoT is the ability to model the information generated by an LLM as an arbitrary graph, where units of information ('LLM thoughts') are vertices"
+    description: "Framework that advances prompting capabilities by modeling LLM reasoning as an arbitrary graph. Thoughts are vertices, edges are dependencies. Enables combining arbitrary thoughts into synergistic outcomes, distilling networks of thoughts, and enhancing thoughts using feedback loops."
+
+  - name: "Chain-of-Thought (CoT) Prompting"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:47-48)"
+    quote: "Chain-of-Thought (CoT) is an approach for prompting, in which one includes the intermediate steps of reasoning within the prompt (intermediate 'thoughts')"
+    description: "Foundational prompting pattern that includes intermediate reasoning steps in the prompt to improve LLM problem-solving. Significantly enhances mathematical, commonsense, and symbolic reasoning without model updates."
+
+  - name: "Self-Consistency with CoT (CoT-SC)"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:55-57)"
+    quote: "One major improvement over CoT, Self-Consistency with CoT (CoT-SC), is a scheme where multiple CoTs are generated, and then the best one is selected as the outcome"
+    description: "Extension of Chain-of-Thought that generates multiple independent reasoning chains and selects the best outcome. Offers opportunity to explore different reasoning paths but lacks local exploration within a path."
+
+  - name: "Tree of Thoughts (ToT)"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:58-61)"
+    quote: "Tree of Thoughts (ToT) models the LLM reasoning process with a tree. This facilitates using different paths of thoughts, and offers novel capabilities such as backtracking"
+    description: "Prompting paradigm that models LLM reasoning as a tree structure. Each node represents a partial solution. Enables thought generation, state evaluation, and search algorithms (BFS/DFS) for exploring reasoning paths with backtracking capability."
+
+  - name: "Thought Aggregation Transformation"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:344-352)"
+    quote: "with GoT, one can aggregate arbitrary thoughts into new ones, to combine and reinforce the advantages of these thoughts, while eliminating their disadvantages"
+    description: "Graph-enabled transformation that merges multiple LLM thoughts into synergistic new thoughts. Creates vertices with multiple incoming edges to aggregate reasoning paths. Enables combining most promising partial solutions while eliminating weaknesses."
+
+  - name: "Thought Refining Transformation"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:355-357)"
+    quote: "refining of a current thought v by modifying its content: V+ = {} and E+ = {(v, v)}. This loop in the graph indicates an iterated thought"
+    description: "Transformation pattern where an LLM thought is iteratively refined through self-loops in the reasoning graph. Enables improvement of thoughts through repeated modification while maintaining the same thought connections."
+
+  - name: "Thought Generation Transformation"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:360-364)"
+    quote: "one can generate one or more new thoughts based on an existing single thought v. This class embraces analogous reasoning steps from earlier schemes, such as ToT or CoT-SC"
+    description: "Transformation that generates k new thoughts from an existing thought. Foundation for branching in reasoning graphs. Creates multiple candidate solutions from a single state for parallel exploration and selection."
+
+  - name: "Graph of Operations (GoO)"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:390-393)"
+    quote: "the Graph of Operations (GoO)...is a static structure that specifies the graph decomposition of a given task, i.e., it prescribes transformations to be applied to LLM thoughts"
+    description: "Static execution plan that prescribes the sequence of thought transformations (Generate, Aggregate, Score, KeepBest) to be applied for solving a task. Defines the graph decomposition strategy before execution."
+
+  - name: "Graph Reasoning State (GRS)"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:394-395)"
+    quote: "GRS is a dynamic structure that maintains the state of the ongoing LLM reasoning process (the history of its thoughts and their states)"
+    description: "Dynamic data structure that tracks the evolving state of LLM reasoning during execution. Maintains thought history, validity scores, and other relevant information for controlling the reasoning process."
+
+  - name: "Thought Scoring Pattern"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:370-378)"
+    quote: "Thoughts are scored to understand whether the current solution is good enough. A score is modeled as a general function E(v, G, p_theta)"
+    description: "Pattern for evaluating LLM thoughts to determine solution quality. Scoring can be done by the LLM itself, by human evaluators, or by local scoring functions. Enables selection of best thoughts for further processing."
+
+  - name: "Thought Ranking Pattern"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:373-374)"
+    quote: "GoT can also rank thoughts. We model this with a function R(G, p_theta, h) where h specifies the number of highest-ranking thoughts in G to be returned"
+    description: "Pattern for selecting top-h thoughts based on scores. Simple yet effective strategy that returns the highest-scoring thoughts for further processing in the reasoning graph."
+
+  - name: "Decompose-Solve-Merge Pattern"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:477-478)"
+    quote: "First, one decomposes the input sequence of numbers into subarrays. Then, one sorts these subarrays individually, and then respectively merges them into a final solution"
+    description: "Task decomposition pattern where complex problems are split into smaller subtasks, solved individually, and merged. Analogous to divide-and-conquer algorithms. Particularly effective for sorting, set operations, and document merging."
+
+  - name: "Volume of Thought Metric"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:129-133)"
+    quote: "the volume of v is the number of LLM thoughts, from which one can reach v using directed edges. Intuitively, these are all the LLM thoughts that have had the potential to contribute to v"
+    description: "Novel metric for evaluating prompting strategies. Measures how many preceding thoughts could have influenced a given thought. GoT achieves high volume (N) with low latency (log_k N), superior to CoT, CoT-SC, and ToT."
+
+  - name: "Latency-Volume Tradeoff"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:743-754)"
+    quote: "GoT is the only scheme to come with both a low latency of log_k N and a high volume N. This is enabled by the fact that GoT harnesses aggregations of thoughts"
+    description: "Fundamental tradeoff in prompting schemes between latency (hops to reach final thought) and volume (information scope). GoT uniquely achieves optimal tradeoff through thought aggregation, combining low latency with high information volume."
+
+  - name: "Multiple Response Generation with Selection"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 1:780-788)"
+    quote: "We experiment extensively with the branching factor k and the number of levels L to ensure that we compare GoT to cost-effective and advantageous configurations"
+    description: "Pattern of generating k parallel responses at each step and selecting best outcomes. Key parameter in ToT and GoT for balancing exploration breadth vs. computational cost. More responses typically improve quality but increase expense."
+
+  - name: "Few-Shot Prompt Engineering"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 3:576-580)"
+    quote: "First, we present the prompt stubs (Table 3), serving as templates to dynamically generate appropriate prompts at runtime. For clarity, we display their corresponding few-shot examples separately"
+    description: "Pattern of using templated prompts with few-shot examples that are dynamically populated at runtime. Enables consistent prompt structure while adapting to specific inputs. Examples demonstrate expected format and reasoning approach."
+
+  - name: "Structured Output Formatting"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 3:603-616)"
+    quote: "Only output the final 2 lists in the following format without any additional text or thoughts!: {{ 'List 1': [...], 'List 2': [...] }}"
+    description: "Pattern of constraining LLM output to specific JSON/structured format. Prompts explicitly specify output schema and prohibit additional text. Enables reliable parsing and processing of LLM responses."
+
+  - name: "Step-by-Step Approach Specification"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 3:633-647)"
+    quote: "<Approach> To fix the incorrectly sorted list follow these steps: 1. For each number from 0 to 9, compare the frequency... 2. Iterate through the incorrectly sorted list..."
+    description: "Pattern of including explicit algorithmic steps in prompts to guide LLM reasoning. Specifies procedural approach for task completion. Improves reliability by providing structured methodology rather than open-ended instructions."
+
+  - name: "Error Correction Prompting"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 3:627-631)"
+    quote: "The following two lists represent an unsorted list of numbers and a sorted variant of that list. The sorted variant is not correct. Fix the sorted variant so that it is correct"
+    description: "Pattern for iterative improvement where LLM is given incorrect output and asked to fix it. Used in improve/refine operations. Leverages LLM ability to compare and correct errors against ground truth or constraints."
+
+  - name: "Document Aggregation Pattern"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 5:599-608)"
+    quote: "For document merging, we employ four distinct types of operations: Generate (merge 4 NDAs into 1), Score (score merged NDA), Aggregate (aggregate multiple merge attempts into one), Improve"
+    description: "Multi-step pattern for merging multiple documents using LLM. Combines generation, scoring, aggregation, and improvement operations. Goal is maximizing information retention while minimizing redundancy."
+
+  - name: "LLM Self-Scoring Pattern"
+    chunk_ref: "19-Graph_of_Thoughts_LLM_Reasoning (Chunk 6:519-528)"
+    quote: "Please score the merged NDA in terms of how much redundant information is contained...as well as how much information is retained from the original NDAs. A score of 10 for redundancy implies..."
+    description: "Pattern where LLM evaluates its own outputs on specified criteria. Provides structured scoring rubric (0-10 scale) with clear definitions. Enables automated quality assessment for thought selection and comparison."

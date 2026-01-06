@@ -1,0 +1,223 @@
+---
+batch_id: "entity_definitions_1"
+field: entity_definitions
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 2
+patterns_found: 42
+---
+
+patterns:
+  - name: "Endurant Definition - Time-Persistence"
+    chunk_ref: "01-UFO (Chunk 1:283-288)"
+    quote: "Endurants are individuals that exist in time with all their parts. They have essential and accidental properties and, hence, they can qualitatively change while maintaining their numerical identity"
+    description: "UFO defines endurants as entities that exist wholly at any moment they exist, possessing both essential and accidental properties. This allows endurants to undergo qualitative change while preserving numerical identity. The identity persistence is governed by the unique Kind the endurant instantiates."
+
+  - name: "Perdurant Definition - Temporal Unfolding"
+    chunk_ref: "01-UFO (Chunk 1:289-296)"
+    quote: "Perdurants are individuals that unfold in time accumulating temporal parts. They are manifestations of dispositions and only exist in the past. As such, perdurants are modally fragile"
+    description: "Perdurants (events) are defined as entities that accumulate temporal parts as they unfold in time. They are manifestations of dispositions and exist only in the past. Being modally fragile means there is no cross-world identity between perdurants - they cannot be different than what they are."
+
+  - name: "Substantial Definition - Independent Entity"
+    chunk_ref: "01-UFO (Chunk 1:298-301)"
+    quote: "accounting for both substantial individuals (or Substantials), i.e., independent entities (e.g., Mick Jagger, the Free University of Bozen-Bolzano)"
+    description: "Substantials are defined as independent entities that do not existentially depend on other entities for their existence. Examples include persons and organizations. Substantials contrast with moments (existentially dependent entities)."
+
+  - name: "Moment Definition - Existentially Dependent Entity"
+    chunk_ref: "01-UFO (Chunk 1:299-301)"
+    quote: "particularized properties, i.e., existentially dependent entities or moments, these last ones termed aspects, abstract particulars, or variable tropes"
+    description: "Moments are defined as particularized properties that are existentially dependent on other entities. They are parasitic entities that can only exist by inhering in other entities. Also known as aspects, abstract particulars, or variable tropes in philosophical literature."
+
+  - name: "Quality Definition - Projectable Property"
+    chunk_ref: "01-UFO (Chunk 1:302-306)"
+    quote: "Intrinsic moments are existentially dependent on a single individual. These include qualities, i.e., reifications of categorical properties such as color, height, weight, electrical charge"
+    description: "Qualities are intrinsic moments that can be directly projected into certain value spaces. They are reifications of categorical properties (color, height, weight, electrical charge). Qualities map to quality structures which delimit the space of possible values (qualia)."
+
+  - name: "Quality Structure Definition - Value Space"
+    chunk_ref: "01-UFO (Chunk 1:303-306)"
+    quote: "The latter, termed quality structures, are abstract entities delimiting the space of possible values (qualia, singular quale) for qualities of a given quality type"
+    description: "Quality structures are abstract entities that define the space of possible values (qualia) for qualities of a given quality type. They can be one-dimensional (quality dimensions like height, weight) or composed of multiple co-dependent dimensions (quality domains like color spindle, taste tetrahedron)."
+
+  - name: "Mode Definition - Non-Projectable Intrinsic Moment"
+    chunk_ref: "01-UFO (Chunk 1:321-323)"
+    quote: "Intrinsic moments also include modes. Modes can bear their own moments, including their own qualities, which can vary in independent ways"
+    description: "Modes are intrinsic moments that cannot be projected into a value space (unlike qualities). They include dispositions (functions, capabilities, capacities, vulnerabilities) and externally dependent entities. Modes can bear their own moments, including qualities that vary independently."
+
+  - name: "Disposition Definition - Modal Capacity"
+    chunk_ref: "01-UFO (Chunk 1:321-323)"
+    quote: "The category of modes include dispositions (e.g., functions, capabilities, capacities, vulnerabilities)"
+    description: "Dispositions are a type of mode that represents capacities, functions, capabilities, and vulnerabilities of entities. They are intrinsic moments that connect to events through manifestation - a perdurant manifests a disposition inhering in an endurant."
+
+  - name: "Externally Dependent Mode Definition"
+    chunk_ref: "01-UFO (Chunk 1:323-327)"
+    quote: "Externally dependent modes inhere in an entity while being externally dependent on another entity"
+    description: "Externally dependent modes are modes that inhere in one entity while being existentially dependent on another entity that is mereologically disjoint from the bearer. Example: John's love for Mary inheres in John but depends on Mary's existence."
+
+  - name: "Qua Individual Definition"
+    chunk_ref: "01-UFO (Chunk 1:325-329)"
+    quote: "a qua individual, which is a mode composed of other externally dependent modes that share the same bearer, the same source of external dependence, and the same foundational event"
+    description: "A qua individual is a complex mode composed of externally dependent modes that share: (1) the same bearer, (2) the same source of external dependence, and (3) the same foundational event. Example: John-qua-husband-of-Mary represents all commitments and claims John has towards Mary founded in their wedding."
+
+  - name: "Relator Definition - Aggregated Qua Individuals"
+    chunk_ref: "01-UFO (Chunk 1:329-334)"
+    quote: "a relator is a moment (i.e., an existentially dependent entity) that is an aggregation of qua individuals"
+    description: "A relator is a moment that aggregates qua individuals, thereby being existentially dependent on multiple individuals (the bearers of its constituting qua individuals). Examples include marriages, enrollments, employments, contracts, and presidential mandates. Relators serve as truthmarkers of material relations."
+
+  - name: "Object Definition - Functional Complex"
+    chunk_ref: "01-UFO (Chunk 1:360-361)"
+    quote: "Objects (aka functional complexes) are entities whose parts play differentiated functional roles with respect to the whole"
+    description: "Objects (functional complexes) are substantials whose parts play differentiated functional roles with respect to the whole. Examples include human bodies, organizations, computers, and cars. This distinguishes objects from quantities and collectives which have different unity conditions."
+
+  - name: "Collective Definition - Uniform Parts"
+    chunk_ref: "01-UFO (Chunk 1:356-358)"
+    quote: "Collectives are entities whose parts play the same role with respect to the whole"
+    description: "Collectives are substantials whose parts play the same role with respect to the whole. Examples include the Black Forest (as a collective of trees), a deck of cards, and the Dutch-speaking group in a crowd. This uniform part-role distinguishes collectives from objects."
+
+  - name: "Quantity Definition - Homeomerous Matter"
+    chunk_ref: "01-UFO (Chunk 1:353-355)"
+    quote: "Quantities are maximally-topologically-self-connected (e.g., pieces) of homeomerous amounts of matter"
+    description: "Quantities are substantials that are maximally topologically self-connected portions of homeomerous (uniform) amounts of matter. Examples include 'that puddle of water' and 'this particular pile of sand'. This topological connectivity defines their unity conditions."
+
+  - name: "Kind Definition - Identity Principle Provider"
+    chunk_ref: "01-UFO (Chunk 1:368-369)"
+    quote: "a kind, which provides uniform principles of individuation, identity, and persistence to its instances"
+    description: "A Kind is a fundamental sort of endurant type that provides uniform principles of individuation, identity, and persistence to its instances. Examples: person, dog, computer, car, headache, organization, marriage. Kinds apply necessarily to their instances in all possible situations (rigid types)."
+
+  - name: "Sortal Definition - Kind Specialization"
+    chunk_ref: "01-UFO (Chunk 1:369-370)"
+    quote: "A sortal is either a kind or a specialization of a kind, and every sortal that is not a kind specializes exactly one kind"
+    description: "A sortal is either a kind or a specialization of exactly one kind. Sortals provide identity conditions for their instances. Every endurant necessarily instantiates exactly one kind, ensuring identity principle uniqueness."
+
+  - name: "Subkind Definition - Rigid Specialization"
+    chunk_ref: "01-UFO (Chunk 1:371-372)"
+    quote: "These specializations can be either themselves rigid, in which case they are termed subkinds"
+    description: "Subkinds are rigid specializations of kinds that apply necessarily to their instances. Examples include hatchback car (subkind of car) and financial organization (subkind of organization). Subkinds inherit the identity principle from their parent kind."
+
+  - name: "Phase Definition - Intrinsic Contingent Classification"
+    chunk_ref: "01-UFO (Chunk 1:373-375)"
+    quote: "sortals whose contingent classification conditions are intrinsic, termed Phases (e.g., teenager as a phase of person, hemorrhagic dengue fever as a phase of dengue fever)"
+    description: "Phases are anti-rigid sortals whose contingent classification conditions are intrinsic (internal to the entity). Examples: teenager as a phase of person, tenured employment as a phase of employment. Phases represent states or stages in an entity's lifecycle."
+
+  - name: "Role Definition - Relational Contingent Classification"
+    chunk_ref: "01-UFO (Chunk 1:375-377)"
+    quote: "sortals whose contingent classification conditions are relational, termed roles (e.g., employee as a role of a person in the scope of an employment relator)"
+    description: "Roles are anti-rigid sortals whose contingent classification conditions are relational (depend on relationships with other entities). Examples: employee (role of person in employment relator scope), husband (role of person in marriage relator scope). Roles emerge from relator mediation."
+
+  - name: "Category Definition - Rigid Non-Sortal"
+    chunk_ref: "01-UFO (Chunk 1:381-383)"
+    quote: "categories: rigid types that define essential properties for their instances, e.g., the category 'physical object' describing the properties of having a mass and a spatial extension"
+    description: "Categories are rigid non-sortals that define essential properties for instances of multiple kinds. Example: 'physical object' describes properties (mass, spatial extension) common to kinds like car, person, bridge, cow. Categories abstract over different identity principles."
+
+  - name: "Phase Mixin Definition - Intrinsic Anti-Rigid Non-Sortal"
+    chunk_ref: "01-UFO (Chunk 1:385-388)"
+    quote: "phase mixins: anti-rigid types that define contingent properties for their instances. Their instantiation is characterized by intrinsic contingent conditions"
+    description: "Phase mixins are anti-rigid non-sortals whose instantiation depends on intrinsic contingent conditions. Examples: 'living animal' (applies to instances of person, dog, horse), 'functional device' (applies to instances of computer, watch, espresso machine). Phase mixins cross kind boundaries."
+
+  - name: "Role Mixin Definition - Relational Anti-Rigid Non-Sortal"
+    chunk_ref: "01-UFO (Chunk 1:390-392)"
+    quote: "role mixins: anti-rigid types that define contingent properties for their instances. Their instantiation is characterized by relational contingent conditions"
+    description: "Role mixins are anti-rigid non-sortals whose instantiation depends on relational contingent conditions. Examples: 'customer' for kinds person and organization, 'insured legal relator' for kinds employment and enrollment. Role mixins abstract role patterns across different kinds."
+
+  - name: "Mixin Definition - Semi-Rigid Non-Sortal"
+    chunk_ref: "01-UFO (Chunk 1:394-395)"
+    quote: "mixins: semi-rigid types that define properties that are essential to some of their instances but accidental to some other instances"
+    description: "Mixins are semi-rigid non-sortals whose properties are essential to some instances but accidental to others. Example: being a 'music artist' is essential to bands but accidental to people. Mixins represent properties that cross the essential/accidental boundary."
+
+  - name: "Type Definition - Possibly Instantiated"
+    chunk_ref: "01-UFO (Chunk 1:454-455)"
+    quote: "types are implicitly defined as those entities that are possibly instantiated"
+    description: "Types are formally defined as entities that are possibly instantiated (there exists some possible world where something instantiates them). This distinguishes types from individuals, which are entities that are necessarily not instantiated by anything."
+
+  - name: "Individual Definition - Not Instantiable"
+    chunk_ref: "01-UFO (Chunk 1:454-458)"
+    quote: "while individuals are those necessarily not instantiated"
+    description: "Individuals are formally defined as entities that are necessarily not instantiated - nothing can be an instance of an individual. The domain is partitioned into types and individuals, with individuals further classified into concrete (endurants, perdurants) and abstract individuals."
+
+  - name: "Concrete Individual Definition"
+    chunk_ref: "01-UFO (Chunk 1:507-509)"
+    quote: "Among the individuals, there are concrete individuals (a7) and abstract individuals (a8)-(a10). Concrete individuals are further differentiated into endurants (a11) and perdurants (a12)"
+    description: "Concrete individuals are the primary partition of individuals, opposed to abstract individuals. Concrete individuals are exhaustively partitioned into endurants (entities wholly present at any time they exist) and perdurants (entities that unfold in time accumulating temporal parts)."
+
+  - name: "Abstract Individual Definition"
+    chunk_ref: "01-UFO (Chunk 1:507-509)"
+    quote: "concrete individuals (a7) and abstract individuals (a8)-(a10)"
+    description: "Abstract individuals form one branch of the individual partition, opposed to concrete individuals. In UFO, abstract individuals include sets and quales (values in quality structures). They lack spatiotemporal location but serve essential roles in quality valuation."
+
+  - name: "Rigid Type Definition"
+    chunk_ref: "01-UFO (Chunk 1:557-562)"
+    quote: "We implicitly define rigidity of endurant types as rigid (a18), anti-rigid (a19) and semi-rigid (a20)"
+    description: "Rigid types are endurant types where if an entity possibly instantiates the type, it necessarily instantiates it in all possible worlds where it exists. Rigid types include kinds, subkinds, and categories. A rigid type cannot specialize an anti-rigid one."
+
+  - name: "Anti-Rigid Type Definition"
+    chunk_ref: "01-UFO (Chunk 1:557-564)"
+    quote: "anti-rigid (a19) and semi-rigid (a20), concluding that every endurant type is either one of the three"
+    description: "Anti-rigid types are endurant types where if an entity possibly instantiates the type, it can possibly not instantiate it. Anti-rigid types include phases, roles, phase mixins, and role mixins. These represent contingent classifications."
+
+  - name: "Inherence Definition - Moment-Bearer Relation"
+    chunk_ref: "01-UFO (Chunk 2:129-139)"
+    quote: "The relation that connects moments to the object that they are about is the relation of inherence. Inherence is a type of existential dependence relation"
+    description: "Inherence is the relation connecting moments to their bearers. It is a type of existential dependence (the moment depends on the bearer for existence). Inherence is non-reflexive, asymmetric, and anti-transitive. A moment cannot inhere in two separate individuals (non-migration principle)."
+
+  - name: "Ultimate Bearer Definition"
+    chunk_ref: "01-UFO (Chunk 2:156-158)"
+    quote: "Moments can also be involved in chains of inherence relations, which are ultimately grounded on a unique entity that does not inhere in anything else. This entity that we will call here the Ultimate Bearer"
+    description: "The ultimate bearer is the unique entity at the end of inherence chains that does not itself inhere in anything else. Every moment has exactly one ultimate bearer. This grounds moment hierarchies (moments of moments) in non-moment entities."
+
+  - name: "External Dependence Definition"
+    chunk_ref: "01-UFO (Chunk 2:189-196)"
+    quote: "a mode x that is existentially dependent on an entity that is independent of the bearer of x"
+    description: "External dependence is a relation where a mode is existentially dependent on an entity that is existentially independent of the mode's bearer. This captures truly relational qualities. Example: John's commitment towards Mary depends on Mary, who is independent of John (the bearer)."
+
+  - name: "Externally Dependent Mode Formal Definition"
+    chunk_ref: "01-UFO (Chunk 2:196-206)"
+    quote: "ExternallyDependentMode(x) means Mode(x) and there exists y such that externallyDependent(x, y)"
+    description: "An externally dependent mode is formally defined as a mode that has at least one entity on which it is externally dependent. Example: John's commitment towards Mary is externally dependent on Mary. This excludes modes that only depend on entities too close to the bearer."
+
+  - name: "Foundation Definition - Event Grounding"
+    chunk_ref: "01-UFO (Chunk 2:207-219)"
+    quote: "Externally dependent modes (as well as relators, as we discuss later) are founded by means of a unique event"
+    description: "Foundation is the relation between externally dependent modes/relators and the unique event that grounds them. Example: John's conjugal commitments towards Mary are founded on the wedding event. Every externally dependent mode has exactly one foundational event."
+
+  - name: "Qua Individual Formal Definition"
+    chunk_ref: "01-UFO (Chunk 2:222-230)"
+    quote: "the relation quaIndividualOf holds between x and y iff x is the sum of all externally dependent modes of y that share the same foundational event"
+    description: "A qua individual of entity y is formally the mereological sum of all externally dependent modes of y that share the same foundational event. Example: John-qua-husband-of-Mary sums all conjugal commitments of John founded on the wedding. Qua individuals are complex externally dependent modes."
+
+  - name: "Relator Formal Definition"
+    chunk_ref: "01-UFO (Chunk 2:247-264)"
+    quote: "Relator(x) means there exists y such that PP(y, x) and for all y, z: if PP(y, x) and PP(z, x) then QuaIndividual(y) and QuaIndividual(z)"
+    description: "A relator is formally defined as the sum of qua individuals that share the same foundation and are mutually existentially dependent. Relators have at least two distinct qua individuals as proper parts. Example: Marriage relator contains John-qua-husband and Mary-qua-wife."
+
+  - name: "Mediation Definition"
+    chunk_ref: "01-UFO (Chunk 2:279-283)"
+    quote: "We introduce the relation of mediation, mediates(x, y), between a relator x and an individual y that the relator connects in a relational statement"
+    description: "Mediation is the relation between a relator and the individuals it connects. A relator mediates an endurant when a qua individual of that endurant is part of the relator. Every relator mediates at least two distinct individuals (theorem t33)."
+
+  - name: "Characterization Definition"
+    chunk_ref: "01-UFO (Chunk 2:302-306)"
+    quote: "a type is characterized by moment types that inhere in its instances"
+    description: "Characterization is the relation between an endurant type and moment types that necessarily inhere in its instances. If type t is characterized by moment type m, then every instance of t has exactly one moment of type m inhering in it, and every moment of type m inheres in exactly one instance of t."
+
+  - name: "Quale Definition"
+    chunk_ref: "01-UFO (Chunk 2:350-351)"
+    quote: "The members of quality structures are quales, where an entity is a quale iff it is a member of a unique quality structure"
+    description: "A quale (plural: qualia) is a member of exactly one quality structure. Quales are abstract individuals serving as values that qualities can take. Each quality has exactly one quale value at any given time, determined by the hasValue relation."
+
+  - name: "Quality Domain vs Quality Dimension"
+    chunk_ref: "01-UFO (Chunk 2:351-357)"
+    quote: "A quality structure is partitioned into quality dimension and quality domain"
+    description: "Quality structures partition into quality dimensions (one-dimensional, associated with simple quality types) and quality domains (multi-dimensional Cartesian products, associated with complex quality types). Simple qualities bear nothing; complex qualities bear simple qualities corresponding to domain dimensions."
+
+  - name: "Simple Quality Definition"
+    chunk_ref: "01-UFO (Chunk 2:399-401)"
+    quote: "A simple quality is a quality that bears nothing"
+    description: "A simple quality is formally defined as a quality that has no moments inhering in it. Simple qualities are associated with quality dimensions (one-dimensional value spaces). Examples include individual height or weight qualities."
+
+  - name: "Complex Quality Definition"
+    chunk_ref: "01-UFO (Chunk 2:400-401)"
+    quote: "A complex quality is a quality but not a simple quality"
+    description: "A complex quality is a quality that bears other qualities (moments inhere in it). Complex qualities are associated with quality domains (multi-dimensional value spaces). Complex qualities can only bear simple qualities. Example: color quality bearing hue, saturation, and brightness."
+
+  - name: "Manifestation Definition - Endurant-Perdurant Link"
+    chunk_ref: "01-UFO (Chunk 2:505-510)"
+    quote: "Any endurant is connected to a perdurant by the manifestation relation"
+    description: "Manifestation is the relation connecting endurants to perdurants. The life of an endurant is the mereological sum of all events that manifest it. Events manifest dispositions inhering in endurants. This provides the ontological bridge between enduring entities and temporal occurrences."

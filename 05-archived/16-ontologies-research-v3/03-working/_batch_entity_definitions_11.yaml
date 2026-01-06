@@ -1,0 +1,149 @@
+---
+batch_id: "entity_definitions_11"
+field: entity_definitions
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 6
+patterns_found: 28
+notes: "Enterprise Ontology chunks (24-Enterprise_Ontoloty_1 through _5) contain encoding errors rendering text as garbled characters. Extraction limited to BBO paper (31-BBO_BPMN_Ontology_1.md) which is fully readable."
+---
+
+patterns:
+  - name: "Process Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:60-62)"
+    quote: "a process is a particular procedure for doing something involving one or more steps or operations. The process may produce a product, a property of a product, or an aspect of a product"
+    description: "Formal definition of Process as a procedure involving steps/operations that produces outputs. This is from ISO 1998 standard. In BBO, Process is a subclass of FlowElementsContainer and represents the key concept around which business process representation is organized."
+
+  - name: "Activity Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:229)"
+    quote: "Activity is the work to be performed. Activity class has three sub-classes: Task (an atomic task), Sub-Process (complex task that contains several Tasks), CallActivity"
+    description: "Activity is defined as work to be performed, with three specializations: Task (atomic), Sub-Process (composite), and CallActivity (invokes reusable elements). Activity is related to LoopCharacteristics to represent iteration specifications."
+
+  - name: "Task Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:230-231)"
+    quote: "Task: an atomic task"
+    description: "Task is defined as an atomic unit of work within the Activity hierarchy. A Task is limited to have at most one ManufacturingFacility because it is an atomic unit that should be performed at one place."
+
+  - name: "Sub-Process Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:231)"
+    quote: "Sub-Process: complex task that contains several Tasks"
+    description: "Sub-Process is a composite activity that contains multiple Tasks. Unlike atomic Tasks, Sub-Processes may require several manufacturing facilities since they encompass multiple work units."
+
+  - name: "Event Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:236-239)"
+    quote: "Event is something that happens during the course of a process. Events affect the flow of the process and usually have a cause or an impact and may require or allow for a reaction"
+    description: "Event is defined as an occurrence during process execution that affects process flow. Events have causes/impacts and may be interrupting or non-interrupting. Several event types exist: TimerEvent, ConditionalEvent, etc."
+
+  - name: "Gateway Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:241)"
+    quote: "Gateway is used to control how SequenceFlows interact as they converge or diverge within a Process"
+    description: "Gateway is a control node for managing flow convergence and divergence. Four subtypes: ConvergingGateway, DivergingGateway, MixedGateway, and UnspecifiedGateway, each with specific cardinality constraints on incoming/outgoing flows."
+
+  - name: "ConvergingGateway Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:248-249)"
+    quote: "A Gateway with a gatewayDirection of converging MUST have multiple incoming Sequence Flows, but MUST NOT have multiple outgoing Sequence Flows"
+    description: "ConvergingGateway is formally defined via cardinality restrictions: it must have 2+ incoming SequenceFlows and exactly 1 outgoing SequenceFlow. This definition is formalized in OWL as equivalence class with min/exactly restrictions."
+
+  - name: "Agent Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:191-192)"
+    quote: "Agent: the actor that performs a given process activity. Indeed, it is important to specify who is responsible for the accomplishment of a given activity"
+    description: "Agent is the actor responsible for performing activities. An Agent may be HumanResource or SoftwareResource. Agents can be assigned directly to activities or indirectly via Roles. Multiple agents with the same Role are potential performers."
+
+  - name: "Agent Taxonomy Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:346-347)"
+    quote: "An Agent may be a HumanResource or a SoftwareResource"
+    description: "Agent class is taxonomized into HumanResource and SoftwareResource subclasses. This reuses the Agent sub-ontology from Ruiz et al. 2004."
+
+  - name: "Resource Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:290-293)"
+    quote: "The Resource concept exists in the BPMN meta-model. However, its semantics and definition are ambiguous... we adopt the first definition of Resource, that englobes all resource types"
+    description: "Resource in BBO encompasses all resource types (broader than BPMN's agent-limited definition). BBO adopts the comprehensive definition where Resource includes any input/output of activities, enabling a resource taxonomy. Resource is the result of a process per ISO definition."
+
+  - name: "WorkProduct Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:326-328)"
+    quote: "Product is defined as follows: Thing or substance produced by a natural or artificial process. We adopt this definition for the WorkProduct concept... we consider WorkProduct as a particular type of MaterialResource"
+    description: "WorkProduct is defined as something produced by a process (from ISO 2005). WorkProduct is a subtype of MaterialResource because once produced, a product can be used as input for other activities. WorkProduct has is_composedOf relation to Resource."
+
+  - name: "Role Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:350-353)"
+    quote: "we differentiated Job from Role to offer more flexibility. Indeed, two persons that have the same Job, may have different authorization levels to execute Activities"
+    description: "Role is distinct from Job to enable flexible authorization modeling. Role defines permissions and responsibilities for activity execution. Activities can be assigned to Roles (indirect assignment) making all agents playing that role potential performers."
+
+  - name: "Job Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:346-350)"
+    quote: "The concept Job with the two relations subordinated and superior represent the organizational model of the company, which is not supported by BPMN meta-model"
+    description: "Job represents organizational position with hierarchical relations (subordinated/superior). Job is differentiated from Role - same Job holders may have different Role-based authorizations. Extends BPMN to model organizational structure."
+
+  - name: "SequenceFlow Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:221-223)"
+    quote: "SequenceFlow represents transitions that ensure the move from the source FlowNode to the target one. A SequenceFlow may depend on a given condition, which is represented as an instance of Expression class"
+    description: "SequenceFlow is a transition connecting FlowNodes with optional condition expressions. Subtypes include ConditionalSequenceFlow, DefaultSequenceFlow, and NormalSequenceFlow based on condition specifications."
+
+  - name: "ConditionalSequenceFlow Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:443)"
+    quote: "Conditional SequenceFlow is a SequenceFlow that has a specified condition Expression"
+    description: "ConditionalSequenceFlow is formally defined as SequenceFlow with has_conditionExpression some Expression. This OWL equivalence class definition enables automatic classification of instances."
+
+  - name: "FlowNode Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:223)"
+    quote: "FlowNode class groups the activities that compose a process"
+    description: "FlowNode is the superclass grouping all process activities including Activity, Event, and Gateway. FlowNodes are connected by SequenceFlows within a FlowElementsContainer."
+
+  - name: "FlowElementsContainer Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:220-221)"
+    quote: "Process is a sub-class of FlowElementsContainer. Describing a process consists in defining the FlowElements that compose it"
+    description: "FlowElementsContainer is the superclass of Process, containing FlowElements (SequenceFlow and FlowNode). This structural pattern enables process decomposition and composition."
+
+  - name: "InputOutputSpecification Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:282-286)"
+    quote: "an activity may have at most one InputOutputSpecification that is related to the required Input/Output Data. However, we need to specify Input/Output of various types, not only those of data type"
+    description: "InputOutputSpecification captures activity inputs and outputs. Extended beyond BPMN's data-only model with has_resourceInput and has_resourceOutput relations to Resource class, enabling specification of material resources, software, tools, etc."
+
+  - name: "ManufacturingFacility Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:195,309-313)"
+    quote: "Manufacturing facility: the place where the process activities should be performed... A workstation, Station, is where a particular job is performed. Cell is the place that groups a set of related operations"
+    description: "ManufacturingFacility is the place where activities occur, with taxonomy: Station (workstation for particular job), Cell (groups related operations), Shop (production area), Factory (contains production areas). Task limited to one ManufacturingFacility; Process may have several."
+
+  - name: "StartEvent Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:415)"
+    quote: "A Start Event MUST be a source for a Sequence Flow"
+    description: "StartEvent is an Event that initiates process flow. Formally constrained as subClassOf has_outgoing some SequenceFlow. StartEvents are not allowed in AdHocSubProcess."
+
+  - name: "EndEvent Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:416)"
+    quote: "End Event ends the flow of the Process, and thus, will not have any outgoing Sequence Flows"
+    description: "EndEvent terminates process flow. Formally constrained as subClassOf not (has_outgoing some SequenceFlow). EndEvents are not allowed in AdHocSubProcess."
+
+  - name: "TimerEvent Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:444)"
+    quote: "A Timer Event is an Event that has exactly one TimerEventDefinition"
+    description: "TimerEvent is formally defined as Event with exactly 1 TimerEventDefinition. This OWL equivalence class enables automatic instance classification."
+
+  - name: "Parameter Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:287-288)"
+    quote: "we have added the concepts: ParameterValueBinding, Parameter and its subclasses QualitativeParameter and QuantitativeParameter, ParameterValue, ParameterExpectedValue, and UnitOfMeasure"
+    description: "Parameter represents value specifications for activities, with QualitativeParameter and QuantitativeParameter subtypes. Related to ParameterValue and ParameterExpectedValue for binding, and UnitOfMeasure for quantitative parameters."
+
+  - name: "Expression Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:222-223)"
+    quote: "A SequenceFlow may depend on a given condition, which is represented as an instance of Expression class"
+    description: "Expression represents conditions controlling SequenceFlow transitions. Includes UnderspecifiedExpression subtype for incomplete condition specifications."
+
+  - name: "CallActivity Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:232-233)"
+    quote: "CallActivity: an activity that calls a CallableElement that may be a GlobalTask (i.e., a reusable task) or Sub-Process"
+    description: "CallActivity is an Activity that invokes reusable elements (CallableElement). Can call GlobalTask for reusable atomic work or Sub-Process for reusable composite work."
+
+  - name: "DataResource Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:282-284)"
+    quote: "In BPMN meta-model, an activity may have at most one InputOutputSpecification that is related to the required Input/Output Data"
+    description: "DataResource is a type in the Resource taxonomy representing data/information inputs and outputs of activities. Part of the extended Resource classification beyond BPMN's original data-only input/output model."
+
+  - name: "MaterialResource Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:327-329)"
+    quote: "we consider WorkProduct as a particular type of MaterialResource, as states the ISO definition: Resource is the result of a process"
+    description: "MaterialResource is a Resource type representing physical/material items. WorkProduct is a subtype of MaterialResource. Part of the resource taxonomy inspired by Falbo/Bertollo and Karray et al."
+
+  - name: "SoftwareResource Entity Definition"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:346)"
+    quote: "An Agent may be a HumanResource or a SoftwareResource"
+    description: "SoftwareResource is a subtype of Agent representing software systems that can perform activities. Enables modeling of automated/software-driven process execution alongside human performers."

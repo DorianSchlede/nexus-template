@@ -1,0 +1,694 @@
+# cc-tools (Go) - Hook Pattern Extraction
+# Repository: https://github.com/Veraticus/cc-tools
+# Author: Josh Symonds (@Veraticus)
+# Language: Go
+# License: MIT
+
+extraction_metadata:
+  repo_name: cc-tools
+  repo_url: https://github.com/Veraticus/cc-tools
+  language: Go
+  extraction_date: 2025-12-31
+  total_patterns: 1
+  notes: |
+    High-performance Go implementation focused on statusline generation.
+    Uses dependency injection pattern for testability.
+    Catppuccin Mocha color theme with 24-bit ANSI true color support.
+    No traditional PreToolUse/PostToolUse hooks - only statusline hook.
+
+patterns:
+  - pattern_name: "high-performance-go-statusline"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "cmd/cc-tools-statusline/main.go"
+    description: "High-performance statusline generator in Go that provides rich contextual information including model display, git branch/status, token usage context bar, k8s context, AWS profile, and hostname with powerline-style visual rendering."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+      configuration: |
+        {
+          "statusLine": {
+            "type": "command",
+            "command": "~/.claude/bin/cc-tools-statusline",
+            "padding": 0
+          }
+        }
+    technique:
+      summary: "Reads JSON from stdin, parses session context, computes git/k8s/AWS/token metrics, renders powerline-style statusline with Catppuccin colors and context progress bar."
+      code_snippet: |
+        // cmd/cc-tools-statusline/main.go - Entry point
+        func main() {
+            out := output.NewTerminal(os.Stdout, os.Stderr)
+            input, err := io.ReadAll(os.Stdin)
+            if err != nil {
+                out.Raw(" > ")
+                os.Exit(0)
+            }
+            reader := bytes.NewReader(input)
+            result, err := runStatuslineWithInput(reader)
+            if err != nil {
+                out.Raw(" > ")
+                os.Exit(0)
+            }
+            out.Raw(result)
+        }
+
+        func runStatuslineWithInput(reader io.Reader) (string, error) {
+            deps := &statusline.Dependencies{
+                FileReader:    &statusline.DefaultFileReader{},
+                CommandRunner: &statusline.DefaultCommandRunner{},
+                EnvReader:     &statusline.DefaultEnvReader{},
+                TerminalWidth: &statusline.DefaultTerminalWidth{},
+                CacheDir:      getCacheDir(),
+                CacheDuration: getCacheDuration(),
+            }
+            sl := statusline.CreateStatusline(deps)
+            return sl.Generate(reader)
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - statusline hook does not inject context back to Claude"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need a high-performance, feature-rich statusline with sub-millisecond rendering, git awareness, k8s/AWS context display, and token usage visualization."
+      when_not_to_use: "When you need simple statusline without extensive context gathering, or when Go compilation is not feasible in your environment."
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies:
+        - "github.com/charmbracelet/lipgloss"
+        - "github.com/mattn/go-runewidth"
+        - "golang.org/x/term"
+
+  - pattern_name: "dependency-injection-testability"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/statusline.go"
+    description: "Architectural pattern using dependency injection to make statusline components fully testable with mock implementations for file reading, command execution, environment access, and terminal width detection."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "All external dependencies are injected via interfaces, enabling comprehensive unit testing without real filesystem, commands, or terminal access."
+      code_snippet: |
+        // Dependencies contains all external dependencies.
+        type Dependencies struct {
+            FileReader    FileReader
+            CommandRunner CommandRunner
+            EnvReader     EnvReader
+            TerminalWidth TerminalWidth
+            CacheDir      string
+            CacheDuration time.Duration
+        }
+
+        // FileReader interface for reading files.
+        type FileReader interface {
+            ReadFile(path string) ([]byte, error)
+            Exists(path string) bool
+            ModTime(path string) (time.Time, error)
+        }
+
+        // CommandRunner interface for executing commands.
+        type CommandRunner interface {
+            Run(command string, args ...string) ([]byte, error)
+        }
+
+        // EnvReader interface for reading environment variables.
+        type EnvReader interface {
+            Get(key string) string
+        }
+
+        // TerminalWidth interface for getting terminal width.
+        type TerminalWidth interface {
+            GetWidth() int
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Quality"
+      when_to_use: "When building complex hook implementations that need comprehensive test coverage without mocking at the OS level."
+      when_not_to_use: "For simple hooks where direct OS calls are acceptable and testability is not a primary concern."
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "catppuccin-true-color-theming"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/colors.go"
+    description: "Uses Catppuccin Mocha color palette with 24-bit true color ANSI escape codes for rich visual theming in the statusline, including background and foreground variants of each color."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Defines a CatppuccinMocha struct with methods returning 24-bit ANSI escape sequences for each palette color, supporting both FG and BG variants."
+      code_snippet: |
+        // CatppuccinMocha defines the Catppuccin Mocha color scheme using true color (24-bit) ANSI codes.
+        type CatppuccinMocha struct{}
+
+        // LavenderBG returns lavender background color.
+        func (c CatppuccinMocha) LavenderBG() string { return "\033[48;2;180;190;254m" } // #b4befe
+
+        // GreenBG returns green background color.
+        func (c CatppuccinMocha) GreenBG() string { return "\033[48;2;166;227;161m" } // #a6e3a1
+
+        // SkyFG returns sky foreground color.
+        func (c CatppuccinMocha) SkyFG() string { return "\033[38;2;137;220;235m" } // #89dceb
+
+        // BaseFG returns base foreground color (dark text on colored backgrounds).
+        func (c CatppuccinMocha) BaseFG() string { return "\033[38;2;30;30;46m" } // #1e1e2e
+
+        // NC returns the ANSI reset sequence.
+        func (c CatppuccinMocha) NC() string { return "\033[0m" }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Observability"
+      when_to_use: "When building visually rich statuslines or hook output that benefits from consistent, aesthetically pleasing color theming."
+      when_not_to_use: "When terminal color support is uncertain or 256-color compatibility is needed."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "powerline-symbol-rendering"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/icons.go"
+    description: "Uses powerline-style Unicode symbols for visual separators and icons, creating a modern shell prompt aesthetic with chevrons, curves, and Nerd Font icons."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Defines constants for powerline separator characters and Nerd Font icons, used to build visually segmented statusline components."
+      code_snippet: |
+        const (
+            // Powerline separators
+            LeftChevron  = ""  // U+E0B0
+            LeftCurve    = ""  // U+E0B6
+            RightCurve   = ""  // U+E0B4
+            RightChevron = ""  // U+E0B2
+
+            // Nerd Font icons
+            GitIcon      = " "  // Git branch icon
+            AwsIcon      = " "  // AWS icon
+            K8sIcon      = "..."  // Kubernetes icon
+            HostnameIcon = " "  // Hostname icon
+            ContextIcon  = " "  // Context/brain icon
+            ModelIcons   = "..." // Various model icons
+
+            // Progress bar characters
+            ProgressLeftEmpty  = ""
+            ProgressMidFull    = ""
+            ProgressRightEmpty = ""
+        )
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Observability"
+      when_to_use: "When building modern, visually segmented statuslines that work with Nerd Font-compatible terminals."
+      when_not_to_use: "When terminal does not support Unicode or Nerd Fonts."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "context-progress-bar"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/render.go"
+    description: "Displays a visual progress bar showing current context window usage as a percentage, with color-coded thresholds (green/yellow/peach/red) indicating context pressure."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Reads token usage from transcript JSONL, calculates context percentage against model-specific limits (200k default, 1M for Sonnet 4.5 [1m]), renders progress bar with color transitions at 40%/60%/80% thresholds."
+      code_snippet: |
+        func (s *Statusline) createContextBar(contextLength int, modelID string, barWidth int) string {
+            availableForBar := s.calculateAvailableBarWidth(barWidth)
+            if availableForBar < 15 {
+                return strings.Repeat(" ", barWidth)
+            }
+            percentage := s.calculateContextPercentage(contextLength, modelID)
+            bgColor, fgColor, fgLightBg := s.getContextColors(percentage)
+            // ... build progress bar with filled/empty segments
+            return result.String()
+        }
+
+        func (s *Statusline) getContextColors(percentage float64) (string, string, string) {
+            switch {
+            case percentage < 40.0:
+                return s.colors.GreenBG(), s.colors.GreenFG(), s.colors.GreenLightBG()
+            case percentage < 60.0:
+                return s.colors.YellowBG(), s.colors.YellowFG(), s.colors.YellowLightBG()
+            case percentage < 80.0:
+                return s.colors.PeachBG(), s.colors.PeachFG(), s.colors.PeachLightBG()
+            default:
+                return s.colors.RedBG(), s.colors.RedFG(), s.colors.RedLightBG()
+            }
+        }
+
+        func getContextConfig(modelID string) ContextConfig {
+            // Sonnet 4.5 with [1m] suffix has 1M context
+            if strings.Contains(modelID, "claude-sonnet-4-5") &&
+                strings.Contains(strings.ToLower(modelID), "[1m]") {
+                return ContextConfig{MaxTokens: 1000000, UsableTokens: 800000}
+            }
+            return ContextConfig{MaxTokens: 200000, UsableTokens: 160000}
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Observability"
+      when_to_use: "When users need visual awareness of context window usage to avoid running into context limits during long sessions."
+      when_not_to_use: "When context tracking is not needed or screen real estate is very limited."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-status-without-commands"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/statusline.go"
+    description: "Extracts git branch and status by reading .git files directly rather than executing git commands, avoiding subprocess overhead for maximum performance."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Walks directory tree to find .git, reads HEAD file for branch name, checks index modification time for dirty status, detects merge/rebase states from special files."
+      code_snippet: |
+        func (s *Statusline) getGitInfo(dir string) GitInfo {
+            // Walk up the directory tree to find .git
+            current := dir
+            for current != "/" && current != "." {
+                gitPath := filepath.Join(current, ".git")
+                if s.deps.FileReader.Exists(gitPath) {
+                    // Handle worktrees (gitdir: prefix)
+                    if content, err := s.deps.FileReader.ReadFile(gitPath); err == nil {
+                        if strings.HasPrefix(string(content), "gitdir:") {
+                            gitDir := strings.TrimSpace(strings.TrimPrefix(string(content), "gitdir:"))
+                            return s.readGitInfo(gitDir)
+                        }
+                    }
+                    return s.readGitInfo(gitPath)
+                }
+                current = filepath.Dir(current)
+            }
+            return GitInfo{}
+        }
+
+        func (s *Statusline) readGitInfo(gitDir string) GitInfo {
+            info := GitInfo{}
+            // Read HEAD file for branch
+            headPath := filepath.Join(gitDir, "HEAD")
+            if content, err := s.deps.FileReader.ReadFile(headPath); err == nil {
+                head := strings.TrimSpace(string(content))
+                if strings.HasPrefix(head, "ref: refs/heads/") {
+                    info.Branch = strings.TrimPrefix(head, "ref: refs/heads/")
+                } else if len(head) >= 7 {
+                    info.Branch = head[:7]  // Detached HEAD
+                }
+            }
+            // Check index modification time for dirty status
+            indexPath := filepath.Join(gitDir, "index")
+            if modTime, err := s.deps.FileReader.ModTime(indexPath); err == nil {
+                if time.Since(modTime) < 60*time.Second {
+                    info.Status = "!"
+                }
+            }
+            return info
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When git status display is needed but subprocess execution is too slow or undesirable."
+      when_not_to_use: "When precise git status (staged vs unstaged, exact file counts) is needed."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "multi-method-terminal-width-detection"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/terminal.go"
+    description: "Robust terminal width detection using a priority-ordered cascade of methods including env vars, tmux, multiple file descriptors, /dev/tty, SSH_TTY, tput, and stty fallbacks."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Tries multiple terminal width detection methods in priority order, returning first successful result or defaulting to 200 columns."
+      code_snippet: |
+        func (t *DefaultTerminalWidth) GetWidth() int {
+            widthMethods := []func() int{
+                t.getTestOverride,     // CLAUDE_STATUSLINE_WIDTH env
+                t.getColumnsEnv,       // COLUMNS env
+                t.getTmuxIfAvailable,  // tmux display-message
+                t.getFromStderr,       // term.GetSize on stderr
+                t.getFromStdout,       // term.GetSize on stdout
+                t.getFromStdin,        // term.GetSize on stdin
+                t.getFromTTY,          // /dev/tty
+                t.getSSHWidth,         // SSH_TTY
+                getTputWidth,          // tput cols
+                getSttyWidth,          // stty size
+            }
+            for _, method := range widthMethods {
+                if width := method(); width > 0 {
+                    return width
+                }
+            }
+            return 200  // Default fallback
+        }
+
+        func getTmuxWidth() int {
+            ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+            defer cancel()
+            cmd := exec.CommandContext(ctx, "tmux", "display-message", "-p", "#{window_width}")
+            output, err := cmd.Output()
+            if err != nil { return 0 }
+            width, _ := strconv.Atoi(strings.TrimSpace(string(output)))
+            return width
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When building terminal tools that must work reliably across SSH, tmux, various terminal emulators, and piped contexts."
+      when_not_to_use: "When simple COLUMNS environment variable is sufficient for your use case."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies:
+        - "golang.org/x/term"
+
+  - pattern_name: "transcript-jsonl-token-parsing"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/statusline.go"
+    description: "Parses Claude Code transcript JSONL files to extract token usage metrics, tracking input/output/cached tokens and calculating current context length from the most recent main chain entry."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Reads transcript JSONL, parses each line for usage data, accumulates totals while tracking most recent non-sidechain entry by timestamp for context length calculation."
+      code_snippet: |
+        func (s *Statusline) getTokenMetrics(transcriptPath string) TokenMetrics {
+            content, err := s.deps.FileReader.ReadFile(transcriptPath)
+            if err != nil { return TokenMetrics{} }
+
+            lines := strings.Split(string(content), "\n")
+            metrics := TokenMetrics{}
+            var mostRecentMainChainUsage struct {
+                InputTokens, CacheReadInputTokens, CacheCreationInputTokens int
+            }
+            var mostRecentTimestamp time.Time
+
+            for _, line := range lines {
+                if line == "" { continue }
+                var msg struct {
+                    Message struct {
+                        Usage struct {
+                            InputTokens, OutputTokens int `json:"..."`
+                            CacheReadInputTokens      int `json:"cache_read_input_tokens"`
+                            CacheCreationInputTokens  int `json:"cache_creation_input_tokens"`
+                        } `json:"usage"`
+                    } `json:"message"`
+                    IsSidechain       bool   `json:"isSidechain"`
+                    IsApiErrorMessage bool   `json:"isApiErrorMessage"`
+                    Timestamp         string `json:"timestamp"`
+                }
+
+                if json.Unmarshal([]byte(line), &msg) == nil && msg.Message.Usage.InputTokens > 0 {
+                    metrics.InputTokens += msg.Message.Usage.InputTokens
+                    metrics.OutputTokens += msg.Message.Usage.OutputTokens
+                    metrics.CachedTokens += msg.Message.Usage.CacheReadInputTokens
+                    metrics.CachedTokens += msg.Message.Usage.CacheCreationInputTokens
+
+                    // Track most recent main chain entry for context length
+                    if !msg.IsSidechain && !msg.IsApiErrorMessage {
+                        if t, err := time.Parse(time.RFC3339, msg.Timestamp); err == nil {
+                            if t.After(mostRecentTimestamp) {
+                                mostRecentTimestamp = t
+                                mostRecentMainChainUsage.InputTokens = msg.Message.Usage.InputTokens
+                                // ... cache fields
+                            }
+                        }
+                    }
+                }
+            }
+
+            metrics.ContextLength = mostRecentMainChainUsage.InputTokens +
+                mostRecentMainChainUsage.CacheReadInputTokens +
+                mostRecentMainChainUsage.CacheCreationInputTokens
+            return metrics
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Observability"
+      when_to_use: "When hooks need to analyze session history for token usage tracking, context pressure monitoring, or conversation analytics."
+      when_not_to_use: "When transcript files are too large for synchronous parsing, or when real-time token streaming is needed."
+    quality:
+      complexity: "medium"
+      performance: "10-50ms"
+      dependencies: []
+
+  - pattern_name: "adaptive-width-component-scaling"
+    hook_event: "Status"
+    source_repo: "cc-tools"
+    source_file: "internal/statusline/render.go"
+    description: "Dynamically scales statusline component widths based on available terminal width, proportionally allocating space between components while maintaining minimum readable sizes."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Calculates available content width after spacers, allocates text budget proportionally (40% dir, 60% model), scales right-side components when constrained, ensures minimum widths for readability."
+      code_snippet: |
+        func (s *Statusline) calculateTextLengths(
+            availableForText, overhead int,
+            dirMaxLen, modelMaxLen, minDirLen, minModelLen int,
+        ) (int, int) {
+            if availableForText < overhead+minDirLen+minModelLen {
+                // Very constrained - scale down proportionally
+                scaleRatio := float64(availableForText-overhead) / float64(minDirLen+minModelLen)
+                dirMaxLen := int(float64(minDirLen) * scaleRatio)
+                modelMaxLen := int(float64(minModelLen) * scaleRatio)
+                const absoluteMinLen = 5
+                if dirMaxLen < absoluteMinLen { dirMaxLen = absoluteMinLen }
+                if modelMaxLen < absoluteMinLen { modelMaxLen = absoluteMinLen }
+                return dirMaxLen, modelMaxLen
+            }
+
+            if availableForText < overhead+dirMaxLen+modelMaxLen {
+                // Moderate constraint - scale proportionally
+                textBudget := availableForText - overhead
+                dirMaxLen := textBudget * 40 / 100
+                modelMaxLen := textBudget * 60 / 100
+                return max(dirMaxLen, minDirLen), max(modelMaxLen, minModelLen)
+            }
+
+            return dirMaxLen, modelMaxLen
+        }
+
+        func (s *Statusline) calculateWidths(termWidth int) (int, int, int) {
+            leftSpacer := s.config.LeftSpacerWidth
+            rightSpacer := s.config.RightSpacerWidth  // Reserve for Claude Code's UI
+            effectiveWidth := termWidth - leftSpacer - rightSpacer
+            // Ensure minimum content width of 20
+            if effectiveWidth < 20 {
+                effectiveWidth = 20
+            }
+            return leftSpacer, rightSpacer, effectiveWidth
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When building responsive terminal UIs that must work across different terminal sizes while maintaining readable component display."
+      when_not_to_use: "When fixed-width output is preferred or terminal width is irrelevant."
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies:
+        - "github.com/mattn/go-runewidth"
+
+  - pattern_name: "hook-output-formatter"
+    hook_event: "PreToolUse|PostToolUse"
+    source_repo: "cc-tools"
+    source_file: "internal/output/hook.go"
+    description: "Utility for formatting hook output messages with ANSI color coding for success (green), warning (yellow), and error (red) states."
+    implementation:
+      matcher: ""
+      decision_type: "block|allow"
+      exit_code: "0|2"
+    technique:
+      summary: "Provides HookFormatter with methods for consistent color-coded output formatting using raw ANSI escape codes."
+      code_snippet: |
+        // HookFormatter provides output formatting specifically for Claude Code hooks.
+        // It uses raw ANSI codes to ensure compatibility with Claude Code's expectations.
+        type HookFormatter struct{}
+
+        const (
+            ansiRed    = "\033[0;31m"
+            ansiGreen  = "\033[0;32m"
+            ansiYellow = "\033[0;33m"
+            ansiReset  = "\033[0m"
+        )
+
+        func (h *HookFormatter) FormatSuccess(message string) string {
+            return fmt.Sprintf("%s%s%s", ansiGreen, message, ansiReset)
+        }
+
+        func (h *HookFormatter) FormatWarning(message string) string {
+            return fmt.Sprintf("%s%s%s", ansiYellow, message, ansiReset)
+        }
+
+        func (h *HookFormatter) FormatError(message string) string {
+            return fmt.Sprintf("%s%s%s", ansiRed, message, ansiReset)
+        }
+
+        func (h *HookFormatter) FormatBlockingError(format string, args ...any) string {
+            message := fmt.Sprintf(format, args...)
+            return h.FormatError(message)
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - this is output formatting, not context loading"
+    use_case:
+      category: "Observability"
+      when_to_use: "When building hooks that need consistent, color-coded user-facing output."
+      when_not_to_use: "When hooks only need to return JSON responses without colored output."
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+architecture_patterns:
+  - pattern_name: "compiled-binary-hook"
+    description: "Distributes hook as pre-compiled Go binary for maximum performance and zero runtime dependencies."
+    details: |
+      - Cross-compiled binaries for linux-amd64, darwin-amd64, darwin-arm64
+      - GitHub Actions workflow for automated releases
+      - Single binary includes all dependencies
+      - Sub-millisecond execution for statusline rendering
+      - No Python/Node.js runtime required
+
+  - pattern_name: "interface-based-dependency-injection"
+    description: "All external dependencies (file I/O, command execution, environment access) abstracted through interfaces for comprehensive testability."
+    details: |
+      - FileReader interface for file operations
+      - CommandRunner interface for subprocess execution
+      - EnvReader interface for environment variables
+      - TerminalWidth interface for terminal size detection
+      - Mock implementations provided for all interfaces
+
+  - pattern_name: "graceful-degradation"
+    description: "All features degrade gracefully when dependencies are unavailable - git info missing shows no branch, K8s context empty shows nothing, etc."
+    details: |
+      - Default fallback values for all computed data
+      - Silent error handling with sensible defaults
+      - Statusline always renders even when data gathering fails
+      - Exit code 0 with fallback prompt on any error
+
+hooks_not_found:
+  - hook_event: "SessionStart"
+    notes: "No SessionStart hook implementation found. Repository focuses on statusline."
+  - hook_event: "PreToolUse"
+    notes: "HookFormatter utility exists but no PreToolUse hook implementations."
+  - hook_event: "PostToolUse"
+    notes: "HookFormatter utility exists but no PostToolUse hook implementations."
+  - hook_event: "PreCompact"
+    notes: "No PreCompact hook implementation."
+  - hook_event: "Stop"
+    notes: "No Stop hook implementation."
+  - hook_event: "SubagentStop"
+    notes: "No SubagentStop hook implementation."
+  - hook_event: "UserPromptSubmit"
+    notes: "No UserPromptSubmit hook implementation."
+  - hook_event: "Notification"
+    notes: "No Notification hook implementation. Config has ntfy_topic placeholder but no implementation."
+
+sdk_patterns:
+  - pattern_name: "go-statusline-sdk"
+    description: "While not a formal SDK, the internal/statusline package provides reusable components for building high-performance statuslines."
+    components:
+      - "statusline.Dependencies - Dependency injection container"
+      - "statusline.Statusline - Main generator with Generate() method"
+      - "statusline.CatppuccinMocha - Color theming"
+      - "statusline.Component - Component model for right-side items"
+      - "output.Terminal - Terminal output abstraction"
+      - "output.HookFormatter - Hook-specific message formatting"
+
+context_loading_patterns:
+  - pattern_name: "transcript-reading"
+    mechanism: "File read of transcript_path from stdin JSON"
+    what_loaded: "Token usage metrics (input, output, cached tokens) and context length"
+    when_useful: "For context pressure visualization and session analytics"
+
+use_case_catalog:
+  - use_case: "Token usage visualization"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows context window usage as colored progress bar (green/yellow/peach/red based on fill percentage)"
+
+  - use_case: "Git branch display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows current git branch without subprocess by reading .git/HEAD directly"
+
+  - use_case: "Kubernetes context display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows current k8s context by parsing KUBECONFIG YAML"
+
+  - use_case: "AWS profile display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows AWS_PROFILE environment variable"
+
+  - use_case: "Hostname display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows system hostname with fallback cascade"
+
+  - use_case: "Devspace/workspace display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows TMUX_DEVSPACE with planetary symbols (Mercury, Venus, etc.)"
+
+  - use_case: "Model name display"
+    hook_type: "Status"
+    source_repo: "cc-tools"
+    description: "Shows Claude model display name with randomized icon"
+
+performance_characteristics:
+  benchmark_results: |
+    Based on benchmark_test.go, the statusline renders in sub-millisecond time.
+    Tests warn if rendering exceeds 1ms, indicating performance target.
+    Uses caching with configurable duration (default 20s) for expensive operations.
+  optimization_techniques:
+    - "Direct file reads instead of git subprocess"
+    - "YAML parsing instead of kubectl subprocess for k8s context"
+    - "Dependency injection allows mocking expensive operations in tests"
+    - "Compiled Go binary eliminates interpreter startup overhead"
+    - "ANSI string building with strings.Builder for efficiency"

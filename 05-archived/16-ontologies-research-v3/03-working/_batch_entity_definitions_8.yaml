@@ -1,0 +1,152 @@
+---
+batch_id: "entity_definitions_8"
+field: entity_definitions
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 28
+---
+
+patterns:
+  # === SciAgents Paper (Chunks 7-10) ===
+
+  - name: "Multi-Agent Role Specialization"
+    chunk_ref: "15-SciAgents (Chunk 7:474-486)"
+    quote: "user: An attentive HUMAN user... planner: A planner who can suggest a plan... ontologist: An ontologist who defines each of the terms..."
+    description: "Defines specialized agent roles in a multi-agent research system: user (human interface), planner (task decomposition), assistant (tool invocation), ontologist (term/relationship definition), scientist (proposal crafting), and seven specialized agents for expanding research aspects (hypothesis, outcome, mechanism, design_principles, unexpected_properties, comparison, novelty, critic). Each role has distinct responsibilities and constraints on when they can act."
+
+  - name: "Ontologist Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 7:519-520)"
+    quote: "The ontologist will define each term and discuss the relationships in the generated path"
+    description: "The ontologist agent is defined as an entity responsible for defining terms and articulating relationships between concepts. This represents a formal role for knowledge formalization within multi-agent workflows."
+
+  - name: "Scientist Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 7:526-529)"
+    quote: "The scientist will use the definitions and relationships provided by the ontologist to craft the research proposal"
+    description: "The scientist agent is defined as an entity that synthesizes ontological definitions and relationships into structured research proposals. It operates downstream of the ontologist agent, demonstrating a clear agent dependency chain."
+
+  - name: "Hierarchical Structure Definition"
+    chunk_ref: "15-SciAgents (Chunk 9:51-55)"
+    quote: "Hierarchical Structure and Mechanical Properties: Nacre's Structure: Nacre... composed of aragonite platelets arranged in a brick-and-mortar structure"
+    description: "Formal definition of hierarchical structure as an organized arrangement of components at multiple levels (molecular, cellular, macroscale), each level composed of smaller sub-units. The definition emphasizes multi-scale organization contributing to emergent properties."
+
+  - name: "Amyloid Fibrils Entity Definition"
+    chunk_ref: "15-SciAgents (Chunk 8:106-107)"
+    quote: "The incorporation of nanocomposites like graphene oxide (GO) or carbon nanotubes (CNTs) can introduce self-healing properties"
+    description: "Amyloid fibrils are defined as protein aggregates that form fibrous structures, characterized by high strength and stability. They can be incorporated into composite materials to provide mechanical reinforcement and influence surface properties."
+
+  - name: "Research Proposal Aspect Agents"
+    chunk_ref: "15-SciAgents (Chunk 7:481-486)"
+    quote: "hypothesis_agent... outcome_agent... mechanism_agent... design_principles_agent... unexpected_properties_agent... comparison_agent... novelty_agent... critic_agent"
+    description: "Seven specialized agents defined to expand specific aspects of research proposals: hypothesis (core claims), outcome (expected results), mechanism (causal processes), design_principles (architectural guidelines), unexpected_properties (emergent behaviors), comparison (benchmarking), novelty (innovation claims). Critic_agent provides summarization and improvement suggestions."
+
+  - name: "Planner Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 8:701-702)"
+    quote: "planner: I can suggest a plan to solve the task by breaking down the task into simpler sub-tasks"
+    description: "Planner is defined as an agent that decomposes complex tasks into simpler sub-tasks. This role handles strategic planning and workflow orchestration in multi-agent systems."
+
+  - name: "Assistant Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 8:701)"
+    quote: "assistant: An assistant who calls the appropriate tools and functions as needed and returns the results"
+    description: "Assistant agent is defined as an entity that invokes tools and functions, returning results to the system. It acts as an intermediary between the planning layer and execution layer."
+
+  - name: "Caller Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 8:703-704)"
+    quote: "caller: I am responsible for selecting the next role to speak. Call this agent immediately after each output"
+    description: "Caller is a meta-agent responsible for orchestrating turn-taking among agents. It determines which agent should act next, implementing a coordination mechanism for multi-agent dialogue."
+
+  - name: "Gene Circuit Entity Definition"
+    chunk_ref: "15-SciAgents (Chunk 10:44-47)"
+    quote: "Gene Circuit Regulation: The hypothesis extends to the use of synthetic biology to control the production of amyloid-forming proteins"
+    description: "Gene circuits are defined as engineered networks of genes that control protein expression, secretion, and assembly in a regulated manner. They enable precise control over biological material production through synthetic biology approaches."
+
+  - name: "Knowledge Path Definition"
+    chunk_ref: "15-SciAgents (Chunk 8:719)"
+    quote: "Generate Knowledge Path: Identify the key concepts and relationships between graphene and proteins"
+    description: "Knowledge path is defined as a structured representation connecting concepts through relationships, generated to provide foundational context for research proposal development. It serves as the semantic backbone for multi-agent reasoning."
+
+  - name: "Composite Material Entity Definition"
+    chunk_ref: "15-SciAgents (Chunk 10:5-7)"
+    quote: "the binding of graphene to amyloid fibrils will result in a composite material with superior electrical conductivity and stability"
+    description: "Composite material is defined as an entity resulting from the combination of two or more distinct materials (e.g., graphene and amyloid fibrils), exhibiting properties superior to individual components. The definition emphasizes emergent properties from material integration."
+
+  - name: "Bioelectronic Device Entity"
+    chunk_ref: "15-SciAgents (Chunk 10:50-56)"
+    quote: "Device Efficiency: bioelectronic devices fabricated from the graphene-amyloid fibril composite will exhibit superior performance metrics"
+    description: "Bioelectronic device is defined as a fabricated artifact incorporating biological and electronic components, characterized by performance metrics including sensitivity (picomolar range), response time (milliseconds), and power consumption (50% reduction vs conventional)."
+
+  - name: "Toolbox Entity Definition"
+    chunk_ref: "15-SciAgents (Chunk 10:129-138)"
+    quote: "Chemical Vapor Deposition (CVD): High-quality graphene sheets will be synthesized... Amyloid Fibril Formation... Composite Formation"
+    description: "Toolbox in the materials science context is defined as a collection of synthesis and characterization methods (CVD, aggregation processes, layer-by-layer assembly) that can be invoked to create and analyze materials."
+
+  - name: "Critic Agent Definition"
+    chunk_ref: "15-SciAgents (Chunk 9:491-492)"
+    quote: "critic_agent to summarize, critique, and suggest improvements to the research proposal"
+    description: "Critic agent is defined as an entity that performs three functions: summarization (synthesis of proposal content), critique (identification of weaknesses), and improvement suggestion (actionable recommendations). It operates after all aspect agents have completed their expansions."
+
+  # === KG-Agent Paper (Chunks 1-2) ===
+
+  - name: "Knowledge Graph Formal Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:176-182)"
+    quote: "A knowledge graph typically consists of a large number of fact triples, expressed as G = {<e, r, e'>|e, e' in E, r in R}"
+    description: "Formal definition of Knowledge Graph as a set of fact triples where each triple <e, r, e'> describes a relation r between head entity e and tail entity e'. Entities belong to entity set E and are assigned unique IDs. Relations belong to relation set R."
+
+  - name: "Entity Type Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:182-183)"
+    quote: "Each entity e is assigned a unique entity ID (or string value), and belongs to one entity type t such as Country and Person"
+    description: "Entity is defined as a uniquely identifiable object in a knowledge graph, characterized by a unique ID and membership in an entity type (e.g., Country, Person). This provides the foundation for typed entity modeling."
+
+  - name: "Neighboring Relations Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:183-190)"
+    quote: "we introduce neighboring relations to denote both the incoming and outgoing relations for a set of entities {e}"
+    description: "Neighboring relations is defined as the union of incoming and outgoing relations for an entity set. Formally: R{e} = {r|<e,r,e'> in G} union {r|<e',r,e> in G}. This enables bidirectional graph traversal."
+
+  - name: "Autonomous Agent Framework Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:23-29)"
+    quote: "we propose an autonomous LLM-based agent framework, called KG-Agent, which enables a small LLM to actively make decisions until finishing the reasoning process"
+    description: "KG-Agent is defined as an autonomous agent framework that integrates: (1) LLM-based planner for decision making, (2) multifunctional toolbox, (3) KG-based executor, and (4) knowledge memory. It enables small LLMs to autonomously reason over knowledge graphs."
+
+  - name: "Extraction Tools Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:241-249)"
+    quote: "Extraction tools aim to facilitate the access to information from KG... get_relation, get_head_entity/get_tail_entity, get_entity_by_type/get_entity_by_constraint"
+    description: "Extraction tools are defined as a category of tools that facilitate access to KG information. Includes five tools: get_relation (retrieve relations), get_head_entity/get_tail_entity (retrieve connected entities), get_entity_by_type/get_entity_by_constraint (retrieve entities with specific type or constraint)."
+
+  - name: "Logic Tools Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:251-255)"
+    quote: "Logic tools aim to support basic manipulation operations on the extracted KG information, including entity counting (count), entity set intersection (intersect) and union (union)"
+    description: "Logic tools are defined as operations for manipulating extracted KG information. Includes: count (entity counting), intersect (set intersection), union (set union), judge (condition verification), end (terminate reasoning with answer). These enable computational operations on intermediate results."
+
+  - name: "Semantic Tools Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:256-259)"
+    quote: "Semantic tools are developed by utilizing pre-trained models to implement specific functions, including relation retrieval (retrieve_relation) and entity disambiguation (disambiguate_entity)"
+    description: "Semantic tools are defined as neural network-based functions that extend basic KG operations. Includes: retrieve_relation (semantic relation retrieval) and disambiguate_entity (entity disambiguation). These leverage pre-trained models for intelligent KG interaction."
+
+  - name: "Knowledge Memory Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:545-551)"
+    quote: "The knowledge memory preserves the currently useful information to support the LLM-based planner for making decisions. It mainly contains four parts of information"
+    description: "Knowledge memory is defined as a stateful component containing: (1) natural language question, (2) toolbox definition, (3) current KG information, (4) history reasoning program. The first two remain constant while the latter two update during reasoning."
+
+  - name: "LLM-based Planner Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:554-565)"
+    quote: "Based on the current knowledge memory, the LLM-based planner selects a tool to interact with KG at each step"
+    description: "LLM-based planner is defined as the decision-making component that selects tools based on current knowledge memory. It addresses four task requirements: entity linking, KG information access, intermediate result processing, and answer return."
+
+  - name: "KG-based Executor Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:567-571)"
+    quote: "After the planner generates the function call, the KG-based executor will execute it using a program compiler"
+    description: "KG-based executor is defined as the component that executes function calls generated by the planner. It caches/operates on intermediate variables and extracts new entities/relations from KG. After execution, it updates the knowledge memory."
+
+  - name: "Retrieval-Augmented Method Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:125-131)"
+    quote: "The retrieval-augmented method is to retrieve and serialize the triples from the KG, and then feed it to the LLM"
+    description: "Retrieval-augmented method is defined as an approach that retrieves task-related triples from KG, serializes them as part of the prompt for LLMs. Distinguished from synergy-augmented methods by not preserving structured KG format."
+
+  - name: "Synergy-Augmented Method Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:133-140)"
+    quote: "the synergy-augmented methods design an information interaction mechanism between LLMs and KGs to enable LLMs to query KGs multiple times"
+    description: "Synergy-augmented method is defined as an approach enabling iterative LLM-KG interaction through multiple query rounds. Can be pre-defined (full plan first, then ground on KG) or step-by-step (plan progressively based on KG feedback)."
+
+  - name: "Instruction Tuning Data Definition"
+    chunk_ref: "16-KG-Agent (Chunk 1:470-475)"
+    quote: "The input contains the question, toolbox definition, current KG information... and the output is the function call at the current step"
+    description: "Instruction tuning data is defined as input-output pairs derived from KG reasoning programs. Input includes: question, toolbox definition, current KG information, history reasoning program. Output is the function call for the current step. Multiple pairs form complete reasoning trajectories."

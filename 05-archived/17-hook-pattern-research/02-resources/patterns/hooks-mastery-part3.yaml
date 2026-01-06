@@ -1,0 +1,390 @@
+repo_id: "hooks-mastery-part3"
+repo_name: "claude-code-hooks-mastery"
+scope: "UserPromptSubmit, Notification"
+language: "Python"
+extracted_at: "2025-12-31T12:00:00Z"
+patterns:
+  # ============================================================================
+  # UserPromptSubmit Hook Patterns
+  # ============================================================================
+
+  - pattern_name: "Prompt Logging and Auditing"
+    hook_event: "UserPromptSubmit"
+    source_file: ".claude/hooks/user_prompt_submit.py"
+    description: "Logs every user prompt to a JSON file for audit trails and debugging. Captures full input data including session_id and timestamp."
+    implementation:
+      matcher: "all_prompts"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Append-based JSON logging with file creation and error recovery"
+      code_snippet: |
+        def log_user_prompt(session_id, input_data):
+            """Log user prompt to logs directory."""
+            log_dir = Path("logs")
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / 'user_prompt_submit.json'
+
+            if log_file.exists():
+                with open(log_file, 'r') as f:
+                    try:
+                        log_data = json.load(f)
+                    except (json.JSONDecodeError, ValueError):
+                        log_data = []
+            else:
+                log_data = []
+
+            log_data.append(input_data)
+
+            with open(log_file, 'w') as f:
+                json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - purely logging, no context injection"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need compliance auditing, debugging traces, or analytics on user interactions"
+
+  - pattern_name: "Session Data Management with Agent Naming"
+    hook_event: "UserPromptSubmit"
+    source_file: ".claude/hooks/user_prompt_submit.py"
+    description: "Maintains per-session JSON files tracking prompts and generating unique agent names via LLM calls with multi-provider fallback."
+    implementation:
+      matcher: "all_prompts"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Session file persistence with LLM-generated unique agent identifiers using Ollama-to-Anthropic fallback chain"
+      code_snippet: |
+        def manage_session_data(session_id, prompt, name_agent=False):
+            sessions_dir = Path(".claude/data/sessions")
+            sessions_dir.mkdir(parents=True, exist_ok=True)
+            session_file = sessions_dir / f"{session_id}.json"
+
+            if session_file.exists():
+                with open(session_file, 'r') as f:
+                    session_data = json.load(f)
+            else:
+                session_data = {"session_id": session_id, "prompts": []}
+
+            session_data["prompts"].append(prompt)
+
+            # Generate agent name via LLM with fallback
+            if name_agent and "agent_name" not in session_data:
+                try:
+                    result = subprocess.run(
+                        ["uv", "run", ".claude/hooks/utils/llm/ollama.py", "--agent-name"],
+                        capture_output=True, text=True, timeout=5
+                    )
+                    if result.returncode == 0:
+                        session_data["agent_name"] = result.stdout.strip()
+                except Exception:
+                    # Fall back to Anthropic
+                    pass
+
+            with open(session_file, 'w') as f:
+                json.dump(session_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - stores data for status line consumption, does not inject context"
+    use_case:
+      category: "Coordination"
+      when_to_use: "When building session-aware features like status lines, conversation tracking, or multi-agent identification"
+
+  - pattern_name: "Prompt Validation with Blocking"
+    hook_event: "UserPromptSubmit"
+    source_file: ".claude/hooks/user_prompt_submit.py"
+    description: "Validates user prompts against configurable blocked patterns and blocks dangerous commands before Claude processes them."
+    implementation:
+      matcher: "blocked_patterns"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Pattern-based security filtering with stderr feedback and exit code 2 blocking"
+      code_snippet: |
+        def validate_prompt(prompt):
+            """
+            Validate the user prompt for security or policy violations.
+            Returns tuple (is_valid, reason).
+            """
+            blocked_patterns = [
+                # Add any patterns you want to block
+                # Example: ('rm -rf /', 'Dangerous command detected'),
+            ]
+
+            prompt_lower = prompt.lower()
+
+            for pattern, reason in blocked_patterns:
+                if pattern.lower() in prompt_lower:
+                    return False, reason
+
+            return True, None
+
+        # In main():
+        if args.validate and not args.log_only:
+            is_valid, reason = validate_prompt(prompt)
+            if not is_valid:
+                print(f"Prompt blocked: {reason}", file=sys.stderr)
+                sys.exit(2)  # Blocks the prompt entirely
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - blocks prompt, no context injection"
+    use_case:
+      category: "Safety"
+      when_to_use: "When enforcing security policies, preventing dangerous operations, or implementing content filtering"
+
+  - pattern_name: "LLM Agent Name Generation with Fallback Chain"
+    hook_event: "UserPromptSubmit"
+    source_file: ".claude/hooks/utils/llm/ollama.py"
+    description: "Generates unique, memorable single-word agent names using LLM with validation and fallback to predefined list."
+    implementation:
+      matcher: "agent_name_flag"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Structured prompting for constrained output with multi-step validation and fallback"
+      code_snippet: |
+        def generate_agent_name():
+            example_names = [
+                "Phoenix", "Sage", "Nova", "Echo", "Atlas", "Cipher", "Nexus",
+                "Oracle", "Quantum", "Zenith", "Aurora", "Vortex", "Nebula"
+            ]
+
+            prompt_text = f"""Generate exactly ONE unique agent/assistant name.
+        Requirements:
+        - Single word only (no spaces, hyphens, or punctuation)
+        - Abstract and memorable
+        - Professional sounding
+        - Easy to pronounce
+        - Similar style to these examples: {', '.join(example_names[:10])}
+
+        Generate a NEW name (not from the examples). Respond with ONLY the name.
+        Name:"""
+
+            try:
+                response = prompt_llm(prompt_text)
+                if response:
+                    name = response.strip().split()[0]
+                    name = ''.join(c for c in name if c.isalnum())
+                    name = name.capitalize()
+                    if name and 3 <= len(name) <= 20:
+                        return name
+                raise Exception("Invalid name")
+            except Exception:
+                return random.choice(example_names)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - utility function for agent naming"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When creating unique identifiers for sessions, agents, or tasks that need human-readable names"
+
+  # ============================================================================
+  # Notification Hook Patterns
+  # ============================================================================
+
+  - pattern_name: "Notification Logging"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/notification.py"
+    description: "Logs all Claude Code notifications to a JSON file for monitoring and debugging agent communication patterns."
+    implementation:
+      matcher: "all_notifications"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Append-based JSON logging mirroring the prompt logging pattern"
+      code_snippet: |
+        # Read JSON input from stdin
+        input_data = json.loads(sys.stdin.read())
+
+        # Ensure log directory exists
+        log_dir = os.path.join(os.getcwd(), 'logs')
+        os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(log_dir, 'notification.json')
+
+        # Read existing log data or initialize empty list
+        if os.path.exists(log_file):
+            with open(log_file, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        # Append new data
+        log_data.append(input_data)
+
+        # Write back to file with formatting
+        with open(log_file, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - logging only"
+    use_case:
+      category: "Observability"
+      when_to_use: "When tracking notification frequency, debugging agent pauses, or analyzing interaction patterns"
+
+  - pattern_name: "TTS Audio Alert on Input Request"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/notification.py"
+    description: "Announces via text-to-speech when Claude needs user input, with multi-provider TTS fallback and personalization."
+    implementation:
+      matcher: "input_request_notifications"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Hierarchical TTS provider selection with environment-based personalization and silent failure handling"
+      code_snippet: |
+        def get_tts_script_path():
+            """
+            Determine which TTS script to use based on available API keys.
+            Priority order: ElevenLabs > OpenAI > pyttsx3
+            """
+            script_dir = Path(__file__).parent
+            tts_dir = script_dir / "utils" / "tts"
+
+            if os.getenv('ELEVENLABS_API_KEY'):
+                return str(tts_dir / "elevenlabs_tts.py")
+            if os.getenv('OPENAI_API_KEY'):
+                return str(tts_dir / "openai_tts.py")
+            return str(tts_dir / "pyttsx3_tts.py")  # Fallback offline TTS
+
+        def announce_notification():
+            tts_script = get_tts_script_path()
+            if not tts_script:
+                return
+
+            engineer_name = os.getenv('ENGINEER_NAME', '').strip()
+
+            # 30% chance to include personalized name
+            if engineer_name and random.random() < 0.3:
+                message = f"{engineer_name}, your agent needs your input"
+            else:
+                message = "Your agent needs your input"
+
+            subprocess.run(["uv", "run", tts_script, message],
+                          capture_output=True, timeout=10)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - produces audio output, no context injection"
+    use_case:
+      category: "Communication"
+      when_to_use: "When working away from screen, in accessible environments, or wanting audio feedback for agent states"
+
+  - pattern_name: "Notification Filtering"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/notification.py"
+    description: "Filters out generic 'waiting for input' notifications to only announce meaningful state changes."
+    implementation:
+      matcher: "non_generic_notifications"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Message content inspection to reduce notification fatigue"
+      code_snippet: |
+        # Only announce meaningful notifications, skip generic waiting messages
+        if args.notify and input_data.get('message') != 'Claude is waiting for your input':
+            announce_notification()
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - filtering logic only"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When reducing notification noise and only surfacing important state changes"
+
+  - pattern_name: "Multi-Provider TTS with ElevenLabs"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/utils/tts/elevenlabs_tts.py"
+    description: "High-quality text-to-speech using ElevenLabs Turbo v2.5 model with configurable voice settings."
+    implementation:
+      matcher: "elevenlabs_available"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "ElevenLabs SDK integration with inline playback and UV script dependencies"
+      code_snippet: |
+        from elevenlabs.client import ElevenLabs
+        from elevenlabs import play
+
+        api_key = os.getenv('ELEVENLABS_API_KEY')
+        elevenlabs = ElevenLabs(api_key=api_key)
+
+        text = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "Default message"
+
+        audio = elevenlabs.text_to_speech.convert(
+            text=text,
+            voice_id="WejK3H1m7MI9CHnIjW9K",  # Specific voice ID
+            model_id="eleven_turbo_v2_5",
+            output_format="mp3_44100_128",
+        )
+
+        play(audio)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio output utility"
+    use_case:
+      category: "Communication"
+      when_to_use: "When high-quality, natural-sounding voice output is required"
+
+  - pattern_name: "Multi-Provider TTS with OpenAI"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/utils/tts/openai_tts.py"
+    description: "Text-to-speech using OpenAI gpt-4o-mini-tts model with streaming playback and tone instructions."
+    implementation:
+      matcher: "openai_available"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Async streaming TTS with LocalAudioPlayer and voice instructions"
+      code_snippet: |
+        from openai import AsyncOpenAI
+        from openai.helpers import LocalAudioPlayer
+
+        openai = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+        async with openai.audio.speech.with_streaming_response.create(
+            model="gpt-4o-mini-tts",
+            voice="nova",
+            input=text,
+            instructions="Speak in a cheerful, positive yet professional tone.",
+            response_format="mp3",
+        ) as response:
+            await LocalAudioPlayer().play(response)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio output utility"
+    use_case:
+      category: "Communication"
+      when_to_use: "When OpenAI is available and streaming audio playback is desired"
+
+  - pattern_name: "Offline TTS Fallback with pyttsx3"
+    hook_event: "Notification"
+    source_file: ".claude/hooks/utils/tts/pyttsx3_tts.py"
+    description: "Offline text-to-speech using pyttsx3 for environments without API keys or network access."
+    implementation:
+      matcher: "fallback_tts"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Cross-platform offline TTS with configurable rate and volume"
+      code_snippet: |
+        import pyttsx3
+
+        engine = pyttsx3.init()
+        engine.setProperty('rate', 180)    # Speech rate (words per minute)
+        engine.setProperty('volume', 0.8)  # Volume (0.0 to 1.0)
+
+        text = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else random.choice([
+            "Work complete!", "All done!", "Task finished!",
+            "Job complete!", "Ready for next task!"
+        ])
+
+        engine.say(text)
+        engine.runAndWait()
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - audio output utility"
+    use_case:
+      category: "Communication"
+      when_to_use: "When no API keys are available or offline operation is required"

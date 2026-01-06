@@ -1,0 +1,415 @@
+{
+  "generated_at": "2025-12-28T16:30:00",
+  "source": "CSV exports (full data)",
+  "tables": {
+    "DatasetVariables": {
+      "total": 70586
+    },
+    "VariableTasks": {
+      "total": 751
+    },
+    "DatasetNodes": {
+      "total": 4964
+    },
+    "NodeTasks": {
+      "total": 18597
+    }
+  },
+  "by_agent": {
+    "Inso All-In-One Agent MAGA": {
+      "total_records": 12220,
+      "with_expected_value": 1146,
+      "reviewed": 758,
+      "status_done": 6159,
+      "unique_variables": 148,
+      "variable_names": [
+        "",
+        "bIsTitleRequest",
+        "reasoning_bIsFoa",
+        "bHasClaimFilingWithGoodsRetention",
+        "reasoning_dRegistrationDeadline",
+        "reasoning_bHasInterestComplaint",
+        "cRefRA",
+        "cDebtorCountry",
+        "reasoning_dFinalDistributionDate",
+        "CaseID",
+        "reasoning_dFilingInsoDate",
+        "bHasAuditDate",
+        "output_SbpAndNullplan",
+        "cPhoneNumber",
+        "bIsContactAllowed",
+        "cPostalCode",
+        "reasoning_bHasClaimFilingWithGoodsRetention",
+        "reasoning_debtorInformation",
+        "reasoning_bHasSbpTerminationClause",
+        "main_folder"
+      ]
+    },
+    "Workflow Automation Assistant - Trawa Sandbox": {
+      "total_records": 39,
+      "with_expected_value": 0,
+      "reviewed": 0,
+      "status_done": 0,
+      "unique_variables": 14,
+      "variable_names": [
+        "amounts_match",
+        "Invoice Date",
+        "path",
+        "invoice_record_id",
+        "reasoning_amounts_match",
+        "Invoice Amount (Brutto)",
+        "InvoiceID",
+        "Payment Date",
+        "selected_branch",
+        "Payment Amount",
+        "step",
+        "data",
+        "description",
+        "Debitor"
+      ]
+    },
+    "TZV Agent": {
+      "total_records": 225,
+      "with_expected_value": 0,
+      "reviewed": 0,
+      "status_done": 50,
+      "unique_variables": 25,
+      "variable_names": [
+        "reasoning_cFrequencyInstalments",
+        "cNameDepositor",
+        "bDocumentManuallyFilled",
+        "dDateFirstInstalment",
+        "cLanguageLetter",
+        "reasoning_bDepositorEqualsDeptor",
+        "reasoning_nAmountFurtherInstalments",
+        "reasoning_bDocumentManuallyFilled",
+        "cNameBank",
+        "bDepositorEqualsDeptor",
+        "reasoning_bEnterprise",
+        "cIBAN",
+        "bSignatureTZV",
+        "bEnterprise",
+        "reasoning_nClaimAmount",
+        "cBIC",
+        "cFrequencyInstalments",
+        "reasoning_bSignatureTZV",
+        "reasoning_nAmountFirstInstalment",
+        "reasoning_dDateFirstInstalment"
+      ]
+    },
+    "TZV Agent 03.09": {
+      "total_records": 40023,
+      "with_expected_value": 17154,
+      "reviewed": 15858,
+      "status_done": 36031,
+      "unique_variables": 119,
+      "variable_names": [
+        "reasoning_bIsFoa",
+        "cNameDepositor",
+        "reasoning_bIsPauseRequestWithinOneMonth",
+        "cRefRA",
+        "bIsDeferment",
+        "cDebtorCountry",
+        "CaseID",
+        "reasoning_nAmountFurtherInstalments",
+        "bIsBankersOrderStatus",
+        "cPhoneNumber",
+        "bIsPowerOfAttorneyBankersOrder",
+        "cPostalCode",
+        "bDepositorEqualsDeptor",
+        "reasoning_debtorInformation",
+        "main_folder",
+        "dLetterDate",
+        "reasoning_debtorMaritalStatus",
+        "reasoning_nClaimAmount",
+        "reasoning_bSignatureTZV",
+        "bIsPaypal"
+      ]
+    },
+    "Payment reconciliation - Help Table": {
+      "total_records": 129,
+      "with_expected_value": 0,
+      "reviewed": 0,
+      "status_done": 0,
+      "unique_variables": 36,
+      "variable_names": [
+        "invoice_record_id",
+        "Zahlungsbetrag Netto",
+        "Fälligkeitsdatum",
+        "Abrechnungsmonat",
+        "message",
+        "IBAN Auftragskonto",
+        "createdTime",
+        "Abrechnungszeitraum Von",
+        "Messungsart (from Marktlokation)",
+        "BIC Auftragskonto",
+        "BIC (SWIFT-Code) Zahlungsbeteiligter",
+        "Betrag",
+        "Saldo nach Buchung",
+        "Rechnungsdatum",
+        "Invoice ID (Rechnungsnummer) from Payment",
+        "Buchungstext",
+        "amounts_match",
+        "Abrechnungszeitraum Bis",
+        "reasoning_amounts_match",
+        "Select"
+      ]
+    },
+    "Coolback Order Processing - Final": {
+      "total_records": 332,
+      "with_expected_value": 2,
+      "reviewed": 2,
+      "status_done": 96,
+      "unique_variables": 45,
+      "variable_names": [
+        "product_menge",
+        "Ort",
+        "message",
+        "doc_index",
+        "header_extraction_reasoning",
+        "Step_04",
+        "product_artikelnummer",
+        "Intent_Output_Reasoning",
+        "Customer_ID",
+        "createdTime",
+        "product_reasoning",
+        "csv_link",
+        "Step_06",
+        "Intent_Output",
+        "ClientType",
+        "NextDocumentThinking",
+        "Step_01",
+        "ShiptoCode",
+        "Merged_Address",
+        "Bestellnummer"
+      ]
+    },
+    "Ops Case Handler (Prod)": {
+      "total_records": 9173,
+      "with_expected_value": 778,
+      "reviewed": 704,
+      "status_done": 7397,
+      "unique_variables": 64,
+      "variable_names": [
+        "SystemModstamp",
+        "Id",
+        "Production Ops Type",
+        "message",
+        "Relationship_Strength__c",
+        "Contact Name",
+        "ContactID_h__c",
+        "Status",
+        "Variable_3",
+        "createdTime",
+        "Attachment_Key",
+        "Email Subject",
+        "Variable_2",
+        "Requested By",
+        "Name",
+        "Deploy When Ready",
+        "CaseNumber",
+        "file_links",
+        "url",
+        "type"
+      ]
+    },
+    "Unknown": {
+      "total_records": 186,
+      "with_expected_value": 88,
+      "reviewed": 9,
+      "status_done": 48,
+      "unique_variables": 42,
+      "variable_names": [
+        "",
+        "reasoning_buyer_person_name",
+        "cateringDescription",
+        "message",
+        "titleGeneral",
+        "reply_email",
+        "sportDescription",
+        "reasoning_delivery_address_street",
+        "Missingfields",
+        "missingField",
+        "delivery_address_street",
+        "MissingFields",
+        "routine_type",
+        "Mis",
+        "DetailedOutput",
+        "classified_category",
+        "teaserGeneral",
+        "reasoning_order_number",
+        "missingFields",
+        "reasoning"
+      ]
+    },
+    "Deal Breaker": {
+      "total_records": 407,
+      "with_expected_value": 244,
+      "reviewed": 213,
+      "status_done": 396,
+      "unique_variables": 22,
+      "variable_names": [
+        "reasoning_product_position",
+        "reasoning_buyer_person_name",
+        "product_article_code",
+        "reasoning_delivery_address_street",
+        "delivery_address_street",
+        "reasoning_order_number",
+        "buyer_email_address",
+        "delivery_address_city",
+        "buyer_person_name",
+        "reasoning_delivery_address_city",
+        "delivery_address_postal_code",
+        "reasoning_order_date",
+        "order_number",
+        "product_quantity",
+        "reasoning_delivery_address_postal_code",
+        "reasoning_buyer_email_address",
+        "reasoning_product_quantity",
+        "reasoning_buyer_company_name",
+        "product_position",
+        "reasoning_product_article_code"
+      ]
+    },
+    "Email Management Assistant (POC)": {
+      "total_records": 248,
+      "with_expected_value": 50,
+      "reviewed": 48,
+      "status_done": 248,
+      "unique_variables": 4,
+      "variable_names": [
+        "Variable_2",
+        "classified_category",
+        "Variable_1",
+        "Variable_0"
+      ]
+    },
+    "B2B Check Agent": {
+      "total_records": 1197,
+      "with_expected_value": 575,
+      "reviewed": 533,
+      "status_done": 919,
+      "unique_variables": 38,
+      "variable_names": [
+        "beam_task_url",
+        "is_eu_vat_format",
+        "Street",
+        "customer_name",
+        "vat_id_provided",
+        "eu_vat_country_code",
+        "refund_comment_text",
+        "City",
+        "Postal code",
+        "company_id_valid",
+        "eu_vat_number_core",
+        "registration_vat_id",
+        "First name",
+        "national_registration_number",
+        "official_company_name",
+        "Registration ID",
+        "registration_country_location",
+        "acceptance_reasoning",
+        "decision",
+        "VAT ID"
+      ]
+    },
+    "Eval Test - Anas": {
+      "total_records": 27,
+      "with_expected_value": 0,
+      "reviewed": 0,
+      "status_done": 0,
+      "unique_variables": 5,
+      "variable_names": [
+        "po_number",
+        "vendor_name",
+        "total_amount",
+        "order_date",
+        "delivery_address"
+      ]
+    },
+    "Creditreform ERV Agent": {
+      "total_records": 126,
+      "with_expected_value": 0,
+      "reviewed": 0,
+      "status_done": 0,
+      "unique_variables": 42,
+      "variable_names": [
+        "bic",
+        "vak_location",
+        "disclosed_income",
+        "third_party_type",
+        "debtor_name",
+        "document_date",
+        "invoice_amount",
+        "Vorgangskürzel",
+        "delay_message",
+        "document_type",
+        "protocol_text",
+        "payment_method",
+        "Bezeichnung_des_Vorgangs",
+        "create_ebanking_voucher",
+        "case_number_cleaned",
+        "contains_pfueb_erlassen",
+        "iban",
+        "appeal_text",
+        "case_number_raw",
+        "contains_monierung"
+      ]
+    },
+    "CV Screening Agent - Favorite Staffing v2": {
+      "total_records": 6254,
+      "with_expected_value": 1926,
+      "reviewed": 1920,
+      "status_done": 3524,
+      "unique_variables": 57,
+      "variable_names": [
+        "experience_years_clinic",
+        "experience_total_years",
+        "experience_years_hospital",
+        "requirements_must_have_certifications",
+        "name",
+        "experience_has_icu",
+        "license_expiration_date",
+        "certifications_pals",
+        "overall_score",
+        "resume_confidence",
+        "email",
+        "experience_relevance_score",
+        "license_match_status",
+        "location_state",
+        "content",
+        "experience_years_nursing_home",
+        "extraction_notes",
+        "location_city",
+        "experience_years_other",
+        "missing_info_to_collect"
+      ]
+    }
+  },
+  "accuracy_stats": {
+    "distribution": {
+      "perfect": 141,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "failed": 610,
+      "unknown": 0
+    },
+    "average": 0.188,
+    "total_with_accuracy": 751
+  },
+  "quality_tiers": {
+    "gold": {
+      "description": "Reviewed (Review=1)",
+      "count": 20045
+    },
+    "silver": {
+      "description": "Status Done",
+      "count": 54868
+    },
+    "bronze": {
+      "description": "Has Expected Value",
+      "count": 21963
+    }
+  }
+}

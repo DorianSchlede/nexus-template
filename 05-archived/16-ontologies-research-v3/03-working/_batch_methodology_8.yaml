@@ -1,0 +1,128 @@
+---
+batch_id: "methodology_8"
+field: methodology
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 6
+patterns_found: 24
+---
+
+patterns:
+  - name: "Multi-Agent Iterative Proposal Development"
+    chunk_ref: "15-SciAgents (Chunk 9:34-37)"
+    quote: "Agent caller, please proceed by calling the hypothesis_agent to expand on the 'hypothesis' aspect of the research proposal."
+    description: "Top-down methodology where specialized agents sequentially expand different aspects of a research proposal (hypothesis, outcome, mechanism, design principles, unexpected properties, comparison, novelty). The caller agent orchestrates the process, invoking domain-specific agents in a predetermined sequence to iteratively build comprehensive research proposals."
+
+  - name: "Biomimetic Design Methodology"
+    chunk_ref: "15-SciAgents (Chunk 9:224-228)"
+    quote: "Biomimicry: Mimic the hexagonally packed arrangement of platelets found in nacre. Multiscale Analysis: Conduct multiscale analysis to optimize the hierarchical structure"
+    description: "Hybrid methodology combining top-down design principles (biomimicry from natural structures) with bottom-up empirical validation (multiscale analysis, AFM imaging, mechanical testing). The approach systematically translates observed natural patterns into engineered materials through structured design principles."
+
+  - name: "Knowledge Path Generation for Research Proposals"
+    chunk_ref: "15-SciAgents (Chunk 9:688-710)"
+    quote: "Generate Knowledge Path: Identify the key concepts and relationships between graphene and proteins. Define Terms and Relationships: Ontologist will define each term"
+    description: "Top-down methodology using step-by-step planning: (1) Generate knowledge path between concepts, (2) Ontologist defines terms and relationships, (3) Scientist crafts research proposal, (4) Specialized agents expand aspects, (5) Critic summarizes and critiques, (6) Rate novelty and feasibility."
+
+  - name: "Literature-Grounded Novelty Assessment"
+    chunk_ref: "15-SciAgents (Chunk 9:636-654)"
+    quote: "Novelty: 7/10 - The idea of mimicking nacre's hierarchical structure to enhance mechanical properties is well-explored. The incorporation of amyloid fibrils..."
+    description: "Hybrid methodology combining literature review (empirical survey of existing work) with theoretical novelty assessment. The approach grounds novelty ratings in systematic comparison with existing research while evaluating feasibility based on current capabilities."
+
+  - name: "Molecular Modeling Integration Methodology"
+    chunk_ref: "15-SciAgents (Chunk 10:505-573)"
+    quote: "Select Appropriate Modeling Techniques: Molecular Dynamics (MD) Simulations, Density Functional Theory (DFT), Monte Carlo Simulations... Validate and Interpret Results"
+    description: "Bottom-up computational methodology for scientific investigation: (1) Define objective, (2) Select modeling techniques (MD, DFT, Monte Carlo), (3) Prepare molecular models, (4) Set up simulation environment, (5) Perform simulations, (6) Conduct DFT calculations, (7) Perform Monte Carlo simulations, (8) Validate with experimental data, (9) Report findings."
+
+  - name: "Synthetic Biology-Materials Science Hybrid"
+    chunk_ref: "15-SciAgents (Chunk 10:380-385)"
+    quote: "Synthetic Biology Integration: The use of engineered gene circuits to control the expression, secretion, and assembly of amyloid-forming proteins is a novel approach"
+    description: "Hybrid interdisciplinary methodology integrating synthetic biology (gene circuits for protein control) with materials science (composite synthesis). This represents a convergent approach combining theoretical design from synthetic biology with empirical materials characterization."
+
+  - name: "Autonomous Agent Framework for KG Reasoning"
+    chunk_ref: "16-KG-Agent (Chunk 1:83-90)"
+    quote: "we propose the KG-Agent, an autonomous LLM-based agent framework for complex reasoning tasks over KG. The motivations are twofold: (1) designing autonomous reasoning approaches"
+    description: "Top-down framework design methodology: (1) Identify limitations of existing approaches, (2) Design autonomous agent framework, (3) Create toolbox for KG manipulation, (4) Synthesize instruction data, (5) Implement autonomous iteration mechanism. Combines theoretical framework design with empirical dataset synthesis."
+
+  - name: "KGQA Dataset-Driven Instruction Synthesis"
+    chunk_ref: "16-KG-Agent (Chunk 1:269-294)"
+    quote: "To enable the autonomous reasoning process, we construct a high-quality instruction dataset for fine-tuning a small LLM... we first leverage existing KGQA datasets to generate the KG reasoning program"
+    description: "Bottom-up methodology for LLM instruction tuning: leverage existing KGQA datasets to synthesize KG reasoning programs, decompose into multiple steps, formulate each step as instruction data with input-output pairs. Empirically grounded in annotated SQL queries and reasoning chains."
+
+  - name: "Reasoning Chain Extraction from Query Graphs"
+    chunk_ref: "16-KG-Agent (Chunk 1:296-433)"
+    quote: "Reasoning Chain Extraction. Since the whole KG is extremely large... we first ground the SQL query on the KG to obtain a query graph"
+    description: "Bottom-up methodology: (1) Ground SQL query on KG to obtain query graph, (2) Extract reasoning chain via breadth-first search from mentioned entity, (3) Include constraint conditions and numerical operations, (4) Convert chain to interrelated triples, (5) Reformulate into function calls with code format."
+
+  - name: "Tool-Augmented Autonomous Reasoning"
+    chunk_ref: "16-KG-Agent (Chunk 1:227-264)"
+    quote: "we construct a supporting toolbox for easing the utilization of the KG information... we design three types of tools for LLMs reasoning over KG, i.e., extraction, semantic, and logic tools"
+    description: "Hybrid methodology combining top-down tool design (extraction, semantic, logic tools) with bottom-up empirical implementation. Tools support discrete operations (filtering, counting, retrieval) that extend LLM capacities for structured data manipulation."
+
+  - name: "Synergy-Augmented LLM-KG Interaction"
+    chunk_ref: "16-KG-Agent (Chunk 1:54-68)"
+    quote: "synergy-augmented methods can benefit from the structured search on KG (e.g., SPARQL) and the language understanding capacity of LLMs"
+    description: "Hybrid methodology combining retrieval-augmented and synergy-augmented approaches. Retrieval-augmented serializes triples as prompts; synergy-augmented designs information interaction mechanisms between KG and LLMs for iterative solution finding. Represents integration of symbolic (structured search) and neural (language understanding) paradigms."
+
+  - name: "Knowledge Memory Initialization and Updation"
+    chunk_ref: "16-KG-Agent (Chunk 1:544-551)"
+    quote: "The knowledge memory preserves the currently useful information to support the LLM-based planner for making decisions. It mainly contains four parts of information"
+    description: "Top-down methodology for agent memory design: (1) Natural language question (static), (2) Toolbox definition (static), (3) Current KG information (dynamic), (4) History reasoning program (dynamic). Memory is initialized and constantly updated at each step after LLM generates function calls."
+
+  - name: "Logic-Embedding Integration Framework"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:19-27)"
+    quote: "Conventional KG reasoning based on symbolic logic is deterministic, with reasoning results being explainable, while modern embedding-based reasoning can deal with uncertainty"
+    description: "Hybrid methodology integrating symbolic logic (deterministic, explainable) with embedding-based reasoning (handles uncertainty, efficient vector computation). Survey categorizes integration from two perspectives: (i) injecting logics into embedding learning, (ii) utilizing embeddings for logic reasoning tasks."
+
+  - name: "Pre-Joint-Post Integration Stages"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:136-141)"
+    quote: "Integration Stages Considering the time when logic is injected in learning embeddings, there are three stages: 1) Pre: conducting symbolic reasoning before learning embeddings"
+    description: "Systematic methodology framework categorizing integration timing: Pre (reasoning before embedding learning, impacts training samples), Joint (injecting logics during learning, extends loss function), Post (reasoning after embeddings learned, joint predictive models with both inputs)."
+
+  - name: "Data-Based vs Model-Based Mechanism Distinction"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:143-147)"
+    quote: "Mechanisms 1) Data-based: replacing variables in logic expressions with concrete entities and getting new triples, then adding all or part of the new triples into training"
+    description: "Methodological distinction: Data-based mechanisms ground logic expressions by replacing variables with concrete entities to generate training triples. Model-based mechanisms add constraints on entity/relation embeddings without additional triples. This categorical framework enables systematic comparison of integration approaches."
+
+  - name: "Grounding-Based Rule Injection"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:169-183)"
+    quote: "One more general solution is using grounding, which replaces variables in each rule with concrete entities, infers implicit triples, and generates additional triples for KGEs' training"
+    description: "Bottom-up methodology using t-norm fuzzy logics: KALE models groundings giving truth scores based on atom truth values, trains with negative sampling. RUGE and IterE use iterative injection, predicting labels of unlabeled triples dynamically based on embeddings in each training iteration."
+
+  - name: "Differentiable Theorem Proving"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:418-436)"
+    quote: "Differentiable theorem proving using embeddings overcome the limits of symbolic provers on generalizing to queries with similar but not identical symbols"
+    description: "Hybrid methodology (NTP approach): keeps variable binding symbolic following Prolog inference but compares symbols using embeddings rather than identical symbols. Enables learning without predefined domain-specific rules while seamlessly reasoning with them. Addresses generalization to similar but non-identical queries."
+
+  - name: "Embedding-Guided Rule Mining"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:453-475)"
+    quote: "Embeddings are widely used in logic learning to overcome incompleteness and noise issues. RuLES adds confidential triples using embedding models for quality extension of KGs"
+    description: "Hybrid methodology: RuLES iteratively extends rules induced from KG through feedback from embedding models, evaluates quality on original and extended KG. RLvLR uses embeddings to guide and prune search during rule mining. NeuralLP and DRUM enable differentiable rule mining via attention-based neural controllers."
+
+  - name: "Multi-Dimensional Taxonomy Construction"
+    chunk_ref: "18-Multi-Agent (Chunk 1:25-34)"
+    quote: "This paper proposes a comprehensive multi-dimensional taxonomy, engineered to analyze how autonomous LLM-powered multi-agent systems balance the dynamic interplay between autonomy and alignment"
+    description: "Top-down systematic methodology for analyzing AI architectures: construct multi-dimensional taxonomy with (1) autonomy levels on x-axis, (2) alignment levels on y-axis, (3) architectural viewpoints on z-axis. Enables systematic analysis, comparison, and understanding of architectural dynamics."
+
+  - name: "Architectural Viewpoint Analysis"
+    chunk_ref: "18-Multi-Agent (Chunk 1:171-179)"
+    quote: "they are applied to multiple distinct architectural viewpoints, such as the system's functionality (goal-driven task management), its internal structure (agent composition)"
+    description: "Top-down methodology applying configuration options to four distinct architectural viewpoints: (1) goal-driven task management (functionality), (2) agent composition (internal structure), (3) multi-agent collaboration (dynamic interactions), (4) context interaction (contextual resources). Yields 12 architectural aspects with 108 configuration options."
+
+  - name: "Domain-Ontology Model Development"
+    chunk_ref: "18-Multi-Agent (Chunk 1:833-841)"
+    quote: "The domain-ontology model derives from an examination of the code and architectural documentation of several representative multi-agent architectures, especially AUTOGPT, SUPERAGI, and METAGPT"
+    description: "Bottom-up empirical methodology: examine code and documentation of representative systems, iteratively analyze to understand components, interactions, and structures. Identify and abstract recurrent architectural characteristics to develop domain-ontology model represented as UML class diagram."
+
+  - name: "Divide and Conquer Task Management"
+    chunk_ref: "18-Multi-Agent (Chunk 1:65-71)"
+    quote: "Such systems tackle user-prompted goals by employing a divide & conquer strategy, by breaking them down into smaller manageable tasks"
+    description: "Top-down task decomposition methodology: break complex user-prompted goals into smaller manageable tasks, assign to specialized agents with dedicated roles and LLM reasoning capabilities, orchestrate iterative collaboration and mutual feedback between agents during task execution and result synthesis."
+
+  - name: "Triadic Decision-Making Interplay"
+    chunk_ref: "18-Multi-Agent (Chunk 1:496-508)"
+    quote: "this complexity can be traced back to the triadic interplay and inherent tensions among the primary decision-making entities: human users, LLM-powered agents, and governing mechanisms"
+    description: "Conceptual framework methodology analyzing balance between autonomy and alignment through three decision-making entities: human users (alignment via supervision), LLM-powered agents (autonomy via self-organization), and rules/mechanisms (predefined constraints). Distinguishes generic alignment (architect-defined) from user-specific preferences."
+
+  - name: "Cross-Cutting Concerns Architecture Analysis"
+    chunk_ref: "18-Multi-Agent (Chunk 1:533-537)"
+    quote: "from an architectural perspective, autonomy and alignment transform into cross-cutting concerns. They traverse components and mechanisms across the entirety of the system's architecture"
+    description: "Architectural analysis methodology treating autonomy and alignment as cross-cutting concerns that traverse all system components: agent communication, context interaction, task management. Balanced configuration directly impacts system efficiency and effectiveness."

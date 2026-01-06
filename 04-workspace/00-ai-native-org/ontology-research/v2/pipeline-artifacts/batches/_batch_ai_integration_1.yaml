@@ -1,0 +1,98 @@
+---
+batch_id: "ai_integration_1"
+field: ai_integration
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 7
+patterns_found: 18
+---
+
+patterns:
+  - name: "Knowledge Graph Embeddings for ML Integration"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:769-778)"
+    quote: "The main goal of knowledge graph embedding techniques is to create a dense representation of the graph in a continuous, low-dimensional vector space that can then be used for machine learning tasks"
+    description: "Knowledge graphs can be transformed into dense numerical embeddings suitable for machine learning. This pattern enables AI/ML systems to consume graph-structured knowledge by mapping nodes and edges to continuous vector representations, bridging symbolic knowledge representation with neural approaches."
+
+  - name: "Plausibility Scoring for Link Prediction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:807-822)"
+    quote: "a specific embedding approach defines a scoring function that accepts entity embeddings and computes the plausibility of the edge: how likely it is to be true"
+    description: "Embedding models define scoring functions that output plausibility scores for edges, enabling AI systems to predict missing links and validate potential new knowledge. This supports automated knowledge graph completion and quality assessment."
+
+  - name: "Graph Neural Networks for Supervised Learning"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:427-445)"
+    quote: "A graph neural network (GNN) builds a neural network based on the topology of the data graph... GNNs support end-to-end supervised learning for specific tasks: given a set of labelled examples, GNNs can be used to classify elements of the graph"
+    description: "GNNs enable AI systems to perform supervised learning directly on graph-structured data by building neural architectures that follow the graph topology. This allows classification, prediction, and recommendation tasks that leverage both node features and graph structure."
+
+  - name: "Deductive Reasoning with Ontologies"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 3:243-251)"
+    quote: "Machines, in contrast, do not have a priori access to such deductive faculties; rather they need to be given formal instructions, in terms of premises and entailment regimes, in order to make similar deductions to what a human can make"
+    description: "Ontologies provide formal entailment regimes that enable AI systems to perform logical deduction. This allows machines to derive new knowledge from existing facts and rules, supporting reasoning capabilities beyond pattern matching."
+
+  - name: "Rule-Based Inference for Knowledge Derivation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:21-35)"
+    quote: "One of the most straightforward ways to provide automated access to deductive knowledge is through inference rules encoding if-then-style consequences. A rule is composed of a body (if) and a head (then)"
+    description: "Inference rules enable automated knowledge derivation through if-then patterns. AI systems can apply rules recursively to derive new facts, supporting both forward-chaining (materialisation) and backward-chaining (query rewriting) reasoning strategies."
+
+  - name: "Query Rewriting for Ontology-Aware Retrieval"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 4:92-109)"
+    quote: "Another strategy is to use rules for query rewriting, which given a query, will automatically extend the query in order to find solutions entailed by a set of rules"
+    description: "Query rewriting automatically extends user queries based on ontological rules to find all entailed solutions. This enables AI systems to perform semantic search that considers class hierarchies and property relationships, improving recall without materializing the full inference closure."
+
+  - name: "Translational Embeddings for Relation Modeling"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:7-24)"
+    quote: "Translational models interpret edge labels as transformations from subject nodes to object nodes; for example, the edge label bus is seen as transforming San Pedro to Moon Valley"
+    description: "Translational embedding models (TransE and variants) represent relations as geometric transformations in vector space. This enables AI systems to capture semantic relationships through vector arithmetic, supporting analogical reasoning and relation-aware predictions."
+
+  - name: "Tensor Decomposition for Latent Factor Discovery"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:63-78)"
+    quote: "Tensor decomposition involves decomposing a tensor into more elemental tensors from which the original tensor can be recomposed by a fixed sequence of basic operations. These elemental tensors can be viewed as capturing latent factors"
+    description: "Tensor decomposition methods enable AI systems to discover latent factors underlying graph structure. This supports dimensionality reduction while preserving relational patterns, enabling efficient representation learning for large knowledge graphs."
+
+  - name: "Neural Plausibility Scoring with Non-Linear Functions"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:240-258)"
+    quote: "A number of approaches rather use neural networks to learn embeddings with non-linear scoring functions for plausibility... Neural Tensor Networks (NTN), which rather proposes to maintain a tensor W of internal weights"
+    description: "Neural network approaches enable more expressive plausibility scoring through non-linear activation functions and learned weight matrices. This allows AI systems to capture complex relational patterns that linear and bilinear models cannot represent."
+
+  - name: "Convolutional Kernels for Graph Feature Extraction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:260-280)"
+    quote: "A number of more recent approaches have proposed using convolutional kernels in their models. ConvE proposes to generate a matrix from entity and relation embeddings by wrapping each vector over several rows"
+    description: "Convolutional neural network techniques can be applied to knowledge graph embeddings, enabling hierarchical feature extraction through learned kernels. This pattern supports capturing local structural patterns in the embedding space."
+
+  - name: "Language Model Integration via Graph Walks"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:310-328)"
+    quote: "RDF2Vec performs biased random walks on the graph and records the paths as sentences, which are then fed as input into the word2vec model"
+    description: "Knowledge graph embeddings can leverage pre-trained language model techniques by generating path sequences through random walks. This bridges graph structure with sequence-based language representations, enabling transfer of NLP techniques to graph domains."
+
+  - name: "Entailment-Aware Embeddings with Rule Constraints"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:341-390)"
+    quote: "KALE computes entity and relation embeddings using a translational model that is adapted to further consider rules using t-norm fuzzy logics"
+    description: "Embedding models can incorporate logical rules as soft constraints during training, aligning inductive (embedding-based) and deductive (rule-based) reasoning. This enables AI systems to produce predictions that respect domain knowledge while benefiting from neural generalization."
+
+  - name: "Symbolic Learning for Interpretable Models"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:667-690)"
+    quote: "An alternative approach is to adopt symbolic learning in order to learn hypotheses in a symbolic language that explain a given set of positive and negative edges. These hypotheses then serve as interpretable models"
+    description: "Symbolic learning methods extract logical rules and axioms from knowledge graphs, producing interpretable models that can be verified by domain experts. This addresses the explainability limitations of purely neural approaches."
+
+  - name: "PROV-AGENT for AI Agent Provenance Tracking"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:117-125)"
+    quote: "PROV-AGENT, a provenance model that extends the W3C PROV standard and incorporates concepts from the Model Context Protocol (MCP) to represent agent actions and their connections to data and workflow tasks"
+    description: "PROV-AGENT extends W3C PROV to capture AI agent interactions including prompts, responses, and decisions within agentic workflows. This enables traceability, root cause analysis, and reliability assessment for LLM-based agent systems."
+
+  - name: "Agent Tool Execution Modeling"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:285-296)"
+    quote: "Following the MCP terminology, an AI agent can be associated with one or many tool executions (AgentTool) and each tool may be informed by one or many AIModelInvocations. Each AIModelInvocation uses a Prompt and a specific AIModel"
+    description: "AI agents are modeled as executing tools that invoke AI models with prompts and receive responses. This structured representation enables capturing the full reasoning chain of agent decisions, supporting debugging and improvement of agent behavior."
+
+  - name: "Retrieval-Augmented Generation Context"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:147-150)"
+    quote: "agent-client architecture that can communicate with external sources, such as knowledge bases or web pages, for Retrieval-Augmented Generation (RAG) to dynamically augment prompts"
+    description: "AI agents can enhance their prompts through RAG, retrieving relevant context from knowledge bases. This pattern connects ontological knowledge structures with generative AI systems, enabling grounded and contextually relevant agent outputs."
+
+  - name: "Hallucination Tracing Through Provenance"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:182-191)"
+    quote: "agentic provenance provides the glue power needed to unify these elements into a single, queryable graph. This enables traceability, root cause analysis, and continuous agent improvement, such as refining prompts or tuning model parameters to reduce hallucinations"
+    description: "Provenance tracking enables tracing agent hallucinations back to their source prompts, inputs, and model parameters. This supports systematic improvement of AI agent reliability through prompt engineering and model fine-tuning."
+
+  - name: "Cross-Facility Agent Workflow Integration"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:151-159)"
+    quote: "A growing challenge in these workflows involves managing execution across physically and logically distributed facilities that include edge devices, cloud services, and HPC systems"
+    description: "AI agents operate across distributed computing environments (edge, cloud, HPC), requiring unified provenance to track agent decisions and their downstream impacts across facility boundaries. This enables end-to-end workflow transparency in heterogeneous deployments."

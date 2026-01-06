@@ -1,0 +1,351 @@
+---
+batch_id: "tools_standards_4"
+field: tools_standards
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 7
+patterns_found: 56
+---
+
+patterns:
+  # ========================================
+  # 02-Knowledge_Graphs Chunk 14
+  # ========================================
+
+  - name: "SHACL Shapes Validation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:27-39)"
+    quote: "The semantics we present here assumes that each node in the graph either satisfies or does not satisfy each shape labelled by the schema"
+    description: "SHACL (Shapes Constraint Language) for validating knowledge graphs against shapes schemas. Supports partial shapes maps with three-valued logic, path counting constraints, and SAT solver-based validation for recursive cases."
+
+  - name: "Kleene Three-Valued Logic for Shapes"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:29-31)"
+    quote: "More complex semantics - for example, based on Kleene's three-valued logic [104, 305] - have been proposed that support partial shapes maps"
+    description: "Extension of shapes validation semantics using three-valued logic to support partial shapes maps where satisfaction of some nodes for some shapes can be left undefined."
+
+  - name: "Quotient Graph Emergent Schema"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:42-74)"
+    quote: "Emergent schemata are often based on the notion of a quotient graph... a quotient graph can merge multiple nodes into one node"
+    description: "Emergent schema discovery through quotient graphs that partition nodes based on equivalence relations (e.g., same types) while preserving edge topology through simulation and bisimulation relations."
+
+  - name: "Annotation Domain Semi-Ring"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:113-158)"
+    quote: "An annotation domain is defined as an idempotent, commutative semi-ring D = <A, plus, times, bottom, top>"
+    description: "Formal algebraic structure for graph annotations supporting context metadata. Enables reasoning and querying over annotated graphs with well-defined operations for temporal, trust, or other domain-specific contexts."
+
+  - name: "Graph Interpretation Semantics"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:186-198)"
+    quote: "A (graph) interpretation I is defined as a pair I := (Gamma, dot_I) where Gamma = (V_Gamma, E_Gamma, L_Gamma) is a graph called the domain graph"
+    description: "Formal model-theoretic semantics for knowledge graphs supporting both Unique Name Assumption (UNA) and no-UNA interpretations, enabling formal reasoning about graph entailment."
+
+  - name: "Rule Interchange Format (RIF)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:313-317)"
+    quote: "rules can be directly specified in a rule language such as Notation3 (N3), Rule Interchange Format (RIF), Semantic Web Rule Language (SWRL)"
+    description: "W3C standard for exchanging rules between rule systems. Part of the semantic web stack enabling interoperability of rule-based reasoning across different systems."
+
+  - name: "SPARQL Inferencing Notation (SPIN)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:315-319)"
+    quote: "SPARQL Inferencing Notation (SPIN) [295]. Languages such as SPIN represent rules as graphs, allowing the rules of a knowledge graph to be embedded in the data graph"
+    description: "Standard for representing SPARQL-based rules within RDF graphs, enabling rules to be embedded as data and queried/manipulated like other graph content."
+
+  - name: "SWRL Semantic Web Rule Language"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:315)"
+    quote: "Semantic Web Rule Language (SWRL) [254]"
+    description: "Rule language combining OWL with RuleML to express Horn-like rules for web ontologies. Implemented by semantic reasoners like HermiT for automated inference."
+
+  - name: "Description Logic Knowledge Base"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:335-344)"
+    quote: "A DL knowledge base K is defined as a tuple (A, T, R), where A is the A-Box: a set of assertional axioms; T is the T-Box: a set of class axioms; and R is the R-Box: a set of relation axioms"
+    description: "Standard structure for Description Logic ontologies with three components: A-Box (instance data), T-Box (terminological/class definitions), R-Box (role/relation definitions). Forms the basis for OWL reasoning."
+
+  - name: "OWL 2 DL SROIQ"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:467-469)"
+    quote: "DLs have been very influential in the definition of OWL, where the OWL 2 DL fragment (roughly) corresponds to the DL SROIQ"
+    description: "OWL 2 DL profile corresponds to the SROIQ description logic, providing decidable reasoning with features including transitive closure, complex role inclusions, nominals, inverse relations, and qualified number restrictions."
+
+  - name: "ALC Description Logic Base"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:426-430)"
+    quote: "ALC (Attributive Language with Complement), supports atomic classes, the top and bottom classes, class intersection, class union, class negation, universal restrictions and existential restrictions"
+    description: "Foundation description logic providing core expressivity for ontology languages. Extended by S (transitivity), H (role inclusion), R (complex roles), O (nominals), I (inverse), and N/Q (number restrictions)."
+
+  # ========================================
+  # 02-Knowledge_Graphs Chunk 15
+  # ========================================
+
+  - name: "Knowledge Graph Embeddings"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:265-282)"
+    quote: "Other embedding techniques - namely RotatE [511] and ComplEx [526] - uses complex space based on complex numbers"
+    description: "Neural representation methods for knowledge graphs including TransE, RotatE, ComplEx, DistMult, SimplE, TuckER. Support plausibility scoring for link prediction with varying trade-offs between parameters and expressiveness."
+
+  - name: "Convolutional Graph Neural Networks"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:502-506)"
+    quote: "When the aggregation functions are based on a convolutional operator, we call the result a convolutional graph neural network (ConvGNN)"
+    description: "Graph neural network architecture applying convolutional operators over graph neighborhoods. Supports multi-layer aggregation with learnable parameters for node classification and link prediction."
+
+  - name: "Graph Parallel Framework (GPF)"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:458-472)"
+    quote: "The key difference between GPFs and GNNs is that in the former, the functions are defined by the user, while in the latter, the functions are generally learnt from labelled examples"
+    description: "Computational framework for parallel graph processing with user-defined message passing, aggregation, and termination functions. Foundation for algorithms like PageRank on distributed systems."
+
+  - name: "Symbolic Learning Rule Mining"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:656-682)"
+    quote: "Systems such as AMIE [170], RuLES [241], CARL [406], DL-Learner [73], etc., propose discrete mining that recursively generates candidate formulae"
+    description: "Rule and axiom mining systems for knowledge graphs. Includes discrete mining (AMIE, RuLES, CARL) using refinement operators and differentiable mining (NeuralLP, DRUM) using gradient descent for path-like rules."
+
+  - name: "SSSOM Mapping Standard"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:not applicable - referenced in 04 chunk)"
+    quote: "N/A"
+    description: "Simple Standard for Sharing Ontology Mappings provides vocabulary and format for encoding ontology alignments with provenance metadata."
+
+  # ========================================
+  # 03-PROV-AGENT Chunk 1
+  # ========================================
+
+  - name: "W3C PROV Standard"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:117-121)"
+    quote: "PROV-AGENT, a provenance model that extends the W3C PROV [7] standard and incorporates concepts from the Model Context Protocol (MCP)"
+    description: "W3C recommended standard for provenance representation with three core classes: Entity, Activity, Agent. Extended by PROV-AGENT for AI agent workflow provenance tracking."
+
+  - name: "Model Context Protocol (MCP)"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:144-150)"
+    quote: "MCP defines core agentic AI development concepts, including tools, prompts, resources, context management, and agent-client architecture that can communicate with external sources"
+    description: "Emerging standard for AI agent development defining concepts for tools, prompts, resources, context management, and RAG integration. Supported by frameworks like LangChain, AutoGen, LangGraph, CrewAI."
+
+  - name: "Flowcept Provenance Framework"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:321-335)"
+    quote: "we extend Flowcept [9], an open-source distributed provenance framework designed for complex, heterogeneous workflows spanning experimental facilities at the edge, cloud platforms, and HPC environments"
+    description: "Open-source distributed provenance framework using federated broker-based model for streaming provenance data from heterogeneous sources (Dask, MLflow, Redis, Kafka) with W3C PROV-extended model."
+
+  - name: "Python Decorator Instrumentation"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:343-351)"
+    quote: "applying the @flowcept_task decorator ensures that, upon execution, the function's inputs, outputs, and any generated telemetry or scheduling data are automatically captured"
+    description: "Decorator-based instrumentation pattern for capturing agent tool execution provenance. @flowcept_agent_tool creates AgentTool activities linked to executing agent and PROV relationships."
+
+  - name: "FlowceptLLM Wrapper"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:358-364)"
+    quote: "a generic wrapper for abstract LLM objects, compatible with models from popular LLM interfaces, including CrewAI, LangChain, and OpenAI"
+    description: "Generic wrapper for capturing LLM invocation provenance including prompts, responses, model metadata (provider, name, temperature), and telemetry. Compatible with major LLM frameworks."
+
+  - name: "LangChain Framework"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:141)"
+    quote: "LangChain [10], [11], AutoGen [12], LangGraph [13], Academy [3], and CrewAI [14] support multi-agent systems"
+    description: "Framework for building LLM applications supporting multi-agent systems, prompt exchanges, and MCP integration for tool use and context management."
+
+  - name: "AutoGen Multi-Agent Framework"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:141)"
+    quote: "AutoGen [12]"
+    description: "Microsoft framework enabling next-gen LLM applications via multi-agent conversation patterns with MCP support."
+
+  - name: "RAG Retrieval-Augmented Generation"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:149-150)"
+    quote: "Retrieval-Augmented Generation (RAG) [15] to dynamically augment prompts"
+    description: "Pattern for enhancing LLM prompts with retrieved contextual knowledge from external sources like knowledge bases or web pages."
+
+  - name: "ProvONE Workflow Extension"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:214)"
+    quote: "ProvONE [21] adds workflow-specific metadata and aims at supporting existing workflow management systems"
+    description: "PROV extension adding workflow-specific metadata for provenance capture in scientific workflow management systems."
+
+  - name: "PROV-ML Machine Learning Extension"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:239-241)"
+    quote: "PROV-ML [22] combines general workflow concepts with ML-specific artifacts, especially for model training and evaluation"
+    description: "PROV extension for machine learning workflows capturing model training and evaluation provenance."
+
+  - name: "FAIR4ML Metadata Schema"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:241-242)"
+    quote: "FAIR4ML [23] adopts a model-centric approach to support the Findability, Accessibility, Interoperability, and Reproducibility (FAIR) principles"
+    description: "Metadata schema for ML models supporting FAIR principles for model findability, accessibility, interoperability, and reproducibility."
+
+  # ========================================
+  # 04-PROV-O_to_BFO Chunk 1
+  # ========================================
+
+  - name: "OWL Web Ontology Language"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:41-42)"
+    quote: "A popular way to construct ontologies, and the way relevant to this paper, is by leveraging the W3C standards Web Ontology Language (OWL) [3] and Resource Description Framework (RDF) [4]"
+    description: "W3C standard for expressing ontologies with formal semantics. OWL 2 DL provides decidable reasoning while OWL 2 RL supports rule-based processing."
+
+  - name: "RDF Resource Description Framework"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:42)"
+    quote: "Resource Description Framework (RDF) [4]"
+    description: "W3C standard for representing graph-structured data using subject-predicate-object triples. Foundation for knowledge graphs and semantic web technologies."
+
+  - name: "BFO Basic Formal Ontology ISO Standard"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:78)"
+    quote: "Basic Formal Ontology (BFO) is a top-level ontology ISO standard [10] used to provide foundational classes to structure different domain ontologies"
+    description: "ISO 21838-2:2020 standard top-level ontology providing foundational classes (continuant, occurrent) for domain ontology development and semantic interoperability."
+
+  - name: "OBO Foundry Relations Ontology (RO)"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:80-81)"
+    quote: "The OBO Relations Ontology (RO) is an extension of BFO developed by Open Biomedical Ontologies (OBO) Foundry [13, 14, 15] to standardize relations between domain ontologies"
+    description: "Extension of BFO standardizing relations for OBO Foundry ontologies. Provides common relation vocabulary for cross-domain interoperability."
+
+  - name: "Common Core Ontologies (CCO)"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:82-84)"
+    quote: "The Common Core Ontologies (CCO) are a suite of mid-level ontologies, used to span across different domain ontologies and intended to bridge the gap between domain ontologies and BFO"
+    description: "Suite of mid-level ontologies bridging BFO and domain ontologies. Provides Information Content Entity, Agent, Plan, and other commonly needed classes."
+
+  - name: "OWL equivalentClass Mapping"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:146-155)"
+    quote: "Equivalence relations represented by OWL equivalentClass and OWL equivalentProperty give necessary and sufficient conditions for something to be an instance of a certain BFO class"
+    description: "OWL construct for bidirectional ontology mapping providing necessary and sufficient conditions for class membership. Enables automated reasoning across aligned ontologies."
+
+  - name: "RDFS subClassOf Subsumption"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:158-164)"
+    quote: "Subsumption relations represented by RDFS subClassOf or RDFS subPropertyOf give sufficient conditions for an instance of one class or relation to be an instance of another"
+    description: "RDFS construct for one-way ontology mapping establishing sufficient conditions. Allows non-injective alignments where multiple terms map to a single term."
+
+  - name: "SWRL Rules for Complex Mappings"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:168-183)"
+    quote: "SWRL rules [21] are especially useful for restricting the domain or range of an OWL object property in order to use it in a valid mapping. An advantage of SWRL is that it is implemented by semantic reasoners such as HermiT"
+    description: "Semantic Web Rule Language for expressing complex ontology mappings with domain/range restrictions. Implemented by HermiT reasoner for automated inference."
+
+  - name: "SKOS Vocabulary for Mappings"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:186-195)"
+    quote: "Mapping predicates from the SKOS vocabulary [25] represent informal relations between terms which may be interpreted by users to be intuitively similar"
+    description: "Simple Knowledge Organization System vocabulary for informal ontology mappings. SKOS relatedMatch provides symmetric, non-transitive associations without strong inferential semantics."
+
+  - name: "SSSOM Simple Standard for Sharing Ontology Mappings"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:188-189)"
+    quote: "Simple Standard for Sharing Ontology Mappings (SSSOM) vocabulary [7]"
+    description: "Standard for encoding ontology mappings with provenance metadata. Supports annotations like subject_label, object_label, mapping_justification from SEMAPV vocabulary."
+
+  - name: "SPARQL Query Language"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:180)"
+    quote: "SPARQL [24] queries can also encode mappings that are equivalent to some SWRL rules"
+    description: "W3C standard query language for RDF data. SPARQL CONSTRUCT can create derived triples for complex mappings and validation."
+
+  - name: "HermiT OWL Reasoner"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:179-180)"
+    quote: "An advantage of SWRL is that it is implemented by semantic reasoners such as HermiT [22, 23]"
+    description: "OWL 2 DL reasoner using hypertableau calculus for satisfiability and consistency checking. Used for validating ontology alignments and detecting inconsistencies."
+
+  - name: "RDF Turtle Serialization"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:426)"
+    quote: "every canonical example instance from the W3C documentation for PROV-O and its extensions was copied into RDF files serialized in the Terse Triple Language (TTL or 'RDF Turtle')"
+    description: "Terse RDF Triple Language (Turtle) for human-readable RDF serialization. Used for ontology files and alignment encoding with reified OWL axioms."
+
+  - name: "ROBOT Ontology Tool"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:419)"
+    quote: "HermiT reasoner [22, 23] and ROBOT command-line tool [34] before running the query"
+    description: "Command-line tool for ontology engineering workflows. Supports SPARQL queries, reasoning, diff operations, and integration with GNU Make for automated pipelines."
+
+  - name: "Protege Ontology Editor"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:571)"
+    quote: "a separate RDF Turtle file imports all three of the alignment files, along with the BFO, RO, and CCO ontologies, for viewing the alignments in context in Protege"
+    description: "Open-source ontology editor for OWL. Used for viewing, editing, and testing ontology alignments with reasoner integration."
+
+  - name: "GitHub Actions CI/CD Pipeline"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:473-474)"
+    quote: "These Makefile tasks are run within a continuous development pipeline using GitHub Actions. The result is that changes to the alignments can be automatically, rigorously tested when committed"
+    description: "Automated testing pipeline for ontology alignments using GitHub Actions with ROBOT, HermiT, and SPARQL queries for continuous validation of coherence, consistency, and conservativity."
+
+  - name: "GNU Make for Ontology Workflows"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:470-471)"
+    quote: "an ontology engineering pipeline using ROBOT and GNU Make"
+    description: "Build automation tool for composing ROBOT commands and SPARQL queries into reproducible ontology engineering workflows."
+
+  - name: "OWL Property Chain Axioms"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:182-183)"
+    quote: "If a set of relations in one ontology should imply a relation in another ontology, OWL property chain axioms can be used to axiomatize this complex subsumption relation between object properties"
+    description: "OWL construct for expressing complex role compositions (e.g., hasPart o locatedIn implies locatedIn). Used for mapping relations that require composition."
+
+  - name: "SOSA/SSN Sensor Ontology"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:440-444)"
+    quote: "The alignments were further tested for consistency with an alignment between PROV-O and the SOSA (Sensor, Observation, Sample, and Actuator) ontology [36], which is a core subset of the Semantic Sensor Network Ontology (SSN) [37]"
+    description: "W3C recommendation ontology for sensors, observations, samples, and actuators. SOSA is lightweight core; SSN provides fuller axiomatization aligned with PROV-O."
+
+  # ========================================
+  # 04-PROV-O_to_BFO Chunk 2
+  # ========================================
+
+  - name: "OWL 2 RL Profile"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 2:200-206)"
+    quote: "PROV-O and its extensions conform to OWL 2 RL, corresponding to the description logic DLP, with the exception of some axioms that conform to OWL 2 DL"
+    description: "OWL 2 profile for rule-based reasoning corresponding to description logic DLP. Enables efficient implementation in rule engines while supporting key ontology features."
+
+  - name: "Zenodo Data Archive"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 2:344-346)"
+    quote: "The alignment files [18] for each ontology and all related project resources are archived at https://doi.org/10.5281/zenodo.14692262"
+    description: "Open-access repository for research data and software archiving with persistent DOI identifiers. Used for FAIR-compliant publication of ontology alignments."
+
+  # ========================================
+  # 05-DOLCE Chunk 1
+  # ========================================
+
+  - name: "First-Order Modal Logic QS5"
+    chunk_ref: "05-DOLCE (Chunk 1:227-229)"
+    quote: "The formal theory of DOLCE is written in the first-order quantified modal logic QS5, including the Barcan and the converse Barcan formula"
+    description: "Expressive logic for foundational ontology axiomatization supporting possibilistic view of entities. Trade-off between expressiveness and computability addressed through OWL approximations."
+
+  - name: "DOLCE-Lite OWL Versions"
+    chunk_ref: "05-DOLCE (Chunk 1:69-70)"
+    quote: "several application-oriented, 'lite' versions were later published, including DOLCE-lite, DOLCE-ultralite, and DOLCE-zero"
+    description: "Simplified OWL versions of DOLCE for semantic web applications. DOLCE-ultralite (DUL) widely adopted for knowledge graphs, multimedia annotation, robotics, process mining."
+
+  - name: "Common Logic CLIF Syntax"
+    chunk_ref: "05-DOLCE (Chunk 1:110-111)"
+    quote: "Today DOLCE is becoming part of the ISO 21838 standard, under development, and is available also in CLIF, a syntax of Common Logic ISO 24707"
+    description: "ISO 24707 Common Logic Interchange Format for expressing DOLCE axioms. Enables formal verification with tools like Mace4 for consistency proofs."
+
+  - name: "OntoClean Methodology"
+    chunk_ref: "05-DOLCE (Chunk 1:73-75)"
+    quote: "The analysis underlying the formalization of DOLCE leverages the techniques of ontological engineering and the study of classes' meta-properties of the OntoClean methodology"
+    description: "Methodology for evaluating ontological decisions through meta-properties like rigidity, identity, unity, dependence. Used to validate class hierarchies and taxonomic choices."
+
+  - name: "General Extensional Mereology (GEM)"
+    chunk_ref: "05-DOLCE (Chunk 1:264)"
+    quote: "The first follows the principles of the General Extensional Mereology (GEM)"
+    description: "Formal theory of parthood relations for atemporal mereology in DOLCE. Temporary parthood drops antisymmetry for time-indexed part relations."
+
+  - name: "Conceptual Spaces (Gardenfors)"
+    chunk_ref: "05-DOLCE (Chunk 1:197-198)"
+    quote: "Quality spaces in DOLCE are based on Gardenfors' conceptual spaces (Gardenfors, 2000)"
+    description: "Geometric framework for representing qualities and properties. Used in DOLCE for quality spaces where qualia represent positions enabling property comparison."
+
+  - name: "WordNet Lexical Database"
+    chunk_ref: "05-DOLCE (Chunk 1:459-460)"
+    quote: "DOLCE, used to reorganize the WordNet top level and causing Princeton WordNet developers to include the individual/class distinction in their lexicon"
+    description: "Large lexical database improved using DOLCE ontological analysis. Individual/class distinction added based on foundational ontology insights."
+
+  - name: "DBpedia Knowledge Graph"
+    chunk_ref: "05-DOLCE (Chunk 1:457-458)"
+    quote: "identifying and fixing millions of inconsistencies in DBpedia, on-the-go discovering modelling anti-patterns that were completely opaque to the axioms of the DBpedia ontology"
+    description: "Structured knowledge graph extracted from Wikipedia. DOLCE+DUL used to detect and fix ontological inconsistencies and discover modeling anti-patterns."
+
+  - name: "CIDOC CRM Cultural Heritage"
+    chunk_ref: "05-DOLCE (Chunk 1:463)"
+    quote: "CIDOC CRM (CIDOC Conceptual Reference Model)"
+    description: "ISO 21127 standard ontology for cultural heritage documentation. Compatible with DOLCE/DUL for semantic integration of museum and heritage data."
+
+  - name: "SSN Semantic Sensor Network"
+    chunk_ref: "05-DOLCE (Chunk 1:463)"
+    quote: "SSN (Semantic Sensor Network Ontology)"
+    description: "W3C recommendation for sensor data and observations. Based on or compatible with DOLCE+DUL patterns."
+
+  - name: "SAREF Smart Appliances Ontology"
+    chunk_ref: "05-DOLCE (Chunk 1:465)"
+    quote: "SAREF (Smart REFerence Ontology)"
+    description: "ETSI standard ontology for smart appliances and IoT. Compatible with DOLCE/DUL for semantic interoperability in smart environments."
+
+  - name: "Framester Knowledge Graph"
+    chunk_ref: "05-DOLCE (Chunk 1:461-462)"
+    quote: "the recent massive Framester knowledge graph (Gangemi et al., 2016), which unifies many different linguistic databases under a frame semantics, and maps them to widely used ontologies under a common DUL hat"
+    description: "Large-scale knowledge graph unifying linguistic databases (FrameNet, VerbNet, PropBank, WordNet) under frame semantics with DUL alignment."
+
+  # ========================================
+  # 05-DOLCE Chunk 2
+  # ========================================
+
+  - name: "OWL2 Punning"
+    chunk_ref: "05-DOLCE (Chunk 2:429-431)"
+    quote: "later much facilitated by punning in OWL2 W3C OWL Working Group (2012) (i.e. the ability to use a constant as the name for a class, an individual, or a binary relation)"
+    description: "OWL 2 feature allowing the same IRI to denote both a class and an individual. Enables the D&S pattern for reifying concepts as first-class entities in DOLCE extensions."
+
+  - name: "Description and Situations (D&S) Pattern"
+    chunk_ref: "05-DOLCE (Chunk 2:428-429)"
+    quote: "They also address the need for some extensions of DOLCE categories, by reusing the D&S (Description and Situations) ontology pattern framework"
+    description: "Ontology design pattern for overcoming OWL expressivity limits. Enables modeling of contexts, plans, norms, and social aspects as first-class entities."
+
+  - name: "Mace4 Model Finder"
+    chunk_ref: "05-DOLCE (Chunk 1:256-258)"
+    quote: "A CLIF version of DOLCE plus the theory of concepts and roles from (Masolo et al., 2004) is formalized and proved consistent by means of Mace4"
+    description: "Automated model finder for first-order logic. Used to prove consistency of DOLCE axiomatization in CLIF format."

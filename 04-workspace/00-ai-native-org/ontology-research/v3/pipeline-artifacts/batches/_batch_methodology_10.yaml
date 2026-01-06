@@ -1,0 +1,99 @@
+---
+batch_id: "methodology_10"
+field: methodology
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 18
+notes: "Paper 24 (Enterprise Ontology) chunks 1 and 2 had encoding issues with corrupted text - only partial extraction possible from that paper"
+---
+
+patterns:
+  - name: "Automated Benchmarking Framework for LLM Evaluation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:230-241)"
+    quote: "An established method to benchmark the correctness of a blockchain-based business process is to replay all possible conforming traces (which the smart contract has to accept) and replay a set of non-conforming traces"
+    description: "Bottom-up empirical methodology using automated trace replay to benchmark LLM-generated smart contracts. The framework generates conforming and non-conforming traces from process models, then replays them against generated smart contracts to measure precision, recall, and F1 scores. This is a data-driven, empirical approach to evaluating code generation quality."
+
+  - name: "Iterative Prompt Refinement Through Pre-runs"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:458-464)"
+    quote: "To reduce the likelihood of our results being tainted by a poorly performing prompt, we tested, compared, and refined multiple versions in pre-runs, which we conducted with sets of five to twenty process models"
+    description: "Hybrid methodology combining manual investigation with automated testing. Prompts evolved from loosely defined zero-shot instructions to more specific one-shot and two-shot prompts through iterative refinement based on pre-run results. This represents an empirical, bottom-up approach to prompt engineering."
+
+  - name: "Model-Driven Process to Smart Contract Transformation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:54-56)"
+    quote: "Blockchain-based business process execution relies on a model-driven paradigm, where process descriptions are transformed into executable artefacts based on rule-based transformation tools"
+    description: "Top-down methodology where formal process models (BPMN) serve as the specification from which executable smart contracts are derived. This represents a model-driven engineering approach that starts with high-level abstractions and transforms them to implementation."
+
+  - name: "Literature Review with Concept Matrix"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:118-123)"
+    quote: "To obtain a comprehensive list of potential process characteristic evaluation criteria, a literature review following the guidelines proposed by [34] is conducted... The identified criteria are then compiled, checked for redundancy and listed in a concept matrix"
+    description: "Top-down methodology using systematic literature review to identify process characteristics for RPA viability assessment. Follows established guidelines (Webster & Watson) to derive criteria from academic literature, then validates through concept matrix analysis."
+
+  - name: "Multi-Perspective Evaluation Framework Design"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:234-236)"
+    quote: "We present five perspectives - task, time, data, system, and human - that contain several characteristics that analysts can use to evaluate a process accordingly"
+    description: "Top-down framework design organizing 13 criteria into 5 evaluation perspectives. The Process Characteristics Evaluation Framework (PCEF) provides structured approach for assessing RPA suitability based on theoretically-derived perspectives rather than empirical observation alone."
+
+  - name: "Process Mining Validation with Event Logs"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:421-426)"
+    quote: "The evaluation focuses on event logs generated through PAIS. Event logs reveal insights about the business process and its execution. We aim at an objective evaluation by using a publicly available data-set to show the applicability of the PCEF"
+    description: "Bottom-up empirical validation using real-world event log data (BPI Challenge 2019 dataset with 1.5M+ events). Process mining tools analyze actual process execution to validate the theoretical framework, representing hybrid methodology combining top-down theory with bottom-up data."
+
+  - name: "Ontology Engineering Through Philosophical Grounding"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:83-90)"
+    quote: "Our program was motivated by the strong belief that any serious scientific discipline should have well-established and explicitly defined metaphysical foundations (Bunge, 1977) or that, as nicely put by Collier (1994): 'the opposite of ontology is not non-ontology, but bad ontology'"
+    description: "Top-down methodology grounded in philosophical foundations. UFO development explicitly rejects pure empiricism in favor of descriptive metaphysics, drawing from formal ontology, cognitive science, linguistics, and philosophical logics to establish principled conceptual modeling foundations."
+
+  - name: "Descriptive Metaphysics Over Revisionary Ontology"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:116-119)"
+    quote: "any attempt to develop ontological foundations for conceptual modeling should take both human cognition and human linguistic competence seriously; it should be a project in descriptive metaphysics and not in revisionary ontology"
+    description: "Top-down methodology prioritizing cognitive and linguistic alignment. UFO explicitly positions itself as descriptive metaphysics that accounts for how humans actually conceptualize reality, rather than prescribing an idealized formal system that ignores modeler intuitions."
+
+  - name: "Four-Category Ontology Framework"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:126-129)"
+    quote: "we needed an ontological theory that would countenance both individuals and universals and one that would include not only substantial individuals and universals but also accidents (particularized properties, moments, qualities, modes, tropes)"
+    description: "Top-down theoretical framework requiring four fundamental categories: individuals, universals, substantial entities, and accidents/tropes. This philosophical commitment drove UFO design as a principled alternative to simpler ontological frameworks."
+
+  - name: "Stratified Ontology Architecture"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:170-193)"
+    quote: "The ontology is divided in three strata dealing with different aspects of reality, namely: UFO-A: An Ontology of Endurants... UFO-B: An Ontology of Perdurants... UFO-C: An Ontology of Intentional and Social Entities"
+    description: "Top-down layered methodology with UFO-A (endurants/structural), UFO-B (perdurants/events), and UFO-C (intentional/social) built as interconnected strata. Each stratum addresses specific conceptual modeling requirements with dedicated micro-theories."
+
+  - name: "Ontology-Based Language Engineering"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:213-222)"
+    quote: "The idea was to employ the ontology-based language engineering method... to design a language for structural conceptual modeling that would have two main characteristics. Firstly, the worldview embedded in the language... should be isomorphic to the ontological distinctions put forth by UFO-A"
+    description: "Top-down methodology using foundational ontology to systematically derive a modeling language (OntoUML). The language metamodel incorporates formal syntactical constraints that delimit valid models to those representing intended states admitted by the underlying ontology."
+
+  - name: "Empirical Validation Through Systematic Language Subversions"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:343-352)"
+    quote: "we have managed to observe a number of different ways in which people would slightly subvert the syntax of the language, ultimately creating what we could call 'systematic subversions' of the language. These 'subversions' would (purposefully) produce models that were grammatically incorrect"
+    description: "Hybrid methodology using observed 'systematic subversions' of OntoUML as empirical feedback to refine theoretical foundations. User deviations from formal syntax revealed gaps in UFO theory, driving evolution of both language and underlying ontology."
+
+  - name: "Anti-Pattern Detection and Rectification"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:318-338)"
+    quote: "By using this model repository as a benchmark, in three different empirical studies... managed to show that this approach for model validation via visual simulation is not only able to detect deviations between formally valid model instances and intended model instances, but is also able to detect recurrent structures that tend to cause these deviations"
+    description: "Bottom-up empirical methodology using a repository of OntoUML models across domains to identify recurring problematic patterns (anti-patterns). Empirical studies validated detection methods and developed rectification solutions based on observed modeling practices."
+
+  - name: "METHONTOLOGY for Ontology Development"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:95-104)"
+    quote: "a presentation of METHONTOLOGY (Fernandez et al., 1997), the methodology followed to develop BBO in five classical stages. Specification states why the ontology is being built... Conceptualization consists in structuring the domain knowledge... Formalization transforms the conceptual model into a formal model"
+    description: "Top-down systematic methodology with five stages: Specification, Conceptualization, Formalization, Implementation, and Maintenance. Follows established ontology engineering methodology to develop BBO through principled phases from requirements to formal implementation."
+
+  - name: "Competency Questions for Ontology Specification"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:164-166)"
+    quote: "Competency questions are recognized to be a good means to materialize ontology specifications (Gruninger and Fox, 1995). After meeting experts and analyzing related works... we collected a set of 22 competency questions"
+    description: "Top-down requirements methodology using competency questions to define ontology scope. Questions collected from domain experts and literature specify what the ontology must be able to answer, driving conceptualization and enabling validation."
+
+  - name: "Meta-Model Fragment Reuse and Extension"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:89-92)"
+    quote: "The core of BBO is an ontological representation of a fragment extracted from the BPMN 2.0 meta-model. Hence, we exploited the process-execution specifications of BPMN 2.0. In addition, we have extended the core of BBO with taxonomies, concepts, relations and attributes"
+    description: "Hybrid methodology combining top-down standard reuse with targeted extensions. Rather than building from scratch, BBO selectively extracts relevant BPMN 2.0 fragments dealing with process description, then extends with additional taxonomies for resources, agents, and manufacturing facilities."
+
+  - name: "UML to OWL Conversion Rules"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:359-386)"
+    quote: "First, we designed and applied a set of conversion rules that automatically generated an OWL representation from the UML diagrams of BBO. Second, we manually turned various natural language specifications in the BPMN document into a formal OWL representation"
+    description: "Hybrid formalization methodology combining automated transformation (UML to OWL conversion rules) with manual formalization of natural language specifications. Systematic algorithm converts class hierarchies, relationships, attributes, and cardinalities while human expertise handles semantic nuances."
+
+  - name: "Schema Metrics for Ontology Evaluation"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:456-466)"
+    quote: "We used the two schema metrics introduced in (Tartir and Arpinar, 2007) to evaluate BBO: the relationship diversity (RD) and the schema deepness (SD)... RD = NR / (NR+ NH), which exceeds for us 50%... SD = NH/NC"
+    description: "Bottom-up quantitative evaluation methodology using schema metrics to assess ontology quality. Relationship Diversity (60%) indicates BBO is not just a taxonomy but rich with relationships. Schema Deepness (0.78) shows detailed domain coverage. Metrics provide objective quality indicators."

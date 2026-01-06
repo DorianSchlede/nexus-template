@@ -1,0 +1,114 @@
+---
+batch_id: "entity_count_1"
+field: entity_count
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 4
+patterns_found: 18
+---
+
+patterns:
+  # ============================================
+  # Paper 01: UFO Unified Foundational Ontology
+  # ============================================
+
+  - name: "UFO Four-Category Ontology Structure"
+    chunk_ref: "01-UFO (Chunk 1:116-117)"
+    quote: "UFO is a four-category ontology that addresses fundamental conceptual modeling notions via a set of micro-theories"
+    description: "UFO is explicitly structured as a four-category ontology. The four fundamental categories are not enumerated here but represent the top-level partitioning. This is significant for entity_count as it establishes UFO's foundational architecture using exactly four top-level categories."
+
+  - name: "UFO Three-Fragment Organization"
+    chunk_ref: "01-UFO (Chunk 1:270-279)"
+    quote: "UFO is organized in three main fragments: UFO-A, which is an ontology of endurants; UFO-B, which is an ontology of perdurants; UFO-C, which is an ontology of social and intentional entities"
+    description: "UFO is modularly organized into three fragments (UFO-A, UFO-B, UFO-C), each covering different ontological domains. This modular structure contributes to its overall entity count by separating endurants, perdurants, and social/intentional entities into distinct theoretical modules."
+
+  - name: "UFO Endurant vs Perdurant Binary Distinction"
+    chunk_ref: "01-UFO (Chunk 1:283-285)"
+    quote: "UFO is a 3D ontology having, as a fundamental distinction, the one between endurants (e.g., Mick Jagger, the Moon) and perdurants (e.g., the 2020 U.S. presidential election)"
+    description: "UFO's fundamental binary distinction between endurants (entities existing wholly at any time) and perdurants (entities unfolding in time) represents a core structural choice. This 3D vs 4D ontological stance determines how entities are classified and counted."
+
+  - name: "UFO Substantial and Moment Endurant Partition"
+    chunk_ref: "01-UFO (Chunk 1:298-301)"
+    quote: "UFO is an ontology based of the so-called Aristotelian Square, thus, accounting for both substantial individuals (or Substantials), i.e., independent entities... as well as particularized properties, i.e., existentially dependent entities or moments"
+    description: "UFO partitions endurants into substantials (independent entities) and moments (existentially dependent entities). This binary partition under endurants doubles the entity count at the second level of the taxonomy."
+
+  - name: "UFO Substantial Trichotomy"
+    chunk_ref: "01-UFO (Chunk 1:353-361)"
+    quote: "Quantities are maximally-topologically-self-connected... Collectives are entities whose parts play the same role with respect to the whole... Objects (aka functional complexes) are entities whose parts play differentiated functional roles"
+    description: "Substantials are partitioned into three categories: Quantities, Collectives, and Objects (functional complexes). This trichotomy at the substantial level adds 3 entity types to the UFO entity count."
+
+  - name: "UFO Moment Trichotomy"
+    chunk_ref: "01-UFO (Chunk 1:302-334)"
+    quote: "Intrinsic moments are existentially dependent on a single individual. These include qualities... Intrinsic moments also include modes... relator is a moment (i.e., an existentially dependent entity) that is an aggregation of qua individuals"
+    description: "Moments are partitioned into Qualities, Modes, and Relators. Qualities project into value spaces, Modes include dispositions, and Relators are aggregations of qua individuals. This adds 3 entity types at the moment level."
+
+  - name: "UFO Six Leaf Endurant Categories"
+    chunk_ref: "01-UFO (Chunk 1:710-712)"
+    quote: "Let Le be the set of the leaf categories of endurants {Object, Collective, Quantity, Relator, Mode, Quality}"
+    description: "UFO explicitly defines exactly 6 leaf categories for endurants: Object, Collective, Quantity, Relator, Mode, and Quality. This is a precise entity count for the terminal endurant taxonomy - a formalized enumeration."
+
+  - name: "UFO Nine Leaf Endurant Type Categories"
+    chunk_ref: "01-UFO (Chunk 1:633-634)"
+    quote: "Let LT be the set of the leaf categories of the aforementioned taxonomy of endurant types {Kind, SubKind, Role, Phase, SemiRigidSortal, RoleMixin, PhaseMixin, Category, Mixin}"
+    description: "For endurant TYPES (meta-types), UFO defines exactly 9 leaf categories based on rigidity and sortality meta-properties. This represents another dimension of entity classification with precise cardinality."
+
+  - name: "UFO Fourteen Leaf Endurant Type Categories Extended"
+    chunk_ref: "01-UFO (Chunk 1:830-832)"
+    quote: "LET = {ObjectKind, CollectiveKind, QuantityKind, SubKind, RelatorKind, ModeKind, QualityKind, SemiRigidSortal, Category, Phase, Mixin, Role, PhaseMixin, RoleMixin}"
+    description: "The complete taxonomy of endurant types has 14 leaf categories combining kinds with their specializations. This represents the full entity_count for UFO's type system taxonomy."
+
+  # ============================================
+  # Paper 02: Knowledge Graphs
+  # ============================================
+
+  - name: "DBpedia Four Classification Schemata"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:478-499)"
+    quote: "Entities within DBpedia are classified using four different schemata in order to address varying application requirements... These schemata include a Simple Knowledge Organization System (SKOS)... YAGO classification schema... UMBEL ontology categorisation schema, and a custom schema called the DBpedia ontology"
+    description: "DBpedia uses exactly 4 different classification schemata to organize entities: SKOS, YAGO, UMBEL, and custom DBpedia ontology. This demonstrates that entity_count can vary based on which schema is applied, and large knowledge graphs support multiple concurrent classification schemes."
+
+  - name: "DBpedia Ontology Core Classes"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:498-500)"
+    quote: "a custom schema called the DBpedia ontology with classes such as Person, Place, Organisation, and Work"
+    description: "The DBpedia ontology has core entity classes including Person, Place, Organisation, and Work. While not exhaustive, this indicates a relatively small set of top-level entity types for practical knowledge graph deployment."
+
+  - name: "YAGO Lightweight Extensible Ontology"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:508-509)"
+    quote: "light-weight and extensible ontology with high quality and coverage"
+    description: "YAGO is described as a 'light-weight' ontology, suggesting a deliberately constrained entity_count to balance quality with coverage. The 'extensible' nature indicates the entity_count is meant to grow organically rather than be fixed upfront."
+
+  - name: "Enterprise Knowledge Graph Lightweight Taxonomies"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:718-721)"
+    quote: "the ontologies used tend to be lightweight, often simple taxonomies representing a hierarchy of classes or concepts"
+    description: "Enterprise knowledge graphs typically use lightweight ontologies with simple taxonomies. This pattern shows that practical enterprise applications favor lower entity_counts compared to philosophical foundational ontologies - explicitly stating the hierarchy is 'simple.'"
+
+  # ============================================
+  # Paper 04: PROV-O to BFO Semantic Mapping
+  # ============================================
+
+  - name: "PROV-O 153 Classes and Object Properties Total"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:577-578)"
+    quote: "A total alignment in the sense of Criterion 4 was achieved by mapping all 153 classes and object properties in PROV-O and its extensions"
+    description: "PROV-O and its extensions contain exactly 153 classes and object properties total. This is a precise entity_count for a W3C recommended provenance ontology including all extensions (PROV-AQ, PROV-Dictionary, PROV-Links, PROV-Inverses, PROV Dublin Core)."
+
+  - name: "PROV-O Core Triad Structure"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:75-77)"
+    quote: "PROV-O is a W3C recommended ontology used to structure data about provenance: information about entities, activities, and people involved in producing a piece of data or thing"
+    description: "PROV-O is fundamentally organized around three core concepts: entities, activities, and people/agents. This Agent-Activity-Entity triad represents PROV-O's minimal core entity_count of 3 for provenance modeling."
+
+  - name: "PROV-O Starting Point vs Expanded vs Qualified Terms"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:622-627)"
+    quote: "Starting Point terms are referred to as 'a small set of classes and properties'... Expanded terms are subclasses and subproperties... Qualified terms are those used to provide 'additional attributes of the binary relations'"
+    description: "PROV-O explicitly organizes terms into three tiers: Starting Point (small core set), Expanded (more specific subclasses), and Qualified (reification patterns). This tiered architecture shows how entity_count grows from a minimal core outward."
+
+  # ============================================
+  # Paper 05: DOLCE Descriptive Ontology
+  # ============================================
+
+  - name: "DOLCE Four Basic Categories"
+    chunk_ref: "05-DOLCE (Chunk 1:121-122)"
+    quote: "the basic categories of DOLCE are endurant (aka continuant), perdurant (occurrent), quality, and abstract"
+    description: "DOLCE has exactly 4 basic/top-level categories: endurant, perdurant, quality, and abstract. This represents DOLCE's foundational entity_count at the highest abstraction level - a quaternary top-level structure."
+
+  - name: "DOLCE Taxonomy with Extensions"
+    chunk_ref: "05-DOLCE (Chunk 1:125)"
+    quote: "The taxonomy of DOLCE extended with the subcategories Concept, Role, and Artefact"
+    description: "DOLCE's taxonomy includes extension categories: Concept, Role, and Artefact. This shows how the base entity_count of 4 top-level categories is extended with domain-specific subcategories while maintaining the foundational structure."

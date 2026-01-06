@@ -1,0 +1,72 @@
+---
+batch_id: "abstraction_level_2"
+field: abstraction_level
+extracted_at: "2025-12-29T12:00:00Z"
+chunks_read: 2
+patterns_found: 12
+---
+
+patterns:
+  # Patterns from 02-Knowledge_Graphs (Chunk 14)
+
+  - name: "DL Knowledge Base Three-Layer Architecture"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:342-344)"
+    quote: "A DL knowledge base K is defined as a tuple (A, T, R), where A is the A-Box: a set of assertional axioms; T is the T-Box: a set of class axioms; and R is the R-Box: a set of relation axioms"
+    description: "Description Logics formally separate knowledge into three abstraction layers: A-Box (ground facts about individuals - application level), T-Box (terminological/class definitions - domain level), and R-Box (relation/property definitions - foundational level). This tripartite structure provides a principled way to organize ontological knowledge at different abstraction levels."
+
+  - name: "Graph Interpretation Semantic Layering"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:186-195)"
+    quote: "A (graph) interpretation I is defined as a pair I := (Gamma, dot-I) where Gamma is a graph called the domain graph and dot-I is a partial mapping from constants to terms in the domain graph"
+    description: "Graph interpretations provide a formal abstraction layer between syntactic graph representations and semantic meaning. The interpretation function maps abstract graph elements to a concrete domain, enabling reasoning at a higher semantic level than raw graph structure. This distinguishes foundational semantics from application-level data representation."
+
+  - name: "Semantic Condition Abstraction Layer"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:223-227)"
+    quote: "A semantic condition is a mapping phi: 2^G -> {true, false}. An interpretation I is a model of G under phi if and only if I is a model of G and phi(Gamma)"
+    description: "Semantic conditions provide an abstraction layer that separates graph validity from ontological constraints. This enables modular ontology design where foundational graph semantics can be extended with domain-specific or application-specific semantic conditions without modifying the base graph model."
+
+  - name: "Description Logic Expressivity Hierarchy"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:424-465)"
+    quote: "Most DLs are founded on one of the following base DLs: ALC (Attributive Language with Complement)... S extends ALC with transitive closure. These base languages can be extended as follows: H adds relation inclusion. R adds complex relation inclusion..."
+    description: "DL languages form a systematic expressivity hierarchy from foundational (ALC) through increasingly expressive extensions (S, H, R, O, I, F, N, Q). The naming scheme [ALC|S][H|R][O][I][F|N|Q] encodes the abstraction level and capabilities. This hierarchy directly maps to the trade-off between expressivity (application needs) and computational decidability (foundational constraints)."
+
+  - name: "OWL 2 DL as Application-Level Implementation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:467-473)"
+    quote: "DLs have been very influential in the definition of OWL, where the OWL 2 DL fragment (roughly) corresponds to the DL SROIQ"
+    description: "OWL 2 DL represents an application-level implementation of foundational Description Logic theory. The mapping from DL axioms to OWL constructs demonstrates how foundational ontology concepts are translated to practical, implementable standards. OWL serves as domain/application layer built on DL foundations."
+
+  - name: "Quotient Graph Abstraction Levels"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:42-72)"
+    quote: "Emergent schemata are often based on the notion of a quotient graph... a quotient graph can merge multiple nodes into one node, where the merged node preserves the edges of its constituent nodes"
+    description: "Quotient graphs provide variable abstraction levels from concrete data (original graph) to abstract schemas (quotient). The range from 'input graph as its own quotient' (no abstraction) to 'single node with all edges' (maximum abstraction) shows how abstraction level is a continuous spectrum. Bisimulation preserves semantic equivalence across abstraction levels."
+
+  - name: "Rule-Based Entailment Abstraction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 14:269-311)"
+    quote: "A rule is a pair R = (B, H) such that B and H are graph patterns and Var(H) subseteq B. We call B the body of the rule while we call H the head of the rule"
+    description: "Rules provide an abstraction mechanism for deriving implicit knowledge from explicit graph data. The 'least model' concept represents the closure of inferences possible at a higher abstraction level. Rules bridge foundational graph structure (body patterns) to domain-level semantics (head conclusions)."
+
+  # Patterns from 03-PROV-AGENT (Chunk 1)
+
+  - name: "W3C PROV as Foundational Standard"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:197-204)"
+    quote: "The W3C PROV standard is a widely adopted representation model for provenance... defines Agent as one of its three core classes, alongside Entity (data) and Activity (process)"
+    description: "W3C PROV serves as a foundational ontology layer with three core abstractions: Agent, Entity, and Activity. This foundational triad provides the semantic basis for domain-specific extensions. The paper explicitly positions PROV as the base abstraction that PROV-AGENT extends for agentic AI applications."
+
+  - name: "PROV-AGENT as Domain Extension Layer"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:252-256)"
+    quote: "PROV-AGENT is a provenance model for representing AI agent interactions, model invocations, and their relationships to non-agentic tasks and data in agentic workflows. It extends W3C PROV and incorporates MCP concepts"
+    description: "PROV-AGENT represents a domain-level ontology extension built on the foundational W3C PROV standard. It demonstrates the pattern of extending foundational ontologies to domain-specific contexts (agentic AI workflows) while maintaining semantic compatibility with the base layer. MCP provides application-level protocol integration."
+
+  - name: "Hierarchical Workflow Abstraction Stack"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:263-269)"
+    quote: "At its core, the model includes standard workflow structures such as Campaign, Workflow, and Task, modeled as subclasses of PROV Activities. Campaigns are associated with Person or Organization agents"
+    description: "PROV-AGENT implements a hierarchical abstraction stack: Campaign (high-level organization) > Workflow (process composition) > Task (atomic execution units). Each level inherits from PROV Activity, demonstrating how abstraction levels can be modeled through class hierarchy while maintaining foundational semantics."
+
+  - name: "AIAgent as Subclass of Abstract Agent"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:278-284)"
+    quote: "We extend the abstract W3C PROV Agent by modeling AIAgent as its subclass, enabling a natural integration of agent actions and interactions into the broader workflow provenance graph"
+    description: "The AIAgent subclass pattern demonstrates domain-specific specialization of foundational abstractions. By extending the abstract PROV Agent, the model maintains semantic interoperability with the foundational layer while adding AI-specific capabilities (tool execution, model invocations). This is the canonical pattern for ontology abstraction level extension."
+
+  - name: "DataObject Entity Hierarchy"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:297-302)"
+    quote: "The data used or generated by agents, including prompts, responses, are represented as subclasses of the DataObject Entity. This allows agents to consume and produce not only DomainData, but also system-level and contextual data"
+    description: "PROV-AGENT defines a DataObject hierarchy with multiple abstraction levels: DomainData (application-specific), SchedulingData (infrastructure-level), TelemetryData (system-level). Prompt and ResponseData represent AI-specific data types. This multi-level data abstraction enables rich provenance tracking across different semantic layers."

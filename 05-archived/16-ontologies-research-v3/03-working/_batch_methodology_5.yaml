@@ -1,0 +1,98 @@
+---
+batch_id: "methodology_5"
+field: methodology
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 7
+patterns_found: 18
+---
+
+patterns:
+  - name: "Process Profile Selective Abstraction"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:132-137)"
+    quote: "In each case we focus on some one structural dimension and thereby ignore, through a process of selective abstraction, all other dimensions within the whole process."
+    description: "Top-down ontological methodology where process classification proceeds by selectively abstracting specific structural dimensions (speed, energy consumed, oxygen utilized) while ignoring others. This allows for principled classification of process universals by focusing on measurable aspects. The approach treats processes as having multiple determinable profile universals that can be isolated through measurement-focused abstraction."
+
+  - name: "Process Classification Through Principled Division"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:279-283)"
+    quote: "We have dealt in the foregoing with only a small selection of the ways in which processes can be classified through division into types and subtypes."
+    description: "Top-down methodology for creating process taxonomies through systematic division into types and subtypes. The approach emphasizes principled classification that ensures consistency and interoperability when annotations are needed for data in scientific domains like physiology or pathology. This is a foundational ontological approach to process typing."
+
+  - name: "Process Nesting and Embedding Analysis"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:283-290)"
+    quote: "One important next step will deal with the ways in which such classification is complicated by the fact that processes are embedded within a series of larger process wholes, each nested within yet larger process wholes."
+    description: "Methodology recognizing that processes exist within hierarchical nesting structures. Analysis can focus on different scales: motion relative to table, body-table system relative to earth, body-table-earth system relative to sun. This multi-scale embedding is fundamental to understanding process ontology and requires methodological consideration of scope and granularity."
+
+  - name: "Standard-Driven Metamodel Design"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:88-91)"
+    quote: "The purpose of the standard is to guide the implementation of conformant process mining tools, and to provide the basis for the development of training material and other resources for users."
+    description: "Bottom-up methodology where the metamodel is designed from practical implementation requirements. OCEL 2.0 was designed to facilitate exchange of event logs from diverse information systems, balancing interoperability, scalability, data integrity, simplified analysis, and future-proofing. The standard emerged from empirical needs of the process mining community."
+
+  - name: "Iterative Standard Evolution Through Community Feedback"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:261-278)"
+    quote: "In 2021, a survey was conducted by the IEEE Task Force on Process Mining. The goal was to collect requirements for a new standard succeeding XES. The online survey with 289 participants...showed the need for supporting object-centricity."
+    description: "Empirical, bottom-up methodology for standard development. OCEL 2.0 evolved from OCEL 1.0 based on community survey (289 participants including practitioners, researchers, vendors, end-users), IEEE Task Force discussions, and experience applying OCPM techniques. The standard aims to strike a middle ground between simplicity and expressiveness based on real-world feedback."
+
+  - name: "Formal Definition Grounding Practical Implementation"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:335-342)"
+    quote: "The theoretical foundation is crucial for understanding and using OCEL 2.0. These definitions form the basis for concrete exchange formats discussed later. The connection between theory and practice ensures that both the relational model and XML schema respect the standard's principles."
+    description: "Hybrid methodology combining theoretical formalization with practical implementation. Formal mathematical definitions (set theory, functions) ground the conceptual metamodel, which then maps to concrete storage formats (SQLite, XML, JSON). Authors encourage adoption of formal definitions in scientific papers to improve reliability."
+
+  - name: "Object-Centric Process Mining Paradigm Shift"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:134-144)"
+    quote: "Object-Centric Process Mining (OCPM) represents a paradigm shift, intended to address and overcome the inherent limitations of traditional case-centric process mining methods. OCPM starts from the actual events and objects that leave traces in ERP, CRM, MES, and other IT systems."
+    description: "Bottom-up methodology grounded in empirical reality of IT systems. Rather than forcing data into single-case abstractions, OCPM starts from actual multi-entity event data as recorded in enterprise systems. This empirical grounding addresses convergence/divergence problems that arise when flattening many-to-many relationships to single case notions."
+
+  - name: "Flattening-Based Process Discovery Approach"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:555-562)"
+    quote: "A flattening operation transforms the object-centric event log into a traditional event log given the choice of an object type. This is useful because many process mining approaches are only available for traditional event logs."
+    description: "Hybrid methodology bridging object-centric and traditional process mining. Flattening projects multi-entity event logs to single-case logs by selecting an object type, enabling application of established discovery algorithms (alpha miner, inductive miner). Results for different object types are then collated into unified object-centric models."
+
+  - name: "Formal Definition with Mathematical Foundations"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:448-451)"
+    quote: "An object-centric event log is a tuple L = (E, AN, AV, AT, OT, O, πtyp, πact, πtime, πvmap, πomap, πotyp, πovmap, ≤) such that..."
+    description: "Top-down formal methodology using set-theoretic definitions. Object-centric event logs are rigorously defined as mathematical tuples with explicit universes (events, attributes, object types), typing functions, and total orderings. This mathematical formalization enables precise semantics and formal proofs about log properties."
+
+  - name: "OC-DFG Discovery Through Collation"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:788-791)"
+    quote: "Essentially, the event log is flattened for each object type, the operation of discovery of an object-centric directly-follows multigraph is performed for each flattened log and the results are collated together to obtain the OC-DFG."
+    description: "Compositional discovery methodology. Object-centric directly-follows multigraphs (OC-DFGs) are discovered by: (1) flattening log per object type, (2) discovering DFG per flattened log, (3) collating results. This leverages existing algorithms while producing richer multi-perspective models."
+
+  - name: "Model-Independent Conformance Checking"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 2:65-68)"
+    quote: "As the last technique, we describe some approaches for conformance checking which are independent of a process model and depend solely on the verification of properties on the event log."
+    description: "Empirical methodology for conformance checking that does not require reference models. Rules like CC1 (number of objects per activity) and CC2 (lifecycle duration) verify properties directly on event logs using statistical measures (mean, standard deviation) to identify anomalies. This bottom-up approach discovers violations from data patterns."
+
+  - name: "Local Directly-Follows Relation Per Entity"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:511-516)"
+    quote: "We can avoid both problems by simply not extracting all events towards a single case identifier, but keeping all events local to the entities they are directly correlated to. To analyze behavior, we only construct a temporal order between events that are related, e.g., correlated to the same entity."
+    description: "Novel methodology avoiding convergence/divergence problems by defining directly-follows relations per individual entity rather than per global case. Events remain local to their correlated entities, and temporal ordering only connects actually related events. This preserves behavioral accuracy lost in classical flattening approaches."
+
+  - name: "Event Knowledge Graph Construction Method"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:693-703)"
+    quote: "We obtain an event knowledge graph from an event table T in three steps. 1. Create an event node for each event record. 2. Infer entities and correlation relationships from event attributes. 3. Infer directly-follows relationships between all events with a corr relationship to the same entity node."
+    description: "Bottom-up methodology for constructing event knowledge graphs from event tables. Three-step process: (1) translate event records to nodes, (2) infer entity nodes and correlation edges from entity identifier attributes, (3) infer df-relationships for each entity based on temporal ordering of correlated events. Uses labeled property graph formalism."
+
+  - name: "Derived Entity Reification for Interaction Discovery"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:893-905)"
+    quote: "We reify the relation between two entity types ent1 and ent2 into a new derived entity type (ent1, ent2). That is, we make each pair (n1, n2) an entity node...An event e is then correlated to a derived entity (n1, n2) iff e is correlated to n1 or n2 (or both)."
+    description: "Methodology for discovering inter-entity behavioral dependencies. Relations between entity types are reified into derived entities, events correlated to either original entity become correlated to the derived entity, and df-relationships for derived entities reveal interaction paths. This surfaces behavioral dependencies not visible in single-entity perspectives."
+
+  - name: "Selection and Projection Graph Operations"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:259-277)"
+    quote: "We select a subset of entities, but keep all event nodes correlated to the entities and all directly-follows relations between the events of these entities...We project on a subset of events by keeping all entity nodes but only the selected event nodes."
+    description: "Methodology adapting classical event log filtering operations for graphs. Selection includes entity subsets while preserving their correlated events and df-relationships. Projection keeps all entities but filters events, requiring df-relationship recomputation. These enable focused analysis of complex multi-entity behaviors."
+
+  - name: "Event and DF-Relationship Aggregation for Discovery"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:317-327)"
+    quote: "We specifically discuss it for aggregating sets of events into activities (or event classes), and aggregating df-relationships between events into corresponding relationships between activities."
+    description: "Methodology for in-database process discovery through aggregation. Events are grouped by Activity property into Class nodes with observes relationships. DF-relationships are then lifted from event level to class level, producing multi-entity directly-follows graphs that respect local df-relations per entity type. Implemented as scalable Cypher queries."
+
+  - name: "Multi-Layered Process Knowledge Graph Analysis"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:677-689)"
+    quote: "We can extend an event knowledge graph with further node and relationship types, to describe more knowledge about the process. We already did that when aggregating multiple Event nodes of the same activity to a new node with label Class."
+    description: "Extensible methodology using labeled property graphs to add analysis layers. Event knowledge graphs can be enriched with Class nodes (aggregated events), Task Instance nodes (actor-entity work units), and Task nodes (aggregated task patterns). Layers connect via explicit relationships (observes, contains), enabling multi-level analysis through Cypher queries."
+
+  - name: "Activity-as-Entity Queue Discovery"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:481-494)"
+    quote: "If we pick the Activity property as 'entity identifier', we infer entities such as Receive SO, Unpack, Scan, Store, Retrieve, Pack Shipment. These are not entities handled by the process. No, these entities are the actual building blocks of the process."
+    description: "Creative methodology extending entity inference beyond physical objects to abstract process constructs. Treating Activity as an entity type reveals how objects 'pass through' activities, surfacing queue behavior between work stations. DF-paths for Activity entities cross other entity paths, enabling Performance Spectrum visualization and queue analysis (FIFO detection, bottleneck identification)."

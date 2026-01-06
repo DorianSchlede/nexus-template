@@ -1,0 +1,73 @@
+# Hook Pattern Research - Session Resume
+
+**Last Updated**: 2025-12-31
+**Project**: 17-hook-pattern-research
+**Status**: Ready for Wave 1 Execution
+
+---
+
+## Current State
+
+Phase 1 (Planning) is **COMPLETE**. Ready to execute Phase 2 (Wave 1 - Repository Extraction).
+
+### What Was Completed
+1. Created project structure with `init_project.py`
+2. Defined research question and 12-field extraction schema in `_briefing.md`
+3. Created orchestrator instructions in `plan.md`
+4. Verified 9 repositories available at `04-workspace/00-ai-native-org/hook-repos/`
+5. Added context loading mechanisms and use case catalog requirements
+
+### Key Files
+- `01-planning/plan.md` - Full orchestrator instructions with subagent prompts
+- `01-planning/steps.md` - Execution checklist (Phase 1 complete)
+- `02-resources/_briefing.md` - Research question, extraction schema (12 fields)
+- `02-resources/patterns/` - Output directory for Wave 1 (empty)
+- `02-resources/hook-guides/` - Output directory for Wave 2 (empty)
+
+---
+
+## Next Action: Execute Wave 1
+
+Spawn **9 parallel agents** to extract patterns from repositories:
+
+| Agent | Repository | Output File |
+|-------|------------|-------------|
+| W1-01 | claude-code-safety-net | patterns/safety-net.yaml |
+| W1-02 | claude-code-tools | patterns/cc-tools-py.yaml |
+| W1-03 | claude-code-hooks-mastery | patterns/hooks-mastery.yaml |
+| W1-04 | claude-code-hooks | patterns/hooks-evanl1.yaml |
+| W1-05 | claude-codex-settings | patterns/codex-settings.yaml |
+| W1-06 | tdd-guard | patterns/tdd-guard.yaml |
+| W1-07 | cc-tools | patterns/cc-tools-go.yaml |
+| W1-08 | claude-hooks | patterns/claude-hooks-ts.yaml |
+| W1-09 | awesome-claude-code | patterns/awesome.yaml |
+
+### Paths
+- **Repos**: `04-workspace/00-ai-native-org/hook-repos/{repo-name}/`
+- **Output**: `02-projects/17-hook-pattern-research/02-resources/patterns/`
+- **Briefing**: `02-projects/17-hook-pattern-research/02-resources/_briefing.md`
+
+---
+
+## Research Focus Areas
+
+1. **8 Hook Event Types**: SessionStart, PreToolUse, PostToolUse, PreCompact, Stop, SubagentStop, UserPromptSubmit, Notification
+2. **Context Loading Mechanisms**: systemMessage, permissionDecisionReason, updatedInput, transcript reading, state files, CLAUDE.md modification
+3. **Use Case Catalog**: Complete inventory of ALL use cases with source attribution
+4. **Architecture Patterns**: SDK abstractions, modular vs monolithic, handler registries
+
+---
+
+## Command to Continue
+
+Say: **"run wave 1"** to spawn 9 parallel extraction agents.
+
+After Wave 1 completes, say: **"run wave 2"** to spawn 10 synthesis agents.
+
+---
+
+## Dependencies
+
+- **Consumes**: 9 hook repositories at `04-workspace/00-ai-native-org/hook-repos/`
+- **Produces**: Pattern catalog for Project 14 (Advanced Hook System)
+- **Related**: `02-projects/14-advanced-hook-system/02-research/SYNTHESIS.md`

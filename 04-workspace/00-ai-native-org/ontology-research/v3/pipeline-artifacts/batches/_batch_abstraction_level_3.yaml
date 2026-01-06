@@ -1,0 +1,98 @@
+---
+batch_id: "abstraction_level_3"
+field: abstraction_level
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 6
+patterns_found: 18
+---
+
+patterns:
+  - name: "Four-category definition hierarchy for knowledge graphs"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:127-142)"
+    quote: "Category I: The first category simply defines the knowledge graph as a graph where nodes represent entities, and edges represent relationships"
+    description: "The paper identifies four distinct categories of knowledge graph definitions, each representing a different level of abstraction. Category I is the most basic (graph of entities/relations), Category II adds knowledge base structure, Category III adds technical characteristics, and Category IV uses extensional/example-based definitions. This hierarchy demonstrates how abstraction levels vary based on definitional purpose."
+
+  - name: "Foundational versus domain ontology distinction"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:75-84)"
+    quote: "Basic Formal Ontology (BFO) is a top-level ontology ISO standard used to provide foundational classes to structure different domain ontologies"
+    description: "Explicit distinction between foundational/top-level ontologies (BFO) and domain ontologies. BFO provides abstract philosophical grounding while domain ontologies address specific application areas. This establishes the ontology stack abstraction levels: foundational -> core/mid-level (CCO) -> domain."
+
+  - name: "Mid-level ontology bridging role (CCO)"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:82-84)"
+    quote: "The Common Core Ontologies (CCO) are a suite of mid-level ontologies, used to span across different domain ontologies and intended to bridge the gap between domain ontologies and BFO"
+    description: "CCO occupies a distinct 'mid-level' abstraction layer, explicitly positioned between foundational ontologies (BFO) and domain ontologies. This three-tier architecture (foundational-core-domain) is a key abstraction pattern for ontology design."
+
+  - name: "PROV-O as core/domain level ontology"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:24-28)"
+    quote: "The Provenance Ontology (PROV-O) is a World Wide Web Consortium (W3C) recommended ontology used to structure data about provenance across a wide variety of domains"
+    description: "PROV-O is positioned as a core/domain level ontology that can be mapped to foundational ontologies (BFO). It is generic enough to span domains but specific enough to require grounding in higher-level abstractions."
+
+  - name: "Total alignment as maximum interoperability"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:277-284)"
+    quote: "When every term in one ontology is surjectively mapped onto by at least one term in the other ontology, this constitutes a total alignment"
+    description: "Total alignment represents complete mapping between abstraction levels. The paper provides formal criteria for evaluating how well lower-level ontologies (PROV-O) can be mapped to foundational ontologies (BFO), enabling interoperability across abstraction levels."
+
+  - name: "Interpretability between ontology levels"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:304-312)"
+    quote: "An ontology O1 is interpretable in ontology O2 if and only if there exists a set of translation definitions (an alignment) for O1 into O2 such that O2 union with alignment entails O1"
+    description: "Formal definition of interpretability between ontologies at different abstraction levels. When a domain ontology is interpretable in a foundational ontology, all logical implications are preserved when translating 'up' the abstraction hierarchy."
+
+  - name: "Synonymy as bidirectional interpretation"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:333-346)"
+    quote: "Two ontologies O1 and O2 are synonymous if and only if there exist two sets of translation definitions, respectively from O1 to O2 and from O2 to O1"
+    description: "Synonymy represents the theoretical limit of semantic interoperability between abstraction levels - when two ontologies can fully understand each other in both directions. This is the gold standard for ontology alignment across abstraction levels."
+
+  - name: "Abstraction-specific mapping predicates"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:146-164)"
+    quote: "Equivalence relations represented by OWL equivalentClass and OWL equivalentProperty give necessary and sufficient conditions... Subsumption relations represented by RDFS subClassOf or RDFS subPropertyOf give sufficient conditions"
+    description: "Different predicate types (equivalence vs subsumption) enable different degrees of cross-level mapping. Equivalence provides bidirectional bridges while subsumption provides one-way bridges from lower to higher abstraction levels."
+
+  - name: "PROV-AGENT as workflow-level provenance extension"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:30-33)"
+    quote: "we introduce PROV-AGENT, a provenance model that extends W3C PROV and leverages the Model Context Protocol (MCP) and data observability to integrate agent interactions"
+    description: "PROV-AGENT extends the W3C PROV standard to a new abstraction level specifically for agentic workflows. This demonstrates how core ontologies can be specialized downward to application-specific domains while maintaining compatibility with the parent abstraction."
+
+  - name: "Three-level PROV architecture (Agent-Activity-Entity)"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:200-204)"
+    quote: "the W3C PROV standard already defines Agent, the central abstraction in this work, as one of its three core classes, alongside Entity (data) and Activity (process)"
+    description: "W3C PROV establishes a foundational three-class abstraction (Agent-Activity-Entity) that serves as the basis for provenance modeling. This triad maps directly to fundamental ontological distinctions and provides a universal pattern for process/workflow abstraction."
+
+  - name: "Hierarchical class extension pattern"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:278-284)"
+    quote: "We extend the abstract W3C PROV Agent by modeling AIAgent as its subclass, enabling a natural integration of agent actions and interactions into the broader workflow provenance graph"
+    description: "AIAgent is modeled as a subclass of W3C PROV Agent, demonstrating how abstraction hierarchies are extended downward through subclassing. This pattern preserves compatibility with the parent abstraction while adding domain-specific semantics."
+
+  - name: "DataObject as entity abstraction layer"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:298-302)"
+    quote: "The data used or generated by agents, including prompts, responses, are represented as subclasses of the DataObject Entity. This allows agents to consume and produce not only DomainData, but also system-level and contextual data"
+    description: "DataObject serves as an intermediate abstraction layer between the generic PROV Entity and specific data types (DomainData, SchedulingData, TelemetryData). This demonstrates multi-level specialization within a single ontology."
+
+  - name: "Tensor order as mathematical abstraction levels"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:65-69)"
+    quote: "A tensor is a multidimensional numeric field that generalises scalars (0-order tensors), vectors (1-order tensors) and matrices (2-order tensors) towards arbitrary dimension/order"
+    description: "Mathematical abstraction levels for representing knowledge graph data structures. Tensor order provides a formal hierarchy from scalars through vectors and matrices to arbitrary n-dimensional structures, enabling different levels of representational complexity."
+
+  - name: "Embedding dimensionality as abstraction granularity"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:196-198)"
+    quote: "DistMult is a seminal method for computing knowledge graph embeddings based on rank decompositions, where each entity and relation is associated with a vector of dimension d"
+    description: "The dimensionality d of embeddings determines the abstraction granularity - higher dimensions capture more latent features but increase complexity. This trade-off between expressivity and tractability is a key abstraction design decision."
+
+  - name: "Expressivity-complexity trade-off in neural models"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:282-291)"
+    quote: "The presented approaches strike different balances in terms of expressivity and the number of parameters that need to be trained. While more expressive models...may better fit more complex plausibility functions"
+    description: "Neural embedding models operate at different abstraction levels based on their expressivity. Simpler models (TransE, DistMult) provide coarser abstractions while complex models (NTN, ConvE) enable finer-grained representation at the cost of more parameters."
+
+  - name: "Symbolic versus subsymbolic abstraction levels"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:646-651)"
+    quote: "The supervised techniques discussed thus far...learn numerical models over graphs. However, such models are often difficult to explain or understand"
+    description: "Fundamental distinction between symbolic (interpretable rules/axioms) and subsymbolic (embeddings/neural) abstraction levels. Symbolic approaches provide human-interpretable abstractions while subsymbolic approaches provide continuous numerical representations."
+
+  - name: "Rule abstraction from simple to complex"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:59-75)"
+    quote: "DL Learner, which is based on algorithms for class learning (aka concept learning), whereby given a set of positive nodes and negative nodes, the goal is to find a logical class description"
+    description: "Class learning represents abstraction from instance data to class-level descriptions. The refinement operator moves between more general and more specific classes, demonstrating how abstraction levels can be navigated within symbolic reasoning."
+
+  - name: "Continuant-occurrent as foundational abstraction"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:636-645)"
+    quote: "We therefore map PROV Entity as a subclass of BFO continuant with one exception... This disjoint relationship is entailed by additionally mapping PROV Activity to a subclass of BFO occurrent because continuants and occurrents are disjoint"
+    description: "The BFO continuant/occurrent distinction represents a fundamental philosophical abstraction dividing entities that persist through time (continuants) from those that unfold in time (occurrents). This foundational-level abstraction constrains all downstream domain ontology design."

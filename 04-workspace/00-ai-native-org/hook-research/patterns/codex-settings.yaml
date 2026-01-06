@@ -1,0 +1,669 @@
+# Claude Codex Settings Hook Patterns
+# Source: https://github.com/fcakyon/claude-codex-settings
+# Extracted: 2025-12-31
+
+patterns:
+  # ============================================================================
+  # PreToolUse Hooks
+  # ============================================================================
+
+  - pattern_name: "ripgrep-over-grep-enforcer"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/general-dev/hooks/scripts/enforce_rg_over_grep.py"
+    description: "Blocks grep and find -name commands, suggesting rg (ripgrep) alternatives for better performance."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Uses regex patterns to detect inefficient CLI tools and blocks with exit code 2, printing guidance to stderr."
+      code_snippet: |
+        VALIDATION_RULES = [
+            (
+                r"\bgrep\b(?!.*\|)",
+                "Use 'rg' (ripgrep) instead of 'grep' for better performance and features",
+            ),
+            (
+                r"\bfind\s+\S+\s+-name\b",
+                "Use 'rg --files | rg pattern' or 'rg --files -g pattern' instead of 'find -name' for better performance",
+            ),
+        ]
+
+        def validate_command(command: str) -> list[str]:
+            issues = []
+            for pattern, message in VALIDATION_RULES:
+                if re.search(pattern, command):
+                    issues.append(message)
+            return issues
+
+        if issues:
+            for message in issues:
+                print(f"- {message}", file=sys.stderr)
+            sys.exit(2)  # Exit code 2 blocks tool call
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - blocks tool with stderr message shown to Claude"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforcing modern CLI tool usage (ripgrep over grep) for performance"
+      when_not_to_use: "When legacy grep flags are required or grep is piped"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-commit-confirmation"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/github-dev/hooks/scripts/git_commit_confirm.py"
+    description: "Shows rich confirmation modal before git commit with message, staged files, and stats."
+    implementation:
+      matcher: "Bash"
+      decision_type: "ask"
+      exit_code: "0"
+    technique:
+      summary: "Parses git commit command (heredoc and simple -m formats), queries git for staged files/stats, returns permissionDecision=ask."
+      code_snippet: |
+        def parse_git_commit_message(command: str) -> dict[str, str]:
+            params = {"message": "", "is_amend": False}
+            params["is_amend"] = "--amend" in command
+
+            # Try heredoc format: git commit -m "$(cat <<'EOF' ... EOF)"
+            heredoc_match = re.search(r"<<'EOF'\s*\n(.*?)\nEOF", command, re.DOTALL)
+            if heredoc_match:
+                params["message"] = heredoc_match.group(1).strip()
+                return params
+
+            # Try simple -m "message" format
+            simple_matches = re.findall(r'(?:-m|--message)\s+["\']([^"\']+)["\']', command)
+            if simple_matches:
+                params["message"] = "\n\n".join(simple_matches)
+            return params
+
+        # Get staged files via subprocess
+        files, stats = get_staged_files()
+
+        output = {
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "ask",
+                "permissionDecisionReason": message,
+            }
+        }
+        print(json.dumps(output))
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Formatted commit preview: message, file list (up to 15), diff stats, amend indicator"
+    use_case:
+      category: "Safety"
+      when_to_use: "Review all git commits before execution, prevent accidental commits"
+      when_not_to_use: "Fully automated CI pipelines where confirmation is not possible"
+    quality:
+      complexity: "medium"
+      performance: "10-50ms"
+      dependencies: ["git"]
+
+  - pattern_name: "gh-pr-create-confirmation"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/github-dev/hooks/scripts/gh_pr_create_confirm.py"
+    description: "Shows confirmation modal before creating GitHub PR via gh CLI with title, body, assignee preview."
+    implementation:
+      matcher: "Bash"
+      decision_type: "ask"
+      exit_code: "0"
+    technique:
+      summary: "Parses gh pr create command for title/body/assignee/reviewer, resolves @me to actual username, returns ask decision."
+      code_snippet: |
+        def parse_gh_pr_create(command: str) -> dict[str, str]:
+            params = {"title": "", "body": "", "assignee": "", "reviewer": ""}
+
+            title_match = re.search(r'(?:-t|--title)\s+["\']([^"\']+)["\']', command)
+            if title_match:
+                params["title"] = title_match.group(1)
+
+            # Handle HEREDOC body syntax
+            heredoc_match = re.search(
+                r'(?:-b|--body)\s+"?\$\(cat\s+<<["\']?(\w+)["\']?\s+(.*?)\s+\1\s*\)"?',
+                command, re.DOTALL,
+            )
+            if heredoc_match:
+                params["body"] = heredoc_match.group(2).strip()
+            return params
+
+        def resolve_username(assignee: str) -> str:
+            if assignee == "@me":
+                result = subprocess.run(["gh", "api", "user", "--jq", ".login"], ...)
+                if result.returncode == 0:
+                    return result.stdout.strip()
+            return assignee
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "PR preview: title, body (truncated at 500 chars), resolved assignee, reviewer"
+    use_case:
+      category: "Safety"
+      when_to_use: "Review PRs before creation, verify title/body/assignee are correct"
+      when_not_to_use: "Automated PR workflows in CI"
+    quality:
+      complexity: "medium"
+      performance: "10-50ms"
+      dependencies: ["gh"]
+
+  - pattern_name: "webfetch-to-tavily-redirect"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/tavily-tools/hooks/scripts/webfetch_to_tavily_extract.py"
+    description: "Intercepts WebFetch calls and redirects to Tavily extract MCP tool for better web content extraction."
+    implementation:
+      matcher: "WebFetch"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Denies WebFetch with systemMessage and permissionDecisionReason guiding Claude to use mcp__tavily__tavily-extract instead."
+      code_snippet: |
+        try:
+            data = json.load(sys.stdin)
+            url = data["tool_input"]["url"]
+        except (KeyError, json.JSONDecodeError) as err:
+            print(f"hook-error: {err}", file=sys.stderr)
+            sys.exit(1)
+
+        print(json.dumps({
+            "systemMessage": "WebFetch detected. AI is directed to use Tavily extract instead.",
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": f"Please use mcp__tavily__tavily-extract with urls: ['{url}'] and extract_depth: 'advanced'"
+            }
+        }))
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Directive to use Tavily extract instead of WebFetch"
+    use_case:
+      category: "Productivity"
+      when_to_use: "Replace built-in WebFetch with superior MCP-based web extraction"
+      when_not_to_use: "When Tavily MCP is not available or API limits are a concern"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["mcp__tavily__tavily-extract"]
+
+  - pattern_name: "websearch-to-tavily-redirect"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/tavily-tools/hooks/scripts/websearch_to_tavily_search.py"
+    description: "Intercepts WebSearch calls and redirects to Tavily search MCP tool."
+    implementation:
+      matcher: "WebSearch"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Denies WebSearch with systemMessage and reason guiding Claude to use mcp__tavily__tavily_search."
+      code_snippet: |
+        try:
+            data = json.load(sys.stdin)
+            query = data["tool_input"]["query"]
+        except (KeyError, json.JSONDecodeError) as err:
+            sys.exit(1)
+
+        print(json.dumps({
+            "systemMessage": "WebSearch detected. AI is directed to use Tavily search instead.",
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": f"Please use mcp__tavily__tavily_search with query: '{query}'"
+            }
+        }))
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Directive to use Tavily search instead of WebSearch"
+    use_case:
+      category: "Productivity"
+      when_to_use: "Replace built-in WebSearch with Tavily search API"
+      when_not_to_use: "When Tavily MCP is not available"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["mcp__tavily__tavily_search"]
+
+  - pattern_name: "tavily-extract-depth-upgrader"
+    hook_event: "PreToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/tavily-tools/hooks/scripts/tavily_extract_to_advanced.py"
+    description: "Upgrades tavily-extract calls to use advanced extract_depth and suggests gh CLI for GitHub URLs."
+    implementation:
+      matcher: "mcp__tavily__tavily-extract"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Modifies tool input to set extract_depth='advanced', provides systemMessage tip for GitHub URLs while allowing the call."
+      code_snippet: |
+        tool_input = data["tool_input"]
+        urls = tool_input.get("urls", [])
+
+        # Always ensure extract_depth="advanced"
+        tool_input["extract_depth"] = "advanced"
+
+        github_domains = ("github.com", "raw.githubusercontent.com", "gist.github.com")
+        github_urls = [url for url in urls if any(domain in url for domain in github_domains)]
+
+        if github_urls:
+            print(json.dumps({
+                "systemMessage": "Tip: For GitHub URLs, use gh CLI: `gh api repos/{owner}/{repo}/contents/{path}`...",
+                "hookSpecificOutput": {
+                    "hookEventName": "PreToolUse",
+                    "permissionDecision": "allow",
+                    "updatedInput": tool_input,
+                },
+            }))
+        else:
+            print(json.dumps({
+                "hookSpecificOutput": {
+                    "hookEventName": "PreToolUse",
+                    "permissionDecision": "allow",
+                    "updatedInput": tool_input,
+                }
+            }))
+    context_loading:
+      mechanism: "updatedInput"
+      what_loaded: "Modified tool_input with extract_depth='advanced'; optional systemMessage tip for GitHub URLs"
+    use_case:
+      category: "Productivity"
+      when_to_use: "Ensure maximum extraction depth from Tavily; guide better GitHub URL handling"
+      when_not_to_use: "When basic extraction is sufficient to save API costs"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  # ============================================================================
+  # PostToolUse Hooks
+  # ============================================================================
+
+  - pattern_name: "marketplace-to-plugin-sync"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/plugin-dev/hooks/scripts/sync_marketplace_to_plugins.py"
+    description: "Syncs marketplace.json plugin entries to individual plugin.json files after Write/Edit operations."
+    implementation:
+      matcher: "Write|Edit|MultiEdit"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Detects marketplace.json edits, parses plugin entries, creates/updates individual plugin.json manifests."
+      code_snippet: |
+        def sync_marketplace_to_plugins():
+            edited_path = get_edited_file_path()
+
+            # Only trigger for marketplace.json edits
+            if not edited_path.endswith("marketplace.json"):
+                return 0
+
+            marketplace = json.loads(marketplace_path.read_text())
+            plugins = marketplace.get("plugins", [])
+
+            for plugin in plugins:
+                source = plugin.get("source")
+                plugin_dir = (marketplace_dir / source).resolve()
+                plugin_json_path = plugin_dir / ".claude-plugin" / "plugin.json"
+
+                plugin_data = {"name": plugin.get("name", "")}
+                for field in ["version", "description", "author", "homepage"]:
+                    if field in plugin:
+                        plugin_data[field] = plugin[field]
+
+                if current_data != plugin_data:
+                    plugin_json_path.write_text(json.dumps(plugin_data, indent=2))
+                    synced.append(plugin.get("name", source))
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - side-effect hook that syncs files silently"
+    use_case:
+      category: "Productivity"
+      when_to_use: "Maintain plugin manifest consistency across marketplace and individual plugins"
+      when_not_to_use: "Single-plugin projects without marketplace"
+    quality:
+      complexity: "medium"
+      performance: "10-50ms"
+      dependencies: []
+
+  - pattern_name: "whitespace-line-cleaner"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/hooks.json"
+    description: "Removes whitespace-only lines from Python/JS/TS files after edits using inline sed command."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Inline bash command using jq to extract file_path, then sed to strip whitespace-only lines."
+      code_snippet: |
+        file_path=$(jq -r '.tool_input.file_path // empty' 2>/dev/null)
+        if [[ -n "$file_path" && -f "$file_path" ]]; then
+          case "$file_path" in
+            *.py|*.js|*.jsx|*.ts|*.tsx)
+              if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' 's/^[[:space:]]*$//g' "$file_path" 2>/dev/null || true
+              else
+                sed -i 's/^[[:space:]]*$//g' "$file_path" 2>/dev/null || true
+              fi
+            ;;
+          esac
+        fi
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - file modification side effect"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforce consistent whitespace handling in source files"
+      when_not_to_use: "Projects that intentionally use blank lines with whitespace"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["jq", "sed"]
+
+  - pattern_name: "python-docstring-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/scripts/format_python_docstrings.py"
+    description: "Formats Python docstrings to Google style after file edits, with AST-based detection."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Uses Python AST to find docstrings, applies Google-style formatting rules (capitalization, periods, section normalization)."
+      code_snippet: |
+        def is_google_docstring(docstring: str) -> bool:
+            google_sections = ('Args:', 'Arguments:', 'Attributes:', 'Example:', ...)
+            return any(f'\n    {section}' in docstring for section in google_sections)
+
+        def format_docstring(docstring: str) -> str:
+            # Capitalize first word if not URL
+            if summary and not summary[0].isupper():
+                summary = summary[0].upper() + summary[1:]
+            # Add period if missing
+            if summary and not summary.endswith(('.', '!', '?', ':')):
+                summary += '.'
+            # Normalize section names
+            section_name = {'Arguments': 'Args', 'Return': 'Returns', ...}.get(section_name, section_name)
+            return formatted
+
+        class DocstringVisitor(ast.NodeVisitor):
+            def visit_FunctionDef(self, node):
+                if ast.get_docstring(node):
+                    self.docstrings.append((node.lineno - 1, ast.get_docstring(node)))
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Error message on formatting failure; blocks with exit code 2"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforce Google-style docstrings in Python projects"
+      when_not_to_use: "Projects using NumPy or other docstring styles"
+    quality:
+      complexity: "high"
+      performance: "50-100ms"
+      dependencies: []
+
+  - pattern_name: "python-ruff-quality-gate"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/scripts/python_code_quality.py"
+    description: "Auto-formats Python files with ruff check --fix and ruff format; blocks on unfixable errors."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Runs ruff check with auto-fix, then ruff format. Blocks with exit code 2 if errors remain unfixed."
+      code_snippet: |
+        # Run ruff check with fixes
+        check_result = subprocess.run([
+            'ruff', 'check', '--fix',
+            '--extend-select', 'F,I,D,UP,RUF,FA',
+            '--target-version', 'py39',
+            '--ignore', 'D100,D104,D203,D205,D212,D213,D401,D406,D407,D413,...',
+            str(py_file)
+        ], capture_output=True, text=True)
+
+        if check_result.returncode != 0:
+            error_msg = f'ERROR running ruff check: {check_result.stdout}'
+            output = {
+                'systemMessage': f'Ruff errors detected in {py_file.name}',
+                'hookSpecificOutput': {'hookEventName': 'PostToolUse', 'decision': 'block', 'reason': error_msg},
+            }
+            sys.exit(2)
+
+        # Run ruff format
+        subprocess.run(['ruff', 'format', '--line-length', '120', str(py_file)])
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Error details when ruff check/format fails"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforce Python code quality with ruff linting and formatting"
+      when_not_to_use: "Projects not using ruff or with incompatible lint rules"
+    quality:
+      complexity: "medium"
+      performance: "50-100ms"
+      dependencies: ["ruff"]
+
+  - pattern_name: "prettier-auto-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/scripts/prettier_formatting.py"
+    description: "Auto-formats JS/TS/CSS/JSON/YAML/HTML/Vue/Svelte files with prettier after edits."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Detects file extension, skips virtual envs and lock files, runs npx prettier --write."
+      code_snippet: |
+        PRETTIER_EXTENSIONS = {'.js', '.jsx', '.ts', '.tsx', '.css', '.less', '.scss',
+                              '.json', '.yml', '.yaml', '.html', '.vue', '.svelte'}
+        LOCK_FILE_PATTERN = re.compile(r'.*lock\.(json|yaml|yml)$|.*\.lock$')
+
+        def check_prettier_version() -> bool:
+            result = subprocess.run(['npx', 'prettier', '--version'], ...)
+            if '3.6.2' not in result.stdout:
+                print(f"Warning: Prettier version mismatch")
+            return True
+
+        subprocess.run([
+            'npx', 'prettier', '--write', '--list-different', '--print-width', '120', str(file)
+        ])
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - silent formatting"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforce consistent formatting across web frontend files"
+      when_not_to_use: "Projects with custom prettier configs or different formatters"
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["npx", "prettier"]
+
+  - pattern_name: "markdown-code-block-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/scripts/markdown_formatting.py"
+    description: "Formats embedded Python and Bash code blocks in markdown files using ruff and prettier-plugin-sh."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Extracts code blocks via regex, writes to temp files, formats with ruff/prettier, replaces in original."
+      code_snippet: |
+        PYTHON_BLOCK_PATTERN = r"^( *)```(?:python|py|\{[ ]*\.py[ ]*\.annotate[ ]*\})\n(.*?)\n\1```"
+        BASH_BLOCK_PATTERN = r"^( *)```(?:bash|sh|shell)\n(.*?)\n\1```"
+
+        def process_markdown_file(file_path, temp_dir):
+            code_blocks = extract_code_blocks(markdown_content)
+            for i, (indentation, code_block) in enumerate(code_blocks["python"]):
+                code_without_indent = remove_indentation(code_block, len(indentation))
+                temp_file.write_text(code_without_indent)
+                temp_files.append((len(indentation), code_block, temp_file, "python"))
+            return markdown_content, temp_files
+
+        def format_code_with_ruff(temp_dir):
+            subprocess.run(["ruff", "format", "--line-length=120", str(temp_dir)])
+            subprocess.run(["ruff", "check", "--fix", "--extend-select=F,I,D,UP,RUF,FA", str(temp_dir)])
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - silent formatting"
+    use_case:
+      category: "Quality"
+      when_to_use: "Documentation projects with code examples that should be properly formatted"
+      when_not_to_use: "Markdown with intentionally malformed code examples"
+    quality:
+      complexity: "high"
+      performance: ">100ms"
+      dependencies: ["ruff", "npx", "prettier-plugin-sh"]
+
+  - pattern_name: "bash-script-formatter"
+    hook_event: "PostToolUse"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/ultralytics-dev/hooks/scripts/bash_formatting.py"
+    description: "Auto-formats .sh and .bash files with prettier-plugin-sh after edits."
+    implementation:
+      matcher: "Edit|MultiEdit|Write"
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Detects shell script extensions, runs prettier with prettier-plugin-sh plugin."
+      code_snippet: |
+        if not file_path.endswith(('.sh', '.bash')):
+            sys.exit(0)
+
+        cmd = f'npx prettier --write --list-different --print-width 120 --plugin=$(npm root -g)/prettier-plugin-sh/lib/index.cjs "{sh_file}"'
+        subprocess.run(cmd, shell=True, capture_output=True, check=False, timeout=10)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - silent formatting"
+    use_case:
+      category: "Quality"
+      when_to_use: "Enforce consistent shell script formatting"
+      when_not_to_use: "Shell scripts with specific formatting requirements"
+    quality:
+      complexity: "low"
+      performance: "50-100ms"
+      dependencies: ["npx", "prettier-plugin-sh"]
+
+  # ============================================================================
+  # Notification Hooks
+  # ============================================================================
+
+  - pattern_name: "os-notification-sender"
+    hook_event: "Notification"
+    source_repo: "claude-codex-settings"
+    source_file: "plugins/notification-tools/hooks/scripts/notify.sh"
+    description: "Sends OS desktop notifications when Claude Code completes tasks; triggers terminal bell."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Triggers terminal bell, then sends platform-specific notification (macOS osascript, Linux notify-send)."
+      code_snippet: |
+        #!/usr/bin/env bash
+        input=$(cat)
+        message=$(echo "$input" | grep -o '"message":"[^"]*"' | cut -d'"' -f4)
+        title="Claude Code"
+
+        # Terminal bell - triggers VSCode visual bell icon
+        printf '\a'
+
+        # Send OS notification
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+          osascript -e "display notification \"${message}\" with title \"${title}\" sound name \"Glass\""
+        elif command -v notify-send &> /dev/null; then
+          notify-send "${title}" "${message}" -u normal -i terminal
+        fi
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - notification side effect only"
+    use_case:
+      category: "Communication"
+      when_to_use: "Alert user when long-running Claude tasks complete"
+      when_not_to_use: "Headless environments without notification support"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["osascript (macOS)", "notify-send (Linux)"]
+
+# ============================================================================
+# Hooks Not Found (from 8 hook types)
+# ============================================================================
+
+hooks_not_found:
+  - hook_event: "SessionStart"
+    notes: "No SessionStart hooks found in this repository"
+  - hook_event: "PreCompact"
+    notes: "No PreCompact hooks found - repository focuses on tool-level hooks"
+  - hook_event: "Stop"
+    notes: "No Stop hooks found - no session cleanup patterns"
+  - hook_event: "SubagentStop"
+    notes: "No SubagentStop hooks found - no multi-agent coordination patterns"
+  - hook_event: "UserPromptSubmit"
+    notes: "No UserPromptSubmit hooks found - no prompt filtering/routing patterns"
+
+# ============================================================================
+# Architecture Notes
+# ============================================================================
+
+architecture:
+  pattern: "plugin-based"
+  description: |
+    This repository uses a plugin architecture where each plugin (general-dev, github-dev,
+    ultralytics-dev, tavily-tools, etc.) has its own hooks/hooks.json defining hook
+    configurations and hooks/scripts/ containing the implementations.
+
+  key_features:
+    - "Plugin root variable: ${CLAUDE_PLUGIN_ROOT} for relative script paths"
+    - "Multiple matchers per hook type (e.g., Bash, Write|Edit|MultiEdit)"
+    - "Consistent JSON protocol for hook input/output"
+    - "Exit codes: 0=allow, 2=block"
+    - "systemMessage for context injection to Claude"
+    - "permissionDecisionReason for user-facing confirmation messages"
+    - "updatedInput for silent tool input modification"
+
+  unique_techniques:
+    - name: "Tool Redirection"
+      description: "Block one tool and suggest another via permissionDecisionReason (WebFetch -> Tavily)"
+    - name: "Input Modification"
+      description: "Silently upgrade tool inputs (extract_depth='advanced')"
+    - name: "Rich Confirmation Dialogs"
+      description: "Parse command arguments to show detailed confirmation (git commit, gh pr create)"
+    - name: "Multi-Formatter Chains"
+      description: "Chain multiple formatters (whitespace -> docstrings -> ruff -> prettier)"
+    - name: "File Sync Patterns"
+      description: "Detect file changes and sync related files (marketplace.json -> plugin.json)"
+
+# ============================================================================
+# Summary Statistics
+# ============================================================================
+
+summary:
+  total_patterns: 14
+  by_hook_event:
+    PreToolUse: 6
+    PostToolUse: 7
+    Notification: 1
+  by_category:
+    Quality: 7
+    Safety: 2
+    Productivity: 4
+    Communication: 1
+  by_complexity:
+    low: 7
+    medium: 4
+    high: 3
+  context_loading_mechanisms_used:
+    - "permissionDecisionReason (confirmation dialogs)"
+    - "systemMessage (directives and tips)"
+    - "updatedInput (silent input modification)"

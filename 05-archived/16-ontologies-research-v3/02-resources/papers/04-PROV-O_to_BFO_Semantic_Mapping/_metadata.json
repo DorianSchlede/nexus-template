@@ -1,0 +1,23 @@
+{
+  "source_pdf": "04-PROV-O_to_BFO_Semantic_Mapping.pdf",
+  "processed_at": "2025-12-27T22:51:45.373819",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 2,
+  "total_lines": 1691,
+  "total_chars": 95413,
+  "chunks": [
+    {
+      "filename": "04-PROV-O_to_BFO_Semantic_Mapping_1.md",
+      "chunk_number": 1,
+      "line_count": 995,
+      "char_count": 59816
+    },
+    {
+      "filename": "04-PROV-O_to_BFO_Semantic_Mapping_2.md",
+      "chunk_number": 2,
+      "line_count": 696,
+      "char_count": 35597
+    }
+  ]
+}

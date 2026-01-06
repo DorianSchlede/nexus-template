@@ -1,0 +1,29 @@
+{
+  "source_pdf": "14-RAG_Ontologic_Graph_Multiagent_LLM.pdf",
+  "processed_at": "2025-12-27T22:52:40.904690",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 3,
+  "total_lines": 2207,
+  "total_chars": 69283,
+  "chunks": [
+    {
+      "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_1.md",
+      "chunk_number": 1,
+      "line_count": 1000,
+      "char_count": 57898
+    },
+    {
+      "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_2.md",
+      "chunk_number": 2,
+      "line_count": 1000,
+      "char_count": 10051
+    },
+    {
+      "filename": "14-RAG_Ontologic_Graph_Multiagent_LLM_3.md",
+      "chunk_number": 3,
+      "line_count": 207,
+      "char_count": 1334
+    }
+  ]
+}

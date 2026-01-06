@@ -53,6 +53,33 @@ desktop.ini
 
 # Google OAuth credentials
 google-credentials.json
-# Large data files
+
+# Database files
+events.db
+events.db-shm
+events.db-wal
+*.db
+
+# Logs
+logs/
+
+# Trash
+TRASH/
+
+# Cache directories
+.cache/
+00-system/.cache/
+
+# Kiro
+.kiro/
+
+# Embedded git repos (hook research)
+04-workspace/00-ai-native-org/hook-research/hook-repos/
+
+# Problematic files
+**/nul
+
+# Large data files (exceed GitHub 100MB limit)
 02-projects/07-airtable-test-dataset-builder/02-resources/*.csv
-*.csv
+05-archived/07-airtable-test-dataset-builder/02-resources/*.csv
+05-archived/07-airtable-test-dataset-builder/02-resources/*.json

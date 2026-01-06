@@ -1,0 +1,48 @@
+---
+batch_id: "limitations_3"
+field: limitations
+extracted_at: "2025-12-29T12:00:00Z"
+chunks_read: 1
+patterns_found: 8
+---
+
+patterns:
+  - name: "Hallucination and Error Propagation Risk"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:21-25)"
+    quote: "agents can hallucinate or reason incorrectly, propagating errors when one agent's output becomes another's input"
+    description: "Core limitation of AI agents in agentic workflows - LLM-based agents may generate hallucinated or incorrect outputs that propagate through the workflow when agent outputs become inputs for other agents or downstream tasks. This compounds errors and makes it difficult to assess correctness of results."
+
+  - name: "Non-Deterministic Behavior"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:81-84)"
+    quote: "agentic workflows are non-deterministic, shaped by near real-time data, adaptive decisions, and evolving interactions"
+    description: "Unlike traditional workflows with static, deterministic paths, agentic workflows exhibit non-deterministic behavior. This makes reproducibility challenging as agent decisions are shaped by dynamic, cyclic behavior where agent outputs inform subsequent decisions or feedback loops."
+
+  - name: "Traditional Provenance Inadequacy"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:93-98)"
+    quote: "traditional provenance approaches are not designed to capture the intrinsic dynamics of modern AI agents"
+    description: "Existing provenance methods fail to capture and relate agent-centric metadata (prompts, responses, decisions) with the broader workflow context and downstream outcomes. Provenance data must represent reasoning processes, model invocations, and contextual information driving agent decisions."
+
+  - name: "Agent-Workflow Isolation"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:160-168)"
+    quote: "these data are typically isolated from the rest of the workflow. This disconnection hinders the contextualization of agent interactions"
+    description: "Current MCP-based agent frameworks record prompts, responses, and AI service invocations, but these data are disconnected from the broader workflow. Existing provenance techniques lack explicit representations of key agent artifacts and model workflows as static graphs, missing semantics needed to capture agentic behavior, dynamic decisions, and model-driven reasoning."
+
+  - name: "Pre-Agentic PROV Extensions"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:244-246)"
+    quote: "these earlier efforts predate agentic workflows, lacking support for core agentic AI concepts and how they relate to broader workflow"
+    description: "Although W3C PROV has been extended for agents and multi-agent systems, these earlier efforts predate agentic workflows with LLMs. They lack support for core agentic AI concepts (tools, prompts, responses, model invocations) and how they relate to broader workflow provenance."
+
+  - name: "LLM-Centric Implementation Scope"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:354-358)"
+    quote: "this first implementation of PROV-AGENT focuses on supporting LLMs by providing a generic wrapper for abstract LLM objects"
+    description: "Current PROV-AGENT implementation is limited to LLMs as the primary foundation model type. While the model is designed to be modality-agnostic and supports other foundation models (vision, audio, multimodal), the implementation prioritizes LLM-based agents given current use case prevalence."
+
+  - name: "Iterative Error Amplification"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:441-445)"
+    quote: "because the agent relies on an LLM, there is a risk of hallucinated or incorrect outputs. Since each decision influences the next in this iterative loop"
+    description: "In iterative agentic workflows where each decision informs the next, a single LLM error may propagate across multiple iterations (e.g., layers in additive manufacturing), potentially compromising all downstream outputs. This cascading error effect makes provenance tracking essential."
+
+  - name: "Early-Stage Framework Maturity"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:558-564)"
+    quote: "To the best of our knowledge, this is the first provenance framework designed to track agent actions and decisions in agentic workflows. While this is an early step"
+    description: "PROV-AGENT represents an early-stage contribution to agentic provenance. The paper acknowledges this as a foundational step that researchers and practitioners can build upon, indicating the framework is not yet mature for all use cases and requires further development for detection and remediation of hallucinations."

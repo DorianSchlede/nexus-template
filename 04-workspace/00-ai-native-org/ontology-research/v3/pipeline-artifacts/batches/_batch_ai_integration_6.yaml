@@ -1,0 +1,234 @@
+---
+batch_id: "ai_integration_6"
+field: ai_integration
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 42
+---
+
+patterns:
+  # Paper 20 - Agentic RAG Survey (Chunk 1)
+  - name: "Agentic RAG Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:55-60)"
+    quote: "Agentic RAG transcends these limitations by embedding autonomous AI agents into the RAG pipeline. These agents leverage agentic design patterns"
+    description: "Agentic RAG represents a paradigm shift where autonomous AI agents are embedded into retrieval-augmented generation pipelines to enable dynamic retrieval strategies, iterative refinement, and adaptive workflows across diverse applications."
+
+  - name: "Four Agentic Design Patterns"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:56-57)"
+    quote: "These agents leverage agentic design patterns - reflection, planning, tool use, and multi-agent collaboration to dynamically manage retrieval strategies"
+    description: "Four core agentic design patterns enable AI integration: (1) Reflection for self-feedback and iterative improvement, (2) Planning for task decomposition, (3) Tool Use for external API and resource access, (4) Multi-agent collaboration for distributed task execution."
+
+  - name: "AI Agent Core Components"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:484-502)"
+    quote: "In essence, an AI agent comprises: LLM (with defined Role and Task), Memory (Short-Term and Long-Term), Planning (Reflection & Self-Critique), Tools"
+    description: "AI agent architecture consists of four fundamental components: LLM as reasoning engine, Memory for context tracking, Planning for iterative reasoning through reflection and self-critique, and Tools for external resource access including vector search, web search, and APIs."
+
+  - name: "Reflection Pattern for Self-Correction"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:515-525)"
+    quote: "Reflection is a foundational design pattern in agentic workflows, enabling agents to iteratively evaluate and refine their outputs. By incorporating self-feedback mechanisms"
+    description: "Reflection enables agents to self-correct by iteratively evaluating outputs for correctness, style, and efficiency, then incorporating feedback into subsequent iterations. External tools like unit tests or web searches can validate results."
+
+  - name: "Planning for Task Decomposition"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:540-549)"
+    quote: "Planning is a key design pattern in agentic workflows that enables agents to autonomously decompose complex tasks into smaller, manageable subtasks"
+    description: "Planning pattern enables AI agents to autonomously break down complex tasks into subtasks, essential for multi-hop reasoning and iterative problem-solving in dynamic scenarios. Agents dynamically determine sequence of steps needed."
+
+  - name: "Tool Use for Capability Extension"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:555-564)"
+    quote: "Tool Use enables agents to extend their capabilities by interacting with external tools, APIs, or computational resources...gathering information, perform computations"
+    description: "Tool Use pattern extends agent capabilities beyond text generation by enabling access to external resources, real-time data, and specialized computations through dynamic tool integration including GPT-4's function calling capabilities."
+
+  - name: "Multi-Agent Task Specialization"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:575-592)"
+    quote: "Multi-agent collaboration is a key design pattern in agentic workflows that enables task specialization and parallel processing. Agents communicate and share intermediate results"
+    description: "Multi-agent collaboration enables distributed problem-solving where specialized agents handle subtasks in parallel. Each agent operates with own memory and workflow, using tools, reflection, or planning for dynamic collaborative problem-solving."
+
+  - name: "Prompt Chaining Workflow"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:620-632)"
+    quote: "Prompt chaining decomposes a complex task into multiple steps, where each step builds upon the previous one. This structured approach improves accuracy"
+    description: "Prompt chaining is an agentic workflow pattern that decomposes complex tasks into sequential steps, improving accuracy by simplifying each subtask before proceeding. Used for structured document creation and multi-language content generation."
+
+  - name: "Routing for Input Classification"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:644-655)"
+    quote: "Routing involves classifying an input and directing it to an appropriate specialized prompt or process. This method ensures distinct queries or tasks are handled separately"
+    description: "Routing pattern classifies inputs and directs them to specialized processes, ensuring different query types receive optimized handling. Enables cost-efficient resource allocation by matching query complexity to appropriate model capabilities."
+
+  - name: "Parallelization for Concurrent Execution"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:671-676)"
+    quote: "Parallelization divides a task into independent processes that run simultaneously, reducing latency and improving throughput"
+    description: "Parallelization workflow pattern divides tasks into independent processes running concurrently, categorized into sectioning (independent subtasks) and voting (multiple outputs for accuracy). Enhances speed and confidence in outputs."
+
+  - name: "Orchestrator-Workers Dynamic Delegation"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:696-707)"
+    quote: "This workflow features a central orchestrator model that dynamically breaks tasks into subtasks, assigns them to specialized worker models, and compiles the results"
+    description: "Orchestrator-Workers pattern features a central orchestrator that dynamically breaks tasks into subtasks, delegates to specialized workers, and compiles results. Adapts to varying input complexity for real-time applications."
+
+  - name: "Evaluator-Optimizer Iterative Refinement"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:721-731)"
+    quote: "The evaluator-optimizer workflow iteratively improves content by generating an initial output and refining it based on feedback from an evaluation model"
+    description: "Evaluator-Optimizer pattern iteratively improves outputs through a feedback loop between generation and evaluation. Effective when clear evaluation criteria exist, such as literary translation or multi-round research queries."
+
+  - name: "Single-Agent Router Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:755-798)"
+    quote: "A Single-Agent Agentic RAG serves as a centralized decision-making system where a single agent manages the retrieval, routing, and integration of information"
+    description: "Single-Agent RAG consolidates retrieval, routing, and integration into one unified agent. Dynamically selects knowledge sources (structured databases, semantic search, web search, recommendation systems) and synthesizes responses through LLM."
+
+  - name: "Multi-Agent Modular Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 1:877-917)"
+    quote: "Multi-Agent RAG represents a modular and scalable evolution of single-agent architectures, designed to handle complex workflows...multiple specialized agents"
+    description: "Multi-Agent RAG distributes responsibilities across specialized agents, each optimized for specific data sources or tasks. Coordinator agent orchestrates query distribution, parallel retrieval execution, and LLM synthesis of diverse outputs."
+
+  # Paper 20 - Agentic RAG Survey (Chunk 2)
+  - name: "Hierarchical Multi-Tier Agent Organization"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:100-136)"
+    quote: "Hierarchical Agentic RAG systems employ a structured, multi-tiered approach to information retrieval and processing, enhancing both efficiency and strategic decision-making"
+    description: "Hierarchical RAG organizes agents in tiers where higher-level agents oversee and direct lower-level agents. Top-tier agents assess query complexity, prioritize data sources, and delegate to subordinate agents for multi-level decision-making."
+
+  - name: "Corrective RAG Self-Correction Mechanism"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:190-244)"
+    quote: "Corrective RAG introduces mechanisms to self-correct retrieval results, enhancing document utilization and improving response generation quality"
+    description: "Corrective RAG embeds intelligent agents for iterative refinement through document relevance evaluation, query refinement, dynamic retrieval from external sources, and response synthesis. Five specialized agents work together for factuality assurance."
+
+  - name: "Adaptive RAG Dynamic Strategy Selection"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:314-398)"
+    quote: "Adaptive RAG enhances the flexibility and efficiency of large language models by dynamically adjusting query handling strategies based on the complexity of the incoming query"
+    description: "Adaptive RAG uses a classifier to assess query complexity and select appropriate strategy: direct LLM response for simple queries, single-step retrieval for moderate queries, or multi-step retrieval for complex queries requiring iterative refinement."
+
+  - name: "Agent-G Graph Knowledge Integration"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:446-533)"
+    quote: "Agent-G introduces a novel agentic architecture that integrates graph knowledge bases with unstructured document retrieval"
+    description: "Agent-G dynamically assigns retrieval tasks to specialized agents leveraging both graph knowledge bases and textual documents. Includes Retriever Bank, Critic Module for validation, Dynamic Agent Interaction, and LLM integration for coherent synthesis."
+
+  - name: "GeAR Graph-Enhanced Agent Retrieval"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:583-657)"
+    quote: "GeAR introduces an agentic framework that enhances traditional RAG systems by incorporating graph-based retrieval mechanisms"
+    description: "GeAR advances RAG through Graph Expansion (capturing entity relationships and dependencies) and Agent Framework (autonomous decision-making for retrieval). Enables multi-hop queries by expanding search space to connected entities."
+
+  - name: "Agentic Document Workflows End-to-End Automation"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 2:701-801)"
+    quote: "Agentic Document Workflows extend traditional RAG paradigms by enabling end-to-end knowledge work automation. These workflows orchestrate complex document-centric processes"
+    description: "ADW orchestrates complex document processes integrating parsing, retrieval, reasoning, and structured outputs with intelligent agents. Maintains state across multi-step workflows, applies domain-specific logic, and generates actionable outputs."
+
+  # Paper 20 - Agentic RAG Survey (Chunk 3)
+  - name: "Healthcare AI Integration for Clinical Decision Support"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:24-46)"
+    quote: "In healthcare, the integration of patient-specific data with the latest medical research is critical for informed decision-making. Agentic RAG systems enable this"
+    description: "Agentic RAG enables healthcare integration by retrieving real-time clinical guidelines, medical literature, and patient history to assist clinicians. Generates comprehensive patient case summaries by integrating EHR and up-to-date medical literature."
+
+  - name: "Legal Knowledge Graph Integration"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:49-71)"
+    quote: "A legal agentic RAG system can analyze contracts, extract critical clauses, and identify potential risks. By combining semantic search capabilities with legal knowledge graphs"
+    description: "Legal AI integration combines semantic search with legal knowledge graphs to automate contract review. Automatically flags deviant clauses, ensures compliance, mitigates risks, and handles large contract volumes simultaneously."
+
+  - name: "Finance Real-Time Analytics Integration"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:74-98)"
+    quote: "Agentic RAG systems are transforming the finance industry by providing real-time insights for investment decisions, market analysis, and risk management"
+    description: "Finance AI integration combines live data streams, historical trends, and predictive modeling. Automates claim processing by retrieving policy details and combining with accident data while ensuring regulatory compliance."
+
+  - name: "Adaptive Learning and Research Synthesis"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:101-121)"
+    quote: "Agentic RAG has been used to assist researchers by synthesizing key findings from multiple sources...generating explanations, study materials, and feedback tailored"
+    description: "Education AI integration enables adaptive learning by generating personalized explanations, study materials, and feedback. Synthesizes research findings from multiple sources, providing concise summaries enriched with references."
+
+  - name: "Graph-Enhanced Multimodal Workflows"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:124-150)"
+    quote: "Graph-Enhanced Agentic RAG (GEAR) combines graph structures with retrieval mechanisms, making it particularly effective in multimodal workflows"
+    description: "GEAR enables multimodal integration of text, images, and videos for comprehensive outputs. Synthesizes customer preferences, competitor analysis, and multimedia content with dynamic adaptability to evolving trends."
+
+  - name: "LangChain and LangGraph Framework Integration"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:164-167)"
+    quote: "LangChain provides modular components for building RAG pipelines...LangGraph complements this by introducing graph-based workflows that support loops, state persistence"
+    description: "LangChain provides modular RAG pipeline components while LangGraph enables graph-based workflows with loops, state persistence, and human-in-the-loop interactions for sophisticated orchestration and self-correction mechanisms."
+
+  - name: "LlamaIndex Meta-Agent Architecture"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:169-172)"
+    quote: "LlamaIndex's Agentic Document Workflows enable end-to-end automation of document processing, retrieval, and structured reasoning. It introduces a meta-agent architecture"
+    description: "LlamaIndex introduces meta-agent architecture where sub-agents manage smaller document sets, coordinating through a top-level agent for compliance analysis and contextual understanding in document automation workflows."
+
+  - name: "CrewAI and AutoGen Multi-Agent Frameworks"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:182-185)"
+    quote: "CrewAI supports hierarchical and sequential processes, robust memory systems, and tool integrations. AG2...excels in multi-agent collaboration with advanced support for code generation"
+    description: "CrewAI supports hierarchical/sequential processes with memory and tool integrations. AG2 (formerly AutoGen) excels in multi-agent collaboration with advanced code generation, tool execution, and decision-making capabilities."
+
+  - name: "Semantic Kernel Agentic SDK"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:198-203)"
+    quote: "Semantic Kernel is an open-source SDK by Microsoft that integrates large language models into applications. It supports agentic patterns, enabling the creation of autonomous AI agents"
+    description: "Microsoft's Semantic Kernel SDK integrates LLMs into applications with agentic pattern support. Used for P1 incident management to facilitate real-time collaboration, automate task execution, and retrieve contextual information."
+
+  - name: "Vector Database Integration for RAG"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:214-217)"
+    quote: "Neo4j, a prominent open-source graph database, excels in handling complex relationships and semantic queries. Alongside Neo4j, vector databases like Weaviate, Pinecone, Milvus"
+    description: "Graph databases (Neo4j) and vector databases (Weaviate, Pinecone, Milvus, Qdrant) provide efficient similarity search and retrieval capabilities, forming the backbone of high-performance Agentic RAG workflows."
+
+  # Paper 21 - LLM Smart Contracts from BPMN
+  - name: "LLM for BPMN-to-Smart-Contract Translation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:12-27)"
+    quote: "Large language models (LLMs) have changed the reality of how software is produced...we present an exploratory study to investigate the use of LLMs for generating smart contract code from business process descriptions"
+    description: "LLMs are explored for translating BPMN process models into executable smart contracts, potentially overcoming limitations of traditional rule-based code generation by leveraging LLM's understanding of both natural language process descriptions and code."
+
+  - name: "LLM Non-Determinism Limitation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:64-69)"
+    quote: "LLM outputs are inherently non-deterministic, making them unreliable for consistent behaviour...generated code may reproduce ethically concerning biases"
+    description: "Key AI integration limitation: LLM outputs are inherently non-deterministic, making them unreliable for critical applications like smart contracts. Generated code can also introduce security vulnerabilities and reproduce biases."
+
+  - name: "Process Model Augmentation for LLM Generation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:205-206)"
+    quote: "their result suggests that augmenting the generation process by a formalised model improves results"
+    description: "Augmenting LLM code generation with formalized process models (BPMN) improves output quality. This suggests ontology-guided LLM generation patterns where structured models constrain and guide LLM outputs."
+
+  - name: "Automated Benchmarking Framework for LLM Code Generation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:227-244)"
+    quote: "we introduce an automated evaluation framework for generating smart contract code from process models...From a given process model, it generates conforming traces"
+    description: "Framework for evaluating LLM-generated code using automated trace replay. Generates conforming and non-conforming traces from process models to validate that LLM-generated contracts correctly enforce process flow, conditions, and resource allocation."
+
+  - name: "Zero-Shot and Few-Shot Prompting for BPM"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:145-147)"
+    quote: "In zero-shot prompting, models complete tasks based solely on instructions without prior examples, whereas few-shot prompting involves providing a handful of illustrative examples"
+    description: "LLM integration with BPM using prompting strategies: zero-shot for instruction-only tasks and few-shot with examples. Research shows few-shot prompts with specific process interpretation instructions improve code generation accuracy."
+
+  - name: "LLM Integration Verification Requirements"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:649-659)"
+    quote: "Future work should explore integrating LLM capabilities into existing smart contract generation tools...LLM integration must rely on extensive evaluation and robust verification of generated outcomes"
+    description: "Safe AI integration requires extensive verification. LLMs should propose code snippets verified against formal specifications or automated theorem provers. LLMs can also generate test cases or identify vulnerabilities to augment verification."
+
+  # Paper 22 - RPA Framework BPM Activities
+  - name: "RPA Process Automation Viability Assessment"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:16-23)"
+    quote: "RPA automates user interaction with graphical user interfaces, whereby it promises efficiency gains and a reduction of human negligence during process execution"
+    description: "RPA enables AI-assisted automation of business processes through software robots that mimic user interface interactions. Framework provides 13 criteria across 5 perspectives (task, time, data, system, human) for evaluating automation candidates."
+
+  - name: "Determinism Criterion for Automation"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:335-344)"
+    quote: "Deterministic activities consist of logical execution steps without any form of cognitive assessment...human judgment aggravates automation"
+    description: "Key AI integration criterion: Determinism indicates whether activities consist of rule-based logical steps without cognitive assessment. Activities requiring human judgment are difficult to automate, while rule-based processes are ideal candidates."
+
+  - name: "Process Mining for AI Automation Discovery"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:422-426)"
+    quote: "The evaluation focuses on event logs generated through PAIS. Event logs reveal insights about the business process and its execution. We aim at an objective evaluation"
+    description: "Process mining on event logs enables objective AI automation discovery. Analyzes standardization, maturity, failure rates, frequency, and duration to identify automation-viable processes through data-driven assessment."
+
+  - name: "Machine Learning Extension of RPA"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:105-106)"
+    quote: "Although RPA typically favors less complex and cognitive tasks, advances in machine learning can extend the range of RPA application in the future"
+    description: "Machine learning advances can extend RPA beyond simple rule-based tasks to more cognitive activities, enabling AI integration for increasingly complex process automation scenarios."
+
+  # Paper 31 - BBO BPMN Ontology
+  - name: "Ontology for Virtual Agent Process Monitoring"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:72-78)"
+    quote: "Once populated with BP data, the ontology forms a knowledge base (KB) that will be exploited by a virtual agent to support operators in the execution of BP step-by-step"
+    description: "BBO ontology enables AI integration through a virtual agent that uses the knowledge base to support human operators in process execution step-by-step and answer questions about process execution."
+
+  - name: "SPARQL Query Interface for AI Agents"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:485-486)"
+    quote: "we design SPARQL queries corresponding to the competency questions and check their results"
+    description: "Ontology enables AI integration through SPARQL query interface. AI agents can query the ontology-based knowledge base to answer competency questions about process resources, locations, sequences, and actor assignments."
+
+  - name: "OWL Reasoning for Process Consistency"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:426-428)"
+    quote: "According to the various reasoners in Protege (i.e., Hermit, Fact and Pellet), the ontology is consistent and remains consistent, even after its population"
+    description: "OWL ontology enables AI reasoning for process consistency checking. Reasoners (Hermit, Fact, Pellet) verify ontology consistency and can automatically classify instances based on formal class definitions from natural language specifications."
+
+  - name: "Natural Language Specification Formalization"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:395-405)"
+    quote: "the diagrams and XML schema do not reflect the whole specification and miss a part of its semantics...Therefore, we have tried to manually conceptualize the natural language specifications, and formalize them in OWL"
+    description: "AI integration pattern: Manual conceptualization and OWL formalization of natural language specifications enables formal reasoning over process semantics that would otherwise be lost in informal documentation."

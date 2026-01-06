@@ -1,0 +1,278 @@
+---
+batch_id: "entity_definitions_5"
+field: entity_definitions
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 9
+patterns_found: 48
+---
+
+patterns:
+  # ========================================
+  # BFO Function, Role, Disposition Paper (06)
+  # ========================================
+
+  - name: "Continuant Definition (BFO)"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:54-57)"
+    quote: "BFO adopts a view of reality as comprising (1) continuants, entities that continue or persist through time, such as objects, qualities, and functions..."
+    description: "BFO defines continuants as entities that persist through time. This includes objects, qualities, and functions. The distinction between continuants (endurants) and occurrents (perdurants) is foundational to BFO's ontological framework."
+
+  - name: "Occurrent Definition (BFO)"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:54-57)"
+    quote: "...and (2) occurrents, the events or happenings in which continuants participate."
+    description: "Occurrents in BFO are events or happenings that have temporal extension. They are distinguished from continuants in that continuants persist through time while occurrents unfold in time as processes or events."
+
+  - name: "Independent Continuant Definition"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:175-177)"
+    quote: "In BFO, all entities are divided into continuants and occurrents. Continuants can be either independent or dependent."
+    description: "BFO divides continuants into independent and dependent categories. Independent continuants are the objects we encounter in everyday experience and serve as bearers of dependent continuants."
+
+  - name: "Dependent Continuant via Inherence"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:187-192)"
+    quote: "Dependent continuants are related to their bearers by inherence. Inherence is defined as a one-sided, existential dependence relation."
+    description: "Dependent continuants (qualities, roles, dispositions, functions) exist only by inhering in independent continuants. The inherence relation is specifically dependent, meaning a quality cannot migrate from one bearer to another."
+
+  - name: "Realizable Entity Definition"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:241-243)"
+    quote: "A realizable entity is defined as a specifically dependent continuant that has an independent continuant entity as its bearer, and whose instances can be realized in associated processes."
+    description: "Realizable entities are a subtype of dependent continuants that can be manifested in processes. Functions, roles, dispositions, and capabilities are all realizable entities that require processes for their actualization."
+
+  - name: "Role Definition (Externally-Grounded)"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:269-271)"
+    quote: "A role is a realizable entity which exists because the bearer is in some special physical, social, or institutional set of circumstances in which the bearer does not have to be..."
+    description: "Roles are externally-grounded realizable entities. Unlike dispositions, roles depend on external circumstances rather than the bearer's physical makeup. Roles are optional and can be lost without physical change to the bearer."
+
+  - name: "Disposition Definition (Internally-Grounded)"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:333-335)"
+    quote: "A disposition is a realizable entity which is such that, if it ceases to exist, then its bearer is physically changed, and whose realization occurs in virtue of the bearer's physical make-up."
+    description: "Dispositions are internally-grounded realizable entities. They reflect the in-built physical makeup of the bearer. If a disposition ceases, the bearer is physically changed. Dispositions exist along a strength continuum from weaker forms to sure-fire dispositions."
+
+  - name: "Function Definition (via Evolution/Design)"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:385-388)"
+    quote: "A function is a disposition that exists in virtue of the bearer's physical make-up, and this physical make-up is something the bearer possesses because it came into being, either through evolution or through intentional design."
+    description: "Functions are dispositions whose bearer's physical makeup came into existence through evolution (biological functions) or intentional design (artifactual functions) to realize processes of a certain sort."
+
+  - name: "Artifactual Function Definition"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:434-436)"
+    quote: "An artifactual function is a function whose bearer's physical make-up has been designed and made intentionally (typically by one or more human beings) to function in a certain way."
+    description: "Artifactual functions are functions of human-designed artifacts. The bearer's physical makeup was intentionally created to realize certain processes, such as a hammer's function to drive nails."
+
+  - name: "Biological Function Definition"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:449-451)"
+    quote: "A biological function is a function whose bearer is part of an organism, and exists and has the physical make-up it has because it has evolved that way and contributes to the organism's realization of a life plan."
+    description: "Biological functions are functions of organism parts that evolved to contribute to the organism's life plan. They are attributed to parts of organisms, not whole organisms - the whole organism has roles, not functions."
+
+  # ========================================
+  # Classifying Processes Paper (07)
+  # ========================================
+
+  - name: "Continuant vs Occurrent Temporal Distinction"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:296-300)"
+    quote: "Four-dimensionalists see reality as consisting exclusively of four-dimensional entities (variously referred to as processes, events, occurrents, perdurants, spacetime-worms)."
+    description: "BFO reconciles four-dimensionalist (occurrent) and three-dimensionalist (continuant) perspectives in a bicategorial framework. Continuants can have spatial parts but not temporal parts; occurrents can have both spatial and temporal parts."
+
+  - name: "Thing Definition (Continuant/Endurant)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:351-354)"
+    quote: "The former [continuants], for Zemach, are defined by the fact that they can be sliced to yield parts only along the spatial dimension - for example those parts of your table which we call its legs, top, nails."
+    description: "Continuants (things) can only be sliced spatially, not temporally. Your arms and legs are parts of you, but your childhood is not a part of you - it is part of your life (an occurrent)."
+
+  - name: "Event Definition (Occurrent/Perdurant)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:376-381)"
+    quote: "An event is an entity that exists, in its entirety, in the area defined by its spatiotemporal boundaries, and each part of this area contains a part of the whole event."
+    description: "Events (occurrents) exist in spatiotemporal regions and can be carved along any spatial and temporal dimensions. Multiple processes can occupy the same spatiotemporal region, unlike Zemach's events."
+
+  - name: "Quality Definition (Dependent Continuant)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:405-409)"
+    quote: "BFO generalizes Zemach's idea of a continuant entity by allowing not only things but also entities that are dependent on things, such as qualities and dispositions such as solubility and fragility."
+    description: "Qualities are dependent continuants that do not require a process of realization. Unlike realizable entities, qualities exist without needing to be manifested in processes."
+
+  - name: "Process Definition (Change in Continuants)"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:689-692)"
+    quote: "Processes, in particular, cannot change on the four-dimensionalist view, because processes are changes (they are changes in those independent continuant entities which are their participants)."
+    description: "Processes are changes in independent continuant entities. Processes themselves cannot change - they ARE changes. When we 'speed up a process', we ensure a quicker process occurs than would have otherwise."
+
+  - name: "Temporal Part Definition"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:577-583)"
+    quote: "a temporal_part_of b =Def. a occurrent_part_of b & for some temporal region r (a spans r & for all occurrents c, r' if (c spans r' & r' occurrent_part_of r) then (c occurrent_part_of a iff c occurrent_part_of b))"
+    description: "Temporal parts are occurrent parts that exactly restrict a larger occurrent to a proper temporal region. The first quarter of a football game is a temporal part of the whole game."
+
+  - name: "Determinable vs Determinate Quality Universals"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:500-510)"
+    quote: "Qualities instantiate quality universals, which are divided into determinable (such as temperature, length and mass) and determinate (such as 37.0C temperature, 1.6 meter length)."
+    description: "Quality universals are divided into determinable (e.g., temperature) and determinate (e.g., 37.0C temperature). Determinable universals are rigid - if exemplified at any time, they are exemplified at all times the bearer exists."
+
+  - name: "Process Profile Definition"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:119-126)"
+    quote: "When comparing two heart beating processes as being for example of the same rate, or when comparing two games of chess as consisting of the same series of moves, then there is something in each of the two processes which is qualitatively 'the same'. This something we call a process profile."
+    description: "Process profiles are structural dimensions along which processes can be compared. They are what two processes share in common when they have the same rate, series of moves, or other comparable characteristics."
+
+  - name: "Quality Process Profile Definition"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:152-157)"
+    quote: "The simplest example of a process profile is that part of a process which serves as the target of selective abstraction focused on a sequence of instances of determinate qualities such as temperature or height."
+    description: "Quality process profiles are the simplest type of process profiles, focusing on a sequence of determinate qualities over time. They can be represented by graphs plotting quality measures against time."
+
+  - name: "Rate Process Profile Definition"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:174-179)"
+    quote: "Rate process profiles are the targets of selective abstraction focused not on determinate quality magnitudes plotted over successive instants of time, but rather on certain ratios between these magnitudes and associated intervals of elapsed time."
+    description: "Rate process profiles focus on ratios between magnitudes and time intervals, such as speed (distance per unit time). They form hierarchies including constant speed, acceleration, and variable acceleration profiles."
+
+  - name: "Cyclical Process Profile Definition"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:238-243)"
+    quote: "Cyclical process profiles are a subtype of rate process profiles in which the salient ratio is not distance covered but rather number of cycles per unit of time."
+    description: "Cyclical process profiles are rate profiles where the ratio is cycles per unit time. They include regular cyclical profiles (like heartbeats at 60 bpm) and irregular cyclical profiles with diagnostic significance."
+
+  # ========================================
+  # OCEL 2.0 Specification Paper (09)
+  # ========================================
+
+  - name: "Event Definition (OCEL)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:149-154)"
+    quote: "Events: Object-centric process mining works on discrete events. They represent the various actions or activities that occur within a system or process... Every event is unique and corresponds to a specific action at a specific point in time."
+    description: "Events in OCEL are discrete, atomic occurrences representing actions/activities in a process. Each event is unique, has a timestamp, may have attributes, and is typed. Events are instantaneous and do not take time."
+
+  - name: "Event Type Definition (Activity)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:157-161)"
+    quote: "Event Types: Events are categorized into different types based on their nature or function. For example, a procurement process might have event types such as Order Created, Order Approved, or Invoice Sent."
+    description: "Event types categorize events by their nature or function. Each event belongs to exactly one type. The term 'activity' is sometimes used interchangeably with event type."
+
+  - name: "Object Definition (OCEL)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:164-167)"
+    quote: "Objects: In object-centric process mining, objects represent the entities that are involved in events. These might be physical items like products in a supply chain, or abstract/information entities like orders, invoices, or contracts."
+    description: "Objects in OCEL are entities involved in events - either physical (products, machines, workers) or abstract/information entities (orders, invoices, contracts). Objects have typed attributes whose values may change over time."
+
+  - name: "Object Type Definition"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:170-171)"
+    quote: "Object Types: Each object is of one type. The object is an instantiation of its type. Object types might include categories like Product, Order, Invoice, or Supplier."
+    description: "Every object in OCEL belongs to exactly one object type. Object types define categories of objects such as Product, Order, Invoice, or Supplier. The object is an instantiation of its type."
+
+  - name: "Event-to-Object (E2O) Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:178-186)"
+    quote: "Event-to-Object (E2O) Relationships: Events are associated with objects. This relationship describes that an object affects an event or that an event affects an object. Events can be related to multiple objects."
+    description: "E2O relationships link events to objects, describing how objects affect events or events affect objects. Unlike traditional logs, events can relate to multiple objects. Relationships can be qualified to describe the object's role."
+
+  - name: "Object-to-Object (O2O) Relationship"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:191-194)"
+    quote: "Object-to-Object (O2O) Relationships: Objects can also be related to other objects outside the context of an event. For example, an employee may be part of an organizational unit."
+    description: "O2O relationships link objects to other objects independent of events. They can be qualified (e.g., part-of, reports-to, belongs-to) and exist outside specific event contexts."
+
+  - name: "Dynamic Object Attribute Values"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:293-297)"
+    quote: "Dynamic Object Attribute Values: OCEL 2.0 adopts a dynamic approach where attribute values can change over time. Instead of having a single, fixed value, an object attribute may have a value that changes during the process."
+    description: "OCEL 2.0 supports dynamic object attributes that change over time due to events and process progression. This provides a more realistic view of process instances than static attributes."
+
+  - name: "Relationship Qualifiers"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:306-308)"
+    quote: "Relationship Qualifiers: OCEL 2.0 offers capabilities to express qualifiers for relationships, both for Object-to-Object (O2O) and Event-to-Object (E2O) relationships."
+    description: "OCEL 2.0 supports qualifiers for both E2O and O2O relationships. E2O qualifiers describe the role an object plays in an event; O2O qualifiers characterize associations between objects."
+
+  - name: "OCEL Formal Definition"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:395-396)"
+    quote: "An Object-Centric Event Log (OCEL) is a tuple L = (E, O, EA, OA, evtype, time, objtype, eatype, oatype, eaval, oaval, E2O, O2O)"
+    description: "Formal OCEL definition includes: events E, objects O, event/object attributes (EA/OA), type functions for events/objects, timestamp function, attribute value functions, and E2O/O2O relationships."
+
+  - name: "Universe Definitions (OCEL Formal)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:346-373)"
+    quote: "Let U_ev be the universe of events, U_etype be the universe of event types, U_obj be the universe of objects, U_otype be the universe of object types..."
+    description: "OCEL defines pairwise disjoint universes for events, event types, objects, object types, attribute names, attribute values, timestamps, and qualifiers. These form the foundation for formal OCEL definitions."
+
+  # ========================================
+  # OC-PM Paper (10)
+  # ========================================
+
+  - name: "Object-Centric Event Log Definition"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:79-82)"
+    quote: "Object-centric event logs are a novel representation of the event data in the information systems, where each event is related to different objects of different types."
+    description: "Object-centric event logs resolve convergence and divergence problems by allowing events to relate to multiple objects of different types, rather than forcing mutually exclusive case groupings."
+
+  - name: "Case Definition (Traditional)"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:48-52)"
+    quote: "In such event logs, a case is a collection of events related to a particular process execution. For example, in a sales order management system, a case may refer to all the events related to the creation and confirmation of the order."
+    description: "In traditional process mining, a case is a collection of events for a particular process execution. This leads to convergence (same event in different cases) and divergence (different instances of same activity) problems."
+
+  - name: "Convergence Problem Definition"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:69-71)"
+    quote: "We have a convergence problem when the same event is related to different cases. In event log formats such as XES, this leads to replicating the same event."
+    description: "Convergence occurs when the same event belongs to multiple cases, requiring event replication in traditional logs. This falsifies frequencies and introduces false behavioral information."
+
+  - name: "Divergence Problem Definition"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:72-74)"
+    quote: "We have a divergence problem when a case contains different instances of the same activity."
+    description: "Divergence occurs when a case contains multiple instances of the same activity (e.g., multiple item pickings in an order), causing issues with process mining that assumes single activity instances per case."
+
+  - name: "Lifecycle Definition (Object)"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:609-612)"
+    quote: "The lifecycle of an object o in O as the sequence of events to which the object is related: lif(o) = case_FL(L,type(o))(o)"
+    description: "An object's lifecycle is the sequence of events the object is related to, obtained by flattening the object-centric event log on the object's type. This represents the complete history of an object."
+
+  - name: "Trace Definition (Object)"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:613-615)"
+    quote: "The trace of an object o in O as the sequence of activities of the events belonging to its lifecycle: trace(o) = trace_FL(L,type(o))(o)"
+    description: "An object's trace is the sequence of activities from events in its lifecycle. This provides the activity-level view of an object's progression through the process."
+
+  - name: "Object-Centric Directly-Follows Multigraph Definition"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:764-786)"
+    quote: "An object-centric directly-follows multigraph (OC-DFG) is a tuple (A, OT, N, F, freq_n, freq_e) where A is a set of activities, OT is a set of object types, N includes activities plus start/end nodes per object type..."
+    description: "OC-DFG is a process model with typed arcs representing directly-follows relationships per object type. It includes start/end nodes per object type and can be annotated with various frequency metrics."
+
+  - name: "Flattening Operation Definition"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:555-559)"
+    quote: "A flattening operation transforms the object-centric event log into a traditional event log given the choice of an object type. This is useful because many process mining approaches are only available for traditional event logs."
+    description: "Flattening projects an object-centric event log to a traditional event log by selecting one object type as case notion. It enables use of traditional process mining techniques on object-centric data."
+
+  # ========================================
+  # Event Knowledge Graphs Paper (11)
+  # ========================================
+
+  - name: "Entity Definition (Multi-Dimensional)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:31-34)"
+    quote: "The actual processes are rather complex and emerge from the interplay of multiple inter-related entities: the various objects handled by the process as well as the organizational entities that execute the process."
+    description: "Entities in event knowledge graphs include both objects handled by the process (Orders, Items, Invoices) and organizational entities that execute it (Actors, Machines). The process emerges from their interplay."
+
+  - name: "Event Table Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:201-206)"
+    quote: "An event table T = (E, Attr, #) is a set E of events, a set Attr of attribute names with act, time in Attr. Partial function # : E x Attr -> Val assigns an event e and an attribute name a to a value."
+    description: "Event tables are the basic data structure with events as rows, attributes as columns. Each event must have activity and timestamp attributes. This is the foundation for event knowledge graph construction."
+
+  - name: "Event Table with Entity Types Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:218-220)"
+    quote: "An event table with entities types T = (E, Attr, #, ENT) additionally designates one or more attributes ENT as names of entity types."
+    description: "Event tables with entity types extend basic event tables by designating certain attributes as entity type identifiers. This enables multi-entity process mining without a single case identifier."
+
+  - name: "Entities Definition (from Event Table)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:252-254)"
+    quote: "Let ent be an entity type. The set of entities in T of type ent is Entities(ent, T) = {n | exists e in E : n in e.ent}."
+    description: "Entities are extracted from event tables by collecting all unique values in entity type columns. Each value represents a specific entity of that type."
+
+  - name: "Correlation Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:265-269)"
+    quote: "Event e is correlated to entity n, written (e, n) in corr_ent,T iff n = e.ent or n in e.ent. We write corr(n, ent, T) = {e in E | (e, n) in corr_ent,T} for the set of events correlated to entity n."
+    description: "Correlation links events to entities based on entity identifier attributes. An event can be correlated to multiple entities of different types, enabling multi-dimensional process analysis."
+
+  - name: "Relation Between Entities Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:300-302)"
+    quote: "Let ent1, ent2 be two entity types. The relation between ent1 and ent2 in T is R(ent1, ent2) = {(e.ent1, ent2) | e.ent1 != null, e.ent2 != null}."
+    description: "Relations between entity types are implicitly defined when events contain identifiers of both types. These relations have cardinalities (1-to-1, n-to-1, n-to-m) that can be inferred from the data."
+
+  - name: "Directly-Follows (per Entity) Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:519-529)"
+    quote: "Let e1, e2 in E be two events; e2 directly follows e1 from the perspective of n, written e1 <_n,T e2 iff (1) both are correlated to n, (2) e1 occurred before e2, (3) no other event correlated to n occurs in between."
+    description: "Local directly-follows relation is defined per entity, avoiding false behavioral information from global case-based ordering. Events follow each other only from the perspective of shared entities."
+
+  - name: "Event Knowledge Graph Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:624-643)"
+    quote: "An event knowledge graph is an LPG G = (N, R, lambda, #) with node labels {Event, Entity} and relationship labels {df, corr} indicating 'directly-follows' and 'correlation'..."
+    description: "Event knowledge graphs are labeled property graphs with Event and Entity nodes, connected by df (directly-follows) and corr (correlation) relationships. DF relationships are entity-specific and preserve local behavioral semantics."
+
+  - name: "DF-Path Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:667-672)"
+    quote: "A path r = <r1, ..., rk> of df-relationships is a directly-follows path (df-path) iff all relationships are defined for the same entity. r is maximal iff there is no other df-relationship extending it."
+    description: "DF-paths are sequences of directly-follows relationships for the same entity, analogous to traces in classical event logs. They can meet at events correlated to multiple entities."
+
+  - name: "Derived Entity Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:893-898)"
+    quote: "We reify the relation between two entity types ent1 and ent2 into a new derived entity type (ent1, ent2). That is, we make each pair (n1, n2) an entity node with (n1, n2).type = (ent1, ent2)."
+    description: "Derived entities are created by reifying relations between entity types into new entity types. This enables analysis of interactions between related entities by inferring df-relationships for the combined entity."
+
+  - name: "Labeled Property Graph Definition"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:574-584)"
+    quote: "A labeled property graph (LPG) G = (N, R, lambda, #) is a graph with nodes N, and relationships R where each node n carries a label, each relationship r carries a label and defines a directed edge..."
+    description: "Labeled property graphs are the data model for event knowledge graphs, with typed nodes and relationships that can carry attribute-value properties. This enables modeling events, entities, and their relationships."

@@ -1,0 +1,2744 @@
+project: C:\Users\dsber\infinite\auto-company\strategy-nexus\02-projects\16-ontologies-research-v3
+generated_at: '2025-12-31T13:19:16.082539'
+algorithm: boolean_lookup
+fields:
+  entity_types:
+    description: Core entity types defined (e.g., Agent, Activity, Entity, Endurant,
+      Perdurant)
+    priority: high
+    sparsity_warning: true
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6846
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2796
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+    match_rate: 82.2%
+  entity_definitions:
+    description: Formal definitions and distinguishing characteristics of each entity
+    priority: high
+    sparsity_warning: true
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 12
+      fields_found_state: 'true'
+      token_count: 12437
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6846
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2796
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+    match_rate: 83.6%
+  entity_relationships:
+    description: Relationships between entities (structural, behavioral, organizational)
+    priority: high
+    sparsity_warning: true
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6846
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4444
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2796
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+    match_rate: 80.8%
+  entity_count:
+    description: Number of entity classes/types in the framework and rationale
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 25050
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 12168
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9157
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13678
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14824
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11122
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10732
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: partial
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: partial
+      token_count: 8731
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  abstraction_level:
+    description: Level of abstraction (foundational, domain, application) and purpose
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: partial
+      token_count: 24575
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13678
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13298
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8622
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: partial
+      token_count: 9947
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  framework_comparison:
+    description: How this ontology compares to others (UFO, PROV-O, BBO, ArchiMate,
+      TOGAF, OCEL)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: partial
+      token_count: 24575
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 4
+      fields_found_state: partial
+      token_count: 6800
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 12
+      fields_found_state: 'true'
+      token_count: 12437
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11209
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7085
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5314
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  methodology:
+    description: Top-down (theoretical) vs bottom-up (empirical) approach
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10514
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8622
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  ai_integration:
+    description: How ontology enables AI agents, LLMs, RAG, planning, guardrails
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7760
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 3745
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7085
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5314
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 6950
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7808
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 4789
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5784
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10331
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9979
+  agent_modeling:
+    description: How agents/actors are modeled (autonomous, intentional, role-based)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: partial
+      token_count: 24575
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6839
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6846
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: partial
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: partial
+      token_count: 8731
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  agentic_workflows:
+    description: Multi-agent systems, agent orchestration, tool use, planning strategies
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7085
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5314
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 6950
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7808
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 4789
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5784
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+  generative_ai_patterns:
+    description: LLM reasoning, chain-of-thought, ReAct, function calling, structured
+      outputs
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 3745
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7085
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5314
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 6950
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7808
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 4789
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5784
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: partial
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+  agent_ontology_integration:
+    description: How AI agents interact with ontologies (RAG, KG querying, ontology-guided
+      reasoning)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 3745
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8364
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11793
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9979
+  empirical_evidence:
+    description: Process mining data, enterprise logs, real-world validation
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 4
+      fields_found_state: partial
+      token_count: 6800
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10515
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3005
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9157
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: 'true'
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: 'true'
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7085
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5314
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 6950
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7808
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 4789
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5784
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: partial
+      token_count: 9947
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+  limitations:
+    description: What the ontology cannot capture (tacit knowledge, improvisation,
+      etc.)
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 25050
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 9
+      fields_found_state: 'true'
+      token_count: 12745
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10515
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 3745
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: partial
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: partial
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: partial
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: partial
+      token_count: 14179
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 3
+      fields_found_state: partial
+      token_count: 11293
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10956
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7085
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 3
+      fields_found_state: partial
+      token_count: 9947
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: partial
+      token_count: 8731
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9979
+  tools_standards:
+    description: Technical implementations (OWL, RDF, BPMN, CMMN, DMN, OCEL 2.0)
+    priority: medium
+    sparsity_warning: true
+    chunks:
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 25050
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 24750
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 24575
+    - paper_id: 01-UFO_Unified_Foundational_Ontology
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 6800
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8940
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14954
+    - paper_id: 04-PROV-O_to_BFO_Semantic_Mapping
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8899
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 12168
+    - paper_id: 05-DOLCE_Descriptive_Ontology
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7760
+    - paper_id: 06-BFO_Function_Role_Disposition
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6839
+    - paper_id: 07-Classifying_Processes_Barry_Smith
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10515
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10514
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6846
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 4444
+    - paper_id: 09-OCEL_20_Specification
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 3745
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9157
+    - paper_id: 10-OC-PM_Object-Centric_Process_Mining
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8364
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13508
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13678
+    - paper_id: 11-Process_Mining_Event_Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 4389
+    - paper_id: 12-Foundations_of_Process_Event_Data
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 13785
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 14824
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 13298
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 3
+      fields_found_state: partial
+      token_count: 16444
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 4
+      fields_found_state: partial
+      token_count: 14591
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 5
+      fields_found_state: partial
+      token_count: 14823
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 6
+      fields_found_state: partial
+      token_count: 14150
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 7
+      fields_found_state: partial
+      token_count: 13073
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 8
+      fields_found_state: partial
+      token_count: 12796
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 9
+      fields_found_state: 'true'
+      token_count: 13834
+    - paper_id: 15-SciAgents_Multi-Agent_Graph_Reasoning
+      chunk: 10
+      fields_found_state: 'true'
+      token_count: 9516
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11122
+    - paper_id: 16-KG-Agent_Knowledge_Graph_Reasoning
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 8301
+    - paper_id: 17-KG_Reasoning_Logics_Embeddings_Survey
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11706
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11209
+    - paper_id: 18-Multi-Agent_Architecture_Taxonomy_LLM
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 14179
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8212
+    - paper_id: 19-Graph_of_Thoughts_LLM_Reasoning
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5784
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10732
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 2
+      fields_found_state: partial
+      token_count: 8622
+    - paper_id: 20-Agentic_RAG_Survey
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 10695
+    - paper_id: 21-LLM_Smart_Contracts_from_BPMN
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 11793
+    - paper_id: 22-RPA_Framework_BPM_Activities
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 10331
+    - paper_id: 23-UFO_Story_Ontological_Foundations
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 14731
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 1
+      fields_found_state: partial
+      token_count: 10535
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7723
+    - paper_id: 24-Enterprise_Ontoloty
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8731
+    - paper_id: 31-BBO_BPMN_Ontology
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9979
+    match_rate: 80.8%
+stats:
+  papers_analyzed: 22
+  total_chunks: 73
+  chunks_per_field_avg: 44

@@ -1,0 +1,322 @@
+[
+  {
+    "node": "0. Receptionist",
+    "version": "0. Receptionist｜2025-09-03|rec4at4Snhyw1",
+    "tasks": 509,
+    "variables": 10678,
+    "correct": 9919,
+    "accuracy": 92.9
+  },
+  {
+    "node": "3.0 SS Grouping",
+    "version": "3.0 SS Grouping｜2025-09-10|recvanSC4Brpw",
+    "tasks": 450,
+    "variables": 4505,
+    "correct": 4370,
+    "accuracy": 97.0
+  },
+  {
+    "node": "3.1 Group A: Complex Overlaps & Payment Processing",
+    "version": "3.1 Group A: Complex Overlaps & Payment ",
+    "tasks": 225,
+    "variables": 1084,
+    "correct": 901,
+    "accuracy": 83.1
+  },
+  {
+    "node": "Extract candidate details from the incoming CV file.",
+    "version": "Extract candidate details from the incom",
+    "tasks": 33,
+    "variables": 1001,
+    "correct": 995,
+    "accuracy": 99.4
+  },
+  {
+    "node": "Receptionist",
+    "version": "Unknown",
+    "tasks": 47,
+    "variables": 845,
+    "correct": 529,
+    "accuracy": 62.6
+  },
+  {
+    "node": "Extract All Case Information From ADM's Email 1",
+    "version": "Unknown",
+    "tasks": 44,
+    "variables": 654,
+    "correct": 599,
+    "accuracy": 91.6
+  },
+  {
+    "node": "2. TZV Zurück",
+    "version": "2. TZV Zurück｜2025-09-03|recF6RRSo0k0bc9",
+    "tasks": 44,
+    "variables": 539,
+    "correct": 386,
+    "accuracy": 71.6
+  },
+  {
+    "node": "scoring and match cv to jd",
+    "version": "scoring and match cv to jd|2025-11-14|re",
+    "tasks": 32,
+    "variables": 480,
+    "correct": 480,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Extract Job Requirements",
+    "version": "Extract Job Requirements|2025-11-14|rec8",
+    "tasks": 33,
+    "variables": 395,
+    "correct": 395,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Process company data for B2B Check",
+    "version": "Process company data for B2B Check|2025-",
+    "tasks": 22,
+    "variables": 328,
+    "correct": 322,
+    "accuracy": 98.2
+  },
+  {
+    "node": "Extract Data",
+    "version": "Extract Data|2025-09-20|rec1F0ZEZt52R33m",
+    "tasks": 17,
+    "variables": 237,
+    "correct": 211,
+    "accuracy": 89.0
+  },
+  {
+    "node": "3.2 Group B: Standalone Processing",
+    "version": "3.2 Group B: Standalone Processing｜2025-",
+    "tasks": 130,
+    "variables": 208,
+    "correct": 180,
+    "accuracy": 86.5
+  },
+  {
+    "node": "Schreiben InsoW",
+    "version": "Unknown",
+    "tasks": 15,
+    "variables": 93,
+    "correct": 77,
+    "accuracy": 82.8
+  },
+  {
+    "node": "Decide if VAT ID has EU or national format",
+    "version": "Decide if VAT ID has EU or national form",
+    "tasks": 22,
+    "variables": 84,
+    "correct": 84,
+    "accuracy": 100.0
+  },
+  {
+    "node": "SBP and Nullplan",
+    "version": "Unknown",
+    "tasks": 6,
+    "variables": 70,
+    "correct": 51,
+    "accuracy": 72.9
+  },
+  {
+    "node": "Schreiben Gericht",
+    "version": "Unknown",
+    "tasks": 7,
+    "variables": 55,
+    "correct": 53,
+    "accuracy": 96.4
+  },
+  {
+    "node": "Classify Incoming Email With the Relevant Category",
+    "version": "Unknown",
+    "tasks": 50,
+    "variables": 50,
+    "correct": 48,
+    "accuracy": 96.0
+  },
+  {
+    "node": "Generate a personalized notification message for the candidate.",
+    "version": "Generate a personalized notification mes",
+    "tasks": 25,
+    "variables": 50,
+    "correct": 50,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 3",
+    "version": "Unknown",
+    "tasks": 24,
+    "variables": 48,
+    "correct": 46,
+    "accuracy": 95.8
+  },
+  {
+    "node": "\"Parse response of VIES API call to identify validity status, company name and address\"",
+    "version": "Unknown",
+    "tasks": 20,
+    "variables": 42,
+    "correct": 37,
+    "accuracy": 88.1
+  },
+  {
+    "node": "1. Schreiben Bank",
+    "version": "1. Schreiben Bank|2025-10-10|recm67sVX8Q",
+    "tasks": 20,
+    "variables": 38,
+    "correct": 35,
+    "accuracy": 92.1
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 1",
+    "version": "Unknown",
+    "tasks": 13,
+    "variables": 36,
+    "correct": 34,
+    "accuracy": 94.4
+  },
+  {
+    "node": "Determine Relevant Related Account Where Record Type Is Partner",
+    "version": "Unknown",
+    "tasks": 23,
+    "variables": 23,
+    "correct": 23,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Identify validity status of company's ID number",
+    "version": "Identify validity status of company's ID",
+    "tasks": 22,
+    "variables": 23,
+    "correct": 21,
+    "accuracy": 91.3
+  },
+  {
+    "node": "Beam Task URL Generator",
+    "version": "Beam Task URL Generator|2025-10-24|recP3",
+    "tasks": 22,
+    "variables": 22,
+    "correct": 7,
+    "accuracy": 31.8
+  },
+  {
+    "node": "Customer country identification tool",
+    "version": "Customer country identification tool|202",
+    "tasks": 20,
+    "variables": 20,
+    "correct": 20,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Compare company data from registration and official data",
+    "version": "Compare company data from registration a",
+    "tasks": 19,
+    "variables": 19,
+    "correct": 18,
+    "accuracy": 94.7
+  },
+  {
+    "node": "Output reasoning and decision to accept new customer",
+    "version": "Output reasoning and decision to accept ",
+    "tasks": 11,
+    "variables": 11,
+    "correct": 8,
+    "accuracy": 72.7
+  },
+  {
+    "node": "Primary Classification",
+    "version": "Unknown",
+    "tasks": 2,
+    "variables": 9,
+    "correct": 9,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Extract the Jira Ticket ID from the API response",
+    "version": "Extract the Jira Ticket ID from the API ",
+    "tasks": 7,
+    "variables": 7,
+    "correct": 7,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Generate request message to customer due to company data mismatch",
+    "version": "Generate request message to customer due",
+    "tasks": 7,
+    "variables": 7,
+    "correct": 0,
+    "accuracy": 0.0
+  },
+  {
+    "node": "Restschuldbefreiung",
+    "version": "Unknown",
+    "tasks": 5,
+    "variables": 7,
+    "correct": 5,
+    "accuracy": 71.4
+  },
+  {
+    "node": "\"Identify validity status, company name and address in OpenAPI response\"",
+    "version": "Unknown",
+    "tasks": 2,
+    "variables": 4,
+    "correct": 4,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Output reasoning and decision to reject customer",
+    "version": "Output reasoning and decision to reject ",
+    "tasks": 3,
+    "variables": 3,
+    "correct": 1,
+    "accuracy": 33.3
+  },
+  {
+    "node": "Add Customer_ID to header details",
+    "version": "Add Customer_ID to header details｜2025-0",
+    "tasks": 1,
+    "variables": 2,
+    "correct": 2,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Identify country location of customer",
+    "version": "Identify country location of customer|20",
+    "tasks": 2,
+    "variables": 2,
+    "correct": 2,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Generate Case URL 2",
+    "version": "Unknown",
+    "tasks": 1,
+    "variables": 1,
+    "correct": 0,
+    "accuracy": 0.0
+  },
+  {
+    "node": "Generate comment text to Finance team for Jira ticket",
+    "version": "Generate comment text to Finance team fo",
+    "tasks": 1,
+    "variables": 1,
+    "correct": 1,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Generate rejection message to customer due to invalid national registration number",
+    "version": "Generate rejection message to customer d",
+    "tasks": 1,
+    "variables": 1,
+    "correct": 1,
+    "accuracy": 100.0
+  },
+  {
+    "node": "Jira Ticket ID Extractor",
+    "version": "Jira Ticket ID Extractor|2025-10-21|rece",
+    "tasks": 1,
+    "variables": 1,
+    "correct": 0,
+    "accuracy": 0.0
+  }
+]

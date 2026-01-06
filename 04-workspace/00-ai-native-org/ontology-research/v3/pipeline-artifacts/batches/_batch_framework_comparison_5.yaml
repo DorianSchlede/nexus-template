@@ -1,0 +1,98 @@
+---
+batch_id: "framework_comparison_5"
+field: framework_comparison
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 18
+---
+
+patterns:
+  - name: "OCEL 2.0 vs OCEL 1.0 Extension"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:33-40)"
+    quote: "OCEL 2.0 forms the new, more expressive standard, allowing for more extensive process analyses while remaining in an easily exchangeable format"
+    description: "OCEL 2.0 extends OCEL 1.0 with three key capabilities: (1) Object-to-Object (O2O) relationships, (2) dynamic object attribute values that change over time, and (3) relationship qualifiers for both E2O and O2O relationships. This represents an evolution of the object-centric event log standard from basic event-object correlation to rich relational modeling."
+
+  - name: "OCEL 2.0 vs XES Comparison"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:37-40)"
+    quote: "Compared to XES, it is more expressive, less complicated, and better readable. OCEL 2.0 offers three exchange formats: relational database (SQLite), XML, and JSON"
+    description: "OCEL 2.0 is positioned as superior to the IEEE XES standard for event logs. While XES became the official IEEE standard in 2016 (revised 2023), OCEL 2.0 offers object-centric capabilities that XES lacks, specifically the ability to relate events to multiple objects rather than requiring a single case identifier."
+
+  - name: "OCEL 1.0 Limitations Addressed by OCEL 2.0"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:198-203)"
+    quote: "The first OCEL format (OCEL 1.0) provided an event log standard that could capture events related to multiple objects with attributes but did not include Object-to-Object (O2O) relationship"
+    description: "OCEL 1.0 had deliberate limitations: no O2O relationships, no qualifiers for relationships, and no changing object attribute values. OCEL 2.0 addresses these by providing a new metamodel that captures the full complexity of object interactions in business processes."
+
+  - name: "Object-Centric vs Case-Centric Process Mining Paradigm"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:115-127)"
+    quote: "Traditional process mining considers processes involving single cases, their events, and event attributes. The approach falls short when dealing with complex, multi-dimensional processes"
+    description: "OCEL 2.0 represents a paradigm shift from traditional case-centric process mining to object-centric process mining. Case-centric approaches require 'flattening' of event data which leads to misleading analysis results, convergence/divergence problems, and inability to see interactions at process intersection points."
+
+  - name: "IEEE Task Force Survey on Object-Centricity Requirements"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:266-278)"
+    quote: "In 2021, a survey was conducted by the IEEE Task Force on Process Mining. The online survey with 289 participants...showed the need for supporting object-centricity"
+    description: "The development of OCEL 2.0 was informed by an IEEE Task Force survey of 289 practitioners, researchers, software vendors and end-users. The survey validated the need for object-centric standards, though the OCED Working Group discussions did not converge due to conflicts between expressiveness vs simplicity and relational vs graph-based paradigms."
+
+  - name: "Convergence and Divergence Problems in Traditional Logs"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:69-78)"
+    quote: "We have a convergence problem when the same event is related to different cases. In event log formats such as XES, this leads to replicating the same event. We have a divergence problem when a case contains different instances of the same activity"
+    description: "Object-centric event logs resolve two fundamental problems with traditional XES-based logs: convergence (same event duplicated across cases) and divergence (multiple activity instances within a case). These problems arise from forcing multi-object events into single-case structures."
+
+  - name: "OC-DFG vs Traditional DFG Models"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:746-761)"
+    quote: "We formalize one object-centric process model, the object-centric directly-follows multigraph (OC-DFG), and how to discover an object-centric directly-follows multigraph starting from an object-centric event log"
+    description: "OC-DFG (Object-Centric Directly-Follows Multigraph) extends traditional DFGs by including typed edges for different object types. Unlike classical DFGs that assume a single case notion, OC-DFGs can represent the lifecycle of multiple object types and their interactions within the same model."
+
+  - name: "OCEL Format Implementations Comparison"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:529-533)"
+    quote: "Recently, the OCEL format has been proposed for object-centric event logs. Two implementations of the format exist (JSON-OCEL, supported by JSON; XML-OCEL, supported by XML; MongoDB)"
+    description: "OCEL provides multiple storage format implementations including JSON-OCEL, XML-OCEL, and MongoDB. Tool support is available for popular languages (Java/ProM framework, Javascript, Python), enabling practical adoption across different technology stacks."
+
+  - name: "Object-Centric Petri Nets vs Colored Petri Nets"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 2:376-389)"
+    quote: "Colored Petri nets have been proposed in the '80 and have a wide range of applications. Colored Petri nets allow the storage of a data value for each token"
+    description: "Object-centric Petri nets are compared to colored Petri nets. While colored Petri nets offer rich semantics with token colors, color sets, expressions, and guards, discovering process models that manage all these features is extremely challenging. Object-centric Petri nets provide a simpler subset of colored Petri net semantics optimized for process discovery."
+
+  - name: "Artifact-Centric vs Object-Centric Approaches"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 2:315-324)"
+    quote: "Artifact-centric process mining is based on defining the properties of key business-relevant entities called business artifacts. In particular, the proposed techniques focus on the modeling of the single artifacts and their interactions"
+    description: "Artifact-centric process mining (proposed earlier) focuses on modeling individual artifacts and their interactions through conformance checking. Object-centric process mining extends this by providing comprehensive tool support and avoiding dependence on relational database schema, addressing limitations of artifact-centric approaches."
+
+  - name: "Event Knowledge Graphs vs Classical Event Logs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:13-21)"
+    quote: "Classical process mining relies on the notion of a unique case identifier, which is used to partition event data into independent sequences of events. In this chapter, we study the shortcomings of this approach for event data over multiple entities"
+    description: "Event knowledge graphs are introduced as an alternative to classical event logs. While classical logs partition events into independent sequences via case identifiers, event knowledge graphs model behavior over multiple entities as a network of events, preserving complex inter-entity relationships that would be lost in traditional log structures."
+
+  - name: "Labeled Property Graphs vs RDF for Event Data"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:550-552)"
+    quote: "A typed graph data model such as labeled property graphs allows to distinguish different types of nodes (events, entities) and relationships (directly-follows, correlated-to)"
+    description: "Labeled property graphs (LPGs) are preferred over RDF for event knowledge graphs because LPGs support attributes on relationships, which is essential for df-paths that need to reference specific entities. RDF does not natively support relationship attributes, making it unsuitable for the directly-follows relationships defined in event knowledge graphs."
+
+  - name: "Event Knowledge Graphs vs OCEL Event Logs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:234-239)"
+    quote: "Note that Definition 2 formalizes the object-centric event logs (OCEL) described in Sect. 3.4 of [1]; we here use the more general term 'entity' instead of 'object' as we will later study behavior over entities which are not tangible objects"
+    description: "Event knowledge graphs extend the OCEL concept by using 'entity' as a more general term than 'object', allowing modeling of non-tangible entities like activities, actors, and abstract concepts. This generalization enables analysis across control-flow, actor, and system perspectives simultaneously."
+
+  - name: "False Behavioral Information in Classical Logs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:436-446)"
+    quote: "Note that the event log in Table 2 contains numerous false behavioral information. Some events were duplicated and occur in both traces...This is also known as divergence. Further, the order of events in both traces gives false behavior information...This is also known as convergence"
+    description: "Classical event logs extracted from multi-entity data contain false behavioral information through divergence (event duplication falsifying frequencies) and convergence (false temporal ordering). Event knowledge graphs avoid these problems by maintaining local directly-follows relations per entity rather than global ordering by case identifier."
+
+  - name: "Multi-Entity DFG vs Single-Entity DFG"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:362-368)"
+    quote: "The resulting graph is a multi-entity directly-follows graph, also called multi-viewpoint DFG or artifact-centric model"
+    description: "Multi-entity DFGs aggregate event knowledge graphs while respecting local directly-follows relations per entity type. Unlike traditional DFGs that assume a single case notion, multi-entity DFGs have typed edges specific to entity types, providing a more accurate representation of multi-entity process behavior."
+
+  - name: "Object-Centric Petri Nets vs Synchronous Proclets"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:17-23)"
+    quote: "Object-centric Petri nets also first discover one Petri net per entity type, then annotate the places and arcs with entity identifiers...However, synchronization by composition prevents explicitly modeling (and thus discovering) interactions between entities"
+    description: "Comparison between object-centric Petri nets and synchronous proclets: object-centric Petri nets compose entity nets along transitions but cannot explicitly model entity interactions. Synchronous proclets use dashed synchronization edges to describe which transitions occur together with multiplicity annotations, enabling explicit interaction modeling."
+
+  - name: "Proclets vs Declarative DCR Graphs"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:25-32)"
+    quote: "While proclets can describe entity interactions, the behavior of entity interactions tends to be rather unstructured resulting in overly complex models. Extensions of declarative models such as modular DCR graphs...could be more suitable"
+    description: "Proclets can describe entity interactions but produce complex models when interactions are unstructured. Declarative models like modular DCR graphs (Dynamic Condition Response) may be more suitable as they apply similar synchronization principles while better handling unstructured interaction patterns."
+
+  - name: "Graph Database Storage vs Relational Database for Event Data"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:403-416)"
+    quote: "the usage of graph databases for the storage, querying, and aggregation of object-centric event data is proposed...However, the scalability of graph databases on process mining tasks still needs to be investigated thoroughly"
+    description: "Graph databases (e.g., Neo4j) enable natural storage of event knowledge graphs with Cypher query support. However, research shows execution time for process mining tasks in graph databases like Neo4j may be disappointing compared to relational approaches, indicating scalability remains a research challenge."

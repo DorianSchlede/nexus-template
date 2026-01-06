@@ -1,0 +1,139 @@
+---
+batch_id: "agent_ontology_integration_4"
+field: agent_ontology_integration
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 24
+---
+
+patterns:
+  # Paper 15 - SciAgents Multi-Agent Graph Reasoning (Chunk 10)
+  - name: "Multi-Agent Research Proposal Workflow"
+    chunk_ref: "15-SciAgents (Chunk 10:59-65)"
+    quote: "Caller, please select the outcome_agent to expand on the 'outcome' aspect of the research proposal. Agent outcome_agent, please expand..."
+    description: "Demonstrates a structured multi-agent workflow where specialized agents (outcome_agent, mechanism_agent, design_principles_agent, critic_agent) interact with ontologically-structured knowledge (research hypothesis components). Each agent handles a specific facet of the research proposal, showing how agents can be organized around ontological categories of scientific reasoning."
+
+  - name: "Critic Agent Evaluation Pattern"
+    chunk_ref: "15-SciAgents (Chunk 10:437-448)"
+    quote: "Critical Scientific Review... Strengths... Weaknesses... Suggested Improvements... Rating of Novelty and Feasibility"
+    description: "The critic_agent applies a structured ontological framework for evaluation with defined categories (Strengths, Weaknesses, Improvements, Ratings). This shows how agents can use ontological schemas to structure their reasoning and output generation for consistent evaluation across different research proposals."
+
+  - name: "Molecular Modeling Agent Integration"
+    chunk_ref: "15-SciAgents (Chunk 10:505-566)"
+    quote: "Key Steps to Set Up and Conduct Molecular Modeling and Simulation... 1. Define the Objective... 2. Select Appropriate Modeling Techniques"
+    description: "Demonstrates agent-ontology integration where the user agent requests molecular modeling guidance. The response follows an ontologically-structured methodology (objective definition, technique selection, model preparation, simulation setup) showing how domain ontologies can guide agent reasoning and output structure."
+
+  # Paper 16 - KG-Agent (Chunk 1)
+  - name: "Autonomous KG Reasoning Agent Framework"
+    chunk_ref: "16-KG-Agent (Chunk 1:19-39)"
+    quote: "we propose an autonomous LLM-based agent framework, called KG-Agent, which enables a small LLM to actively make decisions until finishing the reasoning process over KGs"
+    description: "Core pattern for agent-ontology integration: KG-Agent integrates LLM, multifunctional toolbox, KG-based executor, and knowledge memory. The agent autonomously iterates through tool selection and memory updates to reason over knowledge graphs, demonstrating tight coupling between agent decision-making and KG structure."
+
+  - name: "Three-Tool-Type KG Toolbox"
+    chunk_ref: "16-KG-Agent (Chunk 1:237-259)"
+    quote: "we design three types of tools for LLMs reasoning over KG, i.e., extraction, semantic, and logic tools"
+    description: "Ontology-guided tool design pattern: Extraction tools (get_relation, get_head_entity, get_tail_entity), Logic tools (count, intersect, union, judge, end), and Semantic tools (retrieve_relation, disambiguate_entity). The toolbox structure mirrors the ontological operations needed for KG traversal and reasoning."
+
+  - name: "Knowledge Memory Architecture"
+    chunk_ref: "16-KG-Agent (Chunk 1:545-551)"
+    quote: "The knowledge memory preserves the currently useful information... It mainly contains four parts: natural language question, toolbox definition, current KG information, and history reasoning program"
+    description: "Agent memory structured around ontological knowledge access. The four-part memory design (question, toolbox, KG info, history) enables the agent to maintain context while reasoning over KG, showing how ontological structure informs agent memory architecture."
+
+  - name: "Program-Based KG Reasoning Synthesis"
+    chunk_ref: "16-KG-Agent (Chunk 1:99-105)"
+    quote: "we leverage program language to formulate the multi-hop reasoning process over the KG, and synthesize a code-based instruction dataset to fine-tune the base LLM"
+    description: "Novel pattern for agent-ontology integration: converting KG reasoning chains into programmatic function calls. This bridges symbolic KG operations with LLM-based agent reasoning, allowing the agent to execute structured queries against the ontological knowledge base."
+
+  - name: "Iterative Tool Selection and Memory Update"
+    chunk_ref: "16-KG-Agent (Chunk 1:629-638)"
+    quote: "The KG-Agent framework autonomously iterates the above tool selection and memory updation process to perform step-by-step reasoning, where the knowledge memory is used to maintain the accessed information"
+    description: "Autonomous iteration pattern where the agent walks through the KG along relations, with tool selection guided by ontological structure. The agent stops when reaching answer entities, demonstrating how ontology structure guides agent termination conditions."
+
+  - name: "Query Graph to Reasoning Program Conversion"
+    chunk_ref: "16-KG-Agent (Chunk 1:420-431)"
+    quote: "the query graph has a tree-like structure that can be directly mapped to a logical form... we adopt breadth-first search (BFS) to visit all the nodes on the query graph"
+    description: "Pattern for converting ontological query structures into agent-executable reasoning chains. BFS traversal of query graphs produces reasoning chains that link start entities to answer entities while respecting constraint conditions."
+
+  # Paper 16 - KG-Agent (Chunk 2)
+  - name: "Agent Tool Interface Specification"
+    chunk_ref: "16-KG-Agent (Chunk 2:752-845)"
+    quote: "Table 8: The detailed definition and usage of all the tools... get_relation: Input: entity set... Output: one-hop relations"
+    description: "Formal specification of agent-ontology interface through tool definitions. Each tool maps to specific KG operations with typed inputs/outputs (entity sets, relations, constraints), providing a contract between agent reasoning and ontological operations."
+
+  - name: "Multi-KG Transfer Learning"
+    chunk_ref: "16-KG-Agent (Chunk 2:663-666)"
+    quote: "the agent instruction tuning data is constructed from various KGs (e.g., Wikidata and Freebase), which helps our KG-Agent to learn the general autonomous decision making capabilities over various KGs"
+    description: "Cross-ontology agent training pattern: by training on multiple KGs with different schemas, the agent learns transferable reasoning patterns independent of specific ontological structures, enabling generalization across knowledge domains."
+
+  # Paper 17 - KG Reasoning Logics Embeddings Survey (Chunk 1)
+  - name: "Logic-Embedding Integration Taxonomy"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:21-27)"
+    quote: "we have a more fine-grained categorization to these studies, from two perspectives: (i) injecting logics... into embedding learning, and (ii) utilizing KG embeddings for logic reasoning-relevant tasks"
+    description: "Fundamental taxonomy for agent-ontology integration: distinguishes between (1) using ontological logic to enhance embeddings and (2) using embeddings to enhance ontological reasoning. This bidirectional integration pattern applies to how agents can leverage both symbolic and neural approaches."
+
+  - name: "Embedding-Based Query Answering"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:359-368)"
+    quote: "Query answering returns correct entities in a KG as answers of a given structured query, where reasoning is usually considered for hidden answers"
+    description: "Pattern for agents to answer queries over incomplete KGs using embeddings. Enables agents to handle uncertainty in ontological knowledge by predicting plausible answers rather than relying solely on explicit KG triples."
+
+  - name: "Differentiable Theorem Proving"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:418-436)"
+    quote: "Differentiable theorem proving using embeddings overcome the limits of symbolic provers on generalizing to queries with similar but not identical symbols"
+    description: "NTP (Neural Theorem Prover) pattern: agents can prove theorems over KGs by comparing symbols using embeddings rather than exact matches. Enables generalization in ontological reasoning while maintaining logical structure."
+
+  - name: "Embedding-Guided Rule Mining"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:454-475)"
+    quote: "RuLES adds confidential triples using embedding models for quality extension of KGs. It iteratively extends rules induced from a KG through feedback from embedding models"
+    description: "Pattern for agents to discover new ontological rules: embeddings help evaluate rule quality and guide search during rule mining, compensating for KG incompleteness. Enables agents to extend their ontological knowledge base autonomously."
+
+  - name: "Logic Types for KG Integration"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:124-128)"
+    quote: "We consider two mainstream logic forms used in KG reasoning: (1) logic rules and (2) Ontological schema, such as those supported by OWL 2"
+    description: "Classification of logic types for agent-ontology integration: path rules (compositional reasoning) and ontological schemas (OWL 2 axioms, class hierarchies, relation properties). Agents must handle both rule-based and schema-based ontological knowledge."
+
+  - name: "Integration Stage Classification"
+    chunk_ref: "17-KG_Reasoning (Chunk 1:136-140)"
+    quote: "there are three stages: 1) Pre: conducting symbolic reasoning before learning embeddings... 2) Joint: injecting the logics during embedding learning... 3) Post: conducting symbolic reasoning after embeddings are learned"
+    description: "Temporal pattern for agent-ontology integration: Pre, Joint, and Post stages determine when ontological constraints are applied relative to embedding learning. Informs agent pipeline design for combining symbolic and neural components."
+
+  # Paper 18 - Multi-Agent Architecture Taxonomy (Chunk 1)
+  - name: "Agent Interaction Layer Architecture"
+    chunk_ref: "18-Multi-Agent (Chunk 1:74-80)"
+    quote: "LLM-powered multi-agent systems realize an interaction layer... Externally, this layer facilitates the interaction between the LLM and its contextual environment... Internally, the interaction layer allows for organizing the task-management activity"
+    description: "Architectural pattern for agent-ontology integration: the interaction layer mediates between agents, LLMs, and contextual resources (data, tools, models). This layer enables ontology-aware coordination of multi-agent activities and resource access."
+
+  - name: "Domain-Ontology Model for Multi-Agent Systems"
+    chunk_ref: "18-Multi-Agent (Chunk 1:185-188)"
+    quote: "We outline the architectural characteristics of autonomous LLM-powered multi-agent systems and propose a domain-ontology model represented as a UML class diagram structuring the architectural concepts"
+    description: "Meta-pattern: using domain ontologies to formally specify multi-agent system architecture. The UML class diagram structures concepts like Agent, Task, Action, Memory, Context, and their relationships, providing an ontological foundation for agent system design."
+
+  - name: "Task-Management Activity Ontology"
+    chunk_ref: "18-Multi-Agent (Chunk 1:856-868)"
+    quote: "Task decomposition is the first of three core phases within the Task-Management Activity: Decomposition... Orchestration... Synthesis"
+    description: "Ontological structuring of agent task management into three phases: (1) Decomposition of complex tasks, (2) Orchestration distributing tasks to agents, (3) Synthesis combining results. This ontology guides how agents organize and execute work."
+
+  - name: "Agent Type Ontology"
+    chunk_ref: "18-Multi-Agent (Chunk 1:902-921)"
+    quote: "Task-Management Agents... Domain Role Agents... Technical Agents: These agents are tech-savvies, typically tasked with interfacing with technical platforms"
+    description: "Classification ontology for agent types: Task-Management Agents (creation, prioritization, execution), Domain Role Agents (domain-specific experts), and Technical Agents (SQL Agent, Python Agent). This ontology informs agent composition and specialization."
+
+  # Paper 18 - Multi-Agent Architecture Taxonomy (Chunk 2)
+  - name: "Context Resource Ontology"
+    chunk_ref: "18-Multi-Agent (Chunk 2:104-166)"
+    quote: "Tools... can be categorized into... Search and Analysis Tools... Execution Tools... Reasoning Tools... Development Tools... Communication Tools"
+    description: "Ontological classification of contextual resources available to agents: Tools (5 categories), Data (4 types including structured, unstructured, multimodal, domain-specific), and Foundation Models (NLP, Vision, Audio, Multimodal). This ontology guides agent-resource integration."
+
+  - name: "Communication Protocol Ontology"
+    chunk_ref: "18-Multi-Agent (Chunk 2:75-92)"
+    quote: "distinct protocols are observable: Strict finite processes... Dialogue cycles... Multi-cycle process frameworks with interactions between generic agent types"
+    description: "Ontological classification of multi-agent communication patterns: (1) Strict finite processes with predefined action sequences, (2) Dialogue cycles with alternating delegate/execute actions, (3) Multi-cycle frameworks with dynamic agent interactions. Informs how agents coordinate using ontological protocols."
+
+  - name: "Action Type Ontology for Agents"
+    chunk_ref: "18-Multi-Agent (Chunk 2:35-49)"
+    quote: "the following sub-types of Action performed by the Agents can be distinguished: DecomposeTask... Create Task... DelegateTask... ExecuteTask... EvaluateResult... MergeResult"
+    description: "Ontology of agent actions: DecomposeTask, CreateTask, DelegateTask, ExecuteTask, EvaluateResult, MergeResult. Each action type has defined semantics and can be composed into larger workflows, providing an ontological basis for agent behavior specification."
+
+  - name: "Autonomy-Alignment Balance Framework"
+    chunk_ref: "18-Multi-Agent (Chunk 2:185-204)"
+    quote: "Alignment, on the one hand, primarily manifests through the implementation of dedicated Alignment Techniques by the System Architect... Autonomy, on the other hand, primarily surfaces from the capability of the multi-agent system to fulfill the designated Goal"
+    description: "Framework for balancing agent autonomy with ontological alignment constraints. Alignment techniques (integrated by architects) and user preferences provide ontological guardrails, while agent autonomy enables self-organized strategy and reasoning. This interplay is central to agent-ontology integration."

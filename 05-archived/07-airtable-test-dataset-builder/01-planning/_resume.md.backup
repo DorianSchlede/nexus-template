@@ -1,0 +1,121 @@
+# Resume Context - Airtable Test Dataset Builder
+
+> **Last Updated**: 2026-01-04
+> **Current Phase**: 6.4 Placeholder Integration - COMPLETED
+
+---
+
+## Current Status
+
+**COMPLETED: Full MetaTuner format export** with all required interfaces + **{variable} placeholders**:
+
+```
+datasetName → metadata → promptDataset → metatunerPromptInput (with placeholders) → executions
+```
+
+---
+
+## What Was Done This Session
+
+1. **Fixed TZV Parser Issues**
+   - `# Data` section now correctly finds LAST standalone occurrence (not mid-text)
+   - Added `## Email input` pattern (used by Schreiben Bank, TZV Zurück, Receptionist)
+   - Full prompt template extraction working (3000+ chars)
+
+2. **Interface Research & Documentation**
+   - Documented all MetaTuner interfaces from source code
+   - Created [02-resources/metatuner-complete-interface.md](../02-resources/metatuner-complete-interface.md)
+
+3. **Updated Export Script with Full Interface**
+   - Added `generate_input_schema()` - auto-generates JSON Schema from input data
+   - Added `generate_output_schema()` - auto-generates with enum detection
+   - Added `generate_input_parameters()` / `generate_output_parameters()`
+   - Added `generate_prompt_evaluations()` - creates exact-match eval criteria
+   - Added `build_prompt_executions()` - creates PromptExecutions bundle
+
+4. **Fixed Data Redundancy**
+   - `promptDataset.items[]` now contains only: `id`, `input`, `expectedOutput` (test cases)
+   - `executions.executions[]` contains: `id`, `input`, `output`, `evaluation` (no expectedOutput)
+   - No duplicate data between test cases and execution results
+
+5. **Added {variable} Placeholders to Prompt Template**
+   - Added `add_placeholders_to_prompt()` function
+   - Prompt template now ends with `# Data` section containing `{variable}` placeholders
+   - Placeholders: `{attachments}`, `{beamAgentOSTaskID}`, `{beamTaskId}`, `{beamTaskTimestamp}`, `{pdf_content}`, `{task}`
+   - MetaTuner can now inject input values into the prompt template
+
+6. **Complete Export Structure Now Generated**
+   ```json
+   {
+     "datasetName": "1. Schreiben Bank-gold",
+     "metadata": { agent, node, promptType, tier, itemCount, averageScore, ... },
+     "promptDataset": { name, description, items[], metadata, tags },
+     "metatunerPromptInput": {
+       "prompt": "# Role... # Data\n## pdf_content\n{pdf_content}\n...",
+       "inputSchema": { type, properties, required },
+       "outputSchema": { type, properties: { enum values auto-detected } },
+       "inputParameters": { pdf_content: "...", task: "..." },
+       "outputParameters": { bIsBankersOrderStatus: "..." },
+       "evals": [{ id, name, criteria, threshold, evaluationParams, evaluationChecklist }]
+     },
+     "executions": { id, executions[] }
+   }
+   ```
+
+7. **Finalized Schreiben Bank Dataset**
+   - `metatuner-1-schreiben-bank-gold.json` → copied to `final/`
+   - 60 items, 87.5% avg score, promptType=extraction
+   - 6 input placeholders, full input/output schemas
+   - Clean separation: test cases vs execution results
+
+---
+
+## Next Steps
+
+1. **Re-export All 7 Remaining Datasets** with new complete format
+2. **Set promptType** for each dataset (extraction/classification/generation/routing)
+3. **Test with MetaTuner** - load datasets and run optimization
+
+---
+
+## Files Modified
+
+- `03-working/export_dataset.py` - Complete MetaTuner format (schemas, evals, executions)
+- `01-planning/steps.md` - Updated Phase 6.3 as COMPLETED
+- `02-resources/metatuner-complete-interface.md` - Full interface reference
+- `04-outputs/datasets/final/metatuner-1-schreiben-bank-gold.json` - First complete dataset
+
+---
+
+## Dataset Status
+
+| Dataset | Status | Notes |
+|---------|--------|-------|
+| metatuner-1-schreiben-bank-gold | ✅ DONE | In final/, full MetaTuner format |
+| metatuner-31-group-a-gold | ⏳ Re-export | Needs new format |
+| metatuner-2-tzv-gold | ⏳ Re-export | Needs new format |
+| metatuner-30-ss-grouping-gold | ⏳ Re-export | Needs new format |
+| metatuner-receptionist-gold | ⏳ Re-export | Needs new format |
+| metatuner-classify-incoming-email-gold | ⏳ Re-export | Needs new format |
+| metatuner-extract-all-case-info-gold | ⏳ Re-export | Needs new format |
+| metatuner-extract-data-gold | ⏳ Re-export | Needs new format |
+
+---
+
+## Quick Commands
+
+```bash
+# Export single dataset (now generates full MetaTuner format)
+cd 02-projects/07-airtable-test-dataset-builder/03-working
+python export_dataset.py --node "1. Schreiben Bank" --tier gold --verbose
+
+# Verify complete structure
+python -c "
+import json
+with open('../04-outputs/datasets/FILE.json', encoding='utf-8') as f:
+    d = json.load(f)
+print('Top-level:', list(d.keys()))
+print('metatunerPromptInput:', list(d['metatunerPromptInput'].keys()))
+print('Executions:', len(d['executions']['executions']))
+"
+```

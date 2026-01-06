@@ -1,0 +1,133 @@
+---
+batch_id: "empirical_evidence_8"
+field: empirical_evidence
+extracted_at: "2026-01-01T00:00:00Z"
+chunks_read: 6
+patterns_found: 23
+---
+
+patterns:
+  # From 20-Agentic_RAG_Survey_3.md
+  - name: "Twitch Ad Sales Agentic RAG Use Case"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:5-8)"
+    quote: "Twitch leveraged an agentic workflow with RAG on Amazon Bedrock to streamline ad sales. The system dynamically retrieved advertiser data, historical campaign performance..."
+    description: "Real-world industry validation of agentic RAG systems at Twitch for ad sales enhancement. The system retrieved advertiser data, historical campaign performance, and audience demographics to generate detailed ad proposals, demonstrating operational efficiency gains in a production environment."
+
+  - name: "Healthcare Patient Case Summary Application"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:31-34)"
+    quote: "Agentic RAG systems have been applied in generating patient case summaries. For example, by integrating electronic health records (EHR) and up-to-date medical literature..."
+    description: "Empirical application of agentic RAG in healthcare domain for patient case summaries. Systems integrate EHR data with current medical literature to generate comprehensive summaries for faster clinical decision-making. Demonstrates real-world healthcare integration."
+
+  - name: "Legal Contract Analysis Use Case"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:56-59)"
+    quote: "A legal agentic RAG system can analyze contracts, extract critical clauses, and identify potential risks. By combining semantic search capabilities with legal knowledge graphs..."
+    description: "Industry application of agentic RAG for contract review automation. The system combines semantic search with legal knowledge graphs to automate tedious contract review processes, ensuring compliance and mitigating risks at scale."
+
+  - name: "Auto Insurance Claims Processing"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:82-85)"
+    quote: "In auto insurance, Agentic RAG can automate claim processing. For example, by retrieving policy details and combining them with accident data, it generates claim recommendations..."
+    description: "Finance industry validation through auto insurance claims processing. Demonstrates real-time analytics, risk mitigation through predictive analysis, and multi-step reasoning for claim recommendations while ensuring regulatory compliance."
+
+  - name: "Research Paper Generation in Education"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:108-111)"
+    quote: "In higher education, Agentic RAG has been used to assist researchers by synthesizing key findings from multiple sources. For instance, a researcher querying, 'What are the latest advancements in quantum computing?'"
+    description: "Academic use case showing agentic RAG application in research synthesis. System produces concise summaries enriched with references for quantum computing queries, demonstrating practical value for academic research workflows."
+
+  - name: "RAGBench 100K Examples Benchmark"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:265-266)"
+    quote: "RAGBench: A large-scale, explainable benchmark featuring 100,000 examples across industry domains, with a TRACe evaluation framework for actionable RAG metrics"
+    description: "Large-scale empirical benchmark for RAG system evaluation. RAGBench provides 100,000 examples spanning multiple industry domains with explainable evaluation framework, establishing standardized metrics for RAG performance assessment."
+
+  - name: "BEIR 17 Dataset Benchmark"
+    chunk_ref: "20-Agentic_RAG_Survey (Chunk 3:234-236)"
+    quote: "BEIR (Benchmarking Information Retrieval): A versatile benchmark designed for evaluating embedding models on a variety of information retrieval tasks, encompassing 17 datasets across diverse domains"
+    description: "Comprehensive multi-domain benchmark with 17 datasets covering bioinformatics, finance, and question answering. Provides empirical foundation for evaluating embedding models in retrieval-augmented generation systems."
+
+  # From 21-LLM_Smart_Contracts_from_BPMN_1.md
+  - name: "165 Process Models Benchmark Dataset"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:99-100)"
+    quote: "We provide empirical data from larger data sets of process models (165 models filtered and sampled from the collection of SAP-SAM [37] models)."
+    description: "Empirical benchmark using 165 business process models from SAP-SAM dataset for evaluating LLM-based smart contract generation. The study filters 1,427 choreography models to create a representative sample for systematic evaluation."
+
+  - name: "SAP-SAM 4096 Choreography Models Dataset"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:393-394)"
+    quote: "The collection includes 4,096 BPMN 2.0 choreography models, to our knowledge, the largest collection of choreography models accessible for research purposes."
+    description: "Largest publicly available BPMN 2.0 choreography model collection from SAP Signavio Academic Models Dataset. Contains models created by students, researchers, and teaching staff from 2011-2021, validated against previous research on modeling construct distribution."
+
+  - name: "Seven LLM Models Comparative Evaluation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:440-452)"
+    quote: "DeepSeek DeepSeek-V3 0324 671... Meta Llama-3.1-405b-instruct 405... OpenAI GPT-4.1 n/a Anthropic Claude Sonnet 4 n/a X AI Grok 3 n/a"
+    description: "Comprehensive empirical comparison of seven LLMs (4 open-source, 3 proprietary) for smart contract generation. Models range from 70B to 671B parameters, tested June 11-13 2025 via OpenRouter API with temperature 0 for quasi-deterministic results."
+
+  - name: "F1 Score Performance Metrics"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:580-608)"
+    quote: "grok-3-beta 0.044 10.134 0.918 100.0 claude-sonnet-4 0.046 11.442 0.862 100.0 gpt-4.1 0.028 10.326 0.797 99.4"
+    description: "Quantitative empirical results showing F1 scores for LLM smart contract generation. Top models (Grok, Claude) achieve F1 scores of 0.8+, with 97-100% compilability. Results demonstrate that even 98% F1 falls short of requirements for blockchain smart contracts."
+
+  - name: "2500 Traces Per Process Validation"
+    chunk_ref: "21-LLM_Smart_Contracts_from_BPMN (Chunk 1:479-480)"
+    quote: "For the generation of conforming process traces, we set a threshold of 2,500 traces per process. We generated and replayed 50 non-conforming traces per process."
+    description: "Rigorous empirical validation methodology using conforming and non-conforming trace replay. Each process model tested against up to 2,500 conforming traces and 50 non-conforming traces to validate smart contract correctness."
+
+  # From 22-RPA_Framework_BPM_Activities_1.md
+  - name: "BPI Challenge 2019 Dataset Application"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:427-435)"
+    quote: "The candidate process describes a P2P process of a multinational coatings and paints enterprise... In total, the data set includes more than 1.5 million events, and 251,734 purchase order items (cases)"
+    description: "Real-world empirical validation using BPI Challenge 2019 dataset from multinational enterprise. Dataset contains 1.5+ million events across 251,734 cases in 76,349 purchase orders, demonstrating framework applicability to industrial-scale data."
+
+  - name: "197,010 Cases Process Mining Analysis"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:437-438)"
+    quote: "These filters result in 197,010 cases with 136 process variants."
+    description: "Large-scale empirical analysis focusing on 3-way match invoice category from 2018 data. 197,010 filtered cases across 136 process variants used to evaluate RPA viability assessment framework with quantitative metrics."
+
+  - name: "RPA Framework 13 Criteria Validation"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:579-581)"
+    quote: "The framework includes a set of thirteen criteria grouped into five evaluation perspectives, enabling the examination of a process activity on different reference levels."
+    description: "Empirical framework validation through real-world process mining evaluation. 13 criteria across 5 perspectives (task, time, data, system, human) tested against industrial P2P process, demonstrating practical applicability despite some data limitations."
+
+  - name: "Change Quantity Activity Metrics"
+    chunk_ref: "22-RPA_Framework_BPM_Activities (Chunk 1:507-508)"
+    quote: "The average number of 'Change Quantity' occurrences is 31 times a day. Although the execution of 'Change Quantity' varies month by month, it occurs at least 379 times a month."
+    description: "Quantitative empirical evidence for RPA candidate selection. Specific activity analyzed with 31 daily occurrences, 379+ monthly minimum, 5.33% failure rate, 138 users performing the task, demonstrating measurable criteria for automation potential."
+
+  # From 23-UFO_Story_Ontological_Foundations_1.md
+  - name: "OntoUML Multi-Domain Model Repository"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:318-322)"
+    quote: "we have managed to assemble a model repository containing OntoUML models in different domains (e.g., telecommunications, government, biodiversity, bioinformatics), different sizes..."
+    description: "Empirical validation through accumulated OntoUML model repository. Contains models ranging from dozens to thousands of concepts, created by novices to expert practitioners, across domains including telecommunications, government, biodiversity, and bioinformatics."
+
+  - name: "U.S. Department of Defense OntoUML Adoption"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:223-226)"
+    quote: "it has been considered as a candidate for addressing the OMG SIMF (Semantic Information Model Federation) Request for Proposal, after a report of its successful use over the years by a branch of the U.S. Department of Defense"
+    description: "High-level institutional validation of OntoUML by U.S. Department of Defense. Successful multi-year application led to consideration for OMG SIMF standardization proposal, demonstrating enterprise-scale ontology engineering applicability."
+
+  - name: "Anti-Pattern Empirical Studies"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:322-337)"
+    quote: "in three different empirical studies, Guizzardi & Sales (2014), Sales & Guizzardi (2015) managed to show that this approach for model validation via visual simulation is not only able to detect deviations..."
+    description: "Three empirical studies validating anti-pattern detection methodology. Studies demonstrated correlation between identified anti-patterns and solution adoption, with large industrial model validation showing high correlation for majority of anti-patterns."
+
+  - name: "OntoUML Multi-Domain Applications"
+    chunk_ref: "23-UFO_Story_Ontological_Foundations (Chunk 1:226-242)"
+    quote: "It has been employed in a number of projects in different countries, in academic, government and industrial institutions, in domains such as Geology... Biodiversity Management... Organ Donation..."
+    description: "Extensive real-world empirical validation across diverse domains: Geology, Biodiversity, Organ Donation, Petroleum Reservoir, Disaster Management, Enterprise Architecture, Data Provenance, Logistics, Telecommunications, Petroleum and Gas, and heart electrophysiology."
+
+  # From 31-BBO_BPMN_Ontology_1.md
+  - name: "AVIREX Industrial Partner Validation"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:73-78)"
+    quote: "The first two use contexts are given by the project partner industrial companies, Thales Alenia Space (TAS) and Continental. In both cases, the BPs define how to monitor and supervise the automatic or manual assembly..."
+    description: "Real-world industrial validation through AVIREX project partners Thales Alenia Space and Continental. BBO ontology tested against actual electronic/digital component assembly processes for automotive and space vehicle equipment manufacturing."
+
+  - name: "20 Technical Documents BP Analysis"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:150-155)"
+    quote: "They have provided us with 20 technical documents that describe their BPs. Each document is between 10 and 30 pages long. It describes all the stages, devices and resources required to perform one BP."
+    description: "Empirical grounding through analysis of 20 industrial technical documents from TAS and Continental. Each 10-30 page document describes complete BP specifications including stages, devices, and resources, providing real-world specification requirements."
+
+  - name: "BBO Schema Metrics Evaluation"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:470-473)"
+    quote: "Concepts: 106 | Relationships others than isA: 125 | isA relations: 83 | RD = 125/(125+83) = 0.60 | SD = 83/106 = 0.78"
+    description: "Quantitative schema metrics validation showing BBO complexity and depth. 106 concepts with 125 non-inheritance relationships (60% relationship diversity) and 0.78 schema deepness indicates rich, vertical ontology covering BP domain in detail."
+
+  - name: "22 Competency Questions Validation"
+    chunk_ref: "31-BBO_BPMN_Ontology (Chunk 1:164-166)"
+    quote: "After meeting experts and analyzing related works (Falbo and Bertollo, 2009; Abdalla et al., 2014), we collected a set of 22 competency questions from which we give a sample in Table 1."
+    description: "Empirical requirements gathering through 22 competency questions collected from expert interviews and literature analysis. Questions validated BBO's ability to answer real operational queries about resources, activities, agents, and locations."

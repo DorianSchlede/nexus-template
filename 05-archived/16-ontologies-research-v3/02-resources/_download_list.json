@@ -1,0 +1,254 @@
+{
+  "papers": [
+    {
+      "id": "01",
+      "title": "UFO: Unified Foundational Ontology",
+      "year": 2021,
+      "category": "UFO",
+      "pdf_url": "https://philpapers.org/archive/PORUUF.pdf",
+      "doi": "10.3233/ao-210256"
+    },
+    {
+      "id": "02",
+      "title": "Knowledge Graphs",
+      "year": 2021,
+      "category": "PROV-O",
+      "pdf_url": "https://dl.acm.org/doi/pdf/10.1145/3447772",
+      "doi": "10.1145/3447772"
+    },
+    {
+      "id": "03",
+      "title": "PROV-AGENT Unified Provenance for AI Agents",
+      "year": 2025,
+      "category": "PROV-O",
+      "arxiv_id": "2508.02866",
+      "pdf_url": "https://arxiv.org/pdf/2508.02866v3.pdf"
+    },
+    {
+      "id": "04",
+      "title": "PROV-O to BFO Semantic Mapping",
+      "year": 2025,
+      "category": "PROV-O",
+      "pdf_url": "https://doi.org/10.1038/s41597-025-04580-1",
+      "doi": "10.1038/s41597-025-04580-1"
+    },
+    {
+      "id": "05",
+      "title": "DOLCE Descriptive Ontology",
+      "year": 2023,
+      "category": "DOLCE",
+      "arxiv_id": "2308.01597",
+      "pdf_url": "https://arxiv.org/pdf/2308.01597v1.pdf"
+    },
+    {
+      "id": "06",
+      "title": "BFO Function Role Disposition",
+      "year": 2008,
+      "category": "BFO",
+      "pdf_url": "https://link.springer.com/content/pdf/10.1038%2Fnpre.2008.1941.1.pdf",
+      "doi": "10.1038/npre.2008.1941.1"
+    },
+    {
+      "id": "07",
+      "title": "Classifying Processes Barry Smith",
+      "year": 2012,
+      "category": "BFO",
+      "pdf_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3718480",
+      "doi": "10.1111/j.1467-9329.2012.00557.x"
+    },
+    {
+      "id": "08",
+      "title": "ArchiMate UFO Resources Capabilities",
+      "year": 2015,
+      "category": "EA",
+      "pdf_url": "https://www.sciencedirect.com/science/article/pii/S0306437915000745",
+      "doi": "10.1016/j.is.2015.04.008"
+    },
+    {
+      "id": "09",
+      "title": "OCEL 2.0 Specification",
+      "year": 2024,
+      "category": "OCEL",
+      "arxiv_id": "2403.01975",
+      "pdf_url": "https://arxiv.org/pdf/2403.01975v1.pdf"
+    },
+    {
+      "id": "10",
+      "title": "OC-PM Object-Centric Process Mining",
+      "year": 2022,
+      "category": "OCEL",
+      "pdf_url": "https://link.springer.com/content/pdf/10.1007/s10009-022-00668-w.pdf",
+      "doi": "10.1007/s10009-022-00668-w"
+    },
+    {
+      "id": "11",
+      "title": "Process Mining Event Knowledge Graphs",
+      "year": 2022,
+      "category": "OCEL",
+      "pdf_url": "https://link.springer.com/content/pdf/10.1007/978-3-031-08848-3_9.pdf",
+      "doi": "10.1007/978-3-031-08848-3_9"
+    },
+    {
+      "id": "12",
+      "title": "Foundations of Process Event Data",
+      "year": 2022,
+      "category": "OCEL",
+      "pdf_url": "https://link.springer.com/content/pdf/10.1007/978-3-031-08848-3_6.pdf",
+      "doi": "10.1007/978-3-031-08848-3_6"
+    },
+    {
+      "id": "13",
+      "title": "VKG Object-Centric Event Logs Extraction",
+      "year": 2023,
+      "category": "OCEL",
+      "pdf_url": "https://link.springer.com/content/pdf/10.1007/978-3-031-27815-0_34.pdf",
+      "doi": "10.1007/978-3-031-27815-0_34"
+    },
+    {
+      "id": "14",
+      "title": "RAG Ontologic Graph Multiagent LLM",
+      "year": 2024,
+      "category": "LLM-Agent",
+      "pdf_url": "https://pubs.acs.org/doi/pdf/10.1021/acsengineeringau.3c00058",
+      "doi": "10.1021/acsengineeringau.3c00058"
+    },
+    {
+      "id": "15",
+      "title": "SciAgents Multi-Agent Graph Reasoning",
+      "year": 2024,
+      "category": "LLM-Agent",
+      "pdf_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/12138853",
+      "doi": "10.1002/adma.202413523"
+    },
+    {
+      "id": "16",
+      "title": "KG-Agent Knowledge Graph Reasoning",
+      "year": 2024,
+      "category": "LLM-Agent",
+      "arxiv_id": "2402.11163",
+      "pdf_url": "https://arxiv.org/pdf/2402.11163v1.pdf"
+    },
+    {
+      "id": "17",
+      "title": "KG Reasoning Logics Embeddings Survey",
+      "year": 2022,
+      "category": "AI-KR",
+      "arxiv_id": "2202.07412",
+      "pdf_url": "https://arxiv.org/pdf/2202.07412v1.pdf"
+    },
+    {
+      "id": "18",
+      "title": "Multi-Agent Architecture Taxonomy LLM",
+      "year": 2023,
+      "category": "AI-KR",
+      "arxiv_id": "2310.03659",
+      "pdf_url": "https://arxiv.org/pdf/2310.03659"
+    },
+    {
+      "id": "19",
+      "title": "Graph of Thoughts LLM Reasoning",
+      "year": 2024,
+      "category": "AI-KR",
+      "pdf_url": "https://ojs.aaai.org/index.php/AAAI/article/download/29720/31236",
+      "doi": "10.1609/aaai.v38i16.29720"
+    },
+    {
+      "id": "20",
+      "title": "Agentic RAG Survey",
+      "year": 2025,
+      "category": "AI-KR",
+      "arxiv_id": "2501.09136",
+      "pdf_url": "https://arxiv.org/pdf/2501.09136"
+    },
+    {
+      "id": "21",
+      "title": "LLM Smart Contracts from BPMN",
+      "year": 2025,
+      "category": "AI-KR",
+      "arxiv_id": "2507.23087",
+      "pdf_url": "https://arxiv.org/pdf/2507.23087v1.pdf"
+    },
+    {
+      "id": "22",
+      "title": "RPA Framework BPM Activities",
+      "year": 2020,
+      "category": "AI-KR",
+      "arxiv_id": "2007.10900",
+      "pdf_url": "https://arxiv.org/pdf/2007.10900v2.pdf"
+    }
+  ],
+  "needs_alternative": [
+    {
+      "id": "23",
+      "title": "UFO Story - Towards Ontological Foundations",
+      "year": 2015,
+      "category": "UFO",
+      "doi": "10.3233/ao-150157",
+      "search_strategy": "ResearchGate, author site (Guizzardi)"
+    },
+    {
+      "id": "24",
+      "title": "Building Ontologies with BFO",
+      "year": 2015,
+      "category": "BFO",
+      "doi": "10.7551/mitpress/9780262527811.001.0001",
+      "search_strategy": "MIT Press sample chapters, BFO wiki, Library Genesis"
+    },
+    {
+      "id": "25",
+      "title": "The Enterprise Ontology",
+      "year": 1998,
+      "category": "EA",
+      "doi": "10.1017/s0269888998001088",
+      "search_strategy": "CiteSeerX, author sites, archived versions"
+    },
+    {
+      "id": "26",
+      "title": "BFO 2.0 Specification",
+      "year": 2022,
+      "category": "BFO",
+      "doi": "10.3233/ao-220262",
+      "search_strategy": "BFO wiki, ISO documentation"
+    },
+    {
+      "id": "27",
+      "title": "Ontological Foundations of DOLCE",
+      "year": 2010,
+      "category": "DOLCE",
+      "doi": "10.1007/978-90-481-8847-5_13",
+      "search_strategy": "Author sites (Masolo, Borgo), ResearchGate"
+    },
+    {
+      "id": "28",
+      "title": "Events as Entities UFO",
+      "year": 2019,
+      "category": "UFO",
+      "doi": "10.1007/978-3-030-33223-5_39",
+      "search_strategy": "CEUR-WS, ER conference archives"
+    },
+    {
+      "id": "29",
+      "title": "Endurant Types OntoUML 2.0",
+      "year": 2018,
+      "category": "UFO",
+      "doi": "10.1007/978-3-030-00847-5_12",
+      "search_strategy": "CEUR-WS, ER conference archives"
+    },
+    {
+      "id": "30",
+      "title": "Multi-level Ontology Modeling",
+      "year": 2017,
+      "category": "UFO",
+      "doi": "10.1016/j.datak.2017.03.002",
+      "search_strategy": "ResearchGate, author sites"
+    },
+    {
+      "id": "31",
+      "title": "BBO BPMN Based Ontology",
+      "year": 2019,
+      "category": "BBO",
+      "doi": "10.34190/km.19.113",
+      "search_strategy": "ResearchGate, CEUR-WS"
+    }
+  ]
+}

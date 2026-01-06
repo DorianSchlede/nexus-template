@@ -1,0 +1,1578 @@
+{
+  "name": "2. TZV Zurück-gold",
+  "description": "Node: 2. TZV Zurück. Agent: TZV Agent 03.09. Quality tier: gold. Total items: 42",
+  "items": [
+    {
+      "id": "b8c8ddb5-058e-4bd9-8fc6-42470c87a856",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ100723122519\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"c2f1fe40-c901-462a-a664-9c0ecdc300a8\",\"beamTaskTimestamp\":\"2025-09-09T19:39:05Z\",\"attachments\":[{\"name\":\"EWSZ100723122519.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_b0159d5d-da22-43da-8c40-e78130dff6df_EWSZ100723122519.pdf\"}]}",
+        "beamAgentOSTaskID": "6ac219d7-d109-43b0-b68d-8178f31ae9b1",
+        "beamTaskId": "TZV-1578",
+        "beamTaskTimestamp": "2025-10-17T16:34:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_b0159d5d-da22-43da-8c40-e78130dff6df_EWSZ100723122519.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e26e67cd-23fe-47fd-8e28-c29cd1b0dbdc_fad296c9-2ecb-47b6-b7b4-696d2149269b_b0159d5d-da22-43da-8c40-e78130dff6df_EWSZ100723122519.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-07",
+        "nAmountFirstInstalment": "48.97",
+        "nClaimAmount": "48.97"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-07",
+        "nClaimAmount": "48.97"
+      },
+      "metadata": {
+        "score": 0.75
+      }
+    },
+    {
+      "id": "8cb48980-3820-483a-97ee-0af2226f7854",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"JOKL050723105229\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"312184e7-06f3-471d-977d-40d1fbffcd60\",\"beamTaskTimestamp\":\"2025-09-09T19:38:12Z\",\"attachments\":[{\"name\":\"JOKL050723105229.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_ad6f2e32-7ff0-4404-af0a-7fcc0b8a60b3_JOKL050723105229.pdf\"}]}",
+        "beamAgentOSTaskID": "d24772fd-1618-4174-a495-5d58148b66d6",
+        "beamTaskId": "TZV-1577",
+        "beamTaskTimestamp": "2025-10-17T16:34:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ad6f2e32-7ff0-4404-af0a-7fcc0b8a60b3_JOKL050723105229.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_6c2a8c9d-372c-4574-b0c6-4fc2e8e5cacc_fad296c9-2ecb-47b6-b7b4-696d2149269b_ad6f2e32-7ff0-4404-af0a-7fcc0b8a60b3_JOKL050723105229.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "GENODED1WIL",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE77384621351513961010",
+        "cNameDepositor": "Jana Engels",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "300.00",
+        "nAmountFurtherInstalments": "300.00",
+        "nClaimAmount": "2334.6"
+      },
+      "actualOutput": {
+        "cBIC": "GENODED1WIL",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE77384621351513961010",
+        "cNameDepositor": "Jana Engels",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "300.00",
+        "nAmountFurtherInstalments": "300.00",
+        "nClaimAmount": "2334.60"
+      },
+      "metadata": {
+        "score": 0.88
+      }
+    },
+    {
+      "id": "f087be54-2fbc-4afd-a343-42d488e2d056",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE060623125659\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"37ce03dc-d955-45e1-81db-820da5a3edd9\",\"beamTaskTimestamp\":\"2025-09-09T19:38:34Z\",\"attachments\":[{\"name\":\"ALHE060623125659.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_5928adf4-db8c-451d-a0e0-2056e211fed6_ALHE060623125659.pdf\"}]}",
+        "beamAgentOSTaskID": "d0c6af85-70d1-48e7-be18-fc9680224975",
+        "beamTaskId": "TZV-1576",
+        "beamTaskTimestamp": "2025-10-17T16:34:12Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_5928adf4-db8c-451d-a0e0-2056e211fed6_ALHE060623125659.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_551dd416-919f-4635-b473-2f627ae688a6_fad296c9-2ecb-47b6-b7b4-696d2149269b_5928adf4-db8c-451d-a0e0-2056e211fed6_ALHE060623125659.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "NORSDE51XXX",
+        "cBLZ": "10077777",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE76100777770748503000",
+        "cNameBank": "Norisbank",
+        "cNameDepositor": "Gerd Bartsch",
+        "dDateFirstInstalment": "2023-06-10",
+        "nAmountFirstInstalment": "180.00",
+        "nAmountFurtherInstalments": "180.00",
+        "nClaimAmount": "1049.19"
+      },
+      "actualOutput": {
+        "cBIC": "DONORSDE51+++",
+        "cBLZ": "10077777",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE76100777770748503000",
+        "cNameBank": "Norisbank",
+        "cNameDepositor": "Gerd Barkach",
+        "dDateFirstInstalment": "2023-07-10",
+        "nAmountFirstInstalment": "180.00",
+        "nAmountFurtherInstalments": "180.00",
+        "nClaimAmount": "1049.19"
+      },
+      "metadata": {
+        "score": 0.7
+      }
+    },
+    {
+      "id": "f9941de4-cee3-4c61-a3c7-ee9e9a1e0913",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623135528\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"3fcd86ce-2534-48bb-9b0b-222587fdea26\",\"beamTaskTimestamp\":\"2025-09-09T19:38:36Z\",\"attachments\":[{\"name\":\"ALHE050623135528.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_24830337-c7c9-4df1-ab75-ba4d49e1051e_ALHE050623135528.pdf\"}]}",
+        "beamAgentOSTaskID": "d98537d5-5c81-4842-a68f-04d763c7cd45",
+        "beamTaskId": "TZV-1575",
+        "beamTaskTimestamp": "2025-10-17T16:34:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_24830337-c7c9-4df1-ab75-ba4d49e1051e_ALHE050623135528.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_7f727590-1a83-49e8-b9bf-11350f86f58a_fad296c9-2ecb-47b6-b7b4-696d2149269b_24830337-c7c9-4df1-ab75-ba4d49e1051e_ALHE050623135528.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "998.76"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "998.76"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "8896b2fa-a6f3-43cd-982d-0edea8dd689c",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11808_498944429577_2023-06-09_118968\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"10c9e65e-6515-48a4-b3ec-a534d241ff40\",\"beamTaskTimestamp\":\"2025-09-09T19:38:27Z\",\"attachments\":[{\"name\":\"In_Fax_11808_498944429577_2023-06-09_118968.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_a292ae32-7905-4393-b7cd-880628059858_In_Fax_11808_498944429577_2023-06-09_118968.PDF\"}]}",
+        "beamAgentOSTaskID": "46f799fa-7edc-42d3-bed3-9ba9ad46e6cd",
+        "beamTaskId": "TZV-1574",
+        "beamTaskTimestamp": "2025-10-17T16:34:03Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a292ae32-7905-4393-b7cd-880628059858_In_Fax_11808_498944429577_2023-06-09_118968.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_8f5bc527-4f8b-447a-b49c-7f41ec83b8e3_fad296c9-2ecb-47b6-b7b4-696d2149269b_a292ae32-7905-4393-b7cd-880628059858_In_Fax_11808_498944429577_2023-06-09_118968.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Duman",
+        "dDateFirstInstalment": "2023-06-15",
+        "nAmountFirstInstalment": "75.00",
+        "nAmountFurtherInstalments": "75.00",
+        "nClaimAmount": "812.16"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-06-15",
+        "nAmountFirstInstalment": "75.00",
+        "nAmountFurtherInstalments": "75.00",
+        "nClaimAmount": "812.16"
+      },
+      "metadata": {
+        "score": 0.83
+      }
+    },
+    {
+      "id": "be457f30-7dbf-4434-b7e6-3ffcd7bfcf0f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11808_494098761964_2023-06-06_118328\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"f7c07002-ff51-4bd3-bd05-dd3eb51c0587\",\"beamTaskTimestamp\":\"2025-09-09T19:38:22Z\",\"attachments\":[{\"name\":\"In_Fax_11808_494098761964_2023-06-06_118328.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_7f2bf5f6-d3fc-48be-8986-6e3efb1eb17d_In_Fax_11808_494098761964_2023-06-06_118328.PDF\"}]}",
+        "beamAgentOSTaskID": "dcba3c49-8e34-470c-b624-e35c5a1bad19",
+        "beamTaskId": "TZV-1573",
+        "beamTaskTimestamp": "2025-10-17T16:33:57Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_7f2bf5f6-d3fc-48be-8986-6e3efb1eb17d_In_Fax_11808_494098761964_2023-06-06_118328.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2bb134e9-09ba-48ed-b387-544b768f47cc_fad296c9-2ecb-47b6-b7b4-696d2149269b_7f2bf5f6-d3fc-48be-8986-6e3efb1eb17d_In_Fax_11808_494098761964_2023-06-06_118328.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "HASPDEHHXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE73200505501180844902",
+        "cNameBank": "Hamburger Sparkasse",
+        "cNameDepositor": "Mohammed Elsanhoti",
+        "dDateFirstInstalment": "2023-06-01",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "1656.48"
+      },
+      "actualOutput": {
+        "cBIC": "HASPDEHHXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE73200505501180844902",
+        "cNameBank": "Hamburger Sparkasse",
+        "cNameDepositor": "Ychammed Elsanketi",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "1656.48"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "8d0505e6-52cb-4fc1-8524-e4b1b499cc63",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623134031\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"c168f866-01df-4ea5-94ea-be4296f4a7fb\",\"beamTaskTimestamp\":\"2025-09-09T19:38:29Z\",\"attachments\":[{\"name\":\"ALHE050623134031.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_88be79e7-3413-4062-8a6f-b71a790bbdad_ALHE050623134031.pdf\"}]}",
+        "beamAgentOSTaskID": "ee3ac6e6-5ea5-4b0f-8d42-f066c5b30bf7",
+        "beamTaskId": "TZV-1572",
+        "beamTaskTimestamp": "2025-10-17T16:33:52Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_88be79e7-3413-4062-8a6f-b71a790bbdad_ALHE050623134031.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_01bc518b-c929-4766-b817-c99811450cf2_fad296c9-2ecb-47b6-b7b4-696d2149269b_88be79e7-3413-4062-8a6f-b71a790bbdad_ALHE050623134031.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "37060590",
+        "cBLZ": "37060590",
+        "cIBAN": "DE42370605900004389824",
+        "cNameBank": "Sparda Bank West",
+        "cNameDepositor": "Lisa Groppe",
+        "nClaimAmount": "438.56"
+      },
+      "actualOutput": {
+        "cBLZ": "37060590",
+        "cIBAN": "DE42370605900004389824",
+        "cNameBank": "Sparda Bank West",
+        "cNameDepositor": "Lisa Grappe",
+        "nClaimAmount": "438.56"
+      },
+      "metadata": {
+        "score": 0.67
+      }
+    },
+    {
+      "id": "89adc2e9-b2c1-4a3f-adc0-2801fc09e5f8",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121711\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"ee81c261-9730-48cd-b301-2ac032d93ea5\",\"beamTaskTimestamp\":\"2025-09-09T19:39:00Z\",\"attachments\":[{\"name\":\"EWSZ280623121711.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_6cf613a1-c7f6-4123-aa87-fa3a68fcbfcd_EWSZ280623121711.pdf\"}]}",
+        "beamAgentOSTaskID": "cbfb52ce-7752-4e5f-b249-2918d980ed20",
+        "beamTaskId": "TZV-1571",
+        "beamTaskTimestamp": "2025-10-17T16:33:47Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_6cf613a1-c7f6-4123-aa87-fa3a68fcbfcd_EWSZ280623121711.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_7361d375-3cf7-4339-8b6f-27e59558dd82_fad296c9-2ecb-47b6-b7b4-696d2149269b_6cf613a1-c7f6-4123-aa87-fa3a68fcbfcd_EWSZ280623121711.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "HASPDEHHXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE37200505501230435248",
+        "cNameBank": "Haspa",
+        "cNameDepositor": "Amir Rezai",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "60.00",
+        "nAmountFurtherInstalments": "60.00",
+        "nClaimAmount": "1726.68"
+      },
+      "actualOutput": {
+        "cBIC": "HASPDEHHXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE3720050550193012304352018",
+        "cNameBank": "Haspa",
+        "cNameDepositor": "Amir Rezai",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "60.00",
+        "nAmountFurtherInstalments": "60.00",
+        "nClaimAmount": "1798.65"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "166ba0af-7248-4c41-85cc-6f8f0f2ce132",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LEFI260623134046\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"29d28527-adb5-4052-bb0a-84ea5e39b893\",\"beamTaskTimestamp\":\"2025-09-09T19:39:27Z\",\"attachments\":[{\"name\":\"LEFI260623134046.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_ea21a9aa-c8cc-4252-b70d-379e3684d2e6_LEFI260623134046.pdf\"}]}",
+        "beamAgentOSTaskID": "1c532c9f-f8c9-4796-a9bc-61e79ad9224e",
+        "beamTaskId": "TZV-1570",
+        "beamTaskTimestamp": "2025-10-17T16:33:42Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ea21a9aa-c8cc-4252-b70d-379e3684d2e6_LEFI260623134046.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ffc6671b-daea-4441-a901-58edb8f16562_fad296c9-2ecb-47b6-b7b4-696d2149269b_ea21a9aa-c8cc-4252-b70d-379e3684d2e6_LEFI260623134046.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Ljubica Stankovic",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "1056.57"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "1056.57"
+      },
+      "metadata": {
+        "score": 0.83
+      }
+    },
+    {
+      "id": "14e3e717-a4ad-402b-94ad-7d75221ade33",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"JOKL050723105607\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"521068d7-4998-4529-840d-ca11831bdad2\",\"beamTaskTimestamp\":\"2025-09-09T19:39:07Z\",\"attachments\":[{\"name\":\"JOKL050723105607.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_96476abe-c49d-497a-8e2b-cc9d790891d8_JOKL050723105607.pdf\"}]}",
+        "beamAgentOSTaskID": "2127b14b-ca08-479a-b2a9-49be1c56477d",
+        "beamTaskId": "TZV-1569",
+        "beamTaskTimestamp": "2025-10-17T16:33:37Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_96476abe-c49d-497a-8e2b-cc9d790891d8_JOKL050723105607.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_052b3fe2-711e-4511-bd73-3602d9905f6f_fad296c9-2ecb-47b6-b7b4-696d2149269b_96476abe-c49d-497a-8e2b-cc9d790891d8_JOKL050723105607.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "42.52",
+        "nClaimAmount": "42.52"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-01",
+        "nClaimAmount": "42.52"
+      },
+      "metadata": {
+        "score": 0.75
+      }
+    },
+    {
+      "id": "1164eeb5-b774-4d55-bc0c-055feb68bfbd",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623135500\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"f60b9ac7-5779-4abc-95ea-a858e0bf494c\",\"beamTaskTimestamp\":\"2025-09-09T19:39:25Z\",\"attachments\":[{\"name\":\"ALHE050623135500.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_94c9ed58-82c5-4ce5-99c2-3a5568e4379b_ALHE050623135500.pdf\"}]}",
+        "beamAgentOSTaskID": "95575697-c68e-4316-a151-05917bb4c779",
+        "beamTaskId": "TZV-1568",
+        "beamTaskTimestamp": "2025-10-17T16:33:32Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_94c9ed58-82c5-4ce5-99c2-3a5568e4379b_ALHE050623135500.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_239946af-8428-4d17-ba80-4136a4d990bc_fad296c9-2ecb-47b6-b7b4-696d2149269b_94c9ed58-82c5-4ce5-99c2-3a5568e4379b_ALHE050623135500.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "null",
+        "cNameBank": "null",
+        "dDateFirstInstalment": "2023-06-01"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameBank": "13",
+        "dDateFirstInstalment": "2023-06-01"
+      },
+      "metadata": {
+        "score": 0.33
+      }
+    },
+    {
+      "id": "7d49c348-9f70-45e5-ba9a-544cfc6a6b72",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE060623125506\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"66e5c90a-9abb-4e0f-afa5-3c5c4e966e06\",\"beamTaskTimestamp\":\"2025-09-09T19:38:08Z\",\"attachments\":[{\"name\":\"ALHE060623125506.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_cd38f072-0b51-48a5-b4ca-97023c8dbec3_ALHE060623125506.pdf\"}]}",
+        "beamAgentOSTaskID": "1d066f40-d005-465e-8443-fa3ad8461d19",
+        "beamTaskId": "TZV-1567",
+        "beamTaskTimestamp": "2025-10-17T16:33:27Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_cd38f072-0b51-48a5-b4ca-97023c8dbec3_ALHE060623125506.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4cfa73d8-477a-4eef-a295-6c0f3a0e9f42_fad296c9-2ecb-47b6-b7b4-696d2149269b_cd38f072-0b51-48a5-b4ca-97023c8dbec3_ALHE060623125506.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Alexander Kusch",
+        "dDateFirstInstalment": "2023-06-28",
+        "nAmountFirstInstalment": "10.00",
+        "nAmountFurtherInstalments": "10.00",
+        "nClaimAmount": "871.39"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Alexander Kusch",
+        "dDateFirstInstalment": "2023-07-28",
+        "nAmountFirstInstalment": "10.00",
+        "nAmountFurtherInstalments": "10.00",
+        "nClaimAmount": "871.39"
+      },
+      "metadata": {
+        "score": 0.83
+      }
+    },
+    {
+      "id": "d43eb0e9-c78d-42c0-8029-168ecc7b8250",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"BISC060623131049\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"a58d49bd-6405-45f3-867a-4a4258e45d03\",\"beamTaskTimestamp\":\"2025-09-09T19:39:10Z\",\"attachments\":[{\"name\":\"BISC060623131049.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_087083db-a5cc-45ae-91d5-60a18b3d9d35_BISC060623131049.pdf\"}]}",
+        "beamAgentOSTaskID": "2be3f56b-6290-4acb-b1f7-be3e329805b9",
+        "beamTaskId": "TZV-1566",
+        "beamTaskTimestamp": "2025-10-17T16:33:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_087083db-a5cc-45ae-91d5-60a18b3d9d35_BISC060623131049.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_8c7afc36-8ed3-4542-a27b-85760022804a_fad296c9-2ecb-47b6-b7b4-696d2149269b_087083db-a5cc-45ae-91d5-60a18b3d9d35_BISC060623131049.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "COBADEFFXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE13763400610829761600",
+        "cNameBank": "Commerzbank",
+        "cNameDepositor": "Nurdjan Kolb",
+        "dDateFirstInstalment": "2023-07-23",
+        "nAmountFirstInstalment": "30.00",
+        "nAmountFurtherInstalments": "30.00",
+        "nClaimAmount": "981.49"
+      },
+      "actualOutput": {
+        "cBIC": "COBADEFFXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE13763400610829761600",
+        "cNameBank": "Commerzbank",
+        "cNameDepositor": "Nurdjan Kolb",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "30.00",
+        "nAmountFurtherInstalments": "30.00",
+        "nClaimAmount": "981.49"
+      },
+      "metadata": {
+        "score": 0.89
+      }
+    },
+    {
+      "id": "1c470b5e-77a5-4ac4-9ff4-1b2361eb2eb3",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE060623130723\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"cf247f6c-57f2-4b4e-9522-9906573be682\",\"beamTaskTimestamp\":\"2025-09-09T19:37:14Z\",\"attachments\":[{\"name\":\"ALHE060623130723.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_9246bf48-e2f8-490a-9f6c-2ae517c48b2e_ALHE060623130723.pdf\"}]}",
+        "beamAgentOSTaskID": "3cf59100-3adf-4cef-82eb-9d808630f51c",
+        "beamTaskId": "TZV-1565",
+        "beamTaskTimestamp": "2025-10-17T16:33:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9246bf48-e2f8-490a-9f6c-2ae517c48b2e_ALHE060623130723.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_5f7f6aa7-732c-48b1-a227-7b7e1fb16d57_fad296c9-2ecb-47b6-b7b4-696d2149269b_9246bf48-e2f8-490a-9f6c-2ae517c48b2e_ALHE060623130723.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-06-20",
+        "nAmountFirstInstalment": "186.06",
+        "nAmountFurtherInstalments": "186.06",
+        "nClaimAmount": "372.12"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-06-20",
+        "nAmountFirstInstalment": "186.06",
+        "nAmountFurtherInstalments": "186.06",
+        "nClaimAmount": "372.12"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "ff253b71-1139-4995-aa84-a002970ea736",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LMBA040723130819\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"9472d4e0-d180-4c71-aa07-60694568440b\",\"beamTaskTimestamp\":\"2025-09-09T19:39:22Z\",\"attachments\":[{\"name\":\"LMBA040723130819.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_359cf56a-9f57-4d58-bbdc-f6ec1024ca0f_LMBA040723130819.pdf\"}]}",
+        "beamAgentOSTaskID": "5a567d71-03b6-4a7c-af97-aae1517679e4",
+        "beamTaskId": "TZV-1564",
+        "beamTaskTimestamp": "2025-10-17T16:33:12Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_359cf56a-9f57-4d58-bbdc-f6ec1024ca0f_LMBA040723130819.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9c296881-f5ae-4c51-baf1-f795aaeaa8b7_fad296c9-2ecb-47b6-b7b4-696d2149269b_359cf56a-9f57-4d58-bbdc-f6ec1024ca0f_LMBA040723130819.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-04",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "280.62"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-04",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "280.62"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "8d54ce9a-72c4-4048-bee7-18e73ef43812",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE060623131211\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"8206baf7-21fc-44df-aabc-0c370a34bba4\",\"beamTaskTimestamp\":\"2025-09-09T19:38:17Z\",\"attachments\":[{\"name\":\"ALHE060623131211.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_b06ec9cb-0638-49aa-ae93-2b9abf66347c_ALHE060623131211.pdf\"}]}",
+        "beamAgentOSTaskID": "5ff49cd8-6868-4944-837d-1a2e17df9fa9",
+        "beamTaskId": "TZV-1563",
+        "beamTaskTimestamp": "2025-10-17T16:33:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_b06ec9cb-0638-49aa-ae93-2b9abf66347c_ALHE060623131211.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_0f23e631-9a24-4a22-80cc-5c071a251e20_fad296c9-2ecb-47b6-b7b4-696d2149269b_b06ec9cb-0638-49aa-ae93-2b9abf66347c_ALHE060623131211.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "PBNKDEFF",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE37100100200293068120",
+        "cNameBank": "Postbank",
+        "cNameDepositor": "Steve Niemann",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "411.02"
+      },
+      "actualOutput": {
+        "cBIC": "PBNKDEFF",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE37100100200293068120",
+        "cNameBank": "Postbank",
+        "cNameDepositor": "Stedt Nierawr",
+        "dDateFirstInstalment": "2023-08-15",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "411.02"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "d0744406-1bd3-4c69-93ee-eb8799339e4f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11803_4995618060803_2023-06-10_119075\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"eb3ec896-f337-48c6-bd45-bba66a798b75\",\"beamTaskTimestamp\":\"2025-09-09T19:39:12Z\",\"attachments\":[{\"name\":\"In_Fax_11803_4995618060803_2023-06-10_119075.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_3c93daf0-750e-4f19-98a9-15ae787fa08d_In_Fax_11803_4995618060803_2023-06-10_119075.PDF\"}]}",
+        "beamAgentOSTaskID": "215086c0-3a89-418f-a592-02714870a985",
+        "beamTaskId": "TZV-1562",
+        "beamTaskTimestamp": "2025-10-17T16:33:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3c93daf0-750e-4f19-98a9-15ae787fa08d_In_Fax_11803_4995618060803_2023-06-10_119075.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_361eb781-a3b5-4b6d-ad94-fb04600afb55_fad296c9-2ecb-47b6-b7b4-696d2149269b_3c93daf0-750e-4f19-98a9-15ae787fa08d_In_Fax_11803_4995618060803_2023-06-10_119075.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-08-15",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "3512.14"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-08-15",
+        "nAmountFirstInstalment": "400.00",
+        "nAmountFurtherInstalments": "400.00",
+        "nClaimAmount": "3512.14"
+      },
+      "metadata": {
+        "score": 0.6
+      }
+    },
+    {
+      "id": "5edb9d33-4077-4643-9f19-a939c218b11f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121516\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"42998f55-8cca-4455-b821-808a8b7d082e\",\"beamTaskTimestamp\":\"2025-09-09T19:38:53Z\",\"attachments\":[{\"name\":\"EWSZ280623121516.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_4d4f390c-1551-42b7-8ffb-15e0c76fa9f2_EWSZ280623121516.pdf\"}]}",
+        "beamAgentOSTaskID": "63026c38-e1b3-4ad8-8102-cc9db5deb352",
+        "beamTaskId": "TZV-1561",
+        "beamTaskTimestamp": "2025-10-17T16:32:57Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4d4f390c-1551-42b7-8ffb-15e0c76fa9f2_EWSZ280623121516.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_c9abb653-2c9b-4cfc-901c-140d8fbf6f80_fad296c9-2ecb-47b6-b7b4-696d2149269b_4d4f390c-1551-42b7-8ffb-15e0c76fa9f2_EWSZ280623121516.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "GENODE1L2N",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE88230612200001183214",
+        "cNameDepositor": "Heiner Hahn",
+        "dDateFirstInstalment": "2023-09-01",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "5440.49"
+      },
+      "actualOutput": {
+        "cBIC": "GENODE1L2N",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE88230612200001183214",
+        "cNameDepositor": "Heiner Hahn",
+        "dDateFirstInstalment": "2023-08-06",
+        "nAmountFirstInstalment": "400.00",
+        "nAmountFurtherInstalments": "400.00",
+        "nClaimAmount": "5440.49"
+      },
+      "metadata": {
+        "score": 0.63
+      }
+    },
+    {
+      "id": "f760ec4d-c67b-4448-b5a0-9b7755d2ab00",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"JOKL050723111259\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"da83c150-610c-43fa-8445-c7afed9260d4\",\"beamTaskTimestamp\":\"2025-09-09T19:38:45Z\",\"attachments\":[{\"name\":\"JOKL050723111259.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_190cad82-32b1-426c-bd9e-14b83db0a468_JOKL050723111259.pdf\"}]}",
+        "beamAgentOSTaskID": "59fd9668-629f-4126-933c-4f66ed843a1f",
+        "beamTaskId": "TZV-1560",
+        "beamTaskTimestamp": "2025-10-17T16:32:52Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_190cad82-32b1-426c-bd9e-14b83db0a468_JOKL050723111259.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_513391ff-aa6d-48d0-889a-5fd0a908e830_fad296c9-2ecb-47b6-b7b4-696d2149269b_190cad82-32b1-426c-bd9e-14b83db0a468_JOKL050723111259.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "null",
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Sevim Korngiebel",
+        "dDateFirstInstalment": "2023-07-20",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-20",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00"
+      },
+      "metadata": {
+        "score": 0.67
+      }
+    },
+    {
+      "id": "9144d42b-12b6-4f15-8f98-4079b98f595b",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ANPA100723124240\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"fc8ee392-a76d-4f7f-8565-355e90793af0\",\"beamTaskTimestamp\":\"2025-09-09T19:38:19Z\",\"attachments\":[{\"name\":\"ANPA100723124240.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_ddede9cf-6e6f-41f5-afe3-8eb35f55c7b1_ANPA100723124240.pdf\"}]}",
+        "beamAgentOSTaskID": "1ef4b0db-0eef-4bbb-8ec5-d4b84a0817a4",
+        "beamTaskId": "TZV-1559",
+        "beamTaskTimestamp": "2025-10-17T16:32:47Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ddede9cf-6e6f-41f5-afe3-8eb35f55c7b1_ANPA100723124240.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_82a0db28-2108-4005-8fc2-e8e54b8b615e_fad296c9-2ecb-47b6-b7b4-696d2149269b_ddede9cf-6e6f-41f5-afe3-8eb35f55c7b1_ANPA100723124240.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "OSDDDE81XXX",
+        "cBLZ": "85050300",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE68850503001227330665",
+        "cNameBank": "Ostsächsische SPK Dresden",
+        "dDateFirstInstalment": "2023-07-10",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "648.5"
+      },
+      "actualOutput": {
+        "cBIC": "OSDDDE81XXX",
+        "cBLZ": "85050300",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE68850503001227330665",
+        "cNameBank": "Ostsächsische SPK Dresden",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "648.50"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "a4f73fc8-fd2a-4937-87a6-eb617605f6ff",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121841\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"b185ab1a-6b3e-457e-a70c-6d477e89ca0f\",\"beamTaskTimestamp\":\"2025-09-09T19:38:55Z\",\"attachments\":[{\"name\":\"EWSZ280623121841.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_13565462-47fb-4dcb-8231-a9769dd4d2c1_EWSZ280623121841.pdf\"}]}",
+        "beamAgentOSTaskID": "4be4a6ca-f379-4e41-aa93-0da71457b7c4",
+        "beamTaskId": "TZV-1558",
+        "beamTaskTimestamp": "2025-10-17T16:32:42Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_13565462-47fb-4dcb-8231-a9769dd4d2c1_EWSZ280623121841.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f78b4d5b-c89d-4b4b-83c9-c9b266f60898_fad296c9-2ecb-47b6-b7b4-696d2149269b_13565462-47fb-4dcb-8231-a9769dd4d2c1_EWSZ280623121841.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "COBADEFFXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE82741400480355024100",
+        "cNameBank": "COMMERZBANK",
+        "cNameDepositor": "Kuldeep Gautam",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "21.99",
+        "nAmountFurtherInstalments": "21.99",
+        "nClaimAmount": "214.6"
+      },
+      "actualOutput": {
+        "cBIC": "COBADEFFXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE82741400480355024100",
+        "cNameBank": "COMMERZBANK",
+        "cNameDepositor": "Kuldeep Gautam",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "21.99",
+        "nAmountFurtherInstalments": "21.99",
+        "nClaimAmount": "214.60"
+      },
+      "metadata": {
+        "score": 0.89
+      }
+    },
+    {
+      "id": "5be7e1b8-5394-4078-a295-4085af81da36",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121449\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"73e51a38-24ce-4eea-9cd7-82704bf7991f\",\"beamTaskTimestamp\":\"2025-09-09T19:37:57Z\",\"attachments\":[{\"name\":\"EWSZ280623121449.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_37ec3502-0bb4-498e-bfbf-d8b38469b64f_EWSZ280623121449.pdf\"}]}",
+        "beamAgentOSTaskID": "cd45eaa3-3c60-475b-94df-e643f4f20a16",
+        "beamTaskId": "TZV-1557",
+        "beamTaskTimestamp": "2025-10-17T16:32:37Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_37ec3502-0bb4-498e-bfbf-d8b38469b64f_EWSZ280623121449.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_eec9e11d-99ed-40ef-a60c-f3710bdfba23_fad296c9-2ecb-47b6-b7b4-696d2149269b_37ec3502-0bb4-498e-bfbf-d8b38469b64f_EWSZ280623121449.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE55630500001011175576",
+        "cNameBank": "SPARKASSE ULM",
+        "cNameDepositor": "ZOLTAN NOTAR",
+        "dDateFirstInstalment": "null",
+        "nAmountFirstInstalment": "150.00",
+        "nAmountFurtherInstalments": "150.00",
+        "nClaimAmount": "6824.62"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE5563050000101117576",
+        "cNameBank": "SPARKASSE ULM",
+        "cNameDepositor": "ZOLTAN NOTAR",
+        "dDateFirstInstalment": "2023-06-26",
+        "nAmountFirstInstalment": "150.00",
+        "nAmountFurtherInstalments": "150.00",
+        "nClaimAmount": "6824.62"
+      },
+      "metadata": {
+        "score": 0.75
+      }
+    },
+    {
+      "id": "359ba958-78a1-4adb-9462-7c604dbcfc69",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121305\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"dad8338a-8db1-4deb-bb94-72bb9eb4de56\",\"beamTaskTimestamp\":\"2025-09-09T19:38:47Z\",\"attachments\":[{\"name\":\"EWSZ280623121305.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_54d2b733-0704-4c84-9aec-ca49fe0c365f_EWSZ280623121305.pdf\"}]}",
+        "beamAgentOSTaskID": "1ff37523-1196-4ecc-8a4f-a2244ed831ef",
+        "beamTaskId": "TZV-1556",
+        "beamTaskTimestamp": "2025-10-17T16:32:32Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_54d2b733-0704-4c84-9aec-ca49fe0c365f_EWSZ280623121305.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f11f9ed9-7675-45cf-a3df-4ae3eb47b81f_fad296c9-2ecb-47b6-b7b4-696d2149269b_54d2b733-0704-4c84-9aec-ca49fe0c365f_EWSZ280623121305.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "NOLADE21SES",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE35800555000400039540",
+        "cNameBank": "SALZLAND SPARKASSE",
+        "cNameDepositor": "SIMONE , RUDOLPH",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "952.90"
+      },
+      "actualOutput": {
+        "cBIC": "NOLADE21SES",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE35800555000400039540",
+        "cNameBank": "SALZLANDSPARKASSE",
+        "cNameDepositor": "SIMONE, RUDOLPH",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "952.90"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "1dbf3761-b6d8-4267-8b57-4a8cdd3ef131",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11807_492318820701_2023-06-07_118682\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"64c518e5-d3e7-4db4-8072-e1de06834865\",\"beamTaskTimestamp\":\"2025-09-09T19:37:52Z\",\"attachments\":[{\"name\":\"In_Fax_11807_492318820701_2023-06-07_118682.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_87bdb6fa-1617-4b93-b460-1478b2700dd3_In_Fax_11807_492318820701_2023-06-07_118682.PDF\"}]}",
+        "beamAgentOSTaskID": "7aea318b-7b9b-455e-9d45-cfa2210aa9ab",
+        "beamTaskId": "TZV-1555",
+        "beamTaskTimestamp": "2025-10-17T16:32:27Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_87bdb6fa-1617-4b93-b460-1478b2700dd3_In_Fax_11807_492318820701_2023-06-07_118682.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_0e8b536b-c0f6-4a44-bc27-2390bc0be670_fad296c9-2ecb-47b6-b7b4-696d2149269b_87bdb6fa-1617-4b93-b460-1478b2700dd3_In_Fax_11807_492318820701_2023-06-07_118682.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "WELADEDNXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE2230551001882966",
+        "cNameBank": "Spark. Neuss",
+        "cNameDepositor": "Nadar Muhidin",
+        "dDateFirstInstalment": "2023-06-10",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "308.06"
+      },
+      "actualOutput": {
+        "cBIC": "WELADEDNXXX",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE2230551001882966",
+        "cNameBank": "WEEA Spark Neuss",
+        "cNameDepositor": "Nodar Muhidin",
+        "dDateFirstInstalment": "2023-06-10",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "308.06"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "4881d975-3607-4a27-833e-4ced3c6a6eac",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"BISC060623132814\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"9ef0d40b-7b30-43dd-aa57-975e93824457\",\"beamTaskTimestamp\":\"2025-09-09T19:38:51Z\",\"attachments\":[{\"name\":\"BISC060623132814.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_2bf9e949-ccb7-4555-a637-42cb12be809d_BISC060623132814.pdf\"}]}",
+        "beamAgentOSTaskID": "d9ffb6f0-b059-4467-a6b3-cbf58c53d89c",
+        "beamTaskId": "TZV-1554",
+        "beamTaskTimestamp": "2025-10-17T16:32:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2bf9e949-ccb7-4555-a637-42cb12be809d_BISC060623132814.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_8e036b63-19e1-4dea-8db1-0ac0612eb7d5_fad296c9-2ecb-47b6-b7b4-696d2149269b_2bf9e949-ccb7-4555-a637-42cb12be809d_BISC060623132814.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "WELADE3LXXX",
+        "cBLZ": "47650130",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE45476501301110535356",
+        "cNameBank": "Sparkasse Paderborn",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "15.00",
+        "nAmountFurtherInstalments": "15.00",
+        "nClaimAmount": "289.41"
+      },
+      "actualOutput": {
+        "cBIC": "WELADE3LXXX",
+        "cBLZ": "47650130",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE45476501301110535356",
+        "cNameBank": "Sparkasse Paderborn Defin",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "15.00",
+        "nAmountFurtherInstalments": "15.00",
+        "nClaimAmount": "289.41"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "61be98f1-3bfd-4c13-a7bc-92cc1ebf4194",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623133628\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"b3e80cab-9500-49c8-b98f-dec00e6ac5db\",\"beamTaskTimestamp\":\"2025-09-09T19:38:42Z\",\"attachments\":[{\"name\":\"ALHE050623133628.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_04916193-a829-427c-a4c5-db3bce4c424d_ALHE050623133628.pdf\"}]}",
+        "beamAgentOSTaskID": "fe050026-30e7-4c06-bf66-37ef5051300d",
+        "beamTaskId": "TZV-1553",
+        "beamTaskTimestamp": "2025-10-17T16:32:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_04916193-a829-427c-a4c5-db3bce4c424d_ALHE050623133628.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_52c39f39-d5f0-4c6a-b085-f884ca135249_fad296c9-2ecb-47b6-b7b4-696d2149269b_04916193-a829-427c-a4c5-db3bce4c424d_ALHE050623133628.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "WELADED1MOR",
+        "cBLZ": "35450000",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE14354500001232015733",
+        "cNameBank": "Sparkasse a. Nieder.",
+        "cNameDepositor": "THOMAS HENKEL",
+        "dDateFirstInstalment": "2023-05-15",
+        "nAmountFirstInstalment": "372.96",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "772.96"
+      },
+      "actualOutput": {
+        "cBIC": "WELADEDMOR",
+        "cBLZ": "35450000",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE14354500001232015733",
+        "cNameBank": "Sparkasse a. Nieder.",
+        "cNameDepositor": "THOMAS HENKEL",
+        "dDateFirstInstalment": "2023-06-15",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "772.96"
+      },
+      "metadata": {
+        "score": 0.7
+      }
+    },
+    {
+      "id": "b435dcbf-07b7-4e2e-ad39-f42687f92734",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LMBA070723135223\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"4f7f59c4-4e73-4cd2-9a81-113a504570b8\",\"beamTaskTimestamp\":\"2025-09-09T19:38:15Z\",\"attachments\":[{\"name\":\"LMBA070723135223.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_17ba0f05-8eff-4151-96f9-339b847669a4_LMBA070723135223.pdf\"}]}",
+        "beamAgentOSTaskID": "2818c383-068c-4309-83c2-37c66de0ee51",
+        "beamTaskId": "TZV-1552",
+        "beamTaskTimestamp": "2025-10-17T16:32:12Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_17ba0f05-8eff-4151-96f9-339b847669a4_LMBA070723135223.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_fca06463-459a-49e9-b222-85d114d567ea_fad296c9-2ecb-47b6-b7b4-696d2149269b_17ba0f05-8eff-4151-96f9-339b847669a4_LMBA070723135223.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "PBNKDEFF",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE94100100100565374127",
+        "cNameBank": "Postbank",
+        "cNameDepositor": "Ayad ALhasan Alhilal",
+        "dDateFirstInstalment": "2023-06-05",
+        "nAmountFirstInstalment": "80.00",
+        "nAmountFurtherInstalments": "80.00",
+        "nClaimAmount": "359.92"
+      },
+      "actualOutput": {
+        "cBIC": "PBNKDEFF",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE94100100100565374127",
+        "cNameBank": "Postbank",
+        "cNameDepositor": "Ayad ALhasan Alhilal",
+        "dDateFirstInstalment": "2023-07-05",
+        "nAmountFirstInstalment": "80.00",
+        "nAmountFurtherInstalments": "80.00",
+        "nClaimAmount": "359.92"
+      },
+      "metadata": {
+        "score": 0.89
+      }
+    },
+    {
+      "id": "1f991488-f65e-4c9c-b501-d0e8fa99ce12",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623133559\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"89fcaf7f-a079-4347-ac69-5ed3c15f90d5\",\"beamTaskTimestamp\":\"2025-09-09T19:38:03Z\",\"attachments\":[{\"name\":\"ALHE050623133559.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_66eb28f1-0fd4-404f-86c3-efdc09eff7d9_ALHE050623133559.pdf\"}]}",
+        "beamAgentOSTaskID": "2e9139e8-2539-4921-a159-5091862fdbc4",
+        "beamTaskId": "TZV-1551",
+        "beamTaskTimestamp": "2025-10-17T16:32:08Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_66eb28f1-0fd4-404f-86c3-efdc09eff7d9_ALHE050623133559.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e0a459e9-6fef-4b63-a68f-9b2503a4aea5_fad296c9-2ecb-47b6-b7b4-696d2149269b_66eb28f1-0fd4-404f-86c3-efdc09eff7d9_ALHE050623133559.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "NOLADE21PSU",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE67150504001855091522",
+        "cNameBank": "SPARKASSE Kecker-Randow",
+        "dDateFirstInstalment": "2023-06-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "398.6"
+      },
+      "actualOutput": {
+        "cBIC": "NOLADE21PSU",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE67150504001855091522",
+        "cNameBank": "SPARKASSE Kecker-Randow",
+        "dDateFirstInstalment": "2023-06-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "398.60"
+      },
+      "metadata": {
+        "score": 0.88
+      }
+    },
+    {
+      "id": "1cb9fb32-a280-490b-b016-a3de17358888",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE050623134829\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"89309d9a-39df-4d9e-9005-8e2ab3e0d59e\",\"beamTaskTimestamp\":\"2025-09-09T19:39:18Z\",\"attachments\":[{\"name\":\"ALHE050623134829.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_d1f074dc-6344-4d41-8a86-9ba5dfe3cf05_ALHE050623134829.pdf\"}]}",
+        "beamAgentOSTaskID": "bbe5a617-4d7f-40ba-8e65-ac4d0ac15f8c",
+        "beamTaskId": "TZV-1550",
+        "beamTaskTimestamp": "2025-10-17T16:32:06Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_d1f074dc-6344-4d41-8a86-9ba5dfe3cf05_ALHE050623134829.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_bb156529-52fe-4867-8320-b030992f222d_fad296c9-2ecb-47b6-b7b4-696d2149269b_d1f074dc-6344-4d41-8a86-9ba5dfe3cf05_ALHE050623134829.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "SOLADES1OFG",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE89664500500078019538",
+        "cNameBank": "SPAKA OFFENBURG Ortenau",
+        "cNameDepositor": "BERND Blümle",
+        "dDateFirstInstalment": "2023-05-30",
+        "nAmountFirstInstalment": "120.00",
+        "nAmountFurtherInstalments": "120.00",
+        "nClaimAmount": "1693.24"
+      },
+      "actualOutput": {
+        "cBIC": "SOLADESYOFG",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE89664500500078019538",
+        "cNameBank": "SPAKA OFFENBURG PORTENALL",
+        "cNameDepositor": "BERND BLUMAIS",
+        "dDateFirstInstalment": "2023-06-30",
+        "nAmountFirstInstalment": "120.00",
+        "nAmountFurtherInstalments": "120.00",
+        "nClaimAmount": "1693.24"
+      },
+      "metadata": {
+        "score": 0.56
+      }
+    },
+    {
+      "id": "2caa7262-7238-4796-a847-ea1b4dc24e4f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11803_4995618060803_2023-06-10_119074\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"376f1142-157f-4b96-a41e-506cc2820e7b\",\"beamTaskTimestamp\":\"2025-09-09T19:38:49Z\",\"attachments\":[{\"name\":\"In_Fax_11803_4995618060803_2023-06-10_119074.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_f88cf7cb-66dc-4303-a266-be8d74306680_In_Fax_11803_4995618060803_2023-06-10_119074.PDF\"}]}",
+        "beamAgentOSTaskID": "3f537a35-4ba6-4d23-a135-6d7ea3c7b114",
+        "beamTaskId": "TZV-1549",
+        "beamTaskTimestamp": "2025-10-17T16:31:57Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f88cf7cb-66dc-4303-a266-be8d74306680_In_Fax_11803_4995618060803_2023-06-10_119074.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_89590a31-7d73-49a2-af91-021be96c537d_fad296c9-2ecb-47b6-b7b4-696d2149269b_f88cf7cb-66dc-4303-a266-be8d74306680_In_Fax_11803_4995618060803_2023-06-10_119074.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-08-15",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "3512.14"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-08-15",
+        "nAmountFirstInstalment": "400.00",
+        "nAmountFurtherInstalments": "400.00",
+        "nClaimAmount": "2512.14"
+      },
+      "metadata": {
+        "score": 0.4
+      }
+    },
+    {
+      "id": "0a4d6082-1158-49f6-bba2-32dd16b41297",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"JOKL050723111459\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"069a744c-eca6-438b-aa46-95136983de2d\",\"beamTaskTimestamp\":\"2025-09-09T19:39:16Z\",\"attachments\":[{\"name\":\"JOKL050723111459.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_4c086aa6-5a20-4f6f-8a80-536248d6a107_JOKL050723111459.pdf\"}]}",
+        "beamAgentOSTaskID": "206db80b-f8eb-433b-a635-c7ffb3137fc1",
+        "beamTaskId": "TZV-1548",
+        "beamTaskTimestamp": "2025-10-17T16:31:52Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4c086aa6-5a20-4f6f-8a80-536248d6a107_JOKL050723111459.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_b3b55e89-d44c-4d12-b2ac-799829c03766_fad296c9-2ecb-47b6-b7b4-696d2149269b_4c086aa6-5a20-4f6f-8a80-536248d6a107_JOKL050723111459.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Doris Krzos",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "D. Terzos",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00"
+      },
+      "metadata": {
+        "score": 0.8
+      }
+    },
+    {
+      "id": "fbc3543f-5eaa-4c5b-85e8-c8094fbc547e",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"In_Fax_11808_4936741189821_2023-06-08_118860\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"1e7c2e49-1b9d-4f0b-b85e-871fe9bd8ea9\",\"beamTaskTimestamp\":\"2025-09-09T19:39:20Z\",\"attachments\":[{\"name\":\"In_Fax_11808_4936741189821_2023-06-08_118860.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_8a088ed8-1ff5-4e4f-895e-628e23bb9b21_In_Fax_11808_4936741189821_2023-06-08_118860.PDF\"}]}",
+        "beamAgentOSTaskID": "cd0ea07f-bb11-4e69-afc4-200db14957c4",
+        "beamTaskId": "TZV-1547",
+        "beamTaskTimestamp": "2025-10-17T16:31:47Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_8a088ed8-1ff5-4e4f-895e-628e23bb9b21_In_Fax_11808_4936741189821_2023-06-08_118860.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_6a1aff1b-381d-4829-8b9d-71e73655f27a_fad296c9-2ecb-47b6-b7b4-696d2149269b_8a088ed8-1ff5-4e4f-895e-628e23bb9b21_In_Fax_11808_4936741189821_2023-06-08_118860.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nicole Marsell",
+        "dDateFirstInstalment": "2023-06-15",
+        "nAmountFirstInstalment": "25.00",
+        "nAmountFurtherInstalments": "25.00",
+        "nClaimAmount": "390.1"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nicole Marsell",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "25.00",
+        "nAmountFurtherInstalments": "25.00",
+        "nClaimAmount": "390.10"
+      },
+      "metadata": {
+        "score": 0.67
+      }
+    },
+    {
+      "id": "4724beb4-6a4e-404c-9d22-d6e2fc1c31e7",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LMBA040723130940\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"9c3a6f01-8859-47e6-a07b-0c2c4ccfbc03\",\"beamTaskTimestamp\":\"2025-09-09T19:38:40Z\",\"attachments\":[{\"name\":\"LMBA040723130940.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_6994984c-0535-40ed-8bd3-ac3e815dd341_LMBA040723130940.pdf\"}]}",
+        "beamAgentOSTaskID": "30953cc4-11c5-45fe-aa50-c6ac245ad141",
+        "beamTaskId": "TZV-1546",
+        "beamTaskTimestamp": "2025-10-17T16:31:42Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_6994984c-0535-40ed-8bd3-ac3e815dd341_LMBA040723130940.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a5eb7296-b9fa-4058-99a7-3ef7e48e5721_fad296c9-2ecb-47b6-b7b4-696d2149269b_6994984c-0535-40ed-8bd3-ac3e815dd341_LMBA040723130940.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nadja Schöneck",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "70.00",
+        "nAmountFurtherInstalments": "70.00",
+        "nClaimAmount": "410.25"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nadja Schöneck",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "20.00",
+        "nAmountFurtherInstalments": "20.00",
+        "nClaimAmount": "410.25"
+      },
+      "metadata": {
+        "score": 0.67
+      }
+    },
+    {
+      "id": "c95a4821-a388-4954-9524-a4a3286ac45f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LEFI100723132346\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"ad6aa3e7-f504-46d2-968b-07b20052b121\",\"beamTaskTimestamp\":\"2025-09-09T19:38:58Z\",\"attachments\":[{\"name\":\"LEFI100723132346.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_71cb4e74-20ab-4b1c-b351-e5625f50bf73_LEFI100723132346.pdf\"}]}",
+        "beamAgentOSTaskID": "1effcf46-0967-4001-84d5-a2570a7ee125",
+        "beamTaskId": "TZV-1545",
+        "beamTaskTimestamp": "2025-10-17T16:31:37Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_71cb4e74-20ab-4b1c-b351-e5625f50bf73_LEFI100723132346.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_93247b41-3370-44e6-806d-8737fd8bb640_fad296c9-2ecb-47b6-b7b4-696d2149269b_71cb4e74-20ab-4b1c-b351-e5625f50bf73_LEFI100723132346.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "NOLADE21STK",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE25241510051200025201",
+        "cNameBank": "Sparkasse Stade Altes Land",
+        "cNameDepositor": "Anne Haaren",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "208.28"
+      },
+      "actualOutput": {
+        "cBIC": "NOLADELISTS",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE252411510051200025201",
+        "cNameBank": "Sparkasse Stade Altes Land",
+        "cNameDepositor": "Anne Haaren",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "208.28"
+      },
+      "metadata": {
+        "score": 0.78
+      }
+    },
+    {
+      "id": "639aeb6a-d3f9-4736-90e9-f7bb48980449",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LEFI260623134526\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"b47cd5f1-64fe-4485-b3aa-64447356e279\",\"beamTaskTimestamp\":\"2025-09-09T19:37:54Z\",\"attachments\":[{\"name\":\"LEFI260623134526.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_88c85c3c-1c05-499d-87ad-4862ab2c8ff7_LEFI260623134526.pdf\"}]}",
+        "beamAgentOSTaskID": "5259c2f5-3813-4ba0-bcab-aac01a7e04a8",
+        "beamTaskId": "TZV-1544",
+        "beamTaskTimestamp": "2025-10-17T16:31:32Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_88c85c3c-1c05-499d-87ad-4862ab2c8ff7_LEFI260623134526.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_56cd7b8d-0d00-4ef4-a83a-8bb68e883864_fad296c9-2ecb-47b6-b7b4-696d2149269b_88c85c3c-1c05-499d-87ad-4862ab2c8ff7_LEFI260623134526.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nancy Kalisch",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "30.00",
+        "nAmountFurtherInstalments": "30.00",
+        "nClaimAmount": "315.82"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "cNameDepositor": "Nancy Kalisch",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "30.00",
+        "nAmountFurtherInstalments": "30.00",
+        "nClaimAmount": "315.82"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "3d2787ba-9df4-4679-ad1c-8e239d207284",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE070623105222\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"0b50a4e4-573c-45b2-b40c-f382a1668de7\",\"beamTaskTimestamp\":\"2025-09-09T19:38:24Z\",\"attachments\":[{\"name\":\"ALHE070623105222.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_abb1bbb8-0d48-4c4a-92af-74b10992b381_ALHE070623105222.pdf\"}]}",
+        "beamAgentOSTaskID": "80163208-a499-44f9-9e52-17efaef0e28a",
+        "beamTaskId": "TZV-1543",
+        "beamTaskTimestamp": "2025-10-17T16:31:27Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_abb1bbb8-0d48-4c4a-92af-74b10992b381_ALHE070623105222.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_cb342706-6187-40bd-8720-1d41d9b800a6_fad296c9-2ecb-47b6-b7b4-696d2149269b_abb1bbb8-0d48-4c4a-92af-74b10992b381_ALHE070623105222.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "NOLADE21HDL",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE41810550004056006577",
+        "cNameBank": "Bördesparkasse",
+        "cNameDepositor": "Nicole Kloos",
+        "dDateFirstInstalment": "2023-06-27",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "850.66"
+      },
+      "actualOutput": {
+        "cBIC": "NOLADE21HOL",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE41810550004056006577",
+        "cNameBank": "Gövdesparkasse",
+        "cNameDepositor": "Nicole Kloos",
+        "dDateFirstInstalment": "2023-07-15",
+        "nAmountFirstInstalment": "100.00",
+        "nAmountFurtherInstalments": "100.00",
+        "nClaimAmount": "850.66"
+      },
+      "metadata": {
+        "score": 0.67
+      }
+    },
+    {
+      "id": "cd3a81c1-ba8b-4a2e-9b9a-be132c5b14b2",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ANPA100723124052\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"ab5f16cc-d0d5-46d6-b2c9-633c06064a75\",\"beamTaskTimestamp\":\"2025-09-09T19:38:06Z\",\"attachments\":[{\"name\":\"ANPA100723124052.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_4e4bf92d-e369-471a-995e-86e1747b5d4b_ANPA100723124052.pdf\"}]}",
+        "beamAgentOSTaskID": "73e1340d-dafc-4c8c-bdc5-a5f339e2e35e",
+        "beamTaskId": "TZV-1542",
+        "beamTaskTimestamp": "2025-10-17T16:31:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4e4bf92d-e369-471a-995e-86e1747b5d4b_ANPA100723124052.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_31800e07-0e07-4dd0-a888-6eed959a2efe_fad296c9-2ecb-47b6-b7b4-696d2149269b_4e4bf92d-e369-471a-995e-86e1747b5d4b_ANPA100723124052.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "BYLADEM1ABG",
+        "cBLZ": "75250000",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE46752500000021549670",
+        "cNameBank": "Sparkasse Amberg-Sulzbach",
+        "cNameDepositor": "David Seitz",
+        "dDateFirstInstalment": "2023-07-10",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "178.75"
+      },
+      "actualOutput": {
+        "cBIC": "BYLADEM1ABG",
+        "cBLZ": "75250000",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE46752500000021549670",
+        "cNameBank": "Sparkasse Amberg-Sulzbach",
+        "cNameDepositor": "David Seitz",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "178.75"
+      },
+      "metadata": {
+        "score": 0.9
+      }
+    },
+    {
+      "id": "09cec9e1-14c1-48ec-9130-14be4f2debbb",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"ALHE060623131011\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"d192433f-1771-4bf6-a00b-9e8f0f52fe4a\",\"beamTaskTimestamp\":\"2025-09-09T19:39:14Z\",\"attachments\":[{\"name\":\"ALHE060623131011.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_3949e059-8475-4f46-912a-c7f3ddf0f2c9_ALHE060623131011.pdf\"}]}",
+        "beamAgentOSTaskID": "f84ed6c9-5be5-47bb-96be-03bb57ffc784",
+        "beamTaskId": "TZV-1541",
+        "beamTaskTimestamp": "2025-10-17T16:31:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3949e059-8475-4f46-912a-c7f3ddf0f2c9_ALHE060623131011.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_bdff272f-c5db-4f19-ac5d-116f8a09256b_fad296c9-2ecb-47b6-b7b4-696d2149269b_3949e059-8475-4f46-912a-c7f3ddf0f2c9_ALHE060623131011.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "WELADED1GMB",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE86384500001000552560",
+        "cNameBank": "Sparkasse Gummersbach",
+        "cNameDepositor": "Justin Schauseil",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "37.01",
+        "nAmountFurtherInstalments": "37.01",
+        "nClaimAmount": "333.09"
+      },
+      "actualOutput": {
+        "cBIC": "WELADED1GMB",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE86384500001000552560",
+        "cNameBank": "Sparkasse Gummersbach",
+        "cNameDepositor": "Justin Schauseil",
+        "dDateFirstInstalment": "2023-08-01",
+        "nAmountFirstInstalment": "37.01",
+        "nAmountFurtherInstalments": "37.01",
+        "nClaimAmount": "333.09"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "9d768901-d25a-47c0-85fa-e52737148acd",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"JOKL050723111329\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"a1d050cb-28ba-4334-bcda-1c1b80d71f0f\",\"beamTaskTimestamp\":\"2025-09-09T19:38:31Z\",\"attachments\":[{\"name\":\"JOKL050723111329.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_a276c0cf-b06e-47a5-a5c3-cb37f80d0f89_JOKL050723111329.pdf\"}]}",
+        "beamAgentOSTaskID": "c007005d-0516-4d92-b544-89f5548b8080",
+        "beamTaskId": "TZV-1540",
+        "beamTaskTimestamp": "2025-10-17T16:31:12Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a276c0cf-b06e-47a5-a5c3-cb37f80d0f89_JOKL050723111329.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_6a9923c9-1cde-4bd1-a6ed-31576bfc71c0_fad296c9-2ecb-47b6-b7b4-696d2149269b_a276c0cf-b06e-47a5-a5c3-cb37f80d0f89_JOKL050723111329.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-31",
+        "nAmountFirstInstalment": "106.06",
+        "nClaimAmount": "106.06"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "insgesamt",
+        "dDateFirstInstalment": "2023-07-31",
+        "nClaimAmount": "106.06"
+      },
+      "metadata": {
+        "score": 0.75
+      }
+    },
+    {
+      "id": "617121d7-08fe-4b2e-b335-8fbb7f8eb473",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"LMBA040723130833\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"4a52f7c5-3db5-4230-91b0-93fc7b2e3e53\",\"beamTaskTimestamp\":\"2025-09-09T19:37:59Z\",\"attachments\":[{\"name\":\"LMBA040723130833.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_3472b58c-4f3c-4d06-92e2-a4262efaecd2_LMBA040723130833.pdf\"}]}",
+        "beamAgentOSTaskID": "87299bf2-c806-415c-adaf-dad538dafc8a",
+        "beamTaskId": "TZV-1539",
+        "beamTaskTimestamp": "2025-10-17T16:31:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3472b58c-4f3c-4d06-92e2-a4262efaecd2_LMBA040723130833.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_564b4b8f-e44b-49f9-9f9c-c0ff97e3e9b0_fad296c9-2ecb-47b6-b7b4-696d2149269b_3472b58c-4f3c-4d06-92e2-a4262efaecd2_LMBA040723130833.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-04",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "383.66"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-04",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "383.66"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "f4310854-b906-4259-bcfe-1fb104bcce95",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"EWSZ280623121818\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"bc934ce8-38db-41cc-9b9d-adb6659b5bba\",\"beamTaskTimestamp\":\"2025-09-09T19:38:10Z\",\"attachments\":[{\"name\":\"EWSZ280623121818.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_dadd7495-a6d5-4101-89d9-2c19be6e0d0e_EWSZ280623121818.pdf\"}]}",
+        "beamAgentOSTaskID": "5eb11fdf-5f66-4d32-ae37-539f86bc8aff",
+        "beamTaskId": "TZV-1538",
+        "beamTaskTimestamp": "2025-10-17T16:31:06Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_dadd7495-a6d5-4101-89d9-2c19be6e0d0e_EWSZ280623121818.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_49d20f7f-432c-4a37-bb9f-99c12eda16f8_fad296c9-2ecb-47b6-b7b4-696d2149269b_dadd7495-a6d5-4101-89d9-2c19be6e0d0e_EWSZ280623121818.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cBIC": "O5DDDE81XXX",
+        "cBLZ": "850503001227",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE24850503001227504990",
+        "cNameBank": "Sparkasse Dresden",
+        "cNameDepositor": "Udo Röllig",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "596.71"
+      },
+      "actualOutput": {
+        "cBIC": "OSDDDE81XXX",
+        "cBLZ": "85050300",
+        "cFrequencyInstalments": "monatlich",
+        "cIBAN": "DE24850503001227504990",
+        "cNameBank": "Sparkasse Dresden",
+        "cNameDepositor": "Udo Röllig",
+        "dDateFirstInstalment": "2023-07-01",
+        "nAmountFirstInstalment": "40.00",
+        "nAmountFurtherInstalments": "40.00",
+        "nClaimAmount": "637.87"
+      },
+      "metadata": {
+        "score": 0.7
+      }
+    },
+    {
+      "id": "ebd3f306-1b9d-47b5-a502-a2d8651ff421",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{\\n  \\\"clientId\\\": \\\"BID\\\",\\n  \\\"sourceSystem\\\": \\\"Export Tool\\\",\\ncase_id: \\\"MAGR280623114504\\\"  ,\\\"mainfolder\\\": \\\"TZV\\\",\\n  \\\"subfolder\\\": \\\"TZV Zurück \\\"\\n}\",\"beamAgentOSTaskID\":\"0ab355ce-166c-41ce-ac46-81d2b360c828\",\"beamTaskTimestamp\":\"2025-09-09T19:38:38Z\",\"attachments\":[{\"name\":\"MAGR280623114504.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_b469c4fc-82d7-41bf-96c1-ba61099ea3c0_MAGR280623114504.pdf\"}]}",
+        "beamAgentOSTaskID": "ef3438aa-7c8a-4e5b-881c-21b66a1212a2",
+        "beamTaskId": "TZV-1537",
+        "beamTaskTimestamp": "2025-10-17T16:30:57Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_b469c4fc-82d7-41bf-96c1-ba61099ea3c0_MAGR280623114504.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3a62eaf8-c167-4ee7-9f64-18874579dc42_fad296c9-2ecb-47b6-b7b4-696d2149269b_b469c4fc-82d7-41bf-96c1-ba61099ea3c0_MAGR280623114504.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-20",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "238.18"
+      },
+      "actualOutput": {
+        "cFrequencyInstalments": "monatlich",
+        "dDateFirstInstalment": "2023-07-20",
+        "nAmountFirstInstalment": "50.00",
+        "nAmountFurtherInstalments": "50.00",
+        "nClaimAmount": "238.18"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    }
+  ],
+  "metadata": {
+    "prompt": "# Role\nYou are a detail-oriented data extraction specialist with expertise in accurately identifying and extracting key information specialist with deep expertise in debt collection and insolvency processes.\nYour role is to accurately identify and extract all key information from # Data. To do that, you will follow # Rules.\n# Rules\nThe following are the rules you will adhere to when doing the data extraction.\nYou must extract data related to debt collection and insolvency processes according to the following general rules:\n* Accuracy: Ensure all required information is extracted accurately.\n* No Inference: Do not infer or generate any information that is not explicitly stated in the provided data.\n---\n# Document Context\nTZV (Teilzahlungsvereinbarung) forms are pre-printed installment payment agreement templates:\n**Processing Flow**:\n1. BID representatives (BID, Hörnlein & Feyler, ProCash) send template to debtor\n2. Debtor fills template: selects payment options (checkboxes), adds bank details, signs\n3. Debtor returns completed form\n4. This prompt processes the returned, filled template\n**Form Structure** (3 sections):\n- **Header**: Creditor info, case references (IGNORE creditor bank details here)\n- **Payment Options**: Claim amount, checkbox selection (monthly/lump sum), installment amounts/dates\n- **Bank Authorization**: Debtor's account details (EXTRACT from \"Vollmacht für Dauerauftrag\" section), signatures\n---\n# Key Disambiguation Rules\n**Critical confusion points to avoid extraction errors:**\n1. **Bank Details - Creditor vs Debtor**:\n- ⚠️ Header section = Creditor's bank → IGNORE\n- ✅ Bottom \"Vollmacht für die Einrichtung eines Dauerauftrages\" = Debtor's bank → EXTRACT\n- Example: IBAN in header (creditor) ≠ IBAN in authorization box (debtor)\n2. **Signatures - Two Types**:\n- ✅ Creditor/Sender signature (Gläubiger, \"Im Auftrag\", \"ppa\") → Extract as `bIsSignatureTZV`\n- ⚠️ Account holder signature (Kontoinhaber) → IGNORE for `bIsSignatureTZV`\n3. **Three Amount Hierarchy** (CRITICAL - all must be extracted):\n- `nClaimAmount` = Total debt (largest) - \"Gesamtforderung in Höhe von EUR\"\n- `nAmountFirstInstalment` = First payment - \"in monatlichen Raten von EUR\"\n- `nAmountFurtherInstalments` = Subsequent payments (often = first installment)\n4. **Date Format Transformation**:\n- Input: German format with periods: `20.06.23` or `15.07.2023`\n- Output: ISO 8601: `2023-06-20` or `2023-07-15`\n5. **Depositor = Debtor Logic**:\n- 80% of forms have BLANK \"Kontoinhaber:\" field → Output: `\"unsure\"`\n- Only set `true`/`false` when name clearly matches/differs\n6. **Checkbox Pattern Recognition**:\n- ☑ or ☒ = Selected option\n- ☐ = Unselected option\n- Extract data from SELECTED checkbox only\n---\n# Variables\n### JSON Key: \"cNameDepositor\"\n**Definition**: Name of the account holder (Kontoinhaber).\n**Location**: Bank authorization section at bottom of form, after \"Kontoinhaber:\" label.\n**Keywords**:\n- \"Kontoinhaber:\"\n- \"Kontoinhaber (Vor- und Zuname)\"\n- \"Unterschrift des Kontoinhabers\"\n**Format**:\n- Type: string or null\n- Apply character normalization: Straße → Str., ß → ss, keep Ö/Ü/Ä unchanged\n**Disambiguation**: Often blank in 80% of documents. Cross-reference with debtor name for `bIsDepositorEqualsDebtor` validation.\n**Edge Cases**: `null` when field is empty or missing.\n---\n### JSON Key: \"cNameBank\"\n**Definition**: Name of the bank or financial institution where the debtor's account is held.\n**Location**: Bank authorization section, after \"Bank:\" or \"Kreditinstitut:\" label.\n**Keywords**:\n- \"Bank:\"\n- \"Kreditinstitut:\"\n- \"Name der Bank:\"\n**Format**:\n- Type: string or null\n- Apply character normalization\n**Disambiguation**: Header section may show creditor's bank (not debtor's) - IGNORE header, extract from authorization section only.\n**Edge Cases**: `null` when field is empty. Include legal form (AG, GmbH) if present.\n---\n### JSON Key: \"cIBAN\"\n**Definition**: IBAN of the account holder (debtor's account).\n**Location**: Bank authorization section, after \"IBAN:\" label. German IBANs are 22 characters starting with \"DE\".\n**Keywords**:\n- \"IBAN:\"\n- \"IBAN/BIC:\"\n- International Bank Account Number\n**Format**:\n- Type: string or null\n- Remove ALL spaces: `DE20 3002 0900 5045 0900 92` → `DE20300209005045090092`\n**Disambiguation**: Header IBAN = creditor's bank → IGNORE. Only extract IBAN from bottom authorization section.\n**Edge Cases**: `null` when empty. German format = 22 chars total (DE + 20 digits).\n---\n### JSON Key: \"cBIC\"\n**Definition**: BIC/SWIFT code of the debtor's bank.\n**Location**: Bank authorization section, alongside or after IBAN field.\n**Keywords**:\n- \"BIC:\"\n- \"SWIFT:\"\n- \"IBAN/BIC:\"\n**Format**:\n- Type: string or null\n- Remove ALL spaces: `CMCI DE DD` → `CMCIDEDD`\n- Expected: 8 or 11 alphanumeric characters\n**Disambiguation**: Header BIC = creditor's → IGNORE. Extract from authorization section only.\n**Edge Cases**: `null` when missing. Format: 4-letter bank code + 2-letter country + 2-letter location + optional 3-char branch.\n---\n### JSON Key: \"cBLZ\"\n**Definition**: German bank routing number (Bankleitzahl) - 8-digit identifier.\n**Location**: Bank authorization section, typically before IBAN field, after \"BLZ:\" label.\n**Keywords**:\n- \"BLZ:\"\n- \"Bankleitzahl:\"\n- \"Kto.-Nr./BLZ:\"\n**Format**:\n- Type: string or null\n- Remove spaces: `300 209 00` → `30020900`\n- Expected: 8 digits\n**Disambiguation**: Header BLZ = creditor's → IGNORE. Many forms blank as IBAN supersedes BLZ.\n**Edge Cases**: `null` when empty. Can cross-validate with IBAN (digits 5-12 of German IBAN = BLZ).\n---\n### JSON Key: \"bIsSignatureTZV\"\n**Definition**: Indicates whether the creditor/sender signed the TZV document (NOT account holder signature).\n**Location**: Bottom third of document, near \"Gläubiger:\" or \"Im Auftrag\" text.\n**Keywords**:\n- \"Unterschrift Gläubiger\"\n- \"Im Auftrag\" / \"i.A.\" / \"ppa\"\n- Handwritten signature or stamp above company name\n**Format**:\n- Type: true, false, \"unsure\", or null\n**Disambiguation**: IGNORE account holder (Kontoinhaber) signature at bank authorization section. Only check for creditor/sender signature.\n**Edge Cases**:\n- `null`: No signature area present\n- `false`: Explicitly unsigned or \"Maschinell erstellt, ohne Unterschrift gültig\"\n- `\"unsure\"`: Unclear marks or partial signatures\n- `true`: Signature present\n---\n### JSON Key: \"cFrequencyInstalments\"\n**Definition**: Payment frequency cycle for installment plans (monthly, lump sum, bi-weekly).\n**Location**: Middle section, within payment agreement area after \"Ich begleiche die Gesamtforderung:\".\n**Keywords**:\n- \"monatlich\" / \"monatlichen\"\n- \"insgesamt\" (lump sum)\n- \"in 14tägigen\" (bi-weekly)\n- Checkbox indicators (☐/☑)\n**Format**:\n- Type: string or null\n- Values: \"monatlich\", \"insgesamt\", \"in 14tägigen\"\n**Disambiguation**: Look for marked checkbox (☑/☒). Extract text from SELECTED checkbox only.\n**Edge Cases**: `null` when no payment plan specified or field blank.\n---\n### JSON Key: \"nClaimAmount\"\n**Definition**: Total debt amount (Gesamtforderung) acknowledged by debtor.\n**Location**: Middle section after personal details, typically \"Ich erkenne die Gesamtforderung in Höhe von ... EUR an\".\n**Keywords**:\n- \"Gesamtforderung in Höhe von\"\n- \"Die fällige Schuld in Höhe von EUR\"\n- \"Gesamtforderung\"\n**Format**:\n- Type: string or null\n- German format → normalized: `684,22` → `\"684.22\"`, `1.234,56` → `\"1234.56\"`\n- Dot decimal, exactly 2 decimal places, NO thousand separators\n**Disambiguation**: This is the LARGEST amount - total debt before installments. Do not confuse with installment amounts.\n**Amount Relationships**:\n- Total debt (`nClaimAmount`) > First installment (`nAmountFirstInstalment`) ≥ Further installments\n- German format transformation critical: comma → dot, remove spaces and thousand separators\n**Edge Cases**: `null` when not present. Must be string format, not number.\n---\n### JSON Key: \"nAmountFirstInstalment\"\n**Definition**: First installment payment amount in a payment plan.\n**Location**: Payment options section, after \"in monatlichen Raten von EUR\" within checkbox area.\n**Keywords**:\n- \"in monatlichen Raten von EUR\"\n- \"erste Rate\"\n- Checkbox pattern: \"☑ in monatlichen Raten von EUR [AMOUNT]\"\n**Format**:\n- Type: string or null\n- German format → normalized: `186,06` → `\"186.06\"`, `50,-` → `\"50.00\"`\n- Dot decimal, exactly 2 decimal places, NO thousand separators\n**Disambiguation**: Extract from SELECTED checkbox (☑) only. Not from \"insgesamt am\" (lump sum) option.\n**Amount Relationships**:\n- Total debt (`nClaimAmount`) > First installment > 0\n- Often equals `nAmountFurtherInstalments` for constant payment plans\n- German format: `1.234,56` → `\"1234.56\"`\n**Edge Cases**: `null` when \"insgesamt\" (lump sum) selected or field blank.\n---\n### JSON Key: \"nAmountFurtherInstalments\"\n**Definition**: Amount for subsequent installments after the first payment (often same as first installment).\n**Location**: Payment section, same area as first installment, within \"in monatlichen Raten von EUR\" text.\n**Keywords**:\n- \"in monatlichen Raten von EUR\"\n- \"weitere Raten\"\n- \"in 14-tägigen Raten\"\n**Format**:\n- Type: string or null\n- German format → normalized: `50,00` → `\"50.00\"`\n- Dot decimal, exactly 2 decimal places, NO thousand separators\n**Disambiguation**: For constant payment plans, this equals `nAmountFirstInstalment`. Extract from SELECTED checkbox only.\n**Amount Relationships**:\n- For constant plans: First installment = Further installments\n- Total debt > Further installments > 0\n- German format: comma → dot decimal, remove thousand separators\n**Edge Cases**: `null` when lump sum selected, field blank, or illegible.\n---\n### JSON Key: \"dDateFirstInstalment\"\n**Definition**: First payment date in ISO 8601 format.\n**Location**: Payment section, after \"ab dem\" (from) or \"insgesamt am\" (total payment on).\n**Keywords**:\n- \"ab dem\" (for installments)\n- \"ab\" (abbreviated)\n- \"insgesamt am\" (for one-time payments)\n- \"erste Rate\"\n**Format**:\n- Type: string (ISO 8601: YYYY-MM-DD) or null\n- Transform: `20.06.23` → `\"2023-06-20\"`, `15.07.2023` → `\"2023-07-15\"`\n**Disambiguation**: German date format (DD.MM.YY or DD.MM.YYYY) must be converted to ISO 8601.\n**Edge Cases**: `null` when no date specified. Accept flexible spacing (1.8.23 vs 01.08.23).\n---\n### JSON Key: \"cDepositerPersonType\"\n**Definition**: Type of account holder - private individual or company.\n**Location**: Derived from `cNameDepositor` content (no explicit field in document).\n**Keywords**:\n- Company indicators: \"GmbH\", \"AG\", \"KG\", \"e.V.\", \"OHG\"\n- Personal indicators: Individual names without business suffixes\n**Format**:\n- Type: \"private\", \"company\", or null\n**Disambiguation**: If depositor field empty, cross-check with debtor information (likely same person). Most TZV = private individuals.\n**Edge Cases**: `null` when cannot determine. Company = has legal entity suffix. Private = personal name only.\n---\n### JSON Key: \"cCaseClassification\"\n**Definition**: Case classification based on subfolder in task_query.\n**Location**: Extracted from task_query subfolder structure.\n**Keywords**:\n- Subfolder designation in task_query\n**Format**:\n- Type: string or null\n**Disambiguation**: Match classification to available subfolder options in task_query.\n**Edge Cases**: `null` when subfolder unclear or not specified.\n---\n### JSON Key: \"bIsDepositorEqualsDebtor\"\n**Definition**: Determines if debtor and account holder are the same person through name comparison.\n**Location**: Compare debtor name (header section) with \"Kontoinhaber:\" field (authorization section).\n**Keywords**:\n- Name matching patterns\n- Abbreviations or variants (e.g., \"D. Terzos\" for \"Doris Krzos\")\n**Format**:\n- Type: true, false, \"unsure\", or null\n**Disambiguation**: 80% of forms have BLANK \"Kontoinhaber:\" → default to `\"unsure\"`.\n**Edge Cases**:\n- `true`: Clear name match (exact or recognizable variation)\n- `false`: Different persons clearly identified\n- `\"unsure\"`: Missing account holder info (most common - 70-80% of cases)\n- `null`: No information available\n---\n---\n# Data\n## PDF attachment:\n''' \n```Inkasso-Nr .: 35431624A\nSenden Sie bitte dieses Formular ausgefüllt\nan uns zurück.\nPer E-Mail (auch als Foto) an:\na@bid-coburg.de\nOder per Post an:\nBID Bayerischer Inkasso Dienst GmbH\nPostfach 1341\n96403 Coburg\nRuckZuck Volkmar Feihe Herr Volkmar Feihe\nD-99428 Grammetal, Auf der Lücke 28\nSind Name/Anschrift korrekt?\n☐\nJA\n☒\nNEIN, bitte korrigieren:\n199610\nSPRÖTALI\nAM WALDE 3\nPersönliche Angaben:\nTel .:\n0172 35644 98\nGeb .- Datum:\n06.06. 1966\nE-Mail:\nvolkmarfeile@gmx.de\nc angestellt bei Fa .:\n☐\nOrt Fa .:\n☐\narbeitslos\n☒\nselbstständig\n☐\nRentner/in\n☐\nBürgergeld-/Sozialhilfeempfänger/in\n(bitte Einkommensnachweis beifügen)\nIch erkenne die Gesamtforderung in Höhe von 48.97 EUR an. Hinzu kommen weitere Verzugszinsen von 5 Prozentpunkten\nüber Basiszins aus EUR 16,40 seit 04.07.2023 bzw. aus obigem Betrag, falls dieser geringer ist.\nBeträgt mein Ratenzahlungswunsch zur Begleichung der Gesamtforderung mehr als 9 Raten, erhöhen sich die\nInkassokosten um weitere EUR 14,40, welche ich/wir zusätzlich als Gesamtschuldner anerkenne(n). Die Höhe der\nInkassokosten entspricht bei mehr als 9 Raten einer 1,3 Gebühr gem. § 13e Abs. 1 RDG i.V.m. Nr. 2300 Abs. 2 VV RVG\nanalog EUR 46,80.\nIch begleiche die Gesamtforderung:\n☐\nin monatlichen Raten von EUR\nab dem\n*\n☒\ninsgesamt am\n7.7.23\nKomme ich mit einer Rate länger als 5 Tage in Verzug (Verfallklausel), ist die gesamte Restschuld zur Zahlung fällig.\n# Vollmacht für die Einrichtung eines Dauerauftrages:\nHiermit bevollmächtige(n) ich/wir Sie, die von mir/uns zu entrichtenden Zahlungen (wie oben genannt) mittels Einrichtung\neines Dauerauftrages von meiner/unserer nachfolgend genannten Bankverbindung meiner/unserer Bank in Auftrag zu\ngeben\nKontoinhaber:\nKreditinstitut:\nBIC:\nIBAN:\nX\n☒\nV. F5\n@\n☒\nUnterschrift Kontoinhaber\nOrt, Datum\n*Die der Gläubigerin hierdurch zusätzlich entstehenden Kosten des Vergleichs in Höhe von EUR 41,16 übernehme ich\nfreiwillig im Rahmen des Ratenzahlungsvergleichs. Die Höhe der Kosten bemisst sich nach der vertraglich mit der\nGläubigerin vereinbarten Entstehung einer Einigungsgebühr gemäß Nr. 1000 VV RVG analog. Rechtsgrundlage für die\nErstattung bildet die freiwillige Übernahme dieser Kosten im Rahmen dieses Stundungsvergleichs.\nWeiterhin verzichte(n) ich/wir mit Unterzeichnung auf Einwendungen jeglicher Art hinsichtlich des Grundes und der Höhe der\nSchuld, insbesondere verzichte(n) ich/wir auf die Einrede der Verjährung.\nLohnabtretung:\nZur Absicherung der vorbezeichneten und anerkannten Gesamtforderung It. Forderungsaufstellung vom 03.07.2023 inkl.\nVergleichskosten tritt der Schuldner unter der auflösenden Bedingung der vollständigen Tilgung den pfändbaren Teil seiner\nderzeitigen und künftigen Lohn-, Gehalts- bzw. Provisionsansprüche gegen den jew. Arbeitgeber, Rente, Krankengeld,\nArbeitslosengeld I, Übergangsgeld, Unterhalts, und Elterngeld gegenüber dem jew. Träger an den Gläubiger IONOS SE ab.\nSoweit die Forderung teilweise getilgt ist, wird die Abtretung auf Verlangen des Schuldners in entsprechender Höhe\nfreigegeben.\nSPRÖTAU, 6.7.23\nX\n☒\nV. Fr 25\n☒\nOrt, Datum\nUnterschrift (RuckZuck Volkmar Feihe Herr Volkmar\nFeihe)\nIch bestreite die Forderung:\n☐\nZahlung bereits erfolgt (Bitte Zahlungsnachweis beilegen!)\n☐\nDie Forderung besteht nicht, weil:\nDatenschutzhinweis:\nSie sind nicht verpflichtet, personenbezogene Daten mitzuteilen. Ihre\nfreiwilligen Angaben helfen, eine sachgerechte Entscheidung\nentsprechend Ihrer finanziellen Verhältnisse zu treffen. Ihre Angaben\nwerden bei der Fa. BID Bayerischer Inkasso Dienst GmbH\ngespeichert.```\n'''\nAll content within xml tags which contains a file name. File names are likely to contain 'pdf', 'figure', 'csv', \"jpg\" etc. in the xml tag. \n## Email input",
+    "agent": "TZV Agent 03.09",
+    "node": "2. TZV Zurück",
+    "tier": "gold",
+    "generated_at": "2026-01-02T00:11:07.485354",
+    "source": "airtable-export"
+  },
+  "tags": [
+    "gold",
+    "2.-tzv-zurück"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "source_pdf": "24-Enterprise_Ontoloty.pdf",
+  "processed_at": "2025-12-27T22:54:48.177424",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 5,
+  "total_lines": 4912,
+  "total_chars": 158941,
+  "chunks": [
+    {
+      "filename": "24-Enterprise_Ontoloty_1.md",
+      "chunk_number": 1,
+      "line_count": 986,
+      "char_count": 42143
+    },
+    {
+      "filename": "24-Enterprise_Ontoloty_2.md",
+      "chunk_number": 2,
+      "line_count": 1000,
+      "char_count": 30894
+    },
+    {
+      "filename": "24-Enterprise_Ontoloty_3.md",
+      "chunk_number": 3,
+      "line_count": 992,
+      "char_count": 39791
+    },
+    {
+      "filename": "24-Enterprise_Ontoloty_4.md",
+      "chunk_number": 4,
+      "line_count": 1000,
+      "char_count": 34927
+    },
+    {
+      "filename": "24-Enterprise_Ontoloty_5.md",
+      "chunk_number": 5,
+      "line_count": 934,
+      "char_count": 11186
+    }
+  ]
+}

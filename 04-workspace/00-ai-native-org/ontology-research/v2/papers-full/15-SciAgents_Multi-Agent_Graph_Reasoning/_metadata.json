@@ -1,0 +1,71 @@
+{
+  "source_pdf": "15-SciAgents_Multi-Agent_Graph_Reasoning.pdf",
+  "processed_at": "2025-12-27T22:53:27.858455",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 10,
+  "total_lines": 9629,
+  "total_chars": 549414,
+  "chunks": [
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_1.md",
+      "chunk_number": 1,
+      "line_count": 998,
+      "char_count": 59296
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_2.md",
+      "chunk_number": 2,
+      "line_count": 1000,
+      "char_count": 53195
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_3.md",
+      "chunk_number": 3,
+      "line_count": 1000,
+      "char_count": 65778
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_4.md",
+      "chunk_number": 4,
+      "line_count": 997,
+      "char_count": 58366
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_5.md",
+      "chunk_number": 5,
+      "line_count": 1000,
+      "char_count": 59294
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_6.md",
+      "chunk_number": 6,
+      "line_count": 999,
+      "char_count": 56603
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_7.md",
+      "chunk_number": 7,
+      "line_count": 999,
+      "char_count": 52293
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_8.md",
+      "chunk_number": 8,
+      "line_count": 998,
+      "char_count": 51187
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_9.md",
+      "chunk_number": 9,
+      "line_count": 996,
+      "char_count": 55337
+    },
+    {
+      "filename": "15-SciAgents_Multi-Agent_Graph_Reasoning_10.md",
+      "chunk_number": 10,
+      "line_count": 642,
+      "char_count": 38065
+    }
+  ]
+}

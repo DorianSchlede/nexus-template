@@ -1,0 +1,918 @@
+extraction_type: "cross-cutting"
+focus: "SDK/Library Abstractions"
+extracted_at: "2025-12-31T12:00:00Z"
+source_repositories:
+  - claude-hooks
+  - tdd-guard
+  - cc-tools
+
+patterns_by_type:
+  types:
+    - pattern_name: "Hook Payload Types"
+      pattern_type: "types"
+      source_repo: "claude-hooks"
+      source_file: "templates/hooks/lib.ts"
+      language: "TypeScript"
+      description: "Complete TypeScript interface definitions for all Claude Code hook payloads and responses"
+      technique:
+        summary: "Discriminated union types with per-hook-event payload interfaces and response types"
+        code_snippet: |
+          export interface PreToolUsePayload {
+            session_id: string
+            transcript_path: string
+            hook_event_name: 'PreToolUse'
+            tool_name: string
+            tool_input: Record<string, unknown>
+          }
+
+          export interface PreToolUseResponse extends BaseHookResponse {
+            permissionDecision?: 'allow' | 'deny' | 'ask'
+            permissionDecisionReason?: string
+          }
+
+          export type PreToolUseHandler = (payload: PreToolUsePayload) =>
+            Promise<PreToolUseResponse> | PreToolUseResponse
+      benefits:
+        - "Full IDE autocomplete for all hook payloads"
+        - "Compile-time type checking prevents runtime errors"
+        - "Self-documenting API through type definitions"
+        - "Handler return types enforce correct response shape"
+      drawbacks:
+        - "Requires TypeScript knowledge"
+        - "Types must be kept in sync with Claude Code updates"
+
+    - pattern_name: "Zod Schema Validation"
+      pattern_type: "types"
+      source_repo: "tdd-guard"
+      source_file: "src/contracts/schemas/toolSchemas.ts"
+      language: "TypeScript"
+      description: "Runtime schema validation using Zod with discriminated unions for tool operations"
+      technique:
+        summary: "Zod schemas with safeParse for runtime validation and type inference"
+        code_snippet: |
+          import { z } from 'zod'
+
+          export const HookDataSchema = HookContextSchema.extend({
+            tool_name: z.string(),
+            tool_input: z.unknown(),
+          })
+
+          export const ToolOperationSchema = z.discriminatedUnion('tool_name', [
+            EditOperationSchema,
+            MultiEditOperationSchema,
+            WriteOperationSchema,
+            TodoWriteOperationSchema,
+          ])
+
+          // Usage in hook processing
+          const hookResult = HookDataSchema.safeParse(parsedData)
+          if (!hookResult.success) return defaultResult
+      benefits:
+        - "Runtime validation catches malformed hook data"
+        - "Type inference from schemas - single source of truth"
+        - "Discriminated unions enable type-safe tool handling"
+        - "safeParse prevents exceptions from bubbling"
+      drawbacks:
+        - "Additional dependency (zod)"
+        - "Runtime overhead for validation"
+
+    - pattern_name: "Test Reporter Types"
+      pattern_type: "types"
+      source_repo: "tdd-guard"
+      source_file: "src/contracts/schemas/reporterSchemas.ts"
+      language: "TypeScript"
+      description: "Standardized test result types with helper predicates for state checking"
+      technique:
+        summary: "Zod schemas for test results with type guard functions"
+        code_snippet: |
+          export const TestSchema = z.object({
+            name: z.string(),
+            fullName: z.string(),
+            state: z.enum(['passed', 'failed', 'skipped']),
+            errors: z.array(TestErrorSchema).optional(),
+          })
+
+          export function isTestPassing(testResult: TestResult): boolean {
+            if (testResult.testModules.length === 0) return false
+            return testResult.testModules.every((module) =>
+              module.tests.every((test) => test.state !== 'failed')
+            )
+          }
+      benefits:
+        - "Unified test format across all language reporters"
+        - "Type guard functions simplify conditional logic"
+        - "Schema validation ensures reporter compatibility"
+      drawbacks:
+        - "All reporters must conform to same schema"
+
+    - pattern_name: "Validation Result Type"
+      pattern_type: "types"
+      source_repo: "tdd-guard"
+      source_file: "src/contracts/types/ValidationResult.ts"
+      language: "TypeScript"
+      description: "Standard response type for hook validation decisions"
+      technique:
+        summary: "Simple interface for hook decision responses"
+        code_snippet: |
+          export type ValidationResult = {
+            decision: 'approve' | 'block' | undefined
+            reason: string
+            continue?: boolean
+            stopReason?: string
+          }
+      benefits:
+        - "Consistent response shape across all hook handlers"
+        - "Optional fields allow partial responses"
+        - "Clear semantics for approve/block decisions"
+      drawbacks:
+        - "Limited to predefined decision types"
+
+    - pattern_name: "Go Test Result Structs"
+      pattern_type: "types"
+      source_repo: "tdd-guard"
+      source_file: "reporters/go/internal/transformer/transformer.go"
+      language: "Go"
+      description: "Go struct definitions for TDD Guard compatible test output"
+      technique:
+        summary: "JSON-tagged structs matching the cross-language test schema"
+        code_snippet: |
+          type Test struct {
+            Name     string      `json:"name"`
+            FullName string      `json:"fullName"`
+            State    string      `json:"state"`
+            Errors   []TestError `json:"errors,omitempty"`
+          }
+
+          type TestModule struct {
+            ModuleID string `json:"moduleId"`
+            Tests    []Test `json:"tests"`
+          }
+
+          type TestResult struct {
+            TestModules []TestModule `json:"testModules"`
+            Reason      string       `json:"reason,omitempty"`
+          }
+      benefits:
+        - "JSON tags ensure compatibility with TypeScript schemas"
+        - "omitempty reduces payload size"
+        - "Native Go types for efficient processing"
+      drawbacks:
+        - "Must manually keep in sync with TypeScript types"
+
+  registry:
+    - pattern_name: "Handler Registry Pattern"
+      pattern_type: "registry"
+      source_repo: "claude-hooks"
+      source_file: "templates/hooks/lib.ts"
+      language: "TypeScript"
+      description: "Central handler registry with typed dispatch for all hook events"
+      technique:
+        summary: "Object-based handler registration with switch-based dispatch"
+        code_snippet: |
+          export interface HookHandlers {
+            preToolUse?: PreToolUseHandler
+            postToolUse?: PostToolUseHandler
+            notification?: NotificationHandler
+            stop?: StopHandler
+            subagentStop?: SubagentStopHandler
+            userPromptSubmit?: UserPromptSubmitHandler
+            preCompact?: PreCompactHandler
+            sessionStart?: SessionStartHandler
+          }
+
+          export function runHook(handlers: HookHandlers): void {
+            const hook_type = process.argv[2]
+            process.stdin.on('data', async (data) => {
+              const payload = JSON.parse(data.toString())
+              switch (payload.hook_type) {
+                case 'PreToolUse':
+                  if (handlers.preToolUse) {
+                    const response = await handlers.preToolUse(payload)
+                    console.log(JSON.stringify(response))
+                  }
+                  break
+                // ... other cases
+              }
+            })
+          }
+      benefits:
+        - "Single entry point for all hook handlers"
+        - "Optional handlers - only implement what you need"
+        - "Type-safe handler registration"
+        - "Centralizes stdin/stdout JSON protocol"
+      drawbacks:
+        - "All handlers share same executable"
+        - "Switch statement grows with hook types"
+
+    - pattern_name: "PHPUnit Event Subscriber Registry"
+      pattern_type: "registry"
+      source_repo: "tdd-guard"
+      source_file: "reporters/phpunit/src/TddGuardSubscriber.php"
+      language: "PHP"
+      description: "PHPUnit extension registering multiple event subscribers"
+      technique:
+        summary: "Factory method returning array of event-specific subscribers"
+        code_snippet: |
+          final class TddGuardSubscriber
+          {
+              private TestResultCollector $collector;
+
+              public function __construct(string $projectRoot)
+              {
+                  $storage = new Storage($projectRoot);
+                  $this->collector = new TestResultCollector($storage, $projectRoot);
+              }
+
+              public function getSubscribers(): array
+              {
+                  return [
+                      new PassedTestSubscriber($this->collector),
+                      new FailedTestSubscriber($this->collector),
+                      new ErroredTestSubscriber($this->collector),
+                      new SkippedTestSubscriber($this->collector),
+                      new IncompleteTestSubscriber($this->collector),
+                      new TestRunnerFinishedSubscriber($this->collector),
+                  ];
+              }
+          }
+      benefits:
+        - "Clean separation of event handling by type"
+        - "Shared collector enables data aggregation"
+        - "Easy to add new event types"
+      drawbacks:
+        - "Many small subscriber classes to maintain"
+
+    - pattern_name: "Linter Provider Factory"
+      pattern_type: "registry"
+      source_repo: "tdd-guard"
+      source_file: "src/providers/LinterProvider.ts"
+      language: "TypeScript"
+      description: "Factory provider for multiple linter implementations"
+      technique:
+        summary: "Config-driven factory returning linter interface implementation"
+        code_snippet: |
+          export class LinterProvider {
+            getLinter(config?: Config): Linter | null {
+              const actualConfig = config ?? new Config()
+
+              switch (actualConfig.linterType) {
+                case 'eslint':
+                  return new ESLint()
+                case 'golangci-lint':
+                  return new GolangciLint()
+                case undefined:
+                default:
+                  return null
+              }
+            }
+          }
+      benefits:
+        - "Decouples hook logic from specific linter"
+        - "Easy to add new linter support"
+        - "Config-driven selection"
+      drawbacks:
+        - "Switch statement needs updating for new linters"
+
+    - pattern_name: "Model Client Provider"
+      pattern_type: "registry"
+      source_repo: "tdd-guard"
+      source_file: "src/providers/ModelClientProvider.ts"
+      language: "TypeScript"
+      description: "Factory for AI model clients (CLI, API, SDK)"
+      technique:
+        summary: "Config-driven factory for validation model clients"
+        code_snippet: |
+          export class ModelClientProvider {
+            getModelClient(config?: Config): IModelClient {
+              switch (actualConfig.validationClient) {
+                case 'sdk':
+                  return new ClaudeAgentSdk(actualConfig)
+                case 'api':
+                  return new AnthropicApi(actualConfig)
+                case 'cli':
+                  return new ClaudeCli(actualConfig)
+                default:
+                  return new ClaudeCli(actualConfig)
+              }
+            }
+          }
+      benefits:
+        - "Swap between CLI/API/SDK without code changes"
+        - "Unified interface (IModelClient) for all clients"
+        - "Config-driven for different environments"
+      drawbacks:
+        - "All client types must implement same interface"
+
+  baseClass:
+    - pattern_name: "Jest BaseReporter Extension"
+      pattern_type: "baseClass"
+      source_repo: "tdd-guard"
+      source_file: "reporters/jest/src/JestReporter.ts"
+      language: "TypeScript"
+      description: "Jest custom reporter extending BaseReporter for TDD Guard integration"
+      technique:
+        summary: "Extends Jest's BaseReporter to capture test results in TDD Guard format"
+        code_snippet: |
+          import { BaseReporter, Config } from '@jest/reporters'
+          import { Storage, FileStorage, Config as TDDConfig } from 'tdd-guard'
+
+          export class JestReporter extends BaseReporter {
+            private readonly storage: Storage
+
+            constructor(
+              _globalConfig?: Config.GlobalConfig,
+              reporterOptions?: TDDGuardReporterOptions
+            ) {
+              super()
+              this.storage = this.initializeStorage(reporterOptions)
+            }
+
+            override onTestResult(test: Test, testResult: TestResult): void {
+              this.testModules.set(test.path, { test, testResult })
+            }
+
+            override async onRunComplete(
+              _contexts: Set<TestContext>,
+              results: AggregatedResult
+            ): Promise<void> {
+              const output = this.buildTestModules()
+              await this.storage.saveTest(JSON.stringify(output, null, 2))
+            }
+          }
+      benefits:
+        - "Leverages Jest's built-in reporter lifecycle"
+        - "Only override methods you need"
+        - "Full access to Jest's type system"
+      drawbacks:
+        - "Coupled to Jest's BaseReporter contract"
+        - "Breaking changes in Jest affect reporter"
+
+    - pattern_name: "Vitest Reporter Interface"
+      pattern_type: "baseClass"
+      source_repo: "tdd-guard"
+      source_file: "reporters/vitest/src/VitestReporter.ts"
+      language: "TypeScript"
+      description: "Vitest reporter implementing Reporter interface for TDD Guard"
+      technique:
+        summary: "Implements Vitest's Reporter interface with storage abstraction"
+        code_snippet: |
+          import { Reporter, TestModule, TestCase, TestRunEndReason } from 'vitest/node'
+          import { Storage, FileStorage, Config } from 'tdd-guard'
+
+          export class VitestReporter implements Reporter {
+            private readonly storage: Storage
+            private readonly collectedData: ModuleDataMap = new Map()
+
+            constructor(storageOrRoot?: Storage | string) {
+              this.storage = typeof storageOrRoot === 'string'
+                ? new FileStorage(new Config({ projectRoot: storageOrRoot }))
+                : (storageOrRoot ?? new FileStorage())
+            }
+
+            onTestModuleCollected(testModule: TestModule): void {
+              this.collectedData.set(testModule.moduleId, {
+                module: testModule,
+                tests: [],
+              })
+            }
+
+            async onTestRunEnd(...): Promise<void> {
+              await this.storage.saveTest(JSON.stringify(output, null, 2))
+            }
+          }
+      benefits:
+        - "Clean interface implementation"
+        - "Flexible storage injection (string path or Storage instance)"
+        - "Callback-based data collection"
+      drawbacks:
+        - "Must implement all required interface methods"
+
+    - pattern_name: "PHPUnit Extension Interface"
+      pattern_type: "baseClass"
+      source_repo: "tdd-guard"
+      source_file: "reporters/phpunit/src/TddGuardExtension.php"
+      language: "PHP"
+      description: "PHPUnit extension implementing Extension interface"
+      technique:
+        summary: "Implements PHPUnit Extension interface for test runner integration"
+        code_snippet: |
+          use PHPUnit\Runner\Extension\Extension;
+          use PHPUnit\Runner\Extension\Facade;
+          use PHPUnit\Runner\Extension\ParameterCollection;
+
+          final class TddGuardExtension implements Extension
+          {
+              public function bootstrap(
+                  Configuration $configuration,
+                  Facade $facade,
+                  ParameterCollection $parameters
+              ): void {
+                  $projectRoot = $this->getProjectRoot($parameters);
+                  $subscriber = new TddGuardSubscriber($projectRoot);
+                  foreach ($subscriber->getSubscribers() as $eventSubscriber) {
+                      $facade->registerSubscriber($eventSubscriber);
+                  }
+              }
+          }
+      benefits:
+        - "Native PHPUnit integration"
+        - "Access to configuration and parameters"
+        - "Facade pattern for subscriber registration"
+      drawbacks:
+        - "PHPUnit 10+ only (new extension API)"
+
+    - pattern_name: "HookEvents Event Processor"
+      pattern_type: "baseClass"
+      source_repo: "tdd-guard"
+      source_file: "src/hooks/HookEvents.ts"
+      language: "TypeScript"
+      description: "Event processor class for hook data with storage integration"
+      technique:
+        summary: "Class-based event processor with schema validation and persistence"
+        code_snippet: |
+          export class HookEvents {
+            constructor(private readonly storage: Storage) {}
+
+            async processEvent(event: unknown): Promise<void> {
+              const hookResult = HookDataSchema.safeParse(event)
+              if (!hookResult.success) return
+
+              const operation = this.extractToolOperation(hookResult.data)
+              if (!operation) return
+
+              await this.persistOperation(operation)
+            }
+
+            private extractToolOperation(hook: HookData): ToolOperation | null {
+              const result = ToolOperationSchema.safeParse(hook)
+              return result.success ? result.data : null
+            }
+          }
+      benefits:
+        - "Encapsulates event processing logic"
+        - "Dependency injection for storage"
+        - "Schema validation at each step"
+      drawbacks:
+        - "Single responsibility - only processes events"
+
+  utility:
+    - pattern_name: "Stdin JSON Parser"
+      pattern_type: "utility"
+      source_repo: "tdd-guard"
+      source_file: "src/cli/tdd-guard.ts"
+      language: "TypeScript"
+      description: "Standard pattern for reading hook JSON from stdin"
+      technique:
+        summary: "Node.js stdin event-based JSON accumulation and parsing"
+        code_snippet: |
+          if (require.main === module) {
+            let inputData = ''
+            process.stdin.setEncoding('utf8')
+
+            process.stdin.on('data', (chunk) => {
+              inputData += chunk
+            })
+
+            process.stdin.on('end', async () => {
+              try {
+                const result = await run(inputData)
+                console.log(JSON.stringify(result))
+              } catch (error) {
+                console.error('Failed to parse hook data:', error)
+              } finally {
+                process.exit(0)
+              }
+            })
+          }
+      benefits:
+        - "Handles streaming input correctly"
+        - "Clean separation of I/O from processing"
+        - "Proper error handling and exit codes"
+      drawbacks:
+        - "Boilerplate needed in each hook"
+
+    - pattern_name: "Transcript Message Parser"
+      pattern_type: "utility"
+      source_repo: "claude-hooks"
+      source_file: "templates/hooks/lib.ts"
+      language: "TypeScript"
+      description: "Utilities for parsing Claude Code transcript files (JSONL format)"
+      technique:
+        summary: "Async generator pattern for streaming JSONL transcript parsing"
+        code_snippet: |
+          export async function getInitialMessage(
+            transcriptPath: string
+          ): Promise<string | null> {
+            const fileStream = fs.createReadStream(transcriptPath)
+            const rl = readline.createInterface({
+              input: fileStream,
+              crlfDelay: Infinity,
+            })
+
+            for await (const line of rl) {
+              if (!line.trim()) continue
+              try {
+                const message = JSON.parse(line) as TranscriptMessage
+                if (message.type === 'summary') continue
+                if (message.type === 'user' && message.message.role === 'user') {
+                  return typeof message.message.content === 'string'
+                    ? message.message.content
+                    : null
+                }
+              } catch (_e) {}
+            }
+            return null
+          }
+      benefits:
+        - "Streaming parser for large transcripts"
+        - "Early exit on first match"
+        - "Typed message discrimination"
+        - "Graceful handling of malformed lines"
+      drawbacks:
+        - "File I/O in hook may add latency"
+
+    - pattern_name: "Session Data Persistence"
+      pattern_type: "utility"
+      source_repo: "claude-hooks"
+      source_file: "templates/hooks/session.ts"
+      language: "TypeScript"
+      description: "Utility for persisting hook events by session ID"
+      technique:
+        summary: "JSON file accumulation keyed by session ID in temp directory"
+        code_snippet: |
+          const SESSIONS_DIR = path.join(tmpdir(), 'claude-hooks-sessions')
+
+          export async function saveSessionData(
+            hookType: string,
+            payload: HookPayload
+          ): Promise<void> {
+            await mkdir(SESSIONS_DIR, {recursive: true})
+            const sessionFile = path.join(SESSIONS_DIR, `${payload.session_id}.json`)
+
+            let sessionData: Array<{timestamp: string; hookType: string; payload: HookPayload}> = []
+            try {
+              const existing = await readFile(sessionFile, 'utf-8')
+              sessionData = JSON.parse(existing)
+            } catch {}
+
+            sessionData.push({
+              timestamp: new Date().toISOString(),
+              hookType,
+              payload,
+            })
+
+            await writeFile(sessionFile, JSON.stringify(sessionData, null, 2))
+          }
+      benefits:
+        - "Session-scoped event history"
+        - "Uses temp directory - auto-cleanup"
+        - "Append-style for audit trail"
+      drawbacks:
+        - "File I/O on every hook call"
+        - "No cleanup mechanism"
+
+    - pattern_name: "Storage Interface Abstraction"
+      pattern_type: "utility"
+      source_repo: "tdd-guard"
+      source_file: "src/storage/Storage.ts"
+      language: "TypeScript"
+      description: "Abstract storage interface for hook data persistence"
+      technique:
+        summary: "Interface-based storage with specialized save/get methods"
+        code_snippet: |
+          export const TRANSIENT_DATA = ['test', 'todo', 'modifications', 'lint'] as const
+
+          export interface Storage {
+            saveTest(content: string): Promise<void>
+            saveTodo(content: string): Promise<void>
+            saveModifications(content: string): Promise<void>
+            saveLint(content: string): Promise<void>
+            saveConfig(content: string): Promise<void>
+            saveInstructions(content: string): Promise<void>
+            getTest(): Promise<string | null>
+            getTodo(): Promise<string | null>
+            getModifications(): Promise<string | null>
+            getLint(): Promise<string | null>
+            getConfig(): Promise<string | null>
+            getInstructions(): Promise<string | null>
+            clearTransientData(): Promise<void>
+          }
+      benefits:
+        - "Enables FileStorage and MemoryStorage implementations"
+        - "Testability through dependency injection"
+        - "Clear data categories (test, todo, modifications, lint)"
+        - "Transient vs persistent data distinction"
+      drawbacks:
+        - "New data types require interface changes"
+
+    - pattern_name: "FileStorage Implementation"
+      pattern_type: "utility"
+      source_repo: "tdd-guard"
+      source_file: "src/storage/FileStorage.ts"
+      language: "TypeScript"
+      description: "File-based storage implementation for hook data"
+      technique:
+        summary: "Config-driven file paths with directory auto-creation"
+        code_snippet: |
+          export class FileStorage implements Storage {
+            private readonly config: Config
+            private readonly filePaths: Record<string, string>
+
+            constructor(config?: Config) {
+              this.config = config ?? new Config()
+              this.filePaths = {
+                test: this.config.testResultsFilePath,
+                todo: this.config.todosFilePath,
+                modifications: this.config.modificationsFilePath,
+                lint: this.config.lintFilePath,
+                config: this.config.configFilePath,
+                instructions: this.config.instructionsFilePath,
+              }
+            }
+
+            private async save(type: string, content: string): Promise<void> {
+              await this.ensureDirectory()
+              await fs.writeFile(this.filePaths[type], content)
+            }
+          }
+      benefits:
+        - "Standard file locations via Config"
+        - "Directory creation handled automatically"
+        - "Generic save/get pattern reduces duplication"
+      drawbacks:
+        - "File I/O latency"
+        - "Concurrent write issues possible"
+
+    - pattern_name: "Go Storage Implementation"
+      pattern_type: "utility"
+      source_repo: "tdd-guard"
+      source_file: "reporters/go/internal/storage/storage.go"
+      language: "Go"
+      description: "Go file storage for test results with cross-platform paths"
+      technique:
+        summary: "Path component array for cross-platform compatibility"
+        code_snippet: |
+          var (
+            TestResultsPath = []string{".claude", "tdd-guard", "data", "test.json"}
+          )
+
+          type Storage struct {
+            basePath string
+          }
+
+          func NewStorage(projectRoot string) *Storage {
+            return &Storage{basePath: projectRoot}
+          }
+
+          func (s *Storage) Save(results *transformer.TestResult) error {
+            parts := append([]string{s.basePath}, TestResultsPath...)
+            filePath := filepath.Join(parts...)
+            dir := filepath.Dir(filePath)
+            os.MkdirAll(dir, 0755)
+            data, _ := json.Marshal(results)
+            return os.WriteFile(filePath, data, 0644)
+          }
+      benefits:
+        - "Cross-platform path handling"
+        - "Consistent with TypeScript storage paths"
+        - "Simple interface"
+      drawbacks:
+        - "Limited to test results only"
+
+    - pattern_name: "PHP Storage Implementation"
+      pattern_type: "utility"
+      source_repo: "tdd-guard"
+      source_file: "reporters/phpunit/src/Storage.php"
+      language: "PHP"
+      description: "PHP file storage for test results"
+      technique:
+        summary: "Simple file storage with directory creation"
+        code_snippet: |
+          final class Storage
+          {
+              private string $projectRoot;
+
+              public function __construct(string $projectRoot = '')
+              {
+                  $this->projectRoot = PathValidator::resolveProjectRoot($projectRoot);
+              }
+
+              public function saveTest(string $content): void
+              {
+                  $dataDir = $this->projectRoot . '/.claude/tdd-guard/data';
+                  if (!is_dir($dataDir)) {
+                      mkdir($dataDir, 0755, true);
+                  }
+                  file_put_contents($dataDir . '/test.json', $content);
+              }
+          }
+      benefits:
+        - "Consistent path with other language implementations"
+        - "Directory creation included"
+        - "PathValidator handles project root resolution"
+      drawbacks:
+        - "PHP-specific implementation"
+
+    - pattern_name: "Terminal Output Formatter"
+      pattern_type: "utility"
+      source_repo: "cc-tools"
+      source_file: "internal/output/output.go"
+      language: "Go"
+      description: "Styled terminal output with level-based formatting"
+      technique:
+        summary: "Writer interface with lipgloss styling for colored output"
+        code_snippet: |
+          type Level int
+          const (
+            Info Level = iota
+            Success
+            Warning
+            Error
+            Debug
+          )
+
+          type Terminal struct {
+            stdout io.Writer
+            stderr io.Writer
+            styles map[Level]lipgloss.Style
+          }
+
+          func (t *Terminal) Print(level Level, format string, args ...any) {
+            msg := fmt.Sprintf(format, args...)
+            styled := t.styles[level].Render(msg)
+            if err := t.Write(styled); err != nil {
+              os.Exit(1)
+            }
+          }
+      benefits:
+        - "Consistent styling across hook output"
+        - "Level-based message categorization"
+        - "Lipgloss integration for rich formatting"
+      drawbacks:
+        - "Colors may not render in all terminals"
+
+    - pattern_name: "Hook Output Formatter"
+      pattern_type: "utility"
+      source_repo: "cc-tools"
+      source_file: "internal/output/hook.go"
+      language: "Go"
+      description: "ANSI formatting specifically for Claude Code hook output"
+      technique:
+        summary: "Raw ANSI codes for hook-compatible colored output"
+        code_snippet: |
+          type HookFormatter struct{}
+
+          const (
+            ansiRed    = "\033[0;31m"
+            ansiGreen  = "\033[0;32m"
+            ansiYellow = "\033[0;33m"
+            ansiReset  = "\033[0m"
+          )
+
+          func (h *HookFormatter) FormatSuccess(message string) string {
+            return fmt.Sprintf("%s%s%s", ansiGreen, message, ansiReset)
+          }
+
+          func (h *HookFormatter) FormatBlockingError(format string, args ...any) string {
+            message := fmt.Sprintf(format, args...)
+            return h.FormatError(message)
+          }
+      benefits:
+        - "Direct ANSI codes - no dependencies"
+        - "Specific to Claude Code hook context"
+        - "Simple success/warning/error pattern"
+      drawbacks:
+        - "Hardcoded colors"
+        - "No theme support"
+
+  cli:
+    - pattern_name: "Oclif CLI Generator"
+      pattern_type: "cli"
+      source_repo: "claude-hooks"
+      source_file: "src/commands/init.ts"
+      language: "TypeScript"
+      description: "CLI command to scaffold hook boilerplate using oclif framework"
+      technique:
+        summary: "Oclif Command class with template copying and dependency installation"
+        code_snippet: |
+          import {Command, Flags} from '@oclif/core'
+
+          export default class Init extends Command {
+            static description = `Initialize Claude Code hooks in your project...`
+
+            static flags = {
+              force: Flags.boolean({char: 'f', description: 'Overwrite existing hooks'}),
+              local: Flags.boolean({char: 'l', description: 'Create settings.json.local'}),
+            }
+
+            public async run(): Promise<void> {
+              const {flags} = await this.parse(Init)
+              await fs.ensureDir('.claude/hooks')
+              await this.generateHookFiles()  // Copies templates
+              await this.updateSettings(flags.local)  // Creates settings.json
+              await this.installDependencies()  // Runs bun add
+            }
+          }
+      benefits:
+        - "Zero-config hook setup with single command"
+        - "Handles directory creation, templates, and settings"
+        - "Flag support for force overwrite and local settings"
+        - "Built-in help and documentation"
+      drawbacks:
+        - "Requires npx or global install"
+        - "Bun dependency for generated hooks"
+
+    - pattern_name: "Settings JSON Generator"
+      pattern_type: "cli"
+      source_repo: "claude-hooks"
+      source_file: "src/commands/init.ts"
+      language: "TypeScript"
+      description: "Generates Claude Code settings.json with hook configuration"
+      technique:
+        summary: "Programmatic settings.json creation with hook command mappings"
+        code_snippet: |
+          private async updateSettings(useLocal = false): Promise<void> {
+            const settingsPath = useLocal ? '.claude/settings.json.local' : '.claude/settings.json'
+            let settings: any = {}
+
+            try {
+              const existingSettings = await fs.readFile(settingsPath, 'utf-8')
+              settings = JSON.parse(existingSettings)
+            } catch {}
+
+            settings.hooks = {
+              PreToolUse: [{
+                matcher: '',
+                hooks: [{
+                  type: 'command',
+                  command: 'bun .claude/hooks/index.ts PreToolUse',
+                }],
+              }],
+              PostToolUse: [{ matcher: '', hooks: [{...}] }],
+              // ... all hook types
+            }
+
+            await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2))
+          }
+      benefits:
+        - "Preserves existing settings"
+        - "Local settings support for personal config"
+        - "All hook types pre-configured"
+      drawbacks:
+        - "Overwrites existing hook config"
+
+    - pattern_name: "Dependency Auto-Install"
+      pattern_type: "cli"
+      source_repo: "claude-hooks"
+      source_file: "src/commands/init.ts"
+      language: "TypeScript"
+      description: "Automatic dependency installation during hook scaffolding"
+      technique:
+        summary: "Spawns bun to initialize project and install type definitions"
+        code_snippet: |
+          private async runBunInit(): Promise<void> {
+            return new Promise((resolve, reject) => {
+              const child = spawn('bun', ['init', '-y'], {
+                cwd: '.claude/hooks',
+                stdio: 'pipe',
+              })
+              child.on('exit', (code) => {
+                code === 0 ? resolve() : reject(new Error(`bun init failed`))
+              })
+            })
+          }
+
+          private async installDependencies(): Promise<void> {
+            return new Promise((resolve) => {
+              const child = spawn('bun', ['add', '-d', '@types/node'], {
+                cwd: '.claude/hooks',
+              })
+              child.on('exit', resolve)
+            })
+          }
+      benefits:
+        - "Ready-to-use TypeScript environment"
+        - "No manual setup required"
+        - "Graceful fallback if bun not installed"
+      drawbacks:
+        - "Bun-specific (not npm/yarn)"
+
+summary:
+  total_patterns: 23
+  by_type:
+    types: 5
+    registry: 4
+    baseClass: 4
+    utility: 10
+    cli: 3
+  by_language:
+    TypeScript: 16
+    Go: 4
+    PHP: 3
+  key_insights:
+    - "Type definitions and Zod schemas provide the foundation for type-safe hook development"
+    - "Registry patterns enable single-entry-point handlers with optional hook implementations"
+    - "Storage abstraction is consistent across TypeScript, Go, and PHP - enabling multi-language reporters"
+    - "CLI tooling (claude-hooks) eliminates boilerplate with one-command scaffolding"
+    - "Test reporters (Jest, Vitest, PHPUnit, Go) all output to same schema for TDD Guard consumption"
+    - "Provider pattern used for both linters and model clients enables flexible configuration"

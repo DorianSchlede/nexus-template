@@ -1,0 +1,98 @@
+---
+batch_id: "limitations_3"
+field: limitations
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 7
+patterns_found: 24
+---
+
+patterns:
+  - name: "GNN Expressivity Limitation for Node Distinction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:517-527)"
+    quote: "GNNs relying solely on the neighbourhood of each node have limited expressivity in terms of their ability to distinguish nodes and graphs"
+    description: "Graph Neural Networks that rely only on local neighborhood information have fundamental expressivity limitations. They cannot distinguish certain nodes or graph structures that share identical local neighborhoods, limiting their applicability for fine-grained classification tasks. NRecGNNs have expressiveness similar to ALCQ Description Logic."
+
+  - name: "Knowledge Graph Incompleteness Assumption"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 15:642-654)"
+    quote: "Knowledge graphs are generally incomplete - in fact, one of the main applications of hypothesis mining is to try to improve the completeness of the knowledge graph"
+    description: "Knowledge graphs suffer from inherent incompleteness, which is a fundamental limitation. The Closed World Assumption is unsuitable because it assumes any edge not entailed is false. Even the Partial Completeness Assumption is only a heuristic to address this limitation."
+
+  - name: "Agent Hallucination and Error Propagation"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:21-25)"
+    quote: "agents can hallucinate or reason incorrectly, propagating errors when one agent's output becomes another's input"
+    description: "AI agents, especially those based on LLMs, can generate hallucinated or incorrect outputs. These errors propagate through agentic workflows when one agent's output feeds into another agent's input, compounding errors and making it difficult to assess result correctness."
+
+  - name: "Non-Deterministic Agent Behavior"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:81-84)"
+    quote: "agentic workflows are non-deterministic, shaped by near real-time data, adaptive decisions, and evolving interactions"
+    description: "Unlike traditional workflows with static, deterministic paths, agentic workflows exhibit non-deterministic behavior. This is shaped by real-time data, adaptive decisions, and evolving interactions, making them harder to trace, reproduce, and validate."
+
+  - name: "Traditional Provenance Cannot Capture Agent Dynamics"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:93-98)"
+    quote: "traditional provenance approaches are not designed to capture the intrinsic dynamics of modern AI agents"
+    description: "Existing provenance methods fail to capture agent-centric metadata such as prompts, responses, and decisions, and cannot relate them to broader workflow context and downstream outcomes. They model workflows as static graphs, missing semantics for agentic behavior and model-driven reasoning."
+
+  - name: "Isolated Agent Interaction Data"
+    chunk_ref: "03-PROV-AGENT (Chunk 1:160-167)"
+    quote: "MCP-based agent frameworks record prompts, responses, and AI service invocations, these data are typically isolated from the rest of the workflow"
+    description: "While MCP-based agent frameworks capture agent interactions, this data remains disconnected from the broader workflow. This isolation hinders contextualization of agent interactions and understanding their downstream impact."
+
+  - name: "Ontology Silo Problem"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:44-48)"
+    quote: "the proliferation of ontologies in a domain may lead to larger ontology silos...data organized by independent ontologies are not mutually interoperable"
+    description: "While ontologies solve the data silo problem, the proliferation of independent ontologies creates an 'ontology silo problem' where data sets organized by different ontologies remain non-interoperable, requiring explicit mappings between terms."
+
+  - name: "BFO Cannot Represent All PROV-O Domains"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:358-365)"
+    quote: "BFO represents domains that are not represented in PROV-O, such as those covering spatial and temporal regions. Thus, not every term in BFO can be mapped to some term in PROV-O"
+    description: "A total alignment of BFO to PROV-O is not possible because BFO includes domain-specific concepts (spatial/temporal regions) that have no PROV-O counterparts. This limits the achievable level of semantic interoperability to a one-way total alignment."
+
+  - name: "OWL Data Property Mapping Limitations"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 2:191-200)"
+    quote: "While we considered complex mappings for PROV-O data properties, we were unable to encode these in a computable format due to representational limits of OWL, RDF, and SWRL"
+    description: "Complex mappings for data properties cannot be encoded computationally due to representational limitations of OWL, RDF, and SWRL. Time-related properties like startedAtTime require multiple fine-grained BFO relationships that cannot be directly represented."
+
+  - name: "Conservativity Introduces New Disjoint Relations"
+    chunk_ref: "04-PROV-O_to_BFO (Chunk 1:457-458)"
+    quote: "Although this level of conservativity was achieved, our alignment does entail new disjoint relations between PROV-O terms"
+    description: "Even with conservativity achieved for subsumption hierarchies, the PROV-BFO alignment entails new disjoint relations between PROV-O terms (e.g., PROV Agent becomes disjoint from PROV Activity), changing the semantics beyond the original ontology intent."
+
+  - name: "Foundational Ontology Non-Computability"
+    chunk_ref: "05-DOLCE (Chunk 1:59-62)"
+    quote: "Such richness greatly enhances expressiveness but, on the other hand, it makes foundational ontologies non computable, due to the well-known trade-off between formal expressiveness and computability"
+    description: "DOLCE's rich axiomatization in first-order modal logic provides semantic transparency but sacrifices computability. This fundamental trade-off means foundational ontologies cannot be directly used for applications - only approximated partial translations in application-oriented languages are possible."
+
+  - name: "DOLCE Requires Possibilist Domain Assumption"
+    chunk_ref: "05-DOLCE (Chunk 1:227-230)"
+    quote: "These assumptions entail a possibilistic view of the entities: the domain of quantification contains all possible entities, regardless of their actual existence"
+    description: "DOLCE's formal theory in QS5 modal logic with Barcan formulas requires quantifying over all possible entities, not just actual ones. This philosophical commitment may not align with all application requirements or realist interpretations."
+
+  - name: "DOLCE Does Not Formalize Functions and Roles Natively"
+    chunk_ref: "05-DOLCE (Chunk 1:184-189)"
+    quote: "DOLCE does not formalize functions and roles, although these have been widely investigated and represented in DOLCE-driven approaches"
+    description: "Functions and roles are not part of DOLCE's core formalization - they require extensions. Roles are represented as social concepts with anti-rigidity and foundation properties, requiring additional theoretical apparatus beyond the base ontology."
+
+  - name: "Role vs Function Terminological Confusion"
+    chunk_ref: "06-BFO_Function_Role (Chunk 1:142-146)"
+    quote: "The term 'function' is sometimes used interchangeably with the term 'role'... Hunter defines function as: 'the role that a structure plays in the processes of a living thing'"
+    description: "There is widespread terminological confusion between 'function', 'role', 'disposition', 'tendency', and 'capability' in the literature. This inconsistent thinking about biological and clinical phenomena stands in the way of coherent computer representations and understanding of ontologies like GO."
+
+  - name: "BFO Biological Functions Limited to Parts of Organisms"
+    chunk_ref: "06-BFO_Function_Role (Chunk 1:469-474)"
+    quote: "Biological functions are, according to the proposed definition, attributed to parts of organisms and not to whole organisms themselves"
+    description: "BFO's definition restricts biological functions to parts of organisms (heart, liver, organs) - whole organisms cannot have functions, only roles. This creates a limitation when modeling entities like queen bees that appear to have 'functions' in a colony context."
+
+  - name: "BFO Has No Qualities for Occurrents"
+    chunk_ref: "07-Classifying_Processes (Chunk 1:676-678)"
+    quote: "For item (5), on the other hand, there is no candidate category in the BFO ontology, since there is no counterpart on the occurrent side for BFO's qualities of independent continuants"
+    description: "BFO lacks a mechanism for representing qualities of processes (occurrents). When measuring process attributes like speed, there is no BFO category to represent these - forcing a workaround where process attributions are treated as instantiation of process type universals rather than qualities."
+
+  - name: "Processes Cannot Change in BFO Four-Dimensionalism"
+    chunk_ref: "07-Classifying_Processes (Chunk 1:689-691)"
+    quote: "Processes, in particular, cannot change on the four-dimensionalist view, because processes are changes (they are changes in those independent continuant entities which are their participants)"
+    description: "BFO's four-dimensionalist account of occurrents means processes cannot change - they ARE changes. This limits how we can describe process evolution. Saying 'speed up this process' must be reinterpreted as ensuring an ongoing process will be quicker than the alternative counterfactual process."
+
+  - name: "BFO Process Universals Are Always Rigid"
+    chunk_ref: "07-Classifying_Processes (Chunk 1:735-738)"
+    quote: "Universals on the side of occurrents, in contrast, are always rigid, so that if an occurrent instantiates a universal at some time, then it instantiates this universal at all times"
+    description: "Unlike continuant universals (like 'larva' or 'fetus') which can be non-rigid, all occurrent universals in BFO are rigid. A process cannot change which universal it instantiates over time - this must be modeled as temporal parts instantiating different universals."

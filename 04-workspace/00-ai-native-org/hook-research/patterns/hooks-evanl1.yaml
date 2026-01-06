@@ -1,0 +1,619 @@
+# Claude Code Hook Patterns - EvanL1/claude-code-hooks
+# Repository: https://github.com/EvanL1/claude-code-hooks
+# Extraction Date: 2025-12-31
+# Total Hooks Found: 14
+
+metadata:
+  source_repo: "claude-code-hooks"
+  repo_author: "EvanL1"
+  repo_url: "https://github.com/EvanL1/claude-code-hooks"
+  language: "Python (hooks), Shell (UI)"
+  hook_events_used:
+    - PreToolUse
+    - PostToolUse
+    - UserPromptSubmit
+  hook_events_not_used:
+    - SessionStart
+    - PreCompact
+    - Stop
+    - SubagentStop
+    - Notification
+  architecture: "Individual script files, centralized settings.json configuration"
+
+patterns:
+
+# =============================================================================
+# BLOCKING HOOKS (Exit Code 2)
+# =============================================================================
+
+- pattern_name: "git-branch-protection"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/git-safety-check.py"
+  description: "Blocks deletion of protected branches (main, master, production, prod) and prevents use of --no-verify flag."
+  implementation:
+    matcher: "Bash"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Regex pattern matching on git commands with protected branch list and sophisticated --no-verify detection that excludes quoted strings."
+    code_snippet: |
+      protected_branches = ["main", "master", "production", "prod"]
+
+      # Check for --no-verify (excluding quoted contexts)
+      if re.search(r'(^|\s)--no-verify(\s|$)', command):
+          # Check if in quotes or heredoc
+          msg_match = re.search(r'-m\s+["\'].*?["\']', command)
+          if not (msg_match and msg_match.start() < verify_pos < msg_match.end()):
+              print("Blocked: --no-verify", file=sys.stderr)
+              sys.exit(2)
+
+      # Check branch deletion
+      for branch in protected_branches:
+          if f"git push origin :{branch}" in command:
+              sys.exit(2)
+          if re.search(rf"git\s+branch\s+-[dD].*{branch}", command):
+              sys.exit(2)
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - stderr message only"
+  use_case:
+    category: "Safety"
+    when_to_use: "Protecting critical branches from accidental deletion, preventing hook bypass"
+    when_not_to_use: "When developers need flexibility to force operations"
+  quality:
+    complexity: "medium"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "rust-mod-restriction"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/rust-mod-restriction.py"
+  description: "Blocks creation or modification of mod.rs files in Rust projects, enforcing modern module organization patterns."
+  implementation:
+    matcher: "Write|Edit|MultiEdit"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Extract file_path from tool_input, check basename against 'mod.rs' pattern."
+    code_snippet: |
+      tool_name = input_data.get("tool_name", "")
+      tool_input = input_data.get("tool_input", {})
+
+      if tool_name in ["Write", "Edit", "MultiEdit"]:
+          file_path = tool_input.get("file_path", "")
+          basename = os.path.basename(file_path)
+
+          if basename == "mod.rs":
+              error_msg = """Not allowed to create mod.rs files!
+      Use lib.rs or main.rs with mod declarations instead."""
+              print(error_msg, file=sys.stderr)
+              sys.exit(2)
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - provides suggestion in stderr"
+  use_case:
+    category: "Quality"
+    when_to_use: "Enforcing Rust 2018+ module structure conventions"
+    when_not_to_use: "Legacy Rust codebases using mod.rs pattern"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "naming-restrictions"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/naming-restrictions.py"
+  description: "Blocks poorly named files using regex patterns to detect generic names like test.py, temp1.txt, foo.js."
+  implementation:
+    matcher: "Write|Edit|Bash"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Multiple regex patterns check filename against restricted patterns, provides contextual naming suggestions."
+    code_snippet: |
+      restricted_patterns = [
+          r"^(simple|simplify|complex|basic|test|temp|tmp|new|old)$",
+          r"^(test|temp|tmp|file|data|function)\d*",
+          r"^v\d+$",
+          r"^(new|old|temp|tmp|test)_",
+          r"_(copy|backup|old|new|temp|tmp|test)(\d+)?$",
+          r"^(foo|bar|baz|abc|xyz|asdf|qwerty)$",
+          r"^[a-z]$",  # Single letters
+      ]
+
+      for pattern in restricted_patterns:
+          if re.search(pattern, name_lower):
+              return True, pattern
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - provides contextual suggestions in stderr"
+  use_case:
+    category: "Quality"
+    when_to_use: "Enforcing descriptive file naming conventions"
+    when_not_to_use: "Rapid prototyping where temporary names are acceptable"
+  quality:
+    complexity: "medium"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "python-uv-enforcer"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/python-uv-enforcer.py"
+  description: "Blocks direct usage of pip, python, pytest and enforces uv as the standard Python tool manager."
+  implementation:
+    matcher: "Bash"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Regex matching on Python tool commands with specific uv migration suggestions."
+    code_snippet: |
+      python_tools = [
+          "pip", "pip3", "python", "python3", "pytest", "pylint",
+          "flake8", "black", "mypy", "isort", "poetry", "pipenv",
+          "conda", "virtualenv", "pyenv",
+      ]
+
+      pattern = r"^(" + "|".join(python_tools) + r")\b"
+      if re.match(pattern, command) and not re.match(r"^(python3?\s+-m\s+venv|uv\s+)", command):
+          # Provide specific uv migration suggestions
+          if "pip" in command and "install" in command:
+              error_msg += "\n   uv pip install ..."
+          elif command.startswith("python"):
+              error_msg += "\n   uv run python ..."
+          sys.exit(2)
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - provides uv migration guidance in stderr"
+  use_case:
+    category: "Quality"
+    when_to_use: "Standardizing on uv for Python environment management"
+    when_not_to_use: "Projects that don't use uv or have legacy Python tooling"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "commit-message-filter"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/commit-message-filter.py"
+  description: "Blocks git commits containing Claude auto-generated signatures like 'Generated with Claude Code'."
+  implementation:
+    matcher: "Bash"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Regex patterns match Claude-generated commit message signatures in git commit commands."
+    code_snippet: |
+      blocked_patterns = [
+          r"Generated with\s*\[Claude Code\]",
+          r"Co-Authored-By:\s*Claude\s*<noreply@anthropic\.com>",
+          r"Generated with.*Claude.*Code",
+          r"Claude\s*<noreply@anthropic\.com>",
+      ]
+
+      if "git commit" in command:
+          for pattern in blocked_patterns:
+              if re.search(pattern, command, re.IGNORECASE | re.MULTILINE):
+                  print("Blocked: auto-generated Claude signature", file=sys.stderr)
+                  sys.exit(2)
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - forces user to provide custom commit message"
+  use_case:
+    category: "Quality"
+    when_to_use: "Enforcing meaningful, human-written commit messages"
+    when_not_to_use: "When Claude-generated commits are acceptable"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "docker-image-naming"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/docker-validator.py"
+  description: "Blocks Docker image names with version suffixes like -v2, -test, -prod, enforcing tag-based versioning."
+  implementation:
+    matcher: "Bash"
+    decision_type: "block"
+    exit_code: "2"
+  technique:
+    summary: "Extract image tags from docker build/tag commands, check for bad suffixes, suggest proper tag format."
+    code_snippet: |
+      if "docker build" in command or "docker tag" in command:
+          tag_pattern = r"-t\s+([^\s]+)"
+          matches = re.findall(tag_pattern, command)
+
+          for tag in matches:
+              bad_suffixes = ["-v2", "-v3", "-test", "-dev", "-prod", "-staging"]
+              image_name = tag.split(":")[0]
+
+              for suffix in bad_suffixes:
+                  if image_name.endswith(suffix):
+                      clean_name = image_name[:-len(suffix)]
+                      tag_part = tag.split(":")[1] if ":" in tag else "latest"
+                      error_msg = f"Use: {clean_name}:{tag_part}"
+                      sys.exit(2)
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - provides corrected command suggestion"
+  use_case:
+    category: "Quality"
+    when_to_use: "Enforcing Docker image versioning via tags rather than name suffixes"
+    when_not_to_use: "Legacy Docker workflows with suffix-based versioning"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+# =============================================================================
+# WARNING HOOKS (Exit Code 0 with output)
+# =============================================================================
+
+- pattern_name: "aws-safety-warnings"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/aws-safety-check.py"
+  description: "Warns about dangerous AWS operations (delete, terminate, IAM changes) and production environment access."
+  implementation:
+    matcher: "Bash"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Comprehensive regex pattern matching for AWS CLI commands with categorized warnings for dangerous operations, production indicators, S3 public access, IAM changes, and cost implications."
+    code_snippet: |
+      dangerous_operations = {
+          r"aws\s+.*\s+delete": "Delete operation - confirm target resource",
+          r"aws\s+.*\s+terminate": "Terminate operation - permanent deletion",
+          r"aws\s+s3\s+rm.*--recursive": "Recursive S3 deletion - use caution",
+          r"aws\s+ec2\s+terminate-instances": "Terminating EC2 - data will be lost",
+      }
+
+      # Production environment detection
+      prod_indicators = ["prod", "production", "prd"]
+      for indicator in prod_indicators:
+          if indicator in command.lower():
+              messages.append("WARNING: May be operating on production")
+
+      # S3 public access detection
+      if "--acl public-read" in command:
+          messages.append("Security warning: Setting public access")
+
+      # IAM admin rights detection
+      if "AdministratorAccess" in command:
+          messages.append("Security: Attaching admin permissions")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - warnings printed to stdout"
+  use_case:
+    category: "Safety"
+    when_to_use: "Any AWS CLI operations to catch dangerous commands early"
+    when_not_to_use: "Automated pipelines where warnings would be noise"
+  quality:
+    complexity: "medium"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "npm-safety-warnings"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/npm-safety-check.py"
+  description: "Warns about dangerous npm operations (publish, global install) and known problematic packages."
+  implementation:
+    matcher: "Bash"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Pattern matching for npm/yarn/pnpm commands with warnings for publish, global install, and a blocklist of known problematic packages."
+    code_snippet: |
+      dangerous_operations = {
+          r"npm\s+publish": "Publishing to npm registry - confirm version",
+          r"npm\s+unpublish": "Unpublish affects dependent users",
+          r"npm\s+install\s+.*--global": "Global install affects system",
+          r"npm\s+audit\s+fix\s+--force": "Force fix may introduce breaking changes",
+      }
+
+      suspicious_packages = [
+          "node-ipc",   # Had malicious code incident
+          "colors",     # Had malicious code incident
+          "faker",      # Deleted by author
+      ]
+
+      for pkg in suspicious_packages:
+          if f"install {pkg}" in command:
+              messages.append(f"Warning: '{pkg}' has had security issues")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - warnings printed to stdout"
+  use_case:
+    category: "Safety"
+    when_to_use: "npm/yarn/pnpm operations to catch risky packages and operations"
+    when_not_to_use: "Trusted CI/CD pipelines with vetted dependencies"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "cargo-format-reminder"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/cargo-auto-format.py"
+  description: "Reminds to run cargo fmt and cargo clippy after cargo build/check/test commands."
+  implementation:
+    matcher: "Bash"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Detects cargo build/check/test commands and checks for Cargo.toml presence before suggesting formatting."
+    code_snippet: |
+      def should_run_format(command):
+          cargo_commands = ["cargo build", "cargo check", "cargo test"]
+          return any(cmd in command for cmd in cargo_commands)
+
+      if should_run_format(command):
+          if os.path.exists("./Cargo.toml"):
+              print("Tip: Run 'cargo fmt' and 'cargo clippy' after build")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - reminder printed to stdout"
+  use_case:
+    category: "Quality"
+    when_to_use: "Rust projects to encourage consistent formatting"
+    when_not_to_use: "Projects with CI-enforced formatting"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "java-build-check"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/java-build-check.py"
+  description: "Provides Java/Maven/Gradle best practice suggestions including wrapper usage, test skipping warnings, and JVM tuning."
+  implementation:
+    matcher: "Bash"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Pattern matching for Maven/Gradle commands with contextual suggestions based on presence of wrapper scripts and command flags."
+    code_snippet: |
+      # Suggest wrapper usage
+      if "mvn " in command and os.path.exists("./mvnw"):
+          messages.append("Tip: Use ./mvnw instead of mvn for version consistency")
+
+      # Warn on skipped tests
+      if "-DskipTests" in command:
+          messages.append("Warning: Tests skipped - ensure code quality")
+
+      # JVM tuning suggestions for production
+      if "java -jar" in command:
+          if "-Xmx" not in command:
+              messages.append("Tip: Add -Xmx to limit max heap memory")
+          if "prod" in command.lower() and "-XX:+UseG1GC" not in command:
+              messages.append("Tip: Consider -XX:+UseG1GC for production")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - suggestions printed to stdout"
+  use_case:
+    category: "Quality"
+    when_to_use: "Java projects using Maven or Gradle"
+    when_not_to_use: "Non-Java projects or projects with strict build configurations"
+  quality:
+    complexity: "medium"
+    performance: "<10ms"
+    dependencies: []
+
+# =============================================================================
+# AUDIT/LOGGING HOOKS (Exit Code 0, silent operation)
+# =============================================================================
+
+- pattern_name: "command-logger"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/command-logger.py"
+  description: "Logs all tool invocations to daily JSON log files at ~/.claude/logs/ for audit trail."
+  implementation:
+    matcher: ".*"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Captures all tool use events, extracts relevant fields based on tool type, writes JSON entries to daily log files."
+    code_snippet: |
+      log_dir = os.path.expanduser("~/.claude/logs")
+      os.makedirs(log_dir, exist_ok=True)
+      log_file = os.path.join(log_dir, f"commands_{datetime.now().strftime('%Y%m%d')}.log")
+
+      log_entry = {
+          "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+          "tool": tool_use.get("tool_name", "Unknown"),
+      }
+
+      # Extract tool-specific data
+      if tool == "Bash":
+          log_entry["command"] = arguments.get("command", "")
+      elif tool in ["Write", "Edit", "MultiEdit", "Read"]:
+          log_entry["file"] = arguments.get("file_path", "")
+
+      with open(log_file, "a") as f:
+          f.write(json.dumps(log_entry) + "\n")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - silent logging operation"
+  use_case:
+    category: "Observability"
+    when_to_use: "Audit trails, debugging, usage analytics"
+    when_not_to_use: "Privacy-sensitive environments where logging is not desired"
+  quality:
+    complexity: "low"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "dev-event-notifier"
+  hook_event: "PreToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/dev-event-notifier.py"
+  description: "Detects development events (build, test, deploy, git operations) and logs them with categorized event types."
+  implementation:
+    matcher: "Bash"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Regex pattern matching to classify commands into event categories (build, test, deploy, code, security), logs to separate events directory."
+    code_snippet: |
+      event_patterns = {
+          r"(cargo|maven|gradle|npm|yarn|pnpm)\s+(build|compile)": ("build_start", "Build started"),
+          r"(cargo|npm|yarn|pytest|jest)\s+test": ("test_start", "Test started"),
+          r"docker\s+push": ("deploy_start", "Docker image push"),
+          r"git\s+commit": ("code_commit", "Code commit"),
+          r"npm\s+audit": ("security_check", "Dependency security check"),
+      }
+
+      for pattern, (event, description) in event_patterns.items():
+          if re.search(pattern, command, re.IGNORECASE):
+              log_event(event, description, command)
+              emoji = {"build": "hammer", "test": "test_tube", "deploy": "rocket"}
+              print(f"{emoji.get(event.split('_')[0], 'memo')} {description}")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - event notification printed to stdout"
+  use_case:
+    category: "Observability"
+    when_to_use: "Tracking development workflow events, team visibility"
+    when_not_to_use: "Quiet mode operations where output should be minimal"
+  quality:
+    complexity: "medium"
+    performance: "<10ms"
+    dependencies: []
+
+- pattern_name: "file-stats"
+  hook_event: "PostToolUse"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/file-stats.py"
+  description: "After file writes/edits, displays statistics including line count, character count, function count, and class count."
+  implementation:
+    matcher: "Write|Edit|MultiEdit"
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Reads the modified file, uses language-specific regex patterns to count functions and classes, displays formatted statistics."
+    code_snippet: |
+      def count_functions(content, file_ext):
+          function_counts = {
+              "python": len(re.findall(r"^\s*def\s+\w+", content, re.MULTILINE))
+                       + len(re.findall(r"^\s*async\s+def\s+\w+", content, re.MULTILINE)),
+              "javascript": len(re.findall(r"function\s+\w+\s*\(|const\s+\w+\s*=\s*\(", content, re.MULTILINE)),
+              "go": len(re.findall(r"^\s*func\s+", content, re.MULTILINE)),
+              "rust": len(re.findall(r"^\s*fn\s+\w+", content, re.MULTILINE)),
+          }
+          ext_map = {".py": "python", ".js": "javascript", ".go": "go", ".rs": "rust"}
+          return function_counts.get(ext_map.get(file_ext), 0)
+
+      stats = {"lines": len(lines), "characters": len(content), "functions": count_functions(content, ext)}
+      print(f"File stats: {basename} - Lines: {stats['lines']}, Functions: {stats['functions']}")
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - statistics printed to stdout"
+  use_case:
+    category: "Observability"
+    when_to_use: "Monitoring file changes, tracking code growth"
+    when_not_to_use: "High-frequency file operations where output would be noisy"
+  quality:
+    complexity: "medium"
+    performance: "10-50ms"
+    dependencies: []
+
+# =============================================================================
+# UI HOOKS
+# =============================================================================
+
+- pattern_name: "terminal-ui-beautifier"
+  hook_event: "UserPromptSubmit"
+  source_repo: "claude-code-hooks"
+  source_file: "hooks/terminal-ui.sh"
+  description: "Displays a beautified terminal header with timestamp, current path, and mode indicator when user submits a prompt."
+  implementation:
+    matcher: ""
+    decision_type: "allow"
+    exit_code: "0"
+  technique:
+    summary: "Shell script using ANSI escape codes for colored box drawing, displays time/path/mode, includes loading animation."
+    code_snippet: |
+      #!/bin/bash
+      # Terminal UI Hook - beautified terminal interface
+
+      echo -e "\033[3J\033[H\033[2J\033[1;36m"
+      echo "    =============================================="
+      echo -e "    |           Claude Code Terminal           |"
+      echo -e "    =============================================="
+      echo -e "    Time: $(date '+%A, %B %d, %Y at %I:%M %p')"
+      echo -e "    Path: $(pwd | sed "s|$HOME|~|")"
+      echo -e "    Mode: Interactive"
+
+      # Loading animation
+      for i in {1..3}; do
+          echo -ne "\r    Initializing..."
+          sleep 0.2
+      done
+      echo -ne "\r    Ready!                       "
+  context_loading:
+    mechanism: "none"
+    what_loaded: "N/A - purely visual output"
+  use_case:
+    category: "Productivity"
+    when_to_use: "Enhanced visual experience, session context awareness"
+    when_not_to_use: "Scripted/automated sessions, minimal output environments"
+  quality:
+    complexity: "low"
+    performance: ">100ms"
+    dependencies: ["bash"]
+
+# =============================================================================
+# HOOKS NOT FOUND IN THIS REPOSITORY
+# =============================================================================
+
+hooks_not_found:
+  SessionStart: "No SessionStart hooks implemented"
+  PreCompact: "No PreCompact hooks implemented"
+  Stop: "No Stop hooks implemented"
+  SubagentStop: "No SubagentStop hooks implemented"
+  Notification: "No Notification hooks implemented"
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+
+summary:
+  total_patterns: 14
+  by_hook_event:
+    PreToolUse: 12
+    PostToolUse: 1
+    UserPromptSubmit: 1
+  by_decision_type:
+    block: 6
+    allow: 8
+  by_category:
+    Safety: 3
+    Quality: 6
+    Observability: 3
+    Productivity: 1
+    Communication: 0
+    Coordination: 0
+    Context: 0
+  notable_techniques:
+    - "Regex pattern matching for command analysis"
+    - "Protected resource lists (branches, packages)"
+    - "Language-specific code analysis"
+    - "JSON-based audit logging"
+    - "Event classification and categorization"
+    - "ANSI escape codes for terminal beautification"
+  missing_features:
+    - "No context loading via systemMessage"
+    - "No permissionDecisionReason usage"
+    - "No updatedInput modification"
+    - "No transcript reading"
+    - "No multi-agent coordination"

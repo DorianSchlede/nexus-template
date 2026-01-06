@@ -1,0 +1,569 @@
+repo_id: "tdd-guard-part2"
+repo_name: "tdd-guard"
+scope: "Test detection, state, utilities"
+language: "TypeScript"
+extracted_at: "2025-12-31T12:00:00Z"
+patterns:
+
+  - pattern_name: "Storage Abstraction Pattern"
+    hook_event: "PreToolUse|PostToolUse|SessionStart"
+    source_file: "src/storage/Storage.ts, src/storage/FileStorage.ts, src/storage/MemoryStorage.ts"
+    description: "Interface-based storage abstraction with FileStorage and MemoryStorage implementations for persisting test results, todos, modifications, lint data, and configuration."
+    implementation:
+      matcher: "Edit|Write|MultiEdit|TodoWrite"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Strategy pattern with typed storage interface supporting transient data cleanup"
+      code_snippet: |
+        export const TRANSIENT_DATA = ['test', 'todo', 'modifications', 'lint'] as const
+
+        export interface Storage {
+          saveTest(content: string): Promise<void>
+          saveTodo(content: string): Promise<void>
+          saveModifications(content: string): Promise<void>
+          saveLint(content: string): Promise<void>
+          saveConfig(content: string): Promise<void>
+          saveInstructions(content: string): Promise<void>
+          getTest(): Promise<string | null>
+          getTodo(): Promise<string | null>
+          getModifications(): Promise<string | null>
+          getLint(): Promise<string | null>
+          getConfig(): Promise<string | null>
+          getInstructions(): Promise<string | null>
+          clearTransientData(): Promise<void>
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Storage provides data for context building, not direct context injection"
+    use_case:
+      category: "Context"
+      when_to_use: "When hooks need to persist and retrieve state across multiple tool invocations within a session"
+
+  - pattern_name: "Test Results Processing Pattern"
+    hook_event: "PreToolUse"
+    source_file: "src/processors/testResults/TestResultsProcessor.ts"
+    description: "Parses JSON test results from Vitest or Pytest reporters, validates schema, formats human-readable output with pass/fail counts and error messages."
+    implementation:
+      matcher: "Edit|Write|MultiEdit"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Schema-validated JSON parsing with framework-agnostic formatting"
+      code_snippet: |
+        export class TestResultsProcessor {
+          process(jsonData: string, framework: 'vitest' | 'pytest' = 'vitest'): string {
+            const parseResult = this.parseAndValidate(jsonData, framework)
+            if (!parseResult.success) {
+              return parseResult.error
+            }
+
+            const data = parseResult.data
+            if (data.testModules.length === 0) {
+              return 'No test results found.'
+            }
+
+            const counts = this.countTestsAndModules(data)
+            const reasonOutput = this.formatReason(data)
+            const moduleOutput = this.formatModules(data)
+            const errorOutput = this.formatUnhandledErrors(data)
+            const summaryOutput = this.formatSummary(counts)
+
+            return `${reasonOutput}${moduleOutput}${errorOutput}\n${summaryOutput}`
+          }
+        }
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Formatted test results become part of AI validation context"
+    use_case:
+      category: "Quality"
+      when_to_use: "When hooks need to interpret and format test runner output for AI-based decision making"
+
+  - pattern_name: "File Type Detection Pattern"
+    hook_event: "PreToolUse|PostToolUse"
+    source_file: "src/hooks/fileTypeDetection.ts"
+    description: "Determines programming language from file extension in tool_input.file_path to select appropriate test framework schemas and linters."
+    implementation:
+      matcher: "Edit|Write|MultiEdit"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Extension-based language detection from hook data"
+      code_snippet: |
+        export function detectFileType(hookData: unknown): 'python' | 'javascript' | 'php' {
+          const toolInput = (hookData as { tool_input?: Record<string, unknown> }).tool_input
+          if (toolInput && typeof toolInput === 'object' && 'file_path' in toolInput) {
+            const filePath = toolInput.file_path
+            if (typeof filePath === 'string') {
+              if (filePath.endsWith('.py')) {
+                return 'python'
+              }
+              if (filePath.endsWith('.php')) {
+                return 'php'
+              }
+            }
+          }
+          return 'javascript'
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Language type informs schema selection for test result parsing"
+    use_case:
+      category: "Context"
+      when_to_use: "When hooks need to apply language-specific processing rules"
+
+  - pattern_name: "Session Handler Pattern"
+    hook_event: "SessionStart"
+    source_file: "src/hooks/sessionHandler.ts"
+    description: "Handles SessionStart events to initialize instructions and clear transient data, ensuring clean state at session boundaries."
+    implementation:
+      matcher: "SessionStart"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Session lifecycle management with transient data cleanup"
+      code_snippet: |
+        export class SessionHandler {
+          private readonly storage: Storage
+
+          constructor(storage?: Storage) {
+            this.storage = storage ?? new FileStorage()
+          }
+
+          async processSessionStart(hookData: string): Promise<void> {
+            const parsedData = JSON.parse(hookData)
+            const sessionStartResult = SessionStartSchema.safeParse(parsedData)
+
+            if (!sessionStartResult.success) {
+              return
+            }
+
+            await this.ensureInstructionsExist()
+            await this.storage.clearTransientData()
+          }
+
+          private async ensureInstructionsExist(): Promise<void> {
+            const existingInstructions = await this.storage.getInstructions()
+            if (!existingInstructions) {
+              await this.storage.saveInstructions(RULES)
+            }
+          }
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Initializes TDD rules as instructions if not already present"
+    use_case:
+      category: "Coordination"
+      when_to_use: "When hooks need to perform setup or cleanup at session start"
+
+  - pattern_name: "Guard Manager Pattern"
+    hook_event: "UserPromptSubmit|PreToolUse"
+    source_file: "src/guard/GuardManager.ts"
+    description: "Manages guard enable/disable state and file ignore patterns using minimatch glob patterns, allowing users to toggle TDD enforcement."
+    implementation:
+      matcher: "UserPromptSubmit (tdd-guard on/off)"
+      decision_type: "allow|block"
+      exit_code: "0"
+    technique:
+      summary: "Configurable guard state with glob-based file filtering"
+      code_snippet: |
+        export class GuardManager {
+          private readonly storage: Storage
+          private readonly minimatchOptions = {
+            matchBase: true,
+            nobrace: false,
+            dot: true,
+          } as const
+
+          static readonly DEFAULT_IGNORE_PATTERNS = [
+            '*.md', '*.txt', '*.log', '*.json',
+            '*.yml', '*.yaml', '*.xml', '*.html', '*.css', '*.rst',
+          ]
+
+          async isEnabled(): Promise<boolean> {
+            const config = await this.getConfig()
+            return config?.guardEnabled ?? true
+          }
+
+          async shouldIgnoreFile(filePath: string): Promise<boolean> {
+            const patterns = await this.getIgnorePatterns()
+            return patterns.some((pattern) =>
+              minimatch(filePath, pattern, this.minimatchOptions)
+            )
+          }
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Configuration determines whether validation occurs"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When users need to temporarily disable hook enforcement or exclude certain file types"
+
+  - pattern_name: "User Prompt Command Pattern"
+    hook_event: "UserPromptSubmit"
+    source_file: "src/hooks/userPromptHandler.ts"
+    description: "Intercepts UserPromptSubmit events to process guard toggle commands, enabling user control over TDD enforcement via chat commands."
+    implementation:
+      matcher: "UserPromptSubmit (prompt matching 'tdd-guard on/off')"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Command parsing from user prompts with state toggle"
+      code_snippet: |
+        export class UserPromptHandler {
+          private readonly guardManager: GuardManager
+          private readonly GUARD_COMMANDS = {
+            ON: 'tdd-guard on',
+            OFF: 'tdd-guard off'
+          } as const
+
+          async processUserCommand(hookData: string): Promise<ValidationResult | undefined> {
+            const data = JSON.parse(hookData)
+
+            if (data.hook_event_name !== 'UserPromptSubmit') {
+              return undefined
+            }
+
+            const command = data.prompt?.toLowerCase()
+
+            switch (command) {
+              case this.GUARD_COMMANDS.ON:
+                await this.guardManager.enable()
+                return this.createBlockResult('TDD Guard enabled')
+              case this.GUARD_COMMANDS.OFF:
+                await this.guardManager.disable()
+                return this.createBlockResult('TDD Guard disabled')
+              default:
+                return undefined
+            }
+          }
+        }
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "State change confirmation message"
+    use_case:
+      category: "Productivity"
+      when_to_use: "When hooks need to respond to user-initiated configuration commands"
+
+  - pattern_name: "Hook Event Persistence Pattern"
+    hook_event: "PreToolUse"
+    source_file: "src/hooks/HookEvents.ts"
+    description: "Persists tool operations to storage, separating TodoWrite operations from file modifications for context building."
+    implementation:
+      matcher: "Edit|Write|MultiEdit|TodoWrite"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Discriminated operation persistence with type-specific routing"
+      code_snippet: |
+        export class HookEvents {
+          constructor(private readonly storage: Storage) {}
+
+          async processEvent(event: unknown): Promise<void> {
+            const hookResult = HookDataSchema.safeParse(event)
+            if (!hookResult.success) return
+
+            const operation = this.extractToolOperation(hookResult.data)
+            if (!operation) return
+
+            await this.persistOperation(operation)
+          }
+
+          private async persistOperation(operation: ToolOperation): Promise<void> {
+            const content = JSON.stringify(operation, null, 2)
+
+            if (isTodoWriteOperation(operation)) {
+              await this.storage.saveTodo(content)
+            } else {
+              await this.storage.saveModifications(content)
+            }
+          }
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Operations stored for later context building"
+    use_case:
+      category: "Context"
+      when_to_use: "When hooks need to accumulate operation history for analysis"
+
+  - pattern_name: "Post-Tool Lint Handler Pattern"
+    hook_event: "PostToolUse"
+    source_file: "src/hooks/postToolLint.ts"
+    description: "Runs linting on modified files after tool operations, blocks if lint issues persist after user was notified, tracks notification state."
+    implementation:
+      matcher: "PostToolUse (Edit|Write|MultiEdit)"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Stateful lint enforcement with notification tracking"
+      code_snippet: |
+        export async function handlePostToolLint(
+          hookData: string,
+          storage: Storage,
+          linter: Linter
+        ): Promise<ValidationResult> {
+          const validatedHookData = parseAndValidateHookData(hookData)
+          if (!validatedHookData) return DEFAULT_RESULT
+
+          const filePaths = extractFilePaths(validatedHookData)
+          if (filePaths.length === 0) return DEFAULT_RESULT
+
+          const storedLintData = await getStoredLintData(storage)
+          const lintResults = await linter.lint(filePaths)
+          const lintData = createLintData(lintResults, storedLintData)
+          await storage.saveLint(JSON.stringify(lintData))
+
+          const hasIssues = lintResults.errorCount > 0 || lintResults.warningCount > 0
+
+          // Block if PreToolUse has notified and issues still exist
+          if (storedLintData?.hasNotifiedAboutLintIssues && hasIssues) {
+            return createBlockResult(lintData)
+          }
+
+          return DEFAULT_RESULT
+        }
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Formatted lint issues with file locations and rule info"
+    use_case:
+      category: "Quality"
+      when_to_use: "When enforcing code quality gates after file modifications"
+
+  - pattern_name: "Context Builder Pattern"
+    hook_event: "PreToolUse"
+    source_file: "src/cli/buildContext.ts, src/validation/context/context.ts"
+    description: "Assembles validation context from stored modifications, test results, todos, lint data, and instructions for AI-based TDD validation."
+    implementation:
+      matcher: "Edit|Write|MultiEdit"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Parallel data retrieval with structured prompt generation"
+      code_snippet: |
+        export async function buildContext(storage: Storage): Promise<Context> {
+          const [modifications, rawTest, todo, lint, instructions] = await Promise.all([
+            storage.getModifications(),
+            storage.getTest(),
+            storage.getTodo(),
+            storage.getLint(),
+            storage.getInstructions(),
+          ])
+
+          let processedLintData
+          try {
+            if (lint) {
+              const rawLintData = LintDataSchema.parse(JSON.parse(lint))
+              processedLintData = processLintData(rawLintData)
+            } else {
+              processedLintData = processLintData()
+            }
+          } catch {
+            processedLintData = processLintData()
+          }
+
+          return {
+            modifications: formatModifications(modifications ?? ''),
+            test: rawTest ?? '',
+            todo: todo ?? '',
+            lint: processedLintData,
+            instructions: instructions ?? undefined,
+          }
+        }
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Complete TDD context including rules, file types, operations, test results, todos, and lint data"
+    use_case:
+      category: "Context"
+      when_to_use: "When AI-based validation requires rich context from multiple sources"
+
+  - pattern_name: "Zod Schema Validation Pattern"
+    hook_event: "PreToolUse|PostToolUse|SessionStart"
+    source_file: "src/contracts/schemas/toolSchemas.ts, src/contracts/schemas/reporterSchemas.ts, src/contracts/schemas/lintSchemas.ts"
+    description: "Comprehensive runtime validation using Zod schemas for hook data, tool operations, test results, and lint data with type inference."
+    implementation:
+      matcher: "All hook events"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Discriminated unions with type guards for type-safe data handling"
+      code_snippet: |
+        export const ToolOperationSchema = z.discriminatedUnion('tool_name', [
+          EditOperationSchema,
+          MultiEditOperationSchema,
+          WriteOperationSchema,
+          TodoWriteOperationSchema,
+        ])
+
+        export type ToolOperation = z.infer<typeof ToolOperationSchema>
+
+        export const isEditOperation = (op: ToolOperation): op is EditOperation =>
+          op.tool_name === 'Edit'
+
+        export const isMultiEditOperation = (op: ToolOperation): op is MultiEditOperation =>
+          op.tool_name === 'MultiEdit'
+
+        export const isWriteOperation = (op: ToolOperation): op is WriteOperation =>
+          op.tool_name === 'Write'
+
+        export const isTodoWriteOperation = (op: ToolOperation): op is TodoWriteOperation =>
+          op.tool_name === 'TodoWrite'
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Validated and typed data structures"
+    use_case:
+      category: "Safety"
+      when_to_use: "When hooks need runtime type safety for external data"
+
+  - pattern_name: "Test Passing Detection Pattern"
+    hook_event: "PreToolUse"
+    source_file: "src/contracts/schemas/reporterSchemas.ts"
+    description: "Analyzes test result data to determine if tests are passing, handling edge cases like empty modules and failed test runs."
+    implementation:
+      matcher: "Edit|Write|MultiEdit"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Comprehensive test state analysis with edge case handling"
+      code_snippet: |
+        export function isTestPassing(testResult: TestResult): boolean {
+          // No tests means the test suite is not passing
+          if (testResult.testModules.length === 0) {
+            return false
+          }
+
+          // Check if any tests exist
+          const hasTests = testResult.testModules.some(
+            (module) => module.tests.length > 0
+          )
+          if (!hasTests) {
+            return false
+          }
+
+          return testResult.testModules.every((module) =>
+            module.tests.every((test) => test.state !== 'failed')
+          )
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Boolean test status for conditional logic"
+    use_case:
+      category: "Quality"
+      when_to_use: "When hooks need to gate actions based on test suite status"
+
+  - pattern_name: "Lint Notification State Pattern"
+    hook_event: "PreToolUse|PostToolUse"
+    source_file: "src/hooks/processHookData.ts"
+    description: "Implements two-phase lint notification - PreToolUse notifies once, PostToolUse blocks if issues persist, preventing notification spam."
+    implementation:
+      matcher: "Edit|Write|MultiEdit"
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "State flag coordination between Pre and Post tool handlers"
+      code_snippet: |
+        async function checkLintNotification(storage: Storage, hookData: HookData): Promise<ValidationResult> {
+          let testsPassing = false
+          try {
+            const testStr = await storage.getTest()
+            if (testStr) {
+              const fileType = detectFileType(hookData)
+              const testResult = fileType === 'python'
+                ? PytestResultSchema.safeParse(JSON.parse(testStr))
+                : TestResultSchema.safeParse(JSON.parse(testStr))
+              if (testResult.success) {
+                testsPassing = isTestPassing(testResult.data)
+              }
+            }
+          } catch { testsPassing = false }
+
+          if (!testsPassing) return defaultResult
+
+          // Block once if lint issues exist and not yet notified
+          if (hasIssues && !lintData.hasNotifiedAboutLintIssues) {
+            const updatedLintData = { ...lintData, hasNotifiedAboutLintIssues: true }
+            await storage.saveLint(JSON.stringify(updatedLintData))
+            return { decision: 'block', reason: 'Code quality issues detected...' }
+          }
+          return defaultResult
+        }
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Lint notification with design guidance for fixing issues"
+    use_case:
+      category: "Quality"
+      when_to_use: "When hooks need to notify users of issues without blocking repeatedly"
+
+  - pattern_name: "Linter Provider Factory Pattern"
+    hook_event: "PostToolUse"
+    source_file: "src/providers/LinterProvider.ts"
+    description: "Factory pattern for linter instantiation, supporting ESLint and golangci-lint based on configuration, with null fallback for unsupported configs."
+    implementation:
+      matcher: "PostToolUse"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Configuration-driven linter factory with graceful degradation"
+      code_snippet: |
+        export class LinterProvider {
+          getLinter(config?: Config): Linter | null {
+            const actualConfig = config ?? new Config()
+
+            switch (actualConfig.linterType) {
+              case 'eslint':
+                return new ESLint()
+              case 'golangci-lint':
+                return new GolangciLint()
+              case undefined:
+              default:
+                return null
+            }
+          }
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Configured linter instance for file analysis"
+    use_case:
+      category: "Quality"
+      when_to_use: "When hooks need to support multiple code quality tools"
+
+  - pattern_name: "Configuration Management Pattern"
+    hook_event: "PreToolUse|PostToolUse|SessionStart"
+    source_file: "src/config/Config.ts"
+    description: "Centralized configuration with environment variable support, path validation, and sensible defaults for data directories, model clients, and linter types."
+    implementation:
+      matcher: "All events"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Environment-aware configuration with path validation"
+      code_snippet: |
+        export class Config {
+          readonly dataDir: string
+          readonly useSystemClaude: boolean
+          readonly anthropicApiKey: string | undefined
+          readonly modelType: string
+          readonly linterType: string | undefined
+          readonly modelVersion: string
+          readonly validationClient: ClientType
+
+          constructor(options?: ConfigOptions) {
+            const mode = options?.mode ?? 'production'
+            this.dataDir = this.getDataDir(options)
+            this.useSystemClaude = this.getUseSystemClaude(options)
+            this.anthropicApiKey = this.getAnthropicApiKey(options)
+            this.modelType = this.getModelType(options, mode)
+            this.linterType = this.getLinterType(options)
+            this.modelVersion = this.getModelVersion(options)
+            this.validationClient = this.getValidationClient(options)
+          }
+
+          get testResultsFilePath(): string {
+            return path.join(this.dataDir, TEST_RESULTS_FILENAME)
+          }
+        }
+    context_loading:
+      mechanism: "none"
+      what_loaded: "File paths and client configurations"
+    use_case:
+      category: "Context"
+      when_to_use: "When hooks need flexible configuration across environments"

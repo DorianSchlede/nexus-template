@@ -1,0 +1,476 @@
+repo_id: "hooks-mastery-part1"
+repo_name: "claude-code-hooks-mastery"
+scope: "SessionStart, PreToolUse, PostToolUse"
+language: "Python"
+extracted_at: "2025-12-31T12:00:00Z"
+patterns:
+
+  # ============================================================================
+  # SESSIONSTART PATTERNS
+  # ============================================================================
+
+  - pattern_name: "Session Logging"
+    hook_event: "SessionStart"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Logs every session start event to a JSON file with full input data for auditing and debugging."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Append session data to JSON log file, creating directory if needed"
+      code_snippet: |
+        def log_session_start(input_data):
+            """Log session start event to logs directory."""
+            log_dir = Path("logs")
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / 'session_start.json'
+
+            if log_file.exists():
+                with open(log_file, 'r') as f:
+                    try:
+                        log_data = json.load(f)
+                    except (json.JSONDecodeError, ValueError):
+                        log_data = []
+            else:
+                log_data = []
+
+            log_data.append(input_data)
+
+            with open(log_file, 'w') as f:
+                json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Logs session_id and source (startup/resume/clear) for audit trail"
+    use_case:
+      category: "Observability"
+      when_to_use: "Track session activity, debug session issues, compliance auditing"
+
+  - pattern_name: "Development Context Injection"
+    hook_event: "SessionStart"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Loads git status, project context files, and GitHub issues at session start to provide Claude with relevant development context."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Gather git info, context files, and issues then inject via hookSpecificOutput.additionalContext"
+      code_snippet: |
+        def load_development_context(source):
+            """Load relevant development context based on session source."""
+            context_parts = []
+
+            context_parts.append(f"Session started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            context_parts.append(f"Session source: {source}")
+
+            branch, changes = get_git_status()
+            if branch:
+                context_parts.append(f"Git branch: {branch}")
+                if changes > 0:
+                    context_parts.append(f"Uncommitted changes: {changes} files")
+
+            context_files = [
+                ".claude/CONTEXT.md", ".claude/TODO.md",
+                "TODO.md", ".github/ISSUE_TEMPLATE.md"
+            ]
+
+            for file_path in context_files:
+                if Path(file_path).exists():
+                    with open(file_path, 'r') as f:
+                        content = f.read().strip()[:1000]
+                        context_parts.append(f"\n--- Content from {file_path} ---")
+                        context_parts.append(content)
+
+            return "\n".join(context_parts)
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Git branch/status, project context files (.claude/CONTEXT.md, TODO.md), GitHub issues"
+    use_case:
+      category: "Context"
+      when_to_use: "Auto-load project state when Claude starts to reduce manual context sharing"
+
+  - pattern_name: "Git Status Extraction"
+    hook_event: "SessionStart"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Extracts current git branch and uncommitted changes count using subprocess calls to git CLI."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Run git rev-parse and git status --porcelain to extract branch and change count"
+      code_snippet: |
+        def get_git_status():
+            """Get current git status information."""
+            try:
+                branch_result = subprocess.run(
+                    ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                    capture_output=True, text=True, timeout=5
+                )
+                current_branch = branch_result.stdout.strip() if branch_result.returncode == 0 else "unknown"
+
+                status_result = subprocess.run(
+                    ['git', 'status', '--porcelain'],
+                    capture_output=True, text=True, timeout=5
+                )
+                if status_result.returncode == 0:
+                    changes = status_result.stdout.strip().split('\n') if status_result.stdout.strip() else []
+                    uncommitted_count = len(changes)
+                else:
+                    uncommitted_count = 0
+
+                return current_branch, uncommitted_count
+            except Exception:
+                return None, None
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "Git branch name and number of uncommitted files"
+    use_case:
+      category: "Context"
+      when_to_use: "Include version control state in session context"
+
+  - pattern_name: "GitHub Issues Integration"
+    hook_event: "SessionStart"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Fetches recent open GitHub issues using gh CLI to provide task context at session start."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Use gh CLI to list recent open issues if available"
+      code_snippet: |
+        def get_recent_issues():
+            """Get recent GitHub issues if gh CLI is available."""
+            try:
+                gh_check = subprocess.run(['which', 'gh'], capture_output=True)
+                if gh_check.returncode != 0:
+                    return None
+
+                result = subprocess.run(
+                    ['gh', 'issue', 'list', '--limit', '5', '--state', 'open'],
+                    capture_output=True, text=True, timeout=10
+                )
+                if result.returncode == 0 and result.stdout.strip():
+                    return result.stdout.strip()
+            except Exception:
+                pass
+            return None
+    context_loading:
+      mechanism: "systemMessage"
+      what_loaded: "List of recent open GitHub issues"
+    use_case:
+      category: "Context"
+      when_to_use: "Surface relevant GitHub issues for context when starting work"
+
+  - pattern_name: "TTS Session Announcement"
+    hook_event: "SessionStart"
+    source_file: ".claude/hooks/session_start.py"
+    description: "Announces session start via text-to-speech with different messages based on session source."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Invoke TTS script with session-specific message based on source type"
+      code_snippet: |
+        if args.announce:
+            try:
+                script_dir = Path(__file__).parent
+                tts_script = script_dir / "utils" / "tts" / "pyttsx3_tts.py"
+
+                if tts_script.exists():
+                    messages = {
+                        "startup": "Claude Code session started",
+                        "resume": "Resuming previous session",
+                        "clear": "Starting fresh session"
+                    }
+                    message = messages.get(source, "Session started")
+
+                    subprocess.run(
+                        ["uv", "run", str(tts_script), message],
+                        capture_output=True, timeout=5
+                    )
+            except Exception:
+                pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Audio announcement only"
+    use_case:
+      category: "Communication"
+      when_to_use: "Provide audible feedback for session lifecycle events"
+
+  # ============================================================================
+  # PRETOOLUSE PATTERNS
+  # ============================================================================
+
+  - pattern_name: "Dangerous rm Command Blocking"
+    hook_event: "PreToolUse"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Blocks destructive rm -rf commands and variants using comprehensive regex pattern matching to prevent accidental data loss."
+    implementation:
+      matcher: ""
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Pattern match rm commands against dangerous flags and paths, exit 2 to block"
+      code_snippet: |
+        def is_dangerous_rm_command(command):
+            """Comprehensive detection of dangerous rm commands."""
+            normalized = ' '.join(command.lower().split())
+
+            patterns = [
+                r'\brm\s+.*-[a-z]*r[a-z]*f',  # rm -rf, rm -fr, rm -Rf
+                r'\brm\s+.*-[a-z]*f[a-z]*r',  # rm -fr variations
+                r'\brm\s+--recursive\s+--force',
+                r'\brm\s+--force\s+--recursive',
+                r'\brm\s+-r\s+.*-f',
+                r'\brm\s+-f\s+.*-r',
+            ]
+
+            for pattern in patterns:
+                if re.search(pattern, normalized):
+                    return True
+
+            dangerous_paths = [
+                r'/', r'/\*', r'~', r'~/', r'\$HOME',
+                r'\.\.', r'\*', r'\.', r'\.\s*$',
+            ]
+
+            if re.search(r'\brm\s+.*-[a-z]*r', normalized):
+                for path in dangerous_paths:
+                    if re.search(path, normalized):
+                        return True
+            return False
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Error message explaining why command was blocked"
+    use_case:
+      category: "Safety"
+      when_to_use: "Prevent catastrophic file deletion commands from executing"
+
+  - pattern_name: "Environment File Access Blocking"
+    hook_event: "PreToolUse"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Blocks access to .env files containing sensitive data across all file operations (Read, Edit, Write, Bash) while allowing .env.sample templates."
+    implementation:
+      matcher: ""
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Check file paths and bash commands for .env access patterns, block with exit 2"
+      code_snippet: |
+        def is_env_file_access(tool_name, tool_input):
+            """Check if any tool is trying to access .env files."""
+            if tool_name in ['Read', 'Edit', 'MultiEdit', 'Write', 'Bash']:
+                if tool_name in ['Read', 'Edit', 'MultiEdit', 'Write']:
+                    file_path = tool_input.get('file_path', '')
+                    if '.env' in file_path and not file_path.endswith('.env.sample'):
+                        return True
+
+                elif tool_name == 'Bash':
+                    command = tool_input.get('command', '')
+                    env_patterns = [
+                        r'\b\.env\b(?!\.sample)',
+                        r'cat\s+.*\.env\b(?!\.sample)',
+                        r'echo\s+.*>\s*\.env\b(?!\.sample)',
+                        r'touch\s+.*\.env\b(?!\.sample)',
+                        r'cp\s+.*\.env\b(?!\.sample)',
+                        r'mv\s+.*\.env\b(?!\.sample)',
+                    ]
+
+                    for pattern in env_patterns:
+                        if re.search(pattern, command):
+                            return True
+            return False
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Error message: Access to .env files is prohibited"
+    use_case:
+      category: "Safety"
+      when_to_use: "Protect sensitive environment variables and credentials from exposure"
+
+  - pattern_name: "PreToolUse Event Logging"
+    hook_event: "PreToolUse"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Logs all tool use events to JSON for auditing, enabling analysis of Claude's tool usage patterns."
+    implementation:
+      matcher: ""
+      decision_type: "allow"
+      exit_code: "0"
+    technique:
+      summary: "Append full input_data to JSON log file after safety checks pass"
+      code_snippet: |
+        # After safety checks pass...
+        log_dir = Path.cwd() / 'logs'
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_path = log_dir / 'pre_tool_use.json'
+
+        if log_path.exists():
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        log_data.append(input_data)
+
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+
+        sys.exit(0)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Logs tool_name and tool_input for audit trail"
+    use_case:
+      category: "Observability"
+      when_to_use: "Track all tool invocations for debugging, compliance, or usage analysis"
+
+  - pattern_name: "Multi-Tool Safety Check"
+    hook_event: "PreToolUse"
+    source_file: ".claude/hooks/pre_tool_use.py"
+    description: "Universal safety checker that validates inputs across multiple tool types (Read, Edit, Write, Bash) with tool-specific rules."
+    implementation:
+      matcher: ""
+      decision_type: "block"
+      exit_code: "2"
+    technique:
+      summary: "Dispatch safety checks based on tool_name, apply appropriate validation"
+      code_snippet: |
+        def main():
+            try:
+                input_data = json.load(sys.stdin)
+
+                tool_name = input_data.get('tool_name', '')
+                tool_input = input_data.get('tool_input', {})
+
+                # Check for .env file access (multiple tools)
+                if is_env_file_access(tool_name, tool_input):
+                    print("BLOCKED: Access to .env files prohibited", file=sys.stderr)
+                    print("Use .env.sample for template files", file=sys.stderr)
+                    sys.exit(2)
+
+                # Check for dangerous rm commands (Bash only)
+                if tool_name == 'Bash':
+                    command = tool_input.get('command', '')
+                    if is_dangerous_rm_command(command):
+                        print("BLOCKED: Dangerous rm command detected", file=sys.stderr)
+                        sys.exit(2)
+
+                # Allow and log
+                sys.exit(0)
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Specific block reason based on which safety rule triggered"
+    use_case:
+      category: "Safety"
+      when_to_use: "Apply defense-in-depth with multiple safety checks before tool execution"
+
+  # ============================================================================
+  # POSTTOOLUSE PATTERNS
+  # ============================================================================
+
+  - pattern_name: "PostToolUse Event Logging"
+    hook_event: "PostToolUse"
+    source_file: ".claude/hooks/post_tool_use.py"
+    description: "Logs all completed tool executions including tool name, input, and response for comprehensive audit trail."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Append full input_data (including tool_response) to JSON log file"
+      code_snippet: |
+        def main():
+            try:
+                input_data = json.load(sys.stdin)
+
+                log_dir = Path.cwd() / 'logs'
+                log_dir.mkdir(parents=True, exist_ok=True)
+                log_path = log_dir / 'post_tool_use.json'
+
+                if log_path.exists():
+                    with open(log_path, 'r') as f:
+                        try:
+                            log_data = json.load(f)
+                        except (json.JSONDecodeError, ValueError):
+                            log_data = []
+                else:
+                    log_data = []
+
+                log_data.append(input_data)
+
+                with open(log_path, 'w') as f:
+                    json.dump(log_data, f, indent=2)
+
+                sys.exit(0)
+
+            except json.JSONDecodeError:
+                sys.exit(0)
+            except Exception:
+                sys.exit(0)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "Logs tool_name, tool_input, and tool_response for complete audit"
+    use_case:
+      category: "Observability"
+      when_to_use: "Track tool execution results, debug failures, analyze Claude behavior patterns"
+
+  - pattern_name: "Graceful Error Handling"
+    hook_event: "PostToolUse"
+    source_file: ".claude/hooks/post_tool_use.py"
+    description: "Implements fail-safe error handling that prevents hook failures from disrupting Claude's workflow."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Catch all exceptions and exit 0 to avoid blocking Claude on hook failures"
+      code_snippet: |
+        def main():
+            try:
+                input_data = json.load(sys.stdin)
+                # ... processing logic ...
+                sys.exit(0)
+
+            except json.JSONDecodeError:
+                # Handle JSON decode errors gracefully
+                sys.exit(0)
+            except Exception:
+                # Exit cleanly on any other error
+                sys.exit(0)
+
+        if __name__ == '__main__':
+            main()
+    context_loading:
+      mechanism: "none"
+      what_loaded: "No context; hook fails silently to avoid disrupting workflow"
+    use_case:
+      category: "Quality"
+      when_to_use: "Ensure observability hooks never block the main workflow on errors"
+
+# ============================================================================
+# METADATA
+# ============================================================================
+summary:
+  total_patterns: 11
+  by_hook:
+    SessionStart: 5
+    PreToolUse: 4
+    PostToolUse: 2
+  by_category:
+    Safety: 3
+    Observability: 3
+    Context: 3
+    Communication: 1
+    Quality: 1
+  key_techniques:
+    - "Exit code 2 for blocking dangerous operations"
+    - "JSON log file accumulation for audit trails"
+    - "hookSpecificOutput.additionalContext for context injection"
+    - "Regex pattern matching for security validation"
+    - "Graceful error handling with try/except and exit 0"
+    - "subprocess calls for external tool integration (git, gh)"

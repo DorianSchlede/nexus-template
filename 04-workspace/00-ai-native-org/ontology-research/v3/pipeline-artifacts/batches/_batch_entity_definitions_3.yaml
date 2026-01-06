@@ -1,0 +1,235 @@
+---
+batch_id: "entity_definitions_3"
+field: entity_definitions
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 42
+---
+
+patterns:
+  # Chunk 5 Patterns (02-Knowledge_Graphs_5.md)
+
+  - name: "Entity Embedding as Vector Representation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:7-24)"
+    quote: "Translational models interpret edge labels as transformations from subject nodes (aka the source or head) to object nodes (aka the target or tail)"
+    description: "Entity definition through vector representation. In translational embedding models like TransE, entities are defined as vectors in a learned embedding space where edge labels represent transformations. Subject nodes are sources/heads, object nodes are targets/tails. This provides a formal mathematical definition of entities as dense numeric representations."
+
+  - name: "Tensor as Entity Container"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:63-79)"
+    quote: "A tensor is a multidimensional numeric field that generalises scalars (0-order tensors), vectors (1-order tensors) and matrices (2-order tensors)"
+    description: "Formal definition of tensors as containers for entity representations. Tensors generalize the concept of numeric data structures from scalars through vectors to matrices and beyond. In knowledge graphs, 3-order tensors can encode entity-relation-entity triples, providing a formal mathematical structure for entity representation."
+
+  - name: "Graph as One-Hot Tensor Encoding"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:178-184)"
+    quote: "a graph can be encoded as a one-hot 3-order tensor G with |V| x |L| x |V| elements, where the element (G)ijk is set to one if the ith node links to the kth node"
+    description: "Formal definition of how entities in a knowledge graph can be encoded as tensor elements. Each entity position in the tensor is defined by its index, with binary values indicating relationship presence. This provides a mathematical foundation for entity representation in tensor decomposition approaches."
+
+  - name: "Entity vs Relation Embeddings in DistMult"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:194-205)"
+    quote: "DistMult is a seminal method for computing knowledge graph embeddings based on rank decompositions, where each entity and relation is associated with a vector of dimension d"
+    description: "Distinction between entity embeddings and relation embeddings. DistMult defines entities and relations as separate vector types of the same dimensionality, with a plausibility scoring function that combines them. This formal separation establishes entities as first-class objects distinct from the relations connecting them."
+
+  - name: "Feature Vector Definition for Nodes"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:465-474)"
+    quote: "Each node in the graph is also associated with a state vector, which is recursively updated based on information from the node's neighbours"
+    description: "In Graph Neural Networks, entities (nodes) are formally defined by two vector types: feature vectors (fixed input characteristics) and state vectors (dynamically updated representations). This dual-vector definition captures both intrinsic entity properties and learned contextual representations."
+
+  - name: "Node Feature vs State Vector Distinction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:468-476)"
+    quote: "feature vectors that can capture node and edge labels, weights, etc. These feature vectors remain fixed throughout the process"
+    description: "Formal distinction between fixed feature vectors defining entity attributes and dynamic state vectors encoding learned representations. Feature vectors capture labels and weights while state vectors evolve through neighborhood aggregation, providing a formal separation of static vs dynamic entity definitions."
+
+  - name: "Transition and Output Functions for Entities"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:476-486)"
+    quote: "using a parametric function, called the transition function. A second parametric function, called the output function, is used to compute the final output for a node"
+    description: "Entities in GNNs are formally processed through transition functions (updating state based on neighbors) and output functions (computing final entity representations). These parametric functions define how entities are transformed and characterized within the neural network architecture."
+
+  - name: "Supervised Nodes as Labeled Entities"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:482-486)"
+    quote: "given a partial set of supervised nodes in the graph - i.e., nodes labelled with their desired output - parameters for the transition and output functions can be learnt"
+    description: "Definition of supervised nodes as entities with known output labels used for training. This distinguishes between labeled entities (with ground truth) and unlabeled entities (to be classified), establishing a formal entity categorization based on annotation status."
+
+  - name: "Symbolic Learning Hypothesis Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:667-674)"
+    quote: "adopt symbolic learning in order to learn hypotheses in a symbolic (logical) language that explain a given set of positive and negative edges"
+    description: "Entities in symbolic learning are defined through logical hypotheses that explain their relationships. Positive and negative edges define entity connections, with learned rules providing interpretable models of entity behavior. This contrasts with numeric embedding definitions."
+
+  - name: "Rule-Based Entity Characterization"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 5:676-689)"
+    quote: "we may learn the rule [?x] flight ?y => [?y] flight ?x from observing that flight routes tend to be return routes"
+    description: "Entities can be characterized through learned rules capturing their behavioral patterns. Rules define entity relationships (e.g., symmetric flight connections) providing interpretable, quantified definitions that apply to unseen entity instances."
+
+  # Chunk 6 Patterns (02-Knowledge_Graphs_6.md)
+
+  - name: "Disjointness Axiom Entity Classification"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:19-25)"
+    quote: "the disjointness axiom DomesticAirport intersection InternationalAirport = bottom states that the intersection of the two classes is equivalent to the empty class"
+    description: "Formal definition of entity classification through disjointness axioms. Entities are defined by which classes they cannot simultaneously belong to. The disjointness constraint provides a formal logical definition stating that entity types are mutually exclusive."
+
+  - name: "Class Learning Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:59-69)"
+    quote: "DL Learner is based on algorithms for class learning (aka concept learning), whereby given a set of positive nodes and negative nodes, the goal is to find a logical class description"
+    description: "Entities are defined through learned class descriptions that separate positive from negative examples. Class learning algorithms discover logical descriptions (using DL syntax) that formally characterize entity types based on their distinguishing properties."
+
+  - name: "Named Entity Recognition Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:205-215)"
+    quote: "The NER task identifies mentions of named entities in a text, typically targetting mentions of people, organisations, locations, and potentially other types"
+    description: "Named entities are formally defined as mentions in text belonging to predefined categories: people, organizations, locations, etc. NER provides the operational definition for extracting entity instances from unstructured sources."
+
+  - name: "Emerging Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:226-230)"
+    quote: "The named entities identified by NER may be used to generate new candidate nodes for the knowledge graph (known as emerging entities, shown dashed in Figure 31)"
+    description: "Emerging entities are formally defined as new candidate nodes extracted from text that do not yet exist in the knowledge graph. This distinguishes between established entities (with existing nodes) and emerging entities (newly discovered candidates)."
+
+  - name: "Entity Linking Target Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:233-248)"
+    quote: "The EL task associates mentions of entities in a text with the existing nodes of a target knowledge graph"
+    description: "Entity linking formally defines the mapping between textual entity mentions and existing graph nodes. Entities are characterized by their aliases, multilingual labels, and disambiguation context, establishing a formal correspondence between surface forms and canonical entity representations."
+
+  - name: "N-ary Relation Entity Representation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:298-306)"
+    quote: "an n-ary relation captures additional temporal context, denoting when Rapa Nui was named a World Heritage site; in this case, an anonymous node is created"
+    description: "Complex entity relationships are defined through n-ary relations using anonymous nodes. When binary relations are insufficient, anonymous nodes formally represent the higher-arity relationship context, extending entity definition to capture temporal and other contextual attributes."
+
+  - name: "Frame Semantics Entity Role Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:306-315)"
+    quote: "frame semantics, which, for a given verb (e.g., named), captures the entities involved and how they may be interrelated. Resources such as FrameNet then define frames"
+    description: "Entities are defined through their roles in semantic frames. FrameNet provides formal definitions of entity participation (speaker, entity, name) with optional elements (explanation, purpose, place, time) establishing a structured vocabulary for entity role characterization."
+
+  - name: "Direct Mapping Entity Generation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 6:597-604)"
+    quote: "A direct mapping automatically generates a graph from a table. creates an edge [x] y z for each (non-header, non-empty, non-null) cell of the table"
+    description: "Entities in knowledge graphs can be formally generated through direct mapping from tabular data. Each row becomes an entity node, columns become edge labels, and cells become connected values, providing a systematic definition of entity generation from structured sources."
+
+  # Chunk 7 Patterns (02-Knowledge_Graphs_7.md)
+
+  - name: "Accuracy as Entity Correctness"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:20-24)"
+    quote: "Accuracy refers to the extent to which entities and relations - encoded by nodes and edges in the graph - correctly represent real-life phenomena"
+    description: "Entity quality is formally defined through accuracy: the degree to which graph nodes correctly represent real-world entities. This establishes a formal quality dimension for evaluating entity definitions against ground truth."
+
+  - name: "Semantic Accuracy Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:50-57)"
+    quote: "Semantic accuracy is the degree to which data values correctly represent real world phenomena, which may be affected by imprecise extraction results"
+    description: "Entity semantic accuracy formally measures how well entity attributes reflect actual real-world states. This distinguishes between syntactically valid entity representations and semantically correct ones that faithfully capture reality."
+
+  - name: "Entity Completeness Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:97-108)"
+    quote: "Completeness refers to the degree to which all required information is present in a particular dataset. Completeness comprises: schema completeness, property completeness, population completeness"
+    description: "Entity completeness is formally defined across three dimensions: schema completeness (class/property coverage), property completeness (attribute value coverage), and population completeness (real-world entity coverage). This multi-dimensional definition establishes formal metrics for entity representation quality."
+
+  - name: "Ideal Knowledge Graph Entity Reference"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:110-116)"
+    quote: "Measuring completeness directly is non-trivial as it requires knowledge of a hypothetical ideal knowledge graph that contains all the elements"
+    description: "The ideal knowledge graph provides a formal reference definition for entity completeness. Entities are measured against what an ideal representation would contain, establishing completeness as deviation from this theoretical maximum."
+
+  - name: "Consistency as Entity Coherence"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:168-176)"
+    quote: "Consistency means that a knowledge graph is free of (logical/formal) contradictions with respect to the particular logical entailment considered"
+    description: "Entity consistency is formally defined as freedom from logical contradictions. Entities must satisfy all applicable logical constraints without generating inconsistencies, providing a formal coherence criterion for entity definitions."
+
+  - name: "Validity as Constraint Satisfaction"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:179-191)"
+    quote: "Validity means that the knowledge graph is free of constraint violations, such as captured by shape expressions"
+    description: "Entity validity is formally defined as satisfaction of shape constraints. Unlike consistency (logical coherence), validity ensures entities conform to explicitly stated structural requirements (cardinality, type constraints, etc.)."
+
+  - name: "Conciseness as Entity Relevance"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:202-218)"
+    quote: "Conciseness refers to avoiding the inclusion of schema and data elements that are irrelevant to the domain. distinguish intensional conciseness (schema level) and extensional conciseness (data level)"
+    description: "Entity conciseness formally distinguishes between schema-level relevance (intensional) and instance-level relevance (extensional). Entities should only include domain-relevant attributes and instances, avoiding information overload."
+
+  - name: "Understandability as Entity Interpretability"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:243-259)"
+    quote: "Understandability refers to the ease with which data can be interpreted without ambiguity by human users, which involves the provision of human-readable labels and descriptions"
+    description: "Entity understandability formally requires human-readable labels and descriptions, preferably multilingual, to enable unambiguous interpretation. This defines entities not just by their structural properties but by their interpretability."
+
+  - name: "Missing Link Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:295-309)"
+    quote: "knowledge graph completion aims at filling in the missing edges (aka missing links) of a knowledge graph, i.e., edges that are deemed correct but are neither given nor entailed"
+    description: "Missing links formally define gaps in entity relationships - connections that should exist but are neither stated nor inferable. This establishes a formal notion of entity relationship incompleteness."
+
+  - name: "Type Link Entity Classification"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:337-355)"
+    quote: "Type links are of particular importance to a knowledge graph, where dedicated techniques can be leveraged taking into account the specific semantics of such links"
+    description: "Type links formally define entity classification through edges with label 'type'. These links have special semantics distinguishing them from general relationships, enabling dedicated classification techniques for entity type prediction."
+
+  - name: "Identity Link Entity Equivalence"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 7:358-379)"
+    quote: "Predicting identity links involves searching for nodes that refer to the same entity; this is analogous to the task of entity matching (aka record linkage, deduplication)"
+    description: "Identity links formally define entity equivalence through 'same as' relationships. Entity matching uses value matchers (comparing attribute similarity) and context matchers (comparing neighborhood similarity) to establish that distinct nodes refer to the same real-world entity."
+
+  # Chunk 8 Patterns (02-Knowledge_Graphs_8.md)
+
+  - name: "Node Lookup Entity Description"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:27-40)"
+    quote: "Protocols for performing node lookups accept a node (id) request and return a (sub-)graph describing that node. a common convention is to return a sub-graph containing either all outgoing edges"
+    description: "Entity definition through node lookup protocols. An entity is formally described by the sub-graph of all its incident edges (outgoing and/or incoming), establishing a graph-centric definition where entities are characterized by their relationship neighborhood."
+
+  - name: "Edge Pattern Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:65-78)"
+    quote: "Edge patterns - also known as triple patterns in the case of directed, edge labelled graphs - are singleton graph patterns, i.e., graph patterns with a single edge"
+    description: "Entities can be formally defined and queried through edge patterns. Triple patterns ([subject] predicate object) provide atomic units for entity characterization, where any term can be variable or constant to match entity instances."
+
+  - name: "Licensing Entity Metadata"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:186-198)"
+    quote: "W3C Open Digital Rights Language (ODRL) provides an information model and related vocabularies that can be used to specify permissions, duties, and prohibitions"
+    description: "Entity usage is formally defined through licensing metadata using ODRL. Entities carry permissions, duties, and prohibitions that formally constrain how they can be accessed, modified, and distributed, extending entity definition to include usage rights."
+
+  - name: "Usage Policy Entity Constraints"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:257-269)"
+    quote: "usage policies specify how data can be used: what kinds of processing can be applied, by whom, for what purpose"
+    description: "Entities are formally constrained by usage policies specifying permitted processing operations, authorized actors, and legitimate purposes. This extends entity definition to include behavioral constraints on entity access and manipulation."
+
+  - name: "Encrypted Entity Representation"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:278-290)"
+    quote: "more fine-grained encryption can be performed for individual nodes or edge-labels in a graph, potentially providing different clients access to different information"
+    description: "Entities can be formally defined with encrypted attributes, where different clients have access to different entity information based on encryption keys. This establishes a formal security dimension to entity definition."
+
+  - name: "K-Anonymity Entity Privacy"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 8:322-334)"
+    quote: "Approaches to apply k-anonymity on graphs identify and suppress quasi-identifiers that would allow a given individual to be distinguished from fewer than k-1 other individuals"
+    description: "Entity privacy is formally defined through k-anonymity: entities must be indistinguishable from at least k-1 other entities to prevent identification. Quasi-identifiers are formally identified and suppressed to achieve this anonymization level."
+
+  # Chunk 12 Patterns (02-Knowledge_Graphs_12.md)
+
+  - name: "Knowledge Graph as Entity-Relation Structure"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 12:855-860)"
+    quote: "a knowledge graph as a graph of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations"
+    description: "Formal definition of knowledge graph entities: nodes represent entities of interest from the real world, while edges represent relations between these entities. This establishes the foundational definition of entities as real-world referents encoded as graph nodes."
+
+  - name: "Category I Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:127-140)"
+    quote: "simply defines the knowledge graph as a graph where nodes represent entities, and edges represent relationships between those entities. Often a directed edge labelled graph is assumed"
+    description: "Category I entity definition: entities are simply nodes in a directed edge-labelled graph with relationships as edges. This minimalist definition focuses on structural aspects without requiring additional semantic machinery."
+
+  # Chunk 13 Patterns (02-Knowledge_Graphs_13.md)
+
+  - name: "Category II Knowledge Base Entity"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:144-164)"
+    quote: "a knowledge graph is a graph-structured knowledge base, where the phrase knowledge base was popularised in the 70's in the context of rule-based expert systems"
+    description: "Category II entity definition ties entities to knowledge base concepts from expert systems and ontology traditions. Entities inherit formal semantics from logical formalisms, distinguishing them from simple graph nodes."
+
+  - name: "Category III Technical Entity Criteria"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:170-192)"
+    quote: "a knowledge graph mainly describes real world entities and their interrelations, organized in a graph; defines possible classes and relations of entities in a schema"
+    description: "Category III formally defines entities through four criteria: (1) represent real-world entities in a graph, (2) have defined classes and relations in schema, (3) allow arbitrary entity interrelation, (4) cover multiple domains. This establishes rigorous entity characterization requirements."
+
+  - name: "Intensional Component Entity Definition"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:213-226)"
+    quote: "a ground extensional component, that is, a set of relational constructs for schema and data; an intensional component, that is, a set of inference rules; a derived extensional component"
+    description: "Formal entity definition through three components: ground extensional (explicit entity facts), intensional (inference rules over entities), and derived extensional (inferred entity facts). This establishes entities as participating in both stated and derived knowledge."
+
+  - name: "Formal Graph Definition of Entity"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:319-326)"
+    quote: "A directed edge-labelled graph is a tuple G = (V, E, L), where V is a set of nodes, L is a set of edge labels, and E subset of V x L x V is a set of edges"
+    description: "Formal mathematical definition of entities as elements of set V in directed edge-labelled graph. Entities are nodes belonging to a defined set, with edges E connecting pairs of entities through labeled relations L."
+
+  - name: "Heterogeneous Graph Entity with Type"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:352-360)"
+    quote: "A heterogeneous graph is a tuple G = (V, E, L, l), where l: V -> L maps each node to a label. In heterogeneous graphs, edge and node labels are most commonly called types"
+    description: "Formal definition of typed entities in heterogeneous graphs. Each entity (node) is mapped to a type label through function l, establishing formal entity classification. Types are distinguished from relationship labels."
+
+  - name: "Property Graph Entity with Attributes"
+    chunk_ref: "02-Knowledge_Graphs (Chunk 13:375-385)"
+    quote: "A property graph is a tuple G = (V, E, L, P, U, e, l, p), where p: V union E -> 2^(P x U) maps a node or edge id to a set of property-value pairs"
+    description: "Formal definition of attributed entities in property graphs. Entities (V) have unique identifiers, labels (l), and property-value pairs (p), extending basic node definition to include rich attribute structures."

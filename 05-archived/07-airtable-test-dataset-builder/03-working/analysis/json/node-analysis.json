@@ -1,0 +1,476 @@
+[
+  {
+    "node": "0. Receptionist",
+    "expected_values": 10687,
+    "reviewed": 9928,
+    "executions": 1279,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Extract contact info, debtor details from debt collection documents"
+  },
+  {
+    "node": "3.0 SS Grouping",
+    "expected_values": 4528,
+    "reviewed": 4384,
+    "executions": 835,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "CLASSIFICATION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Classify German debtor letters into Group A or Group B for routing"
+  },
+  {
+    "node": "3.1 Group A: Complex Overlaps & Payment Processing",
+    "expected_values": 1117,
+    "reviewed": 924,
+    "executions": 627,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Extract data from debt collection docs (complex overlaps, payments)"
+  },
+  {
+    "node": "Extract candidate details from the incoming CV file.",
+    "expected_values": 1001,
+    "reviewed": 995,
+    "executions": 96,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "CV Screening Agent - Favorite Staffing v2",
+      "CV Screening Agent"
+    ],
+    "prompt_description": "Extract healthcare candidate info from CVs for HubSpot/matching"
+  },
+  {
+    "node": "Receptionist",
+    "expected_values": 902,
+    "reviewed": 554,
+    "executions": 675,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "Inso All-In-One Agent",
+      "Inso All-In-One Agent MAGA"
+    ],
+    "prompt_description": "Extract contact info, case classification from insolvency documents"
+  },
+  {
+    "node": "Extract All Case Information From ADM's Email 1",
+    "expected_values": 669,
+    "reviewed": 600,
+    "executions": 210,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "Ops Case Handler (Prod)"
+    ],
+    "prompt_description": "Extract partner request info from Salesforce case emails"
+  },
+  {
+    "node": "2. TZV Zurück",
+    "expected_values": 576,
+    "reviewed": 407,
+    "executions": 375,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Extract data from TZV (installment payment) forms"
+  },
+  {
+    "node": "scoring and match cv to jd",
+    "expected_values": 480,
+    "reviewed": 480,
+    "executions": 96,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "SCORING",
+    "agents": [
+      "CV Screening Agent - Favorite Staffing v2",
+      "CV Screening Agent"
+    ],
+    "prompt_description": "Match candidate against job requirements, calculate scores, determine qualification"
+  },
+  {
+    "node": "Extract Job Requirements",
+    "expected_values": 395,
+    "reviewed": 395,
+    "executions": 96,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "CV Screening Agent - Favorite Staffing v2",
+      "CV Screening Agent"
+    ],
+    "prompt_description": "Extract job requirements from healthcare job postings"
+  },
+  {
+    "node": "Process company data for B2B Check",
+    "expected_values": 328,
+    "reviewed": 322,
+    "executions": 46,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "B2B Check Agent"
+    ],
+    "prompt_description": "Parse and normalize raw company registration data for verification"
+  },
+  {
+    "node": "Extract Data",
+    "expected_values": 252,
+    "reviewed": 221,
+    "executions": 371,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "Deal Breaker",
+      "Email Classification Agent"
+    ],
+    "prompt_description": "Extract information from documents/emails (generic extraction)"
+  },
+  {
+    "node": "3.2 Group B: Standalone Processing",
+    "expected_values": 208,
+    "reviewed": 180,
+    "executions": 208,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Extract data from debt collection docs (standalone scenarios)"
+  },
+  {
+    "node": "Schreiben InsoW",
+    "expected_values": 101,
+    "reviewed": 84,
+    "executions": 193,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "Inso All-In-One Agent MAGA"
+    ],
+    "prompt_description": "Extract insolvency case data (financial obligation assessment)"
+  },
+  {
+    "node": "Decide if VAT ID has EU or national format",
+    "expected_values": 84,
+    "reviewed": 84,
+    "executions": 46,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "VALIDATION",
+    "agents": [
+      "B2B Check Agent"
+    ],
+    "prompt_description": "Classify VAT ID format (EU vs national), validate format patterns"
+  },
+  {
+    "node": "SBP and Nullplan",
+    "expected_values": 72,
+    "reviewed": 53,
+    "executions": 133,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "Inso All-In-One Agent",
+      "Inso All-In-One Agent MAGA"
+    ],
+    "prompt_description": "Extract debt settlement plan data from insolvency documents"
+  },
+  {
+    "node": "Classify Incoming Email With the Relevant Category",
+    "expected_values": 58,
+    "reviewed": 48,
+    "executions": 253,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "CLASSIFICATION",
+    "agents": [
+      "Email Management Assistant (POC)"
+    ],
+    "prompt_description": "Classify emails into categories (Technical, Use cases, Community, Spam)"
+  },
+  {
+    "node": "Schreiben Gericht",
+    "expected_values": 55,
+    "reviewed": 53,
+    "executions": 114,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "Inso All-In-One Agent MAGA"
+    ]
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 3",
+    "expected_values": 52,
+    "reviewed": 46,
+    "executions": 114,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "VALIDATION",
+    "agents": [
+      "Ops Case Handler (Prod)"
+    ],
+    "prompt_description": "Verify required fields are present in extracted partner case data"
+  },
+  {
+    "node": "Generate a personalized notification message for the candidate.",
+    "expected_values": 50,
+    "reviewed": 50,
+    "executions": 44,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "CV Screening Agent - Favorite Staffing v2",
+      "CV Screening Agent"
+    ],
+    "prompt_description": "Generate personalized SMS messages for qualified healthcare candidates"
+  },
+  {
+    "node": "\"Parse response of VIES API call to identify validity status, company name and address\"",
+    "expected_values": 42,
+    "reviewed": 37,
+    "executions": 0,
+    "tool_type": "N/A",
+    "prompt_category": "EXTRACTION",
+    "agents": []
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 1",
+    "expected_values": 38,
+    "reviewed": 34,
+    "executions": 94,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "VALIDATION",
+    "agents": [
+      "Ops Case Handler (Prod)"
+    ],
+    "prompt_description": "Verify required fields are present in extracted partner case data"
+  },
+  {
+    "node": "1. Schreiben Bank",
+    "expected_values": 38,
+    "reviewed": 35,
+    "executions": 60,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "TZV Agent 03.09"
+    ],
+    "prompt_description": "Extract standing order status from bank letters"
+  },
+  {
+    "node": "Determine Relevant Related Account Where Record Type Is Partner",
+    "expected_values": 23,
+    "reviewed": 23,
+    "executions": 142,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "Ops Case Handler (Prod)"
+    ]
+  },
+  {
+    "node": "Identify validity status of company's ID number",
+    "expected_values": 23,
+    "reviewed": 21,
+    "executions": 46,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Beam Task URL Generator",
+    "expected_values": 22,
+    "reviewed": 7,
+    "executions": 36,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Customer country identification tool",
+    "expected_values": 20,
+    "reviewed": 20,
+    "executions": 42,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Compare company data from registration and official data",
+    "expected_values": 19,
+    "reviewed": 18,
+    "executions": 25,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Output reasoning and decision to accept new customer",
+    "expected_values": 11,
+    "reviewed": 8,
+    "executions": 23,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Primary Classification",
+    "expected_values": 9,
+    "reviewed": 9,
+    "executions": 675,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "CLASSIFICATION",
+    "agents": [
+      "Inso All-In-One Agent",
+      "Inso All-In-One Agent MAGA"
+    ],
+    "prompt_description": "Hierarchical classification to route documents to processing nodes"
+  },
+  {
+    "node": "Restschuldbefreiung",
+    "expected_values": 7,
+    "reviewed": 5,
+    "executions": 41,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "Inso All-In-One Agent MAGA"
+    ]
+  },
+  {
+    "node": "Extract the Jira Ticket ID from the API response",
+    "expected_values": 7,
+    "reviewed": 7,
+    "executions": 12,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Generate request message to customer due to company data mismatch",
+    "expected_values": 7,
+    "reviewed": 0,
+    "executions": 12,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "\"Identify validity status, company name and address in OpenAPI response\"",
+    "expected_values": 4,
+    "reviewed": 4,
+    "executions": 0,
+    "tool_type": "N/A",
+    "prompt_category": "OTHER",
+    "agents": []
+  },
+  {
+    "node": "Output reasoning and decision to reject customer",
+    "expected_values": 3,
+    "reviewed": 1,
+    "executions": 11,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Add Customer_ID to header details",
+    "expected_values": 2,
+    "reviewed": 2,
+    "executions": 49,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "Coolback Order Processing - Final"
+    ]
+  },
+  {
+    "node": "Identify country location of customer",
+    "expected_values": 2,
+    "reviewed": 2,
+    "executions": 4,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "OTHER",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Generate Case URL 2",
+    "expected_values": 1,
+    "reviewed": 0,
+    "executions": 27,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "Ops Case Handler (Prod)"
+    ]
+  },
+  {
+    "node": "Extract accommodation and facts details about the journey from the provided URLs",
+    "expected_values": 1,
+    "reviewed": 1,
+    "executions": 0,
+    "tool_type": "N/A",
+    "prompt_category": "EXTRACTION",
+    "agents": []
+  },
+  {
+    "node": "Jira Ticket ID Extractor",
+    "expected_values": 1,
+    "reviewed": 0,
+    "executions": 11,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "EXTRACTION",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Generate comment text to Finance team for Jira ticket",
+    "expected_values": 1,
+    "reviewed": 1,
+    "executions": 11,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  },
+  {
+    "node": "Generate rejection message to customer due to invalid national registration number",
+    "expected_values": 1,
+    "reviewed": 1,
+    "executions": 11,
+    "tool_type": "custom_gpt_tool",
+    "prompt_category": "GENERATION",
+    "agents": [
+      "B2B Check Agent"
+    ]
+  }
+]

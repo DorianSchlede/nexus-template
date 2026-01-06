@@ -1,0 +1,68 @@
+---
+batch_id: "abstraction_level_1"
+field: abstraction_level
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 2
+patterns_found: 12
+---
+
+patterns:
+  - name: "UFO as Foundational Ontology"
+    chunk_ref: "01-UFO (Chunk 1:107)"
+    quote: "UFO, OntoUML, foundational ontology, ontological analysis, formal ontology"
+    description: "UFO is explicitly positioned as a foundational ontology - the highest level of abstraction in the ontology stack. Foundational ontologies provide domain-independent categories and principles that can be specialized for domain and application ontologies. This is the most abstract level, dealing with fundamental philosophical categories rather than domain-specific concepts."
+
+  - name: "Four-Category Ontology Structure"
+    chunk_ref: "01-UFO (Chunk 1:116-117)"
+    quote: "UFO is a four-category ontology that addresses fundamental conceptual modeling notions via a set of micro-theories"
+    description: "UFO's abstraction level is characterized by its four-category structure based on the Aristotelian Square, distinguishing both substantials and accidents (particularized properties) at both the type and instance levels. This foundational structure enables domain-independent categorization of all possible entities."
+
+  - name: "Micro-Theory Architecture"
+    chunk_ref: "01-UFO (Chunk 1:117-142)"
+    quote: "a theory of types and taxonomic structures... a theory of part-whole relations... a theory of particularized intrinsic properties"
+    description: "UFO's foundational abstraction is organized as a collection of micro-theories addressing fundamental ontological concepts: types and taxonomic structures, part-whole relations, particularized properties, relations, roles, events, and multi-level modeling. Each micro-theory provides foundational patterns that can be specialized at lower abstraction levels."
+
+  - name: "Three-Fragment Organization (UFO-A, UFO-B, UFO-C)"
+    chunk_ref: "01-UFO (Chunk 1:270-279)"
+    quote: "UFO-A, which is an ontology of endurants; UFO-B, which is an ontology of perdurants; UFO-C, which is an ontology of social and intentional entities"
+    description: "UFO is organized into three main fragments at the foundational level: UFO-A (endurants/objects), UFO-B (perdurants/events), and UFO-C (social/intentional entities built on UFO-A and UFO-B). This modular organization at the foundational level enables selective specialization for domain ontologies."
+
+  - name: "Endurant-Perdurant Fundamental Distinction"
+    chunk_ref: "01-UFO (Chunk 1:283-289)"
+    quote: "UFO is a 3D ontology having, as a fundamental distinction, the one between endurants... and perdurants"
+    description: "At the foundational abstraction level, UFO makes the fundamental distinction between endurants (entities existing wholly at any time) and perdurants (entities unfolding in time with temporal parts). This is a domain-independent ontological distinction that applies across all possible domains."
+
+  - name: "Substantial vs Moment Distinction"
+    chunk_ref: "01-UFO (Chunk 1:297-301)"
+    quote: "UFO is an ontology based of the so-called Aristotelian Square, thus, accounting for both substantial individuals... as well as particularized properties"
+    description: "The foundational level distinguishes between independent entities (substantials like objects) and dependent entities (moments/particularized properties). This Aristotelian Square structure provides the most abstract categorization framework for all entities."
+
+  - name: "Universals and Particulars Hierarchy"
+    chunk_ref: "01-UFO (Chunk 1:363-367)"
+    quote: "UFO is an ontology of both particulars and universals (or types)... UFO is an ontology that also countenances high-order types, i.e., types whose instances are also types"
+    description: "UFO's foundational abstraction includes both particulars (individual instances) and universals (types/patterns). The inclusion of higher-order types (types of types) demonstrates the multi-level abstraction capability of the ontology, supporting meta-modeling at the foundational level."
+
+  - name: "Kind as Identity Provider"
+    chunk_ref: "01-UFO (Chunk 1:368-377)"
+    quote: "a fundamental sort of endurant type is a kind, which provides uniform principles of individuation, identity, and persistence to its instances"
+    description: "At the foundational level, Kinds provide the essential identity criteria for entities. This is a domain-independent abstraction that defines how any entity maintains identity through change. Person, Organization, and Marriage are examples of Kinds at a lower (domain) abstraction level."
+
+  - name: "Sortal vs Non-Sortal Type Distinction"
+    chunk_ref: "01-UFO (Chunk 1:378-395)"
+    quote: "In contrast with sortals, non-sortals are types that represent common properties of individuals of multiple Kinds"
+    description: "The foundational level distinguishes sortals (types with identity principles) from non-sortals (types crossing multiple Kinds). Categories, Phase Mixins, Role Mixins, and Mixins are foundational non-sortal patterns that enable abstraction across domain Kinds."
+
+  - name: "Descriptive vs Revisionary Approach"
+    chunk_ref: "01-UFO (Chunk 1:255-269)"
+    quote: "UFO was constructed as a descriptive (as opposed to a revisionary) project... This means that it is an ontology that takes into full consideration both cognitive and linguistic aspects"
+    description: "UFO's foundational abstraction takes a descriptive approach rather than revisionary, meaning it aims to capture how humans cognitively structure reality at the mesoscopic level. This positions UFO as providing foundational categories that align with human conceptualization rather than purely formal constructs."
+
+  - name: "Grounding for Domain Ontologies"
+    chunk_ref: "01-UFO (Chunk 1:202-208)"
+    quote: "It has been employed as a basis for analyzing, reengineering, and integrating many modeling languages and standards in different domains (e.g., UML, BPMN, ArchiMate)"
+    description: "UFO's foundational abstraction level is validated by its use as grounding for domain-level modeling languages and standards. The foundational categories (Agent, Activity, Entity, etc.) are specialized in domain ontologies like BBO (BPMN-based) and enterprise architecture ontologies."
+
+  - name: "Calculus of Content Purpose"
+    chunk_ref: "01-UFO (Chunk 1:235-238)"
+    quote: "The idea was to develop a 'Calculus of Content' aimed at supporting the ontological analysis, conceptual clarification, and semantic explicitation"
+    description: "UFO's foundational purpose is to serve as a 'Calculus of Content' - a domain-independent framework for analyzing and clarifying concepts. This meta-level purpose confirms UFO's position at the foundational abstraction layer, designed to support rather than replace domain-specific ontologies."

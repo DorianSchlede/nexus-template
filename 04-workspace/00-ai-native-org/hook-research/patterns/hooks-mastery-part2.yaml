@@ -1,0 +1,398 @@
+repo_id: "hooks-mastery-part2"
+repo_name: "claude-code-hooks-mastery"
+scope: "PreCompact, Stop, SubagentStop"
+language: "Python"
+extracted_at: "2025-12-31T12:00:00Z"
+patterns:
+  - pattern_name: "Transcript Backup Before Compaction"
+    hook_event: "PreCompact"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Creates timestamped backup of transcript before context window compaction, preserving full conversation history for debugging or recovery."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Backup transcript file with shutil.copy2, using timestamp and trigger type in filename for versioning"
+      code_snippet: |
+        def backup_transcript(transcript_path, trigger):
+            """Create a backup of the transcript before compaction."""
+            try:
+                if not os.path.exists(transcript_path):
+                    return
+
+                # Create backup directory
+                backup_dir = Path("logs") / "transcript_backups"
+                backup_dir.mkdir(parents=True, exist_ok=True)
+
+                # Generate backup filename with timestamp and trigger type
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                session_name = Path(transcript_path).stem
+                backup_name = f"{session_name}_pre_compact_{trigger}_{timestamp}.jsonl"
+                backup_path = backup_dir / backup_name
+
+                # Copy transcript to backup
+                import shutil
+                shutil.copy2(transcript_path, backup_path)
+
+                return str(backup_path)
+            except Exception:
+                return None
+    context_loading:
+      mechanism: "none"
+      what_loaded: "No context injected; hook logs event and optionally backs up transcript"
+    use_case:
+      category: "Context"
+      when_to_use: "When you need to preserve full conversation history before compaction for audit trails, debugging, or recovery purposes"
+
+  - pattern_name: "Pre-Compact Event Logging"
+    hook_event: "PreCompact"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Appends complete pre-compact event data to a persistent JSON log file, tracking all compaction events with trigger type and session info."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Append-only JSON array logging with graceful handling of malformed existing data"
+      code_snippet: |
+        def log_pre_compact(input_data):
+            """Log pre-compact event to logs directory."""
+            # Ensure logs directory exists
+            log_dir = Path("logs")
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / 'pre_compact.json'
+
+            # Read existing log data or initialize empty list
+            if log_file.exists():
+                with open(log_file, 'r') as f:
+                    try:
+                        log_data = json.load(f)
+                    except (json.JSONDecodeError, ValueError):
+                        log_data = []
+            else:
+                log_data = []
+
+            # Append the entire input data
+            log_data.append(input_data)
+
+            # Write back to file with formatting
+            with open(log_file, 'w') as f:
+                json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - purely logging hook"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to track compaction frequency, distinguish manual vs auto triggers, or audit context window management"
+
+  - pattern_name: "TTS Completion Announcement with LLM-Generated Message"
+    hook_event: "Stop"
+    source_file: ".claude/hooks/stop.py"
+    description: "Announces task completion using text-to-speech with dynamically generated messages from available LLM providers (OpenAI > Anthropic > Ollama), falling back to random preset messages."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Cascading LLM fallback chain for message generation, then cascading TTS provider selection based on API key availability"
+      code_snippet: |
+        def get_llm_completion_message():
+            """Generate completion message using available LLM services."""
+            script_dir = Path(__file__).parent
+            llm_dir = script_dir / "utils" / "llm"
+
+            # Try OpenAI first (highest priority)
+            if os.getenv('OPENAI_API_KEY'):
+                oai_script = llm_dir / "oai.py"
+                if oai_script.exists():
+                    try:
+                        result = subprocess.run([
+                            "uv", "run", str(oai_script), "--completion"
+                        ], capture_output=True, text=True, timeout=10)
+                        if result.returncode == 0 and result.stdout.strip():
+                            return result.stdout.strip()
+                    except (subprocess.TimeoutExpired, subprocess.SubprocessError):
+                        pass
+
+            # Try Anthropic, then Ollama (similar pattern)
+            # ...fallback to random message
+            return random.choice(get_completion_messages())
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - post-completion notification only"
+    use_case:
+      category: "Communication"
+      when_to_use: "When you want audio notifications of task completion with engaging AI-generated messages rather than static text"
+
+  - pattern_name: "Transcript Export to Readable JSON"
+    hook_event: "Stop"
+    source_file: ".claude/hooks/stop.py"
+    description: "Converts JSONL transcript to formatted JSON array at session end, making conversation history accessible for external tools or review."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Parse JSONL line-by-line, aggregate into JSON array, write with pretty-print formatting"
+      code_snippet: |
+        # Handle --chat switch
+        if args.chat and 'transcript_path' in input_data:
+            transcript_path = input_data['transcript_path']
+            if os.path.exists(transcript_path):
+                # Read .jsonl file and convert to JSON array
+                chat_data = []
+                try:
+                    with open(transcript_path, 'r') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line:
+                                try:
+                                    chat_data.append(json.loads(line))
+                                except json.JSONDecodeError:
+                                    pass  # Skip invalid lines
+
+                    # Write to logs/chat.json
+                    chat_file = os.path.join(log_dir, 'chat.json')
+                    with open(chat_file, 'w') as f:
+                        json.dump(chat_data, f, indent=2)
+                except Exception:
+                    pass  # Fail silently
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - exports existing transcript data"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need the conversation history in a format consumable by other tools, dashboards, or for manual review"
+
+  - pattern_name: "Cascading TTS Provider Selection"
+    hook_event: "Stop"
+    source_file: ".claude/hooks/stop.py"
+    description: "Dynamically selects best available TTS provider based on environment API keys, enabling graceful degradation from premium to free options."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Check environment variables for API keys in priority order, return path to corresponding TTS script"
+      code_snippet: |
+        def get_tts_script_path():
+            """
+            Determine which TTS script to use based on available API keys.
+            Priority order: ElevenLabs > OpenAI > pyttsx3
+            """
+            script_dir = Path(__file__).parent
+            tts_dir = script_dir / "utils" / "tts"
+
+            # Check for ElevenLabs API key (highest priority)
+            if os.getenv('ELEVENLABS_API_KEY'):
+                elevenlabs_script = tts_dir / "elevenlabs_tts.py"
+                if elevenlabs_script.exists():
+                    return str(elevenlabs_script)
+
+            # Check for OpenAI API key (second priority)
+            if os.getenv('OPENAI_API_KEY'):
+                openai_script = tts_dir / "openai_tts.py"
+                if openai_script.exists():
+                    return str(openai_script)
+
+            # Fall back to pyttsx3 (no API key required)
+            pyttsx3_script = tts_dir / "pyttsx3_tts.py"
+            if pyttsx3_script.exists():
+                return str(pyttsx3_script)
+
+            return None
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - utility function for TTS selection"
+    use_case:
+      category: "Communication"
+      when_to_use: "When you want audio notifications but need flexibility across different environments with varying API access"
+
+  - pattern_name: "Stop Event Logging"
+    hook_event: "Stop"
+    source_file: ".claude/hooks/stop.py"
+    description: "Logs all stop events with full payload data to persistent JSON file for session analytics and debugging."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Same append-only JSON array pattern as other logging hooks"
+      code_snippet: |
+        # Ensure log directory exists
+        log_dir = os.path.join(os.getcwd(), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, "stop.json")
+
+        # Read existing log data or initialize empty list
+        if os.path.exists(log_path):
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        # Append new data
+        log_data.append(input_data)
+
+        # Write back to file with formatting
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - purely logging hook"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to track how often Claude stops, correlate with other events, or debug premature stops"
+
+  - pattern_name: "Subagent Completion TTS Notification"
+    hook_event: "SubagentStop"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Announces subagent task completion with fixed 'Subagent Complete' message via TTS, using same cascading provider selection as main stop hook."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Fixed message TTS announcement using same provider cascade as Stop hook, but simpler (no LLM generation)"
+      code_snippet: |
+        def announce_subagent_completion():
+            """Announce subagent completion using the best available TTS service."""
+            try:
+                tts_script = get_tts_script_path()
+                if not tts_script:
+                    return  # No TTS scripts available
+
+                # Use fixed message for subagent completion
+                completion_message = "Subagent Complete"
+
+                # Call the TTS script with the completion message
+                subprocess.run([
+                    "uv", "run", tts_script, completion_message
+                ],
+                capture_output=True,  # Suppress output
+                timeout=10  # 10-second timeout
+                )
+
+            except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError):
+                pass  # Fail silently
+            except Exception:
+                pass  # Fail silently
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - post-completion notification only"
+    use_case:
+      category: "Communication"
+      when_to_use: "When using Task tools (subagents) and want audio notification when each completes, distinct from main agent stop"
+
+  - pattern_name: "Subagent Stop Event Logging"
+    hook_event: "SubagentStop"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Logs all subagent stop events separately from main stop events, enabling analysis of multi-agent workflows."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Identical append-only JSON logging pattern but to separate file (subagent_stop.json)"
+      code_snippet: |
+        # Ensure log directory exists
+        log_dir = os.path.join(os.getcwd(), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_path = os.path.join(log_dir, "subagent_stop.json")
+
+        # Read existing log data or initialize empty list
+        if os.path.exists(log_path):
+            with open(log_path, 'r') as f:
+                try:
+                    log_data = json.load(f)
+                except (json.JSONDecodeError, ValueError):
+                    log_data = []
+        else:
+            log_data = []
+
+        # Append new data
+        log_data.append(input_data)
+
+        # Write back to file with formatting
+        with open(log_path, 'w') as f:
+            json.dump(log_data, f, indent=2)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - purely logging hook"
+    use_case:
+      category: "Observability"
+      when_to_use: "When orchestrating multiple subagents and need to track their individual completion patterns or debug coordination issues"
+
+  - pattern_name: "Subagent Transcript Export"
+    hook_event: "SubagentStop"
+    source_file: ".claude/hooks/subagent_stop.py"
+    description: "Same transcript-to-JSON export as Stop hook, allowing subagent conversations to be captured and reviewed."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "JSONL to JSON array conversion, same as Stop hook implementation"
+      code_snippet: |
+        # Handle --chat switch (same as stop.py)
+        if args.chat and 'transcript_path' in input_data:
+            transcript_path = input_data['transcript_path']
+            if os.path.exists(transcript_path):
+                chat_data = []
+                try:
+                    with open(transcript_path, 'r') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line:
+                                try:
+                                    chat_data.append(json.loads(line))
+                                except json.JSONDecodeError:
+                                    pass
+
+                    chat_file = os.path.join(log_dir, 'chat.json')
+                    with open(chat_file, 'w') as f:
+                        json.dump(chat_data, f, indent=2)
+                except Exception:
+                    pass
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - exports subagent transcript data"
+    use_case:
+      category: "Observability"
+      when_to_use: "When you need to review or analyze subagent conversations separately from main agent flow"
+
+  - pattern_name: "Graceful Error Handling Pattern"
+    hook_event: "PreCompact"
+    source_file: ".claude/hooks/pre_compact.py"
+    description: "Universal error handling pattern used across all three hooks - catch all exceptions and exit 0 to avoid blocking agent operation."
+    implementation:
+      matcher: ""
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Wrap entire main() in try/except, always exit 0 regardless of errors to avoid disrupting Claude Code flow"
+      code_snippet: |
+        def main():
+            try:
+                # ... main logic ...
+                sys.exit(0)
+
+            except json.JSONDecodeError:
+                # Handle JSON decode errors gracefully
+                sys.exit(0)
+            except Exception:
+                # Handle any other errors gracefully
+                sys.exit(0)
+
+        if __name__ == '__main__':
+            main()
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - error handling pattern"
+    use_case:
+      category: "Safety"
+      when_to_use: "In any hook where you want logging/notification but must never block or disrupt the main Claude Code flow"

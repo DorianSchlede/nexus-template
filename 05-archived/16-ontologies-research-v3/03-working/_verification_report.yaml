@@ -1,0 +1,87 @@
+verified_at: '2026-01-01T16:21:11.926240'
+sample_rate: 0.1
+batches_checked: 123
+patterns_sampled: 300
+patterns_verified: 81
+patterns_failed: 219
+failures:
+- pattern: Grounding for Domain Ontologies
+  chunk_ref: 01-UFO (Chunk 1:202-208)
+  verdict: 'FAIL - Chunk file not found: 01-UFO_1.md'
+- pattern: Embedding dimensionality as abstraction granularity
+  chunk_ref: 02-Knowledge_Graphs (Chunk 5:196-198)
+  expected_quote: DistMult is a seminal method for computing knowledge graph embeddings
+    based on r...
+  actual_at_lines: decompositions, where each entity and relation is associated with
+    a vector of di...
+  verdict: FAIL - Quote mismatch
+- pattern: Aristotle's Ontological Square in BFO
+  chunk_ref: 07-Classifying_Processes_Barry_Smith (Chunk 1:447-452)
+  expected_quote: BFO draws on Aristotle's ideas concerning the division of substances
+    and acciden...
+  actual_at_lines: things as continuants, BFO draws on Aristotle’s ideas concerning
+    the division of...
+  verdict: FAIL - Quote mismatch
+- pattern: Task Instance Abstraction Layer
+  chunk_ref: 11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:621-627)
+  expected_quote: A task instance of an actor R working on an entity X materializes
+    in an event kn...
+  actual_at_lines: Such a larger unit of work of multiple related activities is called
+    a _task_ [32...
+  verdict: FAIL - Quote mismatch
+- pattern: Program Language Formulation for Multi-hop Reasoning
+  chunk_ref: 16-KG-Agent (Chunk 1:31-33)
+  verdict: 'FAIL - Chunk file not found: 16-KG-Agent_1.md'
+- pattern: Entity Count as Abstraction Indicator
+  chunk_ref: 31-BBO (Chunk 1:471-473)
+  verdict: 'FAIL - Chunk file not found: 31-BBO_1.md'
+- pattern: Agent-Centric Provenance Integration
+  chunk_ref: 03-PROV-AGENT (Chunk 1:102-104)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Multi-Agent Coordination Frameworks
+  chunk_ref: 03-PROV-AGENT (Chunk 1:141-145)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Multi-Agent Research Team Assembly
+  chunk_ref: 15-SciAgents (Chunk 5:127-139)
+  verdict: 'FAIL - Chunk file not found: 15-SciAgents_5.md'
+- pattern: Logic Tools for Data Manipulation
+  chunk_ref: 16-KG-Agent (Chunk 1:251-255)
+  verdict: 'FAIL - Chunk file not found: 16-KG-Agent_1.md'
+- pattern: Autonomy Levels (L0-L2)
+  chunk_ref: 18-Multi-Agent (Chunk 2:300-357)
+  verdict: 'FAIL - Chunk file not found: 18-Multi-Agent_2.md'
+- pattern: General-Purpose Systems Pattern
+  chunk_ref: 18-Multi-Agent (Chunk 4:12-37)
+  verdict: 'FAIL - Chunk file not found: 18-Multi-Agent_4.md'
+- pattern: Domain Role Agents
+  chunk_ref: 18-Multi-Agent (Chunk 2:14-17)
+  verdict: 'FAIL - Chunk file not found: 18-Multi-Agent_2.md'
+- pattern: Self-Evaluation for Thought Scoring
+  chunk_ref: 19-Graph_of_Thoughts (Chunk 2:528-538)
+  verdict: 'FAIL - Chunk file not found: 19-Graph_of_Thoughts_2.md'
+- pattern: GoT Modular Architecture with Controller
+  chunk_ref: 19-Graph_of_Thoughts (Chunk 1:383-396)
+  verdict: 'FAIL - Chunk file not found: 19-Graph_of_Thoughts_1.md'
+- pattern: Volume Metric for Thought Information Scope
+  chunk_ref: 19-Graph_of_Thoughts (Chunk 1:729-740)
+  verdict: 'FAIL - Chunk file not found: 19-Graph_of_Thoughts_1.md'
+- pattern: Agent Attribution for Outputs
+  chunk_ref: 03-PROV-AGENT (Chunk 1:291-292)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: CCO Agent Equivalence with Activity Participation
+  chunk_ref: 04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:676-679)
+  expected_quote: A PROV Agent is equivalent to the intersection of CCO agents that
+    are a CCO agen...
+  actual_at_lines: 'equivalence mapping for PROV Agent in CCO: A **PROV Agent** is
+    equivalent to the...'
+  verdict: FAIL - Quote mismatch
+- pattern: Aspect-Expansion Agent Pattern
+  chunk_ref: 15-SciAgents (Chunk 3:899-906)
+  verdict: 'FAIL - Chunk file not found: 15-SciAgents_3.md'
+- pattern: Multi-Agent Team Composition Pattern
+  chunk_ref: 15-SciAgents (Chunk 7:474-486)
+  verdict: 'FAIL - Chunk file not found: 15-SciAgents_7.md'
+stats:
+  verification_rate: 27.0%
+  threshold: 90%
+  verdict: FAIL

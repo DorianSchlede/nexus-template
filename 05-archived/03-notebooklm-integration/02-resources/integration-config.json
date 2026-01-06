@@ -1,0 +1,106 @@
+{
+  "service_name": "NotebookLM Enterprise",
+  "service_slug": "notebooklm",
+  "base_url": "https://{ENDPOINT_LOCATION}-discoveryengine.googleapis.com/v1alpha/projects/{PROJECT_NUMBER}/locations/{LOCATION}",
+  "auth_type": "oauth2_bearer",
+  "auth_command": "gcloud auth print-access-token",
+  "env_keys": {
+    "project_number": "GOOGLE_CLOUD_PROJECT_NUMBER",
+    "location": "NOTEBOOKLM_LOCATION",
+    "endpoint_location": "NOTEBOOKLM_ENDPOINT_LOCATION"
+  },
+  "api_docs_url": "https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-notebooks",
+  "endpoints": [
+    {
+      "name": "Create Notebook",
+      "slug": "create-notebook",
+      "method": "POST",
+      "path": "/notebooks",
+      "description": "Create a new notebook",
+      "triggers": ["create notebook", "new notebook", "make notebook"]
+    },
+    {
+      "name": "Get Notebook",
+      "slug": "get-notebook",
+      "method": "GET",
+      "path": "/notebooks/{notebook_id}",
+      "description": "Retrieve a specific notebook by ID",
+      "triggers": ["get notebook", "show notebook", "notebook details"]
+    },
+    {
+      "name": "List Recently Viewed",
+      "slug": "list-notebooks",
+      "method": "GET",
+      "path": "/notebooks:listRecentlyViewed",
+      "description": "List recently viewed notebooks",
+      "triggers": ["list notebooks", "show notebooks", "my notebooks", "recent notebooks"]
+    },
+    {
+      "name": "Batch Delete Notebooks",
+      "slug": "delete-notebooks",
+      "method": "POST",
+      "path": "/notebooks:batchDelete",
+      "description": "Delete multiple notebooks at once",
+      "triggers": ["delete notebooks", "remove notebooks", "batch delete"]
+    },
+    {
+      "name": "Share Notebook",
+      "slug": "share-notebook",
+      "method": "POST",
+      "path": "/notebooks/{notebook_id}:share",
+      "description": "Share a notebook with other users",
+      "triggers": ["share notebook", "give access", "add collaborator"]
+    },
+    {
+      "name": "Batch Create Sources",
+      "slug": "add-sources",
+      "method": "POST",
+      "path": "/notebooks/{notebook_id}/sources:batchCreate",
+      "description": "Add sources from Google Drive, text, web URLs, or YouTube",
+      "triggers": ["add sources", "add to notebook", "upload content", "add url", "add youtube"]
+    },
+    {
+      "name": "Upload File",
+      "slug": "upload-file",
+      "method": "POST",
+      "path": "/notebooks/{notebook_id}/sources:uploadFile",
+      "description": "Upload a file (PDF, TXT, MD, audio, images) as source",
+      "triggers": ["upload file", "upload pdf", "add file", "upload document"]
+    },
+    {
+      "name": "Get Source",
+      "slug": "get-source",
+      "method": "GET",
+      "path": "/notebooks/{notebook_id}/sources/{source_id}",
+      "description": "Get details of a specific source",
+      "triggers": ["get source", "source details", "show source"]
+    },
+    {
+      "name": "Batch Delete Sources",
+      "slug": "delete-sources",
+      "method": "POST",
+      "path": "/notebooks/{notebook_id}/sources:batchDelete",
+      "description": "Delete multiple sources from a notebook",
+      "triggers": ["delete sources", "remove sources", "clear sources"]
+    },
+    {
+      "name": "Create Audio Overview",
+      "slug": "create-audio",
+      "method": "POST",
+      "path": "/notebooks/{notebook_id}/audioOverviews",
+      "description": "Generate a podcast-style audio overview of notebook content",
+      "triggers": ["create audio", "generate podcast", "audio overview", "make podcast", "generate audio"]
+    },
+    {
+      "name": "Delete Audio Overview",
+      "slug": "delete-audio",
+      "method": "DELETE",
+      "path": "/notebooks/{notebook_id}/audioOverviews/default",
+      "description": "Delete the audio overview from a notebook",
+      "triggers": ["delete audio", "remove podcast", "delete audio overview"]
+    }
+  ],
+  "status": "ready",
+  "created": "2025-12-27T22:31:00Z",
+  "created_by": "add-integration skill"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://nexus.dev/schemas/precompact_state_v1.json",
+  "title": "PreCompact State Schema",
+  "description": "Schema for precompact_state.json - project detection state written by PreCompact hook",
+  "type": "object",
+  "required": [
+    "active_project_id",
+    "confidence",
+    "detection_method",
+    "timestamp"
+  ],
+  "properties": {
+    "active_project_id": {
+      "type": ["string", "null"],
+      "description": "Project ID detected from transcript (e.g., '24-project-skills-research-resume-expansion'). NULL if no project detected.",
+      "pattern": "^[0-9]{2}-[a-z0-9-]+$",
+      "examples": [
+        "24-project-skills-research-resume-expansion",
+        "07-airtable-test-dataset-builder",
+        "13-architech-absorbtion"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "description": "Confidence level of project detection",
+      "enum": ["high", "medium", "low"],
+      "examples": ["high"]
+    },
+    "detection_method": {
+      "type": "string",
+      "description": "Method used to detect the project",
+      "enum": ["transcript", "cache", "fallback"],
+      "examples": ["transcript"]
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when state was written",
+      "format": "date-time",
+      "examples": ["2026-01-04T12:00:00Z"]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional metadata for debugging",
+      "properties": {
+        "transcript_lines": {
+          "type": "integer",
+          "description": "Number of transcript lines parsed"
+        },
+        "mentions_count": {
+          "type": "integer",
+          "description": "Number of times project was mentioned"
+        },
+        "last_mention_line": {
+          "type": "integer",
+          "description": "Line number of last project mention"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "active_project_id": "24-project-skills-research-resume-expansion",
+      "confidence": "high",
+      "detection_method": "transcript",
+      "timestamp": "2026-01-04T12:00:00Z",
+      "metadata": {
+        "transcript_lines": 1234,
+        "mentions_count": 42,
+        "last_mention_line": 1200
+      }
+    },
+    {
+      "active_project_id": null,
+      "confidence": "low",
+      "detection_method": "fallback",
+      "timestamp": "2026-01-04T12:00:00Z"
+    }
+  ]
+}

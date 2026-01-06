@@ -1,0 +1,342 @@
+<skills-catalog version="v4.0" dynamic-metadata="true">
+<!--
+================================================================================
+Skills XML Structure - CLI + Dynamic Metadata Pattern
+================================================================================
+CORRECTED APPROACH based on user feedback:
+
+1. KEEP load-skill CLI for discovery
+2. Dynamically pull ALL metadata from skill files
+3. Descriptions: 15-20 words (semantic richness, not minimal)
+4. CLI commands execute against actual skill structure
+5. User skills priority = 1, System skills priority = 2
+
+TOKEN TARGET: ~2,500 (down from ~6,000)
+================================================================================
+-->
+
+<!-- ============================================================================
+SYSTEM SKILLS: Loaded with semantic-rich 15-20 word descriptions
+============================================================================ -->
+<system-skills location="00-system/skills/" priority="2">
+
+  <category name="projects">
+    <skill name="plan-project">
+      Collaborative planning for new projects with deliverable endpoints. Uses mental models, creates 4-phase structure, pauses for review. Load when starting finite work.
+    </skill>
+    <skill name="execute-project">
+      Execute existing projects by following steps.md task list. Tracks progress with checkboxes, updates resume state. Load when continuing active project work.
+    </skill>
+    <skill name="archive-project">
+      Move completed projects to archived folder with metadata preservation. Cleans up active workspace while maintaining searchability.
+    </skill>
+  </category>
+
+  <category name="learning">
+    <skill name="setup-memory">
+      Configure user goals, role, and preferences in 01-memory/goals.md. Interactive setup wizard with examples. Creates AI identity context for all sessions.
+    </skill>
+    <skill name="setup-workspace">
+      Organize workspace folder structure in 04-workspace/. Creates workspace-map.md documenting custom folders. Validates structure and provides navigation guide.
+    </skill>
+    <skill name="learn-projects">
+      8-minute tutorial on project workflows vs skills. Explains lifecycle, structure, when to use. Interactive with examples and decision framework.
+    </skill>
+    <skill name="learn-skills">
+      Tutorial on skill system and creation patterns. Covers reusable workflows, SKILL.md format, triggers, and automation scripts.
+    </skill>
+    <skill name="learn-integrations">
+      Guide to MCP servers and integration setup. Explains connector pattern, master skills, and external service workflows.
+    </skill>
+    <skill name="learn-nexus">
+      Comprehensive Nexus architecture and design philosophy. Deep dive into execution engine, context system, and advanced patterns.
+    </skill>
+  </category>
+
+  <category name="skill-dev">
+    <skill name="create-skill">
+      Create reusable workflow skills with SKILL.md template. Interactive prompts for name, description, triggers, scripts. Validates structure and creates folder hierarchy.
+    </skill>
+    <skill name="create-master-skill">
+      Create master skill pattern for integrations. Shared library with authentication, error handling, and common operations. Template-driven setup.
+    </skill>
+    <skill name="import-skill">
+      Download and install skills from Notion marketplace. Validates compatibility, resolves dependencies, configures for local environment.
+    </skill>
+    <skill name="search-skill-database">
+      Search Notion skill marketplace by keyword, category, or tags. Browses descriptions and shows installation instructions.
+    </skill>
+    <skill name="share-skill">
+      Upload skill to Notion marketplace with metadata. Validates SKILL.md format, sanitizes paths, publishes with versioning.
+    </skill>
+    <skill name="validate-skill-functionality">
+      Post-execution validation of skill outputs. Checks files created, verifies expected results, provides quality score and improvement suggestions.
+    </skill>
+  </category>
+
+  <category name="system">
+    <skill name="close-session">
+      Save session progress to reports, update docs, capture learnings. Generates session summary, updates core-learnings.md, marks completion state.
+    </skill>
+    <skill name="explain-nexus">
+      Explain Nexus system overview and capabilities. Covers projects, skills, integrations, memory, hooks. Adapts depth to user knowledge level.
+    </skill>
+    <skill name="list-skills">
+      List all skills with descriptions grouped by category. Shows system, integration, and user skills. Provides quick reference and search capability.
+    </skill>
+    <skill name="update-nexus">
+      Update system files from upstream Git repository. Syncs orchestrator, skills, hooks. Preserves local customizations and user data.
+    </skill>
+    <skill name="update-workspace-map">
+      Validate workspace-map.md accuracy against actual folder structure. Detects new folders, removed paths, missing descriptions. Updates map automatically or suggests changes.
+    </skill>
+    <skill name="validate-docs-implementation">
+      Compare documentation against actual code implementation. Finds gaps, outdated instructions, missing features. Generates consistency report with fix suggestions.
+    </skill>
+    <skill name="validate-system">
+      Validate system integrity with auto-repair capabilities. Checks file structure, YAML frontmatter, broken links, permissions. Fixes common issues automatically.
+    </skill>
+  </category>
+
+  <category name="tools">
+    <skill name="mental-models">
+      59 thinking frameworks for decisions, planning, and analysis. Categories: cognitive, diagnostic, strategic, validation, etc. Interactive selection with guided application.
+    </skill>
+    <skill name="generate-philosophy-doc">
+      Generate domain philosophy documents with standards and best practices. Templates for software, data, API, testing. Captures team conventions and patterns.
+    </skill>
+  </category>
+
+</system-skills>
+
+<!-- ============================================================================
+INTEGRATION SKILLS: CLI discovery pattern with dynamic metadata
+============================================================================ -->
+<integration-skills location="03-skills/*-connect/" priority="2">
+
+  <!--
+  PATTERN for each integration:
+  1. Connector skill (always present)
+  2. Operations metadata (count, pattern)
+  3. CLI command for discovery (load-skill {name} --help)
+  4. Metadata dynamically pulled from skill files
+  -->
+
+  <category name="slack">
+    <connector>
+      <skill name="slack-connect">
+        Initial Slack workspace connection setup. OAuth flow, token storage, workspace validation. Creates slack config and tests basic API access.
+      </skill>
+    </connector>
+    <operations count="12" pattern="slack-*">
+      <!-- CLI loads this dynamically from skill files -->
+      <cli>load-skill slack --help</cli>
+      <!-- Metadata includes: send-message, list-channels, upload-file, channel-history, etc. -->
+    </operations>
+  </category>
+
+  <category name="notion">
+    <connector>
+      <skill name="notion-connect">
+        Connect to Notion databases by name. Discovery wizard, schema extraction, field mapping. Creates notion config with database IDs.
+      </skill>
+    </connector>
+    <operations count="8" pattern="notion-*">
+      <cli>load-skill notion --help</cli>
+    </operations>
+  </category>
+
+  <category name="notebooklm">
+    <connector>
+      <skill name="notebooklm-connect">
+        Setup NotebookLM notebook and audio operations. Authentication, notebook creation, source management. Enables podcast generation workflows.
+      </skill>
+    </connector>
+    <operations count="10" pattern="notebooklm-*">
+      <cli>load-skill notebooklm --help</cli>
+    </operations>
+  </category>
+
+  <category name="langfuse">
+    <connector>
+      <skill name="langfuse-connect">
+        Setup Langfuse tracing connection. Project configuration, API keys, environment setup. Validates connection and shows available operations.
+      </skill>
+    </connector>
+    <operations count="28" pattern="langfuse-*">
+      <!-- CLI prevents auto-loading all 28 skills -->
+      <cli>load-skill langfuse --help</cli>
+      <!-- Returns: trace operations, observation ops, session ops, score ops, dataset ops -->
+    </operations>
+  </category>
+
+  <category name="hubspot">
+    <connector>
+      <skill name="hubspot-connect">
+        Setup HubSpot CRM connection. OAuth authentication, portal selection, property mapping. Creates hubspot config and validates API access.
+      </skill>
+    </connector>
+    <operations count="15" pattern="hubspot-*">
+      <cli>load-skill hubspot --help</cli>
+    </operations>
+  </category>
+
+  <category name="heyreach">
+    <connector>
+      <skill name="heyreach-connect">
+        Setup HeyReach LinkedIn automation. API key configuration, account linking, campaign discovery. Enables lead management workflows.
+      </skill>
+    </connector>
+    <operations count="8" pattern="heyreach-*">
+      <cli>load-skill heyreach --help</cli>
+    </operations>
+  </category>
+
+  <category name="google">
+    <connector>
+      <skill name="google-connect">
+        Setup Google Workspace services connection. OAuth flow, service selection (Gmail, Docs, Calendar, etc.). Creates google config with refresh tokens.
+      </skill>
+    </connector>
+    <operations count="7" pattern="google-*">
+      <cli>load-skill google --help</cli>
+    </operations>
+  </category>
+
+  <category name="beam">
+    <connector>
+      <skill name="beam-connect">
+        Setup Beam AI workspace connection. Authentication, workspace discovery, agent access. Enables task orchestration and graph operations.
+      </skill>
+    </connector>
+    <operations count="10" pattern="beam-*">
+      <cli>load-skill beam --help</cli>
+    </operations>
+  </category>
+
+  <category name="airtable">
+    <connector>
+      <skill name="airtable-connect">
+        Connect to Airtable bases by name. Base discovery, table schema extraction, field mapping. Creates airtable config with base/table IDs.
+      </skill>
+    </connector>
+    <operations count="6" pattern="airtable-*">
+      <cli>load-skill airtable --help</cli>
+    </operations>
+  </category>
+
+</integration-skills>
+
+<!-- ============================================================================
+USER SKILLS: Auto-categorized by parent folder, PRIORITY 1
+============================================================================ -->
+<user-skills location="03-skills/" priority="1">
+
+  <!-- Category detected from parent folder: 03-skills/slack/ -->
+  <category name="slack">
+    <skill name="slack-power">
+      Advanced Slack workflows: extract channel schemas, prepare meeting agendas from thread analysis, digest channel summaries. Use when analyzing Slack conversations for patterns or action items.
+    </skill>
+  </category>
+
+  <!-- Category detected from parent folder: 03-skills/research-pipeline/ -->
+  <category name="research-pipeline">
+    <skill name="paper-search">
+      Search and download academic papers from arXiv, PubMed, Semantic Scholar. Query construction, relevance filtering, PDF download. Creates organized paper library with metadata.
+    </skill>
+    <skill name="paper-analyze">
+      Orchestrate paper analysis with specialized subagents. Delegates to domain experts for extraction, synthesis, citation tracking. Manages multi-paper workflows.
+    </skill>
+    <skill name="paper-query">
+      Query analyzed papers with progressive disclosure. Search by topic, method, findings. Returns relevant sections with context and citations.
+    </skill>
+    <skill name="paper-synthesize">
+      Synthesize insights across multiple analyzed papers. Identifies common themes, contradictions, research gaps. Generates literature review sections.
+    </skill>
+    <skill name="pdf-preprocess">
+      Convert PDFs to clean markdown with chunking. Handles multi-column layouts, equations, figures. Preserves structure while enabling text analysis.
+    </skill>
+  </category>
+
+  <!-- Flat skills in root 03-skills/ → fallback "user" category -->
+  <category name="user">
+    <skill name="create-skill-algorithm">
+      Create nested skill-chain workflows that execute multiple skills in sequence. Defines dependencies, data flow, error handling. Enables complex automation patterns.
+    </skill>
+  </category>
+
+</user-skills>
+
+<!--
+================================================================================
+CLI IMPLEMENTATION SPEC
+================================================================================
+
+load-skill {category} --help
+→ Reads all SKILL.md files in 03-skills/{category}/
+→ Extracts metadata from YAML frontmatter
+→ Groups by operation type (if meta exists in skill)
+→ Returns formatted list with descriptions
+
+Example output:
+
+Langfuse Operations (28 skills):
+
+[Trace Operations]
+- get-trace: Retrieve trace by ID with full tree
+- list-traces: List all traces with filters
+- create-trace: Create new trace with metadata
+
+[Observation Operations]
+- get-observation: Retrieve observation details
+- list-observations: List observations with filters
+
+[Session Operations]
+...
+
+To load a skill: load-skill langfuse get-trace
+
+================================================================================
+METADATA EXTRACTION
+================================================================================
+
+CRITICAL: ALL metadata must be dynamically pulled from skill files.
+
+DON'T hardcode:
+- Skill names
+- Skill counts
+- Skill descriptions
+- Operation categories
+
+DO scan and extract:
+- Read all SKILL.md files in category folder
+- Parse YAML frontmatter
+- Extract: name, description, (optional) operation-type
+- Build category structure dynamically
+
+This ensures:
+- Skills can be added/removed without updating XML
+- Descriptions stay in sync with skill files
+- No manual maintenance of skill lists
+
+================================================================================
+TOKEN SAVINGS CALCULATION
+================================================================================
+
+BEFORE (all skills with 50-word descriptions):
+- 100 skills × 80 tokens = 8,000 tokens
+
+AFTER (semantic-rich 15-20 word descriptions + CLI):
+- 30 system skills × 30 tokens = 900
+- 9 integration categories × 100 tokens = 900
+- 10 user skill categories × 200 tokens = 2,000
+- CLI overhead: None (executed on-demand)
+
+TOTAL: ~2,800 tokens
+
+SAVINGS: 5,200 tokens (65% reduction)
+
+================================================================================
+-->
+
+</skills-catalog>

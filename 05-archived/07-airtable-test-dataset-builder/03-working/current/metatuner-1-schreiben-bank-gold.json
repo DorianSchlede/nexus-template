@@ -1,0 +1,1624 @@
+{
+  "name": "1. Schreiben Bank-gold",
+  "description": "Node: 1. Schreiben Bank. Agent: TZV Agent 03.09. Quality tier: gold. Total items: 60",
+  "items": [
+    {
+      "id": "a1a0fb2d-e5c0-48cc-b8f3-36ca17aa4a64",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11807_4929120898490_2025-05-14_259415.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"028912b5-de97-4250-9a1d-a437f12540f0\",\"beamTaskId\":\"TZV-1478\",\"beamTaskTimestamp\":\"2025-10-10T06:19:18Z\",\"attachments\":[{\"name\":\"In_Fax_11807_4929120898490_2025-05-14_259415.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF\"}]}",
+        "beamAgentOSTaskID": "98a51e3e-81fa-4fc1-966c-d68c2c997913",
+        "beamTaskId": "TZV-1536",
+        "beamTaskTimestamp": "2025-10-10T11:31:42Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e3cd089f-c80f-4e84-829c-f705a6122ede_fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "c7e2ee4c-5ff1-417f-9f3d-4175b4c191b6",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11807_492365418328_2025-06-26_268031.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5ca117f0-24a4-44dd-a53e-34fb0d8da215\",\"beamTaskId\":\"TZV-1479\",\"beamTaskTimestamp\":\"2025-10-10T06:19:23Z\",\"attachments\":[{\"name\":\"In_Fax_11807_492365418328_2025-06-26_268031.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF\"}]}",
+        "beamAgentOSTaskID": "dcbc3782-01fa-4f6b-99a2-6c8faac3922b",
+        "beamTaskId": "TZV-1535",
+        "beamTaskTimestamp": "2025-10-10T11:31:37Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_aa961c84-2cf0-45e5-b8de-692b791ec46c_fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "13abf5c9-e0d0-4a10-aa3f-9ee2694e7bc4",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC27G1V34_ocr_20250805103613_0017.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"cb95b083-f80d-4e69-9c58-6639329dc047\",\"beamTaskId\":\"TZV-1487\",\"beamTaskTimestamp\":\"2025-10-10T06:20:03Z\",\"attachments\":[{\"name\":\"CLTSC27G1V34_ocr_20250805103613_0017.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf\"}]}",
+        "beamAgentOSTaskID": "af1ee306-8ac1-4566-9a97-9d2ab472ab4e",
+        "beamTaskId": "TZV-1534",
+        "beamTaskTimestamp": "2025-10-10T11:31:32Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_0bd4eebd-1709-42b4-a491-4ed562836747_fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "69195c97-0ab1-40e3-895b-365ab944276d",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YSQWSWEN_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"22a32275-10a6-49ed-ae47-7f9e423ed025\",\"beamTaskId\":\"TZV-1492\",\"beamTaskTimestamp\":\"2025-10-10T06:20:28Z\",\"attachments\":[{\"name\":\"YSQWSWEN_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "7ad46b63-dcfc-44af-ac87-85d209edc7c7",
+        "beamTaskId": "TZV-1533",
+        "beamTaskTimestamp": "2025-10-10T11:31:27Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e9f17049-659c-4a59-a0c8-2f861d9cd691_fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "0d67b02f-339f-4b28-947d-0b82cb0fba19",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11803_494541862254511_2025-06-24_267547.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"55715337-3295-46c3-bca9-69b0c4e6cc2c\",\"beamTaskId\":\"TZV-1489\",\"beamTaskTimestamp\":\"2025-10-10T06:20:13Z\",\"attachments\":[{\"name\":\"In_Fax_11803_494541862254511_2025-06-24_267547.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF\"}]}",
+        "beamAgentOSTaskID": "7c6ce0cb-c505-4176-a61b-b366f6e21eca",
+        "beamTaskId": "TZV-1532",
+        "beamTaskTimestamp": "2025-10-10T11:31:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_280d7f3b-e892-47a9-b4f3-bea6fae12bab_fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "2520346e-b729-47ba-9ac8-998045428bb9",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y9S85MA8_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"45087fdb-5a44-44c7-ad95-5ed91bb24294\",\"beamTaskId\":\"TZV-1480\",\"beamTaskTimestamp\":\"2025-10-10T06:19:28Z\",\"attachments\":[{\"name\":\"Y9S85MA8_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "a64865ae-5d56-41d4-b965-dad5c66285d1",
+        "beamTaskId": "TZV-1531",
+        "beamTaskTimestamp": "2025-10-10T11:31:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_32d985a7-1fd9-4a23-aad1-c3847b961d45_fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "479ed282-b786-41cc-b097-10bb72a01af4",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11808_4960428885043_2025-06-06_264338.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"cd2449d1-ad2b-4a1a-8112-b6144e62b80e\",\"beamTaskId\":\"TZV-1496\",\"beamTaskTimestamp\":\"2025-10-10T06:20:48Z\",\"attachments\":[{\"name\":\"In_Fax_11808_4960428885043_2025-06-06_264338.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF\"}]}",
+        "beamAgentOSTaskID": "376ef7f8-01a5-438b-81d3-d0a94e8fafc2",
+        "beamTaskId": "TZV-1530",
+        "beamTaskTimestamp": "2025-10-10T11:31:13Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3a093b34-52af-46ad-b8a4-56abae39525f_fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "0b890d60-78ad-4e0e-ae87-eeaa9902f08d",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y152GHPS_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"429a4add-b19a-4cf8-9066-92d1e1958b56\",\"beamTaskId\":\"TZV-1485\",\"beamTaskTimestamp\":\"2025-10-10T06:19:53Z\",\"attachments\":[{\"name\":\"Y152GHPS_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "914545a8-d749-4083-8ed3-e30f6e216a43",
+        "beamTaskId": "TZV-1529",
+        "beamTaskTimestamp": "2025-10-10T11:31:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e82059e1-9d0a-4a84-bff2-3c0ba2bbea0b_fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "9772ceaf-feb0-4100-8078-443167511d7c",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11783_494954947129_2025-08-18_278718.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"c9a7dbf2-adcd-4b83-ad6f-9071ff44dd3d\",\"beamTaskId\":\"TZV-1494\",\"beamTaskTimestamp\":\"2025-10-10T06:20:38Z\",\"attachments\":[{\"name\":\"In_Fax_11783_494954947129_2025-08-18_278718.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF\"}]}",
+        "beamAgentOSTaskID": "82c4b7c7-2d46-4030-a22a-88f8a825427b",
+        "beamTaskId": "TZV-1528",
+        "beamTaskTimestamp": "2025-10-10T11:31:06Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a46f693a-dcde-41fc-8bad-83c197290abe_fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "8b0ae2fd-6614-480c-ad92-490e4ff9e9e1",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"4dc05d13-7a48-4ee9-ab2c-655ec350929c\",\"beamTaskId\":\"TZV-1483\",\"beamTaskTimestamp\":\"2025-10-10T06:19:43Z\",\"attachments\":[{\"name\":\"CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\"}]}",
+        "beamAgentOSTaskID": "0c1991e1-04c8-4eb3-a095-f3f6d50df786",
+        "beamTaskId": "TZV-1527",
+        "beamTaskTimestamp": "2025-10-10T11:30:57Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_842362c4-9f30-4560-b8f1-bac559d065b2_fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "b20526b4-8857-40ce-9330-8fda061a4b8c",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YMADT2KV_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"41999f31-7964-4df1-8a53-c08484f20304\",\"beamTaskId\":\"TZV-1493\",\"beamTaskTimestamp\":\"2025-10-10T06:20:33Z\",\"attachments\":[{\"name\":\"YMADT2KV_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "248e8374-c3e4-4e74-94ea-7cdb1dc56a3c",
+        "beamTaskId": "TZV-1526",
+        "beamTaskTimestamp": "2025-10-10T11:30:53Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_23e2f762-d470-425e-9b51-cb36ea5f14e2_fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "ee1fb2a8-53db-453e-8b89-b574c39fb417",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11783_4929479711598_2025-05-05_257300.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"a8c269af-a639-421f-a641-521915c57c45\",\"beamTaskId\":\"TZV-1486\",\"beamTaskTimestamp\":\"2025-10-10T06:19:58Z\",\"attachments\":[{\"name\":\"In_Fax_11783_4929479711598_2025-05-05_257300.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF\"}]}",
+        "beamAgentOSTaskID": "ee8bcb07-d49f-4a66-a770-3c586e6997b8",
+        "beamTaskId": "TZV-1525",
+        "beamTaskTimestamp": "2025-10-10T11:30:47Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_25aabbb1-447b-4749-8186-080cf61dc180_fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "7d9fea70-ea01-402a-970f-b3b869492611",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y3ZQV20B_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5683376a-435b-45dd-9622-2ce35d8a6e9b\",\"beamTaskId\":\"TZV-1488\",\"beamTaskTimestamp\":\"2025-10-10T06:20:08Z\",\"attachments\":[{\"name\":\"Y3ZQV20B_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "c9bbb851-36db-446e-98fa-9a1cf01781fe",
+        "beamTaskId": "TZV-1524",
+        "beamTaskTimestamp": "2025-10-10T11:30:42Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_15300763-0967-4f25-b3a0-dddde4ab6764_fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "3c5e2915-d764-42ac-8c29-5dc3abbfff35",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y14J6X66_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5acdfbf3-c1f6-4089-9c74-472039cc29f4\",\"beamTaskId\":\"TZV-1495\",\"beamTaskTimestamp\":\"2025-10-10T06:20:43Z\",\"attachments\":[{\"name\":\"Y14J6X66_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "a2fe7a1c-2134-4a0c-9b01-d3a1eae8dfaf",
+        "beamTaskId": "TZV-1523",
+        "beamTaskTimestamp": "2025-10-10T11:30:37Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9ddbbaa4-e540-4bfe-8551-4350e3f8f869_fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "31f3ba06-0c63-42e8-842e-116d87da5682",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YMALZQPN_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"01f5e797-26aa-41e5-b1db-33c6c50450ee\",\"beamTaskId\":\"TZV-1482\",\"beamTaskTimestamp\":\"2025-10-10T06:19:38Z\",\"attachments\":[{\"name\":\"YMALZQPN_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "fc16129c-e605-4671-80a2-a39b5318ad00",
+        "beamTaskId": "TZV-1522",
+        "beamTaskTimestamp": "2025-10-10T11:30:32Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_1bf5e87c-fb82-46a8-8608-f1399001ddf3_fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "3af104a5-786c-4f4c-8cec-e4ac761fe047",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11800_4969272220_2025-07-07_270140.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"f7cdac6b-9da3-4aaf-b278-d431824db6eb\",\"beamTaskId\":\"TZV-1481\",\"beamTaskTimestamp\":\"2025-10-10T06:19:33Z\",\"attachments\":[{\"name\":\"In_Fax_11800_4969272220_2025-07-07_270140.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF\"}]}",
+        "beamAgentOSTaskID": "e21e80e1-dc29-4b57-b1d2-d8e624908b61",
+        "beamTaskId": "TZV-1521",
+        "beamTaskTimestamp": "2025-10-10T11:30:27Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_01eeae74-c04f-4b33-9bc1-8ad093986d8f_fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.5
+      }
+    },
+    {
+      "id": "103f1ce3-e006-48c0-b6e1-fe84cd27cfd2",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YGDRX5BW_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"49159cc6-9b16-48d4-9b39-f4379095c476\",\"beamTaskId\":\"TZV-1484\",\"beamTaskTimestamp\":\"2025-10-10T06:19:48Z\",\"attachments\":[{\"name\":\"YGDRX5BW_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "084041c9-3bff-4df8-8362-fae0e2bede73",
+        "beamTaskId": "TZV-1520",
+        "beamTaskTimestamp": "2025-10-10T11:30:22Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_7e1a7f79-1723-480a-9228-69f9ffb64089_fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "0db42d82-e944-484c-9aa7-8c9c72d8f1aa",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11808_4929120898490_2025-07-08_270317.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"d17f983e-c25f-41e7-a4de-bad5e97de43f\",\"beamTaskId\":\"TZV-1491\",\"beamTaskTimestamp\":\"2025-10-10T06:20:23Z\",\"attachments\":[{\"name\":\"In_Fax_11808_4929120898490_2025-07-08_270317.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF\"}]}",
+        "beamAgentOSTaskID": "2a349c80-24d2-4aef-8075-09e109b2b6a2",
+        "beamTaskId": "TZV-1519",
+        "beamTaskTimestamp": "2025-10-10T11:30:17Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2d278d0f-cd2b-4c4c-888b-7eee78aae65e_fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "f46136bc-f0e7-48c7-a8df-46e6bb962917",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y4OOKUZL_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"722f2b61-6cbc-48bd-86a1-50bfedc23994\",\"beamTaskId\":\"TZV-1490\",\"beamTaskTimestamp\":\"2025-10-10T06:20:18Z\",\"attachments\":[{\"name\":\"Y4OOKUZL_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "99eae2c6-f783-46fd-b25b-91d10f2c390c",
+        "beamTaskId": "TZV-1518",
+        "beamTaskTimestamp": "2025-10-10T11:30:12Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_1e910159-4df7-47ed-a236-12314388fb33_fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "75120856-b157-428f-897a-acf4909fbe70",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC27G1V34_ocr_20250707104909_0106.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"1732d8c1-f630-4e08-ba41-fbbf7b18258e\",\"beamTaskId\":\"TZV-1477\",\"beamTaskTimestamp\":\"2025-10-10T06:19:13Z\",\"attachments\":[{\"name\":\"CLTSC27G1V34_ocr_20250707104909_0106.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf\"}]}",
+        "beamAgentOSTaskID": "a86ecdd4-0425-4386-8cd1-b8ad21eacc85",
+        "beamTaskId": "TZV-1517",
+        "beamTaskTimestamp": "2025-10-10T11:30:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_00671649-ffb7-4bef-9d90-1c38dd3cefea_fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "09fce62c-9c85-464e-aa7a-adf335535f88",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11807_4929120898490_2025-05-14_259415.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"028912b5-de97-4250-9a1d-a437f12540f0\",\"beamTaskId\":\"TZV-1478\",\"beamTaskTimestamp\":\"2025-10-10T06:19:18Z\",\"attachments\":[{\"name\":\"In_Fax_11807_4929120898490_2025-05-14_259415.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF\"}]}",
+        "beamAgentOSTaskID": "a5000cf6-31b8-4dab-b691-6eaef122ed68",
+        "beamTaskId": "TZV-1516",
+        "beamTaskTimestamp": "2025-10-10T09:56:05Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e18fd6a7-b6b8-4085-a457-9c61cf872e32_fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "9c518c2b-c835-413e-b35c-0059c9408ea0",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11807_492365418328_2025-06-26_268031.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5ca117f0-24a4-44dd-a53e-34fb0d8da215\",\"beamTaskId\":\"TZV-1479\",\"beamTaskTimestamp\":\"2025-10-10T06:19:23Z\",\"attachments\":[{\"name\":\"In_Fax_11807_492365418328_2025-06-26_268031.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF\"}]}",
+        "beamAgentOSTaskID": "e12022ea-4ee5-4f40-8c8d-2ec50dd62e87",
+        "beamTaskId": "TZV-1515",
+        "beamTaskTimestamp": "2025-10-10T09:56:00Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_12ff3ff1-3a06-4f40-93c7-4f8b5b1d0b02_fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "e5061734-a7d7-4c3d-a94e-6f0daadb5972",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC27G1V34_ocr_20250805103613_0017.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"cb95b083-f80d-4e69-9c58-6639329dc047\",\"beamTaskId\":\"TZV-1487\",\"beamTaskTimestamp\":\"2025-10-10T06:20:03Z\",\"attachments\":[{\"name\":\"CLTSC27G1V34_ocr_20250805103613_0017.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf\"}]}",
+        "beamAgentOSTaskID": "9fe8d81c-55fc-4d7f-a283-ce012f800447",
+        "beamTaskId": "TZV-1514",
+        "beamTaskTimestamp": "2025-10-10T09:55:55Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_42854d0f-86dc-4ae1-9add-ff60a11a4345_fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "61127bc5-7fd1-4288-933a-b96d8f3f9dc3",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YSQWSWEN_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"22a32275-10a6-49ed-ae47-7f9e423ed025\",\"beamTaskId\":\"TZV-1492\",\"beamTaskTimestamp\":\"2025-10-10T06:20:28Z\",\"attachments\":[{\"name\":\"YSQWSWEN_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "395e28f3-1267-451f-af15-5360eae73e26",
+        "beamTaskId": "TZV-1513",
+        "beamTaskTimestamp": "2025-10-10T09:55:50Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_93b2b5a6-b6e4-4d17-8075-6bd4fc06ef29_fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "331415a4-02b7-4623-b0b9-a6a6efcc8338",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11803_494541862254511_2025-06-24_267547.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"55715337-3295-46c3-bca9-69b0c4e6cc2c\",\"beamTaskId\":\"TZV-1489\",\"beamTaskTimestamp\":\"2025-10-10T06:20:13Z\",\"attachments\":[{\"name\":\"In_Fax_11803_494541862254511_2025-06-24_267547.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF\"}]}",
+        "beamAgentOSTaskID": "314d99e1-e2fd-41d3-ad76-83daa70dc3d3",
+        "beamTaskId": "TZV-1512",
+        "beamTaskTimestamp": "2025-10-10T09:55:45Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9f892005-b1f8-4d57-901f-acfe20da016a_fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "6ca52544-eba1-466a-8d2c-cc42268807de",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y9S85MA8_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"45087fdb-5a44-44c7-ad95-5ed91bb24294\",\"beamTaskId\":\"TZV-1480\",\"beamTaskTimestamp\":\"2025-10-10T06:19:28Z\",\"attachments\":[{\"name\":\"Y9S85MA8_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "42f41f44-2cb5-4be3-91b6-fff5628f968d",
+        "beamTaskId": "TZV-1511",
+        "beamTaskTimestamp": "2025-10-10T09:55:40Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_210251b2-4aef-4a61-9aa2-1889adee827f_fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "4c52d199-0253-4031-9793-db61ee415357",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11808_4960428885043_2025-06-06_264338.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"cd2449d1-ad2b-4a1a-8112-b6144e62b80e\",\"beamTaskId\":\"TZV-1496\",\"beamTaskTimestamp\":\"2025-10-10T06:20:48Z\",\"attachments\":[{\"name\":\"In_Fax_11808_4960428885043_2025-06-06_264338.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF\"}]}",
+        "beamAgentOSTaskID": "615d6381-1ed2-4df7-8368-b5116a7164c2",
+        "beamTaskId": "TZV-1510",
+        "beamTaskTimestamp": "2025-10-10T09:55:35Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f7c50573-8884-4d0f-8aa1-652fac995533_fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "bb241bd8-cbf4-4502-9d54-74f8416b70a8",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y152GHPS_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"429a4add-b19a-4cf8-9066-92d1e1958b56\",\"beamTaskId\":\"TZV-1485\",\"beamTaskTimestamp\":\"2025-10-10T06:19:53Z\",\"attachments\":[{\"name\":\"Y152GHPS_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "bcc87d2a-66aa-418b-b06f-124365a3021a",
+        "beamTaskId": "TZV-1509",
+        "beamTaskTimestamp": "2025-10-10T09:55:30Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_af23c612-6479-498c-824b-afa4e63997ff_fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "c9c2133f-d8c7-42d3-b88c-08ee5d8a107d",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11783_494954947129_2025-08-18_278718.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"c9a7dbf2-adcd-4b83-ad6f-9071ff44dd3d\",\"beamTaskId\":\"TZV-1494\",\"beamTaskTimestamp\":\"2025-10-10T06:20:38Z\",\"attachments\":[{\"name\":\"In_Fax_11783_494954947129_2025-08-18_278718.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF\"}]}",
+        "beamAgentOSTaskID": "0a9dfa73-d315-4980-bbcc-453f641e1017",
+        "beamTaskId": "TZV-1508",
+        "beamTaskTimestamp": "2025-10-10T09:55:25Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_45a6b151-e95d-457f-b144-a90e368dcb99_fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "26d07982-e121-4c36-9673-9db265be00a2",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"4dc05d13-7a48-4ee9-ab2c-655ec350929c\",\"beamTaskId\":\"TZV-1483\",\"beamTaskTimestamp\":\"2025-10-10T06:19:43Z\",\"attachments\":[{\"name\":\"CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\"}]}",
+        "beamAgentOSTaskID": "cd3084d7-9165-4eef-b00a-7997a06b9df6",
+        "beamTaskId": "TZV-1507",
+        "beamTaskTimestamp": "2025-10-10T09:55:20Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e311800d-10f7-40db-bdc4-453bc2a8b236_fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "13f0368e-6b6b-4c5a-914c-6cb9cbad712a",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YMADT2KV_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"41999f31-7964-4df1-8a53-c08484f20304\",\"beamTaskId\":\"TZV-1493\",\"beamTaskTimestamp\":\"2025-10-10T06:20:33Z\",\"attachments\":[{\"name\":\"YMADT2KV_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "ecd84081-882b-4ba8-932b-0a15f0385f20",
+        "beamTaskId": "TZV-1506",
+        "beamTaskTimestamp": "2025-10-10T09:55:15Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_0e09aeaf-917b-49cc-af5b-d34149aafdd4_fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "2cb75910-2767-499c-a466-0eac93cfa6d4",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11783_4929479711598_2025-05-05_257300.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"a8c269af-a639-421f-a641-521915c57c45\",\"beamTaskId\":\"TZV-1486\",\"beamTaskTimestamp\":\"2025-10-10T06:19:58Z\",\"attachments\":[{\"name\":\"In_Fax_11783_4929479711598_2025-05-05_257300.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF\"}]}",
+        "beamAgentOSTaskID": "78e47f48-c9fd-489b-a40b-8fa66e6b1173",
+        "beamTaskId": "TZV-1505",
+        "beamTaskTimestamp": "2025-10-10T09:55:10Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ca4f37fb-6178-4882-a9f7-560a1285809c_fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "44543dbe-daee-4b4d-90be-952a40bd580f",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y3ZQV20B_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5683376a-435b-45dd-9622-2ce35d8a6e9b\",\"beamTaskId\":\"TZV-1488\",\"beamTaskTimestamp\":\"2025-10-10T06:20:08Z\",\"attachments\":[{\"name\":\"Y3ZQV20B_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "bb20e045-c2cb-4584-b9bd-7282ad7dad25",
+        "beamTaskId": "TZV-1504",
+        "beamTaskTimestamp": "2025-10-10T09:55:07Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_fa31d1f9-b945-4ce2-a969-34057b50b0b8_fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "ef6ed442-4608-4a4c-b994-2aa76bd81f20",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y14J6X66_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"5acdfbf3-c1f6-4089-9c74-472039cc29f4\",\"beamTaskId\":\"TZV-1495\",\"beamTaskTimestamp\":\"2025-10-10T06:20:43Z\",\"attachments\":[{\"name\":\"Y14J6X66_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "bd83b891-26f2-4eb6-baae-e3b33c8018da",
+        "beamTaskId": "TZV-1503",
+        "beamTaskTimestamp": "2025-10-10T09:55:00Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_42c7ec0c-b054-4691-a449-fafaf81f7636_fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "1a692ef7-fbe5-4f2e-ae95-0810578b1fcb",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YMALZQPN_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"01f5e797-26aa-41e5-b1db-33c6c50450ee\",\"beamTaskId\":\"TZV-1482\",\"beamTaskTimestamp\":\"2025-10-10T06:19:38Z\",\"attachments\":[{\"name\":\"YMALZQPN_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "5ed82be8-a7c6-4dc6-91b1-4ac96b3189c3",
+        "beamTaskId": "TZV-1502",
+        "beamTaskTimestamp": "2025-10-10T09:54:55Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_8099a31b-ecd5-484a-92ae-e861916ac7c2_fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "e099311d-c152-4596-930a-6619d9dacbaf",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11800_4969272220_2025-07-07_270140.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"f7cdac6b-9da3-4aaf-b278-d431824db6eb\",\"beamTaskId\":\"TZV-1481\",\"beamTaskTimestamp\":\"2025-10-10T06:19:33Z\",\"attachments\":[{\"name\":\"In_Fax_11800_4969272220_2025-07-07_270140.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF\"}]}",
+        "beamAgentOSTaskID": "000b6ceb-0fbd-4ae6-8839-79de78a94a97",
+        "beamTaskId": "TZV-1501",
+        "beamTaskTimestamp": "2025-10-10T09:54:50Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2a708642-5dc7-487d-ab29-fc55d1105a6a_fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.5
+      }
+    },
+    {
+      "id": "04ceadc5-89c8-4a12-bf95-cf79cfdd28f6",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"YGDRX5BW_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"49159cc6-9b16-48d4-9b39-f4379095c476\",\"beamTaskId\":\"TZV-1484\",\"beamTaskTimestamp\":\"2025-10-10T06:19:48Z\",\"attachments\":[{\"name\":\"YGDRX5BW_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "81eda614-c1b8-4502-a813-f5e68211f1b6",
+        "beamTaskId": "TZV-1500",
+        "beamTaskTimestamp": "2025-10-10T09:54:45Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ae41abc2-cb32-429b-8705-4a38dee6a89d_fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "4c05cd0b-a5e6-4f3f-9d01-45f7c4d89c49",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"In_Fax_11808_4929120898490_2025-07-08_270317.PDF\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"d17f983e-c25f-41e7-a4de-bad5e97de43f\",\"beamTaskId\":\"TZV-1491\",\"beamTaskTimestamp\":\"2025-10-10T06:20:23Z\",\"attachments\":[{\"name\":\"In_Fax_11808_4929120898490_2025-07-08_270317.PDF\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF\"}]}",
+        "beamAgentOSTaskID": "88463506-8a81-43fa-9235-a06b6c7a432d",
+        "beamTaskId": "TZV-1499",
+        "beamTaskTimestamp": "2025-10-10T09:54:40Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_90e315e4-18ca-47c1-89f3-5d930de82cef_fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "c22e82dc-45a2-48ea-910a-19a1f1b9fa4d",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"Y4OOKUZL_S0.eml.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"722f2b61-6cbc-48bd-86a1-50bfedc23994\",\"beamTaskId\":\"TZV-1490\",\"beamTaskTimestamp\":\"2025-10-10T06:20:18Z\",\"attachments\":[{\"name\":\"Y4OOKUZL_S0.eml.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf\"}]}",
+        "beamAgentOSTaskID": "eb79dccf-07e0-4be6-9d1c-0217779702c3",
+        "beamTaskId": "TZV-1498",
+        "beamTaskTimestamp": "2025-10-10T09:54:35Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_7d56f99c-bfc8-47c4-aa5f-eb32a204747f_fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "4d1eb795-b3f3-42cc-978b-c71b0a524d42",
+      "input": {
+        "task": "Dynamic Prompt Name is , task is {\"task\":\"{  \\\"clientId\\\": \\\"BID\\\",  \\\"sourceSystem\\\": \\\"Export Tool\\\",  \\\"case_id\\\": \\\"CLTSC27G1V34_ocr_20250707104909_0106.pdf\\\",  \\\"mainfolder\\\": \\\"TZV\\\",  \\\"subfolder\\\": \\\"Schreiben Bank\\\" }\",\"beamAgentOSTaskID\":\"1732d8c1-f630-4e08-ba41-fbbf7b18258e\",\"beamTaskId\":\"TZV-1477\",\"beamTaskTimestamp\":\"2025-10-10T06:19:13Z\",\"attachments\":[{\"name\":\"CLTSC27G1V34_ocr_20250707104909_0106.pdf\",\"type\":\"file\",\"key\":\"fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf\"}]}",
+        "beamAgentOSTaskID": "81758ff6-14fc-4e63-916c-922d7f4f90fc",
+        "beamTaskId": "TZV-1497",
+        "beamTaskTimestamp": "2025-10-10T09:54:30Z",
+        "attachments": [
+          {
+            "name": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_b3b35889-7efe-4a0b-a4ee-95bec3b4d963_fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "7bdb349f-1c39-4f88-b239-716d12584508",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11808_4960428885043_2025-06-06_264338.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "cd2449d1-ad2b-4a1a-8112-b6144e62b80e",
+        "beamTaskId": "TZV-1496",
+        "beamTaskTimestamp": "2025-10-10T06:20:48Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11808_4960428885043_2025-06-06_264338.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_61bd5437-2603-452c-8904-e67bfb589d93_In_Fax_11808_4960428885043_2025-06-06_264338.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "3a60a388-ff6d-4f08-a0b1-45b043d10e74",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"Y14J6X66_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "5acdfbf3-c1f6-4089-9c74-472039cc29f4",
+        "beamTaskId": "TZV-1495",
+        "beamTaskTimestamp": "2025-10-10T06:20:43Z",
+        "attachments": [
+          {
+            "name": "Y14J6X66_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_9bbee7dd-c835-4732-a336-5fd9b9530bd5_Y14J6X66_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "04d7c30b-9f20-437b-82d1-504b253e3922",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11783_494954947129_2025-08-18_278718.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "c9a7dbf2-adcd-4b83-ad6f-9071ff44dd3d",
+        "beamTaskId": "TZV-1494",
+        "beamTaskTimestamp": "2025-10-10T06:20:38Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11783_494954947129_2025-08-18_278718.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_1979278f-9f58-431b-a612-fa5d4636184e_In_Fax_11783_494954947129_2025-08-18_278718.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "bdd6ca03-d2f5-4730-8318-fbc3d291ff43",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"YMADT2KV_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "41999f31-7964-4df1-8a53-c08484f20304",
+        "beamTaskId": "TZV-1493",
+        "beamTaskTimestamp": "2025-10-10T06:20:33Z",
+        "attachments": [
+          {
+            "name": "YMADT2KV_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_a87e4a2b-32cc-44bd-9b22-897005110172_YMADT2KV_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "77eb77be-d043-4a60-9065-f3833039edd1",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"YSQWSWEN_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "22a32275-10a6-49ed-ae47-7f9e423ed025",
+        "beamTaskId": "TZV-1492",
+        "beamTaskTimestamp": "2025-10-10T06:20:28Z",
+        "attachments": [
+          {
+            "name": "YSQWSWEN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_80935525-a8a7-4350-bb97-d30e2b816bc8_YSQWSWEN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "0595cffe-1902-464b-bee7-653548d6b909",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11808_4929120898490_2025-07-08_270317.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "d17f983e-c25f-41e7-a4de-bad5e97de43f",
+        "beamTaskId": "TZV-1491",
+        "beamTaskTimestamp": "2025-10-10T06:20:23Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11808_4929120898490_2025-07-08_270317.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_f64d5e6d-427f-4e94-a648-4c112e09bc8a_In_Fax_11808_4929120898490_2025-07-08_270317.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "b95d7436-2efa-4459-9758-f53484f3ecc9",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"Y4OOKUZL_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "722f2b61-6cbc-48bd-86a1-50bfedc23994",
+        "beamTaskId": "TZV-1490",
+        "beamTaskTimestamp": "2025-10-10T06:20:18Z",
+        "attachments": [
+          {
+            "name": "Y4OOKUZL_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_c49b6fad-34ac-4822-8fb0-ce3ba03c6d9f_Y4OOKUZL_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "efa7ab7a-6407-4777-a71d-0ccf3f42d9f2",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11803_494541862254511_2025-06-24_267547.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "55715337-3295-46c3-bca9-69b0c4e6cc2c",
+        "beamTaskId": "TZV-1489",
+        "beamTaskTimestamp": "2025-10-10T06:20:13Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11803_494541862254511_2025-06-24_267547.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e150dd3e-00d1-4fd8-a459-052a3a7b0376_In_Fax_11803_494541862254511_2025-06-24_267547.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "1e1a85e7-111a-4ac6-9cef-908d3594a152",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"Y3ZQV20B_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "5683376a-435b-45dd-9622-2ce35d8a6e9b",
+        "beamTaskId": "TZV-1488",
+        "beamTaskTimestamp": "2025-10-10T06:20:08Z",
+        "attachments": [
+          {
+            "name": "Y3ZQV20B_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_ca204a5d-a1d2-44d6-8df0-e603f17fde69_Y3ZQV20B_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "1186a023-a20f-428e-b8c0-287db0074c96",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"CLTSC27G1V34_ocr_20250805103613_0017.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "cb95b083-f80d-4e69-9c58-6639329dc047",
+        "beamTaskId": "TZV-1487",
+        "beamTaskTimestamp": "2025-10-10T06:20:03Z",
+        "attachments": [
+          {
+            "name": "CLTSC27G1V34_ocr_20250805103613_0017.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_42698315-de8f-4255-894b-6ab3547413c4_CLTSC27G1V34_ocr_20250805103613_0017.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "34ec2cbf-bd99-42f1-97a3-b5986b0d0731",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11783_4929479711598_2025-05-05_257300.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "a8c269af-a639-421f-a641-521915c57c45",
+        "beamTaskId": "TZV-1486",
+        "beamTaskTimestamp": "2025-10-10T06:19:58Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11783_4929479711598_2025-05-05_257300.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_e6d027c7-412a-4472-88f1-21161caedac3_In_Fax_11783_4929479711598_2025-05-05_257300.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "f693800b-dc90-4ec1-8e46-33e1ad0c56a5",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"Y152GHPS_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "429a4add-b19a-4cf8-9066-92d1e1958b56",
+        "beamTaskId": "TZV-1485",
+        "beamTaskTimestamp": "2025-10-10T06:19:53Z",
+        "attachments": [
+          {
+            "name": "Y152GHPS_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_dc2a5d32-98d0-4270-8676-13bf52c8781e_Y152GHPS_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "f9ede318-4c74-4031-8fc3-bcd1f87c36e2",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"YGDRX5BW_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "49159cc6-9b16-48d4-9b39-f4379095c476",
+        "beamTaskId": "TZV-1484",
+        "beamTaskTimestamp": "2025-10-10T06:19:48Z",
+        "attachments": [
+          {
+            "name": "YGDRX5BW_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_2312e505-3449-42d6-a209-45bd594c9766_YGDRX5BW_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "cCaseClassification": "Sonstige"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.0
+      }
+    },
+    {
+      "id": "71db11e3-5bee-4f0f-a2c6-8153cf9b131f",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "4dc05d13-7a48-4ee9-ab2c-655ec350929c",
+        "beamTaskId": "TZV-1483",
+        "beamTaskTimestamp": "2025-10-10T06:19:43Z",
+        "attachments": [
+          {
+            "name": "CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_94ec71c9-4a0a-4d8c-82bd-2cd9ee90c31a_CLTSC8J2CS04_KozlovaE_20250527093419_0003.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "ca663ea3-bd70-405b-9237-b0b4739985fd",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"YMALZQPN_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "01f5e797-26aa-41e5-b1db-33c6c50450ee",
+        "beamTaskId": "TZV-1482",
+        "beamTaskTimestamp": "2025-10-10T06:19:38Z",
+        "attachments": [
+          {
+            "name": "YMALZQPN_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_78961e60-24a2-4eda-a868-52c4e8a29b12_YMALZQPN_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "5f1baddb-4bd8-4ce1-bc5c-d6fb23a648f8",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11800_4969272220_2025-07-07_270140.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "f7cdac6b-9da3-4aaf-b278-d431824db6eb",
+        "beamTaskId": "TZV-1481",
+        "beamTaskTimestamp": "2025-10-10T06:19:33Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11800_4969272220_2025-07-07_270140.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_4135249b-2fb9-4ef7-8990-7e317f112af4_In_Fax_11800_4969272220_2025-07-07_270140.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "false",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 0.5
+      }
+    },
+    {
+      "id": "690bcc9a-d6c1-40d6-840b-ed09e9ad1b03",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"Y9S85MA8_S0.eml.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "45087fdb-5a44-44c7-ad95-5ed91bb24294",
+        "beamTaskId": "TZV-1480",
+        "beamTaskTimestamp": "2025-10-10T06:19:28Z",
+        "attachments": [
+          {
+            "name": "Y9S85MA8_S0.eml.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_aec751c8-8e4e-40c4-8f65-359a256af2a4_Y9S85MA8_S0.eml.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "94110157-c38d-4bba-8940-ed56f66839f0",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11807_492365418328_2025-06-26_268031.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "5ca117f0-24a4-44dd-a53e-34fb0d8da215",
+        "beamTaskId": "TZV-1479",
+        "beamTaskTimestamp": "2025-10-10T06:19:23Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11807_492365418328_2025-06-26_268031.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_29ca18e2-946f-472c-bed6-0b8876f91d1b_In_Fax_11807_492365418328_2025-06-26_268031.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "f557393e-5f69-42f8-9838-884bedab3ee9",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"In_Fax_11807_4929120898490_2025-05-14_259415.PDF\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "028912b5-de97-4250-9a1d-a437f12540f0",
+        "beamTaskId": "TZV-1478",
+        "beamTaskTimestamp": "2025-10-10T06:19:18Z",
+        "attachments": [
+          {
+            "name": "In_Fax_11807_4929120898490_2025-05-14_259415.PDF",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_232087d1-d6d8-4985-ad73-08d344cc105c_In_Fax_11807_4929120898490_2025-05-14_259415.PDF"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    },
+    {
+      "id": "78a99114-4a91-4648-8933-8b13306484b3",
+      "input": {
+        "task": "{  \"clientId\": \"BID\",  \"sourceSystem\": \"Export Tool\",  \"case_id\": \"CLTSC27G1V34_ocr_20250707104909_0106.pdf\",  \"mainfolder\": \"TZV\",  \"subfolder\": \"Schreiben Bank\" }",
+        "beamAgentOSTaskID": "1732d8c1-f630-4e08-ba41-fbbf7b18258e",
+        "beamTaskId": "TZV-1477",
+        "beamTaskTimestamp": "2025-10-10T06:19:13Z",
+        "attachments": [
+          {
+            "name": "CLTSC27G1V34_ocr_20250707104909_0106.pdf",
+            "type": "file",
+            "key": "fad296c9-2ecb-47b6-b7b4-696d2149269b_3a25fa80-82d1-4d85-8c9c-a216171d5972_CLTSC27G1V34_ocr_20250707104909_0106.pdf"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "actualOutput": {
+        "bIsBankersOrderStatus": "true",
+        "cCaseClassification": "Schreiben Bank"
+      },
+      "metadata": {
+        "score": 1.0
+      }
+    }
+  ],
+  "metadata": {
+    "prompt": "# Role\nYou are a detail-oriented data extraction specialist with expertise in accurately identifying and extracting key information specialist with deep expertise in debt collection and insolvency processes.\nYour role is to accurately identify and extract all key information from # Data. To do that, you will follow # Rules.\n---\n# Document Context\nSchreiben Bank (bank letters) are communications from banks to BID regarding standing order (Dauerauftrag) setup status:\n**Processing Flow**:\n1. BID sends standing order setup request to bank (on behalf of debtor)\n2. Bank reviews and processes request\n3. Bank sends status communication (acceptance, rejection, or other status)\n4. This prompt extracts standing order status from bank's response\n**Document Characteristics**:\n- **Source**: Bank communications (not debtor letters)\n- **Content**: Standing order status confirmation or rejection\n- **Format**: Official bank letterhead with status information\n---\n# Key Disambiguation Rules\n**Critical extraction logic to avoid errors:**\n1. **Status Determination**:\n- ✅ \"Dauerauftrag anerkannt\" / \"Dauerauftrag erstellt\" → true (accepted)\n- ⚠️ \"Dauerauftrag abgelehnt\" → false (rejected)\n- ❓ No clear status mentioned → null\n2. **Classification by Subfolder**:\n- IF subfolder = \"Schreiben Bank\" → cCaseClassification = \"Schreiben Bank\"\n- ELSE → cCaseClassification = \"Sonstiges\"\n3. **Bank Communication Only**:\n- This prompt processes BANK responses, not debtor or BID letters\n- Look for bank letterhead and official standing order status language\n---\n# Rules\nYou must extract data related to debt collection and insolvency processes according to the following general rules:\n* Accuracy: Ensure all required information is extracted accurately.\n* No Inference: Do not infer or generate any information that is not explicitly stated in the provided data.\n---\n# Variables\n### JSON Key: \"bIsBankersOrderStatus\"\n**Definition**: Status of banker's order (Dauerauftrag) setup based on bank communication.\n**Location**: Main body of bank letter, typically in status notification section.\n**Keywords**:\n- \"Dauerauftrag\"\n- \"Dauerauftrag anerkannt\"\n- \"Dauerauftrag erstellt\"\n- \"Dauerauftrag abgelehnt\"\n- \"Dauerauftrag eingerichtet\"\n**Format**:\n- Type: boolean or null\n- Values: true (accepted/created), false (rejected), null (no status or unclear)\n**Disambiguation**: Look for explicit status language from the bank. \"Anerkannt\" or \"erstellt\" indicates acceptance (true). \"Abgelehnt\" indicates rejection (false).\n**Edge Cases**:\n- `true`: Bank confirms standing order is set up or accepted\n- `false`: Bank explicitly rejects or declines standing order\n- `null`: No standing order status mentioned or status is unclear\n---\n### JSON Key: \"cCaseClassification\"\n**Definition**: Document classification based on subfolder designation.\n**Location**: Derived from task_query subfolder field.\n**Format**:\n- Type: string\n- Possible values: \"Schreiben Bank\", \"Sonstiges\"\n**Disambiguation**: IF subfolder field in task_query equals \"Schreiben Bank\", then set to \"Schreiben Bank\". Otherwise set to \"Sonstiges\".\n**Edge Cases**: `null` when subfolder information is missing from task_query.\n---\n# Data\n## PDF attachment:\n''' \n```BID\nBAYERISCHER INKASSO DIENST\nBID Bayerischer Inkasso\nDienst Gmbh\nRegistrierter\nMitglied im\nInkassodienstleister nach\n§ 10 Aus. 1 Nr. 1 RDG\nBundesverband Deutscher\nInkassouniernehmen e.V.\nGeschäftsführer:\nFrank Fenske\nAndreas Wohner\nZertifiziert nach\nDIN EN ISO 9001\nHandelsregister Coburg\nHRB 6053\nUst .- ID-Nr .: DE215572496\n. Hausanschrift:\nWeichengereuth 26\n96450 Coburg\nTelefon: siehe Betreff-Zeile\nTelefax: 08551 8060-807\nE-Mail: d@bid-coburg.de\nwww.bid-coburg.de\nUniCredit Bank GmbH Coburg\nKonto: 142 07 55\nBLZ: 783 200 76\nBIC: HYVE DE MM 480\nIBAN: DE70 7832 0076 0001 4207 55\nBei Rückfragen: Tel :- Nr: 09561-8060-896 oder -898\nCoburg, 07.05.2025/NAKE\nInkasso-Nr .: D102516993D (Bitte bei allen Zahlungen und Schriftwechsel angeben !!! )\nEinrichtung eines Dauerauftrages\nSehr geehrte Damen und Herren,\nwie aus der Anlage ersichtlich, wurden wir von Ihrem Kunden bevollmächtigt den nachstehenden\nDauerauftrag einzurichten:\n<table>\n<tr>\n<td>Kontoinhaber:</td>\n<td>Tim Weicht, Wilhelm-Busch-Str. 2, 57413 Finnentrop geb. 24.07.1994</td>\n</tr>\n<tr>\n<td>IBAN:</td>\n<td>DE13 4645 1012 0007 5353 54</td>\n</tr>\n<tr>\n<td>Betrag:</td>\n<td>EUR 15,00</td>\n</tr>\n<tr>\n<td>Ausführung:</td>\n<td>monatlich</td>\n</tr>\n<tr>\n<td>Einmalige Ausführung:</td>\n<td>am 16.05.2025 in Höhe von EUR 15,00 (einmaliger Ratenbetrag)</td>\n</tr>\n<tr>\n<td>Weitere Ausführung:</td>\n<td>ab 15.06.2025</td>\n</tr>\n<tr>\n<td>Letzte Ausführung:</td>\n<td>am 15.08.2032</td>\n</tr>\n<tr>\n<td>Verwendungszweck:</td>\n<td>D102516993D-DA, freenet DLS GmbH</td>\n</tr>\n<tr>\n<td>Empfänger:</td>\n<td>BID Bayerischer Inkasso Dienst GmbH Kreditinstitut: UniCredit Bank GmbH Coburg IBAN: DE70 7832 0076 0001 4207-55 BIC: HYVE DE MM 480</td>\n</tr>\n</table>\nVielen Dank für Ihre Bemühungen im Voraus !!!\nMit freundlichen grüßen\nBID Bayerischer Inkasso Dienst GmbH\nAndreas Wohner\nBitte ausfüllen und per Fax an 09561 8060-807\noder per E-Mail an d@bid-coburg.de\n<figure>\nWir bestätigen, dass ein Dauerauftrag mit Angabe Ihres\nAktenzeichens zugunsten des Empfänger-Kontos in o.g.\nHohe eingerichtet wurde.\nKI JA\n☒\n[ ] NEIN\n14.05.25\nSparkasse MUGen in Querland\nDatum\nStempel + Unterschrift\n</figure>\nFAX\n1\n49291208490\nSparkasse Mitten im Sauerland\n1/2\n& 14.5.2025 9:10:23\n<!-- PageNumber=\"2\" -->\nBID Postfach 1341 96403 Coburg\n(D102516993D) Kundennummer\nSparkasse Mitten im Sauerland\nWinziger Platz 6\n59872 Meschede\nEINGEGANGEN\n12 Mai 2035\nSparkasse Mitten MSwind ara\n<!-- PageBreak -->\n# TEILZAHLUNGSVERGLEICH / SCHULDANERKENNTNIS\nInkasso-Nr .: D102516993D/EMAR\nzwischen; freenet DLS GmbH (Rechtsnachfolgerin der mobilcom-debitel GmbH), D-24782 Büdelsdorf, Hollerstraße 126\n(vertreten durch BID Bayerischer Inkasso Dienst GmbH, 96450 Coburg)\nund: Tim Weicht, D-57413 Finnentrop. Wilhelm-Busch-Str. 2\nwird nachslehender Teilzahlungsvergleich geschlossen:\n1\\. Der Schuldner orkennt an, der Gläubiger aus Dienstleistungsvertrag gem. Rechnungen vom 13.05.2024 bis 14.04.2025 in\nHöhe von 824,70 EUR einen Betrag von EUR 942,99 zzgl. 5,00 Prozentpunkte über Basiszins seit 26.04.2025 aus EUR\n824,70 bzw. aus obigem Betrag, falls dieser geringer ist, It. Forderungsaufstellung vom 25.04.2025, zu schulden. Die dem\nGläubiger hierdurch zusätzlich entstehenden Kosten des Vergleichs in Höhe von EUR 41,16 übernimmt der Schuldner\nfreiwillig im Rahmen des Ratenzahlungsvergleichs. Die Höhe der Kosten bemisst sich nach der vertraglich mit dem\nGläubiger vereinbarten Entstehung einer Einigungsgebühr gemäß Nr. 1000 VV RVG analog. Rechtsgrundlage für die\nErstattung bildet die freiwillige Übernahme dieser Kosten im Rahmen dieses Stundungsvergleichs. Die Begleichung der\nGesamtforderung erfolgt in mehr als 9 Raten, infolgedessen sich die Inkassokosten um weitere FUR 39,36 erhöhen, welche\nich/wir zusätzlich als Gesamtschuldner anerkenne(n). Die Hohe der Inkassokosten entspricht bei mehr als 9 Raten einer\n1,3 Gebühr gem. § 13e Abs. : RDG i.V.m. Nr. 2300 Abs. 2 VV AVG analog EUR 134,40. Der Schuldner verpflichtet sich -\nmehrere als Gesamilschuldner - zur Zahlung der vorstehenden Gesamtforderung wie folgt:\n15,00 EUR am 15.05.2025, dann weiterhin monatlich 15,00 EUR beginnend am 15.06.2025. Diese Vereinbarung ist\nbefristet bis zum 15.05.2026. Bis zu diesem Termin ist unter Vorlage eines aktuellen Einkommensbescheides eine. .\nneue Vereinbarung 20 troffen.\n2\\. Der Schuldner verzichtet auf Einwendungen jeglicher Art hinsichtlich des Grundes und der Höhe der Schuld, insbesondere\nverzichtet der Schuldner auf die Einrede der Verjährung. Soweit bereits ein Schuldtitel vorliegt, verzichtet er darüber\nhinaus auf die Erhebung einer Vollstreckungsgegen-, Nichtigkeits- oder Restilutionsklage.\nDer Schuldner versichert weiterhin, weder zahlungsunfähig zu sein, noch sich in einem Insolvenzverfahren zu\nbefinden und die o. g. Aaten aus seinem pfandfreien Einkommen\"/ Vermögen zu leisten.\n3\\. Die jeweilige noch verbleibende Gesamtrestforderung ist zur Zahlung sofort fällig, wenn der Schuldner mit einer Rale ganz\noder teilweise länger als 5 Tage in Rückstand ist, sofem dem Schuldner nicht ausdrücklich eine weitere Stundung gewährt\nwird. Die Neufestsetzung der Raten wird außerdem erforderlich, wenn sich die wirtschaftlichen Verhältnisse des Schuldners\nseit Abschluss dieses Vergleiches wesentlich verbessert haben.\n4\\. Der Gläubiger verpflichtet sich, falls der Schuldner die Raten pünktlich zahlt, keine Vollstreckungen einzuleiten.\nAusgebrachte Vollstreckungen bleiben jedoch bestehen und ruhen, solange die Vereinbarungen eingehalten werden.\n. Zur Absicherung der vorbezeichneten und anerkannten Gesamtforderung It. Forderungsaufstellung vom 25.04.2025 inkl.\nVergleichskosten tritl der Schuldner hiennit den jeweils pfändbaren Teil seiner gegenwärtigan und künftigen Lohn- oder\nGehaltsansprüche einschl. Pension, Ruhegeld und Provisionsansprüche, Tantiemen, Gewinnbeteiligungen und\nAbfindungen gegen den jeweiligen Arbeitgeber/ Dienstherrn bzw. den jeweiligen Leistungsverpflichteten an den Gläubiger\nfreenet DLS GmbH ab. Abgetreten wird vom Schuldner der jeweils pfandbare Teil seiner gegenwärtigen und künftigen\nAnsprüche\na) auf !id. Geldleistungen aus Arbeitslosengeld 1. Kurzarbeiter - u. Insolvenzgeld, Vorruhestandsgeld, Krankengeld.\nRenten, wegen Erwerbsunfähigkeit. Minderung der Erwerbstätigkeit, Berufsunfähigkeit und Altersgeld sowie Renten\nan Hinterbliebene, soweit sie den für Arbeitscinkommen geltenden unpfändbaren Betrag übersteigen und gem. § 53\nAbs. 3 SGB I abtretbar sind\nb) auf Rentenabfindungen und Beitragserstattungen, soweit sic gem. § 53 Abs. 2 SGB { abtretbar sind gegen den\njeweiligen Sozialleistungsträger.\nDer Schuldner ist mit der Zusammenrechnung seiner sämtlichen Einkünfte, auch derjenigen, die selbst betragsmäßig der\nPfändung nicht unterliegen wurden. zur Ermittlung des pfandbaren und damit abtretbaren Betrages einverstanden.\nDer Gläubiger verpflichtet sich, die Abtretungen erst offenzulegen und von ihnen Gebrauch zu machen, wenn der Schuldner\nden Ratenzahlungsverpflichtungen nicht oder, nur teilweise nachkommt.\nArbeitgeber: Thyssen Krupp Sret Ort: LinkenfreQ\n2\nO arbeitslos\n6\n. Tilgungsbestimmung\nDie Raten finden Verrechnung auf die Einigungsgebühr. Zahlungen werden nach § 366/367 BGB bzw. § 491.506 BGB\nverrechgol.\n7\\. Bank: Sparkasse Putinom Swissland BLZ.\nKto .- Nr .:\nIBAN: DE13464510120209535351;\nBIC: Weladed AMES\nKontoinhaber (Vor- und Zuname):\nTom Dacht\nVollmacht für die Einrichtung eines Dauerauftrages:\nHiermit bevollmächtige(n) ich/ wir Sic, die von mis uns zu entrichtendien Zahlungen (wie cben genannt) mittels Einrichtung eines\nDauerauftrages von meiner/ unserer oben genannten Bankverbindung meiner unserer Bank in Auftrag zu geben.\nCoburg, 25.04.2025\nAls Bevollmächtigter das Gläubigers\nUnterschrift des Kontoinhabers\nTin Weicht (Unterschrift)\nBID Bayerischer Inkasso Dienst GmbH\n<!-- PageHeader=\"FAX\" -->\n<!-- PageHeader=\"49291208490\" -->\n<!-- PageFooter=\"Sparkasse Mitten im Sauerland\" -->\n<!-- PageFooter=\"92/2\" -->\n<!-- PageFooter=\"14.5.2025\" -->\n<!-- PageFooter=\"9:10:49\" -->\n<!-- PageFooter=\"Kabink\" -->```\n'''\nAll content within xml tags which contains a file name. File names are likely to contain 'pdf', 'figure', 'csv', \"jpg\" etc. in the xml tag. \n## Email input",
+    "agent": "TZV Agent 03.09",
+    "node": "1. Schreiben Bank",
+    "tier": "gold",
+    "generated_at": "2026-01-02T00:10:21.048362",
+    "source": "airtable-export"
+  },
+  "tags": [
+    "gold",
+    "1.-schreiben-bank"
+  ]
+}

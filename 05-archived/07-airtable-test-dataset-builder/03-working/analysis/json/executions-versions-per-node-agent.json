@@ -1,0 +1,1688 @@
+[
+  {
+    "node": "0. Receptionist",
+    "agent": "TZV Agent 03.09",
+    "executions": 1279,
+    "versions": 18
+  },
+  {
+    "node": "3.0 SS Grouping",
+    "agent": "TZV Agent 03.09",
+    "executions": 835,
+    "versions": 10
+  },
+  {
+    "node": "Extract Job Description and Evaluation Rules from Airtable",
+    "agent": "CV Screening Agent",
+    "executions": 714,
+    "versions": 7
+  },
+  {
+    "node": "Receptionist",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 674,
+    "versions": 6
+  },
+  {
+    "node": "Primary Classification",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 673,
+    "versions": 6
+  },
+  {
+    "node": "3.1 Group A: Complex Overlaps & Payment Processing",
+    "agent": "TZV Agent 03.09",
+    "executions": 627,
+    "versions": 10
+  },
+  {
+    "node": "Unknown",
+    "agent": "Unknown",
+    "executions": 556,
+    "versions": 66
+  },
+  {
+    "node": "Perform Candidate Screening",
+    "agent": "CV Screening Agent",
+    "executions": 530,
+    "versions": 6
+  },
+  {
+    "node": "Determine Candidate Match",
+    "agent": "CV Screening Agent",
+    "executions": 525,
+    "versions": 6
+  },
+  {
+    "node": "Post Data to Zoho Recruit",
+    "agent": "CV Screening Agent",
+    "executions": 519,
+    "versions": 6
+  },
+  {
+    "node": "Exit Node",
+    "agent": "CV Screening Agent",
+    "executions": 446,
+    "versions": 6
+  },
+  {
+    "node": "Search for Account Type using Contact Email within SF Contact Object",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 390,
+    "versions": 9
+  },
+  {
+    "node": "2. TZV Zurück",
+    "agent": "TZV Agent 03.09",
+    "executions": 375,
+    "versions": 11
+  },
+  {
+    "node": "Extract Data",
+    "agent": "Deal Breaker",
+    "executions": 362,
+    "versions": 15
+  },
+  {
+    "node": "Extract Stored Email Content using thread ID (if applicable) 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 346,
+    "versions": 8
+  },
+  {
+    "node": "Classify Incoming Email With the Relevant Category",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 253,
+    "versions": 4
+  },
+  {
+    "node": "Add category to outlook email",
+    "agent": "Agent AOP Brigitte",
+    "executions": 239,
+    "versions": 1
+  },
+  {
+    "node": "Search For Related Accounts Using Contact Email Within SF Related Accounts Object",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 222,
+    "versions": 9
+  },
+  {
+    "node": "Get Prompt From Creator",
+    "agent": "Deal Breaker",
+    "executions": 220,
+    "versions": 11
+  },
+  {
+    "node": "Extract All Case Information From ADM's Email 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 210,
+    "versions": 7
+  },
+  {
+    "node": "3.2 Group B: Standalone Processing",
+    "agent": "TZV Agent 03.09",
+    "executions": 208,
+    "versions": 9
+  },
+  {
+    "node": "Schreiben InsoW",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 193,
+    "versions": 6
+  },
+  {
+    "node": "System Variable Setter",
+    "agent": "Agent AOP Brigitte",
+    "executions": 188,
+    "versions": 1
+  },
+  {
+    "node": "Extract Article Code",
+    "agent": "Agent AOP Brigitte",
+    "executions": 178,
+    "versions": 1
+  },
+  {
+    "node": "Article Code and Buyer Data Aggregator",
+    "agent": "Agent AOP Brigitte",
+    "executions": 174,
+    "versions": 1
+  },
+  {
+    "node": "Extract Buyer and Order Information",
+    "agent": "Agent AOP Brigitte",
+    "executions": 173,
+    "versions": 1
+  },
+  {
+    "node": "Search Customer Data Integration",
+    "agent": "Agent AOP Brigitte",
+    "executions": 171,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Kunde-Material wird gesucht",
+    "agent": "Agent AOP Brigitte",
+    "executions": 166,
+    "versions": 1
+  },
+  {
+    "node": "FOA",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 163,
+    "versions": 4
+  },
+  {
+    "node": "Determine Relevant Related Account Where Record Type Is Partner",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 142,
+    "versions": 9
+  },
+  {
+    "node": "Check the Email Intent",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 141,
+    "versions": 6
+  },
+  {
+    "node": "Generate Beam Task URL",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 132,
+    "versions": 4
+  },
+  {
+    "node": "Update Record on Airtable 4",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 132,
+    "versions": 8
+  },
+  {
+    "node": "SBP and Nullplan",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 132,
+    "versions": 5
+  },
+  {
+    "node": "Draft Reply Email",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 130,
+    "versions": 4
+  },
+  {
+    "node": "\"Send Slack Message with Original Email, Draft Reply, Inbox URL and Task ID\"",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 128,
+    "versions": 4
+  },
+  {
+    "node": "Map output data to spreadsheet",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 126,
+    "versions": 5
+  },
+  {
+    "node": "Prepare formatted Data",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 126,
+    "versions": 5
+  },
+  {
+    "node": "\"Add \"\"Relevant\"\" Label to Email \"",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 126,
+    "versions": 4
+  },
+  {
+    "node": "\"Reply to Email with Generated Template\n\nEnsure that the email is in HTML format so that line breaks and other formatting is preserved in the email \"",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 126,
+    "versions": 4
+  },
+  {
+    "node": "Update Record on Airtable 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 118,
+    "versions": 8
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 3",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 114,
+    "versions": 7
+  },
+  {
+    "node": "Schreiben Gericht",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 114,
+    "versions": 6
+  },
+  {
+    "node": "Reply to ADM Asking For Missing Information 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 98,
+    "versions": 6
+  },
+  {
+    "node": "Reply to ADM Asking For Missing Information 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 97,
+    "versions": 6
+  },
+  {
+    "node": "Add category to outlook email",
+    "agent": "Agent AOP Sandra",
+    "executions": 95,
+    "versions": 1
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 94,
+    "versions": 6
+  },
+  {
+    "node": "scoring and match cv to jd",
+    "agent": "CV Screening Agent - Favorite Staffing v2",
+    "executions": 93,
+    "versions": 2
+  },
+  {
+    "node": "Extract Job Requirements",
+    "agent": "CV Screening Agent - Favorite Staffing v2",
+    "executions": 93,
+    "versions": 2
+  },
+  {
+    "node": "Extract candidate details from the incoming CV file.",
+    "agent": "CV Screening Agent - Favorite Staffing v2",
+    "executions": 93,
+    "versions": 2
+  },
+  {
+    "node": "Add outlook email category",
+    "agent": "Agent AOP Brigitte",
+    "executions": 92,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter",
+    "agent": "Agent AOP Sandra",
+    "executions": 79,
+    "versions": 1
+  },
+  {
+    "node": "\"Assign Outlook Category \"\"Keine Bestellung\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 77,
+    "versions": 5
+  },
+  {
+    "node": "Extract Article Code",
+    "agent": "Agent AOP Sandra",
+    "executions": 75,
+    "versions": 1
+  },
+  {
+    "node": "Search Customer Data Integration",
+    "agent": "Agent AOP Sandra",
+    "executions": 74,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Kunde-Material wird gesucht",
+    "agent": "Agent AOP Sandra",
+    "executions": 74,
+    "versions": 1
+  },
+  {
+    "node": "Article Code and Buyer Data Aggregator",
+    "agent": "Agent AOP Sandra",
+    "executions": 74,
+    "versions": 1
+  },
+  {
+    "node": "Extract Buyer and Order Information",
+    "agent": "Agent AOP Sandra",
+    "executions": 74,
+    "versions": 1
+  },
+  {
+    "node": "Send Message on G-Chat",
+    "agent": "CV Screening Agent",
+    "executions": 70,
+    "versions": 5
+  },
+  {
+    "node": "Add Spam Label",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 69,
+    "versions": 4
+  },
+  {
+    "node": "\"Assign Outlook Category \"\"Verarbeitung\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 63,
+    "versions": 5
+  },
+  {
+    "node": "1. Schreiben Bank",
+    "agent": "TZV Agent 03.09",
+    "executions": 60,
+    "versions": 1
+  },
+  {
+    "node": "Fetch records from the Airtable Database",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 59,
+    "versions": 3
+  },
+  {
+    "node": "Extract Order Head Details",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 59,
+    "versions": 3
+  },
+  {
+    "node": "Validate customer type",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 59,
+    "versions": 3
+  },
+  {
+    "node": "Add Other Label",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 58,
+    "versions": 4
+  },
+  {
+    "node": "Extract Requested_By ID from SF User Object 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 56,
+    "versions": 8
+  },
+  {
+    "node": "\"\nExtract Dixa Conversation ID\"",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 55,
+    "versions": 3
+  },
+  {
+    "node": "Send Email to ADM Asking For Missing Information (Reply To The Email)",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 54,
+    "versions": 6
+  },
+  {
+    "node": "Analyze the content of the customer support ticket.",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 54,
+    "versions": 3
+  },
+  {
+    "node": "Get Dixa Messages",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 54,
+    "versions": 2
+  },
+  {
+    "node": "Add internal note to Dixa",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 54,
+    "versions": 2
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "CV Screening Agent - Favorite Staffing v2",
+    "executions": 52,
+    "versions": 2
+  },
+  {
+    "node": "Validate extracted address against Airtable data and return the relevant Customer ID",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 51,
+    "versions": 3
+  },
+  {
+    "node": "Prepare data for HITL step",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 49,
+    "versions": 3
+  },
+  {
+    "node": "Extract Order Product Details",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 49,
+    "versions": 3
+  },
+  {
+    "node": "Add Customer_ID to header details",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 49,
+    "versions": 3
+  },
+  {
+    "node": "Generate CSV",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 48,
+    "versions": 3
+  },
+  {
+    "node": "Prepare data for csv creation",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 47,
+    "versions": 3
+  },
+  {
+    "node": "Extract Stored Email Content using thread ID (if applicable)",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 47,
+    "versions": 1
+  },
+  {
+    "node": "Identify validity status of company's ID number",
+    "agent": "B2B Check Agent",
+    "executions": 46,
+    "versions": 4
+  },
+  {
+    "node": "Decide if VAT ID has EU or national format",
+    "agent": "B2B Check Agent",
+    "executions": 46,
+    "versions": 4
+  },
+  {
+    "node": "Process company data for B2B Check",
+    "agent": "B2B Check Agent",
+    "executions": 46,
+    "versions": 4
+  },
+  {
+    "node": "\"Set outlook category to \"\"Bestellung verarbeitet\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 45,
+    "versions": 3
+  },
+  {
+    "node": "SFTP Upload",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 45,
+    "versions": 3
+  },
+  {
+    "node": "Extract All Case Information From ADM's Email",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 45,
+    "versions": 2
+  },
+  {
+    "node": "Docuware Upload",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 44,
+    "versions": 3
+  },
+  {
+    "node": "Get Public S3 URL",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 44,
+    "versions": 3
+  },
+  {
+    "node": "Is Valid Product Integration",
+    "agent": "Agent AOP Sandra",
+    "executions": 43,
+    "versions": 1
+  },
+  {
+    "node": "Is Valid Product Data Preparation",
+    "agent": "Agent AOP Sandra",
+    "executions": 43,
+    "versions": 1
+  },
+  {
+    "node": "Customer country identification tool",
+    "agent": "B2B Check Agent",
+    "executions": 42,
+    "versions": 4
+  },
+  {
+    "node": "\"Parse response of VIES API call to identify validity status, company name and address\"",
+    "agent": "B2B Check Agent",
+    "executions": 42,
+    "versions": 4
+  },
+  {
+    "node": "Validate EU VAT ID with VIES API",
+    "agent": "B2B Check Agent",
+    "executions": 42,
+    "versions": 4
+  },
+  {
+    "node": "Is Valid Product Integration",
+    "agent": "Agent AOP Brigitte",
+    "executions": 42,
+    "versions": 1
+  },
+  {
+    "node": "Generate a personalized notification message for the candidate.",
+    "agent": "CV Screening Agent - Favorite Staffing v2",
+    "executions": 41,
+    "versions": 2
+  },
+  {
+    "node": "Restschuldbefreiung",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 41,
+    "versions": 5
+  },
+  {
+    "node": "Smart Extractor",
+    "agent": "LS Agent",
+    "executions": 40,
+    "versions": 2
+  },
+  {
+    "node": "PII Handler",
+    "agent": "LS Agent",
+    "executions": 40,
+    "versions": 2
+  },
+  {
+    "node": "Check For Missing Information Related To Ops Case Creation",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 40,
+    "versions": 2
+  },
+  {
+    "node": "Dixa transfer ticket to queue",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 39,
+    "versions": 2
+  },
+  {
+    "node": "Is Valid Product Data Preparation",
+    "agent": "Agent AOP Brigitte",
+    "executions": 39,
+    "versions": 1
+  },
+  {
+    "node": "Add tag to conversation (escalation)",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 38,
+    "versions": 2
+  },
+  {
+    "node": "Valid Fraisa Article Codes",
+    "agent": "Agent AOP Brigitte",
+    "executions": 37,
+    "versions": 1
+  },
+  {
+    "node": "Beam Task URL Generator",
+    "agent": "B2B Check Agent",
+    "executions": 36,
+    "versions": 3
+  },
+  {
+    "node": "Add internal note to Dixa conversation",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 36,
+    "versions": 2
+  },
+  {
+    "node": "Prepare the data for Order Simulation",
+    "agent": "Agent AOP Brigitte",
+    "executions": 36,
+    "versions": 1
+  },
+  {
+    "node": "Notify ADM (Case # / Confirmation) 4",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 35,
+    "versions": 8
+  },
+  {
+    "node": "Get Public S3 URL 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 35,
+    "versions": 8
+  },
+  {
+    "node": "Extract Requested_By ID from SF User Object 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 34,
+    "versions": 8
+  },
+  {
+    "node": "Store Thread ID and Original Email in Airtable",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 34,
+    "versions": 2
+  },
+  {
+    "node": "Create Order",
+    "agent": "Agent AOP Brigitte",
+    "executions": 34,
+    "versions": 1
+  },
+  {
+    "node": "add category to outlook email",
+    "agent": "Agent AOP Brigitte",
+    "executions": 34,
+    "versions": 1
+  },
+  {
+    "node": "Simulate Order Integration",
+    "agent": "Agent AOP Brigitte",
+    "executions": 34,
+    "versions": 1
+  },
+  {
+    "node": "Send Email to ADM Asking For Missing Information",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 33,
+    "versions": 6
+  },
+  {
+    "node": "Mandat niedergelegt and Ruhendstellung",
+    "agent": "Inso All-In-One Agent MAGA",
+    "executions": 31,
+    "versions": 4
+  },
+  {
+    "node": "Map Data for CreateOrder",
+    "agent": "Agent AOP Brigitte",
+    "executions": 31,
+    "versions": 1
+  },
+  {
+    "node": "Notify ADM with Case Confirmation 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 30,
+    "versions": 8
+  },
+  {
+    "node": "Attach Files to Salesforce Case 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 30,
+    "versions": 8
+  },
+  {
+    "node": "Get Public S3 URL 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 30,
+    "versions": 8
+  },
+  {
+    "node": "Generate Beam Task URL",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 29,
+    "versions": 1
+  },
+  {
+    "node": "Generate Case URL 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 27,
+    "versions": 7
+  },
+  {
+    "node": "EVAL TEST EXTRACTOR",
+    "agent": "Eval Test - Anas",
+    "executions": 25,
+    "versions": 1
+  },
+  {
+    "node": "Compare company data from registration and official data",
+    "agent": "B2B Check Agent",
+    "executions": 25,
+    "versions": 3
+  },
+  {
+    "node": "Output reasoning and decision to accept new customer",
+    "agent": "B2B Check Agent",
+    "executions": 23,
+    "versions": 4
+  },
+  {
+    "node": "Send email to customer via Jira ticket",
+    "agent": "B2B Check Agent",
+    "executions": 23,
+    "versions": 3
+  },
+  {
+    "node": "Add category to outlook email",
+    "agent": "Agent AOP Sebastian",
+    "executions": 23,
+    "versions": 4
+  },
+  {
+    "node": "Attach Files to Salesforce Case 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 21,
+    "versions": 6
+  },
+  {
+    "node": "Validate Checklist",
+    "agent": "LS Agent",
+    "executions": 20,
+    "versions": 1
+  },
+  {
+    "node": "Select Category",
+    "agent": "LS Agent",
+    "executions": 20,
+    "versions": 1
+  },
+  {
+    "node": "Response Generator",
+    "agent": "LS Agent",
+    "executions": 20,
+    "versions": 1
+  },
+  {
+    "node": "Generate Case URL 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 20,
+    "versions": 6
+  },
+  {
+    "node": "Categorize Email",
+    "agent": "Agent AOP Sebastian",
+    "executions": 19,
+    "versions": 4
+  },
+  {
+    "node": "System Variable Setter 2",
+    "agent": "Agent AOP Sebastian",
+    "executions": 19,
+    "versions": 4
+  },
+  {
+    "node": "System Variable Setter 1",
+    "agent": "Agent AOP Sebastian",
+    "executions": 19,
+    "versions": 4
+  },
+  {
+    "node": "Add outlook email category",
+    "agent": "Agent AOP Sandra",
+    "executions": 18,
+    "versions": 1
+  },
+  {
+    "node": "Valid Fraisa Article Codes",
+    "agent": "Agent AOP Sandra",
+    "executions": 18,
+    "versions": 1
+  },
+  {
+    "node": "add category to outlook email",
+    "agent": "Agent AOP Sandra",
+    "executions": 17,
+    "versions": 1
+  },
+  {
+    "node": "Simulate Order Integration",
+    "agent": "Agent AOP Sandra",
+    "executions": 17,
+    "versions": 1
+  },
+  {
+    "node": "Prepare the data for Order Simulation",
+    "agent": "Agent AOP Sandra",
+    "executions": 17,
+    "versions": 1
+  },
+  {
+    "node": "Attach Files from Email to SFDC Case",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 16,
+    "versions": 6
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "LS Agent",
+    "executions": 15,
+    "versions": 1
+  },
+  {
+    "node": "Add conversation custom attribute (request)",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 15,
+    "versions": 2
+  },
+  {
+    "node": "Add tag to conversation (closed)",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 15,
+    "versions": 2
+  },
+  {
+    "node": "Send dixa message (request)",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 15,
+    "versions": 2
+  },
+  {
+    "node": "GET booking information from Apaleo",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 15,
+    "versions": 2
+  },
+  {
+    "node": "Create Order",
+    "agent": "Agent AOP Sandra",
+    "executions": 15,
+    "versions": 1
+  },
+  {
+    "node": "Map Data for CreateOrder",
+    "agent": "Agent AOP Sandra",
+    "executions": 15,
+    "versions": 1
+  },
+  {
+    "node": "Notify ADM with Case Confirmation 3",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 14,
+    "versions": 2
+  },
+  {
+    "node": "Extract Article Code",
+    "agent": "Agent AOP Sebastian",
+    "executions": 14,
+    "versions": 4
+  },
+  {
+    "node": "Article Code and Buyer Data Aggregator",
+    "agent": "Agent AOP Sebastian",
+    "executions": 13,
+    "versions": 4
+  },
+  {
+    "node": "Extract Buyer and Order Information",
+    "agent": "Agent AOP Sebastian",
+    "executions": 13,
+    "versions": 4
+  },
+  {
+    "node": "Generate request message to customer due to company data mismatch",
+    "agent": "B2B Check Agent",
+    "executions": 12,
+    "versions": 2
+  },
+  {
+    "node": "Extract the Jira Ticket ID from the API response",
+    "agent": "B2B Check Agent",
+    "executions": 12,
+    "versions": 2
+  },
+  {
+    "node": "Create a Jira ticket to handle company data mismatch",
+    "agent": "B2B Check Agent",
+    "executions": 12,
+    "versions": 2
+  },
+  {
+    "node": "Search Customer Data Integration",
+    "agent": "Agent AOP Sebastian",
+    "executions": 12,
+    "versions": 4
+  },
+  {
+    "node": "AOP: Kunde wird gesucht",
+    "agent": "Agent AOP Sebastian",
+    "executions": 12,
+    "versions": 4
+  },
+  {
+    "node": "Extract data point from TZV document",
+    "agent": "TZV Agent",
+    "executions": 12,
+    "versions": 2
+  },
+  {
+    "node": "System Variable Setter 2",
+    "agent": "Agent AOP Brigitte",
+    "executions": 12,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter 1",
+    "agent": "Agent AOP Brigitte",
+    "executions": 12,
+    "versions": 1
+  },
+  {
+    "node": "Output reasoning and decision to reject customer",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Generate rejection message to customer due to invalid national registration number",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Add internal comment to Jira ticket",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Generate comment text to Finance team for Jira ticket",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Jira Ticket ID Extractor",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Create Jira ticket via n8n endpoint",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Identify paid invoices in API response",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "Fetch customer invoices",
+    "agent": "B2B Check Agent",
+    "executions": 11,
+    "versions": 3
+  },
+  {
+    "node": "llm node to reconciliate inoice against transationc",
+    "agent": "Unknown",
+    "executions": 11,
+    "versions": 1
+  },
+  {
+    "node": "get from airtable",
+    "agent": "Unknown",
+    "executions": 11,
+    "versions": 1
+  },
+  {
+    "node": "LLM node to extract most accurately all fields from PDF attachemtns referencing to invoices in the email and outputting structures data",
+    "agent": "Unknown",
+    "executions": 11,
+    "versions": 1
+  },
+  {
+    "node": "Add tag to conversation (failure)",
+    "agent": "LIVE - Extension GX Agent",
+    "executions": 11,
+    "versions": 2
+  },
+  {
+    "node": "Classify and determine actions",
+    "agent": "Email Classification Agent",
+    "executions": 10,
+    "versions": 1
+  },
+  {
+    "node": "Extract Additional Variables",
+    "agent": "Email Classification Agent",
+    "executions": 10,
+    "versions": 1
+  },
+  {
+    "node": "Extract General Variables",
+    "agent": "Email Classification Agent",
+    "executions": 10,
+    "versions": 1
+  },
+  {
+    "node": "Identify invoice ID and contract ID in Verwendungszweck parameter of payment object",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 10,
+    "versions": 2
+  },
+  {
+    "node": "search airtable record",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 10,
+    "versions": 2
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Email Classification Agent",
+    "executions": 9,
+    "versions": 1
+  },
+  {
+    "node": "Extract Data",
+    "agent": "Email Classification Agent",
+    "executions": 9,
+    "versions": 1
+  },
+  {
+    "node": "Classify Email",
+    "agent": "Email Classification Agent",
+    "executions": 9,
+    "versions": 1
+  },
+  {
+    "node": "update",
+    "agent": "Unknown",
+    "executions": 9,
+    "versions": 1
+  },
+  {
+    "node": "Filter Airtable records by invoice ID",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 8,
+    "versions": 2
+  },
+  {
+    "node": "Categorize Email",
+    "agent": "Agent AOP Brigitte",
+    "executions": 8,
+    "versions": 1
+  },
+  {
+    "node": "\"Set outlook category to \"\"PLZ nicht gefunden\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 7,
+    "versions": 2
+  },
+  {
+    "node": "Extract Article Code",
+    "agent": "Agent AOP Andrea",
+    "executions": 7,
+    "versions": 1
+  },
+  {
+    "node": "Simulate Order Integration",
+    "agent": "Agent AOP Sebastian",
+    "executions": 6,
+    "versions": 3
+  },
+  {
+    "node": "Valid Fraisa Article Codes",
+    "agent": "Agent AOP Sebastian",
+    "executions": 6,
+    "versions": 3
+  },
+  {
+    "node": "Prepare the data for Order Simulation",
+    "agent": "Agent AOP Sebastian",
+    "executions": 6,
+    "versions": 3
+  },
+  {
+    "node": "Is Valid Product Integration",
+    "agent": "Agent AOP Sebastian",
+    "executions": 6,
+    "versions": 3
+  },
+  {
+    "node": "Is Valid Product Data Preparation",
+    "agent": "Agent AOP Sebastian",
+    "executions": 6,
+    "versions": 3
+  },
+  {
+    "node": "Generate Case URL",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 6,
+    "versions": 1
+  },
+  {
+    "node": "Create Case in Salesforce",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 6,
+    "versions": 1
+  },
+  {
+    "node": "Extract Requested_By ID from SF User Object",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 6,
+    "versions": 1
+  },
+  {
+    "node": "Generate New Category",
+    "agent": "LS Agent",
+    "executions": 5,
+    "versions": 1
+  },
+  {
+    "node": "Create Case in Salesforce 2",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 5,
+    "versions": 4
+  },
+  {
+    "node": "Output reasoning why payment cannot be matched to invoice",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 5,
+    "versions": 2
+  },
+  {
+    "node": "Check if payment amount matches invoice amount",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 5,
+    "versions": 2
+  },
+  {
+    "node": "Add category to outlook email",
+    "agent": "Agent AOP Andrea",
+    "executions": 5,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter",
+    "agent": "Agent AOP Andrea",
+    "executions": 5,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Kunde wird gesucht",
+    "agent": "Agent AOP Brigitte",
+    "executions": 5,
+    "versions": 1
+  },
+  {
+    "node": "\"Identify validity status, company name and address in OpenAPI response\"",
+    "agent": "B2B Check Agent",
+    "executions": 4,
+    "versions": 2
+  },
+  {
+    "node": "Get company details from OpenAPI",
+    "agent": "B2B Check Agent",
+    "executions": 4,
+    "versions": 2
+  },
+  {
+    "node": "Identify country location of customer",
+    "agent": "B2B Check Agent",
+    "executions": 4,
+    "versions": 2
+  },
+  {
+    "node": "Notify ADM with Case Confirmation 1",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 4,
+    "versions": 2
+  },
+  {
+    "node": "Get Public S3 URL",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 4,
+    "versions": 1
+  },
+  {
+    "node": "Extract Buyer and Order Information",
+    "agent": "Agent AOP Andrea",
+    "executions": 4,
+    "versions": 1
+  },
+  {
+    "node": "Generate a personalized notification message for the candidate.",
+    "agent": "CV Screening Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "scoring and match cv to jd",
+    "agent": "CV Screening Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract Job Requirements",
+    "agent": "CV Screening Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract candidate details from the incoming CV file.",
+    "agent": "CV Screening Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Classify and determine actions",
+    "agent": "Creditreform ERV Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract Additional Variables",
+    "agent": "Creditreform ERV Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract General Variables",
+    "agent": "Creditreform ERV Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "get airtable records",
+    "agent": "Debt Collection Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter",
+    "agent": "Debt Collection Agent",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 3,
+    "versions": 3
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "TZV Agent 03.09",
+    "executions": 3,
+    "versions": 3
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "CV Screening Agent",
+    "executions": 3,
+    "versions": 3
+  },
+  {
+    "node": "Categorize Customer Support Email",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Set System Variables",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Identify invoice ID and contract ID in Verwendungszweck parameter of payment object",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "search airtable record",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Add category to outlook email",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Article Code and Buyer Data Aggregator",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract Buyer and Order Information",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Extract Article Code",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Categorize Email",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Gestartet",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter 2",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "System Variable Setter 1",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "add category to outlook email",
+    "agent": "Agent AOP Andrea",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Map Data for CreateOrder",
+    "agent": "Agent AOP Andrea",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "Is Valid Product Data Preparation",
+    "agent": "Agent AOP Andrea",
+    "executions": 3,
+    "versions": 1
+  },
+  {
+    "node": "update airtable record",
+    "agent": "Unknown",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Notify finance",
+    "agent": "Unknown",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "\"Set outlook category to \"\"go to HITL\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "\"Set outlook category to \"\"Adresse nicht gefunden\"\"\"",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Coolback Order Processing - Final",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Agent AOP Sebastian",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Transform API Response in structured outputs",
+    "agent": "Agent AOP Sebastian",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Exit Node",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Filter Airtable records by IBAN",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Filter Airtable records by IBAN",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Create Order",
+    "agent": "Agent AOP Sebastian",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "add category to outlook email",
+    "agent": "Agent AOP Sebastian",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Map Data for CreateOrder",
+    "agent": "Agent AOP Sebastian",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Notify ADM (Case # / Confirmation)",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Notify ADM with Case Confirmation",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Search Customer Data Integration",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Kunde wird gesucht",
+    "agent": "Agent AOP Sandra (Deprecated)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Send Email to ADM Regarding Contact Not Found",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Reply to ADM Asking For Correct Account Name & Any Missing Fields",
+    "agent": "Ops Case Handler (Prod)",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Send Data to BID",
+    "agent": "Inso All-In-One Agent",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Primary Classification",
+    "agent": "Inso All-In-One Agent",
+    "executions": 2,
+    "versions": 2
+  },
+  {
+    "node": "Simulate Order Integration",
+    "agent": "Agent AOP Andrea",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "Search Customer Data Integration",
+    "agent": "Agent AOP Andrea",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "AOP: Kunde-Material wird gesucht",
+    "agent": "Agent AOP Andrea",
+    "executions": 2,
+    "versions": 1
+  },
+  {
+    "node": "\"Send Slack Message with Original Email, Draft Reply, Inbox URL and Task ID\n\nEnsure that the message is in HTML format so that line breaks and other formatting is preserved in the message\"",
+    "agent": "Email Management Assistant (POC)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Convert the drafted response to HTML format as email in outlook and create the email response",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Generate a reply email requesting proof of purchase and defects.",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Filter Decision Preparation Tool",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Identify email response language",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "append rows in sharepoint",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Structure Data for Database",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Add Claim to Database",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Retrieve Article from Database",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Extract Data from Claim Request",
+    "agent": "Claims Support Agent V2 (Live)",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Output reasoning why payment cannot be matched to invoice",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Check if payment amount matches any of the invoice amounts",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Filter Airtable records by contract ID",
+    "agent": "Payment reconciliation - Help Table",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "TZV Agent",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Unknown Node",
+    "agent": "Workflow Automation Assistant - Trawa Sandbox",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "SBP and Nullplan",
+    "agent": "Inso All-In-One Agent",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Receptionist",
+    "agent": "Inso All-In-One Agent",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Create Order",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Prepare the data for Order Simulation",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Valid Fraisa Article Codes",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Is Valid Product Integration",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Article Code and Buyer Data Aggregator",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "Add outlook email category",
+    "agent": "Agent AOP Andrea",
+    "executions": 1,
+    "versions": 1
+  },
+  {
+    "node": "ID and Gericht Edge",
+    "agent": "Inso All-In-One Agent",
+    "executions": 1,
+    "versions": 1
+  }
+]

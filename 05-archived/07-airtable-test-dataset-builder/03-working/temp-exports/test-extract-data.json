@@ -1,0 +1,114 @@
+{
+  "name": "Extract Data-gold",
+  "description": "Node: Extract Data. Agent: Deal Breaker. Quality tier: gold. Total items: 2",
+  "items": [
+    {
+      "id": "9cb59ac2-85cb-4cd0-a47c-4a07c381d9af",
+      "input": {
+        "document": "Hofbauer Engineering GmbH - Industriestr. 9 - 84326 Falkenberg\nOttA GmbH\nHans-Martin-Schleyer-Str. 15b\n47186 Willo\nBESTELLUNG\n<table>\n<tr>\n<td>Auftragsnummer:</td>\n<td>Steinbrenner/3600/273570</td>\n</tr>\n<tr>\n<td>Bestellnummer:</td>\n<td>478962</td>\n</tr>\n<tr>\n<td>Bestelldatum:</td>\n<td>30.10.2024</td>\n</tr>\n<tr>\n<td>Sachbearbeiter:</td>\n<td>Matthias Greiner | DW -84</td>\n</tr>\n</table>\n<table>\n<tr>\n<td>Ihre Lieferantennummer:</td>\n<td>73680</td>\n</tr>\n<tr>\n<td>Belegnummer:</td>\n<td>97371</td>\n</tr>\n<tr>\n<td>Belegdatum:</td>\n<td>30.10.2024</td>\n</tr>\n<tr>\n<td>Seite:</td>\n<td>1/ 1</td>\n</tr>\n</table>\nPos Artikelnummer / Bezeichnung\nMenge\nEinzelpreis €\nRab.\nTermin/\nLager\nBitte vermerken Sie auf Ihren Lieferscheinen und Rechnungen stets\nunsere Bestell- und Artikelnummer sowie Ihre\nLieferantennummer (siehe oben)\nÖffnungszeiten unserer Warenannahme:\nMo. - Do. von 07:00 - 15:00 Uhr\nFr. von 07:00 - 12:00 Uhr\nBitte lassen Sie uns zu jeder Bestellung eine\nAuftragsbestätigung zukommen, auf der auch Ihr Liefertermin bestätigt wird.\neinkauf-mb@hofbauer-eng.de\nACHTUNG: Schicken Sie bitte ab sofort alle Rechnungen und Gutschriften\nan folgende EMail-Adresse: invoice_mb@hofbauer-eng.de\nEs gelten unsere AEB - Allgemeine Einkaufsbedingungen unter www.hofbauer-\nfalkenberg.de/downloads.html\n<table>\n<tr>\n<td>1 MB00022519 X920381742</td>\n<td>3,00 Stk</td>\n<td>112,00</td>\n<td>20.11.2024</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n<td>273570</td>\n</tr>\n</table>\nSpiralbohrer\nSupradrillÂ® U 5xd Nano-U2\nØ11.2/12x118/71\n<table>\n<tr>\n<th>Nettobetrag €</th>\n<th>Porto €</th>\n<th>Netto gesamt €</th>\n<th>MwSt %</th>\n<th>MwSt €</th>\n<th>Endbetrag €</th>\n</tr>\n<tr>\n<td>336,00</td>\n<td></td>\n<td>336,00</td>\n<td>19,00</td>\n<td>63,84</td>\n<td>399,84</td>\n</tr>\n</table>\n<table>\n<tr>\n<td>Zahlung:</td>\n<td>30 Tage netto, 14 Tage 2% Skonto.</td>\n</tr>\n<tr>\n<td>Versand:</td>\n<td>DDP Runding</td>\n</tr>\n</table>",
+        "task_query": {
+          "task": "Dynamic Prompt Name is Sara, task is {\"task\":\"\\nVon: Matthias Greiner mgreiner@hofbauer-eng.de\\nGesendet: Mittwoch, 30. Oktober 2024 10:15\\nAn: info (DE) info@otta.com\\nCc: Stefan Kandler skandler@hofbauer-eng.de; Tobias Steinbrenner tsteinbrenner@hofbauer-eng.de\\nBetreff: Hofbauer_478962\\n\\nAttention: This message was sent from outside of OTTA. Please do not click links or open attachments unless you recognize the source of this email and know the content is safe! If you have questions please contact your local IT.\\n\\nSehr geehrte Damen und Herren,\\n\\nanbei erhalten Sie unsere Bestellung sowie die dazugehörigen gültigen „Allgemeine Einkaufsbedingungen“.\\nBitte lassen Sie uns dazu eine zeitnahe Auftragsbestätigung zukommen.\\n\\nMit freundlichen Grüßen\\n\\nMatthias Greiner\\nTechnischer Einkauf\\n\\nHofbauer Engineering GmbH\\nTelefon  +49 (0) 9971 8549 84\\nEmail     mgreiner@hofbauer-eng.de\\nInternet  www.hofbauer-eng.de\\n\\nHofbauer Falkenberg\\nHofbauer Management GmbH | Hofbauer Engineering GmbH | Hofbauer Technologie GmbH\\nIndustriestr. 9 | 84326 Falkenberg | info@hofbauer-eng.de\\n\\nRegistergericht  Regensburg - HRB-Nr: 17540 | Hofbauer Management GmbH\\nRegistergericht: Regensburg - HRB-Nr: 3299   | Hofbauer Engineering GmbH\\nRegistergericht: Regensburg - HRB-Nr: 9608   | Hofbauer Technologie GmbH\\nGeschäftsführer: Christoph Hofbauer\\nEs gelten unsere AGB / AEB unter www.hofbauer-eng.de\\n\\nHinweis\\nDer Inhalt dieser E-Mail ist ausschließlich für den bezeichneten Adressaten bestimmt.\\nWenn Sie nicht der vorgesehene Adressat dieser E-Mail oder dessen Vertreter sein sollten, so beachten Sie bitte,\\ndass jede Form der Kenntnisnahme, Veröffentlichung, Vervielfältigung oder Weitergabe des Inhalts dieser E-Mail\\nunzulässig ist. Wir bitten Sie, sich in diesem Fall mit dem Absender der E-Mail in Verbindung zu setzen.\\n\\n\",\"beamAgentOSTaskID\":\"aba0079c-dacb-4a7e-a460-a89a02ca4f45\",\"beamTaskId\":\"DEA-64\",\"beamTaskTimestamp\":\"2025-09-19T22:21:13Z\",\"attachments\":[{\"name\":\"Hofbauer-Eng-GmBH.pdf\",\"type\":\"file\",\"key\":\"5aaa99be-8f49-4290-a53a-d7bec8740450_714f669d-bac9-4e0d-93ba-2394011e3d37_Hofbauer-Eng-GmBH.pdf\"}]}",
+          "beamAgentOSTaskID": "ce9bd80c-6484-4fac-9a8d-1aa7bf15b331",
+          "beamTaskId": "DEA-504",
+          "beamTaskTimestamp": "2025-12-17T13:27:40Z",
+          "attachments": [
+            {
+              "name": "5aaa99be-8f49-4290-a53a-d7bec8740450_714f669d-bac9-4e0d-93ba-2394011e3d37_Hofbauer-Eng-GmBH.pdf",
+              "type": "file",
+              "key": "5aaa99be-8f49-4290-a53a-d7bec8740450_366af7bb-3807-49e3-b88f-6ea5b4370c3e_5aaa99be-8f49-4290-a53a-d7bec8740450_714f669d-bac9-4e0d-93ba-2394011e3d37_Hofbauer-Eng-GmBH.pdf"
+            }
+          ]
+        }
+      },
+      "expectedOutput": {
+        "delivery_address_street": "Industriestr. 9",
+        "buyer_email_address": "mgreiner@hofbauer-eng.de",
+        "product_position": "1",
+        "product_article_code": "X920381742",
+        "order_number": "478962",
+        "product_quantity": "3",
+        "delivery_address_postal_code": "84326",
+        "delivery_address_city": "Falkenberg",
+        "buyer_person_name": "Matthias Greiner",
+        "order_date": "2024-10-30",
+        "buyer_company_name": "Hofbauer Engineering GmbH"
+      },
+      "actualOutput": {
+        "delivery_address_street": "Industriestr. 9",
+        "buyer_email_address": "mgreiner@hofbauer-eng.de",
+        "product_position": "1",
+        "product_article_code": "MB00022519 X920381742",
+        "order_number": "478962",
+        "product_quantity": "3",
+        "delivery_address_postal_code": "84326",
+        "delivery_address_city": "Falkenberg",
+        "buyer_person_name": "Matthias Greiner",
+        "order_date": "2024-10-30",
+        "buyer_company_name": "Hofbauer Engineering GmbH"
+      },
+      "metadata": {
+        "score": 0.91
+      }
+    },
+    {
+      "id": "d61006e6-fb35-4820-b59c-c2e96615d8e0",
+      "input": {
+        "document": "Steinbach Precision GmbH & Co. KG . Industriepark 45 . 36251 Bad Hersfeld\nOttA GmbH\nHanns-Martin-Schleyer-Str. 15b\n47186 Willo\nVersandanschrift:\nSteinbach Precision GmbH & Co. KG\nIndustriepark 45\n36251 Bad Hersfeld\nBESTELLUNG: 241494\n<table>\n<tr>\n<td>Unsere Kundennummer:</td>\n<td>22118</td>\n<td>Ihre Lieferantennummer:</td>\n<td>77011</td>\n</tr>\n<tr>\n<td>Unser Zeichen:</td>\n<td>Kommission: FFT</td>\n<td>Druckdatum:</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>Bestelldatum:</td>\n<td>15.11.2024</td>\n<td>Seite:</td>\n<td>1/ 3</td>\n</tr>\n<tr>\n<td>Sachbearbeiter:</td>\n<td>Lukas Mertens</td>\n<td></td>\n<td></td>\n</tr>\n</table>\n<table>\n<tr>\n<th>Pos Artikelnummer</th>\n<th>/ Bezeichnung</th>\n<th>Menge</th>\n<th>Einzelpreis €</th>\n<th>Rab.</th>\n<th>Termin</th>\n</tr>\n<tr>\n<td>1 FRAI00312</td>\n<td>15630610 Zyl. Fräser ø16/16x92/32 AX-NV3, Glattschneidig, normale Ausführung mit Kurzhals</td>\n<td>1,00 Stk</td>\n<td>138,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>2 FRAI00360</td>\n<td>7550391 Kugelkopffräser ø8/8x63/16; Sphero-Alu; Toleranz r ±0.005; 3xd</td>\n<td>1,00 Stk</td>\n<td>76,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>3 FRAI00361</td>\n<td>8560610 Zyl. Fräser ø16/16x102/36 z3 E-Cut Alu, Glattschneidig, normale Ausführung, Kurzhals</td>\n<td>1,00 Stk</td>\n<td>145,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>4 FRAI00330</td>\n<td>8580391 Zyl. Fräser ø8/8x84/18 z3 E-Cut Alu, Glattschneidig, lange Ausführung, Hals</td>\n<td>2,00 Stk</td>\n<td>69,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>5 FRAI00362</td>\n<td>8585501 Zyl. Fräser ø12/12x117/63 r0.2</td>\n<td>2,00 Stk</td>\n<td>236,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n</table>\nMFC AluGlattschneidig,\nE\nT\nL\nU\n3\n\\-\nB\nE\nL\nN\nS\n:\n<!-- PageBreak -->\nBESTELLUNG: 241494\n<table>\n<tr>\n<th>Unsere Kundennummer:</th>\n<th>22118</th>\n<th>Ihre Lieferantennummer:</th>\n<th>77011</th>\n</tr>\n<tr>\n<td>Unser Zeichen:</td>\n<td>Kommission: FFT</td>\n<td>Druckdatum:</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>Bestelldatum:</td>\n<td>15.11.2024</td>\n<td>Seite:</td>\n<td>2/ 3</td>\n</tr>\n<tr>\n<td>Sachbearbeiter:</td>\n<td>Lukas Mertens</td>\n<td></td>\n<td></td>\n</tr>\n</table>\n<table>\n<tr>\n<th>Pos Artikelnummer</th>\n<th>/ Bezeichnung</th>\n<th>Menge</th>\n<th>Einzelpreis €</th>\n<th>Rab.</th>\n<th>Termin</th>\n</tr>\n<tr>\n<td></td>\n<td rowspan=\"2\">Spanteiler, extralange Ausführung 5.2xdHochleistungs- Eintauchstirn, zentraler Luft-/Kühlkanal</td>\n<td rowspan=\"2\"></td>\n<td rowspan=\"2\"></td>\n<td rowspan=\"2\"></td>\n<td rowspan=\"2\"></td>\n</tr>\n<tr>\n<td></td>\n</tr>\n<tr>\n<td>6 FRAI00363</td>\n<td>8585610</td>\n<td>2,00 Stk</td>\n<td rowspan=\"2\">384,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td></td>\n<td>Zyl. Fräser ø16/16x144/84 r0.2 MFC AluGlattschneidig, Spanteiler, extralange Ausführung 5.2xdHochleistungs- Eintauchstirn, zentraler Luft-/Kühlkanal</td>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>7 FRAI00364</td>\n<td>8660180 Zyl. Fräser ø3/6x54/6.6 z3 E-Cut Alu, Glattschneidig, normale Ausführung, Kurzhals</td>\n<td>3,00 Stk</td>\n<td>39,90</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>8 FRAI00336</td>\n<td>8678501 Zyl. Fräser ø12/12x105/45 z3 E-Cut Alu, Glattschneidig, mittellange Ausführung</td>\n<td>2,00 Stk</td>\n<td>107,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>9 FRAI00251</td>\n<td>B570150280 Mikrobohrer ø2.8/3x60/18.2 Microdrill NX, 5xd</td>\n<td>2,00 Stk</td>\n<td>68,00</td>\n<td>10,00 %</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>10 FRAI00365</td>\n<td>X6561140 Kugelkopffräser ø2/6x57/2 MicroXSchaft Ø 6mm,</td>\n<td>2,00 Stk</td>\n<td>65,00</td>\n<td>7,00 %</td>\n<td>15.11.2024</td>\n</tr>\n</table>\n:\n<!-- PageBreak -->\nBESTELLUNG: 241494\n<table>\n<tr>\n<th>Unsere Kundennummer:</th>\n<th>22118</th>\n<th>Ihre Lieferantennummer:</th>\n<th>77011</th>\n</tr>\n<tr>\n<td>Unser Zeichen:</td>\n<td>Kommission: FFT</td>\n<td>Druckdatum:</td>\n<td>15.11.2024</td>\n</tr>\n<tr>\n<td>Bestelldatum:</td>\n<td>15.11.2024</td>\n<td>Seite:</td>\n<td>3/ 3</td>\n</tr>\n<tr>\n<td>Sachbearbeiter:</td>\n<td>Lukas Mertens</td>\n<td></td>\n<td></td>\n</tr>\n</table>\n<table>\n<tr>\n<th>Pos Artikelnummer / Bezeichnung</th>\n<th>Menge</th>\n<th>Einzelpreis €</th>\n<th>Rab.</th>\n<th>Termin</th>\n</tr>\n<tr>\n<td rowspan=\"2\">zylindrischer Hals, 2xdX-Al Rabatt: Projektrabatt gem. Absprache S. Hofacker</td>\n<td rowspan=\"2\"></td>\n<td rowspan=\"2\">- 173,52</td>\n<td rowspan=\"2\">8,00 %</td>\n<td></td>\n</tr>\n<tr>\n<td></td>\n</tr>\n</table>\nWir erwarten Ihre Auftragsbestätigung verbindlich innerhalb von 3 Werktagen an\neinkauf@steinbach-precision.de\nAuf allen Formularen ist unsere Bestellnummer sowie unsere Artikelnummer anzugeben.\n<table>\n<tr>\n<th>Nettobetrag €</th>\n<th>Porto €</th>\n<th>Porto €</th>\n<th>MwSt %</th>\n<th>MwSt €</th>\n<th>Endbetrag €</th>\n</tr>\n<tr>\n<td>1.995,53</td>\n<td></td>\n<td>1.995,53</td>\n<td>19,00</td>\n<td>379,15</td>\n<td>2.374,68</td>\n</tr>\n</table>\n<table>\n<tr>\n<td>Zahlung:</td>\n<td>*14 Tage 3 % Skonto, 30 Tage netto</td>\n</tr>\n<tr>\n<td>Versand:</td>\n<td>Frei Haus</td>\n</tr>\n</table>\n:",
+        "task_query": {
+          "task": "Dynamic Prompt Name is Sara, task is {\"task\":\"\\nVon: Einkauf einkauf@steinbach-precision.de\\nGesendet: Freitag, 15. November 2024 20:08:55 (UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna\\nAn: Kalpakidou Kiriaki\\nCc: Hofacker Stefan; Fertigung Werkstatt\\nBetreff: STEINBACH-Bestellung Nr. 241494\\n\\nAttention: This message was sent from outside of OTTA. Please do not click links or open attachments unless you recognize the source of this email and know the content is safe! If you have questions please contact your local IT.\\n\\nSehr geehrte Damen und Herren,\\n\\nhiermit bestellen wir zum gewünschten Liefertermin:\\nBestellung (unsere Bearbeitungsnummer: 77011/241494)\\n\\nWir erwarten Ihre Auftragsbestätigung verbindlich innerhalb von 3 Werktagen an: einkauf@steinbach-precision.de\\nFür den elektronischen Rechnungsversand verwenden Sie bitte: buchhaltung@steinbach-precision.de\\n\\nBitte beachten:\\nAuf allen Formularen sind folgende Angaben zwingend anzugeben:\\n\\n- unsere Auftragsnummer sowie unser Zeichen\\n- unsere Artikelnummer\\n- Zeichnungsnummer mit aktuellem Index\\n\\n\",\"beamAgentOSTaskID\":\"fbb386d4-60a4-4d9f-a23c-39d98ca4ac20\",\"beamTaskId\":\"DEA-71\",\"beamTaskTimestamp\":\"2025-09-19T22:21:27Z\",\"attachments\":[{\"name\":\"Steinbach-GmBH.PDF\",\"type\":\"file\",\"key\":\"5aaa99be-8f49-4290-a53a-d7bec8740450_5ec06fa7-41ed-4b2a-8e14-59ddd1b94fcb_Steinbach-GmBH.PDF\"}]}",
+          "beamAgentOSTaskID": "684b0643-02f9-4d7f-8318-c6b036fb2ed0",
+          "beamTaskId": "DEA-503",
+          "beamTaskTimestamp": "2025-12-17T13:27:35Z",
+          "attachments": [
+            {
+              "name": "5aaa99be-8f49-4290-a53a-d7bec8740450_5ec06fa7-41ed-4b2a-8e14-59ddd1b94fcb_Steinbach-GmBH.PDF",
+              "type": "file",
+              "key": "5aaa99be-8f49-4290-a53a-d7bec8740450_6e2678cc-97a5-4fbe-89ff-a7140cb8217b_5aaa99be-8f49-4290-a53a-d7bec8740450_5ec06fa7-41ed-4b2a-8e14-59ddd1b94fcb_Steinbach-GmBH.PDF"
+            }
+          ]
+        }
+      },
+      "expectedOutput": {
+        "product_quantity": "2",
+        "product_article_code": "8585501",
+        "order_number": "241494",
+        "product_position": "3",
+        "buyer_company_name": "Steinbach Precision GmbH & Co. KG",
+        "buyer_person_name": "Lukas Mertens",
+        "delivery_address_city": "Bad Hersfeld",
+        "buyer_email_address": "einkauf@steinbach-precision.de",
+        "delivery_address_postal_code": "36251",
+        "order_date": "2024-11-15",
+        "delivery_address_street": "Industriepark 45"
+      },
+      "actualOutput": {
+        "product_quantity": "2",
+        "product_article_code": "FRAI00362",
+        "order_number": "241494",
+        "product_position": "3",
+        "buyer_company_name": "Steinbach Precision GmbH & Co. KG",
+        "buyer_person_name": "Lukas Mertens",
+        "delivery_address_city": "Bad Hersfeld",
+        "buyer_email_address": "einkauf@steinbach-precision.de",
+        "delivery_address_postal_code": "36251",
+        "order_date": "2024-11-15",
+        "delivery_address_street": "Industriepark 45"
+      },
+      "metadata": {
+        "score": 0.74
+      }
+    }
+  ],
+  "metadata": {
+    "prompt": "Apply this to the file and previous info You are extracting structured order data from the text\nbelow (PDF + email). Use all available information from the PDF, the email body, header,\nand signature. If something is not in the document, return null. Return only valid JSON in the\nstructure shown.\nOutput format:\n{{\n\"buyer_company_name\": \"\",\n\"buyer_person_name\": \"\",\n\"buyer_email_address\": \"\",\n\"order_number\": \"\",\n\"order_date\": \"\",\n\"delivery_address_street\": \"\",\n\"delivery_address_city\": \"\",\n\"delivery_address_postal_code\": \"\",\n\"products\": [\n{{\n\"product_position\": \"\",\n\"product_article_code\": \"\",\n\"product_quantity\": \"\"\n}}\n]\n}}\nExtraction rules:\nBuyer info\nCompany name: from header, company block, “Firma,” or email signature\nPerson name: sender name, signature, “Kontakt,” “Ihr Sachbearbeiter,” or “unser Zeichen”\nEmail: main buyer email from the email header or signature\nOrder details\nOrder number: look for “Bestellung,” “Order No.,” “Bestellnummer”\nOrder date: from “Belegdatum,” “Bestelldatum,” “Order date,” or email subject\nDelivery address\nUse the buyer’s delivery address if shown. If no delivery address is listed, use the buyer’s\ncompany address from the signature. Extract street, city, and postal code. Ignore OTTA\naddresses.\nProducts\nExtract one entry per product line:\nPosition: “Pos” or the line number\nQuantity: from “Menge,” “Stück,” “Qty,” or “Quantity”\nArticle code (final corrected rule):\nIf the product line contains “Ihre Materialnummer,” “Ihre Mat.-Nr.,” or “Ihre Artikelnummer,”\nuse that value as product_article_code.\nOtherwise, check the product description block (the line(s) directly below the main product\nrow).\nIf a standalone article-like code appears there (letters + numbers), use this code.\nThis code takes priority over all table numbers.\nIf no description-block code exists, use the article number from the main product table row\n(Art.-Nr., Li.-Art.-Nr., Materialnummer, etc.).\nIf multiple codes appear, choose the one closest to the product name in the description.\nIf no article code appears anywhere, return null.\nIf anything is unclear, return null.\nProcess this document and the Sales email :",
+    "agent": "Deal Breaker",
+    "node": "Extract Data",
+    "tier": "gold",
+    "generated_at": "2026-01-01T23:49:20.887241",
+    "source": "airtable-export"
+  },
+  "tags": [
+    "gold",
+    "extract-data"
+  ]
+}

@@ -1,0 +1,353 @@
+extraction_type: "cross-cutting"
+focus: "Context Loading Mechanisms"
+extracted_at: "2025-12-31T12:00:00Z"
+mechanisms:
+  systemMessage:
+    - source_repo: "tdd-guard"
+      source_file: "src/hooks/processHookData.ts"
+      description: "Injects TDD validation results and guidance as system message to Claude"
+      technique:
+        summary: "Uses systemMessage field in JSON output to provide contextual instructions based on validation results. The hook processes test results and returns structured guidance."
+        code_snippet: |
+          export function processHookData(parsed: HookInput): HookResult {
+            // ... validation logic ...
+            return {
+              systemMessage: validationMessage,
+              hookSpecificOutput: {
+                hookEventName: parsed.hook_event_name,
+                decision: decision,
+                reason: reason
+              }
+            };
+          }
+      use_case: "When hooks need to inject guidance, instructions, or contextual information that Claude should consider for subsequent operations"
+
+    - source_repo: "tdd-guard"
+      source_file: "src/hooks/userPromptHandler.ts"
+      description: "Handles UserPromptSubmit hook to inject TDD context before user prompts"
+      technique:
+        summary: "Intercepts user prompts to inject TDD guidance and test results as system context before Claude processes the user's request."
+        code_snippet: |
+          export async function handleUserPrompt(
+            context: ValidationContext
+          ): Promise<HookResult> {
+            const testState = await loadTestState();
+            const systemMessage = buildTDDGuidance(testState);
+            return {
+              systemMessage,
+              hookSpecificOutput: { hookEventName: 'UserPromptSubmit' }
+            };
+          }
+      use_case: "Injecting behavioral guidelines or state information before Claude processes user requests"
+
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/ultralytics-dev/hooks/scripts/python_code_quality.py"
+      description: "Reports ruff linting errors as system messages when Python files have issues"
+      technique:
+        summary: "PostToolUse hook that runs ruff on edited Python files and injects error messages as systemMessage when linting fails."
+        code_snippet: |
+          if check_result.returncode != 0:
+              error_msg = f'ERROR running ruff check: {error_output}'
+              output = {
+                  'systemMessage': f'Ruff errors detected in {py_file.name}',
+                  'hookSpecificOutput': {
+                      'hookEventName': 'PostToolUse',
+                      'decision': 'block',
+                      'reason': error_msg
+                  },
+              }
+              print(json.dumps(output), file=sys.stderr)
+      use_case: "Providing feedback about tool operation results that Claude should act upon"
+
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/ultralytics-dev/hooks/scripts/format_python_docstrings.py"
+      description: "Injects formatting feedback after docstring changes"
+      technique:
+        summary: "PostToolUse hook monitors Python file edits and provides system messages about docstring formatting compliance."
+        code_snippet: |
+          output = {
+              'systemMessage': f'Docstring formatting applied to {file_name}',
+              'hookSpecificOutput': {
+                  'hookEventName': 'PostToolUse',
+                  'decision': 'allow',
+                  'formatted': True
+              }
+          }
+      use_case: "Informing Claude about automated modifications made to files it edited"
+
+  permissionDecisionReason:
+    - source_repo: "claude-code-safety-net"
+      source_file: "scripts/safety_net_impl/hook.py"
+      description: "Blocks destructive git/filesystem commands with detailed explanations"
+      technique:
+        summary: "PreToolUse hook analyzes bash commands and returns 'deny' with detailed reason explaining why the command was blocked. This reason is shown to Claude."
+        code_snippet: |
+          def main():
+              data = json.load(sys.stdin)
+              command = data.get("tool_input", {}).get("command", "")
+              result = analyze_command(command)
+              if result.blocked:
+                  output = {
+                      "permissionDecision": "deny",
+                      "permissionDecisionReason": result.reason
+                  }
+                  print(json.dumps(output))
+                  sys.exit(0)
+      use_case: "When blocking operations, provides context to Claude about why the action was denied so it can adjust its approach"
+
+    - source_repo: "claude-code-tools"
+      source_file: "plugins/safety-hooks/hooks/bash_hook.py"
+      description: "Blocks dangerous bash operations with safety explanations"
+      technique:
+        summary: "PreToolUse hook checks bash commands against safety rules and returns blocking reasons when violations detected."
+        code_snippet: |
+          if is_dangerous_command(command):
+              result = {
+                  "permissionDecision": "deny",
+                  "permissionDecisionReason": f"Blocked: {command} - {safety_rule_violated}"
+              }
+              print(json.dumps(result))
+      use_case: "Safety guardrails that explain their reasoning so Claude learns which operations to avoid"
+
+    - source_repo: "claude-code-tools"
+      source_file: "plugins/safety-hooks/hooks/env_file_protection_hook.py"
+      description: "Protects .env files from being read or modified with explanatory blocks"
+      technique:
+        summary: "PreToolUse hook intercepts Read/Write operations targeting .env files and explains why access is denied."
+        code_snippet: |
+          if file_path.endswith('.env') or '.env.' in file_path:
+              output = {
+                  "permissionDecision": "deny",
+                  "permissionDecisionReason": "Access to .env files is blocked to protect secrets"
+              }
+              print(json.dumps(output))
+      use_case: "Protecting sensitive files while informing Claude about security boundaries"
+
+    - source_repo: "claude-code-tools"
+      source_file: "plugins/safety-hooks/hooks/git_commit_block_hook.py"
+      description: "Blocks git commits during specific conditions with explanations"
+      technique:
+        summary: "PreToolUse hook monitors git commit operations and blocks with reasons when conditions not met (e.g., tests failing)."
+        code_snippet: |
+          if not tests_passing:
+              result = {
+                  "permissionDecision": "deny",
+                  "permissionDecisionReason": "Cannot commit: tests are failing. Fix tests first."
+              }
+      use_case: "Enforcing workflow rules with contextual explanations"
+
+  updatedInput:
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/tavily-tools/hooks/scripts/websearch_to_tavily_search.py"
+      description: "Redirects WebSearch tool calls to Tavily MCP search for better results"
+      technique:
+        summary: "PreToolUse hook intercepts WebSearch calls and transforms them into Tavily MCP tool calls by modifying tool_name and tool_input."
+        code_snippet: |
+          if tool_name == "WebSearch":
+              output = {
+                  "updatedToolName": "mcp__tavily__tavily_search",
+                  "updatedInput": {
+                      "query": tool_input.get("query", ""),
+                      "max_results": 5,
+                      "search_depth": "advanced"
+                  }
+              }
+              print(json.dumps(output))
+      use_case: "Transforming tool calls to use better alternatives or adding parameters"
+
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/tavily-tools/hooks/scripts/webfetch_to_tavily_extract.py"
+      description: "Redirects WebFetch to Tavily extract for cleaner content"
+      technique:
+        summary: "PreToolUse hook transforms WebFetch operations into Tavily extract operations for better web content retrieval."
+        code_snippet: |
+          if tool_name == "WebFetch":
+              output = {
+                  "updatedToolName": "mcp__tavily__tavily_extract",
+                  "updatedInput": {
+                      "url": tool_input.get("url", ""),
+                      "include_raw_content": True
+                  }
+              }
+              print(json.dumps(output))
+      use_case: "Routing tool calls through improved implementations"
+
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/tavily-tools/hooks/scripts/tavily_extract_to_advanced.py"
+      description: "Upgrades Tavily extract calls with advanced options"
+      technique:
+        summary: "PreToolUse hook intercepts basic Tavily calls and adds advanced parameters for better extraction quality."
+        code_snippet: |
+          if "tavily_extract" in tool_name:
+              enhanced_input = {
+                  **tool_input,
+                  "extract_depth": "deep",
+                  "include_images": False
+              }
+              output = {"updatedInput": enhanced_input}
+      use_case: "Enhancing tool parameters without Claude awareness"
+
+  transcript:
+    - source_repo: "tdd-guard"
+      source_file: "src/hooks/sessionHandler.ts"
+      description: "Reads session transcript to track coding patterns and test coverage"
+      technique:
+        summary: "Hook processes transcript property from hook input to analyze conversation history, track what files were edited, and determine test coverage state."
+        code_snippet: |
+          export async function analyzeSession(
+            hookInput: HookInput
+          ): Promise<SessionState> {
+            const transcript = hookInput.transcript || [];
+            const editedFiles = extractEditedFiles(transcript);
+            const testsMentioned = extractTestReferences(transcript);
+            return {
+              editedFiles,
+              testsMentioned,
+              tddCompliance: calculateCompliance(editedFiles, testsMentioned)
+            };
+          }
+      use_case: "Understanding conversation context to make informed hook decisions"
+
+    - source_repo: "claude-code-tools"
+      source_file: "plugins/aichat/hooks/aichat_resume_hook.py"
+      description: "Analyzes transcript to detect session resumption context"
+      technique:
+        summary: "Hook examines recent transcript entries to determine if this is a resumed session and what context should be restored."
+        code_snippet: |
+          def analyze_transcript(hook_input):
+              transcript = hook_input.get("transcript", [])
+              recent_messages = transcript[-10:]  # Last 10 messages
+              resume_context = detect_resume_pattern(recent_messages)
+              if resume_context:
+                  return {"systemMessage": f"Resuming: {resume_context}"}
+      use_case: "Session continuity and context restoration"
+
+  stateFile:
+    - source_repo: "tdd-guard"
+      source_file: "src/storage/FileStorage.ts"
+      description: "Persists test results and TDD state between hook invocations"
+      technique:
+        summary: "Uses file-based storage in .tdd-guard directory to persist test results, validation history, and session state that hooks can read on subsequent invocations."
+        code_snippet: |
+          export class FileStorage implements Storage {
+            private readonly dataDir: string;
+
+            constructor(workDir: string) {
+              this.dataDir = path.join(workDir, '.tdd-guard');
+            }
+
+            async saveTestResults(results: TestResults): Promise<void> {
+              const filePath = path.join(this.dataDir, 'test-results.json');
+              await fs.writeFile(filePath, JSON.stringify(results));
+            }
+
+            async loadTestResults(): Promise<TestResults | null> {
+              const filePath = path.join(this.dataDir, 'test-results.json');
+              const data = await fs.readFile(filePath, 'utf-8');
+              return JSON.parse(data);
+            }
+          }
+      use_case: "Maintaining state across multiple hook invocations within a session"
+
+    - source_repo: "tdd-guard"
+      source_file: "src/cli/buildContext.ts"
+      description: "Builds validation context by loading persisted state files"
+      technique:
+        summary: "Hook entry point loads state from multiple files to construct complete validation context including test results, lint output, and operation history."
+        code_snippet: |
+          export async function buildContext(
+            workDir: string,
+            hookInput: HookInput
+          ): Promise<ValidationContext> {
+            const storage = new FileStorage(workDir);
+            const testResults = await storage.loadTestResults();
+            const lintResults = await storage.loadLintResults();
+            const history = await storage.loadOperationHistory();
+            return {
+              hookInput,
+              testResults,
+              lintResults,
+              operationHistory: history,
+              timestamp: Date.now()
+            };
+          }
+      use_case: "Accumulating information across session for complex decision-making"
+
+  claudeMd:
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/plugin-dev/skills/hook-development/examples/load-context.sh"
+      description: "Example shell script showing dynamic CLAUDE.md context injection"
+      technique:
+        summary: "Demonstrates pattern of reading CLAUDE.md and injecting its contents via systemMessage in hooks for session-start context loading."
+        code_snippet: |
+          #!/bin/bash
+          # Example: Load CLAUDE.md into hook context
+          CLAUDE_MD=$(cat ~/.claude/CLAUDE.md 2>/dev/null || echo "")
+          PROJECT_MD=$(cat ./CLAUDE.md 2>/dev/null || echo "")
+
+          cat << EOF
+          {
+            "systemMessage": "Context refreshed from CLAUDE.md:\\n${CLAUDE_MD}\\n${PROJECT_MD}",
+            "hookSpecificOutput": {
+              "hookEventName": "SessionStart",
+              "contextsLoaded": ["global", "project"]
+            }
+          }
+          EOF
+      use_case: "Re-injecting CLAUDE.md instructions mid-session or on session start"
+
+    - source_repo: "claude-codex-settings"
+      source_file: "plugins/claude-tools/commands/load-claude-md.md"
+      description: "Slash command to manually reload CLAUDE.md context"
+      technique:
+        summary: "Provides /load-claude-md command that reads and re-injects CLAUDE.md contents for long conversations where context may have drifted."
+        code_snippet: |
+          # Load CLAUDE.md
+
+          Read and inject CLAUDE.md content into the current context.
+          Useful for refreshing instructions in long conversations.
+
+          1. Read `~/.claude/CLAUDE.md` (global instructions)
+          2. Read `CLAUDE.md` or `AGENTS.md` from the current project directory
+          3. Present combined context to Claude
+      use_case: "Manual context refresh for long sessions"
+
+summary:
+  total_mechanisms_found: 6
+  most_common_patterns:
+    - name: "systemMessage"
+      count: 4
+      primary_use: "Injecting guidance, feedback, and contextual information"
+    - name: "permissionDecisionReason"
+      count: 4
+      primary_use: "Explaining blocked operations to enable Claude adaptation"
+    - name: "updatedInput"
+      count: 3
+      primary_use: "Transforming tool calls to better alternatives"
+    - name: "stateFile"
+      count: 2
+      primary_use: "Persisting state across hook invocations"
+    - name: "transcript"
+      count: 2
+      primary_use: "Analyzing conversation history for context"
+    - name: "claudeMd"
+      count: 2
+      primary_use: "Dynamic instruction injection from project files"
+
+key_insights:
+  - insight: "systemMessage is the primary mechanism for context injection - it allows hooks to provide guidance that Claude receives as system-level instructions"
+  - insight: "permissionDecisionReason serves dual purpose: blocking dangerous operations AND teaching Claude what to avoid in future attempts"
+  - insight: "updatedInput enables transparent tool routing - Claude calls one tool but hook substitutes a better implementation"
+  - insight: "State files enable complex workflows by persisting information across multiple hook invocations"
+  - insight: "Transcript analysis allows hooks to understand conversation context and make informed decisions"
+  - insight: "CLAUDE.md injection patterns are manual/slash-command based rather than automatic hooks in these repos"
+
+recommendations:
+  - title: "systemMessage for behavioral guidance"
+    description: "Use for injecting instructions, warnings, or contextual information Claude should consider"
+  - title: "permissionDecisionReason for guardrails"
+    description: "Always provide detailed reasons when blocking - helps Claude learn and adapt"
+  - title: "updatedInput for tool enhancement"
+    description: "Use to transparently route tools to better implementations"
+  - title: "stateFile for session memory"
+    description: "Essential for multi-step workflows that need persistent state"

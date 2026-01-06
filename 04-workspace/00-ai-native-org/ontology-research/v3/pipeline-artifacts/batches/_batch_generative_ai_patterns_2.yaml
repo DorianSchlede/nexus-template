@@ -1,0 +1,98 @@
+---
+batch_id: "generative_ai_patterns_2"
+field: generative_ai_patterns
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 5
+patterns_found: 18
+---
+
+patterns:
+  - name: "Multi-Agent Role Specialization"
+    chunk_ref: "15-SciAgents (Chunk 4:1-6)"
+    quote: "design_principle agent...unexpected_properties_agent...comparison_agent...novelty_agent...critic_agent: Summarizes, critiques, and suggests improvements"
+    description: "Pattern where multiple specialized LLM agents are assigned distinct roles (hypothesis, outcome, mechanism, design principles, unexpected properties, comparison, novelty, critic) to collaboratively expand different aspects of a research proposal. Each agent has a focused responsibility contributing to a comprehensive output."
+
+  - name: "Ontologist-First Knowledge Grounding"
+    chunk_ref: "15-SciAgents (Chunk 4:12-13)"
+    quote: "Define Terms and Relationships: The ontologist will define each term in the knowledge path and discuss the relationships between them"
+    description: "Pattern where an ontologist agent first defines terms and their relationships before any creative generation occurs. This grounds subsequent LLM reasoning in explicit semantic definitions, preventing hallucination and ensuring conceptual consistency."
+
+  - name: "Sequential Plan Execution with Reasoning"
+    chunk_ref: "15-SciAgents (Chunk 4:9-18)"
+    quote: "Overview of the Plan: 1. Define Terms and Relationships...2. Craft the Research Proposal...3. Expand Key Aspects...4. Critique and Improve...5. Rate Novelty"
+    description: "Pattern of structured multi-step execution where each step has explicit reasoning (why it matters) and actions (what to do). The LLM follows a predetermined plan with clear phase transitions and role handoffs between specialized agents."
+
+  - name: "Function Calling for Structured Outputs"
+    chunk_ref: "15-SciAgents (Chunk 4:73)"
+    quote: "The assistant will call the functions.rate_novelty_feasibility function to rate the research idea"
+    description: "Pattern where LLM agents invoke structured function calls (tools) to produce standardized outputs like novelty/feasibility ratings. This constrains the output format and enables programmatic processing of agent decisions."
+
+  - name: "Critic Agent Review Pattern"
+    chunk_ref: "15-SciAgents (Chunk 4:5-6)"
+    quote: "critic_agent: Summarizes, critiques, and suggests improvements after all seven aspects of the proposal have been expanded by the agents"
+    description: "Pattern where a dedicated critic agent reviews all outputs from specialist agents, providing meta-level evaluation, identifying weaknesses, and suggesting improvements. This creates a quality control layer in multi-agent systems."
+
+  - name: "Knowledge Graph Path-Guided Generation"
+    chunk_ref: "15-SciAgents (Chunk 5:145-146)"
+    quote: "Use the generate_path function to generate a knowledge path between two randomly selected keywords"
+    description: "Pattern where LLM generation is guided by paths extracted from a knowledge graph. Random or intentional keyword selection seeds the generation, and relationships between concepts structure the creative output."
+
+  - name: "Structured Research Proposal Template"
+    chunk_ref: "15-SciAgents (Chunk 4:148-225)"
+    quote: "Research Proposal: 1- Hypothesis...2- Outcome...3- Mechanisms...4- Design Principles...5- Unexpected Properties...6- Comparison...7- Novelty"
+    description: "Pattern of using a fixed 7-section template (Hypothesis, Outcome, Mechanisms, Design Principles, Unexpected Properties, Comparison, Novelty) to structure LLM-generated research proposals. Each section has specific semantic expectations and is expanded by specialized agents."
+
+  - name: "Quantitative Goal Setting in Prompts"
+    chunk_ref: "15-SciAgents (Chunk 4:162-164)"
+    quote: "Mechanical Strength: Enhanced tensile strength of up to 1.5 GPa...Energy Efficiency: Reduction in energy consumption by 30%"
+    description: "Pattern where prompts include specific quantitative targets and metrics that the LLM must address. This constrains outputs to include measurable, verifiable claims rather than vague qualitative statements."
+
+  - name: "Modeling and Simulation Technique Specification"
+    chunk_ref: "15-SciAgents (Chunk 4:298-311)"
+    quote: "Molecular Dynamics (MD) Simulations: To understand the interaction...Finite Element Analysis (FEA): FEA will be used to model the mechanical behavior"
+    description: "Pattern where LLM outputs must specify concrete computational methods (MD simulations, FEA) with parameters. Forces the LLM to ground abstract claims in specific, executable scientific methodologies."
+
+  - name: "Experimental Validation Method Specification"
+    chunk_ref: "15-SciAgents (Chunk 4:311-319)"
+    quote: "Electrospinning: Parameters such as voltage, flow rate, and collector distance will be optimized...Tensile Testing...Cell Culture Studies"
+    description: "Pattern requiring LLM to specify concrete experimental methods with parameters for validating proposed mechanisms. Prevents purely theoretical outputs by demanding actionable experimental protocols."
+
+  - name: "Novelty and Feasibility Rating Pattern"
+    chunk_ref: "15-SciAgents (Chunk 4:985-998)"
+    quote: "Novelty: 7/10...Multi-scale Organizational Properties of Silk: The concept...is well-documented...Feasibility: 8/10"
+    description: "Pattern of explicitly rating research ideas on numeric scales for novelty and feasibility, with detailed justification citing literature support and technical challenges. Enables quantitative comparison of generated ideas."
+
+  - name: "Literature-Grounded Validation"
+    chunk_ref: "15-SciAgents (Chunk 6:144-165)"
+    quote: "Query 1: biomimetic materials microfluidic chips...Total Results: 36...Relevant Papers: Surface treatments for microfluidic biocompatibility"
+    description: "Pattern where LLM-generated hypotheses are validated against literature search results. The system queries academic databases and uses the presence or absence of prior work to assess novelty claims."
+
+  - name: "Strengths-Weaknesses-Improvements Review Structure"
+    chunk_ref: "15-SciAgents (Chunk 6:54-82)"
+    quote: "Strengths: 1. Innovative Approach...Weaknesses: 1. Complex Fabrication Process...Suggested Improvements: 1. Pilot Studies"
+    description: "Pattern of structured critique using explicit Strengths, Weaknesses, and Suggested Improvements sections. Provides balanced evaluation and actionable feedback rather than unstructured commentary."
+
+  - name: "Multi-Scale Mechanism Decomposition"
+    chunk_ref: "15-SciAgents (Chunk 6:636-748)"
+    quote: "Molecular Scale Mechanisms...Cellular Scale Mechanisms...Macroscale Mechanisms"
+    description: "Pattern where LLM must decompose mechanisms across multiple spatial scales (molecular, cellular, macroscale). Forces hierarchical thinking about cause-effect relationships at different levels of organization."
+
+  - name: "Impactful Scientific Question Generation"
+    chunk_ref: "15-SciAgents (Chunk 6:85-115)"
+    quote: "Most Impactful Scientific Question for Molecular Modeling: How does the lamellar structure...Key Steps for Molecular Modeling: 1. Model Development...2. Parameterization"
+    description: "Pattern where LLM generates specific scientific questions identified as most impactful, along with concrete key steps for addressing them through molecular modeling or synthetic biology experiments."
+
+  - name: "Agent Team Assembly Declaration"
+    chunk_ref: "15-SciAgents (Chunk 5:127-139)"
+    quote: "Hello everyone. We have assembled a great team today...user: An attentive HUMAN user...planner...assistant...ontologist...scientist...hypothesis_agent"
+    description: "Pattern of explicitly declaring the multi-agent team composition at the start of a collaborative task. Each agent's role and capabilities are stated upfront, establishing clear responsibilities and coordination structure."
+
+  - name: "Random Keyword Path Generation"
+    chunk_ref: "15-SciAgents (Chunk 5:163-165)"
+    quote: "The assistant will call the generate_path function with keyword_1 and keyword_2 set to None to generate a path between randomly selected nodes"
+    description: "Pattern of using random keyword selection to seed novel research idea generation. By not specifying keywords, the system explores unexpected concept combinations from the knowledge graph."
+
+  - name: "Comparative Benchmark Analysis"
+    chunk_ref: "15-SciAgents (Chunk 7:88-132)"
+    quote: "Traditional Materials: Typical Performance...Quantitative Benchmark...Proposed Material: Expected Performance...Quantitative Goal...Rationale"
+    description: "Pattern of structured comparison between traditional/baseline approaches and proposed innovations. Each comparison includes typical performance benchmarks, expected improvements with quantitative goals, and explicit rationale."

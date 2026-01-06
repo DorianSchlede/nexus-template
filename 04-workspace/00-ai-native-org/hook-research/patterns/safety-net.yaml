@@ -1,0 +1,844 @@
+# Hook Pattern Extraction: claude-code-safety-net
+# Source: https://github.com/kenryu42/claude-code-safety-net
+# Extraction Date: 2025-12-31
+#
+# This repository contains a single PreToolUse hook that provides comprehensive
+# safety analysis for Bash commands. The hook blocks destructive git and filesystem
+# operations before they execute.
+
+patterns:
+  - pattern_name: "bash-command-safety-gate"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "hooks/hooks.json, scripts/safety_net_impl/hook.py"
+    description: "Intercepts all Bash tool calls and analyzes commands for destructive patterns. Blocks dangerous git and filesystem operations with detailed explanations."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse shell commands into segments, tokenize, strip wrappers (sudo/env), then dispatch to specialized analyzers for git and rm commands."
+      code_snippet: |
+        def main() -> int:
+            try:
+                input_data = json.load(sys.stdin)
+            except json.JSONDecodeError:
+                if not strict:
+                    return 0
+                # Block with deny in strict mode
+
+            command = tool_input.get("command")
+            analyzed = _analyze_command(command, depth=0, cwd=cwd, ...)
+
+            if analyzed:
+                segment, reason = analyzed
+                output = {
+                    "hookSpecificOutput": {
+                        "hookEventName": "PreToolUse",
+                        "permissionDecision": "deny",
+                        "permissionDecisionReason": f"BLOCKED by Safety Net\n\nReason: {reason}\n\n..."
+                    }
+                }
+                print(json.dumps(output))
+            return 0
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Detailed block reason explaining why command is dangerous and suggesting alternatives (e.g., 'Use git stash first', 'Use -d for safety')"
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting against accidental destructive commands in development environments"
+      when_not_to_use: "Production systems where operations may legitimately need destructive commands"
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: ["shlex (stdlib)"]
+
+  - pattern_name: "git-checkout-pathspec-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git checkout -- file' and 'git checkout ref -- path' patterns that discard uncommitted changes, while allowing safe variants like 'git checkout -b branch'."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git checkout arguments, detect double-dash separators and pathspecs, distinguish safe branch operations from dangerous file operations."
+      code_snippet: |
+        if sub == "checkout":
+            if "--" in rest:
+                idx = rest.index("--")
+                return (
+                    _REASON_GIT_CHECKOUT_DOUBLE_DASH
+                    if idx == 0
+                    else _REASON_GIT_CHECKOUT_REF_DOUBLE_DASH
+                )
+            if "-b" in rest or "b" in short:
+                return None  # Safe: creating branch
+            if "-B" in rest or "B" in short:
+                return None  # Safe: force creating branch
+            if "--orphan" in rest_lower:
+                return None  # Safe: orphan branch
+
+            positional = _checkout_positional_args(rest)
+            if len(positional) >= 2:
+                return _REASON_GIT_CHECKOUT_REF_PATHSPEC
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git checkout -- discards uncommitted changes permanently. Use 'git stash' first."
+    use_case:
+      category: "Safety"
+      when_to_use: "Any environment where uncommitted work must be protected"
+      when_not_to_use: "Scripts that intentionally discard changes"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-restore-worktree-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git restore' commands that discard working tree changes, while allowing safe '--staged' variant."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git restore flags, allow --staged and --help/--version, block --worktree and default restore."
+      code_snippet: |
+        if sub == "restore":
+            if "-h" in rest_lower or "--help" in rest_lower or "--version" in rest_lower:
+                return None
+            if "--worktree" in rest_lower:
+                return _REASON_GIT_RESTORE_WORKTREE
+            if "--staged" in rest_lower:
+                return None  # Safe: only unstages
+            return _REASON_GIT_RESTORE
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git restore discards uncommitted changes. Use 'git stash' or 'git diff' first."
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting working tree modifications"
+      when_not_to_use: "When intentional file restoration is needed"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-reset-hard-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git reset --hard' and 'git reset --merge' which can destroy uncommitted changes."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git reset flags and block dangerous --hard and --merge variants."
+      code_snippet: |
+        if sub == "reset":
+            if "--hard" in rest_lower:
+                return _REASON_GIT_RESET_HARD
+            if "--merge" in rest_lower:
+                return _REASON_GIT_RESET_MERGE
+            return None
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git reset --hard destroys uncommitted changes. Use 'git stash' first."
+    use_case:
+      category: "Safety"
+      when_to_use: "Any development environment"
+      when_not_to_use: "Automated cleanup scripts"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-clean-force-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git clean -f' which permanently removes untracked files."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git clean flags, block when --force or -f present."
+      code_snippet: |
+        if sub == "clean":
+            has_force = "--force" in rest_lower or "f" in short
+            if has_force:
+                return _REASON_GIT_CLEAN_FORCE
+            return None
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git clean -f removes untracked files permanently. Review with 'git clean -n' first."
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting untracked files in development"
+      when_not_to_use: "CI/CD cleanup pipelines"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-push-force-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git push --force' while allowing safer 'git push --force-with-lease'."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git push flags, allow --force-with-lease, block naked --force or -f."
+      code_snippet: |
+        if sub == "push":
+            has_force_with_lease = any(
+                t.startswith("--force-with-lease") for t in rest_lower
+            )
+            has_force = "--force" in rest_lower or "f" in short
+            if has_force and not has_force_with_lease:
+                return _REASON_GIT_PUSH_FORCE
+            return None
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Force push can destroy remote history. Use --force-with-lease if necessary."
+    use_case:
+      category: "Safety"
+      when_to_use: "Shared repositories with multiple contributors"
+      when_not_to_use: "Personal repos where force push is routine"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-branch-force-delete-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git branch -D' which force-deletes without merge check, while allowing 'git branch -d'."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Case-sensitive detection of -D vs -d flag (git treats these differently)."
+      code_snippet: |
+        if sub == "branch":
+            if "-D" in rest or "D" in short:
+                return _REASON_GIT_BRANCH_DELETE_FORCE
+            if "-d" in rest or "d" in short:
+                return None  # Safe delete with merge check
+            return None
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git branch -D force-deletes without merge check. Use -d for safety."
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting branches with unmerged work"
+      when_not_to_use: "Cleanup scripts for stale branches"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "git-stash-drop-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_git.py"
+    description: "Blocks 'git stash drop' and 'git stash clear' which permanently delete stashed changes."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse git stash subcommand and block drop/clear."
+      code_snippet: |
+        if sub == "stash":
+            if not rest_lower:
+                return None
+            if rest_lower[0] == "drop":
+                return _REASON_GIT_STASH_DROP
+            if rest_lower[0] == "clear":
+                return _REASON_GIT_STASH_CLEAR
+            return None
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "git stash drop permanently deletes stashed changes. List stashes first with 'git stash list'."
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting stashed work"
+      when_not_to_use: "Stash management scripts"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "rm-rf-intelligent-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_rm.py"
+    description: "Blocks 'rm -rf' with intelligent path analysis - allows temp paths and paths within cwd, blocks paths outside cwd, root, and home."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse rm flags for -rf combination, analyze target paths - allow /tmp, $TMPDIR, and cwd-relative paths; block root, home, and outside-cwd paths."
+      code_snippet: |
+        def _analyze_rm(tokens, *, allow_tmpdir_var=True, cwd=None, paranoid=False):
+            recursive = "--recursive" in opts_lower or "r" in short or "R" in short
+            force = "--force" in opts_lower or "f" in short
+
+            if not (recursive and force):
+                return None  # Not rm -rf
+
+            targets = _rm_targets(tokens)
+            if any(_is_root_or_home_path(t) for t in targets):
+                return _REASON_RM_RF_ROOT_HOME
+
+            if cwd and any(_is_cwd_itself(t, cwd) for t in targets):
+                return _REASON_RM_RF  # Block deleting cwd itself
+
+            if targets and all(_is_temp_path(t, allow_tmpdir_var=allow_tmpdir_var) for t in targets):
+                return None  # Allow temp paths
+
+            if cwd and targets and all(_is_path_within_cwd(t, cwd) for t in targets):
+                return None  # Allow within cwd
+
+            return _REASON_RM_RF
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "rm -rf is destructive. List files first, then delete individually."
+    use_case:
+      category: "Safety"
+      when_to_use: "Any development environment to prevent catastrophic file deletion"
+      when_not_to_use: "Container cleanup scripts, build systems"
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: ["posixpath (stdlib)"]
+
+  - pattern_name: "shell-wrapper-recursive-analysis"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Recursively analyzes commands wrapped in shell invocations like 'bash -c' up to 5 levels deep to detect hidden destructive commands."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Detect shell invocations (bash/sh/zsh/dash/ksh), extract -c argument, recursively analyze inner command with depth limiting."
+      code_snippet: |
+        _MAX_RECURSION_DEPTH = 5
+
+        if head in {"bash", "sh", "zsh", "dash", "ksh"}:
+            cmd_str = _extract_dash_c_arg(tokens)
+            if cmd_str is not None:
+                if depth >= _MAX_RECURSION_DEPTH:
+                    return segment, "Command analysis recursion limit reached."
+                analyzed = _analyze_command(
+                    cmd_str,
+                    depth=depth + 1,
+                    cwd=cwd,
+                    strict=strict,
+                    paranoid_rm=paranoid_rm,
+                    paranoid_interpreters=paranoid_interpreters,
+                )
+                if analyzed:
+                    return analyzed
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Reason from inner command analysis, preserving the original dangerous command context"
+    use_case:
+      category: "Safety"
+      when_to_use: "Preventing bypass of safety rules via shell wrapping"
+      when_not_to_use: "N/A - essential security layer"
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "interpreter-oneliner-detection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Detects destructive commands hidden in Python/Node/Ruby/Perl one-liners and can optionally block all interpreter one-liners in paranoid mode."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Extract code from interpreter -c/-e args, scan for destructive patterns using regex heuristics."
+      code_snippet: |
+        if head in {"python", "python3", "node", "ruby", "perl"}:
+            code = _extract_pythonish_code_arg(tokens)
+            if code is not None:
+                reason = _dangerous_in_text(code) or _dangerous_find_delete_in_text(code)
+                if reason:
+                    return segment, reason
+                if paranoid_interpreters:
+                    return (
+                        segment,
+                        "Cannot safely analyze interpreter one-liners."
+                        + _PARANOID_INTERPRETERS_SUFFIX,
+                    )
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Detection reason for the destructive pattern found in the code string"
+    use_case:
+      category: "Safety"
+      when_to_use: "High-security environments where code injection is a concern"
+      when_not_to_use: "Development workflows using many one-liner scripts"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "find-delete-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Blocks 'find ... -delete' patterns which permanently delete matching files."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Parse find arguments, skip over -exec blocks and options that consume arguments, detect standalone -delete flag."
+      code_snippet: |
+        def _find_has_delete(args: list[str]) -> bool:
+            consumes_one = {"-name", "-iname", "-path", "-ipath", "-perm", "-user", ...}
+            exec_like = {"-exec", "-execdir", "-ok", "-okdir"}
+
+            i = 0
+            while i < len(args):
+                tok = _strip_token_wrappers(args[i]).lower()
+
+                if tok in exec_like:
+                    # Skip -exec block until ; or +
+                    while i < len(args):
+                        if _strip_token_wrappers(args[i]) in {";", "+"}:
+                            break
+                        i += 1
+                    continue
+
+                if tok == "-delete":
+                    return True
+                i += 1
+            return False
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "find -delete permanently deletes matched files. Use -print first."
+    use_case:
+      category: "Safety"
+      when_to_use: "Protecting against accidental mass file deletion via find"
+      when_not_to_use: "Cleanup scripts that intentionally use find -delete"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "xargs-rm-rf-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Blocks 'xargs rm -rf' patterns where dynamic input makes deletion targets unpredictable."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Extract child command from xargs, detect rm -rf in child, handle replacement mode (-I/-J) and shell wrappers."
+      code_snippet: |
+        if head == "xargs":
+            child = _extract_xargs_child_command(tokens)
+            if child is None:
+                return None
+            child = _strip_wrappers(child)
+
+            child_head = _normalize_cmd_token(child[0])
+
+            if child_head == "rm" and _rm_has_recursive_force(["rm", *child[1:]]):
+                return segment, _REASON_XARGS_RM_RF
+
+            if child_head in {"bash", "sh", "zsh", "dash", "ksh"}:
+                cmd_str = _extract_dash_c_arg(child)
+                if cmd_str is not None:
+                    repl_tokens = _xargs_replacement_tokens(tokens)
+                    if repl_tokens and cmd_str.strip() in repl_tokens:
+                        return (segment, f"xargs {child[0]} -c can execute arbitrary commands from input.")
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "xargs can feed arbitrary input to rm -rf. List files first, then delete individually."
+    use_case:
+      category: "Safety"
+      when_to_use: "Preventing pipeline-based mass deletion"
+      when_not_to_use: "Controlled batch deletion scripts"
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "parallel-rm-rf-protection"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Blocks GNU parallel with rm -rf patterns, handling both ::: static args and stdin dynamic input."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Extract template command and arguments from parallel, expand {} placeholders, analyze resulting rm commands."
+      code_snippet: |
+        if head == "parallel":
+            extracted = _extract_parallel_template_and_args(tokens)
+            if extracted is None:
+                return None
+
+            template, args_after_marker, args_dynamic = extracted
+            template_head = _normalize_cmd_token(template[0])
+
+            if template_head == "rm":
+                if args_dynamic and _rm_has_recursive_force(["rm", *template[1:]]):
+                    return segment, _REASON_PARALLEL_RM_RF
+
+                # Expand placeholders with static args
+                if args_after_marker:
+                    templates = [[tok.replace("{}", arg) for tok in template] for arg in args_after_marker]
+                    for rm_tokens in templates:
+                        reason = _analyze_rm(rm_tokens, ...)
+                        if reason:
+                            return segment, reason
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "parallel can feed arbitrary input to rm -rf. List files first, then delete individually."
+    use_case:
+      category: "Safety"
+      when_to_use: "Preventing parallelized mass deletion"
+      when_not_to_use: "Controlled parallel cleanup operations"
+    quality:
+      complexity: "high"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "secret-redaction-in-logs"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Automatically redacts sensitive data (tokens, passwords, API keys) from block messages and audit logs."
+    implementation:
+      matcher: "Bash"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Regex-based redaction of KEY=VALUE secrets, Authorization headers, URL credentials, and GitHub token patterns."
+      code_snippet: |
+        def _redact_secrets(text: str) -> str:
+            redacted = text
+
+            # KEY=VALUE patterns for secret-ish keys
+            redacted = re.sub(
+                r"\b([A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PASS|KEY|CREDENTIALS)[A-Z0-9_]*)=([^\s]+)",
+                r"\1=<redacted>",
+                redacted,
+                flags=re.IGNORECASE,
+            )
+
+            # Authorization headers
+            redacted = re.sub(r"(?i)(authorization\s*:\s*)([^\s\"']+)", r"\1<redacted>", redacted)
+
+            # URL credentials: scheme://user:pass@host
+            redacted = re.sub(r"(?i)(https?://)([^\s/:@]+):([^\s@]+)@", r"\1<redacted>:<redacted>@", redacted)
+
+            # GitHub token prefixes
+            redacted = re.sub(r"\bgh[pousr]_[A-Za-z0-9]{20,}\b", "<redacted>", redacted)
+
+            return redacted
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - this is a security feature for logging, not context injection"
+    use_case:
+      category: "Safety"
+      when_to_use: "Any hook that logs or displays command content"
+      when_not_to_use: "N/A - should always be used"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "audit-logging-per-session"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Logs all blocked commands to ~/.cc-safety-net/logs/<session_id>.jsonl for audit trail."
+    implementation:
+      matcher: "Bash"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Write JSONL entries with timestamp, redacted command, segment, reason, and cwd to session-specific log file."
+      code_snippet: |
+        def _write_audit_log(session_id, command, segment, reason, cwd) -> None:
+            from datetime import datetime, timezone
+            from pathlib import Path
+
+            logs_dir = Path.home() / ".cc-safety-net" / "logs"
+            safe_session_id = _sanitize_session_id_for_filename(session_id)
+
+            try:
+                logs_dir.mkdir(parents=True, exist_ok=True)
+                log_file = logs_dir / f"{safe_session_id}.jsonl"
+
+                entry = {
+                    "ts": datetime.now(timezone.utc).isoformat(),
+                    "command": _redact_secrets(command)[:300],
+                    "segment": _redact_secrets(segment)[:300],
+                    "reason": reason,
+                    "cwd": cwd,
+                }
+
+                with log_file.open("a", encoding="utf-8") as f:
+                    f.write(json.dumps(entry) + "\n")
+            except OSError:
+                pass  # Best-effort logging
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - observability feature, not context injection"
+    use_case:
+      category: "Observability"
+      when_to_use: "Security auditing and debugging blocked commands"
+      when_not_to_use: "High-throughput systems where logging overhead matters"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: ["pathlib (stdlib)", "datetime (stdlib)"]
+
+  - pattern_name: "strict-mode-fail-closed"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/hook.py"
+    description: "Optional strict mode that blocks when commands cannot be safely parsed, rather than allowing by default."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Check SAFETY_NET_STRICT env var; when enabled, block on JSON parse errors, invalid input structure, and unparseable shell commands."
+      code_snippet: |
+        def _strict_mode() -> bool:
+            return _env_truthy("SAFETY_NET_STRICT")
+
+        # In main():
+        try:
+            input_data = json.load(sys.stdin)
+        except json.JSONDecodeError:
+            if not strict:
+                return 0  # Allow through in default mode
+            # Block in strict mode
+            print(json.dumps({
+                "hookSpecificOutput": {
+                    "permissionDecision": "deny",
+                    "permissionDecisionReason": "BLOCKED by Safety Net\n\nReason: Invalid hook input."
+                }
+            }))
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "Unable to parse shell command safely. [strict mode - disable with: unset SAFETY_NET_STRICT]"
+    use_case:
+      category: "Safety"
+      when_to_use: "High-security environments requiring fail-closed behavior"
+      when_not_to_use: "Normal development where some edge cases should pass through"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "paranoid-rm-mode"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/rules_rm.py"
+    description: "Optional paranoid mode that blocks non-temp rm -rf even within the current working directory."
+    implementation:
+      matcher: "Bash"
+      decision_type: "block"
+      exit_code: "0"
+    technique:
+      summary: "Check SAFETY_NET_PARANOID or SAFETY_NET_PARANOID_RM env var; when enabled, only allow rm -rf on temp paths."
+      code_snippet: |
+        def _paranoid_rm_mode() -> bool:
+            return _paranoid_mode() or _env_truthy("SAFETY_NET_PARANOID_RM")
+
+        # In _analyze_rm:
+        if paranoid:
+            return _REASON_RM_RF + _PARANOID_SUFFIX
+
+        # Only reached in non-paranoid mode:
+        if cwd and targets and all(_is_path_within_cwd(t, cwd) for t in targets):
+            return None  # Allow within cwd in normal mode
+    context_loading:
+      mechanism: "permissionDecisionReason"
+      what_loaded: "rm -rf is destructive. List files first, then delete individually. [paranoid mode - disable with: unset SAFETY_NET_PARANOID SAFETY_NET_PARANOID_RM]"
+    use_case:
+      category: "Safety"
+      when_to_use: "Maximum protection against any rm -rf usage"
+      when_not_to_use: "Normal development workflows"
+    quality:
+      complexity: "low"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "shell-command-splitting"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/shell.py"
+    description: "Splits shell command strings on operators (;, &&, ||, |, &) while respecting quotes and escapes."
+    implementation:
+      matcher: "Bash"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "State machine parser tracking single/double quotes and escapes, splits on shell operators outside quotes."
+      code_snippet: |
+        def _split_shell_commands(command: str) -> list[str]:
+            parts: list[str] = []
+            buf: list[str] = []
+            in_single = False
+            in_double = False
+            escape = False
+
+            i = 0
+            while i < len(command):
+                ch = command[i]
+
+                if escape:
+                    buf.append(ch)
+                    escape = False
+                    continue
+
+                if ch == "\\" and not in_single:
+                    buf.append(ch)
+                    escape = True
+                    continue
+
+                # Quote tracking and operator splitting logic...
+
+            return parts
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - parsing utility"
+    use_case:
+      category: "Context"
+      when_to_use: "Any hook that needs to analyze multi-command shell strings"
+      when_not_to_use: "Simple single-command analysis"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: []
+
+  - pattern_name: "wrapper-stripping"
+    hook_event: "PreToolUse"
+    source_repo: "claude-code-safety-net"
+    source_file: "scripts/safety_net_impl/shell.py"
+    description: "Strips command wrappers (sudo, env, command) and environment variable assignments to find the real command."
+    implementation:
+      matcher: "Bash"
+      decision_type: "none"
+      exit_code: "0"
+    technique:
+      summary: "Iteratively strip sudo (with args), env (with -u/-C/-P/-S), command (with -p/-v/-V), and VAR=value assignments."
+      code_snippet: |
+        def _strip_wrappers(tokens: list[str]) -> list[str]:
+            previous = None
+            depth = 0
+            while tokens and tokens != previous and depth < 20:
+                previous = tokens
+                depth += 1
+
+                tokens = _strip_env_assignments(tokens)
+                head = tokens[0].lower()
+
+                if head == "sudo":
+                    # Skip sudo options and --
+                    tokens = tokens[i:]
+                    continue
+
+                if head == "env":
+                    # Skip env options (-u, -C, etc.)
+                    tokens = tokens[i:]
+                    continue
+
+                if head == "command":
+                    # Skip command options (-p, -v, -V)
+                    tokens = tokens[i:]
+                    continue
+
+            return _strip_env_assignments(tokens)
+    context_loading:
+      mechanism: "none"
+      what_loaded: "N/A - parsing utility"
+    use_case:
+      category: "Context"
+      when_to_use: "Any hook that needs to identify the actual command being run"
+      when_not_to_use: "Hooks that care about the full invocation including wrappers"
+    quality:
+      complexity: "medium"
+      performance: "<10ms"
+      dependencies: ["shlex (stdlib)"]
+
+# Summary of hooks found
+hooks_summary:
+  PreToolUse: 18  # All patterns above operate as PreToolUse
+  PostToolUse: 0
+  SessionStart: 0
+  Stop: 0
+  SubagentStop: 0
+  UserPromptSubmit: 0
+  PreCompact: 0
+  Notification: 0
+
+hooks_not_found:
+  - PostToolUse
+  - SessionStart
+  - Stop
+  - SubagentStop
+  - UserPromptSubmit
+  - PreCompact
+  - Notification
+
+architecture_notes: |
+  This repository implements a single comprehensive PreToolUse hook with a modular
+  architecture:
+
+  1. Entry Point: scripts/safety_net.py - minimal wrapper that imports implementation
+  2. Main Logic: scripts/safety_net_impl/hook.py - command parsing, recursion, dispatching
+  3. Git Rules: scripts/safety_net_impl/rules_git.py - specialized git subcommand analysis
+  4. RM Rules: scripts/safety_net_impl/rules_rm.py - path analysis for rm -rf
+  5. Shell Utils: scripts/safety_net_impl/shell.py - tokenization and wrapper stripping
+
+  Key design decisions:
+  - Exit 0 always (JSON output controls block/allow, not exit code)
+  - Recursive analysis for shell wrappers (bash -c, sh -c, etc.)
+  - Context-aware path analysis (cwd, temp dirs)
+  - Optional strict/paranoid modes via environment variables
+  - Secret redaction in all user-visible output
+  - Per-session audit logging
+
+context_loading_patterns: |
+  Primary mechanism: permissionDecisionReason
+
+  When blocking a command, the hook returns detailed guidance to Claude:
+  1. What was blocked (redacted command excerpt)
+  2. Why it's dangerous (specific explanation)
+  3. What to do instead (e.g., "Use git stash first")
+  4. How to proceed if truly needed ("ask the user for explicit permission")
+
+  This guides Claude toward safer alternatives rather than just blocking.

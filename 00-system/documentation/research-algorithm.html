@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Research Algorithm - Visual Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e27;
+            --bg-card: #1a1f3a;
+            --bg-card-hover: #252b4a;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-purple: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-pink: #ec4899;
+            --border-subtle: rgba(148, 163, 184, 0.1);
+            --glow-purple: rgba(139, 92, 246, 0.2);
+            --glow-blue: rgba(59, 130, 246, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+        }
+
+        .bg-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow-purple) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-gradient::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--glow-blue) 0%, transparent 70%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px var(--glow-purple)); }
+            50% { filter: drop-shadow(0 0 30px var(--glow-blue)); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px var(--glow-purple);
+            border-color: var(--accent-purple);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 3rem 0 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-purple);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            border-color: transparent;
+            box-shadow: 0 4px 20px var(--glow-purple);
+        }
+
+        /* Content Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Phase Cards */
+        .phases-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-color), transparent);
+        }
+
+        .phase-card.phase-1 { --accent-color: var(--accent-green); }
+        .phase-card.phase-2 { --accent-color: var(--accent-blue); }
+        .phase-card.phase-3 { --accent-color: var(--accent-purple); }
+
+        .phase-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-color));
+            opacity: 0.15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .phase-title {
+            flex: 1;
+        }
+
+        .phase-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .phase-title .meta {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .phase-steps {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--accent-color);
+            opacity: 0.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .step-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Architecture Section */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .component-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-purple);
+        }
+
+        .component-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .component-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .component-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .component-type {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .component-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Synthesis Levels */
+        .levels-flow {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .level-row {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .level-connector {
+            position: absolute;
+            left: 60px;
+            top: 100%;
+            width: 2px;
+            height: 2rem;
+            background: linear-gradient(180deg, var(--accent-purple), transparent);
+        }
+
+        .level-badge {
+            width: 120px;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 2px solid var(--level-color);
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .level-row.script .level-badge { --level-color: var(--accent-orange); }
+        .level-row.subagent .level-badge { --level-color: var(--accent-blue); }
+
+        .level-card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            transform: translateX(10px);
+            border-color: var(--level-color);
+            box-shadow: 0 0 30px var(--glow-purple);
+        }
+
+        .level-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .level-output {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 40px var(--glow-purple);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            margin: 2rem 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: rgba(139, 92, 246, 0.1);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--accent-purple);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge.script { background: rgba(245, 158, 11, 0.2); color: var(--accent-orange); }
+        .badge.subagent { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+        .badge.orchestrator { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); }
+        .badge.skill { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+
+        /* Code Block */
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .code-block code {
+            color: var(--accent-green);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-purple);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .level-row { flex-direction: column; align-items: flex-start; }
+            .level-badge { width: 100%; }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Nexus Research Algorithm</h1>
+            <p class="subtitle">A sophisticated 3-phase pipeline that transforms research questions into actionable insights through automated discovery, analysis, and synthesis of academic papers.</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Phases</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Components</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">29</div>
+                    <div class="stat-label">Total Steps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Academic APIs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Synthesis Levels</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('overview')">Overview</div>
+            <div class="nav-tab" onclick="showSection('phases')">3 Phases</div>
+            <div class="nav-tab" onclick="showSection('architecture')">Architecture</div>
+            <div class="nav-tab" onclick="showSection('synthesis')">7-Level Synthesis</div>
+            <div class="nav-tab" onclick="showSection('features')">Key Features</div>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="section active">
+            <h2 class="section-title">System Overview</h2>
+            <p class="section-subtitle">The Nexus Research Algorithm automates the entire research workflow from question to synthesis.</p>
+
+            <div class="highlight-box">
+                <strong>What it does:</strong> Transforms a research question into comprehensive cross-paper insights by automatically discovering papers, extracting knowledge, and synthesizing patterns across the entire corpus.
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Smart Discovery</div>
+                    <div class="feature-desc">Search 9 academic APIs with intelligent filtering and AI-powered abstract review</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">Parallel Analysis</div>
+                    <div class="feature-desc">15 concurrent subagents analyze papers with anti-hallucination verification</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧬</div>
+                    <div class="feature-title">Deep Synthesis</div>
+                    <div class="feature-desc">7-level architecture extracts and verifies patterns across all papers</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <div class="feature-title">Quality Gates</div>
+                    <div class="feature-desc">Multi-layer validation ensures accuracy and completeness</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem;">Complete Workflow</h3>
+
+            <div class="phases-grid">
+                <div class="phase-card phase-1">
+                    <div class="phase-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-title">
+                            <h3>Planning & Acquisition</h3>
+                            <div class="meta">14 steps • create-research-project</div>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary);">Define research question, search APIs, select papers, download PDFs, and prepare for analysis</p>
+                </div>
+
+                <div class="phase-card phase-2">
+                    <div class="phase-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-title">
+                            <h3>Analysis</h3>
+                            <div class="meta">5 steps • analyze-research-project</div>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary);">Parallel paper analysis with 15 concurrent subagents, evidence verification, and quality validation</p>
+                </div>
+
+                <div class="phase-card phase-3">
+                    <div class="phase-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-title">
+                            <h3>Synthesis</h3>
+                            <div class="meta">10 steps • synthesize-research-project</div>
+                        </div>
+                    </div>
+                    <p style="color: var(--text-secondary);">7-level hierarchical synthesis with routing, allocation, extraction, verification, and report generation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phases Section -->
+        <div id="phases" class="section">
+            <h2 class="section-title">3-Phase Pipeline</h2>
+            <p class="section-subtitle">Each phase builds on the previous, with quality gates ensuring readiness before progression.</p>
+
+            <!-- Phase 1 -->
+            <div class="phase-card phase-1" style="margin-bottom: 2rem;">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <div class="phase-title">
+                        <h3>Phase 1: Planning & Acquisition</h3>
+                        <div class="meta">14 steps • Orchestrator: create-research-project</div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Define your research question, search academic databases, select relevant papers, and prepare them for analysis.
+                </p>
+
+                <div class="phase-steps">
+                    <div class="step-item">
+                        <div class="step-num">0-1</div>
+                        <div class="step-content">
+                            <div class="step-name">Initialize Project</div>
+                            <div class="step-desc">Create TodoWrite tracking and Nexus project structure</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <div class="step-name">Define Research Question</div>
+                            <div class="step-desc">Interactive session to define RQ and extraction schema → _briefing.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <div class="step-name">Search Academic APIs</div>
+                            <div class="step-desc">Query 9 APIs (Semantic Scholar, OpenAlex, arXiv, etc.) → _search_results.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <div class="step-name">AI Abstract Review</div>
+                            <div class="step-desc">Score papers 1-5 based on relevance → _abstract_reviews.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <div class="step-name">User Paper Selection</div>
+                            <div class="step-desc">Present recommendations, user approves/modifies → _selection_log.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">6</div>
+                        <div class="step-content">
+                            <div class="step-name">Selection Gate</div>
+                            <div class="step-desc">User approval checkpoint before download</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">7</div>
+                        <div class="step-content">
+                            <div class="step-name">Download Papers</div>
+                            <div class="step-desc">Batch download with multi-source fallback resolution</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">8</div>
+                        <div class="step-content">
+                            <div class="step-name">PDF Preprocessing</div>
+                            <div class="step-desc">Convert PDFs to markdown chunks (max 1000 lines/chunk) + _metadata.json</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">9</div>
+                        <div class="step-content">
+                            <div class="step-name">Acquisition Report</div>
+                            <div class="step-desc">User gate: review acquisition status before analysis prep</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">10</div>
+                        <div class="step-content">
+                            <div class="step-name">Generate Analysis Kit</div>
+                            <div class="step-desc">Create _analysis_kit.md (subagent context bundle)</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">11</div>
+                        <div class="step-content">
+                            <div class="step-name">Generate Extraction Guide</div>
+                            <div class="step-desc">Create _extraction_guide.md (field examples + controlled vocabulary)</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">12</div>
+                        <div class="step-content">
+                            <div class="step-name">Calculate Allocation & Generate Orchestrator Instructions</div>
+                            <div class="step-desc">Determine subagent splits, write allocation table + prompts to plan.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">13</div>
+                        <div class="step-content">
+                            <div class="step-name">Readiness Gate</div>
+                            <div class="step-desc">Confirm ready for Phase 2 execution</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <strong>Outputs:</strong> _briefing.md, _analysis_kit.md, _extraction_guide.md, _selection_log.md, PDFs, markdown chunks, _metadata.json, orchestrator instructions in plan.md
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="phase-card phase-2" style="margin-bottom: 2rem;">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <div class="phase-title">
+                        <h3>Phase 2: Analysis</h3>
+                        <div class="meta">5 steps • Orchestrator: analyze-research-project</div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    15 concurrent subagents analyze papers in parallel with anti-hallucination measures and evidence verification.
+                </p>
+
+                <div class="phase-steps">
+                    <div class="step-item">
+                        <div class="step-num">0</div>
+                        <div class="step-content">
+                            <div class="step-name">Initialize TodoWrite</div>
+                            <div class="step-desc">Set up task tracking for analysis phase</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <div class="step-name">Validate Readiness</div>
+                            <div class="step-desc">Check papers with chunks > 0, _briefing.md and _analysis_kit.md exist</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">1.5</div>
+                        <div class="step-content">
+                            <div class="step-name">Read Pre-Calculated Allocation</div>
+                            <div class="step-desc">Load allocation table from plan.md (calculated in Phase 1 Step 12)</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <div class="step-name">Spawn Analysis Subagents</div>
+                            <div class="step-desc">15 concurrent subagents, each follows 7-step methodology → index.md + _analysis_log.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <div class="step-name">Validate Analysis Logs</div>
+                            <div class="step-desc">Check chunks read, evidence citations, hash verification (Schema v2.3)</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <div class="step-name">Mark READY_FOR_SYNTHESIS</div>
+                            <div class="step-desc">Update project status, handoff to Phase 3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <strong>Anti-Hallucination:</strong> 3-point evidence recording (start/mid/end 100 chars), SHA256 hash verification, chunk:line citations for every extraction
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="phase-card phase-3">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <div class="phase-title">
+                        <h3>Phase 3: Synthesis</h3>
+                        <div class="meta">10 steps • Orchestrator: synthesize-research-project</div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    7-level hierarchical architecture where 6/7 levels are deterministic scripts, only L4 & L7 use LLMs.
+                </p>
+
+                <div class="phase-steps">
+                    <div class="step-item">
+                        <div class="step-num">0</div>
+                        <div class="step-content">
+                            <div class="step-name">Initialize TodoWrite</div>
+                            <div class="step-desc">Set up synthesis tracking</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <div class="step-name">Validate Readiness</div>
+                            <div class="step-desc">Check all papers have index.md, status == READY_FOR_SYNTHESIS</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <div class="step-name">L1: Routing Script</div>
+                            <div class="step-desc">Boolean chunk lookup by field → _synthesis_routing.yaml</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <div class="step-name">L2: Allocation Script</div>
+                            <div class="step-desc">Greedy bin-packing (70k tokens/batch) + L7 budget → _subagent_plan.yaml</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <div class="step-name">L3: Prompts Script</div>
+                            <div class="step-desc">Generate INPUT CONTRACT per batch → 45× _prompt_*.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <div class="step-name">L4: Extraction Subagents</div>
+                            <div class="step-desc">15 concurrent pattern extraction with citations → _batch_*.yaml</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">6</div>
+                        <div class="step-content">
+                            <div class="step-name">L5: Verification Script</div>
+                            <div class="step-desc">10% sample quote-line checking (±5 line tolerance) → _verification_report.yaml</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">7</div>
+                        <div class="step-content">
+                            <div class="step-name">L6: Aggregation Script</div>
+                            <div class="step-desc">Fuzzy deduplication (90% similarity) → _synthesis_{field}.yaml</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">8</div>
+                        <div class="step-content">
+                            <div class="step-name">L7: Report Subagent</div>
+                            <div class="step-desc">Narrative synthesis with cross-field insights → _synthesis_report.md</div>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">9</div>
+                        <div class="step-content">
+                            <div class="step-name">Mark Complete</div>
+                            <div class="step-desc">Update project status to COMPLETE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 1.5rem;">
+                    <strong>Why 7 Levels?</strong> Determinism (6/7 are scripts), Verifiability (L5 catches hallucinations), Scalability (parallel L4), Cost-Effective (scripts are free), Safe (token budget calculated upfront)
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Section -->
+        <div id="architecture" class="section">
+            <h2 class="section-title">System Architecture</h2>
+            <p class="section-subtitle">11 components work together across 3 phases</p>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">Orchestrators (3)</h3>
+            <div class="architecture-grid">
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🌱</div>
+                        <div>
+                            <div class="component-name">create-research-project</div>
+                            <div class="component-type"><span class="badge orchestrator">Orchestrator</span> Phase 1</div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        14-step workflow for research definition, paper discovery, selection, acquisition, and analysis preparation.
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🔬</div>
+                        <div>
+                            <div class="component-name">analyze-research-project</div>
+                            <div class="component-type"><span class="badge orchestrator">Orchestrator</span> Phase 2</div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Parallel paper analysis with 15 concurrent subagents, validation, and quality checking.
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🧬</div>
+                        <div>
+                            <div class="component-name">synthesize-research-project</div>
+                            <div class="component-type"><span class="badge orchestrator">Orchestrator</span> Phase 3</div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        7-level hierarchical synthesis with routing, allocation, extraction, verification, and aggregation.
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.3rem;">Core Skills (6)</h3>
+            <div class="architecture-grid">
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🔍</div>
+                        <div>
+                            <div class="component-name">paper-search</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Search 9 academic APIs (Semantic Scholar, OpenAlex, arXiv, CrossRef, PubMed, CORE, BASE, DOAJ, Unpaywall).
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">📄</div>
+                        <div>
+                            <div class="component-name">pdf-preprocess</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Convert PDFs to markdown chunks (max 1000 lines per chunk) with metadata tracking.
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🤖</div>
+                        <div>
+                            <div class="component-name">paper-analyze</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Orchestrate parallel paper analysis with subagent spawning and validation.
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">✨</div>
+                        <div>
+                            <div class="component-name">paper-synthesize</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Cross-paper pattern extraction and synthesis (used within synthesize-research-project).
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">❓</div>
+                        <div>
+                            <div class="component-name">paper-query</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Query analyzed papers with 3-level progressive disclosure (frontmatter → index → chunks).
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">📊</div>
+                        <div>
+                            <div class="component-name">paper-manage</div>
+                            <div class="component-type"><span class="badge skill">Skill</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Manage paper collections, view statistics, and track progress.
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.3rem;">Shared Components (2)</h3>
+            <div class="architecture-grid">
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">📋</div>
+                        <div>
+                            <div class="component-name">paper-analyze-core</div>
+                            <div class="component-type"><span class="badge">Methodology</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Shared 7-step analysis methodology loaded by subagents (internal use only, not user-invocable).
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-header">
+                        <div class="component-icon">🎯</div>
+                        <div>
+                            <div class="component-name">SKILL.md</div>
+                            <div class="component-type"><span class="badge">Router</span></div>
+                        </div>
+                    </div>
+                    <div class="component-desc">
+                        Master router that directs user requests to appropriate orchestrators and skills.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Synthesis Section -->
+        <div id="synthesis" class="section">
+            <h2 class="section-title">7-Level Synthesis Architecture</h2>
+            <p class="section-subtitle">6 out of 7 levels are deterministic Python scripts for reproducibility and cost efficiency</p>
+
+            <div class="levels-flow">
+                <!-- L1 -->
+                <div class="level-row script">
+                    <div class="level-badge"><span class="badge script">Script</span> L1</div>
+                    <div class="level-card">
+                        <h4>Level 1: Routing</h4>
+                        <p>Boolean chunk lookup by field - determines which papers have data for each extraction field</p>
+                        <div class="level-output">Output: _synthesis_routing.yaml</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L2 -->
+                <div class="level-row script">
+                    <div class="level-badge"><span class="badge script">Script</span> L2</div>
+                    <div class="level-card">
+                        <h4>Level 2: Allocation</h4>
+                        <p>Greedy bin-packing algorithm packs chunks into 70k token batches + calculates Level 7 budget</p>
+                        <div class="level-output">Output: _subagent_plan.yaml</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L3 -->
+                <div class="level-row script">
+                    <div class="level-badge"><span class="badge script">Script</span> L3</div>
+                    <div class="level-card">
+                        <h4>Level 3: Prompts</h4>
+                        <p>Generate INPUT CONTRACT per batch with scope boundaries to prevent drift</p>
+                        <div class="level-output">Output: 45× _prompt_{batch_id}.md</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L4 -->
+                <div class="level-row subagent">
+                    <div class="level-badge"><span class="badge subagent">Subagent</span> L4</div>
+                    <div class="level-card">
+                        <h4>Level 4: Extraction</h4>
+                        <p>15 concurrent subagents extract patterns with citations in parallel (~10 min for 23 papers)</p>
+                        <div class="level-output">Output: _batch_{field}_{N}.yaml</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L5 -->
+                <div class="level-row script">
+                    <div class="level-badge"><span class="badge script">Script</span> L5</div>
+                    <div class="level-card">
+                        <h4>Level 5: Verification</h4>
+                        <p>10% sample quote-line checking with ±5 line tolerance, 90% threshold to pass</p>
+                        <div class="level-output">Output: _verification_report.yaml</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L6 -->
+                <div class="level-row script">
+                    <div class="level-badge"><span class="badge script">Script</span> L6</div>
+                    <div class="level-card">
+                        <h4>Level 6: Aggregation</h4>
+                        <p>Fuzzy deduplication using 90% similarity threshold to merge duplicate patterns</p>
+                        <div class="level-output">Output: _synthesis_{field}.yaml</div>
+                    </div>
+                    <div class="level-connector"></div>
+                </div>
+
+                <!-- L7 -->
+                <div class="level-row subagent">
+                    <div class="level-badge"><span class="badge subagent">Subagent</span> L7</div>
+                    <div class="level-card">
+                        <h4>Level 7: Report</h4>
+                        <p>Narrative synthesis with cross-field insights and thematic connections</p>
+                        <div class="level-output">Output: _synthesis_report.md</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.3rem;">Gap Fixes Implemented</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Gap</th>
+                        <th>Issue</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>G2</strong></td>
+                        <td>No token budget for L7</td>
+                        <td>L2 calculates budget, splits if >75k synthesis tokens</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G13</strong></td>
+                        <td>No input scope control</td>
+                        <td>L3 generates INPUT CONTRACT per prompt</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G15</strong></td>
+                        <td>Can't verify citations</td>
+                        <td>L5 quote-line verification (10% sample, 90% threshold)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G19</strong></td>
+                        <td>Too-generic fields</td>
+                        <td>L1 sparsity check (>80% match = warning)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G22a</strong></td>
+                        <td>Missing research context</td>
+                        <td>L3 includes research_purpose in prompts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G22b</strong></td>
+                        <td>Missing synthesis goals</td>
+                        <td>L3 includes synthesis_goals in prompts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features" class="section">
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">What makes the Nexus Research Algorithm powerful and reliable</p>
+
+            <div class="feature-grid" style="margin-top: 2rem;">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">9 Academic APIs</div>
+                    <div class="feature-desc">1B+ documents across Semantic Scholar, OpenAlex, arXiv, CrossRef, PubMed, CORE, BASE, DOAJ, Unpaywall</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">15 Concurrent Subagents</div>
+                    <div class="feature-desc">Parallel analysis and synthesis for maximum speed without sacrificing quality</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Anti-Hallucination</div>
+                    <div class="feature-desc">3-point evidence recording, SHA256 hash verification, chunk:line citations</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <div class="feature-title">Multi-Layer Validation</div>
+                    <div class="feature-desc">Schema checks, evidence verification, quote-line validation (10% sample, 90% threshold)</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <div class="feature-title">Cost-Effective</div>
+                    <div class="feature-desc">6/7 synthesis levels are free Python scripts, only L4 & L7 use LLMs</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Schema v2.3</div>
+                    <div class="feature-desc">Chunk-level field tracking (true/partial/false), synthesis-ready indexing</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Progressive Disclosure</div>
+                    <div class="feature-desc">3-level query system: frontmatter scan → index reading → chunk loading</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-title">Context Recovery</div>
+                    <div class="feature-desc">_resume.md checkpoints for seamless continuation after compaction</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Smart Allocation</div>
+                    <div class="feature-desc">Pre-calculated in Phase 1 Step 12, optimized for 74k token budget per subagent</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Fuzzy Deduplication</div>
+                    <div class="feature-desc">L6 aggregation with 90% similarity threshold merges duplicate patterns</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <div class="feature-title">INPUT CONTRACT</div>
+                    <div class="feature-desc">L3 generates scope boundaries per batch to prevent synthesis drift</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-title">Quality Gates</div>
+                    <div class="feature-desc">User approval checkpoints at selection, acquisition, and readiness phases</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.3rem;">Token Budget Management</h3>
+            <div class="highlight-box">
+                <strong>100k Context Window Breakdown:</strong><br>
+                • Methodology: 3k tokens<br>
+                • Briefing: 2k tokens<br>
+                • Metadata: 0.5k tokens<br>
+                • Log Overhead: 3.5k tokens<br>
+                • <strong>Paper Content: 74k tokens (usable budget)</strong><br>
+                • Output Buffer: 17k tokens
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.3rem;">Validation Thresholds</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Pass</th>
+                        <th>Warn</th>
+                        <th>Fail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Frontmatter completeness</td>
+                        <td>100%</td>
+                        <td>&lt;100%</td>
+                        <td>Missing required</td>
+                    </tr>
+                    <tr>
+                        <td>Paper reference accuracy</td>
+                        <td>100%</td>
+                        <td>&gt;90%</td>
+                        <td>&lt;90%</td>
+                    </tr>
+                    <tr>
+                        <td>Spot-check verification</td>
+                        <td>&gt;90%</td>
+                        <td>70-90%</td>
+                        <td>&lt;70%</td>
+                    </tr>
+                    <tr>
+                        <td>Coverage</td>
+                        <td>&gt;80%</td>
+                        <td>60-80%</td>
+                        <td>&lt;60%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active state from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active state to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Fade in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

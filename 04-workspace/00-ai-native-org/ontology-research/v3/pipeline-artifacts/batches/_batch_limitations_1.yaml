@@ -1,0 +1,103 @@
+---
+batch_id: "limitations_1"
+field: limitations
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 5
+patterns_found: 19
+---
+
+patterns:
+  - name: "Mismatch Between Bunge's Ontology and Conceptual Modeling Requirements"
+    chunk_ref: "01-UFO (Chunk 1:155-161)"
+    quote: "it soon became clear that there was a mismatch between the purposes for which Bunge's ontology was developed and the requirements of ontological foundations for conceptual modeling"
+    description: "UFO was developed because existing ontological frameworks like Bunge-Wand-Weber had fundamental limitations when applied to conceptual modeling. BWW predictions conflicted with modeler intuitions and practical knowledge, particularly regarding reified relationships which Jackendoff's semantic structures and practitioners accepted but BWW rejected."
+
+  - name: "GFO Theory of Relations Subject to Bradley's Regress"
+    chunk_ref: "01-UFO (Chunk 1:186-190)"
+    quote: "the GFO theory of relations is subject to the so-called Bradley's Regress and, hence, it can only be instantiated by infinite (logical) models. This feature renders it ill-suited for most conceptual modeling applications"
+    description: "The General Formal Ontology (GFO) has a fundamental theoretical limitation: its theory of relations leads to Bradley's Regress, requiring infinite logical models for instantiation. This makes it practically unusable for conceptual modeling applications which require finite, tractable models."
+
+  - name: "DOLCE Lacks Universal Category for Types"
+    chunk_ref: "01-UFO (Chunk 1:185-186)"
+    quote: "DOLCE does not include universal as a category (DOLCE was designed as an ontology of particulars)"
+    description: "DOLCE foundational ontology is limited in scope because it was designed only for particulars (individual entities) and does not include a category for universals/types. This limits its applicability for conceptual modeling which requires both particulars and types."
+
+  - name: "GFO Lacks Theory of Universal Types"
+    chunk_ref: "01-UFO (Chunk 1:184-185)"
+    quote: "GFO's theory of universals still does not recognize these notions"
+    description: "GFO ontology lacks recognition of important conceptual modeling notions like types, roles, phases/states, and mixins that are pervasive in the conceptual modeling literature but have no precise definitions or consensus in GFO."
+
+  - name: "DOLCE Lacks Theory of Relational Properties"
+    chunk_ref: "01-UFO (Chunk 1:186-188)"
+    quote: "DOLCE still does not include a theory of particularized relational properties (relational qualities)"
+    description: "DOLCE foundational ontology is limited because it lacks a theory of particularized relational properties (relational qualities), which are essential for modeling relationships and their properties in conceptual modeling applications."
+
+  - name: "Incomplete Constitution Theory Due to Missing Grounding Theory"
+    chunk_ref: "01-UFO (Chunk 1:987-989)"
+    quote: "we advocate that a complete theory of constitution requires a proper theory of grounding. For this reason, we postpone proposing a complete theory for the former relation in UFO until we can fully advance a complete theory of the latter relation"
+    description: "UFO acknowledges an incomplete theory of constitution relationships because it requires a proper theory of grounding which has not yet been fully developed. Constitution relies on grounding for explaining asymmetric dependence and derivation of properties from constituents."
+
+  - name: "OWL Entailment is Undecidable"
+    chunk_ref: "02-KG (Chunk 3:895-901)"
+    quote: "given two graphs, deciding if the first entails the second - per the notion of entailment we have defined and for all of the ontological features listed - is undecidable: no (finite) algorithm for such entailment can exist that halts on all inputs"
+    description: "A fundamental computational limitation of OWL ontology reasoning: full entailment checking is undecidable. No finite algorithm can correctly determine entailment for all possible inputs with all OWL features enabled. This forces practical systems to use incomplete reasoning or restricted feature sets."
+
+  - name: "Rules Cannot Fully Capture OWL Semantics"
+    chunk_ref: "02-KG (Chunk 4:45-49)"
+    quote: "these rules are likewise incomplete as such rules cannot fully capture negation (e.g., Complement), existentials (e.g., Some Values), universals (e.g., All Values), or counting (e.g., Cardinality and Qualified Cardinality)"
+    description: "Rule-based reasoning systems (like OWL 2 RL/RDF) have inherent expressiveness limitations. They cannot fully capture important ontological features including negation, existential quantification, universal quantification, and cardinality constraints."
+
+  - name: "DL Reasoning Prohibitive Computational Complexity"
+    chunk_ref: "02-KG (Chunk 4:203-209)"
+    quote: "Due to their prohibitive computational complexity - where for example, disjunction may lead to an exponential number of branching possibilities - such reasoning strategies are not typically applied in the case of large-scale data"
+    description: "Description Logic tableau-based reasoning, while complete for expressive DLs, has prohibitive computational complexity. Disjunctions lead to exponential branching possibilities, making it impractical for large-scale knowledge graph data. This forces a tradeoff between expressiveness and scalability."
+
+  - name: "TransE Cannot Handle Multiple Target Relations"
+    chunk_ref: "02-KG (Chunk 5:25-29)"
+    quote: "TransE can be too simplistic; for example, in Figure 24, bus not only transforms San Pedro to Moon Valley, but also to Arica, Calama, and so forth. TransE will, in this case, aim to give similar vectors to all such target locations, which may not be feasible"
+    description: "The TransE embedding model has a fundamental limitation: it cannot properly handle one-to-many or many-to-many relations. When an entity has multiple objects for the same relation, TransE tries to assign similar vectors to all targets, which may be infeasible and conflicts with other edges."
+
+  - name: "TransE Assigns Zero Vector to Cyclical Relations"
+    chunk_ref: "02-KG (Chunk 5:34-36)"
+    quote: "TransE will also tend to assign cyclical relations a zero vector, as the directional components will tend to cancel each other out"
+    description: "TransE has a mathematical limitation with symmetric or cyclical relations. For relations where the source and target can be the same or bidirectional, the directional translation components cancel out, resulting in a zero vector that fails to capture the relation's meaning."
+
+  - name: "DistMult Cannot Capture Edge Direction"
+    chunk_ref: "02-KG (Chunk 5:204-205)"
+    quote: "the plausibility of s p o will always be equal to that of o p s; in other words, DistMult does not consider edge direction"
+    description: "The DistMult embedding model has a fundamental symmetry limitation: its scoring function treats edges as undirected. The plausibility of an edge is identical whether read forward or backward, making it unable to model directed or asymmetric relations."
+
+  - name: "Materialisation Can Become Unfeasibly Large"
+    chunk_ref: "02-KG (Chunk 4:60-64)"
+    quote: "depending on the rules and the data, the materialised graph may become unfeasibly large to manage"
+    description: "Rule-based materialisation (forward chaining) for reasoning has a scalability limitation. Depending on the rules and data, the materialised graph containing all inferred facts may grow to sizes that are impractical to store and manage."
+
+  - name: "Graph Parallel Frameworks Limited Expressiveness"
+    chunk_ref: "02-KG (Chunk 4:557-561)"
+    quote: "such frameworks - based on message passing between neighbours - have limitations: not all types of analytics can be expressed in such frameworks"
+    description: "Graph parallel frameworks using systolic abstraction (like Pregel, GraphX) have expressiveness limitations. Not all graph analytics can be expressed through neighbor-based message passing. They are proven to be only as powerful as the Weisfeiler-Lehman graph isomorphism test for distinguishing structures."
+
+  - name: "Shapes Languages Semantic Problems with Recursion and Negation"
+    chunk_ref: "02-KG (Chunk 2:336-357)"
+    quote: "shapes languages that freely combine recursion and negation may lead to semantic problems, depending on how their semantics are defined"
+    description: "Validating schema languages (like SHACL, ShEx) face semantic paradoxes when combining recursion with negation (the barber paradox). A shape can reference itself with negation, creating undecidable conformance. Various workarounds exist (stratification, partial assignments, stable models) but limit expressiveness."
+
+  - name: "Neural Embedding Models Lack Interpretability"
+    chunk_ref: "02-KG (Chunk 5:653-659)"
+    quote: "such models are often difficult to explain or understand. For example, knowledge graph embeddings might predict the edge SCL flight ARI as being highly plausible, but they will not provide an interpretable model to help understand why"
+    description: "Knowledge graph embeddings and neural models suffer from a fundamental interpretability limitation. They can predict plausibility but cannot explain why - the reasoning is encoded in opaque matrices of learned parameters that do not provide human-understandable justification."
+
+  - name: "Out-of-Vocabulary Problem for Embeddings"
+    chunk_ref: "02-KG (Chunk 5:660-665)"
+    quote: "Such approaches also suffer from the out-of-vocabulary problem, where they are unable to provide results for edges involving previously unseen nodes or edges"
+    description: "Embedding-based approaches cannot handle novel entities not seen during training. If a new node is added to the graph, the model lacks an entity embedding for it and must be retrained before making predictions about edges involving that node."
+
+  - name: "Differentiable Rule Mining Limited to Path-Like Rules"
+    chunk_ref: "02-KG (Chunk 5:907-909)"
+    quote: "These differentiable rule mining techniques are, however, currently limited to learning path-like rules"
+    description: "Current differentiable rule mining approaches (NeuralLP, DRUM) can only learn path-like rules of the form ?x p1 ?y1 p2 ... pn ?yn pn+1 ?z => ?x p ?z. They cannot learn more complex rule patterns with branching or multiple connected components in the rule body."
+
+  - name: "RDF* Limited Context Flexibility"
+    chunk_ref: "02-KG (Chunk 3:82-92)"
+    quote: "The least flexible option is RDF*, which, in the absence of an edge id, does not permit different groups of contextual values to be assigned to an edge"
+    description: "RDF* is the least flexible option among higher-arity representations for modeling context. Without an edge id, it cannot associate different groups of contextual values to the same edge. For example, representing that a president served from 2006-2010 AND 2014-2018 requires creating separate nodes rather than annotating a single edge with multiple temporal contexts."

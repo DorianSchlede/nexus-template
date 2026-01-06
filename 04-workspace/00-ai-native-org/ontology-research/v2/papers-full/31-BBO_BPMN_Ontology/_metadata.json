@@ -1,0 +1,17 @@
+{
+  "source_pdf": "31-BBO_BPMN_Ontology.pdf",
+  "processed_at": "2025-12-27T22:54:51.282419",
+  "max_lines_per_chunk": 1000,
+  "overlap_lines": 100,
+  "total_chunks": 1,
+  "total_lines": 644,
+  "total_chars": 39916,
+  "chunks": [
+    {
+      "filename": "31-BBO_BPMN_Ontology_1.md",
+      "chunk_number": 1,
+      "line_count": 644,
+      "char_count": 39916
+    }
+  ]
+}

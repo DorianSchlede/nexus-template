@@ -1,0 +1,134 @@
+verified_at: '2025-12-29T11:25:51.562517'
+sample_rate: 0.1
+batches_checked: 26
+patterns_sampled: 44
+patterns_verified: 8
+patterns_failed: 36
+failures:
+- pattern: Interpretation as Abstraction Bridge
+  chunk_ref: 02-Knowledge_Graphs (Chunk 3:361-394)
+  expected_quote: We can abstractly define an interpretation of a data graph as being
+    composed of ...
+  actual_at_lines: _4.1.1_ _Interpretations._ We as humans may _interpret_ the node
+    [Santiago] in t...
+  verdict: FAIL - Quote mismatch
+- pattern: Multi-Agent Framework Orchestration
+  chunk_ref: 03-PROV-AGENT (Chunk 1:141-147)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Graph Neural Network for Agent Learning
+  chunk_ref: 02-Knowledge_Graphs (Chunk 15:385-395)
+  expected_quote: A recursive graph neural network (RecGNN) is a pair of functions...
+    Agg computes...
+  actual_at_lines: We first abstractly define a recursive graph neural network.   _Definition
+    B.60 ...
+  verdict: FAIL - Quote mismatch
+- pattern: Ontology-Guided Semantic Reasoning
+  chunk_ref: 02-Knowledge_Graphs (Chunk 1:94-98)
+  expected_quote: Standard knowledge representation formalisms - such as ontologies
+    and rules - ca...
+  actual_at_lines: knowledge representation formalisms – such as ontologies [70, 239,
+    366] and rule...
+  verdict: FAIL - Quote mismatch
+- pattern: Provenance Query Demonstration
+  chunk_ref: 03-PROV-AGENT (Chunk 1:487-489)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Different From Relationship
+  chunk_ref: 02-Knowledge_Graphs (Chunk 3:485-487)
+  expected_quote: two terms refer to different entities, where, e.g., Valparaiso diff.
+    from Region...
+  actual_at_lines: two terms refer to _different_ entities, where, e.g., [Valparaíso]
+    diff. from Re...
+  verdict: FAIL - Quote mismatch
+- pattern: Symmetric Property
+  chunk_ref: 02-Knowledge_Graphs (Chunk 3:595)
+  expected_quote: 'Symmetric: p type Symmetric, x p y iff y p x, nearby type Symmetric'
+  actual_at_lines: Symmetric _𝑝_ type Symmetric _𝑥_ _𝑝_ _𝑦_ iff _[𝑦]_ _𝑝_ _𝑥_ nearby
+    type Symmetric
+  verdict: FAIL - Quote mismatch
+- pattern: Subclass Relationship
+  chunk_ref: 02-Knowledge_Graphs (Chunk 2:116-118)
+  expected_quote: children are defined to be subclasses of their parents such that
+    if we find an e...
+  actual_at_lines: ' defined to be _subclasses_ of their parents such that if we find
+    an edge [EID15...'
+  verdict: FAIL - Quote mismatch
+- pattern: Graph Pattern Entity Variables
+  chunk_ref: 02-Knowledge_Graphs (Chunk 13:457-460)
+  expected_quote: We define a directed edge-labelled graph pattern as a tuple Q =
+    (V, E, L), where...
+  actual_at_lines: _Definition B.9 (Directed edge-labelled graph pattern)._ We define
+    a _directed e...
+  verdict: FAIL - Quote mismatch
+- pattern: Timeliness Definition
+  chunk_ref: 02-Knowledge_Graphs (Chunk 7:68-70)
+  expected_quote: Timeliness is the degree to which the knowledge graph is currently
+    up-to-date wi...
+  actual_at_lines: _7.1.3_ _Timeliness_ is the degree to which the knowledge graph
+    is currently up-...
+  verdict: FAIL - Quote mismatch
+- pattern: AIModel Metadata Entity
+  chunk_ref: 03-PROV-AGENT (Chunk 1:289-291)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Ontology-Based Entailment
+  chunk_ref: 02-Knowledge_Graphs (Chunk 3:264-270)
+  expected_quote: an answer (Nam) could be automatically entailed were we to state
+    that x being a ...
+  actual_at_lines: ' Festival _entails_ that _𝑥_ is a Festival, or that _𝑥_ having
+    venue _𝑦_ in city...'
+  verdict: FAIL - Quote mismatch
+- pattern: Inverse Functional Property
+  chunk_ref: 02-Knowledge_Graphs (Chunk 3:605)
+  expected_quote: 'Inv. Functional: p type Inv. Functional means x1 p y p x2 implies
+    x1 = x2. Examp...'
+  actual_at_lines: Inv. Functional _𝑝_ type Inv. Functional _𝑥_ 1 _𝑝_ _𝑦_ _𝑝_ _𝑥_
+    2 implies _[𝑥]_ 1...
+  verdict: FAIL - Quote mismatch
+- pattern: Shape-Based Relationship Validation
+  chunk_ref: 02-Knowledge_Graphs (Chunk 2:250-277)
+  expected_quote: A shape targets a set of nodes in a data graph and specifies constraints
+    on thos...
+  actual_at_lines: A standard way to define a validating schema for graphs is using
+    _shapes_ [296, ...
+  verdict: FAIL - Quote mismatch
+- pattern: Entity-Edge-Encryption Relationship
+  chunk_ref: 02-Knowledge_Graphs (Chunk 8:272-305)
+  expected_quote: more fine-grained encryption can be performed for individual nodes
+    or edge-label...
+  actual_at_lines: _9.3.3_ _Encryption._ Rather than internally controlling usage,
+    the tourist boar...
+  verdict: FAIL - Quote mismatch
+- pattern: AIAgent-Tool Execution Relationship
+  chunk_ref: 03-PROV-AGENT (Chunk 1:278-292)
+  verdict: 'FAIL - Chunk file not found: 03-PROV-AGENT_1.md'
+- pattern: Assertional vs Terminological Entities (A-Box/T-Box)
+  chunk_ref: 02-Knowledge_Graphs (Chunk 4:152-159)
+  expected_quote: Assertional axioms can be either unary class relations on individuals,
+    such as C...
+  actual_at_lines: claims, known as _axioms_, about these elements. _Assertional axioms_
+    can be eit...
+  verdict: FAIL - Quote mismatch
+- pattern: Tensor/Vector Entity Types (Embeddings)
+  chunk_ref: 02-Knowledge_Graphs (Chunk 15:4-7)
+  expected_quote: We use indexed parentheses - such as (x)_i, (X)_ij, or (X)_i1...in
+    - to denote e...
+  actual_at_lines: matrices, and tensors, respectively. If a vector x ∈ R _[𝑎]_ is
+    used in a contex...
+  verdict: FAIL - Quote mismatch
+- pattern: A-Box, T-Box, R-Box Entities
+  chunk_ref: 02-Knowledge_Graphs (Chunk 14:342-345)
+  expected_quote: 'A DL knowledge base K is defined as a tuple (A, T, R), where A
+    is the A-Box: a s...'
+  actual_at_lines: _Definition B.43 (DL knowledge base)._ A _DL knowledge base_ K
+    is defined as a t...
+  verdict: FAIL - Quote mismatch
+- pattern: AMIE Rule Mining vs Differentiable Rule Mining
+  chunk_ref: 02-Knowledge_Graphs (Chunk 6:3-10)
+  expected_quote: These differentiable rule mining techniques are, however, currently
+    limited to l...
+  actual_at_lines: that some edge labels are more/less likely to follow others in
+    the rules – for e...
+  verdict: FAIL - Quote mismatch
+stats:
+  verification_rate: 18.2%
+  threshold: 90%
+  verdict: FAIL

@@ -1,0 +1,548 @@
+project: c:\Users\dsber\infinite\auto-company\strategy-nexus\02-projects\09-ontologies-research-v22-archive
+generated_at: '2025-12-29T11:09:34.491456'
+algorithm: boolean_lookup
+fields:
+  entity_types:
+    description: Core entity types defined (e.g., Agent, Activity, Entity, Endurant,
+      Perdurant)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: partial
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: partial
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: partial
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: partial
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  entity_definitions:
+    description: Formal definitions and distinguishing characteristics of each entity
+    priority: high
+    sparsity_warning: true
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: partial
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: partial
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 12
+      fields_found_state: partial
+      token_count: 12437
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: partial
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: partial
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+    match_rate: 81.2%
+  entity_relationships:
+    description: Relationships between entities (structural, behavioral, organizational)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: partial
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: partial
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: partial
+      token_count: 10219
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  entity_count:
+    description: Number of entity classes/types in the framework and rationale
+    priority: medium
+    sparsity_warning: false
+    chunks: []
+  abstraction_level:
+    description: Level of abstraction (foundational, domain, application) and purpose
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: partial
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: partial
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: partial
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: partial
+      token_count: 10219
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  framework_comparison:
+    description: How this ontology compares to others (UFO, PROV-O, BBO, ArchiMate,
+      TOGAF, OCEL)
+    priority: high
+    sparsity_warning: true
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: partial
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: partial
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 10
+      fields_found_state: partial
+      token_count: 12832
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 12
+      fields_found_state: partial
+      token_count: 12437
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: partial
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+    match_rate: 87.5%
+  methodology:
+    description: Top-down (theoretical) vs bottom-up (empirical) approach
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: partial
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: partial
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: partial
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: partial
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8960
+  ai_integration:
+    description: How ontology enables AI agents, LLMs, RAG, planning, guardrails
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  agent_modeling:
+    description: How agents/actors are modeled (autonomous, intentional, role-based)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: partial
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  agentic_workflows:
+    description: Multi-agent systems, agent orchestration, tool use, planning strategies
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  generative_ai_patterns:
+    description: LLM reasoning, chain-of-thought, ReAct, function calling, structured
+      outputs
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  agent_ontology_integration:
+    description: How AI agents interact with ontologies (RAG, KG querying, ontology-guided
+      reasoning)
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: partial
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  empirical_evidence:
+    description: Process mining data, enterprise logs, real-world validation
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: partial
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+  limitations:
+    description: What the ontology cannot capture (tacit knowledge, improvisation,
+      etc.)
+    priority: medium
+    sparsity_warning: true
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: partial
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: partial
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: partial
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: partial
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: partial
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 9
+      fields_found_state: 'true'
+      token_count: 12745
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: partial
+      token_count: 8960
+    match_rate: 81.2%
+  tools_standards:
+    description: Technical implementations (OWL, RDF, BPMN, CMMN, DMN, OCEL 2.0)
+    priority: medium
+    sparsity_warning: true
+    chunks:
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 9906
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 10417
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 8789
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 10216
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 11473
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 10926
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 11034
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 11284
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 10
+      fields_found_state: partial
+      token_count: 12832
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 13
+      fields_found_state: 'true'
+      token_count: 9967
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 14
+      fields_found_state: 'true'
+      token_count: 10219
+    - paper_id: 02-Knowledge_Graphs
+      chunk: 15
+      fields_found_state: 'true'
+      token_count: 7040
+    - paper_id: 03-PROV-AGENT_Unified_Provenance_for_AI_Agents
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 8960
+    match_rate: 81.2%
+stats:
+  papers_analyzed: 2
+  total_chunks: 16
+  chunks_per_field_avg: 7

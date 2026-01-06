@@ -1,0 +1,153 @@
+---
+batch_id: "empirical_evidence_3"
+field: empirical_evidence
+extracted_at: "2025-12-31T12:00:00Z"
+chunks_read: 7
+patterns_found: 28
+---
+
+patterns:
+  # Paper 06 - BFO Function Role Disposition
+  - name: "OBO Foundry Multi-Organization Adoption"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:42-46)"
+    quote: "ontologies which together form the Open Biomedical Ontologies (OBO) Foundry—including the Gene Ontology, the Foundational Model of Anatomy..."
+    description: "BFO has been empirically validated through adoption by multiple major ontology initiatives including Gene Ontology, Foundational Model of Anatomy, Protein Ontology, and Ontology for Biomedical Investigations, demonstrating cross-domain applicability."
+
+  - name: "Industry and Research Group Adoption"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:45-46)"
+    quote: "Individuals and groups in organizations such as BioPAX, Science Commons, Ontology Works, the National Cancer Institute, and Computer Task Group also utilize BFO"
+    description: "BFO's practical utility is validated by adoption across diverse organizations including commercial (Ontology Works, Computer Task Group), government (National Cancer Institute), and research consortia (BioPAX, Science Commons)."
+
+  - name: "NIH Funding as Institutional Validation"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:513-515)"
+    quote: "This work is funded by the United States National Institutes of Health (NIH) through the NIH Roadmap for Medical Research, National Center for Biomedical Ontologies"
+    description: "NIH funding through NCBO (Grant 1 U54 HG004028) provides institutional validation of the BFO framework's significance for biomedical research infrastructure."
+
+  - name: "Gene Ontology Molecular Function Production Usage"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:135-139)"
+    quote: "Functions play a central role in virtually all of the biomedical disciplines... One of the three constituent ontologies of the Gene Ontology (GO) is devoted to the representation of molecular functions"
+    description: "Empirical grounding through the Gene Ontology's molecular function ontology, which represents production-level usage of function concepts in annotating genes and gene products across biological research."
+
+  - name: "WHO ICF Classification Standard"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:138-139)"
+    quote: "the World Health Organization's International Classification of Functions, Disabilities and Health (ICF)"
+    description: "Reference to WHO's ICF as an international standard classification that operationalizes function concepts, providing real-world clinical and health policy validation of function-based ontological distinctions."
+
+  # Paper 07 - Classifying Processes Barry Smith
+  - name: "100+ Ontology Development Groups Using BFO"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:283-284)"
+    quote: "BFO provides a formal-ontological architecture and a set of very general terms and relations that are currently being used by more than 100 ontology development groups"
+    description: "BFO's empirical validation extends to over 100 ontology development groups in biology and other fields, demonstrating widespread adoption as evidence of practical utility."
+
+  - name: "Gene Ontology Success Metrics"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:190-195)"
+    quote: "It is the Gene Ontology (GO), portions of which are illustrated in Figure 1, which is the most successful ontology currently being used by scientists in reasoning with experimental data... The GO consists of three sub-ontologies, together comprehending some 30,000 terms"
+    description: "Gene Ontology cited as the most successful scientific ontology, with 30,000 terms representing biological processes, molecular functions, and cellular components, demonstrating BFO-aligned ontology effectiveness in real scientific practice."
+
+  - name: "Cross-Species Data Comparison Validation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:204-207)"
+    quote: "Because the GO is species neutral, it provides a means of comparing data pertaining to different organisms in a way which allows results gained through experimentation on non-human organisms"
+    description: "GO's species-neutral design enables empirical validation through cross-species data comparison, demonstrating practical utility in translating model organism research to human health studies."
+
+  - name: "Wiggers Diagram Physiological Validation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:931-939)"
+    quote: "consider Figure 4, which illustrates the cardiac events occurring in the left ventricle of a human heart... multiple different sorts of physiological processes, corresponding to measurements along the six distinct dimensions"
+    description: "Wiggers diagram provides empirical validation through real physiological measurement data for cardiac processes across six dimensions (aortic pressure, atrial pressure, ventricular pressure, ventricular volume, electrical activity, voltage), grounding process ontology in clinical data."
+
+  - name: "OBI Experimental Description Validation"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 1:239-252)"
+    quote: "the Ontology for Biomedical Investigations (OBI), which comprehends a set of terms which can be used to describe the attributes of experiments in biological and related domains"
+    description: "Evidence of process ontology validation through OBI, designed to unify descriptions of experimental procedures and make results computationally processable, addressing real-world problems of experimental method complexity."
+
+  - name: "RICORDO Biomedical Interoperability Reference"
+    chunk_ref: "07-Classifying_Processes_Barry_Smith (Chunk 2:104-108)"
+    quote: "these measurements reflect the variables encoded in models of human physiology created by scientists using ordinary differential equations (Bernard de Bono, Robert Hoehndorf, et al., 'The RICORDO Approach to Semantic Interoperability for Biomedical Data and Models')"
+    description: "Reference to RICORDO project implementing semantic interoperability for biomedical data models, demonstrating practical application of process measurement ontology to integrate physiological models with experimental data."
+
+  # Paper 09 - OCEL 2.0 Specification
+  - name: "40+ Process Mining Vendors Validation"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:108-114)"
+    quote: "Currently, there are over 40 vendors offering process mining software... advisory firms such as Gartner consider these to form a new and substantial category of tools. Many of the world's largest companies already use process mining"
+    description: "Commercial validation of process mining through 40+ software vendors, Gartner recognition as distinct tool category, and adoption by world's largest companies provides empirical evidence of the field's practical maturity."
+
+  - name: "ICPM Conference and Publication Growth"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:113-114)"
+    quote: "The increasing maturity of the process-mining discipline is also reflected by the success of the International Conference on Process Mining (ICPM) and the large number of process-mining papers"
+    description: "Academic validation through dedicated conference (ICPM) success and publication volume growth in conferences (BPM, CAiSE) and journals, indicating empirical research activity and community development."
+
+  - name: "OCEL 1.0 Triggered OCPM Technique Development"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:141-144)"
+    quote: "OCEL 1.0, released in 2020, was the first standard for storing OCED and triggered the development of OCPM techniques (e.g., discovering object-centric process models)"
+    description: "OCEL 1.0's release in 2020 empirically demonstrated need for object-centric event logs by catalyzing development of multiple OCPM techniques including process discovery, conformance checking, and clustering."
+
+  - name: "IEEE Task Force Survey (289 Participants)"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:265-268)"
+    quote: "In 2021, a survey was conducted by the IEEE Task Force on Process Mining. The goal was to collect requirements for a new standard... The online survey with 289 participants, spanning the roles of practitioners, researchers, software vendors and end-users"
+    description: "Large-scale survey (289 participants) including practitioners, researchers, vendors, and end-users demonstrated empirical need for object-centricity in process mining standards."
+
+  - name: "ERP/CRM/MES System Data Sources"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:134-137)"
+    quote: "OCPM starts from the actual events and objects that leave traces in ERP (Enterprise Resource Planning), CRM (Customer Relationship Management), MES (Manufacturing Execution System), and other IT systems"
+    description: "OCEL framework is empirically grounded in real enterprise system data sources (ERP, CRM, MES), demonstrating practical applicability to SAP and mainstream information systems."
+
+  - name: "Procurement Process with Compliance Violations"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:638-649)"
+    quote: "A purchase requisition (PR1) is created and approved, requesting 500 cows... Two invoices R1 and R2 are received... Mario is an unethical employee who places purchase orders of notebooks without getting proper approval"
+    description: "Realistic procurement process example including compliance violations (unauthorized purchase orders, payment blocks, override approvals), demonstrating OCEL 2.0's ability to capture real-world process complexity and fraud scenarios."
+
+  # Paper 10 - OC-PM Object-Centric Process Mining
+  - name: "Sales Order Management Case Study"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:50-52)"
+    quote: "in a sales order management system, a case may refer to all the events related to the creation and confirmation of the order, collecting and packing the different order items, the delivery, and invoicing"
+    description: "Sales order management example illustrates convergence/divergence problems with real enterprise data, demonstrating empirical motivation for object-centric approaches."
+
+  - name: "OCEL Format Multi-Implementation Support"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:529-533)"
+    quote: "Two implementations of the format exist (JSON-OCEL, supported by JSON; XML-OCEL, supported by XML; MongoDB), with tool support available for some popular languages (Java/ProM framework, Javascript, Python)"
+    description: "OCEL standard's implementation across multiple formats (JSON, XML, MongoDB) and programming languages (Java, JavaScript, Python) provides empirical evidence of practical adoption infrastructure."
+
+  - name: "OC-PM Web-Based Tool Implementation"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:139-141)"
+    quote: "comprehensive tool support (OC-PM) implementing the proposed techniques is described... available at the address https://ocpm.info"
+    description: "OC-PM tool availability as both web interface and ProM plugin at ocpm.info demonstrates empirical validation through working implementation accessible for research and practice."
+
+  - name: "Flattening Operation Backward Compatibility"
+    chunk_ref: "10-OC-PM_Object-Centric_Process_Mining (Chunk 1:555-562)"
+    quote: "A flattening operation transforms the object-centric event log into a traditional event log... This is useful because many process mining approaches are only available for traditional event logs"
+    description: "Empirical validation of backward compatibility requirement: flattening operation designed to bridge object-centric and traditional process mining, acknowledging installed base of traditional tools and gradual migration paths."
+
+  # Paper 11 - Process Mining Event Knowledge Graphs
+  - name: "Retailer Order Processing Case Study"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:36-86)"
+    quote: "Consider a retailer who took two Orders for multiple Items from the same customer... The retailer handles both orders... This process relies on 7 different types of entities. Actors (human workers) and machines (an automated warehouse)"
+    description: "Comprehensive real-world retail example with 7 entity types (Orders, Supplier Orders, Items, Invoices, Payments, Actors, Machines), including 6-day delivery promises, batching of supplier orders, and warehouse automation."
+
+  - name: "Neo4j Graph Database Implementation"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:182-184)"
+    quote: "All concepts for constructing and analyzing event knowledge graphs presented in this chapter are implemented as Cypher queries on the graph database system Neo4j"
+    description: "Complete implementation of event knowledge graph concepts as Cypher queries on Neo4j, with tutorial repository available at github.com/multi-dimensional-process-mining/eventgraph_tutorial."
+
+  - name: "Real-Life Dataset Availability"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:62-64)"
+    quote: "various real-life datasets comprising single and multiple event tables; several event knowledge graphs of real-life processes are available"
+    description: "Availability of real-life event knowledge graphs (citations 19-24) provides empirical grounding beyond synthetic examples, demonstrating practical applicability to actual process data."
+
+  - name: "Performance Spectrum Tool Implementation"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:589-592)"
+    quote: "The Performance Spectrum reveals further, far more involved patterns of process performance over time than just batching and FIFO. It is also implemented as a visual analytics tool over event data"
+    description: "Empirical validation through Performance Spectrum tool implementation, enabling fine-grained performance analysis revealing complex patterns beyond simple metrics, with demonstrated capability to identify bottlenecks."
+
+  - name: "Task Instance Pattern Detection"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:621-625)"
+    quote: "A task instance of an actor R working on an entity X materializes in an event knowledge graph as a specific subgraph... The grey rectangles highlighted in Fig. 18 shows several task instance"
+    description: "Empirical pattern detection capability: task instances identified as specific subgraph patterns where actor and entity df-paths synchronize, enabling analysis of larger units of work across multiple activities."
+
+  - name: "False Behavioral Information Detection"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 1:437-446)"
+    quote: "the event log in Table 2 contains numerous false behavioral information. Some events were duplicated... This is also known as divergence... the order of events in both traces gives false behavior information... This is also known as convergence"
+    description: "Empirical problem documentation: classical event logs produce false behavioral information through convergence (false temporal ordering) and divergence (event duplication), validated through concrete example showing 4 supplier orders appearing where only 2 exist."
+
+  - name: "Delay Root Cause Analysis"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:290-308)"
+    quote: "Pack Shipment for O1 (e27) was delayed by Item Y1 which was only ready for e27 after Receive SO (e19). In turn, e19 was delayed by Supplier Order B with Update SO (e7)"
+    description: "Empirical root cause analysis capability: event knowledge graph enables precise identification of delay cascades, showing Update SO caused supplier order delay, which delayed item delivery, which delayed pack shipment, which delayed order completion beyond 6-day promise."

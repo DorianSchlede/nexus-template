@@ -1,0 +1,1286 @@
+field: agentic_workflows
+aggregated_at: '2026-01-01T16:22:12.978454'
+batches_merged: 5
+patterns_input: 136
+patterns_output: 135
+patterns:
+- name: Agentic Workflow Definition
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:51-54)
+    quote: agentic workflows, where autonomous agents make decisions, plan tasks,
+      and coordinate with humans and other agents
+  description: Defines agentic workflows as a paradigm where autonomous AI agents
+    operate in dynamic environments, making decisions, planning tasks, and coordinating
+    with both humans and other agents across heterogeneous computing platforms including
+    edge devices, cloud systems, and HPC.
+- name: Non-Deterministic Workflow Behavior
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:81-84)
+    quote: agentic workflows are non-deterministic, shaped by near real-time data,
+      adaptive decisions, and evolving interactions
+  description: Contrasts agentic workflows with traditional static workflows - agentic
+    workflows display dynamic, cyclic behavior where agent outputs inform subsequent
+    decisions through feedback loops, unlike deterministic traditional workflows.
+- name: Agent-Centric Provenance Integration
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:102-104)
+    quote: A unified provenance graph that considers AI agent actions as first-class
+      components, on par with traditional workflow tasks
+  description: Pattern for treating AI agent actions as first-class elements in workflow
+    provenance, enabling comprehensive traceability alongside traditional workflow
+    tasks for root cause analysis and debugging.
+- name: Error Propagation Tracking
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:87-91)
+    quote: They may generate hallucinated or incorrect outputs...which can propagate
+      through the workflow, compounding errors
+  description: Addresses the challenge of error propagation in agentic workflows where
+    agent decisions influence downstream tasks, requiring provenance tracking to assess
+    correctness and trace error origins.
+- name: Multi-Agent Coordination Frameworks
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:141-145)
+    quote: LangChain, AutoGen, LangGraph, Academy, and CrewAI support multi-agent
+      systems that interact through prompt exchanges
+  description: Identifies established multi-agent orchestration frameworks that enable
+    agent interaction through prompt exchanges, foundation model calls, and shared
+    context using the Model Context Protocol (MCP).
+- name: Agent-Tool Association Pattern
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:285-287)
+    quote: an AI agent can be associated with one or many tool executions (AgentTool)
+      and each tool may be informed by...AIModelInvocations
+  description: PROV-AGENT pattern where agents are associated with tool executions,
+    each tool informed by model invocations that use prompts, specific AI models,
+    and generate response data attributed to the agent.
+- name: Cross-Facility Agent Distribution
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:151-159)
+    quote: managing execution across physically and logically distributed facilities
+      that include edge devices, cloud services, and HPC systems
+  description: Pattern for agentic workflows spanning distributed infrastructure -
+    edge devices for data collection, cloud for AI services, HPC for computation -
+    requiring coherent understanding of agent interactions across systems.
+- name: Feedback Loop Decision Influence
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:439-445)
+    quote: the decision made for each layer informs the decision logic in the next,
+      enabling the system to learn over the course of a print
+  description: Pattern where agent decisions in iterative workflows influence subsequent
+    decisions, creating feedback loops where errors can propagate across iterations,
+    demonstrated in additive manufacturing use case.
+- name: Multi-Agent Scientific Discovery System
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:30-34)
+    quote: 'SciAgents...leverages three core concepts: (1) large-scale ontological
+      knowledge graphs, (2) a suite of large language models and data retrieval tools,
+      and (3) multi-agent systems with in-situ learning'
+  description: Framework combining ontological knowledge graphs, multiple LLMs with
+    retrieval tools, and multi-agent systems with in-situ learning capabilities for
+    autonomous scientific discovery and hypothesis generation.
+- name: Specialized Agent Role Assignment
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:126-130)
+    quote: Each agent in the system is assigned a distinct role, optimized through
+      complex prompting strategies to ensure that every subtask is tackled with targeted
+      expertise
+  description: Pattern of strategic division of labor where each agent has a distinct
+    role optimized through prompting, enabling the AI system to manage scientific
+    research complexity through effective collaboration.
+- name: Pre-Programmed vs Automated Agent Interactions
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:186-191)
+    quote: In the first approach...interactions between agents are pre-programmed
+      and follow a predefined sequence...the second approach features fully automated
+      agent interactions
+  description: 'Two distinct multi-agent strategies: pre-programmed sequential interactions
+    ensuring consistency and reliability, versus fully automated flexible interactions
+    that dynamically respond to evolving research context.'
+- name: Human-in-the-Loop Agent Orchestration
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:191-194)
+    quote: This second strategy also incorporates human-in-the-loop interactions,
+      enabling human intervention at various stages of research development
+  description: Pattern allowing expert feedback, hypothesis refinement, and strategic
+    guidance within automated multi-agent systems, enhancing quality and relevance
+    of AI-generated scientific ideas.
+- name: Knowledge Graph Path Sampling
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:239-246)
+    quote: our study employs a random path approach...the random approach infuses
+      the path with a richer array of concepts and relationships
+  description: Novel sampling strategy using random paths rather than shortest paths
+    to extract sub-graphs from knowledge graphs, enabling broader exploration and
+    more novel hypothesis generation.
+- name: Ontologist Agent for Relationship Analysis
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:289-296)
+    quote: the role of the ontologist agent is instrumental. It applies advanced reasoning
+      and inference techniques to synthesize and interpret the complex web of data
+  description: Specialized agent role that transitions from static knowledge retrieval
+    to dynamic knowledge generation by examining connections, identifying research
+    gaps, and proposing new angles of inquiry.
+- name: Hierarchical Hypothesis Generation
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:356-365)
+    quote: 'The scientist agent harnesses the extensive knowledge...to propose novel
+      research ideas...addressing seven key aspects: hypothesis, outcome, mechanisms,
+      design principles, unexpected properties, comparison, and novelty'
+  description: Structured approach where scientist agent synthesizes knowledge graph
+    data and ontologist refinements into comprehensive research proposals covering
+    seven distinct scientific aspects.
+- name: Adversarial Critique Agent Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:511-516)
+    quote: the Critic agent, responsible for thoroughly reviewing the research proposal,
+      summarizing its key points, and recommending improvements...highlighting both
+      strengths and weaknesses
+  description: Adversarial pattern where critic agent reviews proposals, identifies
+    strengths/weaknesses, suggests refinements, and poses impactful scientific questions
+    for molecular modeling and experimentation.
+- name: Autonomous Group Chat Coordination
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 2:770-773)
+    quote: dynamic interactions as developed autonomously by the multi-agent team
+      members, coordinated by the group chat manager
+  description: Pattern where a group chat manager selects working agents based on
+    current context, fostering cooperation and mutual adjustments to solve problems
+    through autonomous coordination.
+- name: Shared Memory Agent Collaboration
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 2:784-788)
+    quote: the second approach allows agents to share memory, giving them access to
+      all the content generated in previous interactions...full visibility of the
+      history of their collaboration
+  description: Contrasts filtered information passing with shared memory approach
+    where agents access complete interaction history, enabling more sophisticated
+    collaborative problem-solving.
+- name: Novelty Assessment Tool Integration
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 2:797-799)
+    quote: a tool that assesses the novelty of the proposed research ideas against
+      current literature, using Semantic Scholar API
+  description: Pattern integrating external tools (Semantic Scholar API) to evaluate
+    novelty against existing literature, enabling proactive elimination of ideas too
+    similar to prior work.
+- name: Planner-Driven Task Decomposition
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 4:9-18)
+    quote: The planner who can suggest a plan to solve the task by breaking down the
+      task into simpler sub-tasks
+  description: Agent role pattern where planner develops detailed plans, decomposes
+    tasks into manageable sub-tasks, coordinating specialist agents through systematic
+    execution steps.
+- name: Hierarchical Expansion Strategy
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:200-210)
+    quote: hierarchical expansion strategy where answers are successively refined
+      and improved, enriched with retrieved data, critiqued and amended
+  description: Process pattern from keyword selection through path sampling, structured
+    JSON generation, individual aspect expansion, critical review, and final integrated
+    document production.
+- name: Specialized Expansion Agent Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 4:1-6)
+    quote: hypothesis_agent who can expand the 'hypothesis' aspect...outcome_agent
+      who can expand the 'outcome' aspect...mechanism_agent
+  description: Pattern of seven specialized agents (hypothesis, outcome, mechanism,
+    design_principles, unexpected_properties, comparison, novelty) each expanding
+    specific aspects of research proposals.
+- name: Swarm Intelligence Modeling
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 2:139-142)
+    quote: harnessing a modular, hierarchically organized swarm of intelligence similar
+      to biological systems with multiple iterations
+  description: Bio-inspired pattern modeling multi-agent negotiation as swarm intelligence,
+    with iterative refinement during problem-solving that offers more nuanced reasoning
+    than conventional zero-shot AI responses.
+- name: Iterative Agent Negotiation
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 1:317-319)
+    quote: Agentic reasoning carefully assesses the ideas and negotiate, via adverserial
+      interactions between the agents, a sound prediction
+  description: Pattern where agents engage in adversarial interactions to negotiate
+    and refine predictions, carefully delineating research ideas through collaborative
+    yet competitive reasoning processes.
+- name: Multi-Agent Research Team Assembly
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:127-139)
+    quote: 'We have assembled a great team today to answer questions and solve tasks.
+      In attendance are: user, planner, assistant, ontologist, scientist, hypothesis_agent...'
+  description: 'The SciAgents system explicitly defines a multi-agent architecture
+    where specialized agents are assembled as a ''team'' with distinct roles. This
+    includes: user (human-in-the-loop for code execution), planner (task decomposition),
+    assistant (tool calling), ontologist (term definitions), scientist (proposal crafting),
+    and seven specialized expansion agents. This pattern demonstrates hierarchical
+    orchestration with role-based agent specialization.'
+- name: Sequential Agent Orchestration Pipeline
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:142-157)
+    quote: 'Overview of the Plan: 1. Generate Random Keywords and Knowledge Path...
+      2. Define Terms and Relationships... 3. Craft the Research Proposal... 4. Expand
+      the Research Proposal...'
+  - chunk_ref: 15-SciAgents (Chunk 10:250-253)
+    quote: Caller, please select the unexpected_properties_agent to expand on the
+      'unexpected_properties' aspect of the research proposal
+  description: 'Merged from 2 sources. A structured workflow pipeline where agents
+    execute in sequence: (1) path generation, (2) ontological definition by ontologist,
+    (3) proposal crafting by scientist, (4) parallel expansion by seven specialized
+    agents, (5) critique by critic_agent, (6) novelty/feasibility rating. This demonstrates
+    task decomposition with clear handoff points between agents.'
+- name: Knowledge Graph-Guided Research Generation
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:160-165)
+    quote: 'Generate Random Keywords and Knowledge Path: Use the generate_path function
+      to generate a knowledge path between two randomly selected keywords.'
+  description: Agents leverage a knowledge graph to generate research directions by
+    querying paths between concepts. The generate_path function returns structured
+    relationships that serve as the ontological foundation for research proposal generation.
+    This pattern integrates knowledge graph traversal with agentic reasoning.
+- name: Ontologist-Scientist Agent Handoff
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:167-182)
+    quote: 'Define Terms and Relationships: The ontologist will define each term and
+      discuss the relationships in the generated path. Craft the Research Proposal:
+      The scientist will use the definitions...'
+  description: A strict ordering constraint where the ontologist agent must process
+    knowledge graph output before the scientist agent can proceed. The scientist is
+    explicitly noted as 'ONLY allowed to speak after Ontologist'. This enforces information
+    flow and prevents hallucination by grounding proposals in defined concepts.
+- name: Seven-Aspect Proposal Expansion Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:185-198)
+    quote: The hypothesis_agent will expand the 'hypothesis' aspect. The outcome_agent
+      will expand the 'outcome' aspect. The mechanism_agent will expand the 'mechanism'
+      aspect...
+  description: 'A parallel fan-out pattern where seven specialized agents simultaneously
+    expand different aspects of a research proposal: hypothesis, outcome, mechanism,
+    design_principles, unexpected_properties, comparison, and novelty. Each agent
+    has a narrow, well-defined scope enabling parallel execution and specialized depth.'
+- name: Critic Agent Synthesis and Improvement
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:200-206)
+    quote: 'Critique and Suggest Improvements: The critic_agent will summarize, critique,
+      and suggest improvements to the research proposal.'
+  description: A final convergence step where the critic_agent aggregates outputs
+    from all seven expansion agents, synthesizes a summary, provides critical evaluation,
+    and suggests improvements. This implements quality assurance through adversarial
+    review within the multi-agent workflow.
+- name: Tool-Augmented Agent Functions
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:210-215)
+    quote: 'Rate Novelty and Feasibility: Use the rate_novelty_feasibility function
+      to rate the novelty and feasibility of the research idea.'
+  description: Agents have access to specialized tool functions (generate_path, rate_novelty_feasibility)
+    that augment their reasoning capabilities. The assistant agent serves as a tool-calling
+    intermediary, invoking functions and returning structured results to other agents
+    in the workflow.
+- name: Caller Agent as Workflow Controller
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 6:211-224)
+    quote: 'caller: I am responsible to pick the next agent to speak. I should be
+      called **immediately** after each output or conversation.'
+  description: A dedicated 'caller' agent acts as workflow controller, explicitly
+    managing agent turn-taking and sequencing. This agent must be invoked after every
+    agent output to determine the next speaker, implementing a centralized coordination
+    pattern for multi-agent conversation flow.
+- name: Human-in-the-Loop Code Execution
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 5:130-131)
+    quote: 'user: An attentive HUMAN user who can answer questions about the task,
+      and can perform tasks such as running Python code or inputting command line
+      commands at a Linux terminal...'
+  description: The workflow explicitly includes a human user agent capable of executing
+    code and terminal commands. This pattern enables the multi-agent system to leverage
+    external computation while maintaining human oversight and the ability to ground
+    agent outputs in real execution results.
+- name: Literature-Grounded Feasibility Assessment
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 6:141-200)
+    quote: 'Literature Search Results: Query 1: ''biomimetic materials microfluidic
+      chips heat transfer performance biocompatibility'' Total Results: 36 Relevant
+      Papers...'
+  description: The rate_novelty_feasibility tool performs automated literature search
+    to ground novelty and feasibility ratings in existing research. This pattern prevents
+    agents from generating proposals that duplicate existing work and ensures claims
+    are empirically validated against the scientific record.
+- name: Quantitative Hypothesis Specification
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 6:362-376)
+    quote: 'Hierarchical Structure and Crashworthiness: Rationale... Quantitative
+      Goal: We aim for a 30% increase in crashworthiness... Stiffness Memory: Quantitative
+      Goal: 85% recovery rate...'
+  description: Agents are trained to expand hypotheses with specific quantitative
+    targets (30% increase, 85% recovery rate, 10^6 cycles). This structured output
+    format ensures proposals are testable and measurable, moving beyond vague claims
+    to operationalizable research goals.
+- name: Multi-Scale Mechanism Decomposition
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 6:632-634)
+    quote: The anticipated mechanisms underlying the enhanced crashworthiness... involve
+      multi-scale interactions and processes. These mechanisms can be categorized
+      into molecular, cellular, and macroscale levels...
+  description: Mechanism agents decompose phenomena across multiple scales (molecular,
+    cellular, macroscale), providing detailed explanations at each level. This hierarchical
+    reasoning pattern enables comprehensive mechanism elucidation that spans from
+    fundamental chemistry to emergent material properties.
+- name: Iterative Design Optimization Loop
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 7:267-271)
+    quote: 'Iterative Design: Optimize the material design based on experimental results
+      and computational predictions. Iterate the design and fabrication process to
+      achieve the desired mechanical properties...'
+  description: Design principles agents specify iterative optimization loops where
+    experimental results feed back into computational models for refinement. This
+    pattern integrates simulation (FEA, MD) with experimental validation in a closed-loop
+    improvement cycle.
+- name: Unexpected Properties Prediction
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 7:301-307)
+    quote: Potential unexpected properties of the hierarchical collagen-based material
+      may arise from the complex interplay between its multi-scale structure... These
+      properties could offer additional benefits and open new avenues...
+  description: A dedicated unexpected_properties_agent predicts emergent behaviors
+    not explicitly targeted in the hypothesis (self-healing, thermal stability, tunable
+    properties). This speculative reasoning pattern expands the solution space beyond
+    initial requirements to identify potential serendipitous discoveries.
+- name: Comparative Analysis Framework
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 7:81-85)
+    quote: The comparison aspect of this research proposal involves evaluating the
+      novel hierarchical collagen-based material against traditional materials in
+      terms of crashworthiness, stiffness memory, mechanical stiffness, and dynamic
+      adaptability.
+  description: 'Comparison agents systematically evaluate proposals against multiple
+    baseline categories: traditional materials, natural analogues (nacre), existing
+    solutions, and state-of-the-art alternatives. This structured comparison pattern
+    ensures proposals demonstrate clear advantages over existing approaches.'
+- name: Novelty-Feasibility Rating Protocol
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 7:442-450)
+    quote: 'Novelty: 8/10... The proposed hypothesis is quite novel, especially in
+      the context of combining hierarchical collagen-based materials with dynamic
+      3D porous architectures... Feasibility: 7/10...'
+  description: A standardized scoring protocol rates proposals on novelty (1-10) and
+    feasibility (1-10) with explicit justification. This quantitative assessment enables
+    comparison across proposals and helps prioritize research directions based on
+    innovation potential and practical achievability.
+- name: Synthetic Biology Integration Path
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 7:338-348)
+    quote: 'Synthetic Biology Question: Can cell signaling pathways be engineered
+      to dynamically regulate the mechanical properties and self-healing capabilities...
+      Key Steps for Synthetic Biology: 1. Pathway Selection... 2. Genetic Engineering...'
+  description: 'Research proposals include explicit synthetic biology experimental
+    paths with key steps: pathway selection, genetic engineering (CRISPR), in vitro
+    experiments, property measurement, and optimization. This pattern bridges computational
+    proposals to wet-lab implementation strategies.'
+- name: Gene Circuit-Controlled Material Assembly
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 9:786-788)
+    quote: 'Gene Circuits -- controlled expression, secretion, and assembly -- Proteins:
+      Gene circuits can be designed to precisely control the behavior of proteins,
+      including their expression and assembly into structures like amyloid fibrils.'
+  description: The multi-agent system proposes using synthetic gene circuits to control
+    protein expression and assembly into functional materials (amyloid fibrils + graphene
+    composites). This pattern demonstrates agentic reasoning about programmable biological
+    systems for materials synthesis.
+- name: Multi-Agent Hypothesis Expansion
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:62-66)
+    quote: Caller, please select the outcome_agent to expand on the 'outcome' aspect
+      of the research proposal. Agent outcome_agent, please expand on the 'outcome'
+      aspect
+  description: SciAgents uses a caller-agent pattern where a central coordinator (Caller)
+    delegates specific aspects of a research proposal to specialized agents (outcome_agent,
+    mechanism_agent, design_principles_agent, etc.). Each agent expands on their designated
+    domain, demonstrating task decomposition into specialized sub-tasks.
+- name: Role-Based Agent Specialization
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:122-126)
+    quote: Caller, please select the mechanism_agent to expand on the 'mechanism'
+      aspect of the research proposal
+  description: The SciAgents system assigns specific roles to agents based on domain
+    expertise - mechanism_agent handles synthesis processes, design_principles_agent
+    handles material design, novelty_agent evaluates innovation. This pattern enables
+    multi-perspective analysis through role specialization.
+- name: Critic Agent for Result Evaluation
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:423-439)
+    quote: Caller, please select the critic_agent to summarize, critique, and suggest
+      improvements for the research proposal
+  description: A dedicated critic_agent performs meta-evaluation of the entire research
+    proposal, providing strengths, weaknesses, and suggested improvements. This represents
+    a quality control pattern in multi-agent workflows where one agent evaluates collective
+    output.
+- name: Novelty and Feasibility Rating Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:469-485)
+    quote: 'Novelty Rating: High Reasoning: The proposal introduces a unique combination...
+      Feasibility Rating: Moderate to High'
+  description: The critic_agent provides structured ratings (Novelty and Feasibility
+    on defined scales) with explicit reasoning. This pattern enables quantitative
+    assessment of qualitative research outcomes through structured agent output.
+- name: User-Agent Handoff Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:490-496)
+    quote: Agent user, please identify the single most impactful scientific question
+      that can be tackled with molecular modeling
+  description: The system includes a user agent that can be invoked to provide human-like
+    input or direction, demonstrating a hybrid human-in-the-loop pattern where agents
+    can request user intervention for key decisions.
+- name: TERMINATE Signal Pattern
+  sources:
+  - chunk_ref: 15-SciAgents (Chunk 10:641)
+    quote: TERMINATE
+  description: The multi-agent workflow uses an explicit TERMINATE signal to indicate
+    workflow completion. This pattern provides clear workflow termination semantics
+    for autonomous agent systems.
+- name: Autonomous LLM-based Agent Framework
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:23-29)
+    quote: we propose an autonomous LLM-based agent framework, called KG-Agent, which
+      enables a small LLM to actively make decisions until finishing the reasoning
+      process over KGs
+  description: KG-Agent represents an autonomous agent framework where a fine-tuned
+    LLM actively makes decisions during reasoning over knowledge graphs, without requiring
+    pre-defined interaction mechanisms or human assistance.
+- name: Multifunctional Toolbox Integration
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:26-30)
+    quote: In KG-Agent, we integrate the LLM, multifunctional toolbox, KG-based executor,
+      and knowledge memory, and develop an iteration mechanism that autonomously selects
+      the tool then updates the memory
+  description: 'The KG-Agent architecture integrates four key components: LLM planner,
+    toolbox (extraction/semantic/logic tools), KG-based executor, and knowledge memory.
+    This represents a comprehensive agentic architecture pattern for structured data
+    reasoning.'
+- name: Tool Selection and Memory Update Iteration
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:28-30)
+    quote: develop an iteration mechanism that autonomously selects the tool then
+      updates the memory for reasoning over KG
+  description: 'KG-Agent implements an iterative reasoning loop where the agent: (1)
+    selects appropriate tool, (2) executes tool via KG-executor, (3) updates knowledge
+    memory with results. This cycle repeats until reasoning is complete.'
+- name: Extraction Tools for KG Access
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:241-249)
+    quote: Extraction tools aim to facilitate the access to information from KG...
+      we design five tools to support the access to the relations (get_relation),
+      the head/tail entities
+  description: KG-Agent defines extraction tools (get_relation, get_head_entity, get_tail_entity,
+    get_entity_by_type, get_entity_by_constraint) as a tool category for retrieving
+    structured information from knowledge graphs.
+- name: Logic Tools for Data Manipulation
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:251-255)
+    quote: Logic tools aim to support basic manipulation operations on the extracted
+      KG information, including entity counting (count), entity set intersection (intersect)
+      and union (union)
+  description: 'Logic tools provide computational operations over extracted KG data:
+    count, intersect, union, judge (verification), and end (terminate reasoning).
+    These enable complex multi-hop reasoning through primitive operations.'
+- name: Semantic Tools with Pre-trained Models
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:256-259)
+    quote: Semantic tools are developed by utilizing pretrained models to implement
+      specific functions, including relation retrieval (retrieve_relation) and entity
+      disambiguation (disambiguate_entity)
+  description: Semantic tools leverage pre-trained models for natural language understanding
+    tasks like relation retrieval and entity disambiguation, bridging natural language
+    queries to structured KG operations.
+- name: Code-based Instruction Tuning
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:31-34)
+    quote: we leverage program language to formulate the multi-hop reasoning process
+      over the KG, and synthesize a code-based instruction dataset to fine-tune the
+      base LLM
+  description: KG-Agent uses program/code format to represent multi-hop reasoning
+    chains over KGs, then synthesizes instruction tuning data from these programs
+    to train the agent LLM. This enables structured reasoning via code generation.
+- name: Knowledge Memory with Four-Part Structure
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:545-550)
+    quote: It mainly contains four parts of information, i.e., natural language question,
+      toolbox definition, current KG information, and history reasoning program
+  description: 'The knowledge memory maintains: (1) original question, (2) available
+    tool definitions, (3) current KG information from recent queries, and (4) history
+    of reasoning steps. This structured memory enables context-aware tool selection.'
+- name: LLM-based Planner for Tool Selection
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:554-565)
+    quote: Based on the current knowledge memory, the LLM-based planner selects a
+      tool to interact with KG at each step... the LLM will generate one function
+      call by selecting a tool and its arguments
+  description: The LLM planner component examines current knowledge memory and generates
+    function calls (tool selection with arguments) at each reasoning step. This represents
+    autonomous decision-making for tool use.
+- name: Executor for Memory Updation
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:568-626)
+    quote: After the planner generates the function call, the KG-based executor will
+      execute it using a program compiler. It can cache or operate the intermediate
+      variables
+  description: The KG-based executor compiles and runs function calls, caches intermediate
+    results, and updates knowledge memory with new KG information. This separation
+    of planning (LLM) and execution (compiler) enables reliable tool use.
+- name: Iterative Autonomous KG-Agent
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:629-638)
+    quote: The KG-Agent framework autonomously iterates the above tool selection and
+      memory updation process to perform step-by-step reasoning, where the knowledge
+      memory is used to maintain the accessed information
+  description: KG-Agent performs multi-hop reasoning through autonomous iteration
+    of tool selection and memory update, walking on the KG along relations until reaching
+    answer entities, at which point it automatically terminates.
+- name: Pre-defined vs Autonomous Workflow Distinction
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:71-76)
+    quote: the information interaction mechanism between LLM and KG is often pre-defined
+      (e.g., following a human-crafted multi-round plan), which cannot flexibly adapt
+      to various complex tasks
+  description: KG-Agent distinguishes between pre-defined interaction mechanisms (inflexible)
+    and autonomous mechanisms (adaptive). The autonomous approach allows agents to
+    handle unintended requirements and varied difficulties dynamically.
+- name: Synergy-Augmented Methods
+  sources:
+  - chunk_ref: 16-KG-Agent (Chunk 1:54-68)
+    quote: synergy-augmented methods can benefit from the structured search on KG
+      (e.g., SPARQL) and the language understanding capacity of LLMs, achieving comparable
+      or even better performance
+  description: Synergy-augmented methods design information interaction mechanisms
+    between KG and LLMs for iterative problem-solving, combining structured graph
+    search capabilities with natural language understanding.
+- name: Divide and Conquer Strategy
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 1:65-71)
+    quote: Such systems tackle user-prompted goals by employing a divide & conquer
+      strategy, by breaking them down into smaller manageable tasks. These tasks are
+      then assigned to specialized agents
+  description: 'LLM-powered multi-agent systems employ divide-and-conquer strategy:
+    decompose complex goals into manageable tasks, assign to specialized agents with
+    dedicated roles and LLM reasoning capabilities, then synthesize results.'
+- name: Cognitive Synergy Through Collaboration
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 1:65-66)
+    quote: the cognitive synergy of multiple autonomous LLM-powered agents
+  description: Multi-agent systems leverage cognitive synergy - the combined reasoning
+    power of multiple collaborating LLM-powered agents exceeds individual agent capabilities,
+    inspired by Minsky's 'society of mind' theory.
+- name: Interaction Layer Architecture
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 1:74-81)
+    quote: LLM-powered multi-agent systems realize an interaction layer. Externally,
+      this layer facilitates the interaction between the LLM and its contextual environment...
+      Internally, the interaction layer allows for organizing the task-management
+      activity
+  description: 'The interaction layer serves dual purposes: externally interfaces
+    with data sources, tools, models, and applications; internally provides workspace
+    for agent collaboration and task management. This is a core architectural pattern.'
+- name: Balancing Autonomy and Alignment
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 1:83-91)
+    quote: One of the central challenges for the effective operation of LLM-powered
+      multi-agent architectures lies in finding the optimal balance between autonomy
+      and alignment
+  description: 'A fundamental challenge in multi-agent systems: high autonomy enables
+    complex task handling but risks straying from intended purpose; high alignment
+    ensures goal adherence but may lack flexibility. Systems must balance both.'
+- name: Goal-driven Task Management
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 1:453-461)
+    quote: Autonomous LLM-powered multi-agent systems are designed to accomplish user-prompted
+      goals... the system adeptly breaks down the complex task into smaller, manageable
+      tasks
+  description: 'Goal-driven task management is a key viewpoint comprising: decomposition
+    (breaking down goals into tasks), orchestration (distributing tasks among agents),
+    and synthesis (combining partial results into final output).'
+- name: Task-Management Agent Types
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:1-12)
+    quote: 'Task-Creation Agent: Generating new tasks... Task-Prioritization Agent:
+      Assigning urgency or importance to tasks... Task-Execution Agent: Ensuring efficient
+      task completion'
+  description: 'Three generic task-management agent types: Task-Creation Agent (generates/decomposes
+    tasks), Task-Prioritization Agent (orders tasks by urgency/dependencies), Task-Execution
+    Agent (performs assigned tasks).'
+- name: Domain Role Agents
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:14-17)
+    quote: 'Domain Role Agents: These agents are domain-specific experts. They excel
+      in specialized roles within the application domain, collaborating with peer
+      role agents when needed'
+  description: Domain Role Agents are specialized experts for specific application
+    domains (e.g., project manager, software architect, developer, QA engineer in
+    software development), enabling domain-specific multi-agent collaboration.
+- name: Technical Agents
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:19-21)
+    quote: 'Technical Agents: These agents are tech-savvies, typically tasked with
+      interfacing with technical platforms or development tools. Exemplary technical
+      agents are represented by the SQL Agent'
+  description: Technical Agents interface with technical platforms and development
+    tools (SQL Agent for databases, Python Agent for scripting), providing specialized
+    technical capabilities to the multi-agent system.
+- name: Action Types in Multi-Agent Collaboration
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:38-49)
+    quote: 'DecomposeTask: Breaking down a task into multiple sub-tasks... DelegateTask:
+      Delegating a task to another agent... ExecuteTask: Actually executing a given
+      task... EvaluateResult: Assessing the outcomes'
+  description: 'Six core action types for multi-agent collaboration: DecomposeTask,
+    CreateTask, DelegateTask, ExecuteTask, EvaluateResult, MergeResult. These atomic
+    actions compose complex agentic workflows.'
+- name: Communication Protocol Patterns
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:71-92)
+    quote: Direct collaborations involving two or more agents typically rely on prompt-driven
+      communication sequences or cycles... Strict finite processes or execution chains
+      with predefined action sequences
+  description: 'Three communication protocol patterns observed: (1) Strict finite
+    processes with predefined sequences, (2) Dialogue cycles with alternating delegate/execute
+    between two agents, (3) Multi-cycle process frameworks with dynamic agent interactions.'
+- name: Prompt Augmentation Pattern
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:56-68)
+    quote: Before the LLM receives the Agent Prompt, it may undergo Prompt Augmentation.
+      This process can integrate additional specifics like the aspects or parts of
+      the agent's Role or Memory
+  description: Prompt augmentation enriches agent prompts with role information, memory
+    excerpts, context information from previous utilization, or prepared prompt templates.
+    This is a key pattern for agent-driven prompt engineering.
+- name: Context Interaction Tool Categories
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:104-124)
+    quote: Search and Analysis Tools... Execution Tools... Reasoning Tools... Development
+      Tools... Communication Tools
+  description: 'Five tool categories for context interaction: Search/Analysis Tools
+    (data probing), Execution Tools (interfacing with applications), Reasoning Tools
+    (computational intelligence like Wolfram Alpha), Development Tools (coding/debugging),
+    Communication Tools (email/external interaction).'
+- name: Foundation Model Integration
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:150-171)
+    quote: Foundation Models refer to expansive machine learning models trained on
+      vast amounts of data... NLP Models, Computer Vision Models, Audio Models, Multimodal
+      Models
+  description: 'Multi-agent systems integrate various foundation models beyond LLMs:
+    NLP models, computer vision models, audio models, and multimodal models. This
+    enables agents to handle diverse data types and tasks.'
+- name: Autonomy Levels (L0-L2)
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:300-357)
+    quote: 'L0: Static Autonomy... L1: Adaptive Autonomy... L2: Self-Organizing Autonomy
+      - At this highest level of autonomy, LLM-powered agents emerge as the principal
+      actors, capable of self-organization'
+  description: 'Three autonomy levels: L0 (Static) - predefined rules/mechanisms;
+    L1 (Adaptive) - agents adapt within predefined frameworks; L2 (Self-Organizing)
+    - agents self-organize and dynamically tailor operations based on environmental
+    cues.'
+- name: Alignment Levels (L0-L2)
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:413-432)
+    quote: 'L0: Integrated Alignment... L1: User-Guided Alignment... L2: Real-Time
+      Responsive Alignment - the system can actively solicit user feedback user decisions
+      at critical junctures'
+  description: 'Three alignment levels: L0 (Integrated) - alignment built into system
+    architecture; L1 (User-Guided) - users configure alignment pre-runtime; L2 (Real-Time
+    Responsive) - system adapts to real-time user feedback.'
+- name: Autonomy-Alignment Matrix
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:459-469)
+    quote: By combining these two dimensions in our matrix, we provide a comprehensive
+      view of the interplay between diverse gradations of autonomy and alignment within
+      LLM-powered multi-agent systems
+  description: A 3x3 matrix combining autonomy (static/adaptive/self-organizing) and
+    alignment (integrated/user-guided/real-time) levels creates 9 distinct system
+    configurations, from Rule-Driven Automation (L0/L0) to User-Responsive Autonomy
+    (L2/L2).
+- name: Architectural Viewpoints (4+1 Model Adaptation)
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:641-676)
+    quote: Goal-driven Task Management (Functional Viewpoint)... Agent Composition
+      (Development Viewpoint)... Multi-Agent Collaboration (Process Viewpoint)...
+      Context Interaction (Physical Viewpoint)
+  description: 'Four architectural viewpoints for multi-agent systems adapted from
+    Kruchten''s 4+1 model: Goal-driven Task Management (functionality), Agent Composition
+    (structure), Multi-Agent Collaboration (dynamics), Context Interaction (environment).'
+- name: Availability-driven vs Requirements-driven Dependencies
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 2:697-801)
+    quote: Availability-driven Dependencies (Low-Autonomy System)... Requirements-driven
+      Dependencies (High-Autonomy System)
+  description: 'Two dependency types between architectural viewpoints: availability-driven
+    (low autonomy systems rely on predefined capabilities) and requirements-driven
+    (high autonomy systems adapt capabilities to goals). Mixed levels create intertwined
+    dependencies.'
+- name: General-Purpose Systems Pattern
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:12-37)
+    quote: General-Purpose Systems - representing multi-agent systems designed for
+      and adaptable to a broad spectrum of tasks... Goals are decomposed autonomously
+      and represented as prioritized task lists
+  description: General-purpose systems (AutoGPT, BabyAGI, SuperAGI, AgentGPT) use
+    multi-cycle process frameworks with task-management agents, single task-execution
+    agent, autonomous goal decomposition, and self-organizing resource utilization.
+- name: Central LLM Controller Pattern
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:39-49)
+    quote: Central LLM Controller - marks a third group specialized in leveraging
+      and combining contextual resources... HuggingGPT is characterized by a single
+      central LLM-powered control agent with monologue-based reflection and planning
+  description: Central controller systems (like HuggingGPT) use a single LLM-powered
+    agent as autonomous controller that selects, integrates, and combines multiple
+    specialized foundation models via prompting to solve complex tasks.
+- name: Role-Agent Systems Pattern
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:51-67)
+    quote: Role-Agent Systems - employ an interplay or simulation between multiple
+      dedicated roles agents... these role agents actually collaborate directly with
+      each other
+  description: Role-agent systems (MetaGPT, CAMEL) employ multiple agents with dedicated
+    domain roles that directly collaborate through instructor-executor relationships
+    or dialogue cycles, enabling multi-perspective problem solving.
+- name: Bounded Autonomy with Integrated Alignment
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:70-90)
+    quote: high-autonomy aspects are mostly combined with low alignment levels, resulting
+      in bounded autonomy aspects... predefined and rule-based mechanisms serve as
+      integrated alignment guiding and controlling
+  description: 'Common pattern: high autonomy aspects (goal decomposition, action
+    management, resource utilization) are constrained by low-autonomy aspects with
+    predefined mechanisms that serve as integrated alignment controls.'
+- name: Challenges in Agent Collaboration
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:118-139)
+    quote: Adaptability of Communication Protocols... Dynamic Role-Playing... Robustness
+      of Prompt-driven Collaboration
+  description: 'Key challenges in multi-agent collaboration: limited adaptability
+    of communication protocols (mostly predefined), underexplored dynamic role-playing
+    potential, and vulnerability of prompt-driven collaboration to LLM errors/hallucinations.'
+- name: Real-Time Responsive Alignment Gap
+  sources:
+  - chunk_ref: 18-Multi-Agent (Chunk 4:142-172)
+    quote: The obvious lack of real-time adjustment capabilities can be seen founded
+      in the nature of autonomous agent systems... The absence of user interaction
+      and control during runtime restricts the potential for dynamic alignment
+  description: Current systems lack real-time responsive alignment (L2) - no user
+    adjustment during runtime. This limits dynamic collaboration and hybrid human-agent
+    teamwork, though interceptor mechanisms could enable such capabilities.
+- name: Graph of Thoughts (GoT) Framework
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:17-28)
+    quote: 'Graph of Thoughts (GoT): a framework that advances prompting capabilities
+      in large language models (LLMs) beyond those offered by paradigms such as Chain-of-Thought
+      or Tree of Thoughts'
+  description: GoT is a meta-prompting framework that models LLM reasoning as an arbitrary
+    graph structure where thoughts are vertices and dependencies are edges. This enables
+    combining arbitrary LLM thoughts into synergistic outcomes, distilling whole networks
+    of thoughts, or enhancing thoughts using feedback loops. Unlike linear CoT or
+    tree-based ToT, GoT allows for complex networked reasoning patterns that mirror
+    human cognition and brain mechanisms like recurrence.
+- name: Graph-Enabled Thought Transformations
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:70-82)
+    quote: graph-enabled transformations bring a promise of more powerful prompting
+      when applied to LLM thoughts, but they are not naturally expressible with CoT
+      or ToT
+  description: GoT enables novel thought transformations through its graph model including
+    aggregation (merging multiple thoughts), generation (spawning new thoughts from
+    existing ones), and refining (iterative improvement loops). These transformations
+    extend beyond what is possible with chain or tree structures, allowing thoughts
+    to have multiple incoming edges for aggregation and self-loops for refinement.
+- name: GoT Modular Architecture with Controller
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:383-396)
+    quote: 'The GoT architecture consists of a set of interacting modules: the Prompter,
+      the Parser, the Scoring module, and the Controller which coordinates the entire
+      reasoning process'
+  description: 'GoT implements a modular system architecture with four key components:
+    Prompter (prepares LLM messages), Parser (extracts information from thoughts),
+    Scoring (verifies and scores thoughts), and Controller (coordinates the process).
+    The Controller contains Graph of Operations (GoO) as a static execution plan and
+    Graph Reasoning State (GRS) as dynamic state tracking. This enables systematic
+    orchestration of complex multi-agent-like reasoning workflows.'
+- name: Graph of Operations (GoO) Execution Plan
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:390-396)
+    quote: GoO is a static structure that specifies the graph decomposition of a given
+      task, prescribes transformations to be applied to LLM thoughts, together with
+      their order and dependencies
+  description: GoO serves as a declarative workflow specification that defines how
+    a complex task should be decomposed into graph operations. It prescribes which
+    thought transformations (Generate, Aggregate, Score, KeepBest, Improve) to apply
+    and in what order, enabling reproducible and systematic orchestration of multi-step
+    reasoning processes.
+- name: Task Decomposition via Merge-Sort Pattern
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:471-479)
+    quote: 'In GoT, we employ merge-based sorting: First, one decomposes the input
+      sequence into subarrays. Then, one sorts these subarrays individually, and then
+      respectively merges them into a final solution'
+  description: GoT applies algorithmic decomposition patterns to LLM tasks. The sorting
+    use case demonstrates decomposing a complex problem into parallel subtasks (sorting
+    sub-arrays), solving them independently, then aggregating results (merging). This
+    divide-and-conquer approach enables LLMs to handle larger problems by working
+    on manageable chunks and combining partial solutions.
+- name: Aggregation Transformation for Thought Synthesis
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:344-352)
+    quote: with GoT, one can aggregate arbitrary thoughts into new ones, to combine
+      and reinforce the advantages of these thoughts, while eliminating their disadvantages
+  description: Aggregation is a key graph-enabled transformation that allows merging
+    multiple independent reasoning chains into a single synthesized thought. This
+    enables combining the best aspects of different reasoning paths, aggregating partial
+    solutions into complete ones, and leveraging diverse perspectives to produce superior
+    outcomes that no single chain could achieve alone.
+- name: Refining Transformation with Self-Loops
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:355-357)
+    quote: 'Another thought transformation is the refining of a current thought v
+      by modifying its content: V+ = {} and E+ = {(v, v)}. This loop in the graph
+      indicates an iterated thought'
+  description: The refining transformation enables iterative improvement of a thought
+    through self-referential loops in the graph structure. A thought can reference
+    itself as input, allowing for progressive enhancement cycles. This pattern supports
+    self-critique and iterative refinement workflows where an LLM can repeatedly improve
+    its own output based on evaluation feedback.
+- name: Volume Metric for Thought Information Scope
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:729-740)
+    quote: For a given thought t, the volume of t is the number of preceding LLM thoughts
+      that could have impacted t. Formally, the volume of t is the number of thoughts
+      from which there exists a path to t
+  description: GoT introduces a novel metric called 'volume' to measure the information
+    scope accessible to any given thought. Unlike CoT (linear volume) or ToT (logarithmic
+    volume), GoT achieves maximum volume N with logarithmic latency, meaning final
+    thoughts can draw from all preceding thoughts in the reasoning graph. This quantifies
+    the reasoning capacity advantage of graph-based over linear approaches.
+- name: Latency-Volume Tradeoff Optimization
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 1:756-767)
+    quote: GoT is the only scheme to come with both a low latency of log_k N and a
+      high volume N. This is enabled by the fact that GoT harnesses aggregations of
+      thoughts
+  description: GoT optimizes the fundamental tradeoff between reasoning latency (number
+    of steps to reach a conclusion) and volume (scope of information considered).
+    Through aggregation, GoT achieves both logarithmic latency and maximum volume,
+    outperforming CoT (high latency, high volume), CoT-SC (medium both), and ToT (low
+    latency, low volume). This represents a Pareto improvement in reasoning efficiency.
+- name: Generate-Score-KeepBest Selection Pattern
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 3:566-575)
+    quote: 'For each sub-list: Sort the sub-list (sort prompt) five times; score each
+      sort attempt; keep the best'
+  description: GoT implements a generate-evaluate-select pattern where multiple candidate
+    solutions are generated in parallel, each is scored against a quality metric,
+    and only the best performing candidates are retained for subsequent operations.
+    This pattern enables robust solution selection through competition and eliminates
+    low-quality intermediate results before they propagate through the reasoning graph.
+- name: Self-Evaluation for Thought Scoring
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 2:528-538)
+    quote: Self-reflection and self-evaluation were introduced recently. They are
+      used to enhance different tasks. In GoT, we partially rely on self-evaluation
+      when taking decisions on how to expand the graph of thoughts
+  description: GoT incorporates self-evaluation mechanisms where the LLM assesses
+    its own outputs to guide graph expansion decisions. This enables autonomous quality
+    control within the reasoning workflow, allowing the system to identify and prioritize
+    promising reasoning paths while pruning less valuable branches. Self-evaluation
+    supports adaptive, feedback-driven reasoning orchestration.
+- name: LLM-Based Planning for Complex Tasks
+  sources:
+  - chunk_ref: 19-Graph_of_Thoughts (Chunk 2:541-547)
+    quote: There are many works recently on how to plan complex tasks with LLMs. GoT
+      could be seen as a generic framework that could potentially be used to enhance
+      such schemes, by offering a paradigm for generating complex graph-based plans
+  description: GoT provides a foundation for LLM-based task planning by enabling complex
+    graph-structured execution plans. Rather than simple linear or tree-based plans,
+    GoT allows for plans with merging paths, feedback loops, and parallel execution
+    branches. This supports more sophisticated planning that can adapt to discovered
+    information and combine insights from multiple exploration paths.
+- name: Agentic RAG Paradigm
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:55-61)
+    quote: Agentic Retrieval-Augmented Generation (Agentic RAG) transcends these limitations
+      by embedding autonomous AI agents into the RAG pipeline. These agents leverage
+      agentic design patterns - reflection, planning, tool use, and multi-agent collaboration
+  description: Agentic RAG represents a paradigm shift in RAG systems by integrating
+    autonomous AI agents that can dynamically manage retrieval strategies, iteratively
+    refine contextual understanding, and adapt workflows. Unlike static RAG, agents
+    apply design patterns including reflection (self-critique), planning (task decomposition),
+    tool use (external APIs), and multi-agent collaboration to handle complex, multi-step
+    reasoning.
+- name: Four Core Agentic Design Patterns
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:106-107)
+    quote: These agents leverage agentic patterns, such as reflection, planning, tool
+      use, and multi-agent collaboration, to enhance decision-making and adaptability
+  description: 'Agentic systems are built on four foundational design patterns: (1)
+    Reflection - iterative self-evaluation and refinement, (2) Planning - autonomous
+    task decomposition into manageable subtasks, (3) Tool Use - integration with external
+    APIs, databases, and computational resources, and (4) Multi-Agent Collaboration
+    - distributing tasks among specialized agents. These patterns enable dynamic,
+    adaptive workflow orchestration.'
+- name: Agentic Workflow Patterns for Task Orchestration
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:110-113)
+    quote: these agents employ agentic workflow patterns, such as prompt chaining,
+      routing, parallelization, orchestrator-worker models, and evaluator-optimizer,
+      to structure and optimize task execution
+  description: 'Beyond design patterns, agentic systems employ workflow patterns to
+    structure execution: prompt chaining (sequential subtask processing), routing
+    (directing inputs to specialized handlers), parallelization (concurrent execution),
+    orchestrator-worker (dynamic task delegation), and evaluator-optimizer (iterative
+    refinement). These patterns enable efficient management of complex, multi-domain
+    reasoning tasks.'
+- name: Reflection Pattern for Iterative Refinement
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:515-530)
+    quote: Reflection is a foundational design pattern in agentic workflows, enabling
+      agents to iteratively evaluate and refine their outputs. By incorporating self-feedback
+      mechanisms, agents can identify and address errors
+  description: The Reflection pattern enables agents to critique their own outputs
+    for correctness, style, and efficiency, then incorporate this feedback into subsequent
+    iterations. It can involve prompting agents to self-evaluate, using external validation
+    tools (unit tests, web searches), or distributing critique across multiple agents.
+    Studies like Self-Refine, Reflexion, and CRITIC demonstrate significant performance
+    improvements from reflection.
+- name: Planning Pattern for Task Decomposition
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:540-549)
+    quote: Planning is a key design pattern in agentic workflows that enables agents
+      to autonomously decompose complex tasks into smaller, manageable subtasks. This
+      capability is essential for multi-hop reasoning
+  description: The Planning pattern allows agents to dynamically determine the sequence
+    of steps needed to accomplish a larger objective without predefined workflows.
+    Agents break down complex tasks into subtasks, enabling flexible decision-making
+    in dynamic and uncertain scenarios. While powerful, planning can produce less
+    predictable outcomes compared to deterministic reflection-based workflows.
+- name: Tool Use Pattern for External Integration
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:555-564)
+    quote: Tool Use enables agents to extend their capabilities by interacting with
+      external tools, APIs, or computational resources. This pattern allows agents
+      to gather information, perform computations, and manipulate data beyond their
+      pre-trained knowledge
+  description: The Tool Use pattern extends agent capabilities through integration
+    with external resources including APIs, databases, web search, and computational
+    tools. Modern implementations like GPT-4's function calling enable agents to autonomously
+    select and execute appropriate tools for given tasks. Key challenges include optimizing
+    tool selection when many options are available, often addressed using RAG-inspired
+    heuristic selection.
+- name: Multi-Agent Collaboration Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:575-592)
+    quote: Multi-agent collaboration is a key design pattern that enables task specialization
+      and parallel processing. Agents communicate and share intermediate results,
+      ensuring the overall workflow remains efficient
+  description: The Multi-Agent pattern distributes complex tasks among specialized
+    agents that communicate and share intermediate results. Each agent operates with
+    its own memory and workflow (potentially including tools, reflection, or planning).
+    This enables decomposing intricate tasks into smaller subtasks assigned to different
+    agents, improving scalability and adaptability. Frameworks like AutoGen, Crew
+    AI, and LangGraph support multi-agent implementations.
+- name: Prompt Chaining Workflow Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:620-632)
+    quote: Prompt chaining decomposes a complex task into multiple steps, where each
+      step builds upon the previous one. This structured approach improves accuracy
+      by simplifying each subtask before moving forward
+  description: Prompt chaining structures LLM tasks as sequential processing pipelines
+    where each step receives output from the previous step as input. This pattern
+    is effective when tasks can be broken into fixed subtasks, such as generating
+    content then translating it, or creating an outline then verifying then expanding.
+    While it improves accuracy through decomposition, it may increase latency due
+    to sequential processing.
+- name: Routing Workflow Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:647-655)
+    quote: Routing involves classifying an input and directing it to an appropriate
+      specialized prompt or process. This method ensures distinct queries or tasks
+      are handled separately
+  description: The Routing pattern classifies incoming inputs and directs them to
+    specialized processing pathways optimized for each category. Examples include
+    directing customer queries to appropriate departments (technical support, refunds,
+    general inquiries) or assigning simple queries to smaller models while complex
+    requests go to advanced models. This optimizes efficiency by matching task complexity
+    to appropriate resources.
+- name: Parallelization Workflow Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:674-685)
+    quote: Parallelization divides a task into independent processes that run simultaneously,
+      reducing latency and improving throughput. It can be categorized into sectioning
+      (independent subtasks) and voting (multiple outputs)
+  description: 'Parallelization splits tasks into concurrent independent processes
+    to reduce latency. Two sub-patterns exist: sectioning (different models handle
+    different aspects, e.g., one screens input while another generates response) and
+    voting (multiple models produce outputs for cross-validation, improving confidence
+    through consensus). This pattern is applicable when subtasks are independent and
+    can benefit from simultaneous execution.'
+- name: Orchestrator-Worker Workflow Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:699-709)
+    quote: This workflow features a central orchestrator model that dynamically breaks
+      tasks into subtasks, assigns them to specialized worker models, and compiles
+      the results. Unlike parallelization, it adapts to varying input complexity
+  description: The Orchestrator-Worker pattern features a central orchestrating agent
+    that dynamically decomposes tasks based on the specific input, assigns subtasks
+    to specialized worker agents, and synthesizes their results. Unlike static parallelization,
+    it adapts the decomposition to each input's complexity. Applications include automatically
+    modifying codebases based on change requests or conducting multi-source real-time
+    research.
+- name: Evaluator-Optimizer Workflow Pattern
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:724-740)
+    quote: The evaluator-optimizer workflow iteratively improves content by generating
+      an initial output and refining it based on feedback from an evaluation model
+  description: The Evaluator-Optimizer pattern creates a feedback loop where an initial
+    output is generated, then evaluated against quality criteria, and refined based
+    on evaluation feedback. This iterative cycle continues until quality thresholds
+    are met. Effective when clear evaluation criteria exist, such as improving literary
+    translations through multiple cycles or refining research queries through successive
+    iterations.
+- name: Single-Agent Router Architecture
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:755-798)
+    quote: A Single-Agent Agentic RAG serves as a centralized decision-making system
+      where a single agent manages the retrieval, routing, and integration of information
+  description: 'Single-Agent RAG consolidates all retrieval, routing, and integration
+    tasks into one unified agent. The workflow involves: query submission and evaluation,
+    knowledge source selection (structured databases, semantic search, web search,
+    recommendation systems), data integration and LLM synthesis, and output generation.
+    Suitable for systems with limited tools or well-defined tasks, offering centralized
+    simplicity and dynamic routing capabilities.'
+- name: Multi-Agent RAG Architecture
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 1:877-920)
+    quote: Multi-Agent RAG represents a modular and scalable evolution of single-agent
+      architectures, designed to handle complex workflows by leveraging multiple specialized
+      agents
+  description: Multi-Agent RAG distributes retrieval and reasoning across specialized
+    agents, each optimized for specific data sources or task types. A coordinator
+    agent delegates queries to specialized agents (SQL databases, semantic search,
+    web search, recommendations), which retrieve in parallel. Results are integrated
+    by an LLM for synthesis. This provides modularity, scalability, task specialization,
+    and versatility for multi-domain applications.
+- name: Hierarchical Agentic RAG Architecture
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:100-131)
+    quote: Hierarchical Agentic RAG systems employ a structured, multi-tiered approach
+      to information retrieval and processing, enhancing both efficiency and strategic
+      decision-making
+  description: Hierarchical RAG organizes agents in tiers with higher-level agents
+    overseeing lower-level ones. Top-tier agents evaluate query complexity and prioritize
+    data sources, mid-level agents retrieve from specialized sources, and lower-level
+    agents perform specific retrieval tasks. This enables strategic prioritization,
+    multi-level decision-making, and scalable handling of complex multi-faceted queries
+    through structured delegation.
+- name: Corrective RAG with Self-Correction Mechanisms
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:193-244)
+    quote: Corrective RAG introduces mechanisms to self-correct retrieval results,
+      enhancing document utilization and improving response generation quality
+  description: 'Corrective RAG embeds intelligent agents for iterative refinement:
+    Context Retrieval Agent (initial retrieval), Relevance Evaluation Agent (assesses
+    document relevance), Query Refinement Agent (rewrites queries for better results),
+    External Knowledge Retrieval Agent (supplements with web search when context insufficient),
+    and Response Synthesis Agent (produces final output). This ensures iterative correction
+    and minimizes errors.'
+- name: Adaptive RAG with Dynamic Strategy Selection
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:317-398)
+    quote: Adaptive Retrieval-Augmented Generation (Adaptive RAG) enhances flexibility
+      and efficiency by dynamically adjusting query handling strategies based on the
+      complexity of the incoming query
+  description: 'Adaptive RAG uses a classifier to assess query complexity and select
+    appropriate strategies: straightforward queries bypass retrieval and use direct
+    generation, simple queries use single-step retrieval, complex queries activate
+    multi-step retrieval with iterative refinement. A smaller language model classifies
+    queries while the main LLM synthesizes responses. This optimizes both computational
+    efficiency and response accuracy by matching resources to query demands.'
+- name: Graph-Based Agent-G Framework
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:449-478)
+    quote: Agent-G introduces a novel agentic architecture that integrates graph knowledge
+      bases with unstructured document retrieval... employs modular retriever banks,
+      dynamic agent interaction, and feedback loops
+  description: Agent-G combines structured graph knowledge bases with unstructured
+    document retrieval for enhanced reasoning. Components include a Retriever Bank
+    (modular specialized agents), Critic Module (validates relevance and quality),
+    and Dynamic Agent Interaction (coordinates graph and text retrieval). Feedback
+    loops enable iterative refinement, ensuring high-quality synthesis of structured
+    relationships with contextual document information.
+- name: GeAR Graph-Enhanced Agent Framework
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:586-621)
+    quote: GeAR introduces an agentic framework that enhances traditional RAG systems
+      by incorporating graph-based retrieval mechanisms... addresses challenges in
+      multi-hop retrieval scenarios
+  description: GeAR (Graph-Enhanced Agent for RAG) uses graph expansion to enhance
+    base retrievers, enabling multi-hop retrieval through entity relationships. An
+    agent-based architecture autonomously selects and combines retrieval strategies
+    based on query complexity, deciding when to utilize graph-expanded paths. This
+    supports complex queries requiring reasoning across multiple interconnected entities
+    while maintaining scalable modularity.
+- name: Agentic Document Workflows (ADW)
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 2:704-750)
+    quote: Agentic Document Workflows (ADW) extend traditional RAG paradigms by enabling
+      end-to-end knowledge work automation. These workflows orchestrate complex document-centric
+      processes
+  description: ADW automates end-to-end document-centric workflows integrating parsing,
+    retrieval, reasoning, and structured outputs. Key capabilities include document
+    parsing and information structuring, state maintenance across multi-step processes,
+    knowledge retrieval from external bases, agentic orchestration applying business
+    rules and multi-hop reasoning, and actionable output generation. Supports enterprise
+    workflows like invoice processing, contract review, and claims analysis.
+- name: Agentic Workflow with RAG for Dynamic Retrieval
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:5-8)
+    quote: Twitch leveraged an agentic workflow with RAG on Amazon Bedrock to streamline
+      ad sales. The system dynamically retrieved advertiser data...
+  description: Agentic workflows integrate dynamic retrieval of multi-source data
+    (advertiser data, campaign performance, audience demographics) to generate context-aware
+    proposals. This pattern demonstrates automated orchestration for operational efficiency
+    in sales contexts.
+- name: Real-Time Adaptability in Agentic Workflows
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:20-21)
+    quote: 'Real-Time Adaptability: Dynamically integrates evolving data, such as
+      live service outages or pricing updates.'
+  description: Agentic workflows can adapt in real-time by dynamically integrating
+    evolving data sources. This enables systems to respond to live changes (outages,
+    pricing) without manual intervention.
+- name: Healthcare Agentic RAG for Clinical Decision Support
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:27-34)
+    quote: Agentic RAG systems enable this by retrieving real-time clinical guidelines,
+      medical literature, and patient history to assist clinicians...
+  description: In healthcare, agentic workflows orchestrate retrieval across electronic
+    health records (EHR) and medical literature to generate patient case summaries.
+    The agent coordinates multi-source synthesis for clinician decision support.
+- name: Legal Workflow Automation via Agentic RAG
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:52-59)
+    quote: A legal agentic RAG system can analyze contracts, extract critical clauses,
+      and identify potential risks. By combining semantic search capabilities with
+      legal knowledge graphs...
+  description: Agentic workflows in legal contexts combine semantic search with knowledge
+    graphs to automate contract review, clause extraction, and risk identification.
+    This demonstrates agent orchestration for compliance and risk mitigation at scale.
+- name: Financial Agentic Workflow with Predictive Modeling
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:77-79)
+    quote: These systems integrate live data streams, historical trends, and predictive
+      modeling to generate actionable outputs.
+  description: Agentic workflows in finance integrate multiple data types (live streams,
+    historical data, predictive models) for real-time analytics, risk mitigation,
+    and decision-making in domains like auto insurance claims processing.
+- name: Multi-Step Reasoning in Agentic Workflows
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:95-96)
+    quote: Identifies potential risks using predictive analysis and multi-step reasoning.
+  description: Agentic workflows employ multi-step reasoning chains for complex analysis
+    tasks. This pattern enables agents to decompose problems into sequential reasoning
+    steps for risk identification and strategy development.
+- name: Adaptive Learning Workflows in Education
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:104-106)
+    quote: These systems enable adaptive learning by generating explanations, study
+      materials, and feedback tailored to the learner's progress and preferences.
+  description: Agentic workflows in education adapt content generation based on learner
+    state (progress, preferences). Agents orchestrate personalized content delivery
+    through continuous feedback loops.
+- name: Graph-Enhanced Agentic RAG (GEAR)
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:127-128)
+    quote: Graph-Enhanced Agentic RAG (GEAR) combines graph structures with retrieval
+      mechanisms, making it particularly effective in multimodal workflows...
+  description: GEAR represents an advanced agentic pattern that combines graph structures
+    with retrieval for multimodal workflows. This enables synthesis across text, images,
+    and videos using interconnected data sources.
+- name: Multi-Modal Workflow Orchestration
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:140-141)
+    quote: 'Multi-Modal Capabilities: Integrates text, image, and video data for comprehensive
+      outputs.'
+  description: Agentic workflows can orchestrate across multiple modalities (text,
+    image, video) for comprehensive output generation. This pattern is essential for
+    marketing, entertainment, and rich content synthesis.
+- name: LangGraph Stateful Workflow Orchestration
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:164-167)
+    quote: LangGraph complements this by introducing graph-based workflows that support
+      loops, state persistence, and human-in-the-loop interactions...
+  description: LangGraph enables sophisticated agentic orchestration through graph-based
+    workflows with state persistence, loops, and human-in-the-loop patterns. This
+    supports self-correction mechanisms in agent systems.
+- name: Meta-Agent Architecture with Sub-Agent Coordination
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:169-172)
+    quote: It introduces a meta-agent architecture where sub-agents manage smaller
+      document sets, coordinating through a top-level agent for tasks such as compliance
+      analysis...
+  description: LlamaIndex ADW implements hierarchical agentic workflows with meta-agent
+    architecture. Sub-agents handle specialized document sets while coordinating through
+    a top-level orchestrating agent for complex tasks like compliance analysis.
+- name: Multi-Agent Hierarchical and Sequential Processes
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:182-185)
+    quote: CrewAI supports hierarchical and sequential processes, robust memory systems,
+      and tool integrations. AG2 excels in multi-agent collaboration...
+  description: CrewAI and AG2 (AutoGen) frameworks provide multi-agent architectures
+    supporting hierarchical/sequential processes, memory systems, tool integrations,
+    and advanced collaboration for code generation and decision-making.
+- name: Lightweight Multi-Agent Orchestration (Swarm)
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:188-189)
+    quote: An educational framework designed for ergonomic, lightweight multi-agent
+      orchestration, emphasizing agent autonomy and structured collaboration.
+  description: OpenAI Swarm pattern emphasizes lightweight, ergonomic multi-agent
+    orchestration with focus on agent autonomy and structured collaboration. Designed
+    for educational understanding of multi-agent coordination.
+- name: Semantic Kernel Agentic Patterns
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:198-202)
+    quote: It supports agentic patterns, enabling the creation of autonomous AI agents
+      for natural language understanding, task automation, and decision-making...
+  description: Microsoft Semantic Kernel enables agentic patterns for autonomous agents
+    handling NLU, task automation, and decision-making. Applied in real-time collaboration
+    and P1 incident management workflows.
+- name: Dynamic Decision-Making and Iterative Reasoning
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:340-341)
+    quote: '...these systems introduce capabilities such as dynamic decision-making,
+      iterative reasoning, and collaborative workflows...'
+  description: Core agentic workflow capabilities include dynamic decision-making
+    (real-time adaptation), iterative reasoning (refinement loops), and collaborative
+    workflows (multi-agent coordination). These distinguish agentic from static RAG
+    pipelines.
+- name: Multi-Agent Coordination Complexity Challenge
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:352-354)
+    quote: Coordination complexity in multi-agent architectures, scalability, and
+      latency issues, as well as ethical considerations, must be addressed...
+  description: 'Key challenge for agentic workflows: coordination complexity in multi-agent
+    architectures. Scalability, latency, and ethical considerations require ongoing
+    research for robust deployment.'
+- name: Multi-Agent Collaboration Evaluation Gap
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:354-357)
+    quote: Developing evaluation methodologies that capture the unique aspects of
+      Agentic RAG, such as multi-agent collaboration and dynamic adaptability, will
+      be crucial...
+  description: Current benchmarks lack specialized evaluation for multi-agent collaboration
+    and dynamic adaptability. This represents a research gap for validating agentic
+    workflow effectiveness.
+- name: Convergence of RAG and Agentic Intelligence
+  sources:
+  - chunk_ref: 20-Agentic_RAG_Survey (Chunk 3:360-364)
+    quote: '...the convergence of retrieval-augmented generation and agentic intelligence
+      has the potential to redefine AI''s role in dynamic and complex environments...'
+  description: The fusion of RAG with agentic intelligence represents a paradigm shift
+    enabling adaptive, context-aware solutions. This convergence creates new possibilities
+    for AI in complex, dynamic environments.

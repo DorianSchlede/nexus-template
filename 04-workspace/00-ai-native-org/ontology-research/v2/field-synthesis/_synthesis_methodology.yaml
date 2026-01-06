@@ -1,0 +1,362 @@
+field: methodology
+aggregated_at: '2025-12-29T11:26:26.843523'
+batches_merged: 2
+patterns_input: 33
+patterns_output: 33
+patterns:
+- name: Model-Theoretic Semantics Approach
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:711-716)
+    quote: Each axiom described by the previous tables, when added to a graph, enforces
+      some condition(s) on the interpretations that satisfy the graph.
+  description: Top-down methodology for defining ontology semantics. The paper describes
+    a formal, model-theoretic approach where interpretations are abstractly defined
+    as domain graphs with mappings from data terms. This represents a theoretical,
+    top-down approach to ontology definition where semantics are established through
+    mathematical abstractions before application.
+- name: Interpretation-Based Semantic Definition
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:373-394)
+    quote: 'we can abstractly define an interpretation of a data graph as being composed
+      of two elements: a domain graph, and a mapping from the terms...'
+  description: Top-down methodology for ontology construction. The approach defines
+    interpretations abstractly using domain graphs and mappings, establishing formal
+    semantics independent of specific data instances. This philosophical grounding
+    precedes data-level implementation.
+- name: OWL Feature-Based Ontology Definition
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 3:350-357)
+    quote: Amongst the most popular ontology languages used in practice are the Web
+      Ontology Language (OWL), recommended by the W3C and compatible with RDF graphs
+  description: Top-down standard-based methodology. OWL provides a standardized framework
+    for ontology definition, reflecting a top-down approach where ontology features
+    are pre-defined through W3C standards before application to specific domains.
+- name: Materialisation Rule-Based Reasoning
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:54-64)
+    quote: Materialisation refers to the idea of applying rules recursively to a graph,
+      adding the conclusions generated back to the graph until a fixpoint is reached
+  description: Hybrid methodology combining top-down rule definition with bottom-up
+    data processing. Rules are defined theoretically (top-down) but applied recursively
+    to actual graph data (bottom-up) until a fixpoint is reached, producing inferred
+    knowledge grounded in empirical data.
+- name: Query Rewriting for Ontological Entailment
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:92-109)
+    quote: Another strategy is to use rules for query rewriting, which given a query,
+      will automatically extend the query in order to find solutions entailed by a
+      set of rules
+  description: Top-down methodology where ontological definitions guide query transformation.
+    The OWL 2 QL profile is specifically designed for this approach, where theoretical
+    schema definitions determine how queries are rewritten to find entailed solutions.
+- name: Description Logics Formalization
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:127-147)
+    quote: Description Logics were initially introduced as a way to formalise the
+      meaning of frames and semantic networks... DLs form a family of logics rather
+      than a particular logic
+  description: Top-down theoretical methodology for ontology formalization. DLs provide
+    a formal logical foundation for knowledge graphs, derived from philosophical and
+    mathematical frameworks (First Order Logic) rather than empirical observation.
+    Different DLs balance expressive power and computational complexity.
+- name: Inductive Knowledge Acquisition
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:215-220)
+    quote: inductively acquiring knowledge involves generalising patterns from a given
+      set of input observations, which can then be used to generate novel but potentially
+      imprecise predictions
+  description: Bottom-up methodology for knowledge extraction. In contrast to deductive
+    approaches, inductive methods derive patterns empirically from observed data (observations
+    in graphs), generating knowledge through generalization rather than theoretical
+    definition.
+- name: Graph Analytics for Inductive Knowledge
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:343-359)
+    quote: there is a rich body of work on graph analytics, which uses well-known
+      functions/algorithms to detect communities or clusters, find central nodes and
+      edges... embeddings can use self-supervision
+  description: Bottom-up empirical methodology. Graph analytics applies analytical
+    processes to extract patterns from large graph data using techniques like community
+    detection, centrality measures, and embeddings. Knowledge emerges from data topology
+    rather than theoretical definition.
+- name: Knowledge Graph Embeddings Self-Supervision
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 4:818-821)
+    quote: The resulting embeddings can then be seen as models learnt through self-supervision
+      that encode (latent) features of the graph, mapping input edges to output plausibility
+      scores
+  description: Bottom-up methodology where knowledge representation emerges from data.
+    Embeddings learn latent features directly from graph structure without pre-defined
+    theoretical frameworks, representing a purely empirical approach to encoding knowledge.
+- name: Symbolic Learning for Rule Mining
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 5:667-675)
+    quote: An alternative (sometimes complementary) approach is to adopt symbolic
+      learning in order to learn hypotheses in a symbolic (logical) language that
+      'explain' a given set of positive and negative edges
+  description: Hybrid methodology combining bottom-up pattern discovery with top-down
+    symbolic representation. Rules are learned from empirical data (bottom-up) but
+    expressed in logical/symbolic language (top-down), enabling interpretable models
+    for deductive reasoning.
+- name: AMIE Top-Down Rule Refinement
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 5:780-813)
+    quote: AMIE... builds rules in a top-down fashion starting with rule heads like
+      => ?x country ?y. For each rule head of this form, three types of refinements
+      are considered
+  description: Hybrid methodology with top-down structure. AMIE starts with abstract
+    rule patterns (top-down) but validates and refines them using support and confidence
+    measures computed from empirical data (bottom-up). The methodology combines theoretical
+    rule structure with data-driven validation.
+- name: Ontology Engineering Methodologies
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 6:765-778)
+    quote: Ontology engineering refers to the development and application of methodologies
+      for building ontologies... Early methodologies were often based on a waterfall-like
+      process
+  description: Top-down methodology for ontology construction. Early approaches followed
+    waterfall processes where requirements and conceptualization were fixed before
+    implementation. Later agile methodologies (DILIGENT, XD, MOM, SAMOD) introduced
+    iterative refinement while maintaining top-down conceptual design.
+- name: Ontology Design Patterns (ODPs)
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 6:828-847)
+    quote: Ontology Design Patterns (ODPs) are another common feature of modern methodologies,
+      specifying generalisable ontology modelling patterns that can be used as inspiration
+  description: Top-down methodology using reusable templates. ODPs provide pre-defined
+    modeling patterns based on best practices, representing a top-down approach where
+    theoretical patterns guide ontology construction. Patterns can be used as inspiration,
+    templates, or directly reusable components.
+- name: Ontology Learning from Text
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 6:849-886)
+    quote: Ontology learning, in contrast, can be used to (semi-)automatically extract
+      information from text that is useful for the ontology engineering process
+  description: Bottom-up methodology for semi-automatic ontology extraction. Ontology
+    learning extracts terminology and axioms from text using measures of unithood,
+    termhood, and Hearst patterns. This empirical approach derives ontological structures
+    from natural language corpora rather than theoretical design.
+- name: Four-Category Definition Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:124-254)
+    quote: We can determine four general categories of definitions... Category I...
+      Category II... Category III... Category IV
+  description: 'The paper employs a systematic definitional methodology for knowledge
+    graphs, categorizing existing definitions into four distinct categories: (1) simple
+    graph-based definitions where nodes represent entities and edges represent relationships;
+    (2) knowledge base-structured definitions; (3) technical criteria-based definitions
+    with specific compliance requirements; and (4) extensional definitions based on
+    examples. This hybrid top-down/bottom-up approach synthesizes existing definitions
+    to establish a comprehensive taxonomy. This methodology is relevant for ontology
+    engineering as it demonstrates how to ground new definitions in existing work
+    while identifying gaps.'
+- name: Technical Criteria Definition Approach
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:175-231)
+    quote: a knowledge graph mainly describes real world entities and their interrelations,
+      organized in a graph; defines possible classes and relations
+  description: 'Paulheim''s criteria-based methodology lists four technical characteristics:
+    (1) describes real-world entities and interrelations in graph form; (2) defines
+    possible classes and relations in a schema; (3) allows interrelating arbitrary
+    entities; (4) covers various topical domains. This top-down approach sets exclusion
+    criteria (ruling out ontologies without instances, word sense graphs, domain-specific
+    graphs). Relevant for UDWO metamodel grounding as it shows how to operationalize
+    abstract ontological concepts into testable criteria.'
+- name: Reasoning-Centric Definition
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:196-211)
+    quote: A knowledge graph acquires and integrates information into an ontology
+      and applies a reasoner to derive new knowledge
+  description: Ehrlinger and Woss propose a methodology distinguishing knowledge graphs
+    from ontologies by the provision of reasoning capabilities. This top-down definitional
+    approach emphasizes inference as the distinguishing feature. The methodology separates
+    the knowledge acquisition phase from the reasoning phase, creating a process-oriented
+    view of knowledge graphs. Relevant for AI agent integration patterns where reasoning
+    over ontological structures is key.
+- name: Three-Component Semi-Structured Model
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:213-231)
+    quote: 'a semi-structured data model characterized by three components: (i) a
+      ground extensional component... (ii) an intensional component... (iii) a derived
+      extensional component'
+  description: 'Bellomarini et al. propose a rigorous technical methodology with three
+    components: (1) ground extensional component (schema and data); (2) intensional
+    component (inference rules); (3) derived extensional component (results of reasoning).
+    This hybrid approach bridges bottom-up data modeling with top-down logical inference.
+    Highly relevant for the 8-entity hypothesis as it provides a template for separating
+    structural definitions from derivation rules.'
+- name: Enterprise Consensus Definition
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:256-284)
+    quote: a knowledge graph describes objects of interest and connections between
+      them... many practical implementations impose constraints on the links in knowledge
+      graphs by defining a schema or ontology
+  description: Noy et al. represent industry consensus from eBay, Facebook, Google,
+    IBM, and Microsoft. The methodology balances minimal definitional requirements
+    with acknowledgment that schemas/ontologies 'usually' play a key role. This bottom-up,
+    empirically-grounded approach derives from industrial practice rather than theoretical
+    first principles. Demonstrates how practical enterprise ontology adoption differs
+    from academic rigor.
+- name: Formal Graph Data Model Definitions
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:292-376)
+    quote: A directed edge-labelled graph is a tuple G = (V,E,L), where V is a set
+      of nodes, L is a set of edge labels, and E is a set of edges
+  description: 'The paper provides formal mathematical definitions for multiple graph
+    data models: directed edge-labelled graphs, heterogeneous graphs, property graphs,
+    and graph datasets. This top-down formal methodology uses set-theoretic definitions
+    with precise notation. Each model is defined as a tuple with explicit components
+    and constraints. Essential foundation for understanding how different graph models
+    support different ontological commitments.'
+- name: Graph Pattern Query Formalization
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:449-527)
+    quote: We define a directed edge-labelled graph pattern as a tuple Q = (V,E,L),
+      where V is a set of node terms, L is a set of edge terms, and E is a set of
+      edges
+  description: The methodology formalizes graph patterns using variables (Var) disjoint
+    from constants (Con), enabling query semantics. The approach extends data graph
+    definitions to pattern graphs by replacing constants with terms (Term = Con union
+    Var). This top-down formalization supports both homomorphism-based and isomorphism-based
+    query semantics. Relevant for ontology-guided LLM reasoning where pattern matching
+    over knowledge graphs is required.
+- name: Shapes Schema Validation Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 13:721-907)
+    quote: 'A shapes schema is defined as a tuple S := (Phi, S, lambda) where Phi
+      is a set of shapes, S is a set of shape labels, and lambda: S -> Phi is a total
+      function'
+  description: The methodology defines validating schemas through shapes with formal
+    evaluation semantics. Shapes include constraints like node membership, boolean
+    conditions, conjunctions, negations, and cardinality restrictions on edges. The
+    shapes map function assigns binary satisfaction values to node-shape pairs. This
+    top-down formalism provides the theoretical foundation for SHACL-like validation.
+    Directly relevant for constraining generative AI outputs via ontological schemas.
+- name: Quotient Graph Emergent Schema
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:42-99)
+    quote: Emergent schemata are often based on the notion of a quotient graph...
+      A quotient graph can merge multiple nodes into one node, where the merged node
+      preserves the edges
+  description: The methodology for emergent schemas uses quotient graphs defined via
+    equivalence relations on nodes. The approach supports simulation and bisimulation
+    relations to characterize structural preservation. This is a bottom-up approach
+    that derives schema from data topology rather than imposing it top-down. The methodology
+    demonstrates how schemas can emerge from data patterns, relevant for process mining
+    ontologies like OCEL.
+- name: Annotation Domain Semi-Ring Formalization
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:113-172)
+    quote: An annotation domain is defined as an idempotent, commutative semi-ring
+      D = <A, +, x, bottom, top>
+  description: The methodology formalizes contextual annotations using algebraic structures
+    (idempotent commutative semi-rings). This enables well-defined reasoning and querying
+    over annotation domains (temporal, probabilistic, etc.). The approach extends
+    directed edge-labelled graphs to include annotation values on edges. Top-down
+    mathematical formalism that supports multi-valued or contextual knowledge representation.
+- name: Graph Interpretation and Model Semantics
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:177-261)
+    quote: A graph interpretation I is defined as a pair I := (Gamma, dot-I) where
+      Gamma is a domain graph and dot-I is a partial mapping from constants to terms
+  description: The methodology defines formal semantics through interpretations that
+    map graph constants to domain elements. The approach distinguishes UNA (Unique
+    Name Assumption) via injective mappings. Models are interpretations that satisfy
+    graphs under semantic conditions. Entailment is defined as model inclusion. This
+    top-down logical formalism provides the theoretical foundation for reasoning over
+    knowledge graphs.
+- name: Rule-Based Inference Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:269-325)
+    quote: A rule is a pair R = (B,H) such that B and H are graph patterns and Var(H)
+      is subset of B. We call B the body of the rule while we call H the head
+  description: The methodology formalizes rules for graph inference with body-head
+    structure. Rule application computes mappings from body to graph, then substitutes
+    variables in head. The least model is computed via fixpoint iteration. Rules can
+    be correct (entails only valid conclusions) and complete (entails all valid conclusions)
+    for semantic conditions. Directly relevant for ontology-guided agent reasoning
+    and planning strategies.
+- name: Description Logic Knowledge Base Structure
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:335-424)
+    quote: 'A DL knowledge base K is defined as a tuple (A, T, R), where A is the
+      A-Box: a set of assertional axioms; T is the T-Box: a set of class axioms; and
+      R is the R-Box: a set of relation axioms'
+  description: 'The methodology structures Description Logic knowledge bases into
+    three components: A-Box (assertions about individuals), T-Box (terminological
+    class axioms), R-Box (role/relation axioms). DL interpretations map individuals,
+    classes, and relations to domain elements. This is the formal foundation for OWL
+    ontologies. Highly relevant for the 8-entity hypothesis validation as DL provides
+    the formal grounding for entity definitions.'
+- name: Graph Parallel Framework Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:479-756)
+    quote: A graph parallel framework (GPF) is a triple of functions G := (Msg, Agg,
+      End) such that Msg defines what message must be passed from a node to a neighboring
+      node
+  description: 'The methodology formalizes graph-parallel computation via three functions:
+    Msg (message passing between nodes), Agg (aggregation of incoming messages), End
+    (termination condition). Input is directed vector-labelled graphs. Computation
+    proceeds iteratively until fixpoint. This bottom-up algorithmic approach enables
+    scalable analytics like PageRank over knowledge graphs. Relevant for AI agent
+    systems that need to process large-scale graph data.'
+- name: Knowledge Graph Embedding Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 14:759-895)
+    quote: 'Given a directed edge-labelled graph G = (V,E,L), a knowledge graph embedding
+      of G is a pair of mappings (epsilon, rho) such that epsilon: V -> T and rho:
+      L -> T'
+  description: The methodology defines embeddings as mappings from nodes and edge
+    labels to tensors. Plausibility scoring functions evaluate edge likelihood. Training
+    maximizes plausibility of positive edges while minimizing negative. Various models
+    (TransE, DistMult, ComplEx, etc.) instantiate different scoring functions. Full
+    expressiveness is a formal guarantee. This hybrid approach bridges symbolic graphs
+    with subsymbolic representations, enabling LLM integration patterns.
+- name: Graph Neural Network Recursive Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:378-447)
+    quote: A recursive graph neural network (RecGNN) is a pair of functions R := (Agg,
+      Out), where Agg computes a new feature vector for a node given its previous
+      feature vector and the feature vectors of the nodes and edges forming its neighbourhood
+  description: The methodology formalizes recursive GNNs with aggregation and output
+    functions. Aggregation iterates until fixpoint, then output transforms final vectors.
+    Non-recursive GNNs use layer-specific aggregation functions. Convolutional GNNs
+    apply convolutional operators. This bottom-up inductive approach learns representations
+    from graph structure. Relevant for ontology-guided LLM reasoning where neural
+    approaches complement symbolic methods.
+- name: Hypothesis Mining Methodology
+  sources:
+  - chunk_ref: 02-Knowledge_Graphs (Chunk 15:530-682)
+    quote: Given a knowledge graph G, a set of negative edges E-, a scoring function
+      sigma, and a threshold min_sigma, the goal of hypothesis mining is to identify
+      a set of hypotheses
+  description: The methodology formalizes inductive learning over graphs with support
+    and confidence scoring. Distinguishes positive support (edges entailed by hypothesis)
+    from negative support (false edges entailed). Confidence ratio balances coverage
+    vs. precision. CWA, OWA, and PCA assumptions determine negative edge generation.
+    Discrete mining uses refinement operators; differentiable mining uses gradient
+    descent. Hybrid top-down/bottom-up approach for rule and axiom discovery.
+- name: W3C PROV Extension Methodology for Agentic Workflows
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:17-41)
+    quote: we introduce PROV-AGENT, a provenance model that extends W3C PROV and leverages
+      the Model Context Protocol (MCP) and data observability to integrate agent interactions
+  description: PROV-AGENT extends the W3C PROV standard specifically for agentic workflows.
+    The methodology integrates three core PROV classes (Agent, Entity, Activity) with
+    MCP concepts (tools, prompts, resources). This top-down extension approach adds
+    AI-specific artifacts (AIAgent, AgentTool, AIModelInvocation, Prompt, ResponseData)
+    while maintaining PROV compatibility. Directly addresses how ontologies enable
+    AI agents, LLM reasoning, and multi-agent orchestration.
+- name: Unified Provenance Graph Methodology
+  sources:
+  - chunk_ref: 03-PROV-AGENT (Chunk 1:249-313)
+    quote: PROV-AGENT is a provenance model for representing AI agent interactions,
+      model invocations, and their relationships to non-agentic tasks and data in
+      agentic workflows
+  description: The methodology models agent interactions as first-class workflow components
+    alongside traditional tasks. Uses subclass relationships (AIAgent subclassOf Agent,
+    AgentTool subclassOf Activity). Standard PROV relationships (used, wasGeneratedBy,
+    wasAssociatedWith, wasInformedBy) connect agent artifacts. Supports multi-agent
+    scenarios and modality-agnostic foundation models. This hybrid approach bridges
+    traditional workflow provenance with AI agent traceability, directly relevant
+    for the UDWO metamodel's agent modeling requirements.

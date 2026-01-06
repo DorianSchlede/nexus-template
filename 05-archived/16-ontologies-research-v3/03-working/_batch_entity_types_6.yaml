@@ -1,0 +1,238 @@
+---
+batch_id: "entity_types_6"
+field: entity_types
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 5
+patterns_found: 42
+---
+
+patterns:
+  # ============================================
+  # Paper 11: Process Mining Event Knowledge Graphs (Chunk 2)
+  # ============================================
+
+  - name: "Entity Node Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:51-56)"
+    quote: "This method for constructing event knowledge graphs uses basic principles of information inference: (1) construct entities and correlation based on..."
+    description: "Entity is a core node type in event knowledge graphs. Entities are constructed based on the presence of an entity identifier or a relation, representing objects or concepts being tracked through the process (e.g., Order, Payment, Item, Invoice)."
+
+  - name: "Event Node Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:86-91)"
+    quote: "Event e is starting or ending event if it has no incoming or outgoing df-relationship at all... Event e is starting or ending event for entity n if it has no incoming..."
+    description: "Event is a fundamental node type representing atomic occurrences in process execution. Events have properties like time and activity, and serve as starting, ending, or intermediate points in entity df-paths."
+
+  - name: "Derived Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:3-12)"
+    quote: "Then we can treat any derived entity (n1, n2) just like any other entity and infer the df-relationships for (n1, n2), which results in a new path describing the interactions..."
+    description: "Derived Entity is a composite entity type created by reifying relations between two entities (e.g., Order, Payment becomes a derived entity type). This enables tracking interactions between related entities as first-class objects."
+
+  - name: "Resource Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:188-193)"
+    quote: "This is because our graph of Fig. 9 is incomplete as we did not (a) infer the Resource entity and the corresponding df-relationships from Table 1..."
+    description: "Resource is an entity type representing workers, systems, or other resources that participate in process execution. Resource entities enable organizational analysis of process behavior."
+
+  - name: "Order Entity Type (Business Object)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:112-113)"
+    quote: "O1 and O2 both start with Create Order and end with Ship events with Create Invoice followed by Pack Shipment in between."
+    description: "Order is a domain-specific entity type representing customer orders in the retail process example. Orders are tracked through their lifecycle via df-paths from creation to shipment."
+
+  - name: "Item Entity Type (Business Object)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:118-119)"
+    quote: "Items X1, ..., Y2 start with Receive SO followed by Unpack and end with Pack Shipment"
+    description: "Item is an entity type representing physical items being processed. Items have their own df-paths tracking their journey through receiving, unpacking, and packing operations."
+
+  - name: "Payment Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:8-10)"
+    quote: "Figure 8 shows the result of reifying the relation between Order and Payment entities of Fig. 7 into derived entities (O1, P1) and (O2, P1) of type (Order, Payment)..."
+    description: "Payment is an entity type representing financial transactions. Payment entities can be related to multiple Orders, and these relations can be reified into derived entities for interaction analysis."
+
+  - name: "Invoice Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:121-122)"
+    quote: "I1 and I2 start with Create Invoice and end with Clear Invoice"
+    description: "Invoice is an entity type representing billing documents in the process. Invoices have defined lifecycles tracked through df-paths from creation to clearance."
+
+  - name: "Supplier Order Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:115-116)"
+    quote: "A and B both start with Place SO (eventually) followed by Receive SO, ending with multiple Unpack events."
+    description: "Supplier Order is an entity type representing orders placed with suppliers. These entities track the procurement side of the process from placement through receipt."
+
+  - name: "Class Node Type (Activity Aggregation)"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:330-338)"
+    quote: "For each value c in {e.Activity | e in N^Event} of the Activity property that we find among the events in the graph, we create a new node c with label Class..."
+    description: "Class is a node type created through aggregation that represents activity types shared by multiple events. Class nodes enable abstraction from individual events to activity-level analysis."
+
+  - name: "Activity Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:478-486)"
+    quote: "For example, if we pick the Activity property as 'entity identifier', we infer entities such as Receive SO, Unpack, Scan, Store, Retrieve, Pack Shipment..."
+    description: "Activity can be treated as an entity type by using the Activity property as an entity identifier. This reveals queues between activities as entities that other objects pass through."
+
+  - name: "Actor Entity Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:595-604)"
+    quote: "Often called 'resources' in process management literature, we prefer the term Actor used in organizations research, as each actor follows its own behavior."
+    description: "Actor is an entity type representing workers or performers in the process. Actors are distinguished from generic resources because they exhibit autonomous behavioral patterns and follow individual routines."
+
+  - name: "TaskInstance Node Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:621-627)"
+    quote: "A task instance of an actor R working on an entity X materializes in an event knowledge graph as a specific subgraph over event nodes e1,...,ek..."
+    description: "TaskInstance is a higher-level node type representing a unit of work performed by an actor on an entity. Task instances are identified by subgraph patterns where actor and entity df-paths synchronize over consecutive events."
+
+  - name: "Task Node Type"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 2:730-736)"
+    quote: "To understand which tasks are performed and how often, we aggregate TaskInstance nodes into Task nodes by their Task property..."
+    description: "Task is an aggregated node type that groups TaskInstance nodes by their task description. Tasks represent recurring patterns of work activity (e.g., Place SO, Update SO, Receive SO followed by Unpack)."
+
+  # ============================================
+  # Paper 11: Process Mining Event Knowledge Graphs (Chunk 3)
+  # ============================================
+
+  - name: "Proclet Entity Types"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:5-7)"
+    quote: "Item, Payment, and (Order,Payment) are each discovered from the entity type's df-paths of the graph in Fig. 9. The proclets for the Actors however are created manually..."
+    description: "Proclets are behavioral model components that describe entity type behavior. Each proclet (Order, Supplier Order, Invoice, Item, Payment, derived entity types, Actors) represents a distinct entity type with its own behavioral specification."
+
+  - name: "Object-Centric Petri Net Entity Types"
+    chunk_ref: "11-Process_Mining_Event_Knowledge_Graphs (Chunk 3:17-23)"
+    quote: "Object-centric Petri nets also first discover one Petri net per entity type, then annotate the places and arcs with entity identifiers..."
+    description: "In object-centric Petri nets, each entity type has its own Petri net model that is composed with others. Entity types are distinguished by unique identifiers annotated on places and arcs."
+
+  # ============================================
+  # Paper 12: Foundations of Process Event Data (Chunk 1)
+  # ============================================
+
+  - name: "Event (Fundamental Unit)"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:14-20)"
+    quote: "Process event data is a fundamental building block for process mining as event logs portray the execution trails of business processes from which knowledge..."
+    description: "Event is the fundamental atomic unit in process mining. Events are observations (rows) in event log datasets that are related to each other through time and case dimensions."
+
+  - name: "Case (Process Instance)"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:68-74)"
+    quote: "First, each event should be linked to a case or process instance, typically by using a Case ID. This is 'Requirement 1'..."
+    description: "Case (or Process Instance) is a core entity type representing a single execution of a business process. Each case has a unique Case ID that links related events together."
+
+  - name: "Activity"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:92-106)"
+    quote: "The second key requirement for event log data is the fact that each event should correspond to an activity executed within the process. More specifically, an assumption is made..."
+    description: "Activity is an entity type representing discrete steps or operations in a business process. Events map to activities through activity labels drawn from a restricted set of process activities."
+
+  - name: "Trace"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:110-116)"
+    quote: "Finally, the last requirement entails that there exists an ordering of the events pertaining to a case. As such, each case logically consists of a sequence of events."
+    description: "Trace is an ordered sequence of events belonging to a single case. Traces represent the complete execution path of a process instance from start to finish."
+
+  - name: "Log"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:163-175)"
+    quote: "In IEEE XES, events are considered as an observed atomic granule of activity. Next to events, IEEE XES specifies the concept of a log, a trace, and an attribute component."
+    description: "Log is a container entity type in the XES standard that holds multiple traces. Logs represent collections of process executions and can have attributes at the log level."
+
+  - name: "Attribute"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:127-136)"
+    quote: "In addition to the mandatory elements of a Case ID, Activity, and Timestamp, event logs will usually contain several or often many additional attributes (columns)."
+    description: "Attribute is an entity type representing properties of events, traces, or logs. Attributes can be process instance-level (constant within case) or event-level (varying across events)."
+
+  - name: "Extension"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:172-175)"
+    quote: "The standard does not define a specific set of attributes for events, traces or logs. However, it does allow for extensions. An extension can be used to define a set of attributes..."
+    description: "Extension is a meta-entity type in XES that defines standard attribute sets for specific domains. Extensions provide schema definitions for common attribute patterns."
+
+  - name: "Classifier"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:169-171)"
+    quote: "Event and/or trace classifiers are used to assign an identity to traces and events."
+    description: "Classifier is a meta-entity type that assigns identity to traces and events. Classifiers determine how events and traces are uniquely identified within a log."
+
+  - name: "Lifecycle Transition"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:181-186)"
+    quote: "When sourcing events from many process-aware information systems, events oftentimes relate to the transactional lifecycle that activities undergo..."
+    description: "Lifecycle Transition is an entity type representing states and state changes in activity execution (e.g., start, complete, suspend, resume). The XES lifecycle extension defines a standard activity lifecycle state machine."
+
+  - name: "Object (Artifact)"
+    chunk_ref: "12-Foundations_of_Process_Event_Data (Chunk 1:424-433)"
+    quote: "Another important stream of research within the realm of event extraction addresses object or artifact centricity... Oftentimes, assumptions in terms of a desired perspective..."
+    description: "Object (or Artifact) is an entity type in object-centric process mining representing business objects tracked across processes. The OCEL standard supports multiple object types per event."
+
+  # ============================================
+  # Paper 15: SciAgents Multi-Agent Graph Reasoning (Chunk 1)
+  # ============================================
+
+  - name: "Agent (LLM-Based)"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:117-120)"
+    quote: "Multi-agent AI systems are known for their ability to tackle complex problems across different domains by pooling their capabilities..."
+    description: "Agent is a core entity type representing autonomous LLM-powered actors in the multi-agent system. Agents have specialized roles (Ontologist, Scientist, Critic, Planner) and interact to accomplish complex scientific discovery tasks."
+
+  - name: "Ontologist Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:225-226)"
+    quote: "Each agent plays a specialized role: The Ontologist defines key concepts and relationships..."
+    description: "Ontologist is a specialized agent type responsible for analyzing knowledge graph paths and defining concepts and relationships. The Ontologist provides deep insights that transition from static knowledge retrieval to dynamic knowledge generation."
+
+  - name: "Scientist Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:226-227)"
+    quote: "Scientist 1 crafts a detailed research proposal, Scientist 2 expands and refines the proposal..."
+    description: "Scientist is a specialized agent type for hypothesis generation and refinement. Scientist_1 creates initial research proposals while Scientist_2 expands with quantitative details, chemical formulas, and modeling techniques."
+
+  - name: "Critic Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:227-228)"
+    quote: "and the Critic agent conducts a thorough review and suggests improvements."
+    description: "Critic is a specialized agent type responsible for evaluating research proposals. The Critic identifies strengths and weaknesses, suggests improvements, and proposes specific molecular modeling and experimental priorities."
+
+  - name: "Planner Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:227-228)"
+    quote: "The Planner in the second approach develops a detailed plan..."
+    description: "Planner is a specialized agent type in the automated multi-agent system that develops detailed execution plans for research hypothesis generation tasks."
+
+  - name: "Node (Knowledge Graph)"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:108-110)"
+    quote: "These knowledge graphs not only provide a mechanistic breakdown of information but also offer an ontological framework that elucidates the interconnectedness of different concepts, delineated as nodes and edges..."
+    description: "Node is a fundamental entity type in ontological knowledge graphs representing scientific concepts. Nodes can represent materials (silk), properties (energy-intensive), processes, or other domain concepts."
+
+  - name: "Edge (Knowledge Graph Relationship)"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:108-110)"
+    quote: "...delineated as nodes and edges within the graph."
+    description: "Edge is an entity type representing relationships between concepts in the knowledge graph. Edges connect nodes with semantic relationships like 'provides', 'possess', 'include', 'is'."
+
+  - name: "Path (Knowledge Graph)"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:239-246)"
+    quote: "At the core of our model is an expansive knowledge graph... we provide it with a sub-graph derived from this more extensive knowledge graph. This sub-graph depicts a pathway..."
+    description: "Path is an entity type representing a sequence of connected nodes and edges between two concepts in the knowledge graph. Paths (random or shortest) provide context for hypothesis generation by revealing concept relationships."
+
+  - name: "Hypothesis"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:362-364)"
+    quote: "The agent creates a proposal that carefully addresses the following seven key aspects: hypothesis, outcome, mechanisms, design principles, unexpected properties, comparison, and novelty."
+    description: "Hypothesis is a structured entity type representing a research proposal. Hypotheses have defined components including outcome, mechanisms, design principles, unexpected properties, comparison, and novelty assessment."
+
+  - name: "Human Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:720)"
+    quote: "'Human': human user that poses the task and can intervene at various stages of the problem solving process."
+    description: "Human is an agent type representing the human user in the multi-agent system. Human agents pose tasks, provide feedback, and can intervene at various stages of the automated research process."
+
+  - name: "Assistant Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:733-735)"
+    quote: "'Assistant': has access to external tools including a function to generate a knowledge path from two keywords and a function to assess the novelty and feasibility..."
+    description: "Assistant is a specialized agent type with access to external tools (Semantic Scholar API, path generation functions). The Assistant executes tool calls and assesses research hypothesis novelty."
+
+  - name: "Group Chat Manager"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 1:737-738)"
+    quote: "'Group chat manager': chooses the next speaker based on the context and agent profiles and broadcasts the message to the whole group."
+    description: "Group Chat Manager is a coordination entity type that orchestrates multi-agent interactions. It selects the next speaking agent based on context and broadcasts messages to enable collaborative problem-solving."
+
+  # ============================================
+  # Paper 15: SciAgents Multi-Agent Graph Reasoning (Chunk 2)
+  # ============================================
+
+  - name: "Tool"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:498-499)"
+    quote: "All the tools implemented in this work are defined as python functions. Each function is characterized by a name, a description, and input properties..."
+    description: "Tool is an entity type representing functions that agents can invoke. Tools have names, descriptions, and input properties, enabling agents to perform actions like knowledge path generation and novelty assessment."
+
+  - name: "Novelty Assistant Agent"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:505-509)"
+    quote: "To ensure a thorough assessment of the research idea, we have implemented a tool featuring an AI agent named the 'novelty assistant', which calls the Semantic Scholar API three times..."
+    description: "Novelty Assistant is a specialized agent type dedicated to assessing research hypothesis novelty against existing literature. It queries the Semantic Scholar API with different keyword combinations and analyzes abstracts."
+
+  - name: "Subgraph"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:256-260)"
+    quote: "After the path is found, a subgraph consisting of the path nodes and their second-hop neighbors is generated, providing a broader context for the discovered route."
+    description: "Subgraph is an entity type representing a focused portion of the larger knowledge graph. Subgraphs include path nodes and their neighbors, providing contextual knowledge for reasoning tasks."
+
+  - name: "JSON Structure (Research Output)"
+    chunk_ref: "15-SciAgents_Multi-Agent_Graph_Reasoning (Chunk 2:305-307)"
+    quote: "This output is formatted as a JSON object with fields like 'hypothesis', 'outcome', and 'design_principles', each reflecting different aspects of the potential research..."
+    description: "JSON Structure is a data entity type used to represent structured research outputs. The structure contains fields for hypothesis, outcome, mechanisms, design_principles, unexpected_properties, comparison, and novelty."

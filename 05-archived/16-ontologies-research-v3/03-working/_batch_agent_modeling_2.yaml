@@ -1,0 +1,138 @@
+---
+batch_id: "agent_modeling_2"
+field: agent_modeling
+extracted_at: "2025-12-31T00:00:00Z"
+chunks_read: 6
+patterns_found: 24
+---
+
+patterns:
+  # Paper 04 - PROV-O to BFO Semantic Mapping (Chunk 1)
+  - name: "Agent as Material Entity with Role Realization"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:654-669)"
+    quote: "PROV Agent is mapped as a subclass of BFO material entities that both participate in some PROV Activity and bear some BFO role that is realized in a PROV Activity"
+    description: "Agents are ontologically grounded as material entities with two key characteristics: (1) participation in activities and (2) bearing roles that get realized through activities. This dual requirement establishes agents as physical beings with social/functional aspects expressed through role-bearing."
+
+  - name: "Agent Responsibility through Role-Bearing"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:659-668)"
+    quote: "The definition of PROV Agent also states that an agent bears some form of responsibility for an activity taking place, for the existence of an entity, or another agent's activity"
+    description: "Responsibility is formalized through the role-bearing relation. Every PROV Agent bears some role realized in some PROV Activity, capturing the notion that agents are responsible actors. The open-world interpretation means agent data need not include activity data, but the existence of related activities is asserted."
+
+  - name: "Software Agent as Material Realization"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:656-659)"
+    quote: "every particular instance of a PROV SoftwareAgent is a material realization of some software (which may itself be considered a generically dependent continuant)"
+    description: "Software agents are modeled as material entities because they have physical instantiation. The software itself is a generically dependent continuant (can exist in multiple copies), but any running software agent instance is a material realization. This grounds AI agents ontologically as physical processes."
+
+  - name: "Agent-Entity Compatibility"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:666-668)"
+    quote: "According to Requirement VI3 in 'The Rationale of Prov', a PROV Agent could be a PROV Entity and this is possible in our mapping because both PROV Agent and PROV Entity are subclasses of BFO continuant"
+    description: "The ontology allows agents to also be entities (things that can be used, generated, influenced). Both are continuants in BFO, enabling flexible modeling where the same thing can act as an agent in one context and be acted upon as an entity in another."
+
+  - name: "CCO Agent Equivalence with Activity Participation"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:676-679)"
+    quote: "A PROV Agent is equivalent to the intersection of CCO agents that are a CCO agent in some PROV Activity"
+    description: "The Common Core Ontologies provide a more specific equivalence mapping for agents. A PROV Agent equals the intersection of CCO agents that participate in activities. This enables richer reasoning for BFO/CCO users while maintaining compatibility with the base PROV model."
+
+  - name: "Activity-Agent Participation Asymmetry"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:686-691)"
+    quote: "although all instances of PROV Agent are participants in some PROV Activity at some time, not all instances of PROV Activity have participants"
+    description: "While every agent must participate in some activity (defining characteristic of agency), activities can exist without participants. This asymmetry is important for modeling: agency requires activity involvement, but activities are not defined by having agents."
+
+  - name: "Agent-Activity Disjointness Decision"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:710-720)"
+    quote: "Mapping PROV Agent to BFO continuant and PROV Activity to BFO process implies that PROV Agent is disjoint with PROV Activity. While this contradicts Requirement V14, it does not contradict any specific example"
+    description: "A key ontological commitment: agents and activities are fundamentally different types (continuants vs occurrents). While PROV-O technically allows agents to be activities, the BFO mapping enforces disjointness based on the philosophical distinction between things that persist and things that happen."
+
+  - name: "Agent Activity Relationship via wasAssociatedWith"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 1:758-764)"
+    quote: "PROV wasAssociatedWith has domain PROV Activity and range PROV Agent... This object property is mapped as a subproperty of BFO has participant"
+    description: "The wasAssociatedWith relation formally links activities to their agents. It maps to BFO has_participant (inverse of participates_in) and CCO has_agent. This provides the core mechanism for associating agents with the activities they perform."
+
+  # Paper 04 - PROV-O to BFO Semantic Mapping (Chunk 2)
+  - name: "PROV Role as Externally Determined"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 2:103-113)"
+    quote: "PROV Role is defined as 'the function of an entity or agent with respect to an activity'... we map PROV Role directly as a subclass of BFO role on the grounds that a PROV Role is externally determined by the context"
+    description: "Roles in agent modeling are distinguished from functions. While PROV uses 'function' terminology, the mapping recognizes roles as externally determined (by context of usage/generation/association), not internally grounded in physical makeup. Roles can be gained/lost without physical change."
+
+  - name: "Influence as Process Not Capacity"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 2:43-50)"
+    quote: "the dependent nature of PROV influences is better explained by classifying these as BFO processes or process boundaries that depend on agents through relations such as BFO has participant"
+    description: "Agent influence is modeled as a process (occurrence), not a capacity (disposition). Influences depend on agents through participation, but they are events in time, not inherent capabilities. This reframes agency from 'having capacities' to 'participating in influencing processes'."
+
+  - name: "Agent Influence Tripartite Classification"
+    chunk_ref: "04-PROV-O_to_BFO_Semantic_Mapping (Chunk 2:85-90)"
+    quote: "PROV-O further divides PROV Influence into 3 direct subclasses - PROV EntityInfluence, PROV ActivityInfluence, PROV AgentInfluence - according to a trisection of influencers"
+    description: "Influences are classified by their source type: entity influence, activity influence, or agent influence. This provides a mechanism to distinguish different kinds of causal relationships based on whether the influencer is a thing, a process, or an agent."
+
+  # Paper 05 - DOLCE Descriptive Ontology (Chunk 1)
+  - name: "Endurant-Perdurant Participation"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:134-137)"
+    quote: "An endurant can be in time by participating in a perdurant, and perdurants happen in time by having endurants as participants. For instance, a person is in time by participating to her own life"
+    description: "DOLCE models agents (as endurants/physical objects) as existing in time through participation in events/processes. A person exists through participating in their life. This participation relation is the fundamental link between agents and activities."
+
+  - name: "Agentive Physical Object Category"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:751-752)"
+    quote: "The DOLCE categories that we need for modeling this case are: agentive physical object (APO), non-agentive social object (NASO), and Time (T)"
+    description: "DOLCE provides an explicit 'Agentive Physical Object' (APO) category for modeling agents. This distinguishes entities capable of agency from non-agentive objects and social objects (like roles and concepts). Persons are classified as APO."
+
+  - name: "Role as Anti-Rigid Founded Concept"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:186-189)"
+    quote: "Roles are represented as (social) concepts, which are connected to other entities... roles are concepts that are anti-rigid and founded, meaning that (i) they have dynamic properties and (ii) they have a relational nature"
+    description: "Roles in agent modeling have two key meta-properties: anti-rigidity (can be acquired/lost) and foundedness (depend on external relations). This captures how teacher, student, or employee roles are dynamic, context-dependent classifications of agents."
+
+  - name: "Classification Relation for Role Assignment"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:405-408)"
+    quote: "CF(x, y, t) stands for 'at the time t, x is classified by the concept y'"
+    description: "Role assignment uses a temporal classification relation. An agent x is classified by role y at time t. This three-place relation enables modeling of role acquisition and loss over time, essential for dynamic agent behavior."
+
+  - name: "Functional vs Non-Functional Roles"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:777,792)"
+    quote: "Funct_RL(y) ^ CF(x, y, t) ^ CF(x', y, t) -> x = x' ... Formula (12) states that a functional role (y) can classify only one entity at each time"
+    description: "Roles can be functional (only one holder at a time, like 'teacher of class 2C') or non-functional (multiple holders, like 'student of class 2C'). This distinction is crucial for modeling organizational and social agent arrangements."
+
+  - name: "Constant vs Temporal Participation"
+    chunk_ref: "05-DOLCE_Descriptive_Ontology (Chunk 1:369-370)"
+    quote: "We also introduce the relation of constant participation (PCC), cf. (d10), i.e., participation during the whole perdurant"
+    description: "DOLCE distinguishes constant participation (agent present throughout entire activity) from temporal participation (agent present at specific times). This enables fine-grained modeling of when agents are involved in processes."
+
+  # Paper 06 - BFO Function Role Disposition (Chunk 1)
+  - name: "Role as Externally-Grounded Realizable"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:268-275)"
+    quote: "A role is a realizable entity which exists because the bearer is in some special physical, social, or institutional set of circumstances in which the bearer does not have to be"
+    description: "Roles are externally grounded: they exist due to external circumstances, not internal physical makeup. An agent can lose a role without physical change. This distinguishes roles from dispositions and functions which are internally grounded."
+
+  - name: "Having vs Playing a Role"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:309-312)"
+    quote: "There is also a distinction between having a role and playing a role. An entity can play a role... but neither the person nor the pyramidal neuron have those roles"
+    description: "Critical distinction for agent modeling: an agent can PLAY a role (temporarily fill it) without HAVING it (being the proper role-holder). A passenger can play pilot in emergency without having that role. This enables modeling of temporary vs permanent role assignments."
+
+  - name: "Role Optionality vs Disposition Necessity"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:288,337-339)"
+    quote: "Roles are optional. A person can lose the role of student without being physically changed... Unlike roles, dispositions are not optional. If an entity is a certain way, then it has a certain disposition"
+    description: "Roles are contingent and can be gained/lost without physical change. Dispositions are necessary given physical makeup. This ontological distinction is critical for modeling agent capabilities (dispositions) vs agent assignments (roles)."
+
+  - name: "Function as Internally-Grounded Realizable"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:385-396)"
+    quote: "A function is a disposition that exists in virtue of the bearer's physical make-up, and this physical make-up is something the bearer possesses because it came into being, either through evolution or through intentional design"
+    description: "Functions are dispositions arising from physical structure via evolution (biological) or design (artifactual). Unlike roles which are externally assigned, functions are inherent to the agent's construction. AI agents have functions by design."
+
+  - name: "Biological vs Artifactual Function"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:429,449-451)"
+    quote: "An artifactual function is a function whose bearer's physical make-up has been designed and made intentionally... A biological function is a function whose bearer is part of an organism"
+    description: "Functions split into artifactual (designed, like AI agent functions) and biological (evolved, like organ functions). This grounds AI agent capabilities in the artifactual function category - they have functions because they were designed to have them."
+
+  - name: "Realizable Entity and Process Realization"
+    chunk_ref: "06-BFO_Function_Role_Disposition (Chunk 1:222-226,241-243)"
+    quote: "a screwdriver's function is realized in the actual process of turning a screw... A realizable entity is defined as a specifically dependent continuant that has an independent continuant entity as its bearer, and whose instances can be realized in associated processes"
+    description: "Functions, roles, and dispositions are realized (manifested, executed) in processes. An agent's capabilities are realized when they perform activities. This provides the formal link between agent properties (realizables) and agent behavior (processes)."
+
+  # Paper 09 - OCEL 2.0 Specification (Chunk 1 & 2)
+  - name: "Object-Centric Multi-Object Events"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:149-154)"
+    quote: "Events: Object-centric process mining works on discrete events... Every event is unique and corresponds to a specific action or observation at a specific point in time. Events are atomic, have a timestamp, and may have additional attributes"
+    description: "In OCEL 2.0, events can relate to multiple objects (including human agents, systems, etc.). This overcomes single-case limitations, enabling modeling of activities involving multiple participants/agents without flattening. Events are atomic with timestamps."
+
+  - name: "Event-to-Object Qualified Relationships"
+    chunk_ref: "09-OCEL_20_Specification (Chunk 1:178-185)"
+    quote: "Events are associated with objects... In contrast to traditional event logs, events can be related to multiple objects. Furthermore, these relationships can be qualified differently, describing the role an object plays in the occurrence of this specific event"
+    description: "OCEL 2.0 qualifies event-to-object relationships with role descriptors. In a meeting event, qualifiers distinguish organizer from participants. This enables rich modeling of how different agents/objects participate in activities with specific roles."
