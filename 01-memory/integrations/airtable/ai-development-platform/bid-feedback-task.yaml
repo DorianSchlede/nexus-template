@@ -1,0 +1,208 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblMR7hOrHuxwFJso
+table_name: BID Feedback Task
+exported_at: '2025-12-28T14:12:03.734002'
+field_count: 26
+fields:
+- id: fldOnxaET3pXfZnKj
+  name: Task ID
+  type: singleLineText
+  description: null
+- id: fldDMftCx3NocydRZ
+  name: BID Feedback
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblH9H6wAD90a9Q88
+  prefer_single_record_link: false
+  inverse_link_field_id: fldkgNOsGiou7RkuO
+- id: fldFxrU1IMv72FxHn
+  name: Group (from BID Feedback)
+  type: rollup
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldagSfk5Zgjm0UcV
+  referenced_field_ids: []
+- id: fldzN4hm0H79GfB90
+  name: ContactRole_MismatchOrNull
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld9ZlCkb4mbTaOuI
+- id: fldzi9b81uTkZsXtw
+  name: AI_ContactRole_MismatchOrNull
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldJsNSd8mDkbckTJ
+- id: fldmqC8G2ds6ngUi4
+  name: User_ContactRole_MismatchOrNull
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fld99R3zsXyRfzFk1
+  name: UserType_ContactRole_MismatchOrNull
+  type: rollup
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+  referenced_field_ids: []
+- id: fldRZFZwYi8fVkRBb
+  name: Variable_Contact_Null
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld9ZlCkb4mbTaOuI
+- id: fld4beFxZQELjXllR
+  name: GroupID_Contact_Null copy
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldaSqju4zdbKTpwj
+- id: fldBcHUMpib8V9vNS
+  name: AI_Contact_Null
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldJsNSd8mDkbckTJ
+- id: fldmsvTZLEVp0zpE8
+  name: User_Contact_Null
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldKYDLLV42uUVvwO
+  name: GroupID_Contact_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldaSqju4zdbKTpwj
+- id: fld9EnUbmPrBLHYxH
+  name: Variable_Contact_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld9ZlCkb4mbTaOuI
+- id: fldFYYY83RBiarZ77
+  name: AI_Contact_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldJsNSd8mDkbckTJ
+- id: fldKHKVmHU7ncdCN4
+  name: User_Contact_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldBgEA8YQiaQIeMz
+  name: AI_Classification
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldJsNSd8mDkbckTJ
+- id: fldSLGY6W98pvCZEO
+  name: User_Classification
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldUZYUXLqX6euCRg
+  name: Right Classification
+  type: formula
+  description: Checks if AI_Classification matches User_Classification exactly.
+  referenced_field_ids:
+  - fldBgEA8YQiaQIeMz
+  - fldSLGY6W98pvCZEO
+  formula: '{fldBgEA8YQiaQIeMz} = {fldSLGY6W98pvCZEO}'
+- id: fldxot2eo9lHHJNJ9
+  name: Variable_ClassificationData_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld9ZlCkb4mbTaOuI
+- id: fldCLs4ZGtarqBf9f
+  name: Classification Reasoning
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fld8lOPWjatQqSSTG
+  name: AI_ClassificationData_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fldJsNSd8mDkbckTJ
+- id: fldDAsTlioTpHCO7Y
+  name: User_ClassificationData_Mismatch
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldDMftCx3NocydRZ
+  lookup_field_id: fld1JohqCmBvibc45
+- id: fldA2tCX6YnDT671r
+  name: Root Analysis
+  type: aiText
+  description: null
+  referenced_field_ids:
+  - fldzN4hm0H79GfB90
+  - fldzi9b81uTkZsXtw
+  - fldmqC8G2ds6ngUi4
+  - fldRZFZwYi8fVkRBb
+  - fld4beFxZQELjXllR
+  - fldBcHUMpib8V9vNS
+  - fldmsvTZLEVp0zpE8
+  - fld9EnUbmPrBLHYxH
+  - fldFYYY83RBiarZ77
+  - fldKHKVmHU7ncdCN4
+  - fldBgEA8YQiaQIeMz
+  - fldSLGY6W98pvCZEO
+  - fldxot2eo9lHHJNJ9
+  - fld8lOPWjatQqSSTG
+  - fldDAsTlioTpHCO7Y
+- id: fldb0Bktfsbo6h0GL
+  name: Task Link
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldOnxaET3pXfZnKj
+  formula: '"https://app.bid.beamstudio.ai/d8d3dfb6-e0b4-408c-8a97-68f59af82f7b/455269b0-4d8d-4071-a8a0-6b07450462aa/tasks/"&{fldOnxaET3pXfZnKj}'
+- id: fldzilrKf9jNHx2HD
+  name: Basic Reasoning
+  type: formula
+  description: Explains the main error type based on classification, data extraction,
+    and contact data issues.
+  referenced_field_ids:
+  - fldBgEA8YQiaQIeMz
+  - fldSLGY6W98pvCZEO
+  - fldxot2eo9lHHJNJ9
+  - fldRZFZwYi8fVkRBb
+  - fld9EnUbmPrBLHYxH
+  formula: "IF(\n  {fldBgEA8YQiaQIeMz} != {fldSLGY6W98pvCZEO},\n    \"Wrong Classification\"\
+    ,\n    IF(\n      AND({fldBgEA8YQiaQIeMz} = {fldSLGY6W98pvCZEO}, {fldxot2eo9lHHJNJ9}),\n\
+    \        \"Wrong Classification Data Extraction\",\n        IF(\n          {fldRZFZwYi8fVkRBb},\n\
+    \            \"Missing Contact Data\",\n            IF(\n              {fld9EnUbmPrBLHYxH},\n\
+    \                \"Wrong Contact Data\"\n            )\n        )\n    )\n)"
+- id: fldwLqOf9AYxvMPjU
+  name: Basic Reasoning v2
+  type: formula
+  description: Explains the main error type based on classification, data extraction,
+    and contact data issues.
+  referenced_field_ids:
+  - fldBgEA8YQiaQIeMz
+  - fldSLGY6W98pvCZEO
+  - fldUZYUXLqX6euCRg
+  - fldxot2eo9lHHJNJ9
+  - fldRZFZwYi8fVkRBb
+  - fld9EnUbmPrBLHYxH
+  formula: "TRIM(\n  IF(\n    OR(\n      {fldBgEA8YQiaQIeMz} != {fldSLGY6W98pvCZEO},\n\
+    \      {fldUZYUXLqX6euCRg} = 0\n    ),\n    \"Wrong Classification, \",\n    \"\
+    \"\n  ) &\n  IF(\n    AND(\n      {fldBgEA8YQiaQIeMz} = {fldSLGY6W98pvCZEO},\n\
+    \      {fldxot2eo9lHHJNJ9}\n    ),\n    \"Wrong Data Extraction, \",\n    \"\"\
+    \n  ) &\n  IF(\n    {fldRZFZwYi8fVkRBb},\n    \"Missing Contact Data, \",\n  \
+    \  \"\"\n  ) &\n  IF(\n    {fld9EnUbmPrBLHYxH},\n    \"Wrong Contact Data, \"\
+    ,\n    \"\"\n  ),\n  \", \"\n)"
+views:
+- id: viwVBnDNngdDNtUL7
+  name: Grid view
+  type: grid

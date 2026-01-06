@@ -1,0 +1,34 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tbl2oWQgjhi6wTudJ
+table_name: Match Types
+exported_at: '2025-12-28T14:12:03.710053'
+field_count: 5
+fields:
+- id: fldEeAMllgIFgMc23
+  name: Match Type Name
+  type: singleLineText
+  description: null
+- id: fldT6HMTUYkPSAnY3
+  name: Match Type Description
+  type: multilineText
+  description: null
+- id: fldXvy8j06zhU8jyb
+  name: DatasetVariables
+  type: singleLineText
+  description: null
+- id: fldPycYNzrzkcQQ9M
+  name: Variables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblf2ohTHmsucjVUj
+  prefer_single_record_link: false
+  inverse_link_field_id: flddZoPC81xbR3yIP
+- id: fldvQ293LeGQvrMJE
+  name: VariableTasks
+  type: singleLineText
+  description: null
+views:
+- id: viwo6oxmJc1lLsSHi
+  name: Grid view
+  type: grid

@@ -16,14 +16,14 @@ Public API:
 
 __version__ = "0.15.1"
 
-# Dependency check - fail gracefully with helpful message
+# Dependency check - warn but don't fail (graceful degradation)
 try:
     import yaml
+    HAS_YAML = True
 except ImportError:
-    raise ImportError(
-        "PyYAML is required but not installed.\n"
-        "Install it with: pip install pyyaml"
-    )
+    HAS_YAML = False
+    # Note: Some features require PyYAML (YAML frontmatter parsing)
+    # Install with: pip install pyyaml
 
 # Public API exports
 from .config import (

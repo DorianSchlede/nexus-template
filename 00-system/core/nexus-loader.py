@@ -26,7 +26,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from nexus import NexusService
-from nexus.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING
+from nexus.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING, CACHE_DIR, CACHE_STARTUP_FILE
 from nexus.utils import calculate_bundle_tokens
 
 # =============================================================================
@@ -106,7 +106,7 @@ def main():
     parser.add_argument('--no-metadata', action='store_true', help='Exclude metadata from startup (smaller output, use --metadata separately)')
     parser.add_argument('--project', help='Load project by ID')
     parser.add_argument('--part', type=int, default=0, help='Part to load for split responses (0=auto, 1=essential, 2=references)')
-    parser.add_argument('--skill', help='Load skill by name')
+    parser.add_argument('--skill', help='Load skill by name (returns file tree + SKILL.md, use Read for references)')
     parser.add_argument('--list-projects', action='store_true', help='List all projects')
     parser.add_argument('--list-skills', action='store_true', help='List all skills')
     parser.add_argument('--full', action='store_true', help='Return complete metadata (default: minimal fields for efficiency)')
@@ -117,6 +117,7 @@ def main():
     parser.add_argument('--sync', action='store_true', help='Sync system files from upstream')
     parser.add_argument('--dry-run', action='store_true', help='Show what would change without changing (use with --sync)')
     parser.add_argument('--force', action='store_true', help='Skip confirmation prompts (use with --sync)')
+    parser.add_argument('--session', help='Unique session ID for multi-instance support (prevents cache collisions)')
 
     args = parser.parse_args()
 
@@ -166,16 +167,64 @@ def main():
     output = json.dumps(result, indent=2, ensure_ascii=False)
     output_chars = len(output)
 
-    # Add truncation detection metadata at the very end
-    result['_output'] = {
-        'chars': output_chars,
-        'truncation_risk': output_chars > BASH_OUTPUT_LIMIT * 0.9,
-        'split_recommended': output_chars > BASH_OUTPUT_LIMIT,
-    }
+    # Check if output exceeds bash limit - if so, cache to file
+    # ONLY for startup/resume commands (not for --skill, --project, etc.)
+    is_startup_command = args.startup or args.resume
+    if output_chars > BASH_OUTPUT_LIMIT and is_startup_command:
+        # Create cache directory if needed
+        cache_dir = detected_nexus_root / CACHE_DIR
+        cache_dir.mkdir(parents=True, exist_ok=True)
 
-    # Re-serialize with metadata
-    final_output = json.dumps(result, indent=2, ensure_ascii=False)
-    print(final_output)
+        # Determine cache filename (session-specific if --session provided)
+        if args.session:
+            # Use hash of session ID for unique, fixed-length suffix
+            import hashlib
+            session_hash = hashlib.md5(args.session.encode()).hexdigest()[:8]
+            cache_filename = f"context_startup_{session_hash}.json"
+        else:
+            cache_filename = CACHE_STARTUP_FILE
+
+        # Write full output to cache file
+        cache_file = cache_dir / cache_filename
+        cache_file.write_text(output, encoding='utf-8')
+
+        # Return CLEAR instruction for Claude to read the cached file
+        # The cache contains orchestrator.md, memory files, and full metadata
+        cache_path = str(cache_file.relative_to(detected_nexus_root)).replace("\\", "/")
+
+        # Extract dynamic instructions from result
+        instructions = result.get("instructions", {})
+        mode = "resume" if args.resume else "startup"
+
+        cache_result = {
+            "⚠️ MANDATORY": f"Use Read tool on '{cache_path}' NOW - contains orchestrator.md with AI behavior rules",
+            "mode": mode,
+            "cached": True,
+            "cache_file": cache_path,
+            "instructions": instructions,  # Dynamic next steps based on --startup/--resume
+            "contains": [
+                "orchestrator.md - AI behavior rules, routing, menu display (CRITICAL)",
+                "system-map.md - Navigation structure",
+                "memory files - goals.md, user-config.yaml, memory-map.md",
+                "metadata - all projects and skills"
+            ],
+        }
+        print(json.dumps(cache_result, indent=2, ensure_ascii=False))
+    elif output_chars > BASH_OUTPUT_LIMIT:
+        # For non-startup commands (--skill, --project), just print the full output
+        # Claude's bash tool can handle large outputs, and these need the full content
+        print(output)
+    else:
+        # Add truncation detection metadata at the very end
+        result['_output'] = {
+            'chars': output_chars,
+            'truncation_risk': output_chars > BASH_OUTPUT_LIMIT * 0.9,
+            'split_recommended': output_chars > BASH_OUTPUT_LIMIT,
+        }
+
+        # Re-serialize with metadata
+        final_output = json.dumps(result, indent=2, ensure_ascii=False)
+        print(final_output)
 
 
 if __name__ == "__main__":

@@ -53,3 +53,6 @@ desktop.ini
 
 # Google OAuth credentials
 google-credentials.json
+# Large data files
+02-projects/07-airtable-test-dataset-builder/02-resources/*.csv
+*.csv

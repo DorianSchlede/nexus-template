@@ -1,0 +1,308 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tbl9lACSI4fDUzAv4
+table_name: DatasetTasks
+exported_at: '2025-12-28T14:12:03.685928'
+field_count: 41
+fields:
+- id: fldGaR2gFTtmCinp6
+  name: DatasetTask Name
+  type: singleLineText
+  description: null
+- id: fldPbTjUBAkJ0widH
+  name: Expected Output Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: selZ9JxJNHhrqnWnt
+    name: Done
+    color: greenLight1
+  - id: selhd5RWpc8X0HJ05
+    name: In Progress
+    color: blueLight2
+  - id: selL3YqLHb8LMelxZ
+    name: To Do
+    color: grayLight1
+- id: fld900n9pmqO64oQ9
+  name: AgentVersions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: false
+  inverse_link_field_id: fldeEOCdFJesCsMXK
+- id: fldAcBJcEqNG1KOgw
+  name: Agent Task
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: false
+  inverse_link_field_id: fld98YlcjD7sIMQaF
+- id: fldaNNhqnsqt19DVD
+  name: Expected Last Node Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: sely7l3RRrUXlKLHW
+    name: To Do
+    color: blueLight2
+  - id: sely1fNH6R95bm9sb
+    name: 'In Progress '
+    color: yellowLight2
+  - id: selfwL5MLYULKQsQl
+    name: Completed
+    color: greenLight2
+  - id: selJ0NiIAZRGSURkd
+    name: 2. TZV Zurück
+    color: blueLight2
+- id: fldKJ0ZnqhzUMjozY
+  name: Actual Last Node (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fld2CZc1jCR6swyr7
+- id: fldkOIWVbKKkDWfJ5
+  name: Expected Last Node
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblPJ9VKG74mKv7JK
+  prefer_single_record_link: true
+  inverse_link_field_id: fld03O9q0vHNTstcS
+- id: fldis1z4tfvehWuAw
+  name: BID Case ID (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldCrhUM8gH3ENk4j
+- id: fldpFn5QlIqDeA6tu
+  name: BID Case ID (from Agent Task) copy
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldCrhUM8gH3ENk4j
+- id: fldH7nfokjVpXQ8xB
+  name: Task Type (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldYacQEGdeKGQqmE
+- id: fldy4fByK62Sz18e1
+  name: Evaluation Tasks (from Agent Task)
+  type: rollup
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldsCjtBCdaLBtWtM
+  referenced_field_ids: []
+- id: fldjgiliKdiBSfr8O
+  name: Actual Task Input (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldVLDYZJcdSB8ofR
+- id: fldbAzqLPA2nRFFw9
+  name: Actual Attachments (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldzXMT7t5qCeRRct
+- id: fldTaiqkWEyASUHRA
+  name: Agent (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldTWIqazqiMollCT
+- id: fldp9x5PoR4kvfBMS
+  name: Dataset
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbltUrvSBnfOb4S8v
+  prefer_single_record_link: true
+  inverse_link_field_id: flduodJlkvU6Mt4RA
+- id: fldw7NMZCrOl8ztol
+  name: Dataset Record ID (from Dataset)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldp9x5PoR4kvfBMS
+  lookup_field_id: fld1driKqpLcwmqNo
+- id: fldDV2DZ8DNWner86
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldwoErevq5ahVRho
+- id: fldOtkN7N7vSx9fVd
+  name: OriginalAgentVersion
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblSy63NxSHVSEOCo
+  prefer_single_record_link: false
+  inverse_link_field_id: fldptv1tmn01Au1sl
+- id: fldTi4FsCd0EW3Lk3
+  name: TaskInput
+  type: multilineText
+  description: null
+- id: fldUBl1LJmDTrhdqV
+  name: Attachments
+  type: multipleAttachments
+  description: null
+- id: flduEFJ9ktCO8SaBY
+  name: DatasetNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblflNTX3tR0onX13
+  prefer_single_record_link: false
+  inverse_link_field_id: fld5gn9fM0p8NHoYZ
+- id: fld3glWklSeh3fDKD
+  name: DatasetTask Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: selsqFjUYvPBxOA6N
+    name: To Do
+    color: blueLight2
+  - id: sel8DK32ro9u0XijB
+    name: In progress
+    color: cyanLight2
+  - id: selRkyM3gppbFVXBV
+    name: 'Open Question '
+    color: greenLight2
+  - id: selgIEcwXNvcFXPGH
+    name: Completed
+    color: tealLight2
+- id: flddTNNmKNzG2Oe5r
+  name: DatasetVariables
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: false
+  inverse_link_field_id: fld720dN2tt34oPAY
+- id: fldgDcbDG0YR1wBkz
+  name: Expected Value (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flddTNNmKNzG2Oe5r
+  lookup_field_id: fldNJlDMArS5Zdf2I
+- id: fldtocG40yQ2FMp5x
+  name: BIDFeedbackID (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flddTNNmKNzG2Oe5r
+  lookup_field_id: fldoVYzNfZP5mHzII
+- id: fldwl33NuKnxoLMrF
+  name: BIDFeedbackID Link (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flddTNNmKNzG2Oe5r
+  lookup_field_id: fldosUDyWMoGg1iBL
+- id: fldPtfz58pIm5Qj9j
+  name: Agents
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblVEJD2inVhae855
+  prefer_single_record_link: false
+  inverse_link_field_id: fldn87dO3sEs2pRhb
+- id: fldM4blm4ie0hhtzY
+  name: Workspace (from Agents)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldPtfz58pIm5Qj9j
+  lookup_field_id: fldItXOU8yc1YbCdu
+- id: fldxEo5TMj6xHPny8
+  name: Beam Task ID
+  type: singleLineText
+  description: null
+- id: flddqqAC8ssmzL23h
+  name: Dataset Task UID
+  type: multilineText
+  description: null
+- id: fldsp93DhK4YUU2AV
+  name: Node Tasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: false
+  inverse_link_field_id: fldxJWgtFJ2juAriR
+- id: fldSqAOKCf6mwVUU1
+  name: Variables Tasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblKhpqLs06kI01yv
+  prefer_single_record_link: false
+  inverse_link_field_id: fldZwQmpwWWYACJxT
+- id: fldJSKxexM41Vqsva
+  name: DatasetTask AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: 'RECORD_ID()
+
+    '
+- id: fldoi2lut5n3QjcnU
+  name: AttachementsArray
+  type: multilineText
+  description: null
+- id: fldfgLQXuqWsqbrEJ
+  name: DatasetNodes 2
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblflNTX3tR0onX13
+  prefer_single_record_link: false
+  inverse_link_field_id: fldseIVddXxMsRuVl
+- id: fldH8GAuYskVGQAd0
+  name: Notes
+  type: multilineText
+  description: null
+- id: fldnHBPEfWnwkWu0K
+  name: Accuracy Rollup (from Variables Tasks)
+  type: rollup
+  description: null
+  record_link_field_id: fldSqAOKCf6mwVUU1
+  lookup_field_id: fldWv8UcnhDT7uQnM
+  referenced_field_ids: []
+- id: fldfgIIO95FEsHbi5
+  name: Expected Value - Key Variable (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: flddTNNmKNzG2Oe5r
+  lookup_field_id: fldNJlDMArS5Zdf2I
+- id: fldUmCpSybOkOxtv7
+  name: Agents (from Dataset)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldp9x5PoR4kvfBMS
+  lookup_field_id: fld63cNmqBfQO6ozR
+- id: fldoZBTt7Xro4RXTw
+  name: Created
+  type: createdTime
+  description: null
+- id: fldc45QnQ3RDuklql
+  name: URLs (from Agent Task)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldAcBJcEqNG1KOgw
+  lookup_field_id: fldocM6KHBRqB6Bjb
+views:
+- id: viwoziHOFFXDrmlu1
+  name: Round 15
+  type: grid
+- id: viwGlmkEbhZTEOUAp
+  name: TZV Manually
+  type: grid
+- id: viwLATJnLjodj6kpA
+  name: TZV Schuldner
+  type: grid
+- id: viwc2EbgNH47pjxy4
+  name: EnBw
+  type: grid
+- id: viwtkYKwc5DUgvGzf
+  name: Case Study
+  type: grid
+- id: viwmL4iovTR9ySa8b
+  name: Grid view
+  type: grid
+- id: viwrqhrnoLK9HcOCl
+  name: Unidays
+  type: grid
+- id: viwWlGAa4nKtTWFPl
+  name: Moverii
+  type: grid

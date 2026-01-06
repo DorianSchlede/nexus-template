@@ -13,9 +13,96 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-import yaml
+# PyYAML is optional - graceful degradation if not available
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+    yaml = None
 
 from .config import CHARS_PER_TOKEN, get_templates_dir
+
+
+def parse_simple_yaml(yaml_text: str) -> Dict[str, Any]:
+    """
+    Simple YAML parser for basic frontmatter (fallback when PyYAML unavailable).
+
+    Supports:
+    - Simple key: value pairs
+    - Lists with - items
+    - Nested objects (one level)
+    - Quoted strings
+    - Numbers and booleans
+
+    Does NOT support:
+    - Multi-line values
+    - Complex nested structures
+    - YAML anchors/references
+    """
+    result = {}
+    current_key = None
+    current_list = None
+
+    for line in yaml_text.split('\n'):
+        stripped = line.strip()
+
+        # Skip empty lines and comments
+        if not stripped or stripped.startswith('#'):
+            continue
+
+        # List item
+        if stripped.startswith('- '):
+            if current_list is not None:
+                item = stripped[2:].strip()
+                # Remove quotes
+                if item.startswith('"') and item.endswith('"'):
+                    item = item[1:-1]
+                elif item.startswith("'") and item.endswith("'"):
+                    item = item[1:-1]
+                current_list.append(item)
+            continue
+
+        # Key: value pair
+        if ':' in stripped:
+            key, _, value = stripped.partition(':')
+            key = key.strip()
+            value = value.strip()
+
+            # Start of a list
+            if not value:
+                current_key = key
+                current_list = []
+                result[key] = current_list
+                continue
+
+            # Regular key-value
+            current_list = None
+            current_key = None
+
+            # Parse value type
+            if value.lower() == 'true':
+                result[key] = True
+            elif value.lower() == 'false':
+                result[key] = False
+            elif value.lower() == 'null':
+                result[key] = None
+            elif value.startswith('"') and value.endswith('"'):
+                result[key] = value[1:-1]
+            elif value.startswith("'") and value.endswith("'"):
+                result[key] = value[1:-1]
+            else:
+                # Try number
+                try:
+                    if '.' in value:
+                        result[key] = float(value)
+                    else:
+                        result[key] = int(value)
+                except ValueError:
+                    # Keep as string
+                    result[key] = value
+
+    return result
 
 
 def extract_yaml_frontmatter(file_path: str) -> Optional[Dict[str, Any]]:
@@ -39,7 +126,13 @@ def extract_yaml_frontmatter(file_path: str) -> Optional[Dict[str, Any]]:
             return None
 
         yaml_content = match.group(1)
-        metadata = yaml.safe_load(yaml_content)
+
+        # Try PyYAML first (more reliable)
+        if HAS_YAML:
+            metadata = yaml.safe_load(yaml_content)
+        else:
+            # Fallback to simple parser
+            metadata = parse_simple_yaml(yaml_content)
 
         if metadata:
             # Convert any date objects to ISO format strings for JSON serialization

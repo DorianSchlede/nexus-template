@@ -1,0 +1,35 @@
+{
+  "source_pdf": "24-EffectiveCollab-2412.05449.pdf",
+  "processed_at": "2025-12-28T16:49:41.129472",
+  "max_lines_per_chunk": 500,
+  "overlap_lines": 100,
+  "total_chunks": 4,
+  "total_lines": 1810,
+  "total_chars": 77526,
+  "chunks": [
+    {
+      "filename": "24-EffectiveCollab-2412.05449_1.md",
+      "chunk_number": 1,
+      "line_count": 500,
+      "char_count": 29256
+    },
+    {
+      "filename": "24-EffectiveCollab-2412.05449_2.md",
+      "chunk_number": 2,
+      "line_count": 495,
+      "char_count": 19133
+    },
+    {
+      "filename": "24-EffectiveCollab-2412.05449_3.md",
+      "chunk_number": 3,
+      "line_count": 499,
+      "char_count": 21674
+    },
+    {
+      "filename": "24-EffectiveCollab-2412.05449_4.md",
+      "chunk_number": 4,
+      "line_count": 316,
+      "char_count": 7463
+    }
+  ]
+}

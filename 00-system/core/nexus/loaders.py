@@ -47,19 +47,19 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
     if not projects_dir.exists():
         return []
 
-    # Look for all overview.md files in root and onboarding folder
+    # Look for all 01-overview.md files (numbered naming convention)
     patterns = [
-        "*/01-planning/overview.md",
-        "00-onboarding/*/01-planning/overview.md",
+        "*/01-planning/01-overview.md",
+        "00-onboarding/*/01-planning/01-overview.md",
     ]
 
     for pattern in patterns:
         for overview_file in projects_dir.glob(pattern):
             metadata = extract_yaml_frontmatter(str(overview_file))
             if metadata and "error" not in metadata:
-                # Count actual checkboxes from steps.md
+                # Count actual checkboxes from 04-steps.md (numbered naming convention)
                 project_dir = overview_file.parent.parent
-                steps_file = project_dir / "01-planning" / "steps.md"
+                steps_file = project_dir / "01-planning" / "04-steps.md"
 
                 total, completed, uncompleted = count_checkboxes(steps_file)
 
@@ -163,6 +163,169 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
 
     # Return in priority order: CORE → LEARNING → others
     return core_skills + learning_skills + skills
+
+
+def scan_skills_tiered(base_path: str = ".") -> Dict[str, Any]:
+    """
+    Tiered skill loading for token optimization (~900 tokens vs ~8,250 tokens).
+
+    Strategy:
+    - Tier 1 (ALL system skills): Load ALL 00-system/skills/ with descriptions
+    - Tier 2 (User connectors): For 03-skills/ folders with *-connect/ subdirectory,
+               load connector with description
+    - Tier 3 (Other user skills): Auto-add all 03-skills/ skills WITHOUT connect pattern,
+               with descriptions
+
+    Returns:
+        {
+            "core": {
+                "projects": [{"name": "create-project", "description": "..."}, ...],
+                "learning": [...],
+                ...
+            },
+            "integrations": [{"name": "airtable-connect", "description": "..."}, ...],
+            "user": [{"name": "skill-name", "description": "..."}, ...]
+        }
+    """
+    result = {
+        "core": {},
+        "integrations": [],
+        "user": []
+    }
+
+    # === TIER 1: ALL System Skills (00-system/skills/) with descriptions ===
+    system_skills_dir = Path(base_path) / SYSTEM_DIR / "skills"
+    if system_skills_dir.exists() and system_skills_dir.is_dir():
+        try:
+            # Categorize system skills by their parent folder
+            for skill_file in system_skills_dir.glob("**/SKILL.md"):
+                try:
+                    metadata = extract_yaml_frontmatter(str(skill_file))
+                    if not metadata or "error" in metadata:
+                        continue
+
+                    skill_name = metadata.get("name", "").strip()
+                    skill_desc = metadata.get("description", "").strip()
+
+                    # Skip if name is empty
+                    if not skill_name:
+                        continue
+
+                    # Determine category from path (e.g., 00-system/skills/projects/create-project)
+                    skill_path = Path(metadata.get("_file_path", ""))
+                    try:
+                        # Get category (parent folder of skill)
+                        parts = skill_path.parts
+                        skills_idx = parts.index("skills")
+                        if skills_idx + 2 < len(parts):
+                            category = parts[skills_idx + 1]
+                        else:
+                            category = "other"
+                    except (ValueError, IndexError):
+                        category = "other"
+
+                    # Add to category
+                    if category not in result["core"]:
+                        result["core"][category] = []
+
+                    result["core"][category].append({
+                        "name": skill_name,
+                        "description": skill_desc
+                    })
+                except Exception:
+                    # Skip individual skill errors, continue processing
+                    continue
+        except Exception:
+            # If glob fails entirely, continue with empty core skills
+            pass
+
+    # === TIER 2 + 3: User Skills (03-skills/) ===
+    user_skills_dir = Path(base_path) / SKILLS_DIR
+    if user_skills_dir.exists() and user_skills_dir.is_dir():
+        try:
+            # First pass: Detect which skills have *-connect pattern
+            connect_skills = set()
+            try:
+                for item in user_skills_dir.iterdir():
+                    if not item.is_dir():
+                        continue
+                    try:
+                        # Check if this folder has a *-connect/ subdirectory
+                        for subdir in item.iterdir():
+                            if subdir.is_dir() and subdir.name.endswith("-connect"):
+                                connect_skills.add(item.name)
+
+                                # Load the connect skill's description (Tier 2)
+                                connect_skill_file = subdir / "SKILL.md"
+                                skill_desc = ""
+                                if connect_skill_file.exists():
+                                    try:
+                                        metadata = extract_yaml_frontmatter(str(connect_skill_file))
+                                        if metadata and "error" not in metadata:
+                                            skill_desc = metadata.get("description", "").strip()
+                                    except Exception:
+                                        pass
+
+                                result["integrations"].append({
+                                    "name": subdir.name,
+                                    "description": skill_desc
+                                })
+                                break  # Only add first *-connect found
+                    except (OSError, PermissionError):
+                        # Skip inaccessible subdirectories
+                        continue
+            except (OSError, PermissionError):
+                # If iterdir fails, continue with empty connect_skills
+                pass
+
+            # Second pass: Load all other user skills with descriptions (Tier 3)
+            try:
+                for skill_file in user_skills_dir.glob("**/SKILL.md"):
+                    try:
+                        metadata = extract_yaml_frontmatter(str(skill_file))
+                        if not metadata or "error" in metadata:
+                            continue
+
+                        skill_name = metadata.get("name", "").strip()
+
+                        # Skip if name is empty
+                        if not skill_name:
+                            continue
+
+                        # Skip if this is a connect skill (already in integrations)
+                        if skill_name.endswith("-connect"):
+                            continue
+
+                        # Determine parent category folder
+                        skill_path = Path(metadata.get("_file_path", ""))
+                        try:
+                            parts = skill_path.parts
+                            skills_idx = parts.index("03-skills")
+                            if skills_idx + 1 < len(parts):
+                                parent_category = parts[skills_idx + 1]
+                            else:
+                                parent_category = None
+                        except (ValueError, IndexError):
+                            parent_category = None
+
+                        # Only add if parent category does NOT have connect pattern
+                        # (if parent has connect, we already added the connect skill)
+                        if parent_category not in connect_skills:
+                            result["user"].append({
+                                "name": skill_name,
+                                "description": metadata.get("description", "").strip()
+                            })
+                    except Exception:
+                        # Skip individual skill errors
+                        continue
+            except Exception:
+                # If glob fails, continue with empty user skills
+                pass
+        except Exception:
+            # If entire user skills processing fails, continue
+            pass
+
+    return result
 
 
 def detect_configured_integrations(base_path: str = ".") -> List[Dict[str, Any]]:
@@ -394,16 +557,25 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
     return result
 
 
-def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
+def load_skill_slim(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
     """
-    Load complete skill context.
+    Load skill with file tree + SKILL.md only (no reference content).
+
+    This is a lightweight version of load_skill that shows:
+    - Skill path
+    - Full directory tree with file sizes
+    - SKILL.md content
+    - List of available references/scripts (paths only, no content)
+
+    Use this when you want to see the skill structure without loading
+    all reference files. You can then Read() specific files as needed.
 
     Args:
         skill_name: Name of the skill to load
         base_path: Root path to Nexus installation
 
     Returns:
-        Dictionary with skill files and metadata
+        Dictionary with skill structure and SKILL.md content
     """
     from datetime import datetime
 
@@ -411,18 +583,17 @@ def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
 
     # Search for skill in both locations (supports category subfolders)
     skill_path = None
-
     for skills_dir in [base / SKILLS_DIR, base / SYSTEM_DIR / "skills"]:
         if not skills_dir.exists():
             continue
 
-        # First try direct path (e.g., skills/notion-connect)
+        # Direct path (e.g., skills/notion-connect)
         direct_path = skills_dir / skill_name
         if direct_path.exists() and (direct_path / "SKILL.md").exists():
             skill_path = direct_path
             break
 
-        # Then search recursively in category subfolders (e.g., skills/notion/notion-connect)
+        # Search recursively in category subfolders
         for skill_file in skills_dir.glob(f"**/{skill_name}/SKILL.md"):
             skill_path = skill_file.parent
             break
@@ -433,119 +604,450 @@ def load_skill(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
     if not skill_path:
         return {"error": f"Skill not found: {skill_name}"}
 
-    result = {
-        "loaded_at": datetime.now().isoformat(),
-        "bundle": "skill",
-        "skill_name": skill_name,
-        "skill_path": str(skill_path),
-        "files": {},
-        "references_loaded": [],
-        "scripts_loaded": [],
-        "assets_available": [],
-    }
+    # Build file tree representation
+    def build_tree(path: Path, prefix: str = "") -> List[str]:
+        """Build tree representation of directory."""
+        entries = []
+        items = sorted(path.iterdir(), key=lambda x: (x.is_file(), x.name))
+        for i, item in enumerate(items):
+            is_last = i == len(items) - 1
+            connector = "└── " if is_last else "├── "
+            if item.is_file():
+                size = item.stat().st_size
+                size_str = f"{size:,} bytes" if size < 10000 else f"{size // 1024}KB"
+                entries.append(f"{prefix}{connector}{item.name} ({size_str})")
+            else:
+                entries.append(f"{prefix}{connector}{item.name}/")
+                extension = "    " if is_last else "│   "
+                entries.extend(build_tree(item, prefix + extension))
+        return entries
 
-    # Load SKILL.md with full content
+    tree_lines = [f"{skill_path.name}/"] + build_tree(skill_path)
+
+    # Read SKILL.md content
     skill_file = skill_path / "SKILL.md"
+    skill_content = ""
     if skill_file.exists():
-        metadata = extract_yaml_frontmatter(str(skill_file))
-
-        # Read full content
         try:
-            with open(skill_file, "r", encoding="utf-8") as f:
-                content = f.read()
+            skill_content = skill_file.read_text(encoding="utf-8")
         except Exception as e:
-            content = f"ERROR reading file: {e}"
+            skill_content = f"ERROR reading file: {e}"
 
-        result["files"]["SKILL.md"] = {
-            "path": str(skill_file),
-            "metadata": metadata,
-            "content": content,
-        }
+    # List available files (paths only, no content)
+    references = []
+    scripts = []
+    assets = []
 
-        # AUTO-LOAD references declared in YAML (with content)
-        if metadata and "load_references" in metadata:
-            references_path = skill_path / "references"
-            if references_path.exists():
-                for ref_file in metadata["load_references"]:
-                    ref_path = references_path / ref_file
-                    if ref_path.exists():
-                        try:
-                            with open(ref_path, "r", encoding="utf-8") as f:
-                                ref_content = f.read()
-                        except Exception as e:
-                            ref_content = f"ERROR reading file: {e}"
-                        result["files"][f"references/{ref_file}"] = {
-                            "path": str(ref_path),
-                            "content": ref_content,
-                        }
-                        result["references_loaded"].append(ref_file)
+    refs_path = skill_path / "references"
+    if refs_path.exists():
+        references = [str(f.relative_to(skill_path)) for f in refs_path.glob("*") if f.is_file()]
 
-        # AUTO-LOAD scripts declared in YAML (with content)
-        if metadata and "load_scripts" in metadata:
-            scripts_path = skill_path / "scripts"
-            if scripts_path.exists():
-                for script_file in metadata["load_scripts"]:
-                    script_path_file = scripts_path / script_file
-                    if script_path_file.exists():
-                        try:
-                            with open(script_path_file, "r", encoding="utf-8") as f:
-                                script_content = f.read()
-                        except Exception as e:
-                            script_content = f"ERROR reading file: {e}"
-                        result["files"][f"scripts/{script_file}"] = {
-                            "path": str(script_path_file),
-                            "content": script_content,
-                        }
-                        result["scripts_loaded"].append(script_file)
-
-    # List remaining references (not auto-loaded)
-    references_path = skill_path / "references"
-    if references_path.exists():
-        all_refs = [f.name for f in references_path.glob("*") if f.is_file()]
-        result["references_available"] = [r for r in all_refs if r not in result["references_loaded"]]
-
-    # List remaining scripts (not auto-loaded)
     scripts_path = skill_path / "scripts"
     if scripts_path.exists():
-        all_scripts = [f.name for f in scripts_path.glob("*") if f.is_file()]
-        result["scripts_available"] = [s for s in all_scripts if s not in result["scripts_loaded"]]
+        scripts = [str(f.relative_to(skill_path)) for f in scripts_path.glob("*") if f.is_file()]
 
-    # List assets (never auto-loaded)
     assets_path = skill_path / "assets"
     if assets_path.exists():
-        result["assets_available"] = [f.name for f in assets_path.glob("*") if f.is_file()]
+        assets = [str(f.relative_to(skill_path)) for f in assets_path.glob("*") if f.is_file()]
 
-    return result
+    return {
+        "loaded_at": datetime.now().isoformat(),
+        "bundle": "skill_slim",
+        "skill_name": skill_name,
+        "skill_path": str(skill_path),
+        "file_tree": "\n".join(tree_lines),
+        "SKILL.md": skill_content,
+        "available_files": {
+            "references": references,
+            "scripts": scripts,
+            "assets": assets,
+        },
+        "hint": "Use Read tool on any file path to load its content",
+    }
+# =============================================================================
+# MVC (Minimum Viable Context) - Slim Generators for Session Start
+# =============================================================================
+# These functions generate context small enough for hookSpecificOutput.additionalContext
+# Target: <8K tokens for startup, <4K tokens for resume
+# =============================================================================
 
 
-def load_metadata(base_path: str = ".") -> Dict[str, Any]:
+def build_skills_xml(base_path: str = ".") -> str:
     """
-    Load ONLY project and skill metadata (no memory content).
+    Build XML representation of all skills for STARTUP mode context injection.
 
-    Use this as a second call after --startup to get full metadata
-    when the combined output would exceed bash limits (~30K chars).
+    Returns XML string with:
+    - <system-skills> - All skills from 00-system/skills/ grouped by category
+    - <integration-skills> - Skills ending with -connect from 03-skills/
+    - <user-skills> - All other skills from 03-skills/
 
-    Args:
-        base_path: Root path to Nexus installation
+    Each skill has action="read {path}" attribute for direct loading.
 
     Returns:
-        - projects: Full project metadata list
-        - skills: Full skill metadata list
-        - stats: Counts and summary
+        XML string ready for inclusion in nexus-context
+    """
+    from xml.sax.saxutils import escape
+
+    xml_parts = []
+
+    # === SYSTEM SKILLS (00-system/skills/) ===
+    system_skills_dir = Path(base_path) / SYSTEM_DIR / "skills"
+    categories: Dict[str, List[Dict[str, str]]] = {}
+
+    if system_skills_dir.exists():
+        for skill_file in system_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+                skill_path = metadata.get("_file_path", str(skill_file))
+
+                if not skill_name:
+                    continue
+
+                # Determine category from path
+                parts = Path(skill_path).parts
+                try:
+                    skills_idx = parts.index("skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "other"
+                except (ValueError, IndexError):
+                    category = "other"
+
+                if category not in categories:
+                    categories[category] = []
+
+                categories[category].append({
+                    "name": skill_name,
+                    "description": skill_desc,
+                    "path": skill_path
+                })
+            except Exception:
+                continue
+
+    # Build system-skills XML
+    xml_parts.append('  <system-skills location="00-system/skills/">')
+    for category, skills in sorted(categories.items()):
+        xml_parts.append(f'    <category name="{escape(category)}">')
+        for skill in skills:
+            action = f"read {skill['path']}"
+            desc = escape(skill['description']) if skill['description'] else ""
+            xml_parts.append(f'      <skill name="{escape(skill["name"])}" action="{escape(action)}">')
+            xml_parts.append(f'        {desc}')
+            xml_parts.append('      </skill>')
+        xml_parts.append('    </category>')
+    xml_parts.append('  </system-skills>')
+
+    # === INTEGRATION SKILLS (03-skills/*-connect/) ===
+    user_skills_dir = Path(base_path) / SKILLS_DIR
+    integration_skills = []
+    other_user_skills = []
+
+    if user_skills_dir.exists():
+        for skill_file in user_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+                skill_path = metadata.get("_file_path", str(skill_file))
+
+                if not skill_name:
+                    continue
+
+                if skill_name.endswith("-connect"):
+                    integration_skills.append({
+                        "name": skill_name,
+                        "description": skill_desc,
+                        "path": skill_path
+                    })
+                else:
+                    other_user_skills.append({
+                        "name": skill_name,
+                        "description": skill_desc,
+                        "path": skill_path
+                    })
+            except Exception:
+                continue
+
+    # Build integration-skills XML
+    xml_parts.append('  <integration-skills location="03-skills/*-connect/">')
+    for skill in integration_skills:
+        action = f"read {skill['path']}"
+        desc = escape(skill['description']) if skill['description'] else ""
+        xml_parts.append(f'    <skill name="{escape(skill["name"])}" action="{escape(action)}">')
+        xml_parts.append(f'      {desc}')
+        xml_parts.append('    </skill>')
+    xml_parts.append('  </integration-skills>')
+
+    # Build user-skills XML
+    xml_parts.append('  <user-skills location="03-skills/">')
+    for skill in other_user_skills:
+        action = f"read {skill['path']}"
+        desc = escape(skill['description']) if skill['description'] else ""
+        xml_parts.append(f'    <skill name="{escape(skill["name"])}" action="{escape(action)}">')
+        xml_parts.append(f'      {desc}')
+        xml_parts.append('    </skill>')
+    xml_parts.append('  </user-skills>')
+
+    return '\n'.join(xml_parts)
+
+
+def extract_essential_orchestrator(base_path: str = ".") -> Dict[str, Any]:
+    """
+    Extract MINIMAL routing rules from orchestrator.md (~500 tokens vs ~4K).
+
+    Returns structured data instead of full prose:
+    - Routing priority table
+    - Core skill triggers
+    - Never-do list
+    - Mode rules
+
+    For full orchestrator content, AI should read the file directly when needed.
+    """
+    return {
+        "routing": [
+            {"priority": 1, "match": "skill trigger", "action": "load matched skill"},
+            {"priority": 2, "match": "integration keyword", "action": "load {name}-connect"},
+            {"priority": 3, "match": "project number/name", "action": "execute-project"},
+            {"priority": 4, "match": "no match", "action": "respond naturally"},
+        ],
+        "core_skills": {
+            "plan-project": "User wants to START something NEW with deliverable",
+            "execute-project": "User references EXISTING project by name/ID",
+            "create-skill": "User wants to AUTOMATE repeating work",
+        },
+        "skill_priority": "00-system/skills/ > 03-skills/ (System skills have priority!)",
+        "concepts": {
+            "project": "Temporal work with beginning/end. Location: 02-projects/",
+            "skill": "Reusable workflow. 00-system/skills/ (system, priority) > 03-skills/ (user)",
+            "decision": "Will do ONCE? → Project. Will do AGAIN? → Skill.",
+        },
+        "never_do": [
+            "Never create project/skill folders directly → use create-* skills",
+            "Never auto-load learning skills → suggest, user decides",
+            "Never create README.md, CHANGELOG.md in skills → clutter",
+            "Never add documentation not needed for AI execution",
+        ],
+        "mode_rules": {
+            "plan_mode": "Project status=PLANNING: Read files, discuss approach",
+            "execute_mode": "Project status=IN_PROGRESS: Follow steps.md, don't read files directly",
+        },
+    }
+
+
+def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
+    """
+    Load FULL startup context for SessionStart hook additionalContext injection.
+
+    Loading order (Attention-Based - Revised):
+    Optimized for LLM attention with identity-first approach:
+
+    PRIMACY (WHO AM I - Most critical):
+    1. user_goals - WHO I am, WHAT I want (identity/purpose)
+
+    EARLY (Current context):
+    2. user_projects - WHAT I'm working on now (minimal: id, name, status, progress, current_task)
+    3. orchestrator - HOW to behave (rules, but after knowing WHO)
+
+    MIDDLE (Bulk data - lower attention):
+    4. skills - WHERE to route (reference, less critical during attention scan)
+
+    LATE (Reference material):
+    5. workspace_map - HOW workspace is organized
+    6. memory_map - HOW memory system works
+    7. system_map - HOW system is structured
+
+    RECENCY (Memory anchor):
+    8. stats - Quick summary (last thing seen)
+
+    Returns:
+        Complete context bundle with all nexus data
     """
     from datetime import datetime
 
+    base = Path(base_path)
     result = {
         "loaded_at": datetime.now().isoformat(),
-        "bundle": "metadata",
-        "projects": scan_projects(base_path, minimal=True),
-        "skills": scan_skills(base_path, minimal=True),
+        "bundle": "full_startup",
     }
 
+    # === PRIMACY: WHO AM I ===
+
+    # 1. User Goals - WHO AM I, WHAT I WANT (Most critical context)
+    try:
+        goals_path = base / "01-memory" / "goals.md"
+        if goals_path.exists():
+            result["user_goals"] = goals_path.read_text(encoding="utf-8")
+    except Exception:
+        pass
+
+    # === EARLY: Current Work + Behavior ===
+
+    # 2. Projects - WHAT user is doing now (minimal metadata only)
+    # Include ACTIVE for backwards compatibility with older projects
+    all_projects = scan_projects(base_path, minimal=True)
+    active_projects = [
+        p for p in all_projects
+        if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")
+    ]
+    # Minimize to essential fields only
+    result["user_projects"] = [
+        {
+            "id": p["id"],
+            "name": p["name"],
+            "status": p["status"],
+            "progress": p.get("progress", 0),
+            "current_task": p.get("current_task")
+        }
+        for p in active_projects
+    ]
+
+    # 3. Orchestrator - HOW to behave (after knowing WHO)
+    try:
+        orch_path = base / "00-system" / "core" / "orchestrator.md"
+        if orch_path.exists():
+            result["orchestrator"] = extract_essential_orchestrator(base_path)
+    except Exception as e:
+        result["orchestrator"] = {"error": str(e)}
+
+    # === MIDDLE: Bulk Data (Lower Attention) ===
+
+    # 4. Skills - Routing reference (WHERE to route) - TIERED LOADING
+    result["skills"] = scan_skills_tiered(base_path)
+
+    # === LATE: Reference Material ===
+    # NOTE: Full map contents REMOVED to prevent duplication with resume context.
+    # Maps are loaded on-demand when AI needs them, not in every context bundle.
+    # This saves ~6K tokens per session.
+
+    # === RECENCY: Memory Anchor ===
+
+    # 8. Stats - Quick summary (recency effect)
+    # Calculate total skills from tiered structure
+    total_skills_count = 0
+    if isinstance(result.get("skills"), dict):
+        # Count core skills
+        for category_skills in result["skills"].get("core", {}).values():
+            total_skills_count += len(category_skills)
+        # Count integration connectors
+        total_skills_count += len(result["skills"].get("integrations", []))
+        # Count user skills
+        total_skills_count += len(result["skills"].get("user", []))
+
     result["stats"] = {
-        "total_projects": len(result["projects"]),
-        "total_skills": len(result["skills"]),
-        "active_projects": len([p for p in result["projects"] if p.get("status") == "IN_PROGRESS"]),
+        "total_projects": len(all_projects),
+        "active_projects": len(result["user_projects"]),
+        "total_skills": total_skills_count,
     }
+
+    # === ACTION INSTRUCTIONS & STATE DETECTION ===
+    # Use state.py functions for comprehensive state detection and instructions
+
+    try:
+        from .state import (
+            check_goals_personalized,
+            check_workspace_configured,
+            build_display_hints,
+            build_pending_onboarding,
+            extract_learning_completed,
+        )
+    except ImportError:
+        # Fallback if state.py not available
+        check_goals_personalized = None
+        check_workspace_configured = None
+        build_display_hints = None
+        build_pending_onboarding = None
+        extract_learning_completed = None
+
+    # Check goals personalization
+    goals_path = base / "01-memory" / "goals.md"
+    if check_goals_personalized:
+        goals_personalized = check_goals_personalized(goals_path)
+    else:
+        # Fallback: simple check
+        goals_personalized = False
+        try:
+            if goals_path.exists():
+                content = goals_path.read_text(encoding="utf-8")
+                if "smart_default: true" not in content.lower():
+                    goals_personalized = True
+        except Exception:
+            pass
+
+    # Check workspace configuration
+    if check_workspace_configured:
+        workspace_configured = check_workspace_configured(base)
+    else:
+        workspace_configured = False
+
+    # Get learning completion status
+    learning_completed = {}
+    pending_onboarding = []
+    if extract_learning_completed and build_pending_onboarding:
+        try:
+            config_path = base / "01-memory" / "user-config.yaml"
+            learning_completed = extract_learning_completed(config_path)
+            pending_onboarding = build_pending_onboarding(learning_completed)
+        except Exception:
+            pass
+
+    # Build display hints (for menu rendering suggestions)
+    display_hints = []
+    if build_display_hints:
+        try:
+            display_hints = build_display_hints(
+                update_info={},  # TODO: Add update check integration
+                pending_onboarding=pending_onboarding,
+                goals_personalized=goals_personalized,
+                workspace_configured=workspace_configured,
+            )
+        except Exception:
+            display_hints = []
+
+    # State detection for onboarding suggestions
+    result["state"] = {
+        "goals_personalized": goals_personalized,
+        "workspace_configured": workspace_configured,
+        "has_active_projects": len(result["user_projects"]) > 0,
+        "has_planning_projects": len([p for p in result["user_projects"] if p.get("status") == "PLANNING"]) > 0,
+        "has_in_progress_projects": len([p for p in result["user_projects"] if p.get("status") == "IN_PROGRESS"]) > 0,
+        "learning_completed": learning_completed,
+        "pending_onboarding": pending_onboarding,
+        "onboarding_complete": len(pending_onboarding) == 0,
+        "display_hints": display_hints,
+    }
+
+    # Action instruction based on state
+    result["action"] = "display_menu"
+
+    # Build state-aware instruction
+    instruction_parts = [
+        "Display the complete Nexus menu from orchestrator.md:",
+        "- ASCII banner with version",
+        "- User memory status (use state.goals_personalized flag)",
+        "- Active projects (user_projects)",
+        "- Available skills by category (skills.core, skills.integrations, skills.user)",
+        "- Workspace status (use state.workspace_configured flag)",
+        "- Integrations status",
+    ]
+
+    # Add onboarding guidance if needed
+    if not goals_personalized:
+        instruction_parts.append("⚠️  ONBOARDING: Goals not personalized - prominently suggest 'setup memory' as #1 next step")
+    if not workspace_configured:
+        instruction_parts.append("⚠️  ONBOARDING: Workspace not configured - suggest 'setup workspace' in next steps")
+
+    # Add display hints guidance
+    if display_hints:
+        instruction_parts.append(f"📌 DISPLAY HINTS: {', '.join(display_hints)}")
+
+    instruction_parts.append("- Suggested next steps (numbered, state-aware, see orchestrator.md for logic)")
+
+    result["instruction"] = "\n".join(instruction_parts)
 
     return result

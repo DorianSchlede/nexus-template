@@ -1,0 +1,180 @@
+---
+batch_id: "quality_metric_4"
+field: quality_metric
+extracted_at: "2025-12-29T00:00:00Z"
+chunks_read: 13
+patterns_found: 28
+---
+
+patterns:
+  # From 15-AgentSurvey-2503.21460 (Chunk 3)
+  - name: "Self-Verification Success Rate"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 3:8-12)"
+    quote: "self-verification techniques enable models to retrospectively assess and correct their outputs, leading to more reliable decision-making"
+    description: "Self-verification as a quality pattern allows models to retrospectively assess and correct outputs, improving reasoning quality and reducing hallucinations. The metric measures the improvement in decision-making reliability through iterative self-feedback cycles."
+
+  - name: "Multi-Dimensional Capability Assessment"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 3:141-154)"
+    quote: "AgentBench builds a unified test field across eight interactive environments... MMAU enhances explainability through granular capability mapping"
+    description: "Modern benchmarks assess agent intelligence across hierarchical dimensions including reasoning, planning, and problem-solving. MMAU breaks down agent intelligence into five core competencies with more than 3,000 cross-domain tasks for multi-dimensional quality measurement."
+
+  - name: "Domain-Specific Competency Testing"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 3:193-218)"
+    quote: "MedAgentBench contains tasks designed by 300 clinicians in an FHIR-compliant environment... reveal significant performance gaps"
+    description: "Domain-specific evaluation systems measure agent performance in vertical domains like healthcare, autonomous driving, and data science. Quality gaps are revealed when comparing specialized benchmarks to general testing in practical applications."
+
+  - name: "Multi-Agent Adversarial Debate Success Rate"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 3:52-57)"
+    quote: "multi-agent debate framework to enhance reasoning by having multiple LLMs critique and refine each other's arguments over multiple rounds, improving factuality"
+    description: "Multi-agent debate frameworks measure improvement in factuality and reduction of hallucinations through multiple rounds of critique between LLMs. The quality metric tracks how adversarial interaction improves reasoning accuracy."
+
+  - name: "Agent Security Vulnerability Metrics"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 3:470-474)"
+    quote: "Agent security bench introduces a comprehensive framework to evaluate attacks and defenses for LLM-based agents across 10 scenarios, 10 agents, 400+ tools, 23 attack/defense methods, and 8 metrics"
+    description: "Security quality metrics evaluate agent vulnerabilities across multiple dimensions: 10 scenarios, 10 agents, 400+ tools, 23 attack/defense methods, and 8 specific metrics. Reveals significant vulnerabilities and limited defense effectiveness."
+
+  # From 15-AgentSurvey-2503.21460 (Chunk 6)
+  - name: "Multi-Agent System Enterprise Assessment"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 6:251-262)"
+    quote: "TheAgentCompany pioneered enterprise-level assessments using simulated software company environments to test web interaction and code collaboration capabilities"
+    description: "Enterprise-level quality assessment through simulated company environments testing web interaction and code collaboration. MLRB designs 7 competition-level ML research tasks, and MLE-Bench evaluates through 71 real-world Kaggle competitions."
+
+  - name: "Self-Verification in Scientific Discovery"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 6:63-66)"
+    quote: "self-questioning or self-verification in multi-agent AI: one or more agents propose a scientific insight, and another evaluates its plausibility with known knowledge, thereby reducing errors"
+    description: "Multi-agent self-verification quality pattern where agents propose insights and others evaluate plausibility against known knowledge. Reduces errors through cross-validation between proposing and evaluating agents."
+
+  - name: "Diagnostic Accuracy with Uncertainty Scoring"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 6:201-208)"
+    quote: "it could achieve diagnostic accuracy on par with state-of-the-art standalone models while also providing an uncertainty score that correlates with its correctness"
+    description: "Medical imaging quality metric combining diagnostic accuracy with uncertainty estimation. The uncertainty score correlates with correctness, enabling reliability assessment of AI-driven decisions."
+
+  # From 18-HallucinationSurvey-2509.18970 (Chunk 2)
+  - name: "Sub-intention Dependency Modeling Quality"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:154-176)"
+    quote: "Inadequate modeling of dependency relationships among these sub-intentions can give rise to three types of errors: Sub-intention Omission, Sub-intention Redundancy, and Sub-intentions Disorder"
+    description: "Quality metric for intention decomposition measuring three error types: omission (missing critical reasoning steps), redundancy (task-irrelevant sub-intentions), and disorder (wrong sequential ordering). All three compromise reasoning integrity."
+
+  - name: "Tool Selection Accuracy"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:227-249)"
+    quote: "Given pt and a set of candidate tools Tcand, the agent must first select the appropriate tool Ts... Tool Calling: Once Ts is selected, the agent then needs to populate Ts with the tool parameters"
+    description: "Quality metric for tool usage measuring accuracy of tool selection from candidate set and correct parameter population. Errors in either stage lead to execution hallucinations."
+
+  - name: "Memory Retrieval Relevance"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:370-404)"
+    quote: "Memory Retrieval: Extracting and integrating relevant information from stored memory... poor Ranking Strategies may lead the agent to retrieve memory content that only superficially appears similar"
+    description: "Quality metric for memory retrieval measuring true relevance vs. superficial similarity. Sub-optimal ranking strategies lead to retrieval of content that appears similar but lacks true task relevance."
+
+  # From 18-HallucinationSurvey-2509.18970 (Chunk 3)
+  - name: "Memory Priority Assignment Accuracy"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:9-20)"
+    quote: "poorly assigned priorities can result in the elimination of important information or the retention of irrelevant content, ultimately compromising the accuracy of subsequent decisions"
+    description: "Quality metric for memory management measuring correct priority assignment for forgetting and merging. Poor priorities lead to loss of important information or retention of irrelevant content, with implicit conflicts increasing difficulty."
+
+  - name: "Information Compression Fidelity"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:21-30)"
+    quote: "this process is susceptible to Information Compression issues, where the generated summaries may be overly general, omit crucial details, or introduce distortions"
+    description: "Quality metric for memory summarization measuring compression accuracy. Evaluates whether summaries are overly general, omit crucial details, or introduce distortions due to imperfect abstraction and non-standardized formats."
+
+  - name: "Communication Protocol Reliability"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:61-78)"
+    quote: "Communication protocols govern how agents exchange messages, directly determining the efficiency, reliability, and coordination of their interactions"
+    description: "Quality metric for MAS communication measuring efficiency, reliability, and coordination. Evaluates asynchronous scheduling, message format clarity (natural language vs. structured JSON), and fault-tolerant design."
+
+  - name: "Factuality and Faithfulness Hallucination Rate"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 3:45-55)"
+    quote: "LLMs are prone to the well-known Factuality and Faithfulness Hallucinations, some agents may produce messages containing inaccurate facts, misinterpretations, or misleading inferences"
+    description: "Quality metric measuring rate of factuality and faithfulness hallucinations in inter-agent communication. Tracks inaccurate facts, misinterpretations of shared knowledge, and misleading inferences propagated between agents."
+
+  # From 18-HallucinationSurvey-2509.18970 (Chunk 4)
+  - name: "Self-Verification Mechanism Quality"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:17-39)"
+    quote: "Self-verification is a lightweight and model-internal approach wherein agents assess the validity and reliability of their own outputs... Self-reflection, Self-consistency, Self-questioning"
+    description: "Quality metric for self-verification measuring effectiveness of three strategies: self-reflection (introspection and flaw identification), self-consistency (majority voting across multiple outputs), and self-questioning (detection of unsupported assertions)."
+
+  - name: "Validator Assistance Accuracy"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:42-118)"
+    quote: "This approach leverages external validators to verify the correctness of an agent's outputs... Language-based Validators, Retrieval-based Validators, Execution-based Validators, Simulation-based Validators, Ensemble-based Validators"
+    description: "Quality metric for external validation measuring accuracy across five validator types: language-based (atomic fact decomposition), retrieval-based (external source verification), execution-based (code/plan running), simulation-based (sandboxed testing), and ensemble-based (cross-verification)."
+
+  - name: "Hallucination Accumulation Tracking"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 4:153-169)"
+    quote: "hallucinations can accumulate and amplify over time. In such cases, hallucinations may initially appear as minor issues, but their iterative accumulation can ultimately lead to severe consequences"
+    description: "Quality metric for tracking hallucination accumulation over multi-step decision-making. Measures how minor initial hallucinations compound through iterative processes, requiring full decision-chain analysis for early detection."
+
+  # From 19-HalMit-2507.15903 (Chunk 1)
+  - name: "Semantic Entropy Variance by Domain"
+    chunk_ref: "19-HalMit-2507.15903 (Chunk 1:149-158)"
+    quote: "semantic entropy values of agent responses vary substantially across application domains, with noticeable differences in both medians and variances"
+    description: "Quality metric using semantic entropy to measure response uncertainty across domains. Higher entropy indicates greater uncertainty and hallucination likelihood. Domain-specific analysis shows consistent distributions within domains but significant variation across domains."
+
+  - name: "Generalization Bound Identification"
+    chunk_ref: "19-HalMit-2507.15903 (Chunk 1:56-64)"
+    quote: "Hallucinations typically arise when the generated content significantly exceeds the generalization bounds of the agent. If a generated response lies outside the bound, it is highly likely that this response is hallucinated"
+    description: "Quality metric measuring whether agent responses fall within or outside learned generalization bounds. Responses outside bounds are flagged as potential hallucinations, enabling domain-specific boundary identification for monitoring."
+
+  # From 19-HalMit-2507.15903 (Chunk 2)
+  - name: "Hallucination Detection Reward Metric"
+    chunk_ref: "19-HalMit-2507.15903 (Chunk 2:176-191)"
+    quote: "the reward for the triple... ∆Hi if sum(sig) != 0; |Ri-1| if sum(sig) = 0"
+    description: "Quality metric for hallucination detection based on semantic entropy changes. Positive reward when semantic entropy increases toward generalization bound; penalty when all responses contain hallucinations. Used to train policy network for efficient bound exploration."
+
+  # From 19-HalMit-2507.15903 (Chunk 3)
+  - name: "AUROC and AUC-PR for Hallucination Monitoring"
+    chunk_ref: "19-HalMit-2507.15903 (Chunk 3:136-143)"
+    quote: "a comprehensive set of metrics is used in our evaluation, including: 1) the area under the receiver operator characteristic curve (AUROC), 2) the area under the precision recall curve (AUC-PR), 3) the F1 score, and 4) the accuracy"
+    description: "Standard quality metrics for hallucination monitoring: AUROC (0.76-0.90), AUC-PR (0.77-0.86), F1 score (0.67-0.88), and accuracy (0.73-0.89). HalMit achieves 8% improvement over best baselines in AUROC and AUC-PR."
+
+  - name: "Domain-Specific Monitoring Accuracy"
+    chunk_ref: "19-HalMit-2507.15903 (Chunk 3:172-191)"
+    quote: "HalMit achieves the best performance in Inheritance and Modern History domains... our method improves the AUROC and AUC-PR metrics up to 8% over the best baseline"
+    description: "Quality metric showing domain-specific hallucination monitoring accuracy. HalMit achieves 90% AUROC in certain domains with up to 8% improvement over baselines. Performance particularly strong in domains allowing divergent responses."
+
+  # From 22-PROV-AGENT-2508.02866 (Chunk 2)
+  - name: "End-to-End Provenance Traceability"
+    chunk_ref: "22-PROV-AGENT-2508.02866 (Chunk 2:16-18)"
+    quote: "agent decisions, LLM interactions, and workflow tasks are unified in a single provenance graph, enabling users to trace erroneous outputs back to their upstream prompts, inputs, and prior decisions"
+    description: "Quality metric for agentic provenance tracking measuring ability to trace erroneous outputs back through complete decision chain to original inputs. Enables root cause analysis and hallucination source identification."
+
+  - name: "Agent Decision Influence Propagation"
+    chunk_ref: "22-PROV-AGENT-2508.02866 (Chunk 2:124-138)"
+    quote: "How did an agent decision influence subsequent workflow activities?... the query recursively navigates on the used/wasGeneratedBy relationships"
+    description: "Quality metric for tracking decision propagation across workflow iterations. Measures how agent decisions influence downstream activities and identifies error propagation paths through recursive provenance navigation."
+
+  # From 24-EffectiveCollab-2412.05449 (Chunk 1)
+  - name: "End-to-End Goal Success Rate (GSR)"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 1:23-29)"
+    quote: "achieving end-to-end goal success rates of 90%. Our analysis yields several key findings: multi-agent collaboration enhances goal success rates by up to 70% compared to single-agent approaches"
+    description: "Primary quality metric for multi-agent collaboration measuring end-to-end task completion success. Achieves 90% GSR with multi-agent approach, representing up to 70% improvement over single-agent baselines."
+
+  - name: "Payload Referencing Performance Improvement"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 1:25-27)"
+    quote: "payload referencing improves performance on code-intensive tasks by 23%"
+    description: "Quality metric measuring improvement from payload referencing mechanism in code-intensive multi-agent tasks. 23% performance improvement through efficient content block sharing without regeneration."
+
+  # From 24-EffectiveCollab-2412.05449 (Chunk 2)
+  - name: "Goal Success Rate Decomposition"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 2:62-91)"
+    quote: "Overall GSR: Overall goal success rate covering both the user-side and the system-side... User-side GSR: Goal success rate in the perspective of the user... System-side GSR: Goal success rate in the perspective of the system developers"
+    description: "Quality metric decomposition for multi-agent evaluation: Overall GSR (all assertions True), Supervisor GSR (primary agent reliability), User-side GSR (user-observable behaviors), System-side GSR (system developer perspective including tool calling correctness)."
+
+  - name: "Communication Overhead Latency"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 2:93-118)"
+    quote: "Avg. communication overhead per turn: Average number of seconds that the supervisor agent spends communicating with other agents before getting back to the user"
+    description: "Quality metric for multi-agent efficiency measuring communication latency: average overhead per turn (13.39-35.44s), latency per communication, user-perceived turn latency (24.42-168.73s), and output tokens per communication."
+
+  # From 24-EffectiveCollab-2412.05449 (Chunk 3)
+  - name: "Routing Classification Accuracy"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 3:15-19)"
+    quote: "the LLM-based routing solution with Claude 3.0 Haiku achieves more than 90% routing classification accuracy and less than 3% false agent switching rate... Average latency of routing classification is about 350 ms"
+    description: "Quality metrics for dynamic agent routing: 90%+ classification accuracy, <3% false agent switching rate, ~350ms classification latency, and 600-800ms turn-level routing overhead."
+
+  - name: "Human-LLM Evaluation Agreement"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 3:74-88)"
+    quote: "For success metrics, the agreement is generally above 85%... Travel 0.93, Mortgage 0.87, Software 0.97"
+    description: "Quality validation metric measuring agreement between human annotators and LLM-based assertion evaluation. Agreement ratios above 85% (Travel: 93%, Mortgage: 87%, Software: 97% for Overall GSR) validate automatic evaluation reliability."
+
+  - name: "Payload Referencing GSR and Efficiency Impact"
+    chunk_ref: "24-EffectiveCollab-2412.05449 (Chunk 3:103-119)"
+    quote: "Enabling payload referencing results in a 23% relative improvement in overall GSR as well as a 27% relative reduction in the average communication overhead per turn"
+    description: "Quality metrics for payload referencing: 23% relative GSR improvement (0.73 to 0.90), 27% reduction in communication overhead, 30% reduction in output tokens per communication. Critical for code-heavy domains."

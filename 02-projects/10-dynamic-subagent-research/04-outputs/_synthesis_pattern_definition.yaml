@@ -1,0 +1,1567 @@
+field: pattern_definition
+aggregated_at: '2025-12-29T10:38:17.970455'
+batches_merged: 5
+patterns_input: 168
+patterns_output: 164
+patterns:
+- name: Agentic Context Engineering (ACE) Framework
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:24-27)
+    quote: ACE treats contexts as evolving playbooks that accumulate, refine, and
+      organize strategies through a modular process of generation, reflection, and
+      curation
+  description: Core framework pattern for context adaptation. ACE prevents context
+    collapse with structured, incremental updates that preserve detailed knowledge
+    and scale with long-context models. The pattern operates in both offline (system
+    prompt optimization) and online (test-time memory adaptation) settings.
+- name: Dynamic Cheatsheet Adaptive Memory
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:114-116)
+    quote: Building on the agentic architecture of Dynamic Cheatsheet, ACE incorporates
+      a modular workflow of generation, reflection, and curation
+  description: Pattern for test-time learning with adaptive external memory. Introduces
+    an adaptive memory of reusable strategies and code snippets that continuously
+    updates with newly encountered inputs and outputs. Does not require ground-truth
+    labels - model curates its own memory from generations.
+- name: Generator-Reflector-Curator Division of Labor
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:214-218)
+    quote: 'ACE introduces a structured division of labor across three roles: the
+      Generator, which produces reasoning trajectories; the Reflector, which distills
+      concrete insights; and the Curator'
+  description: Three-component agentic architecture pattern. The Generator produces
+    reasoning trajectories; the Reflector critiques traces to extract lessons; the
+    Curator synthesizes lessons into compact delta entries merged deterministically.
+    Mirrors human learning process of experimenting, reflecting, and consolidating.
+- name: Incremental Delta Updates
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:285-296)
+    quote: context as a collection of structured, itemized bullets with metadata including
+      unique identifier and counters tracking how often it was marked helpful or harmful
+  description: 'Pattern for context representation as structured bullets rather than
+    monolithic prompts. Each bullet contains: (1) metadata with unique ID and helpful/harmful
+    counters, (2) content capturing strategies, domain concepts, or failure modes.
+    Enables localization, fine-grained retrieval, and incremental adaptation.'
+- name: Grow-and-Refine Context Evolution
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:309-314)
+    quote: bullets with new identifiers are appended, while existing bullets are updated
+      in place. A de-duplication step then prunes redundancy by comparing bullets
+      via semantic embeddings
+  description: Pattern for context maintenance ensuring compactness and relevance.
+    New bullets are appended, existing ones updated with counter increments. Semantic
+    embedding-based de-duplication prunes redundancy. Can be proactive (after each
+    delta) or lazy (only when context window exceeded).
+- name: Brevity Bias Prevention
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:167-174)
+    quote: 'brevity bias: the tendency of optimization to collapse toward short, generic
+      prompts...sacrificing diversity and omitting domain-specific detail'
+  description: Anti-pattern identification. Addresses the tendency of context adaptation
+    methods to collapse toward short, generic prompts that omit domain-specific heuristics,
+    tool-use guidelines, and failure modes. ACE counters this by treating contexts
+    as comprehensive playbooks rather than concise summaries.
+- name: Context Collapse Prevention
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 1:186-199)
+    quote: context collapse arises when an LLM is tasked with fully rewriting the
+      accumulated context at each adaptation step...model tends to compress it into
+      much shorter, less informative summaries
+  description: 'Anti-pattern identification and prevention. Context collapse occurs
+    during monolithic rewriting when LLMs compress large contexts into shorter summaries,
+    causing dramatic information loss. Example: 18,282 tokens collapsed to 122 tokens
+    with accuracy dropping from 66.7 to 57.1.'
+- name: Playbook-Based Context Organization
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 3:478-488)
+    quote: 'ACE Playbook: Read the Playbook first, then execute the task by explicitly
+      leveraging each relevant section'
+  description: Pattern for organizing context as a structured playbook with labeled
+    sections (PLAYBOOK_BEGIN/END markers). Agent reads playbook before task execution,
+    explicitly leveraging relevant sections. Contains curated strategies, API-specific
+    information, common mistakes, and proven solutions.
+- name: Reflector Error Diagnosis
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:151-166)
+    quote: 'diagnose the current trajectory: identify what went wrong, grounded in
+      execution feedback, API usage, unit test report, and ground truth when applicable'
+  description: Pattern for systematic error analysis. Reflector analyzes model reasoning
+    traces to identify errors, performs root cause analysis, determines correct approach,
+    and extracts key insights. Tags existing playbook bullets as helpful/harmful/neutral
+    to guide future generation.
+- name: Curator Knowledge Curation
+  sources:
+  - chunk_ref: 01-ACE-2510.04618 (Chunk 4:330-341)
+    quote: identify what new insights should be added to an existing playbook based
+      on a reflection from a previous attempt
+  description: Pattern for incremental knowledge accumulation. Curator reviews existing
+    playbook and reflection, identifies NEW insights missing from current playbook,
+    avoids redundancy, and outputs only additions needed. Uses ADD operations with
+    section and content specifications.
+- name: Context Engineering Formal Definition
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 1:419-424)
+    quote: Context Engineering re-conceptualizes the context C as a dynamically structured
+      set of informational components, c1, c2, ..., cn orchestrated by a high-level
+      assembly function A
+  description: 'Formal mathematical pattern defining context as C = A(c1, c2, ...,
+    cn). Components include: c_instr (system instructions), c_know (external knowledge),
+    c_tools (tool definitions), c_mem (persistent memory), c_state (dynamic state),
+    c_query (user request). Replaces monolithic static prompt view.'
+- name: Dynamic Context Orchestration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:65-67)
+    quote: assembly function A is a form of Dynamic Context Orchestration, a pipeline
+      of formatting and concatenation operations, A = Concat (Format1, ..., Formatn)
+  description: Pattern for context assembly as pipeline of formatting and concatenation
+    operations. Each format function must be optimized for LLM architectural biases
+    (attention patterns). Enables systematic composition of context components.
+- name: Information-Theoretic Retrieval Optimality
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:70-77)
+    quote: goal is to select knowledge that maximizes the mutual information with
+      the target answer Y*, given the query c_query
+  description: Formal pattern for optimal knowledge retrieval. Retrieve* = arg max
+    I(Y*; c_know | c_query). Ensures retrieved context is not just semantically similar
+    but maximally informative for solving the task.
+- name: Bayesian Context Inference
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:80-101)
+    quote: infer the optimal context posterior P(C|c_query, History, World)...decision-theoretic
+      objective is to find context C* that maximizes expected reward
+  description: Pattern for probabilistic context construction. Uses Bayes' theorem
+    to compute context posterior proportional to likelihood of query given context
+    and prior probability of context relevance. Provides principled uncertainty handling
+    and adaptive retrieval through prior updates.
+- name: Chain-of-Thought Prompting
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:310-314)
+    quote: Chain-of-Thought (CoT) prompting decomposes complex problems into intermediate
+      reasoning steps, mirroring human cognition
+  description: Pattern for structured reasoning through intermediate steps. Zero-shot
+    CoT uses trigger phrases like 'Let's think step by step,' improving MultiArith
+    accuracy from 17.7% to 78.7%. Enables complex multi-step problem solving.
+- name: Tree-of-Thoughts Hierarchical Reasoning
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:317-318)
+    quote: Tree-of-Thoughts (ToT) organizes reasoning as hierarchical structures with
+      exploration, lookahead, and backtracking capabilities
+  description: Pattern for organizing reasoning as hierarchical tree structures. Enables
+    exploration, lookahead, and backtracking. Increased Game of 24 success rates from
+    4% to 74%. Extends CoT by allowing branching and non-linear reasoning paths.
+- name: Graph-of-Thoughts Reasoning
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:319-320)
+    quote: Graph-of-Thoughts (GoT) models reasoning as arbitrary graphs with thoughts
+      as vertices and dependencies as edges
+  description: Pattern for graph-based reasoning where thoughts are vertices and dependencies
+    are edges. Improves quality by 62% and reduces costs by 31% compared to ToT. Enables
+    modeling of complex non-hierarchical reasoning dependencies.
+- name: Self-Refine Iterative Improvement
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:181-185)
+    quote: Self-Refine framework uses the same model as generator, feedback provider,
+      and refiner, demonstrating that identifying and fixing errors is often easier
+      than producing perfect initial solutions
+  description: Pattern for self-improvement through cyclical feedback. Same model
+    serves as generator, feedback provider, and refiner. Based on insight that error
+    identification and correction is easier than perfect initial generation. Maintains
+    reflective text in episodic memory buffers.
+- name: Multi-Aspect Feedback Integration
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 2:188-191)
+    quote: Multi-Aspect Feedback integrates frozen language models and external tools
+      focusing on specific error categories to enable more comprehensive, independent
+      evaluation
+  description: Pattern for diverse feedback sources. Integrates multiple feedback
+    modules (frozen LMs and external tools) each focusing on specific error categories.
+    Enables more comprehensive, independent evaluation compared to single-model feedback.
+- name: Modular RAG Architecture
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:312-316)
+    quote: Modular RAG shifts from linear retrieval-generation architectures toward
+      reconfigurable frameworks with flexible component interaction
+  description: 'Pattern for flexible RAG component composition. Introduces hierarchical
+    architectures: top-level RAG stages, middle-level sub-modules, bottom-level operational
+    units. Transcends linear structures through routing, scheduling, and fusion mechanisms
+    enabling dynamic reconfiguration.'
+- name: Agentic RAG Dynamic Retrieval
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:347-351)
+    quote: Agentic RAG embeds autonomous AI agents into the RAG pipeline, enabling
+      dynamic, context-sensitive operations guided by continuous reasoning
+  description: Pattern for agent-embedded retrieval. Embeds autonomous AI agents into
+    RAG pipeline for dynamic, context-sensitive operations. Leverages reflection,
+    planning, tool use, and multi-agent collaboration. Treats retrieval as dynamic
+    operation where agents function as intelligent investigators.
+- name: Graph-Enhanced RAG
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 5:7-13)
+    quote: Graph-based RAG shifts from document-oriented approaches toward structured
+      knowledge representations capturing entity relationships, domain hierarchies,
+      and semantic connections
+  description: Pattern for structured knowledge retrieval. Captures entity relationships,
+    domain hierarchies, and semantic connections. Enables extraction of specific reasoning
+    paths and multi-hop reasoning through structured pathway navigation. Minimizes
+    context drift and hallucinations.
+- name: OS-Inspired Hierarchical Memory
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:131-137)
+    quote: OS-inspired hierarchical memory systems implement virtual memory management
+      concepts, with MemGPT exemplifying this approach through systems that page information
+      between limited context windows and external storage
+  description: Pattern for memory management inspired by operating systems. Pages
+    information between limited context windows (main memory) and external storage.
+    Main context contains system instructions, FIFO message queues, and writable scratchpads.
+    Memory management through function-calling capabilities.
+- name: Ebbinghaus Forgetting Curve Memory
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:141-142)
+    quote: MemoryBank using Ebbinghaus Forgetting Curve theory to dynamically adjust
+      memory strength according to time and significance
+  description: Pattern for cognitive-inspired memory management. Dynamically adjusts
+    memory strength based on temporal factors and significance, following psychological
+    forgetting curve principles. Enables selective memory preservation and natural
+    memory decay.
+- name: Lost-in-the-Middle Phenomenon
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 4:103-108)
+    quote: lost-in-the-middle phenomenon, where LLMs struggle to access information
+      positioned in middle sections of long contexts, performing significantly better
+      when relevant information appears at beginning or end
+  description: Anti-pattern identification. LLMs exhibit positional bias where information
+    in middle of long contexts is harder to access. Performance degrades by up to
+    73% when critical results are in middle positions. Impacts extended chain-of-thought
+    reasoning where earlier results become susceptible to forgetting.
+- name: MCP Communication Protocol
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 6:337-340)
+    quote: MCP functions as 'USB-C for AI,' standardizing agent-environment interactions
+      through JSON-RPC client-server interfaces
+  description: Pattern for standardized agent-environment communication. Model Context
+    Protocol (MCP) standardizes interactions through JSON-RPC client-server interfaces.
+    Enables hundreds of servers across diverse domains while introducing security
+    considerations.
+- name: A2A Peer-to-Peer Communication
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 6:343-345)
+    quote: A2A standardizes peer-to-peer communication through capability-based Agent
+      Cards enabling task delegation and secure collaboration via JSON-based lifecycle
+      models
+  description: Pattern for inter-agent communication. Agent-to-Agent (A2A) protocol
+    enables peer-to-peer communication through capability-based Agent Cards. Supports
+    task delegation and secure collaboration via JSON-based lifecycle models.
+- name: ReAct Thought-Action-Observation Cycle
+  sources:
+  - chunk_ref: 02-ContextSurvey-2507.13334 (Chunk 6:99-101)
+    quote: ReAct's 'thought-action-observation' cycle, progressing through specialized
+      models like Gorilla and comprehensive frameworks
+  description: Pattern for interleaved reasoning and action. Pioneered interleaving
+    of reasoning traces with task-specific actions. Reasoning supports plan tracking
+    while actions interface with external information sources. Enables models to think
+    and act complementarily.
+- name: Session-based Context Refinement
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 7:21-24)
+    quote: Session-based context refinement defines collaborative scope boundaries,
+      facilitating event-driven orchestration where agents can enter and exit dynamically
+  description: A pattern for defining collaborative scope boundaries in multi-agent
+    systems. Uses sessions to enable event-driven orchestration where agents can dynamically
+    enter/exit, create output streams, and contribute to shared session streams. Enables
+    agent inclusion based on user input or autonomous decision-making for adaptable
+    systems.
+- name: Handover Pattern in Business Process Simulation
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 7:84-87)
+    quote: autonomous behavior operates through local control-flow and handover patterns
+      acknowledging agent autonomy in collaborative work
+  description: A coordination pattern for multi-agent business process simulation
+    (AgentSimulator). Orchestrated behavior follows global control-flow patterns while
+    autonomous behavior uses local control-flow and explicit handover patterns that
+    acknowledge agent autonomy. Enables process behavior discovery in both orchestrated
+    and autonomous settings.
+- name: SagaLLM Transaction Framework
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 7:59-62)
+    quote: comprehensive solutions such as the SagaLLM framework providing transaction
+      support, independent validation procedures, and robust context preservation
+      mechanisms
+  description: A framework pattern addressing multi-agent coordination challenges
+    including transaction support, independent validation procedures, and context
+    preservation. Designed to handle LangGraph/AutoGen/CAMEL limitations in atomicity
+    guarantees, compensation mechanisms, and validation procedures.
+- name: Protocol Adherence Evaluation Pattern
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 7:201-206)
+    quote: Multi-agent systems evaluation captures communication effectiveness, coordination
+      efficiency, and collective outcome quality through specialized metrics addressing
+      protocol adherence, task decomposition accuracy
+  description: An evaluation pattern for multi-agent systems that measures communication
+    effectiveness, coordination efficiency, and collective outcomes. Uses specialized
+    metrics for protocol adherence, task decomposition accuracy, and emergent collaborative
+    behaviors. Addresses validation limitations in frameworks relying on LLM self-validation.
+- name: Unified Taxonomic Framework for Context Engineering
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 8:460-464)
+    quote: a unified taxonomic framework that organizes context engineering techniques
+      into Foundational Components and System Implementations
+  description: 'A meta-pattern organizing context engineering into two tiers: Foundational
+    Components (Context Retrieval/Generation, Context Processing, Context Management)
+    and System Implementations (RAG, Memory Systems, Tool-Integrated Reasoning, Multi-Agent
+    Systems). Demonstrates how core capabilities integrate into sophisticated architectures.'
+- name: Communication Protocol Standardization Pattern
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 8:315-324)
+    quote: Communication protocol standardization represents a critical research frontier,
+      with emerging protocols including MCP, A2A, ACP, and ANP demonstrating the need
+      for unified frameworks
+  description: A pattern addressing inter-agent communication standardization. References
+    MCP (USB-C for AI), A2A (Agent-to-Agent), ACP (Agent Communication Protocol),
+    and ANP (Agent Network Protocol). Identifies security vulnerabilities and scalability
+    limitations requiring solutions for large-scale deployment.
+- name: Graceful Degradation Strategy
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 8:375-379)
+    quote: Multi-agent systems face additional challenges in coordination failure
+      scenarios, where partial system failures can cascade through the entire agent
+      network. Evaluation frameworks must address graceful degradation strategies
+  description: A resilience pattern for multi-agent systems handling partial failures
+    that can cascade through agent networks. Requires error recovery protocols and
+    mechanisms to maintain system functionality under adverse conditions, including
+    handling unknown unknowns and emergent failure cascades.
+- name: GAIA Performance Gap Pattern
+  sources:
+  - chunk_ref: 02-ContextSurvey (Chunk 9:33-35)
+    quote: GAIA (human 92% vs AI 15%) highlight the importance of transparent capability
+      communication and appropriate expectation setting
+  description: An evaluation pattern revealing substantial performance gaps between
+    human (92%) and AI (15%) capabilities on general assistant tasks. Underscores
+    the importance of transparent capability communication, appropriate expectation
+    setting, and developed robust alignment mechanisms for deployed systems.
+- name: Context Engineering Workflow
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 1:69-72)
+    quote: context engineering approach for LLM-based code assistants. By context
+      engineering, we mean systematically constructing and supplying all relevant
+      information needed for a coding task
+  description: 'A comprehensive pattern for LLM code assistants involving systematic
+    construction and supply of all relevant information: clarified intent, high-level
+    plans, external knowledge, and repository-specific details. Implemented via a
+    coordinated multi-agent process with Intent Translator, Retrieval, Synthesis,
+    and Multi-Agent orchestration.'
+- name: Intent Translator Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 1:75-77)
+    quote: an Intent Translator using GPT-5 to rewrite or elaborate the user request
+      into a structured task specification
+  description: A preprocessing pattern using a high-end LLM to reformulate ambiguous
+    user queries into structured specifications. Translates requests like 'Add a calendar
+    view' into explicit step-by-step task lists including UI updates, data fetching,
+    styling, and testing requirements. Reduces burden on coding agents to interpret
+    fuzzy instructions.
+- name: Orchestrator-Worker Multi-Agent Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 1:278-287)
+    quote: 'centralized orchestrator-worker paradigm (often called a hub-and-spoke
+      pattern): a primary Claude instance (the Manager) coordinates several specialist
+      sub-agents that each have their own context and role'
+  description: A multi-agent architecture where a central Manager orchestrates specialist
+    sub-agents (backend-architect, frontend-specialist, devops-engineer, code-reviewer)
+    defined via YAML/Markdown configurations. Each subagent operates with isolated
+    context windows to prevent cross-contamination between workflow phases.
+- name: Semantic Code Search Index Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 1:246-269)
+    quote: semantic code search index using a vector database. We embed code files
+      and fragments into high-dimensional vectors using a code-specialized embedding
+      model
+  description: A retrieval pattern combining semantic search (vector embeddings via
+    ChromaDB/Zilliz) with lexical search (grep, file path matching). Uses AST parser
+    (tree-sitter) to chunk files by function/class definitions. Queries repository
+    for relevant code fragments based on task specifications.
+- name: Context Layering Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 2:7-9)
+    quote: 'structured layering of context is key. At any given time, an agent is
+      working with a manageable slice of information: role-specific prompt + CLAUDE.md
+      context + task-specific instructions + relevant code/knowledge snippets'
+  description: 'A pattern ensuring each agent works with manageable context slices:
+    role-specific prompts, CLAUDE.md project context, task-specific instructions,
+    and retrieved code/knowledge snippets. Helps maintain coherence for large tasks
+    and mitigates context window issues by dividing work among specialized agents.'
+- name: Iterative Coding and Validation Loop
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 1:374-381)
+    quote: As agents make changes, we leverage Claude's tool integration to run validations.
+      After code for a step is written, the orchestrator can trigger test execution
+      via a shell tool
+  description: A feedback loop pattern where agents make code changes, tests are executed,
+    and error output is captured. Failed tests feed back into the responsible agent
+    or debugging agent to prompt fixes. Resembles DARS feedback loop with simple re-try
+    rather than multiple simultaneous trajectories.
+- name: Single-Shot Success Rate Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 2:66-74)
+    quote: multi-agent approach succeeded in more tasks and required fewer iterations.
+      It often produced working solutions on the first attempt, whereas the baseline
+      frequently needed follow-up prompts
+  description: A success metric pattern comparing multi-agent vs single-agent approaches.
+    Multi-agent system achieved 80% success rate (4/5 tasks) without human corrections
+    vs 40% for single-agent baseline. Demonstrates value of comprehensive context
+    engineering and specialized agent roles for first-attempt correctness.
+- name: Agent Responsibility Delineation Pattern
+  sources:
+  - chunk_ref: 03-ClaudeCode (Chunk 2:110-122)
+    quote: importance of clearly delineating responsibilities to avoid both gaps and
+      overlaps. Planner's prompt to explicitly assign sub-tasks to agent roles, and
+      implementing a simple lock to prevent concurrent edits
+  description: An orchestration pattern ensuring clear agent responsibilities. Requires
+    Planner to explicitly assign sub-tasks to specific agent roles. Implements file
+    locks to prevent concurrent edits to same files. Quality assurance step with dedicated
+    reviewer agent catches subtle issues missed by coding agents.
+- name: Git-Context-Controller (GCC) Framework
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:17-22)
+    quote: GCC, a structured context management framework inspired by software version
+      control systems. GCC elevates context from passive token streams to a navigable,
+      versioned memory hierarchy
+  description: A context management pattern treating agent memory as a version-controlled
+    file system. Structures context under .GCC/ directory with global roadmap (main.md),
+    per-branch execution traces (log.md), milestone summaries (commit.md), and metadata
+    (metadata.yaml). Enables milestone-based checkpointing and structured reflection.
+- name: COMMIT Checkpointing Pattern
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:172-175)
+    quote: COMMIT <summary> - called when the agent notices recent progress forms
+      a coherent milestone (e.g., implementing a module, finishing a hypothesis test)
+  description: A memory persistence pattern where agents checkpoint meaningful progress
+    as coherent milestones. Updates commit.md with branch purpose, previous progress
+    summary, and current commit contribution. Turns loose OTA sequences into retrievable
+    memory units enabling progress tracking and rollbacks.
+- name: BRANCH Exploration Pattern
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:176-177)
+    quote: BRANCH <name> - called when the agent wants to pursue an alternative approach
+      without affecting current context
+  description: An isolation pattern for exploring alternative approaches (new API
+    designs, research paths) without affecting main context. Creates isolated workspace
+    with empty log.md and new commit.md. Ensures focused reasoning while maintaining
+    ability to return to main flow. Enables safe architectural experiments.
+- name: MERGE Synthesis Pattern
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:180-181)
+    quote: MERGE <branch name> - called when a completed branch's results should be
+      synthesized back into the main trajectory
+  description: A convergence pattern for integrating branch outcomes into main plan.
+    Automatically calls CONTEXT on target branch, updates main.md with branch outcome
+    impact, merges commit.md entries with origin tags for traceability. Creates Git
+    commit to checkpoint unified memory state.
+- name: Multi-level Context Retrieval Pattern
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:87-91)
+    quote: 'Multi-level context retrieval: Agents can access context at varying levels
+      of detail, from high-level project plans to low-level OTA steps'
+  description: 'A hierarchical retrieval pattern enabling agents to access context
+    at varying granularity: high-level project plans (main.md) to fine-grained OTA
+    (Observation-Thought-Action) execution traces (log.md). Supports seamless navigation
+    across layers for tracing and locating any point in reasoning history.'
+- name: Cross-agent Memory Handover Pattern
+  sources:
+  - chunk_ref: 04-GCC (Chunk 1:100-105)
+    quote: allows agents to operate seamlessly across sessions. No need to 're-teach'
+      the model when a new session begins. Another agent, based on a different LLM,
+      can pick up exactly where the previous one left off
+  description: A continuity pattern enabling seamless operation across sessions and
+    agents. Different LLMs on different machines can resume where previous agents
+    stopped with minimal overhead. Smooths distribution and handover of agent-generated
+    codebases, similar to human Git collaboration workflows.
+- name: Spontaneous Modular Behavior Emergence
+  sources:
+  - chunk_ref: 04-GCC (Chunk 2:118-124)
+    quote: What is notable about this sequence is that it was not procedurally enforced.
+      These behaviors emerged spontaneously from the framing structure of GCC itself
+  description: An emergent behavior pattern where agents internalize GCC affordances
+    as cognitive norms without explicit instructions. Agents independently write tests,
+    validate correctness, then commit - behaving as disciplined software engineers.
+    The system's structured memory framing induces proper development workflows.
+- name: ProtocolBench Evaluation Framework
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 1:22-23)
+    quote: 'ProtocolBench, a benchmark that systematically compares agent protocols
+      along four measurable axes: task success, end-to-end latency, message or byte
+      overhead, and robustness under failures'
+  description: 'A comprehensive evaluation pattern for multi-agent communication protocols.
+    Measures four axes: task success/quality, end-to-end latency/throughput, message/byte
+    overhead, and failure-time robustness. Uses protocol-normalizing adapters and
+    shared scenario suite for fair comparisons.'
+- name: Protocol Adapter Normalization Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 1:112-116)
+    quote: Protocol Adapters that normalize envelopes, field mappings, retries, and
+      streaming semantics across A2A/ACP/ANP/Agora
+  description: A translation pattern where protocol adapters normalize envelopes,
+    field mappings, retries, and streaming semantics across different protocols (A2A,
+    ACP, ANP, Agora). Enables fair protocol comparisons by isolating protocol-specific
+    effects while pinning non-protocol factors.
+- name: ProtocolRouter Dynamic Selection Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 1:113-116)
+    quote: ProtocolRouter, a learned protocol router that selects per-scenario (or
+      per-module) protocols based on requirements and runtime signals
+  description: A dynamic routing pattern that selects optimal protocols per-scenario
+    or per-module based on stated requirements and observable signals. Performs selection
+    and composition only; cross-protocol message translation uses stateless encode/decode
+    bridges preserving semantics and security attributes.
+- name: Fail-Storm Recovery Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 2:103-106)
+    quote: Pre-fault (60 seconds before failure) and Post-fault (60 seconds after
+      recovery). We measure Answer Discovery Rate, Latency, and Recovery Time
+  description: A resilience evaluation pattern testing protocol behavior under cyclic
+    node failures in Shard-QA ring topology. Measures pre-fault vs post-fault answer
+    discovery rate, median task completion latency, and duration from fault injection
+    to system stabilization. Tests with 8 agents, 3 killed every 120s.
+- name: Security Capability Matrix Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 2:131-136)
+    quote: evaluate security capabilities using a binary matrix indicating whether
+      each protocol supports specific security features (TLS transport, session hijacking
+      protection, end-to-end encryption)
+  description: A security assessment pattern using binary capability matrix for protocol
+    evaluation. Tests TLS transport, session hijacking protection, E2E encryption,
+    tunnel sniffing resistance, and metadata leakage prevention. Measures probe block
+    rates as percentage of attacks successfully blocked. ANP/Agora provide comprehensive
+    coverage; ACP/A2A offer partial capabilities.
+- name: Unified Transport Envelope (UTE)
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 5:448-456)
+    quote: 'Minimal required fields: src, dst, content, context. In BaseAgent.send(),
+      UTE.new(...) produces the envelope...'
+  description: A unified message envelope pattern that standardizes inter-protocol
+    communication. UTE provides a protocol-agnostic wrapper containing source, destination,
+    content, and context fields. This enables stateless bridging between heterogeneous
+    protocols (A2A, ACP, ANP, AGORA) while preserving business semantics and security
+    attributes.
+- name: Protocol Adapter Abstraction (BaseProtocolAdapter)
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 6:21-23)
+    quote: One adapter instance per egress edge (destination/URL/credentials) for
+      isolation and precise metering...
+  description: Egress abstraction pattern where each adapter instance handles a single
+    protocol and destination. Encapsulates encoding/decoding, transport, authentication,
+    and feature negotiation. Enables independent evolution of protocol-specific logic
+    while maintaining unified interface.
+- name: Dual-Role Agent Pattern (BaseAgent)
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 6:14-18)
+    quote: 'BaseAgent (dual role): Acts as a server (receives messages) and as a multi-client
+      (sends to multiple destinations via multiple protocols)...'
+  description: Agents simultaneously function as servers (receiving via BaseServerAdapter
+    implementations) and multi-clients (sending via protocol adapters). This pattern
+    enables flexible peer-to-peer and hierarchical topologies within the same agent
+    implementation.
+- name: Async Event Hook Model
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 6:62-77)
+    quote: 'before_encode / after_encode: UTE -> protocol payload, pre/post. before_transport
+      / after_transport: Network send/receive...'
+  description: 'Lifecycle hook pattern providing extension points for message processing:
+    before/after encode, before/after transport, on_stream_event, on_retry/on_backoff,
+    on_decode/on_error. Enables observability, custom transformations, and error handling
+    without modifying core adapter logic.'
+- name: Unified Error Taxonomy
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 6:85-87)
+    quote: 'Adapter exceptions are normalized by PAL into: E_TIMEOUT, E_HTTP, E_CONN,
+      E_PROTOCOL, E_ENCODE/DECODE, E_UNSUPPORTED...'
+  description: Standardized error classification pattern where protocol-specific exceptions
+    are normalized to a common taxonomy. Enables consistent error handling and retry
+    logic across different protocols and transport mechanisms.
+- name: Spec-Only Selection Pipeline
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 7:74-76)
+    quote: 'Three stages: evidence extraction -> semantic mapping -> candidate reduction
+      and priority. Fixed priority for tie-breaking...'
+  description: 'Protocol routing pattern using deterministic three-stage pipeline:
+    extract evidence spans from scenario text, map to protocol capabilities, then
+    reduce candidates using fixed priority order (identity/confidentiality -> operation
+    semantics -> interaction preferences). Temperature=0 ensures reproducibility.'
+- name: Canonical Feature Model (CFM)
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 7:64-68)
+    quote: 'Capabilities are organized into six facets: (1) transport & interaction,
+      (2) long-running & artifacts, (3) identity & confidentiality...'
+  description: 'Protocol capability classification pattern organizing features into
+    six facets: transport/interaction, long-running/artifacts, identity/confidentiality,
+    delivery/replay, operation semantics, and cross-org trust/governance. Hard constraints
+    prune incompatible protocols before selection.'
+- name: Heterogeneous Link Bridging
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 7:103-116)
+    quote: We enforce 'change transport, not semantics or security.' Homogeneous links
+      use the chosen protocol natively...
+  description: Cross-protocol bridging pattern where heterogeneous links use stateless
+    encode/decode bridges around UTE. Bridges perform only field re-mapping and semantic
+    alignment, never altering business content or security markers. Preserves end-to-end
+    integrity across protocol boundaries.
+- name: Resilience Primitives Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 7:133-136)
+    quote: 'Resilience primitives: jittered exponential backoff; hedging with cancel-on-first-success;
+      circuit breaking (open/half-open/close)...'
+  description: 'Router-level resilience pattern combining multiple strategies: exponential
+    backoff with jitter, hedging (parallel requests with first-success cancellation),
+    circuit breaking with state machine, and bulkheading via per-slot concurrency
+    caps. Ordering enforced via per-trace_id work queues.'
+- name: Agent Role Configuration Pattern
+  sources:
+  - chunk_ref: 07-ProtocolBench (Chunk 5:248-269)
+    quote: 'AGENT CONFIGURATION - For each required tool, specify: name: Descriptive
+      agent name, role: Create meaningful, task-specific roles...'
+  description: Dynamic agent configuration pattern where roles are assigned based
+    on task requirements. Includes predefined role types (information_gatherer, computational_specialist,
+    document_analyzer, evidence_synthesizer, task_coordinator) with tool assignments.
+    Enables flexible multi-agent planning.
+- name: Three-Layer Architecture (LACP)
+  sources:
+  - chunk_ref: 08-LACP (Chunk 1:185-214)
+    quote: LACP's architecture implements three mutually-insulated layers, each with
+      well-defined interfaces that enable independent evolution...
+  description: 'Telecom-inspired layered protocol architecture with three layers:
+    Semantic Layer (intent via PLAN/ACT/OBSERVE message types), Transactional Layer
+    (signing, sequencing, idempotency, atomic transactions), and Transport Layer (protocol-agnostic
+    delivery). Separation of concerns enables independent evolution.'
+- name: Semantic Message Types (PLAN/ACT/OBSERVE)
+  sources:
+  - chunk_ref: 08-LACP (Chunk 1:192-226)
+    quote: This layer defines a minimal set of universal message types (e.g., PLAN,
+      ACT, OBSERVE) that can be extended with domain-specific content...
+  description: 'Narrow waist semantic pattern with three core message types: PLAN
+    (express high-level intent with intent_id, role, natural_language), ACT (invoke
+    external tool with intent_id, tool_call, params), OBSERVE (return results/status
+    with intent_id, status, output). All wrapped in JWS envelope for security.'
+- name: Transactional Integrity Layer
+  sources:
+  - chunk_ref: 08-LACP (Chunk 1:206-209)
+    quote: This layer ensures the reliability and integrity of communications. It
+      provides mechanisms for message signing, sequencing, unique transaction IDs...
+  description: Message integrity pattern providing cryptographic signing, sequence
+    numbering, unique transaction IDs for idempotency, and two-phase commit for atomic
+    transactions. Critical for ensuring multi-agent interactions are secure and robust
+    in safety-critical applications.
+- name: JWS Message Envelope
+  sources:
+  - chunk_ref: 08-LACP (Chunk 2:184-224)
+    quote: a semantic PLAN payload is wrapped by a signed, two-phase-commit envelope
+      and then by a binary transport frame...
+  description: Layered message encoding pattern where semantic payload is wrapped
+    in transactional layer with JSON Web Signature (including transaction_id, sequence_num,
+    timestamp, source/target_agent, signature, timeout_ms), then wrapped in binary
+    transport frame with checksum.
+- name: Tampering Prevention via Signature Verification
+  sources:
+  - chunk_ref: 08-LACP (Chunk 2:137-152)
+    quote: Upon receiving the tampered message, the server's cryptographic verification
+      step immediately failed. The server logged a signature mismatch...
+  description: Security pattern where message tampering is detected via cryptographic
+    signature verification. If payload is modified after signing, signature mismatch
+    triggers HTTP 403 Forbidden response, preventing fraudulent transactions. Provides
+    end-to-end message integrity beyond TLS.
+- name: Replay Attack Prevention via Transaction ID
+  sources:
+  - chunk_ref: 08-LACP (Chunk 2:154-168)
+    quote: The server's signature verification passed, but its Transactional Layer
+      logic identified the transaction_id as a duplicate...
+  description: Idempotency pattern tracking transaction_ids of processed messages.
+    Duplicate requests return HTTP 409 Conflict, preventing double-processing. Works
+    in conjunction with signature verification to ensure both integrity and exactly-once
+    semantics.
+- name: Explicit Behavioral Contract Modeling
+  sources:
+  - chunk_ref: 09-SEMAP (Chunk 1:175-208)
+    quote: each agent is modeled through an explicit behavioral contract, a verifiable
+      schema that specifies the required input artifacts and expected output artifacts...
+  description: Design-by-Contract pattern for multi-agent LLMs where each agent has
+    formal contract C = (name, IC, OC) specifying role identifier, required input
+    artifacts (pre-conditions), and required output artifacts (post-conditions). Reduces
+    ambiguity and under-specification at role and task levels.
+- name: Structured Messaging Schema
+  sources:
+  - chunk_ref: 09-SEMAP (Chunk 1:210-231)
+    quote: 'Each message M is formalized as: M = (sender, receiver, CM) where CM is
+      a payload structured as a list of schema-designated objects...'
+  description: Typed inter-agent messaging pattern where messages include sender identifier,
+    receiver identifier, and payload as list of schema-designated objects (e.g., code,
+    review log, reviewer comment). Ensures semantic clarity, completeness, and coordination
+    alignment.
+- name: Lifecycle-Guided Execution (FSM)
+  sources:
+  - chunk_ref: 09-SEMAP (Chunk 1:238-266)
+    quote: 'a task lifecycle is modeled as a finite state machine (FSM): L = (S, Sigma,
+      delta, s0, F) where S: lifecycle stages...'
+  description: State machine pattern for workflow control where task progression follows
+    FSM with states (initialized, implementing, reviewing, completed, failed), verification
+    outcomes as transitions, and terminal states. Ensures output correctness and guards
+    against premature termination.
+- name: Verification-Driven State Transitions
+  sources:
+  - chunk_ref: 09-SEMAP (Chunk 1:243-247)
+    quote: This ensures that task progression is gated by validation and that failures
+      can trigger appropriate recovery or reassignment actions...
+  description: Gate pattern where state transitions in the lifecycle FSM require passing
+    verification checks. Failed verification triggers recovery or reassignment rather
+    than advancing to next state. Prevents inappropriate verification and ensures
+    quality gates.
+- name: Protocol Middleware Layer (A2A Integration)
+  sources:
+  - chunk_ref: 09-SEMAP (Chunk 1:88-92)
+    quote: SEMAP is implemented as a lightweight protocol middleware atop Google's
+      Agent-to-Agent (A2A) infrastructure and supports both centralized and decentralized
+      workflows...
+  description: Middleware integration pattern where SEMAP protocol layer sits atop
+    existing infrastructure (A2A). Adds behavioral contracts, structured messaging,
+    and lifecycle control without replacing underlying communication. Supports both
+    centralized (CEO-style) and decentralized topologies.
+- name: Context-Rich Communication Protocol
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:287-310)
+    quote: 'a communication event c(t)ij is defined as: c(t)ij = (M(t)ij, B(t)ij,
+      I(t)ij) where M indicates the message content...'
+  description: 'Structured communication pattern where each inter-agent event contains
+    three components: Message (instructions/clarifications), Background (core problem
+    details and intermediate decisions for coherence), and Intermediate Output (generated
+    outputs for task progression and traceability). Replaces unstructured text exchanges.'
+- name: Agent-Specific Independent Memory
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:272-283)
+    quote: each agent vi maintains an independent memory, Memory_i. Unlike long-term
+      memory, which relies on a shared memory pool accessible by all agents...
+  description: Memory isolation pattern where each agent maintains its own persistent
+    memory, operating without interference from others and not limited to session
+    or conversational thread. Enables independence (no centralized dependencies) and
+    persistence (historical data across sessions).
+- name: Collaborative Hierarchy Agent Team
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:410-431)
+    quote: The entire graph G consists of multiple teams, each represented as a subset
+      Vteam. Each team includes a dedicated supervisor agent and one or more member
+      agents...
+  description: 'Nested hierarchical team pattern where member agent in one team can
+    act as supervisor for another team, creating recursive hierarchy. Formal structure:
+    Vmain = {main Supervisor, Generator, Eval Supervisor, Revisor}, Veval = {Eval
+    Supervisor, Evaluators E1..Ek}.'
+- name: Hierarchical Refinement Algorithm
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:328-384)
+    quote: The process begins with the main Supervisor assigning tasks to the evaluation
+      Supervisor, who then distributes evaluation criteria to individual evaluators...
+  description: 'Multi-level refinement pattern: Main Supervisor assigns to Eval Supervisor,
+    who distributes criteria to k independent evaluators. Each evaluator assesses
+    output against assigned criteria, Eval Supervisor aggregates/summarizes feedback,
+    Main Supervisor checks quality threshold, Revisor refines if needed. Iterative
+    until threshold met or max iterations.'
+- name: Supervisor-Member Role Pattern
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:242-269)
+    quote: 'Type_i: Specifies whether the agent is a Supervisor (S) responsible for
+      overseeing task success, or a Member (M) focused on problem-solving...'
+  description: Role classification pattern distinguishing Supervisor agents (oversee
+    team operations, assign tasks, ensure task success) from Member agents (problem-solving,
+    optionally utilizing plugins). Combined with Role_i, Plugins_i, and Memory_i to
+    define complete agent specification.
+- name: Evaluation Team Feedback Aggregation
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 2:39-51)
+    quote: The evaluation Supervisor aggregates and summarizes this feedback (Feval_summary)
+      before passing it to the main Supervisor...
+  description: Feedback synthesis pattern where multiple independent evaluators provide
+    assessments that are aggregated and summarized by Eval Supervisor before passing
+    to Main Supervisor. Reduces bias from individual evaluators and prevents feedback
+    overload. Quality threshold determines if output is finalized or needs revision.
+- name: Background Information Context Passing
+  sources:
+  - chunk_ref: 10-TalkHier (Chunk 1:302-307)
+    quote: B(t)ij denotes background information to ensure coherence and task progression,
+      including the problem's core details and intermediate decisions...
+  description: Context preservation pattern where background information is explicitly
+    passed between agents to maintain coherence. Not present for connections from
+    Member to Supervisor nodes. Ensures agents have necessary context without requiring
+    shared memory or repeated context transfer.
+- name: Collaboration Channel Abstraction
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 1:459-465)
+    quote: 'C = {cj}: a set of collaboration channels that facilitate interactions
+      among agents, enabling the exchange of information based on given objectives...'
+  description: Channel-based collaboration pattern where interactions are organized
+    into distinct channels characterized by actors (agents involved), types (cooperation/competition/coopetition),
+    structures (peer-to-peer/centralized/distributed), and strategies. Channels with
+    different attributes are treated as separate, enabling hybrid collaboration models.
+- name: Agent Definition Tuple (a = {m,o,e,x,y})
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:13-40)
+    quote: An agent can be mathematically represented by a = {m,o,e,x,y} where Model
+      m = {arch, mem, adp}...
+  description: 'Formal agent specification pattern: Model (architecture, agent-specific
+    memory, optional adapters), Objective (goal guiding actions), Environment (context/conditions),
+    Input (perception), Output (y = m(o,e,x)). Enables mathematical analysis of collaborative
+    mechanisms.'
+- name: Multi-Stage Collaboration Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:81-85)
+    quote: 'Collaboration can occur at different stages: (i) late-stage collaborations,
+      such as ensembling outputs, (ii) mid-stage collaborations, exchanging parameters...'
+  description: 'Temporal collaboration pattern distinguishing three stages: Early-stage
+    (sharing data, context, environment for development), Mid-stage (exchanging parameters/weights
+    in federated manner), Late-stage (ensembling outputs/actions toward collaborative
+    goals). Enables targeted optimization of collaboration mechanisms.'
+- name: Cooperation Alignment Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:243-250)
+    quote: Cooperation in LLM-based MASs occurs when agents align their individual
+      objectives (oi) with a shared collective goal (O_collab)...
+  description: Goal alignment pattern where individual agent objectives are unified
+    into collective goal (O_collab = union of oi). Agents assess each other's needs
+    and capabilities, actively seeking collaborative opportunities. Essential for
+    tasks requiring collective decision-making and complementary skill sets.
+- name: Competition Dynamics Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:360-365)
+    quote: Competition happens when there are conflicting objectives or scenarios
+      of limited resources. Agents prioritize their individual goals (oi)...
+  description: Competitive collaboration pattern where agents have mutually exclusive
+    or opposing objectives (O_collab = {oi | oi != oj for all i != j}). Promotes robustness,
+    strategic adaptability, and creative problem-solving through rivalry. Useful for
+    debate, strategic gameplay, and answer refinement.
+- name: Coopetition Blend Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:403-415)
+    quote: Coopetition, a strategic blend of cooperation and competition, enables
+      agents to collaborate on certain tasks to achieve shared objectives while simultaneously
+      competing...
+  description: Hybrid collaboration pattern where agents cooperate on some tasks while
+    competing on others. Applied in negotiation scenarios with trade-offs and mixture-of-experts
+    frameworks. Enables compromise and leverages both cooperative efficiency and competitive
+    quality improvement.
+- name: Hybrid Collaboration Coordination
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:418-440)
+    quote: Different agents may participate in different collaboration channels C,
+      each with distinct interaction types, coordinating together to achieve the overall
+      system goal...
+  description: Multi-channel coordination pattern where agents participate in multiple
+    collaboration channels with different types (competitive channel between debaters,
+    cooperative channel between debaters and judge). Requires coordination mechanisms
+    like role assignments, communication protocols, and shared knowledge representations.
+- name: Rule-Based Collaboration Protocol
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:449-452)
+    quote: Interactions among agents in C are strictly controlled by predefined rules,
+      ensuring that agents coordinate their actions according to system-wide constraints...
+  - chunk_ref: 12-CollabSurvey (Chunk 2:469-472)
+    quote: Leverage distinct predefined roles or communication structure. Each agent
+      operates on segmented objective, support overall goal...
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:49-101)
+    quote: Interactions among agents in C are strictly controlled by predefined rules,
+      ensuring that agents coordinate their actions according to system-wide constraints
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:104-138)
+    quote: Role-based protocols in MASs leverage distinct predefined roles or division
+      of work, where each agent operates on a segmented objective that supports the
+      system's overarching goal
+  description: 'Merged from 4 sources. A protocol pattern where agent interactions
+    are governed by predefined rules rather than probabilistic or role-specific inputs.
+    Ensures straightforward implementation, facilitates debugging, and enforces fairness.
+    Suitable for tasks with well-defined procedures like consensus seeking and navigation.
+    Disadvantage: lacks adaptability to unexpected situations.'
+- name: Model-Based Collaboration Protocol
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:473-476)
+    quote: Based on input (with uncertainty in perception), environment and shared
+      goals, agents carry out probabilistic decision making...
+  description: Adaptive collaboration pattern where agents make probabilistic decisions
+    based on uncertain inputs, environment, and shared goals. Offers adaptability
+    to dynamic environments and robustness to uncertainties. More complex to implement
+    and computationally expensive. Applied in game environments and robotics.
+- name: Directed Acyclic Graph Collaboration
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:74-77)
+    quote: the collaboration channels are pre-defined through a Directed Acyclic Graph
+      with each edge as agents handling and receiving outputs...
+  description: Structured workflow pattern where collaboration channels form a DAG
+    with agents as nodes and edges representing output flow. Enables clear task dependencies
+    and ordered execution. Applied in simulated game environments and coding tasks
+    with planned collaboration sequences.
+- name: Shared Belief State Representation
+  sources:
+  - chunk_ref: 12-CollabSurvey (Chunk 2:253-257)
+    quote: agents gain a shared belief state representation within the environment
+      E, helping them track each other's goals and actions, thereby facilitating smoother
+      coordination...
+  description: Theory of Mind pattern for multi-agent collaboration where agents maintain
+    shared belief state to track each other's goals and actions. Enables emergent
+    collaborative behaviors and high-order Theory of Mind capabilities. Challenges
+    remain in long-horizon planning and hallucination management.
+- name: Coopetition Collaboration Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:3-16)
+    quote: Coopetition, a strategic blend of cooperation and competition, enables
+      agents to collaborate on certain tasks to achieve shared objectives while simultaneously
+      competing
+  description: A hybrid collaboration pattern where agents engage in both cooperative
+    and competitive behaviors. Agents assign varying values to their interests, creating
+    opportunities for compromise and collaboration. The mixture-of-experts (MoE) framework
+    exemplifies this pattern where multiple expert models compete to contribute to
+    the final output through a gating mechanism.
+- name: Hybrid Collaboration Channel Coordination
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:18-40)
+    quote: In LLM-based MASs, there is often the need for complex interactions that
+      transcend singular collaboration types like competition or cooperation
+  description: 'A pattern for coordinating multiple collaboration channels with distinct
+    interaction types. Different agents participate in different channels (competitive
+    and cooperative) coordinating together to achieve overall system goals. Example:
+    LEGO framework where agents first cooperate to augment task information, then
+    create competitive channels for output refinement.'
+- name: Model-based Probabilistic Protocol
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:141-176)
+    quote: Model-based protocols in MASs provide flexibility for decision making,
+      especially in environments where uncertainties in input perception may impact
+      agents' actions
+  description: A protocol pattern enabling probabilistic decision-making based on
+    environmental data and shared goals. Uses Theory of Mind (ToM) inferences for
+    agents to anticipate peer mental states. Enables adaptability to dynamic environments
+    but increases computational complexity and cost.
+- name: Centralized Communication Structure
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:209-337)
+    quote: The centralized structure is an implementation where every agent is connected
+      to a central agent acting as a hub through which all other agents communicate
+  description: 'A communication topology pattern where a central serving agent manages,
+    controls, and coordinates interactions among participant agents. Aligned with
+    Federated Learning approaches. Examples: LLM-Blender uses pairwise ranking to
+    combine responses; AgentCoord provides visual interface for coordination strategy
+    design.'
+- name: Decentralized Peer-to-Peer Structure
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:343-388)
+    quote: Decentralized MAS differs from centralized systems by distributing control
+      and decision-making across agents, each operating based on local information
+  description: A communication pattern where agents directly communicate peer-to-peer
+    without central coordination. Commonly employed in world simulation applications.
+    Research shows multi-LLM debates can boost factuality and reasoning. Enables autonomous
+    operation and adaptation to system changes.
+- name: Hierarchical Layered Communication
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:391-433)
+    quote: Layered communication is structured hierarchically, with agents at each
+      level having distinct functions and primarily interacting within their layer
+      or with adjacent layers
+  description: A multi-tier communication pattern organizing agents in hierarchical
+    layers with distinct roles. DyLAN framework organizes agents in multi-layered
+    feed-forward network with Team Optimization and Task Solving stages. Dynamically
+    deactivates low-performing agents through LLM-powered ranker.
+- name: Static Coordination Architecture
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 3:446-474)
+    quote: Static architectures rely on domain knowledge and predefined rules to establish
+      collaboration channels, ensuring interactions align with specific domain requirements
+  description: An orchestration pattern using predefined rules and domain knowledge
+    for channel setup. Sequential chaining connects LLM agents where output feeds
+    into next agent. MapCoder emulates program synthesis with recall, planning, code
+    generation, and debugging agents through predefined channels.
+- name: Dynamic Coordination Architecture
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:85-98)
+    quote: Dynamic coordination and orchestration architectures are designed to adapt
+      to changing/evolving environments and task requirements using management agents
+      or adaptive mechanisms
+  description: An adaptive orchestration pattern assigning roles and defining collaboration
+    channels in real-time. Solo Performance Prompting (SPP) dynamically identifies
+    relevant personas based on input. Graph-based orchestration uses LLM Orchestrator
+    to construct Directed Acyclic Graph (DAG) for task dependencies.
+- name: DyLAN Dynamic Agent Network
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:29-42)
+    quote: DyLAN organizes agents in a multi-layered feed-forward network with Team
+      Optimization selecting top contributory agents and Task Solving stage
+  description: A dynamic collaboration pattern with two-stage agent organization.
+    First stage (Team Optimization) selects top contributory agents unsupervisedly
+    based on individual contributions. Second stage (Task Solving) minimizes impact
+    of less effective agents. Includes inference-time agent selection and early-stopping
+    mechanism.
+- name: Effective Collaboration Channel Design
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:135-141)
+    quote: Establishing robust collaboration channels among agents is crucial for
+      seamless collaboration. Clear protocols prevent misunderstandings and ensure
+      efficient information exchange
+  description: A design principle pattern emphasizing that MAS outperform single-agent
+    systems with effectively designed collaboration mechanisms. Suboptimal channel
+    design can cause MAS to be overtaken by single-agent counterparts with strong
+    prompts.
+- name: Adaptive Role and Channel Assignment
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 4:148-151)
+    quote: In certain tasks, it is better to let the system dynamically assign roles
+      and collaboration channels based on agents' strengths and task requirements
+  description: A flexibility pattern for dynamic role and channel assignment that
+    enhances system flexibility and performance. Allows system to respond effectively
+    to changing environments and objectives.
+- name: Routines and Handoffs Pattern (OpenAI Swarm)
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 5:67-71)
+    quote: Handoff mechanism allows for seamless transitions between specialized agents.
+      Suitable for applications that require scalability
+  description: An orchestration pattern from OpenAI's Swarm framework introducing
+    routines and handoffs for multi-agent coordination. An agent can transfer active
+    conversation to another agent (handoff), enabling seamless transitions between
+    specialized agents. Emphasizes lightweight coordination and execution for scalable
+    applications.
+- name: Orchestrator-Delegator Pattern (Magentic-One)
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 5:302-307)
+    quote: At its core is the Orchestrator agent, responsible for high-level planning,
+      progress tracking, and dynamic re-planning to recover from errors
+  description: A generalist MAS pattern from Microsoft's Magentic-One system. Central
+    Orchestrator handles high-level planning, progress tracking, and dynamic re-planning
+    for error recovery. Delegates specific tasks to specialized agents (web browser,
+    file navigation, code execution). Modular architecture for diverse domain adaptability.
+- name: Agentic Flow Pattern (Orca-AgentInstruct)
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:1-7)
+    quote: Utilizing 3 distinct agentic flows (Content Transformation, Seed Instruction
+      Generation, and Instruction Refinement) and decentralised structure of agents
+  description: 'A synthetic data generation pattern using multi-agent framework with
+    three distinct flows: Content Transformation, Seed Instruction Generation, and
+    Instruction Refinement. Decentralized agent structure showed significant performance
+    gains (up to 54%) when used for fine-tuning.'
+- name: Agent-as-a-Judge Evaluation Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 5:343-349)
+    quote: Agent-as-a-Judge formulates a novel framework for evaluating agentic systems
+      using agentic systems to assess other agentic systems
+  description: An evaluation pattern where agentic systems evaluate other agentic
+    systems. Uses role-based strategy with specialized agent modules (graph construction,
+    code retrieval) operating independently in decentralized manner. Provides detailed
+    feedback throughout task-solving, mirroring human evaluation at reduced cost.
+- name: Theory of Mind (ToM) Collaboration
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:63-66)
+    quote: collaboration among LLM-based agents can elicit human-like capabilities,
+      including conversational skills, theory of mind (reasoning about others' mental
+      states)
+  description: A collaboration pattern enabling agents to exhibit Theory of Mind capabilities
+    - reasoning about others' mental states. Enables human-like conversational skills,
+    Hobbesian social contract theory adherence, and non-verbal action inference in
+    collaborative settings.
+- name: Unified Governance Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:109-118)
+    quote: Unified governance is fundamental in enabling collective intelligence among
+      group of LLM-based agents, including the design of coordination and planning
+      mechanisms
+  description: A governance pattern for collective intelligence requiring coordination
+    and planning mechanisms. Addresses which steps to take, which agents to involve,
+    and task distribution. Must account for potential failures with robust detection
+    and recovery mechanisms, including redundancy or fallback agents.
+- name: Shared Decision Making Pattern
+  sources:
+  - chunk_ref: 12-CollabSurvey-2501.06322 (Chunk 6:119-122)
+    quote: MASs must achieve coherent and accurate collective decision-making. Current
+      LLM-based MASs commonly utilize limited decision-making methods such as dictatorial
+      or popular voting
+  description: A decision-making pattern addressing limitations of current methods
+    (dictatorial/popular voting) that may not capture different aspects of agent preferences
+    or handle LLM overconfidence. Requires novel approaches to enhance diversity and
+    fairness of collective decisions.
+- name: Build-Collaborate-Evolve Framework
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:187-197)
+    quote: We analyze three interconnected dimensions of LLM agents - construction,
+      collaboration, and evolution - offering a more holistic understanding than previous
+      approaches
+  description: A comprehensive taxonomy framework for LLM agent systems examining
+    construction (how agents are built), collaboration (how they interact), and evolution
+    (how they improve over time). Highlights continuity between individual agent design
+    and collaborative systems.
+- name: Human-Curated Static Profile Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:325-346)
+    quote: This approach establishes fixed agent profiles through manual specification
+      by domain experts, embedding explicit rules and domain-specific knowledge
+  description: A profile definition pattern ensuring strict adherence to predefined
+    behavioral guidelines through manual specification. Enables standardized communication
+    protocols. Systems like Camel, AutoGen, OpenAgents orchestrate human-agent collaboration
+    through predefined conversational roles (user proxy, assistant).
+- name: Batch-Generated Dynamic Profile Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:348-362)
+    quote: This paradigm employs parameterized initialization to systematically generate
+      diverse agent profiles that emulate human societal behaviors
+  description: A profile definition pattern using controlled variations in personality
+    traits, knowledge backgrounds, or value systems during agent creation. Produces
+    heterogeneous populations through template-based prompting or latent space sampling
+    for social behavior studies and emergent group intelligence simulations.
+- name: Short-Term Memory Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:372-390)
+    quote: Short-term memory retains agent-internal dialog histories and environmental
+      feedback to support context-sensitive task execution
+  description: A memory mechanism pattern for transient contextual data retention.
+    Implemented in ReAct, ChatDev, Graph of Thoughts, and AFlow. Enables detailed
+    reasoning through interactive exchanges but limited by LLM context window, requiring
+    active information compression and constraints on multi-turn interaction depth.
+- name: Long-Term Memory Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 1:391-405)
+    quote: Long-term memory systematically archives agents' intermediate reasoning
+      trajectories and synthesizes them into reusable tools for future invocation
+  description: 'A memory mechanism pattern transforming ephemeral cognitive efforts
+    into persistent operational assets through three paradigms: skill libraries (Voyager,
+    GITM), experience repositories (ExpeL, Reflexion), and tool synthesis frameworks
+    (TPTU, OpenAgents). Enhances reasoning efficiency through strategic knowledge
+    reuse.'
+- name: Knowledge Retrieval as Memory Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:7-21)
+    quote: This paradigm diverges from agent-internal memory generation by integrating
+      external knowledge repositories into generation processes
+  description: 'A memory paradigm integrating external knowledge through three approaches:
+    Static knowledge grounding (RAG, GraphRAG), Interactive retrieval with agent dialogues
+    (Chain of Agents), and Reasoning-integrated retrieval (IRCoT, Llatrieval). Enables
+    agents to transcend training data limitations.'
+- name: Single-Path Chaining Planning Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:44-67)
+    quote: Single-path chaining first asks the agent to devise a plan consisting of
+      a sequence of subtasks that are built upon one another
+  description: A task decomposition pattern where agent follows predefined plan sequentially
+    (plan-and-solve paradigm). Dynamic planning variant generates next subtask based
+    on current situation. Can use multiple chain-of-thoughts with self-consistency,
+    majority voting, or agent discussion to reduce error accumulation.
+- name: Tree-of-Thought Planning Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:68-83)
+    quote: A more complicated method uses trees instead of chains as the planning
+      data structure, where multiple possible reasoning paths exist and the agent
+      is allowed to backtrack
+  description: A multi-path planning pattern exploring solution space through tree-like
+    thought process. Allows LLMs to backtrack to previous states and correct mistakes.
+    Enables trial-error-correct processes, potentially incorporating reinforcement
+    learning and Monte Carlo Tree Search for robotics and game-playing.
+- name: Feedback-Driven Iteration Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:86-107)
+    quote: Feedback-driven iteration enables the agent to learn from feedback and
+      enhance performance over time from environmental input, human guidance, model
+      introspection, and multi-agent collaboration
+  description: 'A planning pattern leveraging multiple feedback sources: environmental
+    feedback (robotics), human feedback (user interactions), model introspection (self-generated),
+    and multi-agent collaboration. Used to update plans, adjust reasoning paths, or
+    modify goals iteratively until satisfactory.'
+- name: Explicit Controller Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:214-226)
+    quote: Explicit controller systems utilize dedicated coordination modules to decompose
+      tasks and assign subgoals
+  description: A centralized control pattern using dedicated coordination modules
+    implemented as separate LLM agents. Coscientist exemplifies this with human operator
+    as central controller establishing standardized scientific experimental workflows.
+    LLM-Blender uses cross-attention encoder for pairwise comparison.
+- name: Differentiation-based Controller Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:227-240)
+    quote: Differentiation-based systems achieve centralized control by using prompts
+      to guide the meta agent in assuming distinct sub-roles
+  description: A centralized control pattern implicitly differentiating meta-agent
+    into sub-agents through prompts. AutoAct differentiates into plan-agent, tool-agent,
+    and reflect-agent. Meta-Prompting decomposes complex tasks into domain-specific
+    subtasks through meta-prompts with single model as coordinator.
+- name: Revision-based Decentralized Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:256-270)
+    quote: Agents only observe finalized decisions generated by peers and iteratively
+      refine a shared output through structured editing protocols
+  description: A decentralized collaboration pattern where agents observe peer decisions
+    and refine shared output through editing protocols. MedAgents uses domain-specific
+    experts proposing and modifying decisions independently with consensus via voting.
+    METAL introduces specialized text and visual revision agents.
+- name: Communication-based Decentralized Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:271-283)
+    quote: Communication-based methods feature more flexible organizational structures,
+      allowing agents to directly engage in dialogues and observe peers' reasoning
+      processes
+  description: A decentralized collaboration pattern with flexible structures for
+    direct dialogue and reasoning observation. MAD employs structured protocols addressing
+    degeneration-of-thought problem. MADR enables agents to critique claims and generate
+    verifiable explanations. AutoGen implements group-chat for iterative debates.
+- name: Static Hybrid Architecture Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:294-303)
+    quote: Static systems predefine fixed patterns for combining different collaboration
+      modalities
+  description: 'A hybrid architecture pattern with predefined coordination rules.
+    CAMEL partitions agents into intra-group decentralized teams with inter-group
+    centralized governance. AFlow employs three-tier hierarchy: centralized strategic
+    planning, decentralized tactical negotiation, market-driven operational allocation.
+    EoT formalizes BUS, STAR, TREE, RING patterns.'
+- name: Dynamic Topology Optimization Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 2:304-364)
+    quote: Recent innovations introduce neural topology optimizers that dynamically
+      reconfigure collaboration structures based on real-time performance feedback
+  description: A hybrid architecture pattern with self-optimizing topologies. DiscoGraph
+    uses teacher-student framework with matrix-valued edge weights for adaptive spatial
+    attention. DyLAN uses Agent Importance Score to identify contributory agents and
+    adjust collaboration. MDAgents dynamically assigns structures based on task complexity.
+- name: Self-Reflection and Self-Correction Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:4-15)
+    quote: Self-reflection and self-correction enable LLMs to iteratively refine their
+      outputs by identifying and addressing errors
+  description: An evolution pattern where agents iteratively refine outputs without
+    external supervision. SELF-REFINE applies iterative self-feedback. STaR and V-STaR
+    train models to verify and refine problem-solving processes. Self-verification
+    enables retrospective assessment and correction for reliable decision-making.
+- name: Cooperative Co-Evolution Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:36-46)
+    quote: Multi-agent collaboration enhances LLMs by enabling knowledge sharing,
+      joint decision-making, and coordinated problem-solving
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:47-68)
+    quote: Competitive co-evolution strengthens LLMs through adversarial interactions,
+      debate, and strategic competition
+  description: Merged from 2 sources. An evolution pattern through cooperative learning.
+    ProAgent enables dynamic adaptation by inferring teammates' intentions. CORY extends
+    RL fine-tuning into cooperative multi-agent framework with role-exchange mechanisms.
+    CAMEL develops role-playing framework with inception prompting for autonomous
+    collaboration.
+- name: Multi-Agent Debate Defense Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 3:497-500)
+    quote: Chern et al. introduce a multi-agent debate method to reduce the susceptibility
+      of agents to adversarial attacks
+  description: A defense pattern using multi-agent debate to reduce susceptibility
+    to adversarial attacks. Each agent acts as domain expert to verify facticity of
+    external knowledge, providing redundancy and cross-validation against attacks.
+- name: Trajectory Firewall Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 5:1-6)
+    quote: self-correction mechanism, known as the trajectory firewall layer, to correct
+      the deviated trajectory of agents. This firewall layer verifies generated responses
+      to ensure compliance with security rules
+  description: A security pattern implementing self-correction mechanism to verify
+    agent responses ensure compliance with security rules. Corrects deviated trajectories
+    by validating generated responses against security constraints.
+- name: Model Context Protocol (MCP) Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 4:28-33)
+    quote: MCP is an open protocol that standardizes how applications provide context
+      to LLMs. It is used to create secure links between LLMs and data sources as
+      well as to build LLM agents and workflows
+  description: A standardization pattern for context provision between applications
+    and LLMs. Creates secure links between LLMs and data sources. MCP-Agent provides
+    simple framework to build agents using MCP, enabling services to take advantage
+    of standardized context provision.
+- name: Architect-Critic-Specialist Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 6:26-31)
+    quote: Planner agent (GPT-4) decomposes a complex materials design challenge into
+      a sequence of tasks, which are then verified by a Critic agent and delegated
+      to specialist modules
+  description: A scientific discovery pattern where Planner agent decomposes challenges
+    into tasks, Critic agent verifies, and specialist modules execute. AtomAgents
+    framework uses this for physics-aware alloy design. Curie system uses Architect
+    and Technician agents for rigorous automated experimentation.
+- name: Self-Verification Multi-Agent Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 6:59-65)
+    quote: 'These examples illustrate the methodology of self-questioning or self-verification
+      in multi-agent AI: one or more agents propose a scientific insight, and another
+      evaluates its plausibility'
+  description: A scientific collaboration pattern where agents propose insights and
+    others evaluate plausibility with known knowledge. GeneAgent uses self-refinement
+    loop to discover gene associations. BioRAG uses agents to retrieve information
+    with one agent specifically for self-evaluation of retrieval results.
+- name: Self-Collaboration Code Generation Pattern
+  sources:
+  - chunk_ref: 15-AgentSurvey-2503.21460 (Chunk 6:297-306)
+    quote: SDM introduces a self-collaboration framework that guides multiple LLM
+      agents to work together on code generation tasks, enhancing their ability to
+      tackle complex software development
+  description: A productivity pattern where multiple LLM agents collaborate on code
+    generation. ChatDev proposes chat-powered framework guiding agents on what and
+    how to communicate. MetaGPT incorporates Standardized Operating Procedures (SOPs)
+    through meta-programming for enhanced coordination.
+- name: Agent Hallucination Taxonomy
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:230-237)
+    quote: 'We introduce a novel decomposition of agent components into two parts:
+      internal state and external behaviors...'
+  description: A comprehensive taxonomy pattern that classifies agent hallucinations
+    into five types based on internal state (belief state) versus external behaviors
+    (reasoning, execution, perception, memorization, communication). This pattern
+    provides a structured framework for identifying where in the agent pipeline handover
+    failures and hallucinations occur.
+- name: POMDP Agent Loop Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:342-356)
+    quote: Reasoning, Execution, Feedback, Environment Transition, Perception, Memorization,
+      Belief Update
+  description: 'Defines the complete agent execution loop as a sequence of operations:
+    Reasoning generates plan from belief state, Execution translates to action, Feedback
+    provides reward, Perception observes new state, Memorization updates memory, Belief
+    Update refines internal state. This pattern is fundamental for understanding where
+    handover points exist in agent workflows.'
+- name: MAS Broadcasting and Structure Evolution Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:421-428)
+    quote: Broadcasting means that the agent broadcasts its message to neighboring
+      nodes according to its plan, while structure evolution indicates that the communication
+      structure Gt can be updated
+  description: 'Extends single-agent loop to multi-agent systems with two additional
+    procedures: Broadcasting (message dissemination to network neighbors) and Structure
+    Evolution (dynamic updating of communication topology). Critical for understanding
+    inter-agent handover protocols.'
+- name: Goal Understanding Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 1:441-451)
+    quote: I = Understand(b0, g) where I denotes the inferred intention, and b0 represents
+      the initial belief state
+  description: Pattern for parsing user goals into agent intentions before execution.
+    When intention I is complex, decomposition into sub-intentions occurs. This is
+    the first handover point where miscommunication can introduce errors into the
+    system.
+- name: Intention Decomposition Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:53-69)
+    quote: 'Two decomposition methods: pre-defined decomposition and dynamic decomposition...dynamically
+      optimized based on the current belief state bt'
+  description: Pattern for breaking complex intentions into manageable sub-intentions.
+    Pre-defined decomposition specifies sub-intentions in advance, while dynamic decomposition
+    generates them iteratively based on evolving belief state. Handover quality depends
+    on accurate dependency modeling between sub-intentions.
+- name: Sub-intention Dependency Chain Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:154-175)
+    quote: These sub-intentions typically form a sequentially dependent chain, where
+      the completion of each sub-intention pre-supposes the successful fulfillment
+      of its predecessors
+  description: Pattern describing the sequential dependency relationships between
+    sub-intentions. Failures manifest as Sub-intention Omission (missing critical
+    steps), Sub-intention Redundancy (task-irrelevant additions), and Sub-intentions
+    Disorder (wrong sequencing). Proper handover requires preserving these dependencies.
+- name: Tool Selection and Calling Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:227-249)
+    quote: Ts = Select(bt, pt, Tcand)...at = Call(bt, pt, Ts)
+  description: 'Two-phase execution pattern: Tool Selection retrieves and selects
+    appropriate tool from candidates, Tool Calling populates parameters to form executable
+    action. This is a critical handover point where documentation limitations, shallow
+    pattern understanding, or solvability unawareness can cause execution hallucinations.'
+- name: Memory Retrieval and Update Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:370-373)
+    quote: 'Memory Retrieval: Extracting and integrating relevant information from
+      stored memory...Memory Update: revising and removing existing memory'
+  description: 'Pattern for memory operations in agents with two core functions: retrieval
+    (extracting relevant stored information for current decision) and update (revising/removing
+    based on new information/feedback). Sub-optimal retrieval mechanisms or imperfect
+    priority assignment cause memorization hallucinations.'
+- name: Communication Protocol Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 2:457-474)
+    quote: Communication protocols govern how agents exchange messages, directly determining
+      the efficiency, reliability, and coordination of their interactions
+  description: 'Pattern for inter-agent communication in MAS covering three aspects:
+    Asynchronous Scheduling (temporal coordination), Message Formats (natural language
+    vs structured JSON), and Fault-tolerant Design (confirmation/synchronization constraints).
+    Uncoordinated protocols lead to communication hallucinations.'
+- name: Self-verification Mechanism Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:17-39)
+    quote: Self-verification is a lightweight and model-internal approach wherein
+      agents assess the validity and reliability of their own outputs without relying
+      on external validators
+  description: 'Pattern for agent self-assessment through three techniques: Self-reflection
+    (prompting introspection), Self-consistency (multiple candidate generation with
+    voting), and Self-questioning (verification questions based on reasoning process).
+    Enables autonomous error detection in handovers.'
+- name: Validator Assistance Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:42-48)
+    quote: This approach leverages external validators to verify the correctness of
+      an agent's outputs, aiming to mitigate hallucinations
+  description: 'Pattern for external verification using five validator categories:
+    Language-based (truthfulness/coherence), Retrieval-based (external source checking),
+    Execution-based (running generated code), Simulation-based (sandboxed testing),
+    and Ensemble-based (combining multiple validators). Critical for post-handover
+    verification.'
+- name: Hallucinatory Accumulation Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:153-169)
+    quote: hallucinations can accumulate and amplify over time. In such cases, hallucinations
+      may initially appear as minor issues, but their iterative accumulation can ultimately
+      lead to severe consequences
+  description: Pattern describing how errors propagate and compound across multi-step
+    agent processes. Single-step errors magnify into severe consequences through iterative
+    accumulation. This pattern emphasizes the need for early detection and mitigation
+    in handover chains.
+- name: Lightweight Checkpoint Injection Pattern
+  sources:
+  - chunk_ref: 18-HallucinationSurvey-2509.18970 (Chunk 4:186-189)
+    quote: lightweight checkpoints can be injected at each stage to verify whether
+      hallucinations have occurred
+  description: Pattern for hallucination detection through strategic checkpoint placement
+    at each pipeline stage. Enables modeling and tracing of entire execution trajectories
+    to locate hallucination sources. Essential for debugging handover failures.
+- name: Generalization Bound Exploration Pattern
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:86-100)
+    quote: we propose HalMit, a fine-grained approach for modeling per-agent generalization
+      bounds to monitor hallucinations that fall outside these boundaries
+  description: Pattern for identifying agent-specific generalization bounds within
+    domains. Uses a watchdog framework to detect when generated responses exceed the
+    agent's reliable knowledge boundary, flagging potential hallucinations. The bound
+    is domain-specific rather than universal.
+- name: Probabilistic Fractal Query Generation Pattern
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:375-390)
+    quote: 'FT1: Semantic Deduction...FT2: Semantic Analog...FT3: Semantic Induction'
+  description: 'Pattern using three fractal affine transformations to systematically
+    explore an agent''s generalization boundary: Semantic Deduction (specific queries
+    from general concepts), Semantic Analog (broadening via synonyms/analogies), and
+    Semantic Induction (abstracting from specific instances). Enables comprehensive
+    boundary identification.'
+- name: Multi-Agent Bound Exploration Pattern
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 1:355-396)
+    quote: 'the proposed MAS consists of three specialized agent types: core agent
+      (CA), query generation agent (QGA), and evaluation agent (EA)'
+  description: 'Pattern using specialized agent roles for hallucination detection:
+    Core Agent coordinates exploration, Query Generation Agents create test queries
+    through fractal transformations, Evaluation Agent assesses response quality using
+    HalluBench criteria. Demonstrates structured inter-agent handover for quality
+    assurance.'
+- name: Vector Database Boundary Storage Pattern
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 2:82-98)
+    quote: the CA embeds the QA pair and the context information into a vector database
+      as a point of the generalization bound of agent
+  description: Pattern for storing identified generalization boundary points as query-response
+    pairs with context in a vector database. When hallucination is reported, the QA
+    pair is embedded and stored. During monitoring, input queries are compared against
+    stored boundary points using cosine similarity.
+- name: Semantic Entropy-Based Hallucination Detection Pattern
+  sources:
+  - chunk_ref: 19-HalMit-2507.15903 (Chunk 3:1-5)
+    quote: we compare the semantic entropy of the query with the semantic entropy
+      of the most similar vector in the vector database. If HQ is larger, the input
+      query is likely to be outside the generalization bound
+  description: Pattern using semantic entropy comparison for hallucination detection.
+    Queries with higher semantic entropy than similar boundary points are flagged
+    as potential hallucinations. Provides a quantitative threshold mechanism for handover
+    quality verification.
+- name: PROV-AGENT Provenance Model Pattern
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:29-38)
+    quote: PROV-AGENT, a provenance model that extends W3C PROV and leverages the
+      Model Context Protocol (MCP)...to integrate agent interactions into end-to-end
+      workflow provenance
+  description: Pattern extending W3C PROV standard to capture agentic workflow provenance.
+    Integrates MCP concepts for representing agent tools, prompts, responses, and
+    model invocations within unified provenance graphs. Enables traceability and root
+    cause analysis for agent handovers.
+- name: AIAgent Tool Execution Pattern
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 1:285-296)
+    quote: an AI agent can be associated with one or many tool executions (AgentTool)
+      and each tool may be informed by one or many AIModelInvocations. Each AIModelInvocation
+      uses a Prompt and a specific AIModel
+  description: 'Pattern modeling agent tool executions with full provenance: AgentTool
+    activities linked to AIAgent, informed by AIModelInvocations that use Prompts
+    and specific AIModels, generating ResponseData attributed to the agent. Captures
+    complete handover chain for audit.'
+- name: Agentic Provenance Query Pattern
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 2:93-101)
+    quote: Q1. Given an agent decision, what was the complete lineage until the first
+      input data?...traverses to its generating Agent_Tool_i, then to the inputs it
+      used
+  description: 'Pattern enabling provenance queries for agent accountability: trace
+    complete lineage from decision to source data, understand reasoning behind decisions,
+    retrieve prompts/responses for surprising decisions, track decision propagation
+    through workflow. Essential for debugging handover failures.'
+- name: Iterative Decision Propagation Pattern
+  sources:
+  - chunk_ref: 22-PROV-AGENT-2508.02866 (Chunk 2:36-45)
+    quote: the decision made for each layer informs the decision logic in the next,
+      enabling the system to learn over the course of a print. However, because the
+      agent relies on an LLM, there is a risk of hallucinated or incorrect outputs
+  description: Pattern describing iterative agent decisions where each decision influences
+    subsequent decision logic. A single error can propagate across iterations, compromising
+    downstream outputs. Provenance tracking becomes essential for identifying where
+    handover corruption began.
+- name: Hierarchical Agents Collaboration Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:57-59)
+    quote: In a centralized hierarchy, a supervisor agent oversees and assigns tasks
+      to specialist agents. The figure demonstrates a multi-layer hierarchy, where
+      an agent can function as both a specialist agent and a supervisor agent
+  description: Pattern for hierarchical multi-agent collaboration where supervisor
+    agents delegate to specialists who may themselves supervise other agents. Each
+    leaf agent focuses on specialized tasks while supervisors manage planning, delegation,
+    and coordination. Defines clear handover boundaries.
+- name: Inter-Agent Message Passing Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:230-244)
+    quote: 'we model the inter-agent communication capability as a specialized tool
+      that can be leveraged by the supervisor agent...Parallel Communication: The
+      supervisor agent can engage in parallel communication with multiple specialist
+      agents simultaneously'
+  description: Pattern modeling inter-agent communication as a tool (send_message
+    with recipient and content). Supports unified interface, parallel communication
+    with multiple agents, and leverages existing function calling capability. Defines
+    handover protocol for multi-agent systems.
+- name: Payload Referencing Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:275-298)
+    quote: Payload referencing is a specialized mechanism designed to handle the exchange
+      of large content blocks, particularly code snippets...allowing direct injection
+      of text extracted from past multi-party communication into the message content
+  description: Pattern for efficient transfer of large content blocks between agents.
+    Automatically detects structured content, assigns unique identifiers, and enables
+    reference tags instead of regeneration. Reduces 27% communication overhead and
+    prevents payload corruption during agent-to-agent transmission.
+- name: Dynamic Agent Routing Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:325-345)
+    quote: a dynamic agent routing mechanism that selectively bypasses the supervisor
+      agent's orchestration when the incoming message only requires simple routing...using
+      a fast classifier that predicts whether the incoming message can be directly
+      routed
+  description: Pattern for optimizing handovers by routing simple requests directly
+    to specialist agents, bypassing full orchestration. Uses fast classifier to predict
+    routing decisions with 90% accuracy. Falls back to full orchestration when uncertain.
+    Reduces latency for straightforward handovers.
+- name: Assertion-Based Benchmarking Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 1:389-402)
+    quote: 'The assertion-based evaluation framework relies on three components: 1)
+      benchmarking data collection, 2) environment simulators, 3) automatic assertion
+      judge'
+  description: Pattern for evaluating multi-agent systems through assertions (statements
+    that must hold true for success). Categorizes assertions as user-side (observable)
+    and system-side (tool correctness, inter-agent behavior). Enables scalable automated
+    evaluation of handover quality.
+- name: Goal Success Rate Metrics Pattern
+  sources:
+  - chunk_ref: 24-EffectiveCollab-2412.05449 (Chunk 2:62-91)
+    quote: 'Overall GSR: Overall goal success rate covering both user-side and system-side...Supervisor
+      GSR: Goal success rate of the supervisor agent without any dependence on sub-agent
+      and tool behavior'
+  description: 'Pattern defining success metrics for multi-agent collaboration: Overall
+    GSR (all assertions true), Supervisor GSR (supervisor reliability regardless of
+    sub-agent failures), User-side GSR (user perspective), System-side GSR (system
+    perspective). Provides comprehensive handover quality measurement framework.'

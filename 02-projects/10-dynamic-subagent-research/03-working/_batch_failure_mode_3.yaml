@@ -1,0 +1,170 @@
+---
+batch_id: "failure_mode_3"
+field: failure_mode
+extracted_at: "2025-12-29T12:00:00Z"
+chunks_read: 11
+patterns_found: 28
+---
+
+patterns:
+  # =========================================
+  # 12-CollabSurvey-2501.06322 Patterns
+  # =========================================
+
+  - name: "Single Agent Failure Amplification"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:354-357)"
+    quote: "the failure of one agent or more agents (e.g., infinite conversation loop, amplified hallucinations [56]) can negatively impact the entire system"
+    description: "In cooperative MAS, failure of one agent can cascade through the system. Specific failure modes include infinite conversation loops and amplified hallucinations that spread from one agent to others, negatively impacting the entire collaborative system."
+
+  - name: "Unpredictable Agent Messaging Behavior"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:347-348)"
+    quote: "agents may act unpredictably by sending messages to themselves, pretending to be clients"
+    description: "In book marketplace applications, agents exhibited unpredictable behavior by self-messaging and client impersonation. This represents a failure mode where agent identity boundaries break down, leading to deceptive internal communication patterns."
+
+  - name: "Competitive Collaboration Channel Suboptimality"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 2:394-397)"
+    quote: "MAS approach with suboptimal design for their competitive collaboration channels can be overtaken by single-agent counterparts with strong prompts"
+    description: "When competitive collaboration channels are poorly designed, the entire MAS can perform worse than a single agent with well-crafted prompts. This failure mode indicates that bad multi-agent design can be counterproductive."
+
+  - name: "Rule-based System Adaptability Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:97-101)"
+    quote: "rule-based systems suffer from a lack of adaptability. When confronted with unexpected situations or dynamic environments that fall outside the scope of the predefined rules, these systems may fail to respond appropriately"
+    description: "Rule-based MAS protocols fail when encountering scenarios outside predefined rules. The failure mode requires significant manual intervention to adjust rule sets, and complexity grows exponentially as tasks increase."
+
+  - name: "Role-based Rigidity Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:134-138)"
+    quote: "if roles are not properly specified, role-based systems can show rigidity, which might result in disputes or functional deficiencies"
+    description: "Role-based systems fail through rigidity when roles are improperly specified. Interdependencies between agent roles mean ineffective communication or blocking of interactions can severely impact overall system performance."
+
+  - name: "Centralized Node Collapse"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 3:193-197)"
+    quote: "If the central node fails the entire system might collapse. System is less resilient to disruptions"
+    description: "Centralized MAS architectures have a single point of failure. If the central controlling agent fails, the entire system collapses because all agents depend on it for coordination and resource allocation."
+
+  - name: "Dynamic Architecture Adjustment Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:20-26)"
+    quote: "Higher resource usage due to real-time adjustments. Potential failures in dynamic adjustments"
+    description: "Dynamic coordination architectures can fail during real-time adjustments. The failure mode involves higher resource consumption and potential breakdowns when the system attempts to adapt roles and channels dynamically."
+
+  - name: "Static Architecture Scalability Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:14-19)"
+    quote: "Relies on accurate initial design and domain knowledge. Fixed channels may deal with scalability and flexibility"
+    description: "Static architectures fail when initial design or domain knowledge is inaccurate. Fixed collaboration channels struggle with scalability and flexibility requirements as systems grow."
+
+  - name: "AI Safety Performance Failure - Exploitation"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:122-123)"
+    quote: "AI safety and performance concerns arise, particularly in competitive scenarios where failures like exploitation and hallucination can happen"
+    description: "In competitive MAS scenarios, specific failure modes include exploitation (agents gaming the system) and hallucination propagation. These represent safety-critical failures that undermine system reliability."
+
+  - name: "LLM Coherence Degradation in Long Debates"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:406-407)"
+    quote: "LLMs struggle to maintain coherence and relevance in long scenarios"
+    description: "In multi-agent debate systems, LLMs fail to maintain coherence and relevance during extended interactions. This failure mode leads to degraded output quality as debate length increases."
+
+  - name: "Missing Requirements Task Comprehension Failure"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 4:441-442)"
+    quote: "Without clear, detailed requirements, agents struggle to grasp task ideas"
+    description: "In ChatDev and similar development frameworks, agents fail to comprehend tasks when requirements lack clarity or detail. The absence of explicit specifications leads to misaligned development outcomes."
+
+  - name: "Hallucination Propagation and Reinforcement"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:125-128)"
+    quote: "A single agent's hallucination can be spread and reinforced by other agents, leading to minor inaccuracies into critical and cascading effects"
+    description: "In MAS, a single agent's hallucination can propagate and be reinforced by other agents. This creates a cascade where minor initial inaccuracies compound into critical errors across the entire system."
+
+  - name: "Scalability Coordination Complexity"
+    chunk_ref: "12-CollabSurvey-2501.06322 (Chunk 6:131-135)"
+    quote: "Increasing agent population poses a significant challenge in MASs. Managing resources (memory, processing time), coordination and collaboration channels among a growing number of agents introduces additional complexities"
+    description: "As agent populations grow, coordination becomes increasingly complex. Failure modes include inefficiencies in agent interactions, resource management bottlenecks, and prevention failures leading to system degradation."
+
+  # =========================================
+  # 15-AgentSurvey-2503.21460 Patterns
+  # =========================================
+
+  - name: "Error Accumulation in Single-Path Planning"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 2:53-55)"
+    quote: "it may suffer from a lack of flexibility and error accumulation during chaining, as the agent is required to follow the predefined plan without any deviation"
+    description: "Single-path chaining in task decomposition fails through error accumulation. When agents must follow predefined plans without deviation, errors compound through the chain, reducing flexibility and causing cascading failures."
+
+  - name: "Degeneration-of-Thought Problem"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 2:276-278)"
+    quote: "MAD [80] employs structured communication protocols to address the 'degeneration-of-thought' problem, where agents overly fixate on initial solutions"
+    description: "Multi-agent debate systems can fail through 'degeneration-of-thought' where agents become overly fixated on initial solutions. This failure mode prevents exploration of alternative solutions and leads to suboptimal outcomes."
+
+  - name: "Centralized Bottleneck Failure"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 2:244-246)"
+    quote: "a single control node often becomes a bottleneck due to handling all inter-agent communication, task scheduling, and contention resolution"
+    description: "Centralized architectures fail when the control node becomes a bottleneck. Handling all inter-agent communication, task scheduling, and contention resolution through one point creates performance degradation and potential system failures."
+
+  - name: "Adversarial Attack Performance Degradation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:82-84)"
+    quote: "Adversarial attacks aim to compromise the reliability of the agents, rendering them ineffective in specific tasks"
+    description: "Adversarial attacks represent a failure mode where agents are rendered ineffective for specific tasks. The attack compromises agent reliability, making them unable to perform their intended functions."
+
+  - name: "Multi-Agent Infectious Attack Propagation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:93-95)"
+    quote: "GIGA [181] introduces generalizable infectious gradient attacks to propagate adversarial inputs across multi-agent, multi-round LLM-powered systems"
+    description: "Infectious attacks can propagate adversarial inputs across multi-agent systems over multiple rounds. This failure mode spreads malicious content through agent interactions, compromising the entire system gradually."
+
+  - name: "Backdoor Trigger Activation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:139-141)"
+    quote: "Backdoor attacks implant specific triggers to cause the model to produce preset errors when encountering these triggers while performing normally under normal inputs"
+    description: "Backdoor attacks create hidden failure modes that only activate under specific trigger conditions. The agent performs normally otherwise, making detection difficult until the trigger causes preset errors."
+
+  - name: "Multi-Agent Collaboration Attack Disruption"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:165-167)"
+    quote: "attackers manipulate the interaction or collaboration mechanisms between multiple models to disrupt the overall functionality of the system"
+    description: "Collaboration attacks target inter-model interactions rather than individual agents. The failure mode involves disruption of collaboration mechanisms, causing system-wide functionality breakdown."
+
+  - name: "Contagion and Recursion Attack"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:168-171)"
+    quote: "CORBA [196] introduces a novel yet simple attack method for the LLM multi-agent system. It exploits contagion and recursion, which are hard to mitigate via alignment"
+    description: "CORBA attacks exploit contagion and recursion properties in MAS that are difficult to mitigate through alignment. The failure spreads recursively through agent interactions, making containment challenging."
+
+  - name: "Inter-Agent Message Manipulation"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 4:172-173)"
+    quote: "AiTM [197] introduces an attack method to the LLM multi-agent system by intercepting and manipulating inter-agent messages using an adversarial agent"
+    description: "Adversary-in-the-Middle attacks intercept and manipulate messages between agents. This failure mode corrupts communication channels, causing agents to act on falsified information."
+
+  - name: "Hallucination with Cascading Uncertainty"
+    chunk_ref: "15-AgentSurvey-2503.21460 (Chunk 6:376-378)"
+    quote: "causing hallucinations [315] and compounding uncertainty in multi-agent systems, such as agentic frameworks for medical applications and autonomous scientific discovery"
+    description: "LLM stochastic nature causes hallucinations that compound uncertainty in multi-agent systems. In high-stakes domains like medical and scientific applications, this failure mode can mislead critical decision-making."
+
+  # =========================================
+  # 18-HallucinationSurvey-2509.18970 Patterns
+  # =========================================
+
+  - name: "Compound Module Interaction Hallucination"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:193-196)"
+    quote: "agent hallucinations are compound behaviors arising from interactions among multiple modules, resulting in a broader and more varied range of hallucination types"
+    description: "Agent hallucinations differ from simple LLM errors by arising from complex interactions between perception, reasoning, and action modules. This creates diverse failure types that are harder to diagnose and fix."
+
+  - name: "Multi-Step Hallucination Propagation Chain"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:196-200)"
+    quote: "agent hallucinations often span multiple steps and involve multi-state transitions. Such hallucinations are not limited to the final output; they may also arise during intermediate processes such as perception and reasoning, where they can propagate and accumulate over time"
+    description: "Agent hallucinations span multiple execution steps with multi-state transitions. Unlike localized errors, they propagate through perception and reasoning stages, accumulating over time to cause severe downstream failures."
+
+  - name: "Physically Consequential Action Error"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 1:201-205)"
+    quote: "Agent hallucinations involve 'physically consequential' errors, where incorrect embodied actions can directly affect task execution, system devices, and user experiences in the real world"
+    description: "Agent hallucinations create physically consequential failures where incorrect embodied actions affect real-world systems. The cost and risk are significantly higher than text-only errors due to direct impact on devices and users."
+
+  - name: "Sub-intention Dependency Failure"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:162-175)"
+    quote: "Inadequate modeling of dependency relationships among these sub-intentions can give rise to three types of errors: Sub-intention Omission, Sub-intention Redundancy and Sub-intentions Disorder"
+    description: "Failure in modeling sub-intention dependencies causes three error types: omission (missing critical steps), redundancy (irrelevant additions), and disorder (wrong sequencing). All compromise reasoning integrity and efficiency."
+
+  - name: "Tool Solvability Awareness Failure"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:298-312)"
+    quote: "A lack of solvability awareness in LLM-based agents can also lead to execution hallucinations, where the agent mistakenly assumes that pt is solvable and proceeds with unjustified confidence"
+    description: "Agents may proceed with unjustified confidence when they lack awareness of whether their plan is solvable. This leads to execution hallucinations where agents invoke irrelevant, fabricated, or non-executable tools."
+
+  - name: "Communication Protocol Asynchrony Failure"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:462-467)"
+    quote: "LLM-based MAS usually follows a manner of Asynchronous Scheduling so when receiving and processing instructions, agents may encounter issues of information loss and information overload"
+    description: "Asynchronous scheduling in MAS leads to information loss and overload during instruction processing. Temporal discrepancies result in information errors that increase the risk of hallucinatory outputs."
+
+  - name: "Ineffective Network Topology Update"
+    chunk_ref: "18-HallucinationSurvey-2509.18970 (Chunk 2:475-493)"
+    quote: "When network updates are ineffective, they can induce communication hallucinations due to inconsistent or outdated inter-agent connections"
+    description: "Ineffective network topology updates cause communication hallucinations through inconsistent or outdated agent connections. Messages may be routed to inappropriate recipients, causing misunderstandings or redundant reasoning."

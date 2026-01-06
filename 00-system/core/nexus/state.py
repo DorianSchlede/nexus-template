@@ -12,7 +12,12 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-import yaml
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+    yaml = None
 
 from .config import (
     MANDATORY_MAPS,
@@ -21,7 +26,7 @@ from .config import (
     WORKSPACE_DIR,
 )
 from .models import SystemState
-from .utils import is_template_file
+from .utils import is_template_file, parse_simple_yaml
 
 
 def detect_system_state(
@@ -137,32 +142,131 @@ def build_instructions(
     elif state == SystemState.RESUME:
         if active_projects:
             most_recent = active_projects[0]
+            project_id = most_recent["id"]
+            project_name = most_recent.get("name", project_id)
+            project_desc = most_recent.get("description", "").lower()
+            progress = most_recent.get("progress", 0) * 100
+
+            # Check for _resume.md to get last active skill/phase
+            last_skill = None
+            last_phase = None
+            project_file_path = most_recent.get("_file_path", "")
+            if project_file_path:
+                project_dir = Path(project_file_path).parent.parent
+                resume_file = project_dir / "_resume.md"
+                if resume_file.exists():
+                    try:
+                        resume_content = resume_file.read_text(encoding="utf-8")
+                        if resume_content.startswith("---"):
+                            parts = resume_content.split("---", 2)
+                            if len(parts) >= 2:
+                                if HAS_YAML:
+                                    resume_yaml = yaml.safe_load(parts[1])
+                                else:
+                                    resume_yaml = parse_simple_yaml(parts[1])
+                                if resume_yaml:
+                                    last_skill = resume_yaml.get("last_skill")
+                                    last_phase = resume_yaml.get("phase")
+                    except Exception:
+                        pass
+
+            # Build skill loading step from _resume.md
+            if last_skill:
+                # Explicit skill from _resume.md
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": f"python 00-system/core/nexus-loader.py --skill {last_skill}",
+                    "why": f"Last active skill: {last_skill}" + (f" (phase: {last_phase})" if last_phase else ""),
+                    "REQUIRED": True,
+                    "detected_from": "_resume.md",
+                }
+            elif last_phase:
+                # Phase but no skill - map phase to skill
+                phase_skill_map = {
+                    "analysis": "analyze-research-project",
+                    "synthesis": "synthesize-research-project",
+                    "planning": "execute-project",
+                    "execution": "execute-project",
+                }
+                skill_name = phase_skill_map.get(last_phase, "execute-project")
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": f"python 00-system/core/nexus-loader.py --skill {skill_name}",
+                    "why": f"Phase '{last_phase}' from _resume.md",
+                    "REQUIRED": True,
+                    "detected_from": "_resume.md",
+                }
+            else:
+                # No _resume.md or empty - fallback
+                skill_step = {
+                    "step": 2,
+                    "action": "RUN",
+                    "command": "python 00-system/core/nexus-loader.py --skill execute-project",
+                    "why": "Default skill (no _resume.md found)",
+                    "REQUIRED": True,
+                }
+
             instructions.update({
-                "action": "continue_working",
-                "execution_mode": "immediate",
-                "suggest_project": most_recent["id"],
-                "message": "Context restored. Continue where you left off.",
-                "reason": "Resumed from context summary - skip menu, continue work",
-                "workflow": [
-                    "Context has been restored from summary",
-                    "DO NOT display menu - continue working on previous task",
-                    f"Active project available: {most_recent['name']} ({most_recent.get('progress', 0)*100:.0f}% complete)",
-                    "Continue from previous conversation context",
-                    "If user gives new instructions, follow them",
+                "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
+                "execution_mode": "blocking",
+                "project_id": project_id,
+                "project_name": project_name,
+                "project_phase": last_phase,
+                "project_progress": f"{progress:.0f}%",
+
+                # CRITICAL ENFORCEMENT
+                "STOP": "🛑 DO NOT CONTINUE WORKING WITHOUT LOADING CONTEXT FIRST",
+                "MANDATORY": "You MUST execute ALL steps below BEFORE continuing work",
+                "REASON": "Context summary lost project details. Without loading, you will hallucinate.",
+
+                "EXECUTE_NOW": [
+                    {
+                        "step": 1,
+                        "action": "READ",
+                        "target": "00-system/.cache/context_startup.json",
+                        "why": "Contains full metadata, skills list, project states",
+                        "REQUIRED": True,
+                    },
+                    skill_step,
+                    {
+                        "step": 3,
+                        "action": "RUN",
+                        "command": f"python 00-system/core/nexus-loader.py --project {project_id}",
+                        "why": "Loads overview.md, plan.md, steps.md - the actual project state",
+                        "REQUIRED": True,
+                    },
+                ],
+
+                "AFTER_LOADING": f"Continue working on '{project_name}' from context summary instructions",
+
+                "FAILURE_CONSEQUENCES": [
+                    "You will not know current task progress",
+                    "You will not know which steps are done vs pending",
+                    "You will make up file contents that don't exist",
+                    "User will lose trust when you contradict previous work",
                 ],
             })
         else:
             instructions.update({
-                "action": "continue_working",
-                "execution_mode": "immediate",
-                "message": "Context restored. Ready to continue.",
-                "reason": "Resumed from context summary - skip menu, await instructions",
-                "workflow": [
-                    "Context has been restored from summary",
-                    "DO NOT display menu",
-                    "Continue from previous conversation context",
-                    "Follow user instructions from summary",
+                "action": "EXECUTE_MANDATORY_LOADING_SEQUENCE",
+                "execution_mode": "blocking",
+
+                "STOP": "🛑 DO NOT CONTINUE WORKING WITHOUT LOADING CONTEXT FIRST",
+                "MANDATORY": "You MUST execute the step below BEFORE continuing work",
+
+                "EXECUTE_NOW": [
+                    {
+                        "step": 1,
+                        "action": "READ",
+                        "target": "00-system/.cache/context_startup.json",
+                        "why": "Contains full metadata, skills list, system state",
+                        "REQUIRED": True,
+                    },
                 ],
+
+                "AFTER_LOADING": "Continue from context summary instructions",
             })
 
     return instructions
@@ -175,7 +279,12 @@ def build_display_hints(
     workspace_configured: bool,
 ) -> List[str]:
     """
-    Build display hints - critical items AI must show in menu.
+    Build display hints optimized for orchestrator.md menu rendering.
+
+    These hints map directly to conditional sections in orchestrator.md:
+    - SHOW_UPDATE_BANNER → Display at top of menu
+    - ONBOARDING_INCOMPLETE → Emphasize in suggested steps
+    - Individual skill hints → Add to numbered suggestions
 
     Args:
         update_info: Update check results
@@ -184,23 +293,41 @@ def build_display_hints(
         workspace_configured: Whether workspace has been configured
 
     Returns:
-        List of display hint strings
+        List of display hint strings matching orchestrator.md patterns
     """
     hints = []
 
+    # Update banner (if available)
     if update_info.get("update_available", False):
         local_ver = update_info.get("local_version", "unknown")
         upstream_ver = update_info.get("upstream_version", "latest")
         hints.append(f"SHOW_UPDATE_BANNER: v{local_ver} → v{upstream_ver}")
 
+    # Onboarding summary (for emphasis in suggested steps)
     if pending_onboarding:
+        # Sort by priority (setup_memory first, then others)
+        priority_order = ["setup_memory", "setup_workspace", "learn_projects", "learn_skills", "learn_integrations", "learn_nexus"]
+        sorted_pending = sorted(pending_onboarding, key=lambda x: priority_order.index(x["key"]) if x["key"] in priority_order else 99)
+
         hints.append(f"ONBOARDING_INCOMPLETE: {len(pending_onboarding)} skills pending")
 
-    if not goals_personalized:
-        hints.append("PROMPT_SETUP_GOALS: Goals not yet personalized")
+        # Add individual skill hints for menu rendering
+        for skill in sorted_pending:
+            skill_key = skill["key"]
+            skill_name = skill["name"]
 
-    if not workspace_configured:
-        hints.append("PROMPT_SETUP_WORKSPACE: Workspace not configured")
+            if skill_key == "setup_memory":
+                hints.append(f"SUGGEST_ONBOARDING: 'setup memory' - teach Nexus about you ({skill['time']})")
+            elif skill_key == "setup_workspace":
+                hints.append(f"SUGGEST_ONBOARDING: 'setup workspace' - organize your files ({skill['time']})")
+            elif skill_key == "learn_projects":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn projects' - understand projects vs skills ({skill['time']})")
+            elif skill_key == "learn_skills":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn skills' - automate repeating work ({skill['time']})")
+            elif skill_key == "learn_integrations":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn integrations' - connect external tools ({skill['time']})")
+            elif skill_key == "learn_nexus":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn nexus' - deep dive into the system ({skill['time']})")
 
     return hints
 
@@ -257,7 +384,10 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
         if content.startswith("---"):
             parts = content.split("---", 2)
             if len(parts) >= 2:
-                config_data = yaml.safe_load(parts[1])
+                if HAS_YAML:
+                    config_data = yaml.safe_load(parts[1])
+                else:
+                    config_data = parse_simple_yaml(parts[1])
                 if config_data and "learning_tracker" in config_data:
                     tracker = config_data["learning_tracker"]
                     if "completed" in tracker and isinstance(tracker["completed"], dict):

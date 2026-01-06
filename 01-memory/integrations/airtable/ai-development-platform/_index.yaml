@@ -1,0 +1,106 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+permission_level: create
+exported_at: '2025-12-28T14:12:03.595766'
+table_count: 25
+tables:
+- id: tbl6mvvqpU4AOIpVS
+  name: Users
+  file: users.yaml
+  field_count: 17
+- id: tbl6LEK3wd4mKAfhp
+  name: AgentTaskList
+  file: agenttasklist.yaml
+  field_count: 10
+- id: tblheJuJQmEAI4Th1
+  name: Workspace
+  file: workspace.yaml
+  field_count: 8
+- id: tblVEJD2inVhae855
+  name: Agents
+  file: agents.yaml
+  field_count: 37
+- id: tblPJ9VKG74mKv7JK
+  name: Nodes
+  file: nodes.yaml
+  field_count: 24
+- id: tblf2ohTHmsucjVUj
+  name: Variables
+  file: variables.yaml
+  field_count: 30
+- id: tblSy63NxSHVSEOCo
+  name: AgentVersions
+  file: agentversions.yaml
+  field_count: 21
+- id: tblh0GsN5Et3ApzLS
+  name: NodeVersions
+  file: nodeversions.yaml
+  field_count: 37
+- id: tblsEzGhn4XJjNrkt
+  name: AgentTasks
+  file: agenttasks.yaml
+  field_count: 64
+- id: tblNdPnVWDragZtcK
+  name: NodeTasks
+  file: nodetasks.yaml
+  field_count: 61
+- id: tblKhpqLs06kI01yv
+  name: VariableTasks
+  file: variabletasks.yaml
+  field_count: 62
+- id: tbltUrvSBnfOb4S8v
+  name: Datasets
+  file: datasets.yaml
+  field_count: 23
+- id: tblOrJsp3sqWPGmD6
+  name: DatasetRun
+  file: datasetrun.yaml
+  field_count: 48
+- id: tbl9lACSI4fDUzAv4
+  name: DatasetTasks
+  file: datasettasks.yaml
+  field_count: 41
+- id: tblflNTX3tR0onX13
+  name: DatasetNodes
+  file: datasetnodes.yaml
+  field_count: 36
+- id: tblsHYj8CrdHbY8Bt
+  name: DatasetVariables
+  file: datasetvariables.yaml
+  field_count: 50
+- id: tbl2oWQgjhi6wTudJ
+  name: Match Types
+  file: match-types.yaml
+  field_count: 5
+- id: tblT1mIwLx9JECKd8
+  name: DatasetRunVariableImprovements
+  file: datasetrunvariableimprovements.yaml
+  field_count: 13
+- id: tblP097FL3Cgru3KL
+  name: ExpectedJson
+  file: expectedjson.yaml
+  field_count: 8
+- id: tbl1u70powCW0rPTm
+  name: TestCase
+  file: testcase.yaml
+  field_count: 10
+- id: tblkaM1g04wyXNN5n
+  name: TestCaseGroup
+  file: testcasegroup.yaml
+  field_count: 9
+- id: tblH9H6wAD90a9Q88
+  name: BID Feedback
+  file: bid-feedback.yaml
+  field_count: 54
+- id: tblMR7hOrHuxwFJso
+  name: BID Feedback Task
+  file: bid-feedback-task.yaml
+  field_count: 26
+- id: tblLKJ7zurjJD80bi
+  name: Prompt
+  file: prompt.yaml
+  field_count: 7
+- id: tblB6uthptJnf4Wi9
+  name: BID Feedback Contact
+  file: bid-feedback-contact.yaml
+  field_count: 9

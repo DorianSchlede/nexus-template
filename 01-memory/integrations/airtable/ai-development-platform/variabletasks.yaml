@@ -1,0 +1,428 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblKhpqLs06kI01yv
+table_name: VariableTasks
+exported_at: '2025-12-28T14:12:03.660664'
+field_count: 62
+fields:
+- id: fldlsCXVxxx4qSuem
+  name: VariableTask Name
+  type: singleLineText
+  description: null
+- id: fldaEJVo2NxCehbta
+  name: Variable
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblf2ohTHmsucjVUj
+  prefer_single_record_link: true
+  inverse_link_field_id: fldsYkZgsCOqgKmcp
+- id: fldqen62mQwA8YP89
+  name: Variable Type (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fldaJBYAJTts9xdq5
+- id: fld3CuSF8C0ob61Gu
+  name: Match Type (from Variable) (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: flddZoPC81xbR3yIP
+- id: fldE97RkGEPALRlND
+  name: Node (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fld2n2BGhxw6J65IU
+- id: fldWBAJ4aFvhtkx7n
+  name: Workspace (from Agent) (from Node) (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fld0szUOWCaN9A2bE
+- id: fldEiWo2XIa92JYtl
+  name: Agent (from Node) (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fldXhYJ8o5cXxfhsS
+- id: fldOP13sbfNu6YK7H
+  name: Variable Name
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fld244tcnq4DMtpxI
+- id: flduB9HRcICOjSFqf
+  name: AIValue
+  type: singleLineText
+  description: null
+- id: fldUS2XEpo2phYaZ6
+  name: Expected Value
+  type: singleLineText
+  description: null
+- id: fldWv8UcnhDT7uQnM
+  name: Accuracy
+  type: formula
+  description: Checks if AIValue matches Expected Value (from DatasetVariables) based
+    on match type.
+  referenced_field_ids:
+  - fld3obEZIAYU5KIKL
+  - fld7ePTK3fWS1fyir
+  - fldqen62mQwA8YP89
+  - flduB9HRcICOjSFqf
+  formula: "IF(\n  AND(\n    {fld3obEZIAYU5KIKL} = \"Done\",\n    {fld7ePTK3fWS1fyir},\n\
+    \    {fldqen62mQwA8YP89}\n  ),\n  IF(\n    {flduB9HRcICOjSFqf},\n    {flduB9HRcICOjSFqf}\
+    \ = {fld7ePTK3fWS1fyir},\n    0\n  )\n)"
+- id: fld53vRcKPcO2JYul
+  name: VariableTaskAccuracy
+  type: formula
+  description: Returns 1 if Expected Value matches AIValue, otherwise returns 0.
+  referenced_field_ids:
+  - fldUS2XEpo2phYaZ6
+  - flduB9HRcICOjSFqf
+  formula: IF({fldUS2XEpo2phYaZ6} = {flduB9HRcICOjSFqf}, 1, 0)
+- id: fldHKmJO3vfBBEsCc
+  name: AgentTask
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsEzGhn4XJjNrkt
+  prefer_single_record_link: true
+  inverse_link_field_id: fldo11koJZunOWBwy
+- id: flds1xZnsey9RauWV
+  name: DatasetRunAirtableID (from DatasetRun) (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldnXRarAuKGCjjiC
+- id: fld8BKAko7dl0o4pe
+  name: Task Type (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldYacQEGdeKGQqmE
+- id: fldln2gdyp56Tzo5K
+  name: DatasetVariables (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldGUuLs3vGfOiM4r
+- id: fldGnBB9NZmKYLpoZ
+  name: DatasetVariables (from DatasetTasks) (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fld0APSm6K0sKxIoz
+- id: fldUa9iYrPy2bPOIV
+  name: DatasetRun (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldPvGaaxL741s2vs
+- id: fldp6xPKQ1bFz7TWW
+  name: BID Case ID (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldCrhUM8gH3ENk4j
+- id: fldrs16YMJK3Eczfj
+  name: Dataset (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldpadv6gm83kinEQ
+- id: fld8Tcc2BW4KcM2vB
+  name: Actual Task Input (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldVLDYZJcdSB8ofR
+- id: fld1d7898H3AIcDuH
+  name: NodeTask
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblNdPnVWDragZtcK
+  prefer_single_record_link: true
+  inverse_link_field_id: fldWGXDicqn9y7bWm
+- id: fldCFwACmtBbPjrLC
+  name: NodeTaskPrompt
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldpPbrRvSRsbrGHy
+- id: fld7ePTK3fWS1fyir
+  name: Expected Value (from DatasetVariable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldx6jhfF87U8UjkD
+  lookup_field_id: fldNJlDMArS5Zdf2I
+- id: fldMTgR5BIp9treA2
+  name: Node Versions
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblh0GsN5Et3ApzLS
+  prefer_single_record_link: false
+  inverse_link_field_id: fldvMNQsgd1wr1Dl9
+- id: fldx6jhfF87U8UjkD
+  name: DatasetVariable
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblsHYj8CrdHbY8Bt
+  prefer_single_record_link: true
+  inverse_link_field_id: fldmq94garzYX3eOG
+- id: fld3obEZIAYU5KIKL
+  name: Expected Output Status (from DatasetTask) (from DatasetVariables)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldx6jhfF87U8UjkD
+  lookup_field_id: fldI3ua2xxQQ0bQe5
+- id: fldlHmkE2O8iuHloD
+  name: VariableVersion
+  type: singleLineText
+  description: null
+- id: fld7YHDzS9chjpLiR
+  name: Task ID
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldsCjtBCdaLBtWtM
+- id: fldy3ycNe5U5rLwAq
+  name: Custom ID
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldlHELS5UjsXZIGI
+- id: fld87ay5FoobYPvkh
+  name: Task Type
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldA5YICxe6nsRQCs
+- id: fldIRvsGHtCAyQmWV
+  name: AI Issue Analysis
+  type: multilineText
+  description: null
+- id: fldAA5Dp5kcSR9HfM
+  name: AI Optimization Suggestion
+  type: multilineText
+  description: null
+- id: fldbVHbENovdRr8S4
+  name: Map Dataset Variable ID
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldJdjd3wy6xvq7sR
+  - fldxVJ2mcaYCuZv4z
+  - fldOP13sbfNu6YK7H
+  formula: '{fldJdjd3wy6xvq7sR}&"|"&{fldxVJ2mcaYCuZv4z}&"|"&{fldOP13sbfNu6YK7H}'
+- id: fldUTX0kXYyjuEgnn
+  name: Created at
+  type: createdTime
+  description: null
+- id: fldxVJ2mcaYCuZv4z
+  name: Array ID
+  type: singleLineText
+  description: null
+- id: fld1278JXvxDvrhX2
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldVPpIqnmmuIlwkb
+- id: fldizuwX6QjLfWBKe
+  name: Variable Task UID
+  type: singleLineText
+  description: null
+- id: fldM4sZsZlBTR7F6G
+  name: DatasetRunImprovements
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblT1mIwLx9JECKd8
+  prefer_single_record_link: false
+  inverse_link_field_id: fld9vYB3tT7fzzLOw
+- id: fldZwQmpwWWYACJxT
+  name: DatasetTasks
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tbl9lACSI4fDUzAv4
+  prefer_single_record_link: false
+  inverse_link_field_id: fldSqAOKCf6mwVUU1
+- id: fld7gUqhJ5mU4amFf
+  name: DatasetNodes
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblflNTX3tR0onX13
+  prefer_single_record_link: false
+  inverse_link_field_id: fldxMimCJCImrX65y
+- id: fldJdjd3wy6xvq7sR
+  name: DatasetTasks (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fld98YlcjD7sIMQaF
+- id: fldHYVTMvi1zeDu9j
+  name: TaskNodeVariableID
+  type: formula
+  description: Concatenates TaskNode and Variable fields with a vertical bar separator.
+  referenced_field_ids: []
+  formula: RECORD_ID()
+- id: fldPKE2L35vr5ZDkg
+  name: DatasetVariables 2
+  type: singleLineText
+  description: null
+- id: fld0WNZBXycTvp6Yc
+  name: Created
+  type: createdTime
+  description: null
+- id: fldhhiexxk4CQE9VN
+  name: DatasetVariables 3
+  type: singleLineText
+  description: null
+- id: fldd4EMuQ1ReOjTWq
+  name: BID CaseID
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldqn1cqAjPRahgPl
+- id: fldFTTW9yXIXHKmwK
+  name: Variable AID (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fldyExhmbkzwLfOjk
+- id: fldiZUOkVeyvjKusM
+  name: Variable Name and ID
+  type: formula
+  description: Concatenates the Variable Name and Variable AID fields with a colon
+    separator.
+  referenced_field_ids:
+  - fldOP13sbfNu6YK7H
+  - fldFTTW9yXIXHKmwK
+  - fldxVJ2mcaYCuZv4z
+  formula: '{fldOP13sbfNu6YK7H} & ":" & {fldFTTW9yXIXHKmwK}& ":" & {fldxVJ2mcaYCuZv4z}'
+- id: fldVrPCwRdWWTdtgg
+  name: Agent Versions (from Node Versions)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldMTgR5BIp9treA2
+  lookup_field_id: fldpsyKaousktKsO3
+- id: fldZhmp9RAbcOHZ07
+  name: VariableTask AID
+  type: formula
+  description: null
+  referenced_field_ids: []
+  formula: 'RECORD_ID()
+
+    '
+- id: fldyFYCmcB2j52BQV
+  name: Expected Value - Key Variable (from DatasetVariables) (from DatasetTasks)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldZwQmpwWWYACJxT
+  lookup_field_id: fldfgIIO95FEsHbi5
+- id: fldt4LgiKqrTcIgVa
+  name: Model (from Node Versions)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldMTgR5BIp9treA2
+  lookup_field_id: fldsUbWFq15iSgAQ2
+- id: fld6NjJ2ydPJZz71P
+  name: NodeTask Name (from NodeTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldTS4X9RvqFLrH1k
+- id: flduQqG4T2udbgEHD
+  name: Beam Eval Score (from NodeTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldAOZSbkQzqFw5RA
+- id: fldz5NSdOQVEw9mMt
+  name: Duration Mins _ New (from AgentTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldHKmJO3vfBBEsCc
+  lookup_field_id: fldhvltZgDzY4nbFG
+- id: fldHnm4K2UVaxDxPd
+  name: Prompt Word Count (from Node Versions)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldMTgR5BIp9treA2
+  lookup_field_id: fldD9waGtRIikfI3S
+- id: fldNSg5EfpaKUZczX
+  name: Filled Prompt Count (from NodeTask)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldGZ0wVpeDcDESjU
+- id: fldzodtTQ70RY02FA
+  name: Filled Prompt Count (from NodeTask) 2
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fld1d7898H3AIcDuH
+  lookup_field_id: fldGZ0wVpeDcDESjU
+- id: fldhl9tOn1JqztkAd
+  name: LLM Score
+  type: aiText
+  description: null
+  referenced_field_ids:
+  - flduB9HRcICOjSFqf
+  - fld9fWllNxIBPXYgo
+  - fld7ePTK3fWS1fyir
+- id: fld9fWllNxIBPXYgo
+  name: Check List (from Variable)
+  type: multipleLookupValues
+  description: null
+  record_link_field_id: fldaEJVo2NxCehbta
+  lookup_field_id: fldsSszh1nXngYA32
+- id: fld1T4wAMGimXdrZh
+  name: LLM Score (Number)
+  type: formula
+  description: Converts the LLM Score field value from string to number for calculations.
+  referenced_field_ids:
+  - fldhl9tOn1JqztkAd
+  formula: VALUE({fldhl9tOn1JqztkAd})
+views:
+- id: viwZVFopHE8B5wMZZ
+  name: Round 15 with EP
+  type: grid
+- id: viwk3sAhwGsFa0p48
+  name: 'Sonnet '
+  type: grid
+- id: viwHYk9hIGLpAofDg
+  name: BID MAGA
+  type: grid
+- id: viwwQW3CEfHKV1K4H
+  name: Round 18
+  type: grid
+- id: viwQkBuUVzKiGHo6m
+  name: TZV
+  type: grid
+- id: viwR9B5y8JwKfaY37
+  name: LS
+  type: grid
+- id: viwYXTJPZIacfpis7
+  name: First Email Dataaset
+  type: grid
+- id: viwpy7iTKmuo7pwnf
+  name: EnBW
+  type: grid
+- id: viwaIemexlONmcA02
+  name: Deal Breaker
+  type: grid
+- id: viwC1b581qIOb75ih
+  name: Bid
+  type: grid
+- id: viwVLF1EtvnaDekL9
+  name: Coolback
+  type: grid
+- id: viwtv77PoEgxmAlP7
+  name: Trawa
+  type: grid
+- id: viwF3cTji4JXAkS5N
+  name: jack's Grid
+  type: grid
+- id: viwir6uHh9uBESfc5
+  name: With Expected Output
+  type: grid

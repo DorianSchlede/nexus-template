@@ -1,0 +1,69 @@
+---
+current_phase: complete
+current_section: 1
+current_task: 1
+files_to_load:
+- 01-planning/overview.md
+- 01-planning/plan.md
+- 01-planning/steps.md
+last_updated: '2026-01-01T22:00:00'
+next_action: execute-project
+progress: In progress
+project_id: 21-inductive-corpus-analysis
+project_name: Inductive Corpus Analysis
+resume_schema_version: '1.0'
+---
+
+# Resume Context
+
+## Current State
+- Phase: COMPLETE
+- Papers analyzed: 6 (UFO, Multi-Agent, Agentic RAG, SciAgents, OCEL/Event KG, GoT)
+- Raw extractions: 6 parallel agents
+- Synthesis: Complete
+
+## Key Decisions Made
+- **NO theoretical priming** - extracted only what authors say
+- Used author terminology, not canonical terms
+- Quote-first approach
+- Captured contradictions between papers
+
+## Completed Work
+- [x] Created project structure
+- [x] Defined unprimed extraction prompts
+- [x] Ran 6 parallel extraction agents on raw paper chunks
+- [x] Generated inductive synthesis report
+
+## Key Findings
+- Agent-Action-Context triad appears across AI papers (not from UDWO)
+- Event-Object correlation appears across process papers
+- Static vs Dynamic dichotomy is universal
+- Papers DON'T converge on entity definitions (incompatible formalisms)
+- "Thought" as first-class entity (GoT) - novel finding
+- Entity-local ordering preferred over global (OCEL, Event KG)
+- Autonomy-Alignment tension is central design concern (Multi-Agent)
+
+## Outputs Generated
+- `04-outputs/emergent_entities.yaml` - Initial entity extraction
+- `04-outputs/inductive_synthesis.md` - Final synthesis report
+
+# Validation Gate
+
+Before continuing, you MUST verify you understand:
+
+1. **Project Purpose** (from [overview.md](overview.md)):
+   - What problem are we solving?
+   - What is the success criterion?
+
+2. **Current Location** (from [steps.md](steps.md)):
+   - What phase are we in?
+   - What is the next task?
+
+3. **Approach** (from [plan.md](plan.md)):
+   - What is the implementation strategy?
+
+**If you cannot answer these questions, STOP and re-read files_to_load.**
+
+---
+
+*This file is auto-updated on every task completion by execute-project skill.*

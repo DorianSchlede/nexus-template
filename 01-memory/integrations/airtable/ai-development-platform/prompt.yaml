@@ -1,0 +1,61 @@
+base_id: appFPoOfBpUv73M5A
+base_name: AI Development Platform
+table_id: tblLKJ7zurjJD80bi
+table_name: Prompt
+exported_at: '2025-12-28T14:12:03.739860'
+field_count: 7
+fields:
+- id: fldK52LQ9AhfFbUgZ
+  name: Name
+  type: singleLineText
+  description: null
+- id: fldKQqrwdLdzYEz0e
+  name: Prompt
+  type: multilineText
+  description: null
+- id: fld1TFT5oSImxtxl7
+  name: Attachments
+  type: multipleAttachments
+  description: null
+- id: fldhN4BCg7ezf3bBS
+  name: Extracted Prompt
+  type: aiText
+  description: An AI generated summary of the Attachments field. Upload files to Attachments
+    to generate a summary.
+  referenced_field_ids:
+  - fld1TFT5oSImxtxl7
+- id: fld1Y10Y0TkcQbFph
+  name: Formatted Prompt
+  type: formula
+  description: null
+  referenced_field_ids:
+  - fldKQqrwdLdzYEz0e
+  - fldhN4BCg7ezf3bBS
+  formula: "REGEX_REPLACE(\n  REGEX_REPLACE(\n    IF({fldKQqrwdLdzYEz0e}, {fldKQqrwdLdzYEz0e},\
+    \ {fldhN4BCg7ezf3bBS}),\n    \"\\\\{\",\n    \"{{\"\n  ),\n  \"\\\\}\",\n  \"\
+    }}\"\n)"
+- id: fldLCkpIqDHdyECpV
+  name: Status
+  type: singleSelect
+  description: null
+  choices:
+  - id: selGBxuvTA1SYBjN8
+    name: Todo
+    color: redLight2
+  - id: sel2glHHGr2mhk3XY
+    name: In progress
+    color: yellowLight2
+  - id: self31B8jwltZyXmW
+    name: Done
+    color: greenLight2
+- id: fldzVXPzHBddJp2Gd
+  name: DatasetRun
+  type: multipleRecordLinks
+  description: null
+  linked_table_id: tblOrJsp3sqWPGmD6
+  prefer_single_record_link: false
+  inverse_link_field_id: fldmd4hZUEo2mfZ89
+views:
+- id: viwQ9n6L5No7N72ml
+  name: Grid view
+  type: grid

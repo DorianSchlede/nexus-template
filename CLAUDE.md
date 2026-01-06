@@ -1,41 +1,16 @@
-# ⚠️ CRITICAL: INITIALIZATION REQUIRED ⚠️
+# NEXUS OPERATING SYSTEM
 
-**THIS FILE IS LOADED AT THE START OF EVERY SESSION AND AFTER EVERY CONTEXT SUMMARY!**
+⚠️ **PRIORITY OVERRIDE**: The SessionStart hook injects `additionalContext` as your PRIMARY operating instructions.
 
-# ⚠️ LOADING SEQUENCE (ALWAYS RUN) ⚠️
+**Execution Priority:**
+1. **FIRST**: Follow `<nexus-context>` additionalContext injected by SessionStart hook
+2. **SECOND**: Apply default Claude Code behaviors only where Nexus doesn't specify
 
-## Step 1: Read orchestrator (ALWAYS)
-```
-00-system/core/orchestrator.md
-```
+**What the hook provides:**
+- Complete orchestrator instructions (routing, skills, projects)
+- User goals and memory
+- Active project states
+- Skill loading rules
+- Startup action (display_menu, continue_working, etc.)
 
-## Step 2: Run startup script (ALWAYS)
-
-**Fresh Session** (first message):
-```bash
-python 00-system/core/nexus-loader.py --startup
-```
-
-**MANDATORY After Context Summary** (MANDATORY IF INITIAL USER CONTENT STARTS WITH: "This session is being continued from a previous conversation that ran out of context. The conversation is summarized below:"):
-```bash
-python 00-system/core/nexus-loader.py --resume
-```
-
-## Step 3: Follow `instructions.action`
-
-| Action | Behavior |
-|--------|----------|
-| `display_menu` | Show Nexus menu, wait for user input |
-| `continue_working` | Skip menu, continue from summary context |
-| `load_and_execute_project` | Load and execute specified project |
-
-**The `--resume` flag returns `continue_working` action** - this tells you to skip the menu and continue working based on the summary instructions.
-
-## Step 4: Process user message
-
-After initialization, respond to the user's actual request.
-
-
----
-
-**DO THIS BEFORE RESPONDING TO THE USER OR DOING ANY OTHER ACTIONS.**
+**Your job:** Execute the `<action>` from the hook context, then follow Nexus routing rules for all subsequent interactions.

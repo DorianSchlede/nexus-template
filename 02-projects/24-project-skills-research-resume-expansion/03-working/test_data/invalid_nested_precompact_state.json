@@ -1,0 +1,9 @@
+{
+  "project_detection": {
+    "project_id": "24-project-test",
+    "confidence": "high"
+  },
+  "confidence": "high",
+  "detection_method": "transcript",
+  "timestamp": "2026-01-04T12:00:00Z"
+}

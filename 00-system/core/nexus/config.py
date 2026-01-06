@@ -17,13 +17,18 @@ CONTEXT_WINDOW = 200000  # Claude's context window
 METADATA_BUDGET_WARNING = 7000  # Warn if metadata >7K tokens (3.5% of window)
 BASH_OUTPUT_LIMIT = 30000  # Claude Code bash output truncation limit
 
+# Cache configuration
+CACHE_DIR = "00-system/.cache"  # Relative to Nexus root
+CACHE_STARTUP_FILE = "context_startup.json"  # Used by nexus-loader.py CLI fallback
+
 # =============================================================================
 # MANDATORY NAVIGATION MAPS
 # =============================================================================
 
 # These files provide core system navigation and context
-# Always loaded at startup
+# Always loaded at startup - ORDER MATTERS (orchestrator first!)
 MANDATORY_MAPS: List[str] = [
+    "00-system/core/orchestrator.md",  # AI behavior rules, routing, menu display - LOAD FIRST
     "00-system/system-map.md",  # System structure and navigation hub
 ]
 

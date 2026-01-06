@@ -1,11 +1,16 @@
 # Workspace Map
 
-> Last updated: 2025-12-24
+> Last updated: 2026-01-01
 
 ## Folder Structure
 
 ```
 04-workspace/
+│
+├── 00-ai-native-org/                 # AI-native organization research
+│   ├── hook-repos/                   # Cloned hook implementation repos
+│   ├── hook-research/                # Hook pattern analysis & findings
+│   └── ontology-research/            # Ontology research outputs
 │
 ├── 01-hypotheses/                    # Hypothesis tracking (D/F/V categories)
 │   ├── desirability/                 # Customer pain & demand hypotheses
@@ -39,7 +44,16 @@
 │
 ├── 07-insights/                      # Strategic synthesis
 │   ├── patterns/                     # Recurring themes from research
-│   └── decisions/                    # Key decisions & rationale
+│   ├── decisions/                    # Key decisions & rationale
+│   ├── meeting-prep/                 # Meeting preparation materials
+│   ├── slack-extracts/               # Slack channel extractions
+│   ├── technical/                    # Technical research & analysis
+│   └── core-papers/                  # Curated foundational papers
+│       ├── _index.md                 # Paper index with tiers
+│       ├── context-engineering/      # Context management papers
+│       ├── agent-memory/             # Memory & learning papers
+│       ├── multi-agent/              # Orchestration papers
+│       └── evaluation-safety/        # Eval & safety papers
 │
 ├── 08-strategy/                      # Business foundations
 │   └── [strategy documents]          # BMC, VPC, company context, team alignment
@@ -91,3 +105,5 @@ RESEARCH → OUTBOUND → INTERVIEW → ANALYZE → VALIDATE → DECIDE
 | Experiment data | `02-experiments/` |
 | Target customer profile | `08-strategy/value-proposition-canvas.md` |
 | Team roles & risks | `08-strategy/team-alignment-map.md` |
+| Core research papers | `07-insights/core-papers/_index.md` |
+| Slack extractions | `07-insights/slack-extracts/` |

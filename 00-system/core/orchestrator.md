@@ -19,13 +19,13 @@ The Python script (`nexus-loader.py`) is the **MASTER CONTROLLER**. It analyzes 
 
 ---
 
-## Startup (MANDATORY)
+## Startup (AUTOMATIC)
 
-```bash
-python 00-system/core/nexus-loader.py --startup
-```
+Context is **auto-injected** via the SessionStart hook. No manual steps needed.
 
-**Then:** Use `memory_content` → Follow `instructions.action`
+The hook injects: routing rules, skills, projects, memory, and instructions via `additionalContext`.
+
+**Then:** Follow `instructions.action` from the injected context.
 
 ---
 

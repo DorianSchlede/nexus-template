@@ -1,0 +1,1712 @@
+project: C:\Users\dsber\infinite\auto-company\strategy-nexus\02-projects\10-dynamic-subagent-research
+generated_at: '2025-12-28T17:27:59.200170'
+algorithm: boolean_lookup
+fields:
+  pattern_definition:
+    description: Definition eines Handover-Patterns mit Namen, Zweck, und Mechanismus
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6096
+    - paper_id: 01-ACE-2510.04618
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5290
+    - paper_id: 01-ACE-2510.04618
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4564
+    - paper_id: 01-ACE-2510.04618
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2160
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 9
+      fields_found_state: partial
+      token_count: 6788
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 3667
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 4505
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 8
+      fields_found_state: partial
+      token_count: 2280
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 2
+      fields_found_state: partial
+      token_count: 1935
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4274
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2247
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 6118
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 7
+      fields_found_state: partial
+      token_count: 5798
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: partial
+      token_count: 3669
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 4
+      fields_found_state: partial
+      token_count: 2677
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 2
+      fields_found_state: partial
+      token_count: 4783
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+  mechanism_type:
+    description: Art des Mechanismus
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6096
+    - paper_id: 01-ACE-2510.04618
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4564
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 5
+      fields_found_state: partial
+      token_count: 3667
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: partial
+      token_count: 4505
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4274
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 2247
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 6118
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 7
+      fields_found_state: partial
+      token_count: 5798
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: partial
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 3669
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4783
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+  failure_mode:
+    description: Was passiert wenn das Pattern verletzt wird
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4564
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: partial
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: partial
+      token_count: 7737
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: partial
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: partial
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 3667
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: partial
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: partial
+      token_count: 4505
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: partial
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: partial
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4274
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: partial
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: partial
+      token_count: 6118
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: partial
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: partial
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5418
+  implementation_detail:
+    description: Konkrete Code-Implementierung (Funktion, Klasse, Datenstruktur)
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6096
+    - paper_id: 01-ACE-2510.04618
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4564
+    - paper_id: 01-ACE-2510.04618
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 2160
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: partial
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: partial
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 5
+      fields_found_state: partial
+      token_count: 3667
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 4505
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 8
+      fields_found_state: partial
+      token_count: 2280
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: partial
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4274
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 5
+      fields_found_state: partial
+      token_count: 2247
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: partial
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: partial
+      token_count: 6118
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: partial
+      token_count: 5878
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 3669
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+  integration_point:
+    description: Wo im Pipeline wird das Pattern angewendet
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4564
+    - paper_id: 01-ACE-2510.04618
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 2160
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 5
+      fields_found_state: partial
+      token_count: 3667
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: partial
+      token_count: 4505
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4274
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 2247
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: partial
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 6118
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 7
+      fields_found_state: partial
+      token_count: 5798
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 2
+      fields_found_state: partial
+      token_count: 4783
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+  quality_metric:
+    description: Messbare Qualitätsmetriken die das Pattern beeinflusst
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6096
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 9
+      fields_found_state: partial
+      token_count: 6788
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 2280
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 1935
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: partial
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4274
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 2247
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: partial
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: partial
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: partial
+      token_count: 6118
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: partial
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: partial
+      token_count: 5878
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 3669
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4783
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 1865
+  limitation:
+    description: Bekannte Einschränkungen oder Nachteile des Patterns
+    priority: medium
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6096
+    - paper_id: 01-ACE-2510.04618
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5290
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 9
+      fields_found_state: partial
+      token_count: 6788
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5236
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5989
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 4
+      fields_found_state: partial
+      token_count: 4713
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6048
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 1935
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 4543
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: partial
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 6118
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 5798
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: partial
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 1
+      fields_found_state: partial
+      token_count: 5267
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 3669
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 2677
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: partial
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 2
+      fields_found_state: partial
+      token_count: 4783
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+  related_pattern:
+    description: Andere Patterns die mit diesem zusammenhängen
+    priority: high
+    sparsity_warning: false
+    chunks:
+    - paper_id: 01-ACE-2510.04618
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6612
+    - paper_id: 01-ACE-2510.04618
+      chunk: 2
+      fields_found_state: partial
+      token_count: 6096
+    - paper_id: 01-ACE-2510.04618
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5290
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5516
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 7355
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7844
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 8234
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 7874
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 8172
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 7533
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 8
+      fields_found_state: 'true'
+      token_count: 7737
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 15
+      fields_found_state: partial
+      token_count: 6242
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 16
+      fields_found_state: partial
+      token_count: 6409
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 17
+      fields_found_state: partial
+      token_count: 6514
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 18
+      fields_found_state: partial
+      token_count: 6353
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 19
+      fields_found_state: partial
+      token_count: 6306
+    - paper_id: 02-ContextSurvey-2507.13334
+      chunk: 20
+      fields_found_state: partial
+      token_count: 6644
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7772
+    - paper_id: 03-ClaudeCode-2508.08322
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3838
+    - paper_id: 04-GCC-2508.00031
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6835
+    - paper_id: 04-GCC-2508.00031
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4896
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 2
+      fields_found_state: partial
+      token_count: 5185
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 6
+      fields_found_state: 'true'
+      token_count: 3760
+    - paper_id: 07-ProtocolBench-2510.17149
+      chunk: 7
+      fields_found_state: 'true'
+      token_count: 4505
+    - paper_id: 08-LACP-2510.13821
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5993
+    - paper_id: 08-LACP-2510.13821
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 5918
+    - paper_id: 09-SEMAP-2510.12120
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6048
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 4847
+    - paper_id: 10-TalkHier-2502.11098
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 4849
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 1
+      fields_found_state: partial
+      token_count: 7223
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6993
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 7642
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 4414
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 5
+      fields_found_state: partial
+      token_count: 5308
+    - paper_id: 12-CollabSurvey-2501.06322
+      chunk: 6
+      fields_found_state: partial
+      token_count: 8011
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 5486
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6232
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5930
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 5895
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 5
+      fields_found_state: 'true'
+      token_count: 5633
+    - paper_id: 15-AgentSurvey-2503.21460
+      chunk: 6
+      fields_found_state: partial
+      token_count: 6118
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 1
+      fields_found_state: partial
+      token_count: 4874
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 2
+      fields_found_state: 'true'
+      token_count: 6015
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5420
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 4
+      fields_found_state: partial
+      token_count: 5878
+    - paper_id: 18-HallucinationSurvey-2509.18970
+      chunk: 8
+      fields_found_state: partial
+      token_count: 2017
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3650
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 3669
+    - paper_id: 19-HalMit-2507.15903
+      chunk: 4
+      fields_found_state: 'true'
+      token_count: 2677
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 6432
+    - paper_id: 22-PROV-AGENT-2508.02866
+      chunk: 2
+      fields_found_state: partial
+      token_count: 3948
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 1
+      fields_found_state: 'true'
+      token_count: 7314
+    - paper_id: 24-EffectiveCollab-2412.05449
+      chunk: 3
+      fields_found_state: 'true'
+      token_count: 5418
+stats:
+  papers_analyzed: 14
+  total_chunks: 87
+  chunks_per_field_avg: 52

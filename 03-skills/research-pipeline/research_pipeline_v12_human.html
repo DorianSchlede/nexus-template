@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Pipeline - Human-Readable Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0e27;
+            --card: #1a1f3a;
+            --border: #2d3554;
+
+            --text: #f8fafc;
+            --text-dim: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--blue);
+        }
+
+        .header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        /* PHASE */
+        .phase {
+            margin-bottom: 3rem;
+        }
+
+        .phase-header {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-tagline {
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-outcome {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--green);
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .phase-outcome::before {
+            content: '✓ ';
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* STEP */
+        .step {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .step-header {
+            margin-bottom: 1rem;
+        }
+
+        .step-number-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .step-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-must-pass {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-important {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--yellow);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-standard {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-when {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* WHAT/WHY */
+        .what {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--blue);
+        }
+
+        .why {
+            background: rgba(16, 185, 129, 0.08);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--green);
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .why::before {
+            content: '💡 ';
+        }
+
+        /* SECTIONS */
+        .sections {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-list {
+            list-style: none;
+        }
+
+        .section-list li {
+            padding: 0.4rem 0;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .section-list li::before {
+            content: '→ ';
+            color: var(--blue);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        .section-list code {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--green);
+            font-size: 0.85rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .gap-item {
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .gap-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* RESPONSIVE */
+        @media (min-width: 768px) {
+            .sections {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* EMPTY STATE */
+        .empty {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Research Pipeline Architecture</h1>
+            <p>29 steps across 3 phases - human-readable guide</p>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <span>🎯</span>
+                    <span>Planning & Acquisition</span>
+                </div>
+                <div class="phase-tagline">From research question to preprocessed chunks</div>
+                <div class="phase-outcome">Ready-to-analyze paper corpus with metadata and chunks</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">0</span>
+                        <h3 class="step-title">Initialize Task Tracking</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">First step - initializes Phase ?</span>
+                    </div>
+                </div>
+
+                <div class="what">project structure (Step 1) - [ ] Define research question → _briefing.md (Step 2)</div>
+                <div class="why">Establishes foundation for all subsequent steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Current State with download/chunk counts</li>
+
+                            <li>Paper Corpus table with actual paper IDs, chunk counts, subagent allocation</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>acquisition completeness` |</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">1</span>
+                        <h3 class="step-title">Create Project Structure</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 1 in Phase A</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Produces artifacts needed for downstream steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>00-system/skills/projects/create-project/scripts/init_project.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">2</span>
+                        <h3 class="step-title">Define Research Question (with AI Field Generation)</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-important">IMPORTANT</span>
+                        <span class="badge badge-when">Step 2 in Phase A</span>
+                    </div>
+                </div>
+
+                <div class="what">Interactive session to create `02-resources/_briefing.md`:</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Identify 6-10 extraction fields that would capture key insights</li>
+
+                            <li>For each field provide:</li>
+
+                            <li>Flag any generic fields that might match too much content (sparsity risk)</li>
+
+                            <li>Ensure fields are MECE (mutually exclusive, collectively exhaustive)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>02-resources/_briefing.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>the 8-entity hypothesis for our UDWO metamodel"</li>
+
+                            <li>⚠ "{generic_field}" is generic - consider removing if not research-focused</li>
+
+                            <li>fields are MECE (mutually exclusive, collectively exhaustive)</li>
+
+                            <li>All other fields are domain-specific</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🔧 Problem Fixes</div>
+
+                        <div class="gap-item">G5: Fix: AI-Generated Field Suggestions</div>
+
+                        <div class="gap-item">G22A: Fix: Add research_purpose field</div>
+
+                        <div class="gap-item">G22A: WHY this research matters (provides context to subagents)</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">3</span>
+                        <h3 class="step-title">Search Papers</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 3 in Phase A</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Advances pipeline execution</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>PDF: {URL if available}</li>
+
+                            <li>Status: PENDING_REVIEW</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>02-resources/_search_results.md</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">4</span>
+                        <h3 class="step-title">Review Abstracts</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 4 in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">See [references/abstract_review.md](references/abstract_review.md) for scoring criteria.</div>
+                <div class="why">Advances pipeline execution</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Relevance Score: 5/5</li>
+
+                            <li>Recommendation: APPROVE</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>02-resources/_abstract_reviews.md</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">5</span>
+                        <h3 class="step-title">User Selection</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 5 in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Advances pipeline execution</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>03-working/_selection_log.md</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">6</span>
+                        <h3 class="step-title">Selection Gate</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Checkpoint - requires user approval in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Requires user review before proceeding - prevents wasted effort</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>paper selection before acquisition:</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">7</span>
+                        <h3 class="step-title">Download Approved Papers</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 7 in Phase C</span>
+                    </div>
+                </div>
+
+                <div class="what">`_download_report.md` with success/fail stats</div>
+                <div class="why">Produces artifacts needed for downstream steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Resolves multiple URLs per paper (arXiv → S2 → Unpaywall → direct)</li>
+
+                            <li>Downloads in parallel with rate limiting</li>
+
+                            <li>Verifies PDFs (catches HTML error pages)</li>
+
+                            <li>Retries failed downloads with exponential backoff</li>
+
+                            <li>Generates `_download_report.md` with success/fail stats</li>
+
+                            <li>DOI via Semantic Scholar - Often has PDF + arXiv link</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>_download_report.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/skills/paper-search/scripts/paper_download.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">8</span>
+                        <h3 class="step-title">Preprocess PDFs → Chunks</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 8 in Phase C</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Advances pipeline execution</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/skills/pdf-preprocess/scripts/pdf_to_markdown.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">9</span>
+                        <h3 class="step-title">Acquisition Report + User Gate</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Checkpoint - requires user approval in Phase C</span>
+                    </div>
+                </div>
+
+                <div class="what">After acquisition complete, populate the Paper Corpus table in plan.md:</div>
+                <div class="why">Requires user review before proceeding - prevents wasted effort</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Thematic-LM (ACM paywall)</li>
+
+                            <li>LLM-in-the-loop (ACL paywall)</li>
+
+                            <li>CollabCoder (ACM paywall)</li>
+
+                            <li>Searching for arXiv preprints of paywalled papers</li>
+
+                            <li>Adding alternative papers on similar topics</li>
+
+                            <li>Proceeding with limited corpus</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>Downloaded: 18 papers</li>
+
+                            <li>Preprocessed: 18 papers → 52 chunks</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">10</span>
+                        <h3 class="step-title">Generate Analysis Kit</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Step 10 in Phase D</span>
+                    </div>
+                </div>
+
+                <div class="what">`_analysis_kit.md` for subagent context:</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Research question from `_briefing.md`</li>
+
+                            <li>Extraction schema (fields, descriptions, priorities)</li>
+
+                            <li>Validation contract (required frontmatter fields)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>_analysis_kit.md</code></li>
+
+                            <li><code>02-resources/_analysis_kit.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>_briefing.md</code></li>
+
+                            <li><code>references/analysis_kit_template.md</code></li>
+
+                            <li><code>02-resources/_analysis_kit.md</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">11</span>
+                        <h3 class="step-title">Generate Extraction Guide</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 11 in Phase D</span>
+                    </div>
+                </div>
+
+                <div class="what">`_extraction_guide.md` with project-specific extraction examples:</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Field-specific examples for EACH field in `_briefing.md`</li>
+
+                            <li>Controlled vocabulary for this domain</li>
+
+                            <li>Good/bad extraction examples</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>_extraction_guide.md</code></li>
+
+                            <li><code>02-resources/_extraction_guide.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/shared/paper-analyze-core/references/extraction_guide_template.md</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">12</span>
+                        <h3 class="step-title">Generate Orchestrator Instructions + Subagent Allocation Plan</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Step 12 in Phase D</span>
+                    </div>
+                </div>
+
+                <div class="what">Subagent Prompts Populate with: - Project path constants - Pre-calculated allocation from 12.1 (NOT dynamic calculation)</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Project path constants</li>
+
+                            <li>Pre-calculated allocation from 12.1 (NOT dynamic calculation)</li>
+
+                            <li>Subagent prompt template with `{paper_id}` and `{chunks}` variables</li>
+
+                            <li>Split prompts for large papers (with specific chunk ranges)</li>
+
+                            <li>Merge prompts for multi-part papers</li>
+
+                            <li>Validation checks (Phase 4.5)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>references/orchestrator_template.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>allocation count matches paper count</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">13</span>
+                        <h3 class="step-title">Confirm Ready for Execution</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 13 in Phase D</span>
+                    </div>
+                </div>
+
+                <div class="what">analysis logs (Phase 4.5 hallucination check)</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Analyze each paper (spawn subagents in batches of 10)</li>
+
+                            <li>Validate analysis logs (Phase 4.5 hallucination check)</li>
+
+                            <li>Generate cross-paper synthesis</li>
+
+                            <li>Paper folders with `_metadata.json` (chunks exist)</li>
+
+                            <li>Validate all prerequisites exist (fail fast if missing)</li>
+
+                            <li>Read orchestrator instructions from plan.md</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>at least 1 paper has chunks</li>
+
+                            <li>extraction guide exists</li>
+
+                            <li>orchestrator instructions in plan</li>
+
+                            <li>analysis logs (Phase 4</li>
+
+                            <li>all prerequisites exist (fail fast if missing)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <span>🔬</span>
+                    <span>Deep Analysis</span>
+                </div>
+                <div class="phase-tagline">Per-paper extraction with evidence citations</div>
+                <div class="phase-outcome">Structured insights with chunk-level provenance</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">0</span>
+                        <h3 class="step-title">Initialize Task Tracking</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">First step - initializes Phase ?</span>
+                    </div>
+                </div>
+
+                <div class="what">readiness (Step 1) - [ ] Analyze papers → index.md + _analysis_log.md (Step 2)</div>
+                <div class="why">Establishes foundation for all subsequent steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Paper Corpus table (which papers to analyze)</li>
+
+                            <li>Subagent allocation rules (how many subagents per paper)</li>
+
+                            <li>Orchestrator Instructions (exact prompts for subagents)</li>
+
+                            <li>Current State (to update as execution progresses)</li>
+
+                            <li>Change `ready` to `analyzed` for each completed paper</li>
+
+                            <li>Change to `failed` for papers that failed validation</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>01-planning/plan.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>analysis logs (Step 3)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">1</span>
+                        <h3 class="step-title">Validate Readiness</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Validation point in Phase A</span>
+                    </div>
+                </div>
+
+                <div class="what">research project' Step 2 first.</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Generate _analysis_kit.md (Step 10)</li>
+
+                            <li>Generate _extraction_guide.md (Step 11)</li>
+
+                            <li>Add orchestrator instructions to plan.md (Step 12)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>prerequisites and paper readiness:</li>
+
+                            <li>extraction guide exists</li>
+
+                            <li>orchestrator instructions in plan</li>
+
+                            <li>for papers needing analysis (no index</li>
+
+                            <li>If project was created with an older version (missing _analysis_kit</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">2</span>
+                        <h3 class="step-title">Analyze Papers</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 2 in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">from _briefing.md extraction_schema):</div>
+                <div class="why">{research_purpose} # G22a - WHY this research matters</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Paper Corpus table with chunk counts and subagent allocation</li>
+
+                            <li>Exact prompts for standard papers (1 subagent)</li>
+
+                            <li>Exact prompts for large papers (2+ subagents + merge)</li>
+
+                            <li>Concurrency settings</li>
+
+                            <li>ANY folder except `{paper_path}/`</li>
+
+                            <li>ANY file in `04-outputs/`</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>{paper_path}/_analysis_log.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>_briefing.md</code></li>
+
+                            <li><code>_analysis_kit.md</code></li>
+
+                            <li><code>03-skills/research-pipeline/shared/paper-analyze-core/SKILL.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>use YAML frontmatter format below)</li>
+
+                            <li>use this EXACT YAML frontmatter structure:</li>
+
+                            <li>equal chunks_expected}</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🔧 Problem Fixes</div>
+
+                        <div class="gap-item">G22A: WHY this research matters</div>
+
+                        <div class="gap-item">G22B: What synthesis will aggregate</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">3</span>
+                        <h3 class="step-title">Validate Analysis Logs</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-important">IMPORTANT</span>
+                        <span class="badge badge-when">Validation point in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Schema version = 2.0</li>
+
+                            <li>All chunks read (recorded in log)</li>
+
+                            <li>Multi-point evidence matches actual chunks</li>
+
+                            <li>Paper_XYZ - Chunk 3 evidence mismatch</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>PASSED: 16 papers (validation complete)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/skills/paper-analyze/scripts/validate_analysis.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">4</span>
+                        <h3 class="step-title">Mark Analysis READY_FOR_SYNTHESIS</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 4 in Phase C</span>
+                    </div>
+                </div>
+
+                <div class="what">Update project status to indicate readiness for synthesis:</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Read all index.md files</li>
+
+                            <li>Spawn batch extraction subagents</li>
+
+                            <li>Aggregate patterns per field</li>
+
+                            <li>Generate full _synthesis_report.md with citations</li>
+
+                            <li>Reads `chunks_remaining` from `_analysis_log.md`</li>
+
+                            <li>Spawns subagent with `start_from_chunk: 4`</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>_analysis_log.md</code></li>
+
+                            <li><code>{paper_path}/_analysis_log.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>write partial progress:</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-title">
+                    <span>✨</span>
+                    <span>Cross-Paper Synthesis</span>
+                </div>
+                <div class="phase-tagline">7-level architecture for pattern discovery</div>
+                <div class="phase-outcome">Unified insights across entire research corpus</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">0</span>
+                        <h3 class="step-title">Initialize Task Tracking</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">First step - initializes Phase ?</span>
+                    </div>
+                </div>
+
+                <div class="what">readiness (Step 1) - [ ] Run build_synthesis_routing.py (Step 2 - Level 1)</div>
+                <div class="why">Establishes foundation for all subsequent steps</div>
+
+                <div class="sections">
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">1</span>
+                        <h3 class="step-title">Validate Readiness</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Validation point in Phase A</span>
+                    </div>
+                </div>
+
+                <div class="what">Run interface validation script first (catches format mismatches):</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>prerequisites including chunk_index (required for 7-level routing):</li>
+
+                            <li>briefing exists (with research_purpose - G22a)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/shared/contracts/validate_interface.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">2</span>
+                        <h3 class="step-title">Build Synthesis Routing Table</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 2 in Phase B</span>
+                    </div>
+                </div>
+
+                <div class="what">Run script to build routing from chunk_index.fields_found:</div>
+                <div class="why">Produces artifacts needed for downstream steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Reads all index.md files with chunk_index</li>
+
+                            <li>For each field from _briefing.md:</li>
+
+                            <li>Looks up `chunk_index[N].fields_found[field]`</li>
+
+                            <li>If `true` or `partial` → add chunk to routing</li>
+
+                            <li>Outputs routing table</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>02-resources/_synthesis_routing.yaml</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>(Gap G19): Warns if field matches >80% of chunks</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/build_synthesis_routing.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">3</span>
+                        <h3 class="step-title">Calculate Subagent Allocation</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 3 in Phase C</span>
+                    </div>
+                </div>
+
+                <div class="what">Run script to allocate chunks to subagent batches with token budget:</div>
+                <div class="why">synthesis_files_estimated: 45000</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Reads routing table with token counts per chunk</li>
+
+                            <li>Uses greedy bin-packing to fit chunks into 70k token batches</li>
+
+                            <li>Groups chunks by paper when possible (context preservation)</li>
+
+                            <li>Outputs subagent plan</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>02-resources/_subagent_plan.yaml</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>Synthesis files: ~45,000 tokens</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/calculate_subagent_allocation.py</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">🔧 Problem Fixes</div>
+
+                        <div class="gap-item">G3: # Level 4 batches (extraction subagents)</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">4</span>
+                        <h3 class="step-title">Generate Subagent Prompts</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 4 in Phase D</span>
+                    </div>
+                </div>
+
+                <div class="what">prompts with INPUT CONTRACT: ```bash python 03-skills/research-pipeline/validation/scripts/generate_subagent_prompts.py \</div>
+                <div class="why">Produces artifacts needed for downstream steps</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Reads _briefing.md for research_purpose (G22a)</li>
+
+                            <li>Reads _analysis_kit.md for synthesis_goals (G22b)</li>
+
+                            <li>Generates INPUT CONTRACT per subagent (G13)</li>
+
+                            <li>Outputs prompt files</li>
+
+                            <li>ANY other batch's chunks</li>
+
+                            <li>ANY file in 04-outputs/</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>03-working/prompts/_prompt_{batch_id}.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>{project_path}/02-resources/_briefing.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>research_purpose (G22a)</li>
+
+                            <li>synthesis_goals (G22b)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/generate_subagent_prompts.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">5</span>
+                        <h3 class="step-title">Spawn Batch Extraction Subagents</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 5 in Phase E</span>
+                    </div>
+                </div>
+
+                <div class="what">Spawn subagents with prompt file path (subagent reads prompt, not orchestrator):</div>
+                <div class="why">Advances pipeline execution</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>03-working/_batch_{field}_{N}.yaml</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">6</span>
+                        <h3 class="step-title">Verify Subagent Outputs</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-important">IMPORTANT</span>
+                        <span class="badge badge-when">Validation point in Phase F</span>
+                    </div>
+                </div>
+
+                <div class="what">Run script to verify subagent outputs with quote-line verification (Gap G15):</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Reads all _batch_{field}_{N}.yaml files</li>
+
+                            <li>For each batch, samples 10% of patterns</li>
+
+                            <li>For each sampled pattern:</li>
+
+                            <li>Parses chunk_ref: "Paper-ID (Chunk N:Line-Line)"</li>
+
+                            <li>Reads the actual chunk file</li>
+
+                            <li>Checks if quote exists at cited lines (±5 lines tolerance)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>03-working/_verification_report.yaml</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>subagent outputs with quote-line verification (Gap G15):</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/verify_subagent_output.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">7</span>
+                        <h3 class="step-title">Aggregate Patterns</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Checkpoint - requires user approval in Phase G</span>
+                    </div>
+                </div>
+
+                <div class="what">Run script to merge patterns across batches (deterministic - no LLM):</div>
+                <div class="why">Requires user review before proceeding - prevents wasted effort</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Reads all _batch_{field}_{N}.yaml for each field</li>
+
+                            <li>Merges patterns by name (fuzzy match with 90% similarity)</li>
+
+                            <li>Combines sources: if Pattern X appears in 3 batches, all 3 sources merged</li>
+
+                            <li>Outputs aggregated YAML per field</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>04-outputs/_synthesis_{field}.yaml</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">⚙️ Automation</div>
+                        <ul class="section-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/aggregate_patterns.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">8</span>
+                        <h3 class="step-title">Generate Synthesis Report</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-standard">STANDARD</span>
+                        <span class="badge badge-when">Step 8 in Phase H</span>
+                    </div>
+                </div>
+
+                <div class="what">Spawn final report subagent with token budget (Gap G2):</div>
+                <div class="why">Reduces redundancy and improves efficiency</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Synthesis files: {synthesis_tokens} tokens</li>
+
+                            <li>Methodology: 3,000 tokens</li>
+
+                            <li>Output reservation: 20,000 tokens</li>
+
+                            <li>Usable: {usable_tokens} tokens</li>
+
+                            <li>Executive Summary (3-4 paragraphs answering RQ with citations)</li>
+
+                            <li>Key Findings (5-8 findings with evidence tables)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📤 Creates</div>
+                        <ul class="section-list">
+
+                            <li><code>{project_path}/04-outputs/_synthesis_entity_types.yaml</code></li>
+
+                            <li><code>{project_path}/04-outputs/_synthesis_ai_integration.yaml</code></li>
+
+                            <li><code>{project_path}/04-outputs/_synthesis_report.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📥 Uses</div>
+                        <ul class="section-list">
+
+                            <li><code>{project_path}/02-resources/_briefing.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>Synthesis files: 45,000 tokens</li>
+
+                            <li>have inline citation: [Paper-ID (Chunk:Line)]</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number-title">
+                        <span class="step-number">9</span>
+                        <h3 class="step-title">Mark Project COMPLETE</h3>
+                    </div>
+                    <div class="step-badges">
+                        <span class="badge badge-must-pass">MUST-PASS</span>
+                        <span class="badge badge-when">Final step of Phase I</span>
+                    </div>
+                </div>
+
+                <div class="what">Executes pipeline step</div>
+                <div class="why">Ensures quality and correctness before moving forward</div>
+
+                <div class="sections">
+
+                    <div class="section">
+                        <div class="section-title">🔧 How It Works</div>
+                        <ul class="section-list">
+
+                            <li>Review synthesis report</li>
+
+                            <li>Archive or close project</li>
+
+                            <li>SCRIPTS ARE DETERMINISTIC - Levels 1-3, 5-6 use Python scripts, NOT LLM</li>
+
+                            <li>ONLY 2 SUBAGENT LEVELS - Level 4 (extraction) and Level 7 (report) use LLM</li>
+
+                            <li>PRESERVE CITATIONS - Every level keeps Paper-ID (Chunk:Line)</li>
+
+                            <li>TOKEN BUDGET IS REAL - Level 7 has calculated budget, can split</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">✅ Quality Checks</div>
+                        <ul class="section-list">
+
+                            <li>build_synthesis_routing.py (Level 1)</li>
+
+                            <li>calculate_subagent_allocation.py (Level 2)</li>
+
+                            <li>generate_subagent_prompts.py (Level 3)</li>
+
+                            <li>verify_subagent_output.py (Level 5)</li>
+
+                            <li>aggregate_patterns.py (Level 6)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

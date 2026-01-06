@@ -1,0 +1,98 @@
+---
+name: {{ orchestrator_name }}
+description: "{{ description }}. Load when user mentions '{{ orchestrator_name | replace('-', ' ') }}', 'run {{ phase_name }}', 'start {{ phase_name }}'."
+type: orchestrator
+version: "{{ version | default('1.0') }}"
+parent_chain: {{ chain_name }}
+phase: {{ phase_num }}
+---
+
+# {{ orchestrator_name | replace('-', ' ') | title }}
+
+**Phase {{ phase_num }}**: {{ phase_name | title }} orchestrator for [{{ chain_name }}](../../SKILL.md).
+
+## Purpose
+
+{{ description }}
+
+## Sub-Skills Used
+
+This orchestrator coordinates the following sub-skills:
+
+| Sub-Skill | Purpose |
+|-----------|---------|
+{% for skill in sub_skills %}
+| [{{ skill }}](../../skills/{{ skill }}/SKILL.md) | TODO: Add description |
+{% endfor %}
+
+## Workflow
+
+<!-- TODO: Define the step-by-step workflow -->
+
+### Step 1: Initialize
+
+```
+- Create TodoWrite with workflow steps
+- Validate prerequisites
+- Set up working context
+```
+
+### Step 2: Execute Sub-Skills
+
+{% for skill in sub_skills %}
+#### {{ loop.index }}. {{ skill | replace('-', ' ') | title }}
+
+```
+- Load skill: skills/{{ skill }}/SKILL.md
+- Input: TODO
+- Output: TODO
+```
+
+{% endfor %}
+
+{% if gate %}
+### Step {{ sub_skills | length + 2 }}: Verify Gate Conditions
+
+**Gate: {{ gate.name }}**
+
+Before proceeding to the next phase, verify:
+
+{% for condition in gate.conditions %}
+- [ ] {{ condition }}
+{% endfor %}
+{% endif %}
+
+{% if outputs %}
+## Outputs
+
+This phase produces the following outputs:
+
+| Output | Location | Required |
+|--------|----------|----------|
+{% for output in outputs %}
+| {{ output.path.split('/')[-1] }} | `{{ output.path }}` | {{ 'Yes' if output.required else 'No' }} |
+{% endfor %}
+{% endif %}
+
+## Error Handling
+
+<!-- TODO: Define error handling for this orchestrator -->
+
+- If a sub-skill fails: ...
+- If gate conditions not met: ...
+- Recovery procedures: ...
+
+## Usage Example
+
+```
+User: "{{ orchestrator_name | replace('-', ' ') }}"
+→ This skill is loaded
+→ Executes workflow steps 1-N
+→ Produces outputs
+→ Verifies gate conditions
+```
+
+---
+
+**Parent Chain**: [{{ chain_name }}](../../SKILL.md)
+**Version**: {{ version | default('1.0') }} ({{ generated_date }})
