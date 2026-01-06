@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Pipeline v10 - Ultra Polished</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #141937;
+            --bg-tertiary: #1e2447;
+            --bg-card: #1a1f3a;
+
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-pink: #ec4899;
+
+            --border-subtle: #2d3554;
+            --border-bright: #3b82f6;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #141937 100%);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            background: var(--bg-card);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .hero-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* FLOW OVERVIEW */
+        .flow-overview {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 2px solid var(--border-bright);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-overview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+
+        .flow-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .flow-stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .flow-stage {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--border-subtle);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow-stage:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flow-stage-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .flow-stage-phase {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-stage-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .flow-stage-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .flow-stage-steps {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        /* ORCHESTRATOR SECTIONS */
+        .orchestrator-section {
+            margin-bottom: 5rem;
+        }
+
+        .orchestrator-header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .orchestrator-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--accent-purple);
+        }
+
+        .orchestrator-icon {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+
+        .orchestrator-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .orchestrator-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .orchestrator-badge {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            padding: 0.4rem 1rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* TIMELINE */
+        .steps-timeline {
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .steps-timeline::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            bottom: 2rem;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            border-radius: 2px;
+        }
+
+        /* STEP CARD */
+        .step-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-card::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -4rem;
+            top: 2rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 4px solid var(--bg-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .step-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .step-title-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .step-title {
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .step-phase {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            padding: 0.35rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* META BADGES */
+        .step-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-badge {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .meta-badge.has-content {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.4);
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .meta-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .badge-icon {
+            font-size: 1rem;
+        }
+
+        /* TOGGLE DETAILS */
+        .toggle-details {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 0.65rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-details:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .toggle-details:active {
+            transform: translateY(0);
+        }
+
+        /* DETAILS PANEL */
+        .step-details {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .step-details.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .details-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .details-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .details-content {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .file-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .file-item {
+            background: var(--bg-secondary);
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-icon {
+            color: var(--accent-blue);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 4rem;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .flow-stages {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-timeline {
+                padding-left: 3rem;
+            }
+
+            .steps-timeline::before {
+                left: 1.5rem;
+            }
+
+            .step-card::before {
+                left: -3rem;
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero">
+            <h1>Research Pipeline</h1>
+            <p>3-Phase Architecture • 29 Steps • 7-Level Synthesis</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">3</div>
+                    <div class="hero-stat-label">Phases</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">29</div>
+                    <div class="hero-stat-label">Steps</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">11</div>
+                    <div class="hero-stat-label">Components</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOW OVERVIEW -->
+        <div class="flow-overview">
+            <div class="flow-title">
+                <span>🚀</span>
+                <span>Pipeline Flow</span>
+            </div>
+            <div class="flow-stages">
+
+                <div class="flow-stage">
+                    <span class="flow-stage-icon">🎯</span>
+                    <div class="flow-stage-phase">Phase 1</div>
+                    <div class="flow-stage-name">Planning & Acquisition</div>
+                    <div class="flow-stage-desc">Create Research Project</div>
+                    <div class="flow-stage-steps">14 steps</div>
+                </div>
+
+                <div class="flow-stage">
+                    <span class="flow-stage-icon">🔬</span>
+                    <div class="flow-stage-phase">Phase 2</div>
+                    <div class="flow-stage-name">Analysis</div>
+                    <div class="flow-stage-desc">Analyze Research Project</div>
+                    <div class="flow-stage-steps">5 steps</div>
+                </div>
+
+                <div class="flow-stage">
+                    <span class="flow-stage-icon">✨</span>
+                    <div class="flow-stage-phase">Phase 3</div>
+                    <div class="flow-stage-name">Synthesis (7-Level)</div>
+                    <div class="flow-stage-desc">Synthesize Research Project</div>
+                    <div class="flow-stage-steps">10 steps</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ORCHESTRATOR: create-research-project -->
+        <div class="orchestrator-section">
+            <div class="orchestrator-header">
+                <div class="orchestrator-icon">🎯</div>
+                <div class="orchestrator-content">
+                    <h2>Planning & Acquisition</h2>
+                    <div class="orchestrator-meta">
+                        <span class="orchestrator-badge">Phase 1</span>
+                        <span class="orchestrator-badge">14 Steps</span>
+                        <span class="orchestrator-badge">create-research-project</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="steps-timeline">
+
+                <div class="step-card" data-step="0">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Initialize Task Tracking</div>
+                            <span class="step-phase">Phase ?</span>
+                        </div>
+                        <div class="step-description">Initialize Task Tracking</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>6 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="1">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Create Project Structure</div>
+                            <span class="step-phase">Phase A</span>
+                        </div>
+                        <div class="step-description">Create Project Structure</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Define Research Question (with AI Field Generation)</div>
+                            <span class="step-phase">Phase A</span>
+                        </div>
+                        <div class="step-description">Interactive session to create `02-resources/_briefing.md`:</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>5 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>4 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Search Papers</div>
+                            <span class="step-phase">Phase A</span>
+                        </div>
+                        <div class="step-description">Search Papers</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Review Abstracts</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">See [references/abstract_review.md](references/abstract_review.md) for scoring criteria.</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>1 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="5">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">User Selection</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">User Selection</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="6">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Selection Gate</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">Selection Gate</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>1 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="7">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Download Approved Papers</div>
+                            <span class="step-phase">Phase C</span>
+                        </div>
+                        <div class="step-description">Resolves multiple URLs per paper (arXiv → S2 → Unpaywall → direct)</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>4 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="8">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Preprocess PDFs → Chunks</div>
+                            <span class="step-phase">Phase C</span>
+                        </div>
+                        <div class="step-description">Preprocess PDFs → Chunks</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>5 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="9">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Acquisition Report + User Gate</div>
+                            <span class="step-phase">Phase C</span>
+                        </div>
+                        <div class="step-description">Acquisition Report + User Gate</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>4 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="10">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Generate Analysis Kit</div>
+                            <span class="step-phase">Phase D</span>
+                        </div>
+                        <div class="step-description">This file consolidates everything subagents need to analyze papers, eliminating redundant reads.</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>2 validations</span>
+                        </div>
+                    </div>
+
+                    <button class="toggle-details" onclick="toggleDetails(this)">
+                        <span>📋</span>
+                        <span>Show Details</span>
+                    </button>
+
+                    <div class="step-details">
+
+                        <div class="details-section">
+                            <div class="details-label">
+                                <span>📥</span>
+                                <span>Input Files</span>
+                            </div>
+                            <div class="details-content">
+                                <ul class="file-list">
+
+                                    <li class="file-item">
+                                        <span class="file-icon">📄</span>
+                                        <code>_briefing.md</code>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="11">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Generate Extraction Guide</div>
+                            <span class="step-phase">Phase D</span>
+                        </div>
+                        <div class="step-description">Generate Extraction Guide</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>1 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="12">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Generate Orchestrator Instructions + Subagent Allocation Plan</div>
+                            <span class="step-phase">Phase D</span>
+                        </div>
+                        <div class="step-description">Generate Orchestrator Instructions + Subagent Allocation Plan</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>4 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="13">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Confirm Ready for Execution</div>
+                            <span class="step-phase">Phase D</span>
+                        </div>
+                        <div class="step-description">Confirm Ready for Execution</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>12 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ORCHESTRATOR: analyze-research-project -->
+        <div class="orchestrator-section">
+            <div class="orchestrator-header">
+                <div class="orchestrator-icon">🔬</div>
+                <div class="orchestrator-content">
+                    <h2>Analysis</h2>
+                    <div class="orchestrator-meta">
+                        <span class="orchestrator-badge">Phase 2</span>
+                        <span class="orchestrator-badge">5 Steps</span>
+                        <span class="orchestrator-badge">analyze-research-project</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="steps-timeline">
+
+                <div class="step-card" data-step="0">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Initialize Task Tracking</div>
+                            <span class="step-phase">Phase ?</span>
+                        </div>
+                        <div class="step-description">Initialize Task Tracking</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>5 validations</span>
+                        </div>
+                    </div>
+
+                    <button class="toggle-details" onclick="toggleDetails(this)">
+                        <span>📋</span>
+                        <span>Show Details</span>
+                    </button>
+
+                    <div class="step-details">
+
+                        <div class="details-section">
+                            <div class="details-label">
+                                <span>📥</span>
+                                <span>Input Files</span>
+                            </div>
+                            <div class="details-content">
+                                <ul class="file-list">
+
+                                    <li class="file-item">
+                                        <span class="file-icon">📄</span>
+                                        <code>01-planning/plan.md</code>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="1">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Validate Readiness</div>
+                            <span class="step-phase">Phase A</span>
+                        </div>
+                        <div class="step-description">Validate Readiness</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>7 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>10 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Analyze Papers</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">Paper Corpus table with chunk counts and subagent allocation</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>7 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Validate Analysis Logs</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">Multi-point evidence matches actual chunks</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>3 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Mark Analysis READY_FOR_SYNTHESIS</div>
+                            <span class="step-phase">Phase C</span>
+                        </div>
+                        <div class="step-description">Mark Analysis READY_FOR_SYNTHESIS</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>5 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>7 validations</span>
+                        </div>
+                    </div>
+
+                    <button class="toggle-details" onclick="toggleDetails(this)">
+                        <span>📋</span>
+                        <span>Show Details</span>
+                    </button>
+
+                    <div class="step-details">
+
+                        <div class="details-section">
+                            <div class="details-label">
+                                <span>📥</span>
+                                <span>Input Files</span>
+                            </div>
+                            <div class="details-content">
+                                <ul class="file-list">
+
+                                    <li class="file-item">
+                                        <span class="file-icon">📄</span>
+                                        <code>_analysis_log.md</code>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ORCHESTRATOR: synthesize-research-project -->
+        <div class="orchestrator-section">
+            <div class="orchestrator-header">
+                <div class="orchestrator-icon">✨</div>
+                <div class="orchestrator-content">
+                    <h2>Synthesis (7-Level)</h2>
+                    <div class="orchestrator-meta">
+                        <span class="orchestrator-badge">Phase 3</span>
+                        <span class="orchestrator-badge">10 Steps</span>
+                        <span class="orchestrator-badge">synthesize-research-project</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="steps-timeline">
+
+                <div class="step-card" data-step="0">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Initialize Task Tracking</div>
+                            <span class="step-phase">Phase ?</span>
+                        </div>
+                        <div class="step-description">Initialize Task Tracking</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>1 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>2 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="1">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Validate Readiness</div>
+                            <span class="step-phase">Phase A</span>
+                        </div>
+                        <div class="step-description">If validation fails, papers need re-analysis with the updated skill (which includes inline YAML template).</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>3 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Build Synthesis Routing Table</div>
+                            <span class="step-phase">Phase B</span>
+                        </div>
+                        <div class="step-description">Reads all index.md files with chunk_index</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>1 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Calculate Subagent Allocation</div>
+                            <span class="step-phase">Phase C</span>
+                        </div>
+                        <div class="step-description">Reads routing table with token counts per chunk</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>1 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Generate Subagent Prompts</div>
+                            <span class="step-phase">Phase D</span>
+                        </div>
+                        <div class="step-description">Reads _briefing.md for research_purpose (G22a)</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>4 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="5">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Spawn Batch Extraction Subagents</div>
+                            <span class="step-phase">Phase E</span>
+                        </div>
+                        <div class="step-description">CRITICAL**: Do NOT read prompt content yourself. Pass the file path and let the subagent read it. This saves orchestrator context tokens.</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="6">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Verify Subagent Outputs</div>
+                            <span class="step-phase">Phase F</span>
+                        </div>
+                        <div class="step-description">Checks if quote exists at cited lines (±5 lines tolerance)</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>5 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="7">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Aggregate Patterns</div>
+                            <span class="step-phase">Phase G</span>
+                        </div>
+                        <div class="step-description">Reads all _batch_{field}_{N}.yaml for each field</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>3 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">✅</span>
+                            <span>0 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="8">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Generate Synthesis Report</div>
+                            <span class="step-phase">Phase H</span>
+                        </div>
+                        <div class="step-description">Generate Synthesis Report</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>4 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>2 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="step-card" data-step="9">
+                    <div class="step-header">
+                        <div class="step-title-row">
+                            <div class="step-title">Mark Project COMPLETE</div>
+                            <span class="step-phase">Phase I</span>
+                        </div>
+                        <div class="step-description">Mark Project COMPLETE</div>
+                    </div>
+
+                    <div class="step-meta">
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">📝</span>
+                            <span>2 code blocks</span>
+                        </div>
+                        <div class="meta-badge ">
+                            <span class="badge-icon">⚙️</span>
+                            <span>0 scripts</span>
+                        </div>
+                        <div class="meta-badge has-content">
+                            <span class="badge-icon">✅</span>
+                            <span>4 validations</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Research Pipeline v10 • Generated with ❤️ • Flow-First Design</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails(button) {
+            const card = button.closest('.step-card');
+            const details = card.querySelector('.step-details');
+            const buttonText = button.querySelector('span:last-child');
+
+            details.classList.toggle('show');
+
+            if (details.classList.contains('show')) {
+                buttonText.textContent = 'Hide Details';
+                button.style.background = 'linear-gradient(135deg, #10b981, #3b82f6)';
+            } else {
+                buttonText.textContent = 'Show Details';
+                button.style.background = 'linear-gradient(135deg, #3b82f6, #8b5cf6)';
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

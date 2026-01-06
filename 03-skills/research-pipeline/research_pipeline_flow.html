@@ -1,0 +1,2540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Pipeline - Endless Scroll Visualization</title>
+    <style>
+        :root {
+            --bg-primary: #0a0c10;
+            --bg-secondary: #12161e;
+            --bg-tertiary: #1a1f2e;
+            --bg-elevated: #242a3a;
+            --bg-card: #161b26;
+            --border: #2d3548;
+            --border-subtle: #232838;
+            --text-primary: #e8ecf4;
+            --text-secondary: #9aa5bb;
+            --text-muted: #5d6a82;
+            --accent-blue: #4dabf5;
+            --accent-green: #4ade80;
+            --accent-purple: #a78bfa;
+            --accent-orange: #fb923c;
+            --accent-red: #f87171;
+            --accent-pink: #f472b6;
+            --accent-cyan: #22d3ee;
+            --accent-yellow: #facc15;
+            --glow-blue: rgba(77, 171, 245, 0.15);
+            --glow-purple: rgba(167, 139, 250, 0.15);
+            --glow-green: rgba(74, 222, 128, 0.15);
+            --phase-a: #22c55e;
+            --phase-b: #3b82f6;
+            --phase-c: #f59e0b;
+            --phase-d: #a855f7;
+            --phase-e: #ec4899;
+            --phase-f: #14b8a6;
+            --phase-g: #6366f1;
+            --phase-h: #f97316;
+            --phase-i: #8b5cf6;
+            --sidebar-width: 320px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== LAYOUT ===== */
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 8px;
+        }
+
+        .nav-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-section-header:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .nav-section-header.active {
+            background: var(--glow-blue);
+            border-left-color: var(--accent-blue);
+        }
+
+        .nav-section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .nav-section-icon.create { background: linear-gradient(135deg, var(--phase-a) 0%, #16a34a 100%); }
+        .nav-section-icon.analyze { background: linear-gradient(135deg, var(--phase-b) 0%, #2563eb 100%); }
+        .nav-section-icon.synthesize { background: linear-gradient(135deg, var(--phase-d) 0%, #7c3aed 100%); }
+
+        .nav-section-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .nav-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-section-stats {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .nav-items {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-section.expanded .nav-items {
+            max-height: 2000px;
+        }
+
+        .nav-phase {
+            padding: 8px 20px 8px 56px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px 8px 56px;
+            cursor: pointer;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: rgba(77, 171, 245, 0.1);
+            border-left-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .nav-item-number {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            min-width: 28px;
+        }
+
+        .nav-item-name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-item-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .nav-item-badge.gate {
+            background: var(--accent-orange);
+            color: #000;
+        }
+
+        .nav-item-badge.subagent {
+            background: var(--accent-purple);
+            color: #fff;
+        }
+
+        .nav-item-badge.script {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        /* ===== HERO / DIAGRAM ===== */
+        .hero {
+            background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+            padding: 60px 48px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Pipeline Flow Diagram */
+        .pipeline-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 32px 0;
+        }
+
+        .pipeline-node {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 32px;
+            min-width: 240px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pipeline-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .pipeline-node.create {
+            border-color: var(--phase-a);
+            box-shadow: 0 0 30px var(--glow-green);
+        }
+        .pipeline-node.create:hover { box-shadow: 0 0 50px var(--glow-green); }
+
+        .pipeline-node.analyze {
+            border-color: var(--phase-b);
+            box-shadow: 0 0 30px var(--glow-blue);
+        }
+        .pipeline-node.analyze:hover { box-shadow: 0 0 50px var(--glow-blue); }
+
+        .pipeline-node.synthesize {
+            border-color: var(--phase-d);
+            box-shadow: 0 0 30px var(--glow-purple);
+        }
+        .pipeline-node.synthesize:hover { box-shadow: 0 0 50px var(--glow-purple); }
+
+        .pipeline-node-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .pipeline-node-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .pipeline-node-stats {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .pipeline-node-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pipeline-arrow {
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .pipeline-arrow svg {
+            width: 48px;
+            height: 24px;
+            fill: var(--text-muted);
+        }
+
+        /* ===== SECTIONS (Endless Scroll) ===== */
+        .section {
+            padding: 48px;
+            border-bottom: 1px solid var(--border);
+            scroll-margin-top: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .section-icon.create { background: linear-gradient(135deg, var(--phase-a) 0%, #16a34a 100%); }
+        .section-icon.analyze { background: linear-gradient(135deg, var(--phase-b) 0%, #2563eb 100%); }
+        .section-icon.synthesize { background: linear-gradient(135deg, var(--phase-d) 0%, #7c3aed 100%); }
+
+        .section-info h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .section-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Phase Headers */
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            margin-top: 32px;
+        }
+
+        .phase-header:first-of-type {
+            margin-top: 0;
+        }
+
+        .phase-letter {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .phase-letter.A { background: var(--phase-a); }
+        .phase-letter.B { background: var(--phase-b); }
+        .phase-letter.C { background: var(--phase-c); }
+        .phase-letter.D { background: var(--phase-d); }
+        .phase-letter.E { background: var(--phase-e); }
+        .phase-letter.F { background: var(--phase-f); }
+        .phase-letter.G { background: var(--phase-g); }
+        .phase-letter.H { background: var(--phase-h); }
+        .phase-letter.I { background: var(--phase-i); }
+
+        .phase-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Step Cards */
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.2s;
+            scroll-margin-top: 20px;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 24px;
+            cursor: pointer;
+        }
+
+        .step-number {
+            background: var(--bg-elevated);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+
+        .step-info {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .step-badges {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .step-badge {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .step-badge.gate {
+            background: rgba(251, 146, 60, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .step-badge.subagent {
+            background: rgba(167, 139, 250, 0.2);
+            color: var(--accent-purple);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .step-badge.script {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .step-badge.level {
+            background: rgba(250, 204, 21, 0.2);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+        }
+
+        .step-content {
+            padding: 0 24px 24px;
+            display: none;
+        }
+
+        .step-card.expanded .step-content {
+            display: block;
+        }
+
+        .step-expand-icon {
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .step-card.expanded .step-expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Content Cards */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .content-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .content-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--bg-elevated);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .content-card-header svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .content-card-body {
+            padding: 16px;
+        }
+
+        /* File Items */
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        .file-item:last-child { margin-bottom: 0; }
+
+        .file-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .file-icon.input { color: var(--accent-blue); }
+        .file-icon.output { color: var(--accent-green); }
+
+        .file-path {
+            flex: 1;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        .file-format {
+            font-size: 10px;
+            padding: 2px 8px;
+            background: var(--bg-elevated);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* Script Documentation */
+        .script-doc {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(34, 211, 238, 0.02) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .script-doc:last-child { margin-bottom: 0; }
+
+        .script-doc-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .script-doc-icon {
+            font-size: 24px;
+        }
+
+        .script-doc-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-cyan);
+        }
+
+        .script-doc-level {
+            margin-left: auto;
+            background: var(--accent-orange);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .script-doc-purpose {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .script-doc-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .script-io-section {
+            margin-bottom: 12px;
+        }
+
+        .script-io-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .script-io-item {
+            display: flex;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .script-io-item:last-child { border-bottom: none; }
+
+        .script-io-name {
+            color: var(--accent-cyan);
+            font-family: monospace;
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+
+        .script-io-desc {
+            color: var(--text-muted);
+        }
+
+        .script-features {
+            margin-top: 12px;
+        }
+
+        .script-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .script-features li {
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+
+        .script-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .script-command {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent-cyan);
+            margin-top: 12px;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .script-command::before {
+            content: '$ ';
+            color: var(--text-muted);
+        }
+
+        /* Subagent Config */
+        .subagent-config {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1) 0%, rgba(167, 139, 250, 0.03) 100%);
+            border: 1px solid rgba(167, 139, 250, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .subagent-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .subagent-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-purple);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .subagent-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .subagent-type {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .subagent-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .subagent-stat {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .subagent-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        .subagent-stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .subagent-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .subagent-slot {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-purple);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        /* Gate */
+        .gate-card {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.1) 0%, rgba(251, 146, 60, 0.03) 100%);
+            border: 1px solid rgba(251, 146, 60, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .gate-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--accent-orange);
+        }
+
+        .gate-header svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .gate-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .gate-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .gate-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .gate-option:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .gate-key {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-orange);
+            color: #000;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .gate-label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 32px 48px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: 3px;
+            background: var(--bg-tertiary);
+            z-index: 1000;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="app">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">Research Pipeline</div>
+                <div class="logo-sub">Workflow Visualization</div>
+            </div>
+            <div class="nav" id="nav">
+                <!-- Generated by JS -->
+            </div>
+        </nav>
+
+        <main class="main" id="main">
+            <!-- Generated by JS -->
+        </main>
+    </div>
+
+    <script>
+    const DATA = {
+  "orchestrators": [
+    {
+      "name": "create-research-project",
+      "path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\create-research-project\\SKILL.md",
+      "description": "Create research projects with paper selection, download, and preprocessing (Phase 1). Load when user says 'create research project', 'new research', 'start research on [topic]'. Delivers analysis-read",
+      "phases": [
+        {
+          "letter": "A",
+          "name": "RESEARCH DEFINITION",
+          "steps": [
+            {
+              "id": "step_0",
+              "number": "0",
+              "name": "Initialize Task Tracking",
+              "phase": "A",
+              "phase_name": "RESEARCH DEFINITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_1",
+              "number": "1",
+              "name": "Create Project Structure",
+              "phase": "A",
+              "phase_name": "RESEARCH DEFINITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 00-system/skills/projects/create-project/scripts/init_project.py \\"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_2",
+              "number": "2",
+              "name": "Define Research Question (with AI Field Generation)",
+              "phase": "A",
+              "phase_name": "RESEARCH DEFINITION",
+              "description": "",
+              "sub_steps": [
+                {
+                  "number": "2.1",
+                  "name": "Research Question"
+                },
+                {
+                  "number": "2.2",
+                  "name": "Research Purpose (G22a - NEW)"
+                },
+                {
+                  "number": "2.3",
+                  "name": "AI Field Generation (G5)"
+                }
+              ],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_3",
+              "number": "3",
+              "name": "Search Papers",
+              "phase": "A",
+              "phase_name": "RESEARCH DEFINITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "B",
+          "name": "PAPER SELECTION",
+          "steps": [
+            {
+              "id": "step_4",
+              "number": "4",
+              "name": "Review Abstracts",
+              "phase": "B",
+              "phase_name": "PAPER SELECTION",
+              "description": "See [references/abstract_review.md](references/abstract_review.md) for scoring criteria.",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_5",
+              "number": "5",
+              "name": "User Selection",
+              "phase": "B",
+              "phase_name": "PAPER SELECTION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_6",
+              "number": "6",
+              "name": "Selection Gate",
+              "phase": "B",
+              "phase_name": "PAPER SELECTION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": {
+                "name": "Selection Gate",
+                "options": [
+                  {
+                    "key": "Y",
+                    "label": "Yes \u2192 Proceed to acquisition",
+                    "target": ""
+                  },
+                  {
+                    "key": "N",
+                    "label": "No, modify selection",
+                    "target": ""
+                  },
+                  {
+                    "key": "S",
+                    "label": "Save and continue later",
+                    "target": ""
+                  }
+                ]
+              },
+              "handoff_to": "acquisition",
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "C",
+          "name": "PAPER ACQUISITION",
+          "steps": [
+            {
+              "id": "step_7",
+              "number": "7",
+              "name": "Download Approved Papers",
+              "phase": "C",
+              "phase_name": "PAPER ACQUISITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/skills/paper-search/scripts/paper_download.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "paper_download.py",
+                  "purpose": "Batch download papers with multi-source fallback and retry logic",
+                  "description": "Robust paper downloader with intelligent URL resolution. Reads _selection_log.md\nor JSON input, resolves PDFs via arXiv, Semantic Scholar, OpenAlex, and Unpaywall.\nParallel downloads with progress tracking, PDF magic byte verification, exponential\nbackoff retry, and per-source rate limiting.",
+                  "level": null,
+                  "inputs": [
+                    {
+                      "path": "_selection_log.md",
+                      "description": "Markdown table with paper IDs, titles, URLs"
+                    },
+                    {
+                      "path": "papers.json",
+                      "description": "JSON list of papers with DOI/arXiv/URLs"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "output/{id}-{title}.pdf",
+                      "description": "Downloaded PDF files"
+                    },
+                    {
+                      "path": "output/_download_report.md",
+                      "description": "Download success/failure report"
+                    }
+                  ],
+                  "key_features": [
+                    "Multi-source URL resolution (arXiv > S2 > Unpaywall)",
+                    "PDF verification (magic bytes check)",
+                    "Exponential backoff retry (3 attempts)",
+                    "Parallel downloads with semaphore"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_8",
+              "number": "8",
+              "name": "Preprocess PDFs \u2192 Chunks",
+              "phase": "C",
+              "phase_name": "PAPER ACQUISITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/skills/pdf-preprocess/scripts/pdf_to_markdown.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "pdf_to_markdown.py",
+                  "purpose": "Convert PDFs to chunked markdown files for LLM consumption",
+                  "description": "PDF extraction using pymupdf4llm for high-quality markdown output. Auto-chunks\ncontent to max N lines with configurable overlap for context continuity.\nCreates one folder per PDF containing numbered chunk files and _metadata.json.\nPreserves headings, tables, and formatting.",
+                  "level": null,
+                  "inputs": [
+                    {
+                      "path": "input.pdf",
+                      "description": "Source PDF file"
+                    },
+                    {
+                      "path": "--max-lines",
+                      "description": "Max lines per chunk (default: 1000)"
+                    },
+                    {
+                      "path": "--overlap",
+                      "description": "Overlap lines between chunks (default: 100)"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "{name}/{name}_1.md",
+                      "description": "First markdown chunk"
+                    },
+                    {
+                      "path": "{name}/{name}_N.md",
+                      "description": "Subsequent chunks"
+                    },
+                    {
+                      "path": "{name}/_metadata.json",
+                      "description": "Chunk metadata (sizes, counts)"
+                    }
+                  ],
+                  "key_features": [
+                    "pymupdf4llm for quality extraction",
+                    "Smart paragraph-boundary chunking",
+                    "Configurable overlap for context",
+                    "Batch processing mode"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_9",
+              "number": "9",
+              "name": "Acquisition Report + User Gate",
+              "phase": "C",
+              "phase_name": "PAPER ACQUISITION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": {
+                "name": "Acquisition Report + User Gate",
+                "options": [
+                  {
+                    "key": "Y",
+                    "label": "Yes, proceed to execution",
+                    "target": ""
+                  },
+                  {
+                    "key": "S",
+                    "label": "Save and continue later",
+                    "target": ""
+                  }
+                ]
+              },
+              "handoff_to": "execution",
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "D",
+          "name": "READINESS GATE",
+          "steps": [
+            {
+              "id": "step_10",
+              "number": "10",
+              "name": "Generate Analysis Kit",
+              "phase": "D",
+              "phase_name": "READINESS GATE",
+              "description": "This file consolidates everything subagents need to analyze papers, eliminating redundant reads.",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "kit = read(\"02-resources/_analysis_kit.md\")"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_11",
+              "number": "11",
+              "name": "Generate Extraction Guide",
+              "phase": "D",
+              "phase_name": "READINESS GATE",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "guide = read(\"02-resources/_extraction_guide.md\")"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_12",
+              "number": "12",
+              "name": "Generate Orchestrator Instructions + Subagent Allocation Plan",
+              "phase": "D",
+              "phase_name": "READINESS GATE",
+              "description": "",
+              "sub_steps": [
+                {
+                  "number": "12.1",
+                  "name": "Calculate Subagent Allocation (CRITICAL)"
+                },
+                {
+                  "number": "12.2",
+                  "name": "Write Allocation Table to plan.md"
+                },
+                {
+                  "number": "12.3",
+                  "name": "Generate Subagent Prompts"
+                }
+              ],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "allocation = []",
+                "plan = read(\"01-planning/plan.md\")"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_13",
+              "number": "13",
+              "name": "Confirm Ready for Execution",
+              "phase": "D",
+              "phase_name": "READINESS GATE",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "papers_with_chunks = count_papers_with_metadata_json()"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": {
+                "type": "general-purpose",
+                "concurrency": 1,
+                "timeout": "5 min",
+                "retry": 1,
+                "input_contract": [],
+                "output_contract": []
+              },
+              "gate": null,
+              "handoff_to": "execute-research-project",
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        }
+      ],
+      "handoff_from": null,
+      "handoff_to": "execute-research-project",
+      "total_steps": 14,
+      "total_gates": 2
+    },
+    {
+      "name": "analyze-research-project",
+      "path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\analyze-research-project\\SKILL.md",
+      "description": "Analyze research papers (Phase 2: analysis only). Load when user says 'analyze research project', 'execute research project', 'continue research', 'run analysis', or mentions a research project by nam",
+      "phases": [
+        {
+          "letter": "A",
+          "name": "VALIDATION",
+          "steps": [
+            {
+              "id": "step_0",
+              "number": "0",
+              "name": "Initialize Task Tracking",
+              "phase": "A",
+              "phase_name": "VALIDATION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_1",
+              "number": "1",
+              "name": "Validate Readiness",
+              "phase": "A",
+              "phase_name": "VALIDATION",
+              "description": "",
+              "sub_steps": [
+                {
+                  "number": "1.1",
+                  "name": "Prerequisite Checks (Fail Fast)"
+                },
+                {
+                  "number": "1.2",
+                  "name": "Paper Readiness Check"
+                }
+              ],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "project_path = \"02-projects/NN-{slug}/\"",
+                "papers_ready = []"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_1_5",
+              "number": "1.5",
+              "name": "Read Pre-Calculated Subagent Allocation",
+              "phase": "A",
+              "phase_name": "VALIDATION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "plan = read(f\"{project_path}/01-planning/plan.md\")",
+                "if \"## Subagent Allocation Plan\" not in plan:"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "B",
+          "name": "ANALYSIS",
+          "steps": [
+            {
+              "id": "step_2",
+              "number": "2",
+              "name": "Analyze Papers",
+              "phase": "B",
+              "phase_name": "ANALYSIS",
+              "description": "The plan.md contains:",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "Task("
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            },
+            {
+              "id": "step_3",
+              "number": "3",
+              "name": "Validate Analysis Logs",
+              "phase": "B",
+              "phase_name": "ANALYSIS",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/skills/paper-analyze/scripts/validate_analysis.py \\"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": {
+                "type": "general-purpose",
+                "concurrency": 1,
+                "timeout": "5 min",
+                "retry": 1,
+                "input_contract": [],
+                "output_contract": []
+              },
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "C",
+          "name": "COMPLETION",
+          "steps": [
+            {
+              "id": "step_4",
+              "number": "4",
+              "name": "Mark Analysis READY_FOR_SYNTHESIS",
+              "phase": "C",
+              "phase_name": "COMPLETION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        }
+      ],
+      "handoff_from": null,
+      "handoff_to": "synthesize-research-project",
+      "total_steps": 6,
+      "total_gates": 0
+    },
+    {
+      "name": "synthesize-research-project",
+      "path": "C:\\Users\\dsber\\infinite\\auto-company\\strategy-nexus\\03-skills\\research-pipeline\\orchestrators\\synthesize-research-project\\SKILL.md",
+      "description": "Synthesize analyzed research papers into comprehensive reports (Phase 3). Load when user says 'synthesize research project', 'generate synthesis', 'create synthesis report', or wants cross-paper synth",
+      "phases": [
+        {
+          "letter": "A",
+          "name": "VALIDATION",
+          "steps": [
+            {
+              "id": "step_0",
+              "number": "0",
+              "name": "Initialize Task Tracking",
+              "phase": "A",
+              "phase_name": "VALIDATION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": {
+                "type": "general-purpose",
+                "concurrency": 1,
+                "timeout": "5 min",
+                "retry": 1,
+                "input_contract": [],
+                "output_contract": []
+              },
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": 1,
+              "raw_content": ""
+            },
+            {
+              "id": "step_1",
+              "number": "1",
+              "name": "Validate Readiness",
+              "phase": "A",
+              "phase_name": "VALIDATION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/shared/contracts/validate_interface.py {project_path}",
+                "project_path = \"02-projects/NN-{slug}/\""
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "B",
+          "name": "ROUTING (Script - Level 1)",
+          "steps": [
+            {
+              "id": "step_2",
+              "number": "2",
+              "name": "Build Synthesis Routing Table",
+              "phase": "B",
+              "phase_name": "ROUTING (Script - Level 1)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/validation/scripts/build_synthesis_routing.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "build_synthesis_routing.py",
+                  "purpose": "Level 1: Build routing table from chunk_index.fields_found",
+                  "description": "First level of 7-Level Synthesis Architecture. Reads all index.md files with\nchunk_index (Schema 2.3+), builds a routing table mapping extraction fields\nto specific paper chunks. Uses boolean lookup (no full-text search) for\ndeterministic routing. Warns if field matches >80% of chunks (Gap G19 sparsity).",
+                  "level": 1,
+                  "inputs": [
+                    {
+                      "path": "02-resources/_briefing.md",
+                      "description": "Extraction schema definition"
+                    },
+                    {
+                      "path": "02-resources/papers/*/index.md",
+                      "description": "Paper indices with chunk_index"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "02-resources/_synthesis_routing.yaml",
+                      "description": "Field \u2192 chunks routing table"
+                    }
+                  ],
+                  "key_features": [
+                    "Boolean lookup from chunk_index.fields_found",
+                    "Sparsity warning (Gap G19) if field matches >80%",
+                    "Per-chunk token counts for budget planning",
+                    "Deterministic (no LLM needed)"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "C",
+          "name": "ALLOCATION (Script - Level 2)",
+          "steps": [
+            {
+              "id": "step_3",
+              "number": "3",
+              "name": "Calculate Subagent Allocation",
+              "phase": "C",
+              "phase_name": "ALLOCATION (Script - Level 2)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/validation/scripts/calculate_subagent_allocation.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "calculate_subagent_allocation.py",
+                  "purpose": "Level 2: Greedy bin-packing of chunks into subagent batches",
+                  "description": "Second level of 7-Level Architecture. Takes routing table and packs chunks\ninto batches respecting 70K token budget per batch. Uses greedy bin-packing,\ngroups chunks by paper when possible. Also calculates Level 7 token budget\nfor final report (Gap G2 fix).",
+                  "level": 2,
+                  "inputs": [
+                    {
+                      "path": "_synthesis_routing.yaml",
+                      "description": "Routing table from Level 1"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "_subagent_plan.yaml",
+                      "description": "Batch assignments with token budgets"
+                    }
+                  ],
+                  "key_features": [
+                    "Greedy bin-packing algorithm",
+                    "70K tokens per batch budget",
+                    "Level 7 budget calculation (Gap G2)",
+                    "Estimated duration per batch"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "D",
+          "name": "PROMPT GENERATION (Script - Level 3)",
+          "steps": [
+            {
+              "id": "step_4",
+              "number": "4",
+              "name": "Generate Subagent Prompts",
+              "phase": "D",
+              "phase_name": "PROMPT GENERATION (Script - Level 3)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/validation/scripts/generate_subagent_prompts.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "generate_subagent_prompts.py",
+                  "purpose": "Level 3: Generate prompts with INPUT CONTRACT for each batch",
+                  "description": "Third level of 7-Level Architecture. Creates subagent prompt files with strict\nINPUT CONTRACT (Gap G13) listing exact files to read. Includes research_purpose\n(Gap G22a) and synthesis_goals (Gap G22b) from _briefing.md and _analysis_kit.md.\nGenerates output schema template with citation format.",
+                  "level": 3,
+                  "inputs": [
+                    {
+                      "path": "_subagent_plan.yaml",
+                      "description": "Batch assignments from Level 2"
+                    },
+                    {
+                      "path": "_briefing.md",
+                      "description": "research_purpose field"
+                    },
+                    {
+                      "path": "_analysis_kit.md",
+                      "description": "synthesis_goals field"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "03-working/_prompt_{field}_{N}.md",
+                      "description": "Subagent prompt files"
+                    }
+                  ],
+                  "key_features": [
+                    "INPUT CONTRACT (Gap G13) - strict file list",
+                    "research_purpose context (Gap G22a)",
+                    "synthesis_goals context (Gap G22b)",
+                    "Output schema with citation format"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "E",
+          "name": "EXTRACTION (Subagents - Level 4)",
+          "steps": [
+            {
+              "id": "step_5",
+              "number": "5",
+              "name": "Spawn Batch Extraction Subagents",
+              "phase": "E",
+              "phase_name": "EXTRACTION (Subagents - Level 4)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "prompt_dir = project_path / \"03-working/prompts/\""
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "F",
+          "name": "VERIFICATION (Script - Level 5)",
+          "steps": [
+            {
+              "id": "step_6",
+              "number": "6",
+              "name": "Verify Subagent Outputs",
+              "phase": "F",
+              "phase_name": "VERIFICATION (Script - Level 5)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/validation/scripts/verify_subagent_output.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "verify_subagent_output.py",
+                  "purpose": "Level 5: Verify extraction outputs with quote-line checking",
+                  "description": "Fifth level of 7-Level Architecture. Samples patterns from batch outputs and\nverifies quoted text exists at cited line numbers (Gap G15). Checks chunk_ref\nformat, file existence, and quote presence with 5-line tolerance. Requires\n90% verification rate to pass.",
+                  "level": 5,
+                  "inputs": [
+                    {
+                      "path": "03-working/_batch_*.yaml",
+                      "description": "Subagent extraction outputs"
+                    },
+                    {
+                      "path": "02-resources/papers/*/*.md",
+                      "description": "Source chunk files for verification"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "_verification_report.yaml",
+                      "description": "Pass/fail with failure details"
+                    }
+                  ],
+                  "key_features": [
+                    "Quote-line verification (Gap G15)",
+                    "10% sample rate by default",
+                    "5-line tolerance for matching",
+                    "90% threshold to pass"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "G",
+          "name": "AGGREGATION (Script - Level 6)",
+          "steps": [
+            {
+              "id": "step_7",
+              "number": "7",
+              "name": "Aggregate Patterns",
+              "phase": "G",
+              "phase_name": "AGGREGATION (Script - Level 6)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "python 03-skills/research-pipeline/validation/scripts/aggregate_patterns.py \\"
+              ],
+              "script_docs": [
+                {
+                  "name": "aggregate_patterns.py",
+                  "purpose": "Level 6: Deduplicate and aggregate patterns across batches",
+                  "description": "Sixth level of 7-Level Architecture. Reads all batch outputs, uses fuzzy matching\n(70% threshold) to deduplicate patterns while preserving all source citations.\nCreates per-field synthesis files combining patterns from multiple papers.",
+                  "level": 6,
+                  "inputs": [
+                    {
+                      "path": "03-working/_batch_*.yaml",
+                      "description": "Verified batch outputs"
+                    }
+                  ],
+                  "outputs": [
+                    {
+                      "path": "04-outputs/_synthesis_{field}.yaml",
+                      "description": "Aggregated per-field patterns"
+                    }
+                  ],
+                  "key_features": [
+                    "Fuzzy name matching (70% threshold)",
+                    "Source preservation (all citations kept)",
+                    "Deduplication rate reporting",
+                    "Per-field output files"
+                  ]
+                }
+              ],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "H",
+          "name": "FINAL REPORT (Subagent - Level 7)",
+          "steps": [
+            {
+              "id": "step_8",
+              "number": "8",
+              "name": "Generate Synthesis Report",
+              "phase": "H",
+              "phase_name": "FINAL REPORT (Subagent - Level 7)",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [
+                "plan = read(f\"{project_path}/02-resources/_subagent_plan.yaml\")"
+              ],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": false,
+              "level": 7,
+              "raw_content": ""
+            }
+          ]
+        },
+        {
+          "letter": "I",
+          "name": "COMPLETION",
+          "steps": [
+            {
+              "id": "step_9",
+              "number": "9",
+              "name": "Mark Project COMPLETE",
+              "phase": "I",
+              "phase_name": "COMPLETION",
+              "description": "",
+              "sub_steps": [],
+              "inputs": [],
+              "outputs": [],
+              "scripts": [],
+              "script_docs": [],
+              "output_docs": [],
+              "skills_used": [],
+              "subagent": null,
+              "gate": null,
+              "handoff_to": null,
+              "is_script": true,
+              "level": null,
+              "raw_content": ""
+            }
+          ]
+        }
+      ],
+      "handoff_from": null,
+      "handoff_to": null,
+      "total_steps": 10,
+      "total_gates": 0
+    }
+  ],
+  "file_graph": {
+    "nodes": {},
+    "edges": []
+  },
+  "pipeline": [
+    {
+      "name": "create-research-project",
+      "steps": 14,
+      "gates": 2,
+      "phases": 4,
+      "handoff_to": "execute-research-project"
+    },
+    {
+      "name": "analyze-research-project",
+      "steps": 6,
+      "gates": 0,
+      "phases": 3,
+      "handoff_to": "synthesize-research-project"
+    },
+    {
+      "name": "synthesize-research-project",
+      "steps": 10,
+      "gates": 0,
+      "phases": 9,
+      "handoff_to": null
+    }
+  ]
+};
+
+    // State
+    let expandedSections = new Set(['create-research-project']);
+    let expandedSteps = new Set();
+
+    // Get orchestrator class
+    function getOrchestratorClass(name) {
+        if (name.includes('create')) return 'create';
+        if (name.includes('analyze')) return 'analyze';
+        if (name.includes('synthesize')) return 'synthesize';
+        return 'create';
+    }
+
+    // Get orchestrator icon
+    function getOrchestratorIcon(name) {
+        if (name.includes('create')) return '🚀';
+        if (name.includes('analyze')) return '🔬';
+        if (name.includes('synthesize')) return '✨';
+        return '📦';
+    }
+
+    // Format orchestrator name
+    function formatOrchestratorName(name) {
+        return name.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    // Render sidebar navigation
+    function renderNav() {
+        const nav = document.getElementById('nav');
+        let html = '';
+
+        DATA.orchestrators.forEach((orch, orchIndex) => {
+            const isExpanded = expandedSections.has(orch.name);
+            const cls = getOrchestratorClass(orch.name);
+
+            html += `
+                <div class="nav-section ${isExpanded ? 'expanded' : ''}" data-orch="${orch.name}">
+                    <div class="nav-section-header" onclick="toggleSection('${orch.name}')">
+                        <div class="nav-section-icon ${cls}">${getOrchestratorIcon(orch.name)}</div>
+                        <div class="nav-section-info">
+                            <div class="nav-section-title">${formatOrchestratorName(orch.name)}</div>
+                            <div class="nav-section-stats">${orch.total_steps} steps · ${orch.total_gates} gates</div>
+                        </div>
+                    </div>
+                    <div class="nav-items">
+            `;
+
+            orch.phases.forEach(phase => {
+                html += `<div class="nav-phase">Phase ${phase.letter}: ${phase.name}</div>`;
+                phase.steps.forEach(step => {
+                    const badges = [];
+                    if (step.gate) badges.push('<span class="nav-item-badge gate">G</span>');
+                    if (step.subagent) badges.push('<span class="nav-item-badge subagent">S</span>');
+                    if (step.is_script) badges.push('<span class="nav-item-badge script">⚙</span>');
+
+                    html += `
+                        <div class="nav-item" data-step="${orch.name}-${step.id}" onclick="scrollToStep('${orch.name}-${step.id}')">
+                            <span class="nav-item-number">${step.number}</span>
+                            <span class="nav-item-name">${step.name}</span>
+                            ${badges.join('')}
+                        </div>
+                    `;
+                });
+            });
+
+            html += '</div></div>';
+        });
+
+        nav.innerHTML = html;
+    }
+
+    // Toggle section expansion
+    function toggleSection(name) {
+        if (expandedSections.has(name)) {
+            expandedSections.delete(name);
+        } else {
+            expandedSections.add(name);
+        }
+        renderNav();
+    }
+
+    // Toggle step expansion
+    function toggleStep(stepId) {
+        const card = document.querySelector(`[data-step-card="${stepId}"]`);
+        if (card) {
+            card.classList.toggle('expanded');
+            if (card.classList.contains('expanded')) {
+                expandedSteps.add(stepId);
+            } else {
+                expandedSteps.delete(stepId);
+            }
+        }
+    }
+
+    // Scroll to step
+    function scrollToStep(stepId) {
+        const element = document.querySelector(`[data-step-card="${stepId}"]`);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Expand it
+            element.classList.add('expanded');
+            expandedSteps.add(stepId);
+        }
+    }
+
+    // Render main content
+    function renderMain() {
+        const main = document.getElementById('main');
+        let html = '';
+
+        // Hero section with diagram
+        html += `
+            <section class="hero">
+                <h1 class="hero-title">Research Pipeline Visualization</h1>
+                <p class="hero-subtitle">Complete workflow for academic paper research, analysis, and synthesis</p>
+
+                <div class="pipeline-diagram">
+        `;
+
+        DATA.pipeline.forEach((node, i) => {
+            const cls = getOrchestratorClass(node.name);
+            html += `
+                <div class="pipeline-node ${cls}" onclick="scrollToSection('${node.name}')">
+                    <div class="pipeline-node-icon">${getOrchestratorIcon(node.name)}</div>
+                    <div class="pipeline-node-title">${formatOrchestratorName(node.name)}</div>
+                    <div class="pipeline-node-stats">
+                        <div class="pipeline-node-stat"><span>${node.steps}</span> steps</div>
+                        <div class="pipeline-node-stat"><span>${node.phases}</span> phases</div>
+                        <div class="pipeline-node-stat"><span>${node.gates}</span> gates</div>
+                    </div>
+                </div>
+            `;
+
+            if (i < DATA.pipeline.length - 1) {
+                html += `
+                    <div class="pipeline-arrow">
+                        <svg viewBox="0 0 48 24"><path d="M0 12h40M32 4l12 8-12 8" stroke="currentColor" fill="none" stroke-width="2"/></svg>
+                    </div>
+                `;
+            }
+        });
+
+        html += '</div></section>';
+
+        // Orchestrator sections
+        DATA.orchestrators.forEach(orch => {
+            const cls = getOrchestratorClass(orch.name);
+
+            html += `
+                <section class="section" id="${orch.name}" data-section="${orch.name}">
+                    <div class="section-header">
+                        <div class="section-icon ${cls}">${getOrchestratorIcon(orch.name)}</div>
+                        <div class="section-info">
+                            <h2>${formatOrchestratorName(orch.name)}</h2>
+                            <p>${orch.description || `${orch.total_steps} steps across ${orch.phases.length} phases`}</p>
+                        </div>
+                    </div>
+            `;
+
+            orch.phases.forEach(phase => {
+                html += `
+                    <div class="phase-header">
+                        <div class="phase-letter ${phase.letter}">${phase.letter}</div>
+                        <div class="phase-name">${phase.name}</div>
+                    </div>
+                `;
+
+                phase.steps.forEach(step => {
+                    const stepId = `${orch.name}-${step.id}`;
+                    const isExpanded = expandedSteps.has(stepId);
+
+                    html += `
+                        <div class="step-card ${isExpanded ? 'expanded' : ''}" data-step-card="${stepId}" id="${stepId}">
+                            <div class="step-card-header" onclick="toggleStep('${stepId}')">
+                                <div class="step-number">${step.number}</div>
+                                <div class="step-info">
+                                    <div class="step-title">${step.name}</div>
+                                    <div class="step-description">${step.description || ''}</div>
+                                </div>
+                                <div class="step-badges">
+                                    ${step.level ? `<span class="step-badge level">Level ${step.level}</span>` : ''}
+                                    ${step.is_script ? '<span class="step-badge script">Script</span>' : ''}
+                                    ${step.subagent ? '<span class="step-badge subagent">Subagent</span>' : ''}
+                                    ${step.gate ? '<span class="step-badge gate">Gate</span>' : ''}
+                                </div>
+                                <div class="step-expand-icon">▼</div>
+                            </div>
+                            <div class="step-content">
+                                ${renderStepContent(step)}
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            html += '</section>';
+        });
+
+        // Footer
+        html += `
+            <footer class="footer">
+                Research Pipeline Visualizer v5 · Generated ${new Date().toLocaleString()}
+            </footer>
+        `;
+
+        main.innerHTML = html;
+    }
+
+    // Render step content
+    function renderStepContent(step) {
+        let html = '<div class="content-grid">';
+
+        // Inputs
+        if (step.inputs && step.inputs.length > 0) {
+            html += `
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <svg viewBox="0 0 16 16"><path d="M4.5 3.5a.5.5 0 00-.5.5v8a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V6H10a1 1 0 01-1-1V2H4.5z"/></svg>
+                        Inputs (${step.inputs.length})
+                    </div>
+                    <div class="content-card-body">
+                        ${step.inputs.map(f => `
+                            <div class="file-item">
+                                <span class="file-icon input">→</span>
+                                <span class="file-path">${f.path}</span>
+                                <span class="file-format">${f.format}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Outputs
+        if (step.outputs && step.outputs.length > 0) {
+            html += `
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <svg viewBox="0 0 16 16"><path d="M4.5 3.5a.5.5 0 00-.5.5v8a.5.5 0 00.5.5h8a.5.5 0 00.5-.5V6H10a1 1 0 01-1-1V2H4.5z"/></svg>
+                        Outputs (${step.outputs.length})
+                    </div>
+                    <div class="content-card-body">
+                        ${step.outputs.map(f => `
+                            <div class="file-item">
+                                <span class="file-icon output">✓</span>
+                                <span class="file-path">${f.path}</span>
+                                <span class="file-format">${f.format}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        html += '</div>';
+
+        // Script Documentation
+        if (step.script_docs && step.script_docs.length > 0) {
+            step.script_docs.forEach((doc, i) => {
+                const cmd = step.scripts && step.scripts[i] ? step.scripts[i] : '';
+                html += `
+                    <div class="script-doc">
+                        <div class="script-doc-header">
+                            <div class="script-doc-icon">⚙️</div>
+                            <div class="script-doc-name">${doc.name}</div>
+                            ${doc.level ? `<div class="script-doc-level">Level ${doc.level}</div>` : ''}
+                        </div>
+                        <div class="script-doc-purpose">${doc.purpose}</div>
+                        ${doc.description ? `<div class="script-doc-description">${doc.description}</div>` : ''}
+
+                        ${doc.inputs && doc.inputs.length > 0 ? `
+                            <div class="script-io-section">
+                                <div class="script-io-title">📥 Inputs</div>
+                                ${doc.inputs.map(inp => `
+                                    <div class="script-io-item">
+                                        <span class="script-io-name">${inp.name || inp.path || ''}</span>
+                                        <span class="script-io-desc">${inp.description || ''}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        ${doc.outputs && doc.outputs.length > 0 ? `
+                            <div class="script-io-section">
+                                <div class="script-io-title">📤 Outputs</div>
+                                ${doc.outputs.map(out => `
+                                    <div class="script-io-item">
+                                        <span class="script-io-name">${out.name || out.path || ''}</span>
+                                        <span class="script-io-desc">${out.description || ''}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        ${doc.key_features && doc.key_features.length > 0 ? `
+                            <div class="script-features">
+                                <div class="script-io-title">✨ Key Features</div>
+                                <ul>
+                                    ${doc.key_features.map(f => `<li>${f}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+
+                        ${cmd ? `<div class="script-command">${cmd}</div>` : ''}
+                    </div>
+                `;
+            });
+        } else if (step.scripts && step.scripts.length > 0) {
+            // Fallback: just show script commands without documentation
+            step.scripts.forEach(cmd => {
+                html += `<div class="script-command">${cmd}</div>`;
+            });
+        }
+
+        // Subagent config
+        if (step.subagent) {
+            const sa = step.subagent;
+            html += `
+                <div class="subagent-config">
+                    <div class="subagent-header">
+                        <div class="subagent-icon">🤖</div>
+                        <div>
+                            <div class="subagent-title">Parallel Subagents</div>
+                            <div class="subagent-type">${sa.type}</div>
+                        </div>
+                    </div>
+                    <div class="subagent-stats">
+                        <div class="subagent-stat">
+                            <div class="subagent-stat-value">${sa.concurrency}</div>
+                            <div class="subagent-stat-label">Concurrency</div>
+                        </div>
+                        <div class="subagent-stat">
+                            <div class="subagent-stat-value">${sa.timeout}</div>
+                            <div class="subagent-stat-label">Timeout</div>
+                        </div>
+                        <div class="subagent-stat">
+                            <div class="subagent-stat-value">${sa.retry}</div>
+                            <div class="subagent-stat-label">Retry</div>
+                        </div>
+                    </div>
+                    <div class="subagent-slots">
+                        ${Array(Math.min(sa.concurrency, 15)).fill(0).map(() => '<div class="subagent-slot">▶</div>').join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Gate
+        if (step.gate) {
+            html += `
+                <div class="gate-card">
+                    <div class="gate-header">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <div class="gate-title">User Decision Gate</div>
+                    </div>
+                    <div class="gate-options">
+                        ${step.gate.options.map(opt => `
+                            <div class="gate-option">
+                                <div class="gate-key">${opt.key}</div>
+                                <div class="gate-label">${opt.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        return html;
+    }
+
+    // Scroll to section
+    function scrollToSection(name) {
+        const section = document.querySelector(`[data-section="${name}"]`);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            // Expand in nav
+            expandedSections.add(name);
+            renderNav();
+        }
+    }
+
+    // Scroll spy
+    function updateScrollSpy() {
+        const sections = document.querySelectorAll('[data-section]');
+        const steps = document.querySelectorAll('[data-step-card]');
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+
+        // Update progress bar
+        const docHeight = document.documentElement.scrollHeight - windowHeight;
+        const progress = (scrollY / docHeight) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+
+        // Find current section
+        let currentSection = null;
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= windowHeight / 3) {
+                currentSection = section.dataset.section;
+            }
+        });
+
+        // Update nav section highlight
+        document.querySelectorAll('.nav-section-header').forEach(header => {
+            const section = header.closest('.nav-section');
+            if (section && section.dataset.orch === currentSection) {
+                header.classList.add('active');
+            } else {
+                header.classList.remove('active');
+            }
+        });
+
+        // Find current step
+        let currentStep = null;
+        steps.forEach(step => {
+            const rect = step.getBoundingClientRect();
+            if (rect.top <= windowHeight / 2 && rect.bottom > 0) {
+                currentStep = step.dataset.stepCard;
+            }
+        });
+
+        // Update nav item highlight
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.dataset.step === currentStep) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    // Throttle scroll handler
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+            updateScrollSpy();
+            scrollTimeout = null;
+        }, 50);
+    });
+
+    // Initialize
+    renderNav();
+    renderMain();
+    updateScrollSpy();
+    </script>
+</body>
+</html>

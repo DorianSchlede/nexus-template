@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Pipeline v11 - Content-Rich</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-card: #1a1f3a;
+            --bg-section: #141937;
+
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+
+            --border-subtle: #2d3554;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #141937 100%);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            background: var(--bg-card);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+            font-size: 0.875rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+        }
+
+        /* ORCHESTRATOR SECTION */
+        .orchestrator-section {
+            margin-bottom: 4rem;
+        }
+
+        .orch-header {
+            background: var(--bg-section);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .orch-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .orch-mission {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .orch-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .orch-meta-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .orch-meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .orch-meta-value {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .orch-meta-value code {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: var(--accent-green);
+            font-size: 0.85rem;
+        }
+
+        /* STEP CARD */
+        .step-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .step-header {
+            margin-left: 60px;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .importance-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .importance-critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .importance-high {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .importance-medium {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .step-context {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        .step-purpose {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--accent-green);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-purpose-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-purpose-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* CONTENT SECTIONS */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .content-box {
+            background: var(--bg-section);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .content-box-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .content-box-icon {
+            font-size: 1.2rem;
+        }
+
+        .content-box-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .content-box-count {
+            margin-left: auto;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .content-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-list li::before {
+            content: '▸';
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+            font-weight: 700;
+        }
+
+        .content-list code {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            font-family: 'Consolas', monospace;
+        }
+
+        .gap-fix-item {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--accent-yellow);
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .gap-fix-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-header {
+                margin-left: 0;
+                margin-top: 60px;
+            }
+
+            .step-number {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero">
+            <h1>Research Pipeline Architecture</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">
+                Comprehensive 3-Phase System for Academic Paper Analysis
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="stat-value">29</span>
+                    <span>Total Steps</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-value">3</span>
+                    <span>Critical Gates</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-value">3</span>
+                    <span>Artifacts Produced</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-value">33</span>
+                    <span>Validation Checks</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORCHESTRATOR: create-research-project -->
+        <div class="orchestrator-section">
+            <div class="orch-header">
+                <div class="orch-title">
+                    <span>🎯</span>
+                    <span>Phase 1: Planning & Acquisition</span>
+                </div>
+                <div class="orch-mission">Build research corpus from search to preprocessed chunks</div>
+                <div class="orch-meta">
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Key Outputs</div>
+                        <div class="orch-meta-value">
+                            <code>_briefing.md</code>, <code>PDFs</code>, <code>_chunks/*.md</code>
+                        </div>
+                    </div>
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Complexity</div>
+                        <div class="orch-meta-value">14 steps - highest manual intervention</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">0</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Initialize Task Tracking</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 0 in create-research-project (initialization)</div>
+                </div>
+
+                <div class="step-description">After Step 2 (Define RQ)**, update plan.md:</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>[ ] Create project structure (Step 1)</li>
+
+                            <li>[ ] Define research question → _briefing.md (Step 2)</li>
+
+                            <li>[ ] Search papers → _search_results.md (Step 3)</li>
+
+                            <li>[ ] Review abstracts → _abstract_reviews.md (Step 4)</li>
+
+                            <li>[ ] User selection → _selection_log.md (Step 5)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔗</span>
+                            <span class="content-box-title">Dependencies</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>9</li>
+
+                            <li>2</li>
+
+                            <li>6</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Create Project Structure</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 1 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Create Project Structure</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Artifact generation</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>00-system/skills/projects/create-project/scripts/init_project.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Define Research Question (with AI Field Generation)</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 2 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Interactive session to create `02-resources/_briefing.md`:</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">field**</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">4</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>the 8-entity hypothesis for our UDWO metamodel"</li>
+
+                            <li>⚠ "{generic_field}" is generic - consider removing if not research-focused</li>
+
+                            <li>fields are MECE (mutually exclusive, collectively exhaustive)</li>
+
+                            <li>All other fields are domain-specific</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>'ok' → Accept all fields</li>
+
+                            <li>'remove N' → Remove field N (e.g., 'remove 6')</li>
+
+                            <li>'add FIELD_NAME: description' → Add custom field</li>
+
+                            <li>'edit N: new description' → Edit description</li>
+
+                            <li>Identify 6-10 extraction fields that would capture key insights</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Gap Fixes</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+
+                        <div class="gap-fix-item">G5: Fix: AI-Generated Field Suggestions**</div>
+
+                        <div class="gap-fix-item">G22A: Fix: Add research_purpose field**</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Search Papers</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 3 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Search Papers</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>PDF: {URL if available}</li>
+
+                            <li>Status: PENDING_REVIEW</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Review Abstracts</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 4 in create-research-project</div>
+                </div>
+
+                <div class="step-description">See [references/abstract_review.md](references/abstract_review.md) for scoring criteria.</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Recommendation: APPROVE</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">User Selection</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 5 in create-research-project</div>
+                </div>
+
+                <div class="step-description">User Selection</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>[x] Paper Title (5/5)</li>
+
+                            <li>[x] Paper Title (4/5)</li>
+
+                            <li>[ ] Paper Title (3/5) - {concern}</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Selection Gate</div>
+                        <span class="importance-badge importance-critical">Critical</span>
+                    </div>
+                    <div class="step-context">Step 6 in create-research-project (user approval gate)</div>
+                </div>
+
+                <div class="step-description">On 'Y':** Proceed to Phase C (Acquisition)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">7</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Download Approved Papers</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 7 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Resolves multiple URLs per paper (arXiv → S2 → Unpaywall → direct)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">📤</span>
+                            <span class="content-box-title">Outputs</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>_download_report.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Resolves multiple URLs per paper (arXiv → S2 → Unpaywall → direct)</li>
+
+                            <li>Downloads in parallel with rate limiting</li>
+
+                            <li>Verifies PDFs (catches HTML error pages)</li>
+
+                            <li>Retries failed downloads with exponential backoff</li>
+
+                            <li>Generates `_download_report.md` with success/fail stats</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/skills/paper-search/scripts/paper_download.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">8</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Preprocess PDFs → Chunks</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 8 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Preprocess PDFs → Chunks</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/skills/pdf-preprocess/scripts/pdf_to_markdown.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">9</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Acquisition Report + User Gate</div>
+                        <span class="importance-badge importance-critical">Critical</span>
+                    </div>
+                    <div class="step-context">Step 9 in create-research-project (user approval gate)</div>
+                </div>
+
+                <div class="step-description">>12 chunks → 2 subagents (split at chunk 6)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Downloaded:    18 papers</li>
+
+                            <li>Preprocessed:  18 papers → 52 chunks</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Thematic-LM (ACM paywall)</li>
+
+                            <li>LLM-in-the-loop (ACL paywall)</li>
+
+                            <li>CollabCoder (ACM paywall)</li>
+
+                            <li><=4 chunks → 1 subagent</li>
+
+                            <li>5-12 chunks → 1 subagent</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">10</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Generate Analysis Kit</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 10 in create-research-project</div>
+                </div>
+
+                <div class="step-description">This file consolidates everything subagents need to analyze papers, eliminating redundant reads.</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Data consolidation</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">📤</span>
+                            <span class="content-box-title">Outputs</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>_analysis_kit.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Research question from `_briefing.md`</li>
+
+                            <li>Extraction schema (fields, descriptions, priorities)</li>
+
+                            <li>Validation contract (required frontmatter fields)</li>
+
+                            <li>chunks_read == chunks_expected</li>
+
+                            <li>analysis_complete == true</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔗</span>
+                            <span class="content-box-title">Dependencies</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>_briefing.md</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">11</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Generate Extraction Guide</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 11 in create-research-project</div>
+                </div>
+
+                <div class="step-description">Field-specific examples for EACH field in `_briefing.md`</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">📤</span>
+                            <span class="content-box-title">Outputs</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>_extraction_guide.md</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Field-specific examples for EACH field in `_briefing.md`</li>
+
+                            <li>Controlled vocabulary for this domain</li>
+
+                            <li>Good/bad extraction examples</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">12</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Generate Orchestrator Instructions + Subagent Allocation Plan</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 12 in create-research-project</div>
+                </div>
+
+                <div class="step-description">**Pre-calculated allocation from 12.1** (NOT dynamic calculation)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">sections to add:**</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>allocation count matches paper count</li>
+
+                            <li>be written to plan.md so execute-research-project can read it:**</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Project path constants</li>
+
+                            <li>**Pre-calculated allocation from 12.1** (NOT dynamic calculation)</li>
+
+                            <li>Subagent prompt template with `{paper_id}` and `{chunks}` variables</li>
+
+                            <li>Split prompts for large papers (with specific chunk ranges)</li>
+
+                            <li>Merge prompts for multi-part papers</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">13</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Confirm Ready for Execution</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 13 in create-research-project</div>
+                </div>
+
+                <div class="step-description">The `execute-research-project` skill expects:</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">|</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">4</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>at least 1 paper has chunks</li>
+
+                            <li>_briefing.md (extraction schema)</li>
+
+                            <li>_analysis_kit.md (subagent context)</li>
+
+                            <li>_selection_log.md (user approved)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Analyze each paper (spawn subagents in batches of 10)</li>
+
+                            <li>Validate analysis logs (Phase 4.5 hallucination check)</li>
+
+                            <li>Generate cross-paper synthesis</li>
+
+                            <li>Paper folders with `_metadata.json` (chunks exist)</li>
+
+                            <li>`02-resources/_briefing.md` (extraction schema)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ORCHESTRATOR: analyze-research-project -->
+        <div class="orchestrator-section">
+            <div class="orch-header">
+                <div class="orch-title">
+                    <span>🔬</span>
+                    <span>Phase 2: Analysis</span>
+                </div>
+                <div class="orch-mission">Per-paper deep extraction with multi-point evidence</div>
+                <div class="orch-meta">
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Key Outputs</div>
+                        <div class="orch-meta-value">
+                            <code>index.md per paper</code>, <code>chunk_index Schema 2.3</code>
+                        </div>
+                    </div>
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Complexity</div>
+                        <div class="orch-meta-value">5 steps - 15 parallel subagents</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">0</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Initialize Task Tracking</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 0 in analyze-research-project (initialization)</div>
+                </div>
+
+                <div class="step-description">Paper Corpus table (which papers to analyze)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>analysis logs (Step 3)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>[ ] Validate readiness (Step 1)</li>
+
+                            <li>[ ] Analyze papers → index.md + _analysis_log.md (Step 2)</li>
+
+                            <li>[ ] Validate analysis logs (Step 3)</li>
+
+                            <li>[ ] Mark analysis READY_FOR_SYNTHESIS (Step 4)</li>
+
+                            <li>Paper Corpus table (which papers to analyze)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔗</span>
+                            <span class="content-box-title">Dependencies</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>4</li>
+
+                            <li>01-planning/plan.md</li>
+
+                            <li>2</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Validate Readiness</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 1 in analyze-research-project (validation checkpoint)</div>
+                </div>
+
+                <div class="step-description">If project was created with an older version (missing _analysis_kit.md, _extraction_guide.md, or orchestrator instructions):</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Artifact generation</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>prerequisites and paper readiness:**</li>
+
+                            <li>have been created in Phase 1 Step 12.</li>
+
+                            <li>Proceeding with Phase 2 (Analysis)...</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Generate _analysis_kit.md (Step 10)</li>
+
+                            <li>Generate _extraction_guide.md (Step 11)</li>
+
+                            <li>Add orchestrator instructions to plan.md (Step 12)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Analyze Papers</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 2 in analyze-research-project</div>
+                </div>
+
+                <div class="step-description">Paper Corpus table with chunk counts and subagent allocation</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">{research_purpose}  # G22a - WHY this research matters</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>use YAML frontmatter format below)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Paper Corpus table with chunk counts and subagent allocation</li>
+
+                            <li>Exact prompts for standard papers (1 subagent)</li>
+
+                            <li>Exact prompts for large papers (2+ subagents + merge)</li>
+
+                            <li>`03-skills/research-pipeline/shared/paper-analyze-core/SKILL.md` (methodology)</li>
+
+                            <li>`{project_path}/02-resources/_briefing.md` (research question + schema)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔗</span>
+                            <span class="content-box-title">Dependencies</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>_analysis_kit.md</li>
+
+                            <li>_briefing.md</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Gap Fixes</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+
+                        <div class="gap-fix-item">G13: Fix)</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Validate Analysis Logs</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 3 in analyze-research-project (validation checkpoint)</div>
+                </div>
+
+                <div class="step-description">Multi-point evidence matches actual chunks</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>PASSED:  16 papers (validation complete)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">4</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>All chunks read (recorded in log)</li>
+
+                            <li>Multi-point evidence matches actual chunks</li>
+
+                            <li>index.md created and valid YAML frontmatter</li>
+
+                            <li>Paper_XYZ - Chunk 3 evidence mismatch</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/skills/paper-analyze/scripts/validate_analysis.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Mark Analysis READY_FOR_SYNTHESIS</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 4 in analyze-research-project</div>
+                </div>
+
+                <div class="step-description">Note**: Synthesis files are created by `synthesize-research-project` (Phase 3).</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">|</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>write partial progress:**</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Read all index.md files</li>
+
+                            <li>Spawn batch extraction subagents</li>
+
+                            <li>Aggregate patterns per field</li>
+
+                            <li>Generate full _synthesis_report.md with citations</li>
+
+                            <li>Reads `chunks_remaining` from `_analysis_log.md`</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔗</span>
+                            <span class="content-box-title">Dependencies</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>_analysis_log.md</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ORCHESTRATOR: synthesize-research-project -->
+        <div class="orchestrator-section">
+            <div class="orch-header">
+                <div class="orch-title">
+                    <span>✨</span>
+                    <span>Phase 3: Synthesis</span>
+                </div>
+                <div class="orch-mission">Cross-paper pattern extraction via 7-level architecture</div>
+                <div class="orch-meta">
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Key Outputs</div>
+                        <div class="orch-meta-value">
+                            <code>_synthesis_*.yaml</code>, <code>_synthesis_report.md</code>
+                        </div>
+                    </div>
+                    <div class="orch-meta-item">
+                        <div class="orch-meta-label">Complexity</div>
+                        <div class="orch-meta-value">10 steps - 6/7 levels are deterministic scripts</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">0</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Initialize Task Tracking</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 0 in synthesize-research-project (initialization)</div>
+                </div>
+
+                <div class="step-description">Initialize Task Tracking</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>[ ] Validate readiness (Step 1)</li>
+
+                            <li>[ ] Run build_synthesis_routing.py (Step 2 - Level 1)</li>
+
+                            <li>[ ] Run calculate_subagent_allocation.py (Step 3 - Level 2)</li>
+
+                            <li>[ ] Run generate_subagent_prompts.py (Step 4 - Level 3)</li>
+
+                            <li>[ ] Spawn batch extraction subagents (Step 5 - Level 4)</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Validate Readiness</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 1 in synthesize-research-project (validation checkpoint)</div>
+                </div>
+
+                <div class="step-description">If validation fails, papers need re-analysis with the updated skill (which includes inline YAML template).</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">- G22a)</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>prerequisites including chunk_index (required for 7-level routing):**</li>
+
+                            <li>briefing exists (with research_purpose - G22a)</li>
+
+                            <li>for 7-level routing):**</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/shared/contracts/validate_interface.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Build Synthesis Routing Table</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 2 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">Reads all index.md files with chunk_index</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>(Gap G19)**: Warns if field matches >80% of chunks</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Reads all index.md files with chunk_index</li>
+
+                            <li>For each field from _briefing.md:</li>
+
+                            <li>Looks up `chunk_index[N].fields_found[field]`</li>
+
+                            <li>If `true` or `partial` → add chunk to routing</li>
+
+                            <li>Outputs routing table</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/build_synthesis_routing.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Calculate Subagent Allocation</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 3 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">Reads routing table with token counts per chunk</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">synthesis_files_estimated: 45000</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Synthesis files: ~45,000 tokens</li>
+
+                            <li>Proceeding with Level 3 (Prompt Generation)...</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Reads routing table with token counts per chunk</li>
+
+                            <li>Uses greedy bin-packing to fit chunks into 70k token batches</li>
+
+                            <li>Groups chunks by paper when possible (context preservation)</li>
+
+                            <li>Outputs subagent plan</li>
+
+                            <li>batch_id: "entity_types_1"</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/calculate_subagent_allocation.py</code></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Gap Fixes</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+
+                        <div class="gap-fix-item">G3: # Level 4 batches (extraction subagents)</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Generate Subagent Prompts</div>
+                        <span class="importance-badge importance-medium">Medium</span>
+                    </div>
+                    <div class="step-context">Step 4 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">Reads _briefing.md for research_purpose (G22a)</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">(G22a)</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>research_purpose (G22a)</li>
+
+                            <li>synthesis_goals (G22b)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Reads _briefing.md for research_purpose (G22a)</li>
+
+                            <li>Reads _analysis_kit.md for synthesis_goals (G22b)</li>
+
+                            <li>Generates INPUT CONTRACT per subagent (G13)</li>
+
+                            <li>`{project_path}/02-resources/_briefing.md`</li>
+
+                            <li>`{paper_path}/{paper_id}_{chunk}.md`</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/generate_subagent_prompts.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Spawn Batch Extraction Subagents</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 5 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">CRITICAL**: Do NOT read prompt content yourself. Pass the file path and let the subagent read it. This saves orchestrator context tokens.</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>name: "Endurant (Continuant)"</li>
+
+                            <li>name: "Perdurant (Occurrent)"</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Verify Subagent Outputs</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 6 in synthesize-research-project (validation checkpoint)</div>
+                </div>
+
+                <div class="step-description">Parses chunk_ref: "Paper-ID (Chunk N:Line-Line)"</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>subagent outputs with quote-line verification (Gap G15):**</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Reads all _batch_{field}_{N}.yaml files</li>
+
+                            <li>For each batch, samples 10% of patterns</li>
+
+                            <li>For each sampled pattern:</li>
+
+                            <li>Parses chunk_ref: "Paper-ID (Chunk N:Line-Line)"</li>
+
+                            <li>Reads the actual chunk file</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/verify_subagent_output.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">7</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Aggregate Patterns</div>
+                        <span class="importance-badge importance-critical">Critical</span>
+                    </div>
+                    <div class="step-context">Step 7 in synthesize-research-project (user approval gate)</div>
+                </div>
+
+                <div class="step-description">Reads all _batch_{field}_{N}.yaml for each field</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">Pipeline execution</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Reads all _batch_{field}_{N}.yaml for each field</li>
+
+                            <li>Merges patterns by name (fuzzy match with 90% similarity)</li>
+
+                            <li>Combines sources: if Pattern X appears in 3 batches, all 3 sources merged</li>
+
+                            <li>Outputs aggregated YAML per field</li>
+
+                            <li>name: "Endurant (Continuant)"</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">⚙️</span>
+                            <span class="content-box-title">Scripts</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li><code>03-skills/research-pipeline/validation/scripts/aggregate_patterns.py</code></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">8</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Generate Synthesis Report</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 8 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">Generate Synthesis Report</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">{research_purpose}</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">2</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Synthesis files: 45,000 tokens</li>
+
+                            <li>have inline citation: [Paper-ID (Chunk:Line)]</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Synthesis files: {synthesis_tokens} tokens</li>
+
+                            <li>Methodology: 3,000 tokens</li>
+
+                            <li>Output reservation: 20,000 tokens</li>
+
+                            <li>Usable: {usable_tokens} tokens</li>
+
+                            <li>`{project_path}/02-resources/_briefing.md`</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Gap Fixes</span>
+                            <span class="content-box-count">1</span>
+                        </div>
+
+                        <div class="gap-fix-item">1: Core Entity Type Convergence</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">9</div>
+                <div class="step-header">
+                    <div class="step-title-row">
+                        <div class="step-title">Mark Project COMPLETE</div>
+                        <span class="importance-badge importance-high">High</span>
+                    </div>
+                    <div class="step-context">Step 9 in synthesize-research-project</div>
+                </div>
+
+                <div class="step-description">Rule**: Script levels output YAML, final subagent outputs Markdown.</div>
+
+                <div class="step-purpose">
+                    <div class="step-purpose-label">🎯 Purpose</div>
+                    <div class="step-purpose-text">"{purpose}"</div>
+                </div>
+
+                <div class="content-grid">
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">✅</span>
+                            <span class="content-box-title">Validations</span>
+                            <span class="content-box-count">3</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>build_synthesis_routing.py (Level 1)</li>
+
+                            <li>calculate_subagent_allocation.py (Level 2)</li>
+
+                            <li>generate_subagent_prompts.py (Level 3)</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <span class="content-box-icon">🔧</span>
+                            <span class="content-box-title">Details</span>
+                            <span class="content-box-count">5</span>
+                        </div>
+                        <ul class="content-list">
+
+                            <li>Review synthesis report</li>
+
+                            <li>Archive or close project</li>
+
+                            <li>**ONLY 2 SUBAGENT LEVELS** - Level 4 (extraction) and Level 7 (report) use LLM</li>
+
+                            <li>**PRESERVE CITATIONS** - Every level keeps Paper-ID (Chunk:Line)</li>
+
+                            <li>**TOKEN BUDGET IS REAL** - Level 7 has calculated budget, can split</li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

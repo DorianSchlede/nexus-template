@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "version": "MVC v3.2",
+    "created": "2026-01-01",
+    "updated": "2026-01-01",
+    "status": "READY FOR IMPLEMENTATION",
+    "target_tokens": 4000,
+    "max_tokens": 8000,
+    "additionalContext_limit": "Unknown - no documented limit. Test empirically. ~1340 bytes reported issues."
+  },
+
+  "_decisions": {
+    "projects": "Nur Nummer, kein Keywords - Load via ID",
+    "routing_priority": "1. Skill, 2. Integration, 3. Project",
+    "skill_priority": "CORRECTED: 00-system/skills/ > 03-skills/ (System MUST work!)",
+    "never_do": "Split into absolute vs mode-dependent rules + extended from create-skill",
+    "skills_structure": "Ordner-basiert, auto-scalable via folder discovery",
+    "active_state": "NICHT sinnvoll - entfernt",
+    "plan_vs_execute": "Inferred from project status, overridable by keywords"
+  },
+
+  "_resolved_questions": {
+    "plan_vs_execute": {
+      "solution": "Status-based default + keyword override",
+      "rules": {
+        "PLANNING": "Default plan mode - AI reads files, discusses approach",
+        "IN_PROGRESS": "Default execute mode - AI follows steps.md",
+        "ACTIVE": "Respond naturally - ongoing work",
+        "override_keywords": {
+          "force_plan": ["plan", "review", "discuss"],
+          "force_execute": ["continue", "work on", "resume", "execute"]
+        }
+      },
+      "where_used": "Project routing - determines behavior after project match"
+    },
+    "auto_scalable_skills": {
+      "solution": "Folder-based discovery at context generation",
+      "mechanism": "Glob 00-system/skills/*/ THEN 03-skills/*/",
+      "priority": "CORRECTED: 00-system/skills/ > 03-skills/ (System skills MUST work)",
+      "output": "Category -> skill-name list only (no descriptions in startup)"
+    },
+    "never_do_clarification": {
+      "solution": "Split absolute vs mode-dependent + extended rules",
+      "absolute": [
+        "Never create folders directly → use create-* skills",
+        "Never auto-load learning skills → suggest, user decides",
+        "Never create README.md, CHANGELOG.md in skills → clutter",
+        "Never add documentation not needed for AI execution"
+      ],
+      "mode_dependent": "Different rules for plan_mode vs execute_mode"
+    }
+  },
+
+  "nexus_version": "v4",
+  "mode": "startup",
+  "language": "English",
+
+  "routing": {
+    "_comment": "Priority CHANGED: Skill first, then Integration, then Project",
+    "priority": [
+      {"order": 1, "match": "skill trigger", "action": "load matched skill"},
+      {"order": 2, "match": "integration keyword", "action": "load {name}-connect"},
+      {"order": 3, "match": "project number/name", "action": "execute-project"}
+    ],
+    "fallback": "respond naturally"
+  },
+
+  "rules": {
+    "_comment": "Split into absolute (always apply) vs mode-dependent (context matters). Extended from create-skill SKILL.md",
+    "absolute": [
+      "Never create project/skill folders directly → use create-* skills",
+      "Never auto-load learning skills → suggest, user decides",
+      "Never create README.md, CHANGELOG.md, INSTALLATION_GUIDE.md in skills",
+      "Never add auxiliary documentation not needed for AI execution",
+      "Never duplicate information (SKILL.md OR references, not both)"
+    ],
+    "plan_mode": [
+      "DO read project files to understand scope",
+      "DO discuss alternatives before committing",
+      "DO question assumptions and validate approach",
+      "DO offer mental models for complex decisions"
+    ],
+    "execute_mode": [
+      "Follow steps.md sequentially - don't skip",
+      "Read _resume.md for context on current step",
+      "Complete steps in order, mark done before next",
+      "DON'T read project files directly - use execute-project"
+    ]
+  },
+
+  "projects": {
+    "_comment": "Nur aktive Projekte, nur Nummer + Name + Status - KEINE Keywords",
+    "_filter": "status IN (PLANNING, IN_PROGRESS, ACTIVE)",
+    "list": [
+      {"id": "01", "name": "ICP Definition", "status": "PLANNING"},
+      {"id": "02", "name": "Ontologies Research", "status": "IN_PROGRESS", "progress": 52},
+      {"id": "03", "name": "NotebookLM Integration", "status": "PLANNING"},
+      {"id": "05", "name": "Create Algorithm Skill", "status": "ACTIVE"},
+      {"id": "06", "name": "Synthesis Pipeline", "status": "IN_PROGRESS"},
+      {"id": "07", "name": "Airtable Test Dataset", "status": "PLANNING"},
+      {"id": "14", "name": "Advanced Hook System", "status": "PLANNING"},
+      {"id": "18", "name": "Hook Research Upgrade", "status": "PLANNING"}
+    ]
+  },
+
+  "skills": {
+    "_comment": "Auto-discovered from folder structure at generation time. SYSTEM SKILLS HAVE PRIORITY!",
+    "_discovery": {
+      "method": "glob 00-system/skills/*/ FIRST, then 03-skills/*/",
+      "priority": "CORRECTED: 00-system/skills/ > 03-skills/ (System skills MUST work)",
+      "output": "category -> [skill-names] (no descriptions in startup)"
+    },
+    "_example_output": {
+      "airtable": ["airtable-connect", "airtable-master"],
+      "beam": ["beam-connect", "beam-master"],
+      "google": ["gmail", "google-calendar", "google-docs", "google-drive"],
+      "hubspot": ["hubspot-connect", "hubspot-master", "hubspot-create-contact"],
+      "research-pipeline": ["create-research-project", "analyze-research-project"],
+      "projects": ["create-project", "execute-project", "archive-project"],
+      "skill-dev": ["create-skill", "import-skill", "share-skill"],
+      "system": ["close-session", "explain-nexus", "list-skills"]
+    },
+    "_trigger_resolution": {
+      "method": "On routing match, read SKILL.md header for exact trigger keywords",
+      "lazy": true,
+      "cache": "Optional: pre-extract triggers to skill_triggers map"
+    }
+  },
+
+  "skill_triggers": {
+    "_comment": "OPTIONAL: Pre-generated trigger map for faster routing. Can be auto-generated or lazy-loaded.",
+    "_generation": "Extract 'triggers:' from each SKILL.md frontmatter",
+    "_core_triggers": {
+      "create project|new project": "projects/create-project",
+      "continue|resume|work on|execute": "projects/execute-project",
+      "create skill|automate": "skill-dev/create-skill"
+    },
+    "_integration_triggers": {
+      "hubspot|crm|contacts": "hubspot/hubspot-connect",
+      "slack|channel|message": "slack/slack-connect",
+      "gmail|email": "google/gmail",
+      "airtable": "airtable/airtable-connect",
+      "notion": "notion/notion-connect",
+      "beam": "beam/beam-connect"
+    },
+    "_research_triggers": {
+      "research|papers": "research-pipeline/create-research-project",
+      "analyze papers": "research-pipeline/analyze-research-project",
+      "synthesize": "research-pipeline/synthesize-research-project"
+    }
+  },
+
+  "user": {
+    "role": "Co-founder at Mutagent",
+    "goal": "100+ customer interviews + 5 pilot customers",
+    "language": "English"
+  },
+
+  "concepts": {
+    "project": "Temporal work with beginning/end. Location: 02-projects/{ID}-{name}/",
+    "skill": "Reusable workflow. 00-system/skills/ (system, priority) > 03-skills/ (user)",
+    "decision": "ONCE? -> Project. AGAIN? -> Skill."
+  },
+
+  "action": "display_menu",
+  "menu_instruction": "Read 00-system/core/orchestrator.md for menu template"
+}
