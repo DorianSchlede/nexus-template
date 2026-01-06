@@ -17,9 +17,8 @@ from .config import MANDATORY_MAPS, MEMORY_DIR
 from .loaders import (
     create_smart_defaults,
     detect_configured_integrations,
-    load_metadata,
     load_project,
-    load_skill,
+    load_skill_slim,
     scan_projects,
     scan_skills,
 )
@@ -202,15 +201,15 @@ class NexusService:
 
     def load_skill(self, skill_name: str) -> Dict[str, Any]:
         """
-        Load complete skill context.
+        Load skill context (file tree + SKILL.md only, no auto-loaded references).
 
         Args:
             skill_name: Name of the skill to load
 
         Returns:
-            Skill context with files and metadata
+            Skill context with file tree, SKILL.md content, and paths to load more
         """
-        return load_skill(skill_name, str(self.base_path))
+        return load_skill_slim(skill_name, str(self.base_path))
 
     def load_metadata(self) -> Dict[str, Any]:
         """
@@ -219,7 +218,22 @@ class NexusService:
         Returns:
             Metadata only (no memory content)
         """
-        return load_metadata(str(self.base_path))
+        from datetime import datetime
+
+        result = {
+            "loaded_at": datetime.now().isoformat(),
+            "bundle": "metadata",
+            "projects": scan_projects(str(self.base_path), minimal=True),
+            "skills": scan_skills(str(self.base_path), minimal=True),
+        }
+
+        result["stats"] = {
+            "total_projects": len(result["projects"]),
+            "total_skills": len(result["skills"]),
+            "active_projects": len([p for p in result["projects"] if p.get("status") == "IN_PROGRESS"]),
+        }
+
+        return result
 
     def list_projects(self, full: bool = False) -> Dict[str, Any]:
         """

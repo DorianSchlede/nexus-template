@@ -1,11 +1,16 @@
 # Workspace Map
 
-> Last updated: 2025-12-31
+> Last updated: 2026-01-01
 
 ## Folder Structure
 
 ```
 04-workspace/
+│
+├── 00-ai-native-org/                 # AI-native organization research
+│   ├── hook-repos/                   # Cloned hook implementation repos
+│   ├── hook-research/                # Hook pattern analysis & findings
+│   └── ontology-research/            # Ontology research outputs
 │
 ├── 01-hypotheses/                    # Hypothesis tracking (D/F/V categories)
 │   ├── desirability/                 # Customer pain & demand hypotheses
@@ -40,7 +45,9 @@
 ├── 07-insights/                      # Strategic synthesis
 │   ├── patterns/                     # Recurring themes from research
 │   ├── decisions/                    # Key decisions & rationale
+│   ├── meeting-prep/                 # Meeting preparation materials
 │   ├── slack-extracts/               # Slack channel extractions
+│   ├── technical/                    # Technical research & analysis
 │   └── core-papers/                  # Curated foundational papers
 │       ├── _index.md                 # Paper index with tiers
 │       ├── context-engineering/      # Context management papers

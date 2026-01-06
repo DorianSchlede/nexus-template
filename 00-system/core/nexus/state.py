@@ -12,7 +12,12 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-import yaml
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+    yaml = None
 
 from .config import (
     MANDATORY_MAPS,
@@ -21,7 +26,7 @@ from .config import (
     WORKSPACE_DIR,
 )
 from .models import SystemState
-from .utils import is_template_file
+from .utils import is_template_file, parse_simple_yaml
 
 
 def detect_system_state(
@@ -155,7 +160,10 @@ def build_instructions(
                         if resume_content.startswith("---"):
                             parts = resume_content.split("---", 2)
                             if len(parts) >= 2:
-                                resume_yaml = yaml.safe_load(parts[1])
+                                if HAS_YAML:
+                                    resume_yaml = yaml.safe_load(parts[1])
+                                else:
+                                    resume_yaml = parse_simple_yaml(parts[1])
                                 if resume_yaml:
                                     last_skill = resume_yaml.get("last_skill")
                                     last_phase = resume_yaml.get("phase")
@@ -271,7 +279,12 @@ def build_display_hints(
     workspace_configured: bool,
 ) -> List[str]:
     """
-    Build display hints - critical items AI must show in menu.
+    Build display hints optimized for orchestrator.md menu rendering.
+
+    These hints map directly to conditional sections in orchestrator.md:
+    - SHOW_UPDATE_BANNER → Display at top of menu
+    - ONBOARDING_INCOMPLETE → Emphasize in suggested steps
+    - Individual skill hints → Add to numbered suggestions
 
     Args:
         update_info: Update check results
@@ -280,23 +293,41 @@ def build_display_hints(
         workspace_configured: Whether workspace has been configured
 
     Returns:
-        List of display hint strings
+        List of display hint strings matching orchestrator.md patterns
     """
     hints = []
 
+    # Update banner (if available)
     if update_info.get("update_available", False):
         local_ver = update_info.get("local_version", "unknown")
         upstream_ver = update_info.get("upstream_version", "latest")
         hints.append(f"SHOW_UPDATE_BANNER: v{local_ver} → v{upstream_ver}")
 
+    # Onboarding summary (for emphasis in suggested steps)
     if pending_onboarding:
+        # Sort by priority (setup_memory first, then others)
+        priority_order = ["setup_memory", "setup_workspace", "learn_projects", "learn_skills", "learn_integrations", "learn_nexus"]
+        sorted_pending = sorted(pending_onboarding, key=lambda x: priority_order.index(x["key"]) if x["key"] in priority_order else 99)
+
         hints.append(f"ONBOARDING_INCOMPLETE: {len(pending_onboarding)} skills pending")
 
-    if not goals_personalized:
-        hints.append("PROMPT_SETUP_GOALS: Goals not yet personalized")
+        # Add individual skill hints for menu rendering
+        for skill in sorted_pending:
+            skill_key = skill["key"]
+            skill_name = skill["name"]
 
-    if not workspace_configured:
-        hints.append("PROMPT_SETUP_WORKSPACE: Workspace not configured")
+            if skill_key == "setup_memory":
+                hints.append(f"SUGGEST_ONBOARDING: 'setup memory' - teach Nexus about you ({skill['time']})")
+            elif skill_key == "setup_workspace":
+                hints.append(f"SUGGEST_ONBOARDING: 'setup workspace' - organize your files ({skill['time']})")
+            elif skill_key == "learn_projects":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn projects' - understand projects vs skills ({skill['time']})")
+            elif skill_key == "learn_skills":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn skills' - automate repeating work ({skill['time']})")
+            elif skill_key == "learn_integrations":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn integrations' - connect external tools ({skill['time']})")
+            elif skill_key == "learn_nexus":
+                hints.append(f"SUGGEST_ONBOARDING: 'learn nexus' - deep dive into the system ({skill['time']})")
 
     return hints
 
@@ -353,7 +384,10 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
         if content.startswith("---"):
             parts = content.split("---", 2)
             if len(parts) >= 2:
-                config_data = yaml.safe_load(parts[1])
+                if HAS_YAML:
+                    config_data = yaml.safe_load(parts[1])
+                else:
+                    config_data = parse_simple_yaml(parts[1])
                 if config_data and "learning_tracker" in config_data:
                     tracker = config_data["learning_tracker"]
                     if "completed" in tracker and isinstance(tracker["completed"], dict):

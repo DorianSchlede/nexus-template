@@ -19,8 +19,7 @@ BASH_OUTPUT_LIMIT = 30000  # Claude Code bash output truncation limit
 
 # Cache configuration
 CACHE_DIR = "00-system/.cache"  # Relative to Nexus root
-CACHE_STARTUP_FILE = "context_startup.json"
-CACHE_METADATA_FILE = "context_metadata.json"
+CACHE_STARTUP_FILE = "context_startup.json"  # Used by nexus-loader.py CLI fallback
 
 # =============================================================================
 # MANDATORY NAVIGATION MAPS

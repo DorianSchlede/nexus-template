@@ -279,6 +279,15 @@ TodoWrite with initial todos:
 
 ## Step 1: Validate Readiness
 
+**Run interface validation script first (catches format mismatches):**
+
+```bash
+# RECOMMENDED: Run validation before synthesis
+python 03-skills/research-pipeline/shared/contracts/validate_interface.py {project_path}
+```
+
+If validation fails, papers need re-analysis with the updated skill (which includes inline YAML template).
+
 **Check prerequisites including chunk_index (required for 7-level routing):**
 
 ```python

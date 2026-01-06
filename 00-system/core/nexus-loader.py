@@ -106,7 +106,7 @@ def main():
     parser.add_argument('--no-metadata', action='store_true', help='Exclude metadata from startup (smaller output, use --metadata separately)')
     parser.add_argument('--project', help='Load project by ID')
     parser.add_argument('--part', type=int, default=0, help='Part to load for split responses (0=auto, 1=essential, 2=references)')
-    parser.add_argument('--skill', help='Load skill by name')
+    parser.add_argument('--skill', help='Load skill by name (returns file tree + SKILL.md, use Read for references)')
     parser.add_argument('--list-projects', action='store_true', help='List all projects')
     parser.add_argument('--list-skills', action='store_true', help='List all skills')
     parser.add_argument('--full', action='store_true', help='Return complete metadata (default: minimal fields for efficiency)')
@@ -168,7 +168,9 @@ def main():
     output_chars = len(output)
 
     # Check if output exceeds bash limit - if so, cache to file
-    if output_chars > BASH_OUTPUT_LIMIT:
+    # ONLY for startup/resume commands (not for --skill, --project, etc.)
+    is_startup_command = args.startup or args.resume
+    if output_chars > BASH_OUTPUT_LIMIT and is_startup_command:
         # Create cache directory if needed
         cache_dir = detected_nexus_root / CACHE_DIR
         cache_dir.mkdir(parents=True, exist_ok=True)
@@ -208,6 +210,10 @@ def main():
             ],
         }
         print(json.dumps(cache_result, indent=2, ensure_ascii=False))
+    elif output_chars > BASH_OUTPUT_LIMIT:
+        # For non-startup commands (--skill, --project), just print the full output
+        # Claude's bash tool can handle large outputs, and these need the full content
+        print(output)
     else:
         # Add truncation detection metadata at the very end
         result['_output'] = {

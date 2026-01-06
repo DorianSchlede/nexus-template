@@ -31,30 +31,6 @@ from utils.registry import lookup_shortcut, detect_type_from_path, extract_id_fr
 
 EXECUTABLE_TYPES = {"agent", "skill", "task", "workflow"}
 
-# Path patterns for Read tool fallback (handles nested folders)
-EXECUTABLE_PATH_PATTERNS = {
-    "agent": [
-        r"/01-agents/([^/]+)/",           # /01-agents/name/...
-        r"/01-agents/([^/]+)\.md$",       # /01-agents/name.md
-        r"\\01-agents\\([^\\]+)\\",       # Windows paths
-        r"\\01-agents\\([^\\]+)\.md$",
-    ],
-    "skill": [
-        r"/02-skills/([^/]+)/",
-        r"/02-skills/([^/]+)\.md$",
-        r"\\02-skills\\([^\\]+)\\",
-        r"\\02-skills\\([^\\]+)\.md$",
-    ],
-    "task": [
-        r"/03-tasks/([^/]+)\.md$",
-        r"\\03-tasks\\([^\\]+)\.md$",
-    ],
-    "workflow": [
-        r"/04-workflows/([^/]+)\.md$",
-        r"\\04-workflows\\([^\\]+)\.md$",
-    ],
-}
-
 
 def detect_executable(tool_name, tool_input):
     """
@@ -114,12 +90,16 @@ def detect_executable(tool_name, tool_input):
 
 def parse_shortcut_for_type(shortcut):
     """
-    Parse shortcut to extract type and id.
+    Parse shortcut to extract type and id from explicit prefix format.
 
     Formats:
     - ~agent:meta-architect -> type=agent, id=meta-architect
     - ~task:create-project -> type=task, id=create-project
-    - ~meta-architect (known agents) -> type=agent, id=meta-architect
+    - ~skill:paper-search -> type=skill, id=paper-search
+    - ~workflow:research -> type=workflow, id=research
+
+    Note: For shortcuts without explicit type prefix (e.g., ~meta-architect),
+    use the registry lookup instead. This function only handles explicit prefixes.
 
     Returns: {"type": "...", "id": "..."} or None
     """
@@ -131,32 +111,22 @@ def parse_shortcut_for_type(shortcut):
             "id": match.group(2)
         }
 
-    # Known agent shortcuts (commonly loaded directly)
-    known_agents = {
-        "~meta-architect", "~master", "~architect", "~developer",
-        "~product-manager", "~analyst", "~llm-whisperer", "~trace-analyst",
-        "~trace-aggregator", "~research-orchestrator", "~project-manager"
-    }
-    if shortcut in known_agents:
-        return {
-            "type": "agent",
-            "id": shortcut.lstrip("~")
-        }
-
     return None
 
 
 def detect_from_path_patterns(file_path):
-    """Detect executable from file path using patterns."""
-    for exec_type, patterns in EXECUTABLE_PATH_PATTERNS.items():
-        for pattern in patterns:
-            match = re.search(pattern, file_path, re.IGNORECASE)
-            if match:
-                exec_id = match.group(1) if match.lastindex else extract_id_from_path(file_path)
-                return {
-                    "type": exec_type,
-                    "id": exec_id,
-                }
+    """
+    Detect executable from file path using registry utilities.
+
+    Uses detect_type_from_path() and extract_id_from_path() from registry.py
+    as the single source of truth for path pattern matching.
+    """
+    exec_type = detect_type_from_path(file_path)
+    if exec_type and exec_type in EXECUTABLE_TYPES:
+        return {
+            "type": exec_type,
+            "id": extract_id_from_path(file_path),
+        }
     return None
 
 
@@ -220,6 +190,62 @@ def is_dangerous_rm_command(command):
     return False
 
 
+# =============================================================================
+# GIT DANGEROUS OPERATIONS SAFETY
+# =============================================================================
+# These operations can cause irreversible data loss and should be blocked
+# unless user explicitly confirms they understand the risk.
+# =============================================================================
+
+GIT_DANGEROUS_PATTERNS = [
+    # Hard reset - loses uncommitted changes
+    (r"git\s+reset\s+--hard", "git reset --hard (loses uncommitted changes)"),
+    (r"git\s+reset\s+--merge", "git reset --merge (discards merge conflicts)"),
+
+    # Force push - can rewrite remote history
+    (r"git\s+push\s+.*--force(?!-with-lease)", "git push --force (use --force-with-lease instead)"),
+    (r"git\s+push\s+.*-f\b(?!orce-with-lease)", "git push -f (use --force-with-lease instead)"),
+
+    # Branch deletion with force
+    (r"git\s+branch\s+-D\b", "git branch -D (force delete, use -d for safe delete)"),
+
+    # Dangerous checkout that discards changes
+    (r"git\s+checkout\s+--\s+\.", "git checkout -- . (discards all local changes)"),
+
+    # Clean with force - deletes untracked files
+    (r"git\s+clean\s+.*-[a-z]*f", "git clean -f (deletes untracked files permanently)"),
+
+    # Stash operations that lose data
+    (r"git\s+stash\s+(drop|clear)", "git stash drop/clear (loses stashed changes)"),
+]
+
+
+def is_dangerous_git_command(command):
+    """
+    Detect dangerous git commands that could cause data loss.
+
+    Returns:
+        tuple: (is_dangerous: bool, reason: str)
+    """
+    normalized = " ".join(command.lower().split())
+
+    for pattern, reason in GIT_DANGEROUS_PATTERNS:
+        if re.search(pattern, normalized, re.IGNORECASE):
+            return True, reason
+
+    return False, ""
+
+
+# TRASH pattern guidance for safe file deletion
+TRASH_GUIDANCE = """
+SAFE ALTERNATIVE: Instead of rm, use the TRASH pattern:
+1. Create TRASH/ directory if needed: mkdir -p TRASH
+2. Move files: mv <files> TRASH/
+3. Add entry in TRASH-FILES.md with date and reason
+4. Files can be recovered until manually purged
+"""
+
+
 def is_env_file_access(tool_name, tool_input):
     """
     Check if any tool is trying to access .env files containing sensitive data.
@@ -268,7 +294,7 @@ def main():
             print("Use .env.sample for template files instead", file=sys.stderr)
             sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
 
-        # Check for dangerous rm -rf commands
+        # Check for dangerous Bash commands
         if tool_name == "Bash":
             command = tool_input.get("command", "")
 
@@ -278,7 +304,19 @@ def main():
                     "BLOCKED: Dangerous rm command detected and prevented",
                     file=sys.stderr,
                 )
+                print(TRASH_GUIDANCE, file=sys.stderr)
                 sys.exit(2)  # Exit code 2 blocks tool call and shows error to Claude
+
+            # Block dangerous git commands
+            is_dangerous_git, git_reason = is_dangerous_git_command(command)
+            if is_dangerous_git:
+                print(
+                    f"BLOCKED: {git_reason}",
+                    file=sys.stderr,
+                )
+                print("These operations can cause irreversible data loss.", file=sys.stderr)
+                print("If you need to proceed, ask user to run the command manually.", file=sys.stderr)
+                sys.exit(2)  # Exit code 2 blocks tool call
 
         # Extract session_id
         session_id = input_data.get("session_id", "unknown")

@@ -443,12 +443,61 @@ Synthesis Goals: {synthesis_goals}    # G22b - What synthesis will aggregate
 ## OUTPUT CONTRACT
 Write these files:
 1. `{paper_path}/_analysis_log.md` (Schema v2.3)
-2. `{paper_path}/index.md` (with chunk_index in frontmatter)
+2. `{paper_path}/index.md` (MUST use YAML frontmatter format below)
 
-YAML must include:
-- chunk_index with fields_found for ALL fields
-- Standardized item schema for extractions
-- Structured N/A for missing fields (Gap G18 format)
+### CRITICAL: index.md MUST use this EXACT YAML frontmatter structure:
+
+```yaml
+---
+paper_id: "{paper_id}"
+title: "{extracted title}"
+authors: []
+year: null
+chunks_expected: {from _metadata.json}
+chunks_read: {must equal chunks_expected}
+analysis_complete: true
+schema_version: "2.3"
+
+# CHUNK-LEVEL FIELD ASSESSMENT (REQUIRED for synthesis routing)
+chunk_index:
+  1:
+    token_count: {len(chunk_content) // 4}
+    fields_found:
+{fields_found_template}
+  2:
+    token_count: {len(chunk_content) // 4}
+    fields_found:
+{fields_found_template}
+  # ... repeat for ALL chunks
+
+# EXTRACTION FIELDS (from _briefing.md extraction_schema)
+{field_name}:
+  - item: "Extracted item name"
+    chunk: 1
+    lines: "128-133"
+    quote: "Exact quote from chunk..."
+
+# Use Structured N/A for fields not found
+{field_name_not_found}:
+  - item: "NOT_FOUND"
+    chunk: null
+    lines: null
+    quote: null
+    reason: "Paper does not discuss this topic"
+---
+```
+
+### fields_found template (generate from _briefing.md extraction_schema):
+```yaml
+      {field_1}: true|partial|false
+      {field_2}: true|partial|false
+      # ... ALL fields from extraction_schema MUST be listed
+      # true = extractable content present
+      # partial = mentioned but not detailed
+      # false = not present in chunk
+```
+
+**VALIDATION**: Synthesis pipeline will FAIL if chunk_index is missing or malformed.
 
 Do NOT read other files. Do NOT read the PDF.
 """

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run .claude/hooks/session_start.py"
+            "command": "python .claude/hooks/session_start.py"
           }
         ]
       }
@@ -124,7 +124,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/save_resume_state.py\"",
+            "command": "python .claude/hooks/save_resume_state.py",
             "timeout": 10
           }
         ]

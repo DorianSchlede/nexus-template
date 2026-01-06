@@ -26,18 +26,45 @@ TEMPLATE = """Analyze paper: {paper_id}
 
 Read IN ORDER:
 1. {PROJECT}/02-resources/_analysis_kit.md
-2. 03-skills/research-pipeline/shared/paper-analyze-core/SKILL.md
-3. {PROJECT}/02-resources/papers/{paper_id}/_metadata.json
-4. ALL chunks listed in _metadata.json
+2. {PROJECT}/02-resources/_briefing.md (get extraction_schema fields)
+3. 03-skills/research-pipeline/shared/paper-analyze-core/SKILL.md
+4. {PROJECT}/02-resources/papers/{paper_id}/_metadata.json
+5. ALL chunks listed in _metadata.json
 
 Write:
 1. {PROJECT}/02-resources/papers/{paper_id}/_analysis_log.md
 2. {PROJECT}/02-resources/papers/{paper_id}/index.md
 
-CRITICAL:
-- Read ALL chunks (validation will check chunks_read == chunks_expected)
-- Include chunk refs for every finding
-- Set analysis_complete: true in index.md frontmatter"""
+CRITICAL OUTPUT FORMAT - index.md MUST use this YAML frontmatter:
+
+---
+paper_id: "{paper_id}"
+title: "{extracted title}"
+schema_version: "2.3"
+chunks_expected: {from _metadata.json}
+chunks_read: {must equal chunks_expected}
+analysis_complete: true
+
+chunk_index:
+  1:
+    token_count: {len(chunk) // 4}
+    fields_found:
+      {field_1}: true|partial|false
+      {field_2}: true|partial|false
+      # ALL fields from _briefing.md extraction_schema
+  2:
+    token_count: {len(chunk) // 4}
+    fields_found:
+      # ... same fields
+
+{field_name}:
+  - item: "Extracted item"
+    chunk: 1
+    lines: "128-133"
+    quote: "Exact quote..."
+---
+
+VALIDATION: Synthesis will FAIL without chunk_index in frontmatter."""
 ```
 
 #### 4.2 Batch Execution

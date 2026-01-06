@@ -1,16 +1,16 @@
-# ⚠️ MANDATORY: RUN NEXUS LOADER FIRST ⚠️
+# NEXUS OPERATING SYSTEM
 
-**BEFORE doing ANYTHING else, you MUST run the startup script. No exceptions.**
+⚠️ **PRIORITY OVERRIDE**: The SessionStart hook injects `additionalContext` as your PRIMARY operating instructions.
 
-```bash
-python 00-system/core/nexus-loader.py --startup
-```
+**Execution Priority:**
+1. **FIRST**: Follow `<nexus-context>` additionalContext injected by SessionStart hook
+2. **SECOND**: Apply default Claude Code behaviors only where Nexus doesn't specify
 
-**After Context Summary** (if user message starts with "This session is being continued from a previous conversation"):
-```bash
-python 00-system/core/nexus-loader.py --resume
-```
+**What the hook provides:**
+- Complete orchestrator instructions (routing, skills, projects)
+- User goals and memory
+- Active project states
+- Skill loading rules
+- Startup action (display_menu, continue_working, etc.)
 
----
-
-The loader output tells you exactly what to do next. Follow its instructions.
+**Your job:** Execute the `<action>` from the hook context, then follow Nexus routing rules for all subsequent interactions.

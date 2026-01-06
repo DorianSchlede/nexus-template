@@ -1,298 +1,304 @@
 bases:
-- id: applgFcrTVoHZnYxw
-  name: Agent CMS
-  permission_level: create
-- id: appSum5xXAgFpEySq
-  name: Evaluations
-  permission_level: create
-- id: appzi9bAOmCgv6tvz
-  name: Beam AI Agent Evaluations
-  permission_level: create
-- id: appuHRZYMuUBd0zpV
-  name: Beam Evaluations e2e (Copy)
-  permission_level: create
-- id: appFi9waib1xGDa5m
-  name: Linde test - Hassaan
-  permission_level: create
-- id: appYw6cgVZh6fLeRE
-  name: Beam Evaluations Production
-  permission_level: create
-- id: app8EkANh1XHD8GqQ
-  name: AImaxDOC
-  permission_level: create
-- id: app7WZO1fMBU2jhnF
-  name: Beam Evaluations (e2e)
-  permission_level: create
-- id: appmRO3bq61GbEc6M
-  name: CRUD
-  permission_level: create
-- id: app4DNQhGGgWbUOLg
-  name: Patient Database
-  permission_level: create
-- id: appCh8JKTrwb6iSum
-  name: Artikel Datenbank
-  permission_level: create
-- id: apptV9SEWN3Vx0Zyq
-  name: BID x Beam
-  permission_level: create
-- id: appv2VisLmet7tqyt
-  name: Coolback x Beam AI Workshop
-  permission_level: create
-- id: appkqvao5meBxTK3m
-  name: Beam Evaluations (prod) (August 30, 2024)
-  permission_level: create
-- id: appK2dsrY3Wu9gPUN
-  name: Webhooks
-  permission_level: create
-- id: appLBT5aB3emzpMul
-  name: GEMS Demo
-  permission_level: create
-- id: app30TkdgZASbsAr7
-  name: Beam AI Context
-  permission_level: create
-- id: app6xrNZgjrO5gmvQ
-  name: 'Demo: Debt Collection'
-  permission_level: create
-- id: appSQaUyvR7hxphJT
-  name: Graph Evaluations (ACTIVE)
-  permission_level: create
-- id: appRWdX3nKuatq5TN
-  name: CLX Prod
-  permission_level: create
-- id: appOTjdP0RQ9VaVm7
-  name: Automation_Expert_Interview
-  permission_level: create
-- id: app9DCo12WTcr6bRO
-  name: Hire Booth - Database
-  permission_level: create
-- id: appyRiDZRQY0l813r
-  name: Hackathon
-  permission_level: create
-- id: appB02B90KGZkm7tG
-  name: KYC Database
-  permission_level: create
-- id: appaJAfTi3RohG8AB
-  name: Demos Database
-  permission_level: create
-- id: appHRgX0OJxMy2xQZ
-  name: eCapital Database
-  permission_level: create
-- id: appSaZH9DPZdQiWuw
-  name: Utility Bills Database
-  permission_level: create
-- id: appHSBNy6KH0EyPUB
-  name: T2 Database
-  permission_level: create
-- id: appSALW4HVFcs1V1H
+- id: appDliqd1pr7IdwCC
   name: Untitled Base
   permission_level: create
-- id: appF0e7SwUI3PMNEw
-  name: Crypto.com
+  tables:
+  - fields:
+    - id: fldhv08RMkgY1RWxH
+      name: Name
+      type: singleLineText
+    - id: fldQzIsVnzIYDnXin
+      name: Notes
+      type: multilineText
+    - id: fldQxog1UQKIaHBPX
+      name: Assignee
+      type: singleCollaborator
+    - choices:
+      - Todo
+      - In progress
+      - Done
+      id: fldpCKSIYTinOasnZ
+      name: Status
+      type: singleSelect
+    - id: fldij3Q08CqFMMao0
+      name: Attachments
+      type: multipleAttachments
+    - id: fldqmzMrN0nrlCDLL
+      name: Attachment Summary
+      type: aiText
+    id: tblm7yQMM9n1XwU3R
+    name: Table 1
+    primary_field_id: fldhv08RMkgY1RWxH
+- id: app1PUP808LAqvCfZ
+  name: Research & Competitor Intelligence
   permission_level: create
-- id: app9kfnBWl7eKA4Dy
-  name: Reconciliation Database
-  permission_level: create
-- id: appcD3a09oZJtixuK
-  name: gap_analysis
-  permission_level: create
-- id: appZUZvNal76srPey
-  name: Adres_PoC
-  permission_level: create
-- id: applr9AZSSWyO9G1R
-  name: Coolback – Customer Dataset
-  permission_level: create
-- id: appqGkfuM4QEhJSyX
-  name: Willis Towers Watson (Copy)
-  permission_level: create
-- id: appRN9i5ZMM9cNlJt
-  name: House of Shipping
-  permission_level: create
-- id: appEhXbk0rNSaQxyW
-  name: GTM Request Database
-  permission_level: create
-- id: appv1DayNNtrzdLtr
-  name: KPMG
-  permission_level: create
-- id: app5cFnwuaK9iNfMz
-  name: HG Capital
-  permission_level: create
-- id: appiyxx0zr96JKfuq
-  name: Prompt Taxonomy
-  permission_level: create
-- id: appg2kBz8OnSHi89Q
-  name: Sales and Stock Update
-  permission_level: create
-- id: app5vPGJzdlOMF46J
-  name: Order to Cash
-  permission_level: create
-- id: appyD0uMtPQVbkgK1
-  name: Zurich
-  permission_level: create
-- id: appAj6tTjxcziGxWm
-  name: Myriad
-  permission_level: create
-- id: appEnRPQKEqYHYIZm
-  name: kilian_sandbox
-  permission_level: create
-- id: app7dLs38M4UFhuoq
-  name: Hiring Database - Suf
-  permission_level: create
-- id: appFPoOfBpUv73M5A
-  name: AI Development Platform
-  permission_level: create
-- id: appH6p9hOXdtmiQqQ
-  name: Bosch
-  permission_level: create
-- id: appeHa570wuReeV6D
+  tables:
+  - fields:
+    - id: fldGUuTE555kSvHcZ
+      name: Title
+      type: singleLineText
+    - id: fldXgTrCMN9J5a84q
+      name: Authors
+      type: singleLineText
+    - id: fldbh4yCMZRHn3mHW
+      name: Publication Date
+      type: date
+    - id: fldPDpe8x0syDUJrK
+      name: Abstract
+      type: multilineText
+    - id: fldHFftF1FfJJSV5U
+      name: PDF Link
+      type: singleLineText
+    - id: fldRCJ6yTk741aM4Y
+      name: Cover Image
+      type: multipleAttachments
+    - id: fldxF3vgeVoOUDf5R
+      name: Category
+      type: multipleRecordLinks
+    - id: fld5BOp0erjiB5rU7
+      name: Competitors Mentioned
+      type: multipleRecordLinks
+    - id: fldmlItVJCJwWbXWc
+      name: Year Published
+      type: formula
+    - id: fldPhVZeGNns5cuAr
+      name: Number of Competitors Mentioned
+      type: rollup
+    - id: fldVlLTbimwFmDJyI
+      name: Category Name (Lookup)
+      type: multipleLookupValues
+    - id: fld0WanCQbyZBfhUR
+      name: Summary (AI)
+      type: aiText
+    - id: flduwswIJdOw12Nm6
+      name: Competitor Analysis Insights (AI)
+      type: aiText
+    id: tblnMQGGMRcGRFVQW
+    name: Research Papers
+    primary_field_id: fldGUuTE555kSvHcZ
+  - fields:
+    - id: fldELPYog12XQZcft
+      name: Category Name
+      type: singleLineText
+    - id: fldWPDzi5l729PSL1
+      name: Description
+      type: multilineText
+    - id: fldbuNQpGctDyQF2b
+      name: Related Research Papers
+      type: multipleRecordLinks
+    - id: fldV2NruzooDFuuCs
+      name: Research Paper Count
+      type: count
+    - id: fld3xVizy1dBLp1Li
+      name: Most Recent Paper Date
+      type: rollup
+    - id: fldcDmU8wX1XELHyt
+      name: Summary of Research Focus
+      type: aiText
+    - id: fldGLWcHo6CJOSy7s
+      name: Emerging Trends (AI Agent Ops)
+      type: aiText
+    - id: fldzsbYEyWdUfsd9U
+      name: Features
+      type: multipleRecordLinks
+    - id: fldwDNBjmFQyV1FRo
+      name: Products
+      type: multipleRecordLinks
+    id: tblqOiP0oqegvuprT
+    name: Categories
+    primary_field_id: fldELPYog12XQZcft
+  - fields:
+    - id: fld7gqTy0bMdstnvw
+      name: Competitor Name
+      type: singleLineText
+    - id: fldJzYtWUtK4vlVsI
+      name: Logo
+      type: multipleAttachments
+    - id: fld0g4SpfmfOicdUI
+      name: Website
+      type: singleLineText
+    - id: fldaqEXubAXOmmQX6
+      name: Headquarters Location
+      type: singleLineText
+    - id: fld9Zw3Is6H51Xi0t
+      name: Founded Year
+      type: number
+    - choices:
+      - 1-10
+      - 11-50
+      - 51-200
+      - 201-500
+      - 501-1000
+      - 1001+
+      id: fldNQpd7utJ7sTOQ7
+      name: Company Size
+      type: singleSelect
+    - id: fld6zQyzW3kYJPs37
+      name: Products
+      type: multipleRecordLinks
+    - id: fldM3seiIrAwzHCP7
+      name: Strategic Moves
+      type: multilineText
+    - id: fld6c6jHsLhz1IzBf
+      name: Key Features
+      type: multipleRecordLinks
+    - id: fldrHAKxqIHBwZYqz
+      name: '# of Products'
+      type: rollup
+    - id: fld9kr8La28rr7aMG
+      name: '# of Key Features'
+      type: rollup
+    - id: flddh1MDTBM9HaBdN
+      name: Latest Product Release Date
+      type: rollup
+    - id: fldFJUwkZuU14v2rv
+      name: Product List
+      type: rollup
+    - id: fldppvpvQ4SfIIH9i
+      name: Key Feature List
+      type: rollup
+    - id: fld4fWYIobIrHqZdM
+      name: Strategic Move Summary (AI)
+      type: aiText
+    - id: fldu2O1VFbmI6Ze9R
+      name: Competitor Positioning (AI)
+      type: aiText
+    - id: fldXyF7MvDgISAyDC
+      name: Research Papers
+      type: multipleRecordLinks
+    id: tblUg62Fjjl46ezjV
+    name: Competitors
+    primary_field_id: fld7gqTy0bMdstnvw
+  - fields:
+    - id: fldvo2RE9NTNnN60V
+      name: Product Name
+      type: singleLineText
+    - id: fldDg8s5lXN1Ww2D6
+      name: Description
+      type: multilineText
+    - id: fldrEdBGxfH9n229A
+      name: Release Date
+      type: date
+    - id: fldRsXCfjCUzvTvmJ
+      name: Product Image
+      type: multipleAttachments
+    - id: fldwYU8LJQTHNldmr
+      name: Competitor Company
+      type: multipleRecordLinks
+    - id: fldTO5uwSmM7YgpI7
+      name: Features Included
+      type: multipleRecordLinks
+    - id: fld86XN633QPWcE8S
+      name: Category
+      type: multipleRecordLinks
+    - id: fldXnfWaRgjkfSu6q
+      name: Website URL
+      type: singleLineText
+    - id: fld3K9pDABNHefuNQ
+      name: Pricing
+      type: currency
+    - choices:
+      - Active
+      - Discontinued
+      - Beta
+      - Upcoming
+      id: fldBMZXfdI9Qk8uUE
+      name: Status
+      type: singleSelect
+    - id: fldsh3j23BBCkno8c
+      name: Number of Features
+      type: count
+    - id: fldsH4DYZtJdB6YVi
+      name: Feature List
+      type: rollup
+    - id: fldhzB6jAjPUZmxue
+      name: Competitor Company Website
+      type: multipleLookupValues
+    - id: fldACgpPmuFbVJjqI
+      name: Days Since Release
+      type: formula
+    - id: fldu0t4SvrqDm8HWC
+      name: Product Summary (AI)
+      type: aiText
+    - id: fldPjlJGI0AEErCkN
+      name: Competitive Positioning Insights (AI)
+      type: aiText
+    id: tblvXQxNuFjAANtn7
+    name: Products
+    primary_field_id: fldvo2RE9NTNnN60V
+  - fields:
+    - id: fld04MM06OJ71wer8
+      name: Feature Name
+      type: singleLineText
+    - id: fldZeHMTW0yhF8bcD
+      name: Description
+      type: multilineText
+    - id: fldqpZlQviPxtatVT
+      name: Product
+      type: multipleRecordLinks
+    - id: fldWVwknefPCMuANq
+      name: Category
+      type: multipleRecordLinks
+    - id: fldWwXDXxgZMUYKMN
+      name: Visual Example
+      type: multipleAttachments
+    - id: flddpNN1PKWnJRdGb
+      name: Release Date
+      type: date
+    - id: flde6kQ9kCxM2iqm2
+      name: Is Core Feature
+      type: checkbox
+    - id: fldg4uTkx5lAHDRZa
+      name: Competitor
+      type: multipleRecordLinks
+    - id: fldcR70iOqTXkV1Zv
+      name: Competitor Name
+      type: multipleLookupValues
+    - id: fldk3poTmw65tmOfW
+      name: Product Name
+      type: multipleLookupValues
+    - id: fldTzkyPdX2k5LlPi
+      name: Category Name
+      type: multipleLookupValues
+    - id: fld4JLD6ZE3WIyz5w
+      name: Feature Summary (AI)
+      type: aiText
+    - id: fldUqdAFX3SQtSC5T
+      name: Feature Differentiation (AI)
+      type: aiText
+    id: tblFBPGTXATI6LytM
+    name: Features
+    primary_field_id: fld04MM06OJ71wer8
+- id: app1gngDx52VAgjVQ
   name: Untitled Base
   permission_level: create
-- id: appb47dGKPIsFwIhh
-  name: Beam Agent Development v3
-  permission_level: create
-- id: app3yOUwWvdFS0jTs
-  name: Beam AI Testing
-  permission_level: create
-- id: app6EpydVbOqelcby
-  name: Beam AI Testing
-  permission_level: create
-- id: appyqz0zlxGeykQQY
-  name: Beam AI Testing
-  permission_level: create
-- id: appS10tmZsfd7Isyv
-  name: Beam AI Testing
-  permission_level: create
-- id: appK66YOr6qGEaq9y
-  name: Beam AI Testing
-  permission_level: create
-- id: appgLpKpVl58bD5TK
-  name: Beam AI Testing v2
-  permission_level: create
-- id: appW7xUN0cjIHz83z
-  name: Beam AI Testing v2
-  permission_level: create
-- id: appu5hdswhIE48IOW
-  name: Beam AI Testing v3
-  permission_level: create
-- id: appmzsIhkHdzIb1BH
-  name: Aramco
-  permission_level: create
-- id: appDmSzqbloUwUZN6
-  name: TISTA
-  permission_level: create
-- id: appqLFaMVNHsvjk69
-  name: trawa prompt testing
-  permission_level: create
-- id: appXAzaFQqHfzuJR6
-  name: Interview Transcript Analyzer
-  permission_level: create
-- id: appzfVapVn2xdBKgB
-  name: Customer Support Management
-  permission_level: create
-- id: appdHf1l88uHlS8hH
-  name: Booth - Job Desciptions (Copy)
-  permission_level: create
-- id: appcT72XQzJ1M6Men
-  name: Unidays Email Content
-  permission_level: create
-- id: appO7CaXsehbNNCcH
-  name: Competitor Analysis
-  permission_level: create
-- id: appGaZ1hPNkcUGxo3
-  name: Untitled Base
-  permission_level: create
-- id: appAgyOB6WdeyCaBo
-  name: BID Leicht Strittig Analyse
-  permission_level: create
-- id: appLMTXzdXMX7W7sS
-  name: HR Demos
-  permission_level: create
-- id: appCCwtCWpWsQHYm8
-  name: 'Team: Operations'
-  permission_level: create
-- id: appnJkuMLpGjwV7Hb
-  name: Compliance_QA_System
-  permission_level: create
-- id: apppAAhpegK9FO1yE
-  name: wusoom_database
-  permission_level: create
-- id: appgjU7WRuOYLFtTm
-  name: mcp_sven
-  permission_level: create
-- id: appRr252fWCezR3SN
-  name: Agent Analytics
-  permission_level: create
-- id: appxD5vALTgH6cYdc
-  name: Prompt Library
-  permission_level: create
-- id: app1HvBA0XwFCUgVa
-  name: Zurich_Master_Invoices
-  permission_level: create
-- id: appkU8WB7gOFyIJTg
-  name: Raw Mat Data Extraction
-  permission_level: create
-- id: appSTm2kIkQ8Muexk
-  name: Booth - Calendars (TA)
-  permission_level: create
-- id: appo8GKhDKgdOeBYq
-  name: Booth - Calendars (TA)
-  permission_level: create
-- id: appZ4ZuwQ0aFuVrkD
-  name: Doulagivers
-  permission_level: create
-- id: appBGWijUTGWwOtSj
-  name: VRAI Quote Manager
-  permission_level: create
-- id: appTpyxA1R64fFBEQ
-  name: Client Portal
-  permission_level: create
-- id: appP1SZxJlG2K5K7N
-  name: mcp_test
-  permission_level: create
-- id: appnOmMJEq1jEreyh
-  name: Anaplan
-  permission_level: create
-- id: appeBrl9BLzpdosuq
-  name: Untitled Base
-  permission_level: create
-- id: appjjJCmJetkEKltI
-  name: Model Tracker
-  permission_level: create
-- id: appalHKtlbFkimKuf
-  name: Untitled Base
-  permission_level: create
-- id: appBGyGCNjZIm2F8N
-  name: RBI
-  permission_level: create
-- id: app0UMtUpO5jXyGRG
-  name: GMM Luchttechniek
-  permission_level: create
-- id: appipPIsNOP1eciCK
-  name: Untitled Base
-  permission_level: create
-- id: appV9gahm5X2MQMzh
-  name: Demo Database - ME
-  permission_level: create
-- id: appJdAA8QRUAX1OC2
-  name: Zurich_internal
-  permission_level: create
-- id: appKK7xXcY6FH9FO1
-  name: Smartly
-  permission_level: create
-- id: appUi0Fbq8kbjysbo
-  name: Beam Hackathon Team 4
-  permission_level: create
-- id: appgQ4zJkda7wCaDl
-  name: True Search
-  permission_level: create
-- id: appKdXSOoqmYwt42j
-  name: Untitled Base
-  permission_level: create
-- id: appNJz3J3aMqdBnXU
-  name: BMW Bank
-  permission_level: create
-- id: appNr2qRxEw8w2Zlt
-  name: GBM
-  permission_level: create
-discovered_at: '2025-12-28T14:00:38.402768'
-includes_schema: false
-total_bases: 98
+  tables:
+  - fields:
+    - id: fldCpaN3n9ZM4RV4s
+      name: Name
+      type: singleLineText
+    - id: fldGxikvOsNJaPwB8
+      name: Notes
+      type: multilineText
+    - id: fldNeKcNXXcPDOb2P
+      name: Assignee
+      type: singleCollaborator
+    - choices:
+      - Todo
+      - In progress
+      - Done
+      id: fldzVEi76LYQ1i8dB
+      name: Status
+      type: singleSelect
+    - id: fldbPQLZoP9CpUJvR
+      name: Attachments
+      type: multipleAttachments
+    - id: fldQMSqarraRPzrCo
+      name: Attachment Summary
+      type: aiText
+    id: tblEqpWgWOZBa33pA
+    name: Table 1
+    primary_field_id: fldCpaN3n9ZM4RV4s
+discovered_at: '2025-12-31T01:06:50.381347'
+includes_schema: true
+total_bases: 3

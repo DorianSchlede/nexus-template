@@ -1,33 +1,51 @@
 # Langfuse Integration Configuration
 # LLM Observability & Tracing Platform
-# Host: https://tracing.beamstudio.ai (self-hosted)
 
 service_name: "Langfuse"
 service_slug: "langfuse"
 status: "configured"
 created: "2025-12-28"
 
-# API Configuration
-api:
-  host: "https://tracing.beamstudio.ai"
-  public_key: "pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09"
-  secret_key_env: "LANGFUSE_SECRET_KEY"  # Store actual key in environment
+# =============================================================================
+# INSTANCES
+# =============================================================================
 
-# Environment Variables Required
+instances:
+  # Claude Code traces (local development)
+  claude_code:
+    host: "http://localhost:3002"
+    public_key: "pk-lf-226d37cd-4d4d-4411-b4c1-90d8e87954a8"
+    secret_key_env: "LANGFUSE_SECRET_KEY_CLAUDE"
+    description: "Claude Code session traces - 2900+ traces"
+
+  # Beam AI traces (production)
+  beam_ai:
+    host: "https://tracing.beamstudio.ai"
+    public_key: "pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09"
+    secret_key_env: "LANGFUSE_SECRET_KEY_BEAM"
+    description: "Beam AI agent orchestration traces"
+
+# Default instance for skills
+default_instance: "claude_code"
+
+# Environment Variables Required (set in .env)
 env_vars:
-  LANGFUSE_SECRET_KEY: "sk-lf-d56f24f8-fb07-4f84-96d1-68dbe530bee5"
-  LANGFUSE_PUBLIC_KEY: "pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09"
-  LANGFUSE_HOST: "https://tracing.beamstudio.ai"
+  # Claude Code instance
+  LANGFUSE_SECRET_KEY: "sk-lf-49a255c7-0639-426e-9dad-2908881402ca"
+  LANGFUSE_PUBLIC_KEY: "pk-lf-226d37cd-4d4d-4411-b4c1-90d8e87954a8"
+  LANGFUSE_HOST: "http://localhost:3002"
+  # Alternative: LANGFUSE_BASE_URL works too
 
 # Usage Examples
 usage:
   python: |
     from langfuse import Langfuse
 
+    # Claude Code instance
     langfuse = Langfuse(
-        secret_key="sk-lf-d56f24f8-fb07-4f84-96d1-68dbe530bee5",
-        public_key="pk-lf-c57c7eb7-84ec-49af-a295-e06035606f09",
-        host="https://tracing.beamstudio.ai"
+        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+        host=os.getenv("LANGFUSE_HOST")
     )
 
 # Purpose

@@ -14,9 +14,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-import yaml
+try:
+    import yaml
+    HAS_YAML = True
+except ImportError:
+    HAS_YAML = False
+    yaml = None
 
 from .config import DEFAULT_UPSTREAM_URL, SYNC_PATHS
+from .utils import parse_simple_yaml
 
 
 def run_git_command(args: List[str], cwd: str = None) -> Tuple[bool, str]:
@@ -85,7 +91,10 @@ def get_upstream_url(base_path: str) -> str:
             if content.startswith("---"):
                 parts = content.split("---", 2)
                 if len(parts) >= 2:
-                    config = yaml.safe_load(parts[1])
+                    if HAS_YAML:
+                        config = yaml.safe_load(parts[1])
+                    else:
+                        config = parse_simple_yaml(parts[1])
                     if config and "sync" in config:
                         url = config["sync"].get("upstream_url")
                         if url:

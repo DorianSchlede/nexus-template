@@ -6,7 +6,7 @@
 
 ## Overview
 
-The Nexus Research Algorithm is a sophisticated multi-phase pipeline that automates the discovery, acquisition, analysis, and synthesis of academic papers. It consists of **9 interconnected skills** that work together to transform a research question into actionable insights.
+The Nexus Research Algorithm is a sophisticated **3-phase pipeline** that automates the discovery, acquisition, analysis, and synthesis of academic papers. It consists of **11 components** (3 orchestrators, 6 skills, 1 master router, 1 shared methodology) that work together to transform a research question into actionable insights with comprehensive cross-paper synthesis.
 
 ---
 
@@ -19,10 +19,22 @@ graph TB
         PS --> PP[pdf-preprocess]
     end
 
-    subgraph "Phase 2: Analysis & Synthesis"
-        ERP[execute-research-project] --> PA[paper-analyze]
+    subgraph "Phase 2: Analysis"
+        ARP[analyze-research-project] --> PA[paper-analyze]
         PA --> PAC[paper-analyze-core]
-        PA --> PSY[paper-synthesize]
+    end
+
+    subgraph "Phase 3: Synthesis (7-Level)"
+        SRP[synthesize-research-project]
+        L1[L1: Routing Script]
+        L2[L2: Allocation Script]
+        L3[L3: Prompts Script]
+        L4[L4: Extraction Subagents]
+        L5[L5: Verification Script]
+        L6[L6: Aggregation Script]
+        L7[L7: Report Subagent]
+
+        SRP --> L1 --> L2 --> L3 --> L4 --> L5 --> L6 --> L7
     end
 
     subgraph "Utility Skills"
@@ -30,14 +42,16 @@ graph TB
         PM[paper-manage]
     end
 
-    CRP --> ERP
+    CRP --> ARP
     PP --> PA
-    PSY --> PQ
+    ARP --> SRP
+    SRP --> PQ
     PM --> CRP
-    PM --> ERP
+    PM --> ARP
 
     style CRP fill:#4CAF50,color:white
-    style ERP fill:#2196F3,color:white
+    style ARP fill:#2196F3,color:white
+    style SRP fill:#9C27B0,color:white
     style PAC fill:#FF9800,color:white
 ```
 
@@ -64,43 +78,66 @@ flowchart TD
         Preprocess --> Kit[Step 10: Generate Analysis Kit]
         Kit --> Guide[Step 11: Generate Extraction Guide]
         Guide --> Orch[Step 12: Generate Orchestrator Instructions]
-        Orch --> Ready{Step 13: Readiness Gate}
+        Orch --> Ready1{Step 13: Readiness Gate}
     end
 
-    subgraph Phase2["Phase 2: Analysis & Synthesis (Steps 0-5)"]
-        Ready -->|Ready| Validate1[Step 1: Validate Readiness]
+    subgraph Phase2["Phase 2: Analysis (Steps 0-4)"]
+        Ready1 -->|Ready| Validate1[Step 1: Validate Readiness]
         Validate1 --> Plan[Step 1.5: Read Pre-Calculated Allocation]
         Plan --> Analyze[Step 2: Spawn Subagents per Allocation]
         Analyze --> Index[index.md per Paper]
         Index --> Validate2[Step 3: Validate Analysis Logs]
-        Validate2 --> Synth[Step 4: Generate Synthesis]
-        Synth --> Validate3[Step 4.5: Validate Synthesis]
-        Validate3 --> Complete[Step 5: Mark Project Complete]
+        Validate2 --> Ready2[Step 4: Mark READY_FOR_SYNTHESIS]
     end
 
-    Complete --> End([Research Outputs])
+    subgraph Phase3["Phase 3: Synthesis (Steps 0-9, 7 Levels)"]
+        Ready2 --> ValidateP3[Step 1: Validate Readiness]
+        ValidateP3 --> L1[Step 2: L1 Routing Script]
+        L1 --> L2[Step 3: L2 Allocation Script]
+        L2 --> L4Prompts[Step 4: L3 Generate Prompts]
+        L4Prompts --> L4[Step 5: L4 Extract Patterns]
+        L4 --> L5[Step 6: L5 Verify Quotes]
+        L5 --> L6[Step 7: L6 Aggregate Patterns]
+        L6 --> L7[Step 8: L7 Generate Report]
+        L7 --> Complete[Step 9: Mark Complete]
+    end
+
+    Complete --> End([_synthesis_report.md])
 
     style Phase1 fill:#E8F5E9
     style Phase2 fill:#E3F2FD
+    style Phase3 fill:#F3E5F5
 ```
 
 ---
 
 ## Skills Overview
 
-### Core Skills
+### Orchestrators (3)
+
+| Orchestrator | Phase | Steps | Purpose |
+|--------------|-------|-------|---------|
+| `create-research-project` | Phase 1 | 0-13 | Planning & Acquisition |
+| `analyze-research-project` | Phase 2 | 0-4 | Per-paper analysis |
+| `synthesize-research-project` | Phase 3 | 0-9 | Cross-paper synthesis (7-level) |
+
+### Core Skills (6)
 
 | Skill | Purpose | Trigger Keywords |
 |-------|---------|------------------|
-| `create-research-project` | Phase 1 orchestrator | "create research project", "new research" |
-| `execute-research-project` | Phase 2 orchestrator | "execute research project", "run analysis" |
 | `paper-search` | Search 9 academic APIs | "find paper", "search paper" |
 | `pdf-preprocess` | Convert PDFs to markdown | "preprocess pdf", "chunk pdf" |
 | `paper-analyze` | Orchestrate paper analysis | "analyze papers", "process papers" |
-| `paper-analyze-core` | Analysis methodology | *Internal use only* |
 | `paper-synthesize` | Cross-paper synthesis | "synthesize collection" |
 | `paper-query` | Query analyzed papers | "query papers", "find papers about" |
 | `paper-manage` | Manage collections | "list collections", "paper stats" |
+
+### Shared Components (2)
+
+| Component | Type | Purpose |
+|-----------|------|---------|
+| `paper-analyze-core` | Shared methodology | Analysis methodology (internal use) |
+| `SKILL.md` | Master router | Skill-chain router |
 
 ---
 
@@ -171,38 +208,32 @@ sequenceDiagram
 
 ---
 
-## Phase 2: Analysis & Synthesis
+## Phase 2: Analysis
 
 ### Workflow Diagram
 
 ```mermaid
 sequenceDiagram
     participant U as User
-    participant ERP as execute-research-project
+    participant ARP as analyze-research-project
     participant PA as paper-analyze
     participant PAC as paper-analyze-core
-    participant PSY as paper-synthesize
 
-    U->>ERP: "Execute research project"
-    ERP->>ERP: Validate readiness
+    U->>ARP: "Analyze research project"
+    ARP->>ARP: Validate readiness
+    ARP->>ARP: Read pre-calculated allocation from plan.md
 
     loop For each paper (max 15 concurrent)
-        ERP->>PA: Spawn subagent
+        ARP->>PA: Spawn subagent
         PA->>PAC: Load methodology
         PAC->>PAC: 7-step analysis
         PAC->>PA: Return index.md + _analysis_log.md
     end
 
-    PA->>ERP: All analyses complete
-    ERP->>ERP: Validate analysis logs
-
-    ERP->>PSY: Generate synthesis
-    PSY->>PSY: Read all index.md frontmatter
-    PSY->>PSY: Aggregate by extraction field
-    PSY->>ERP: Return _synthesis.md
-
-    ERP->>ERP: Validate synthesis
-    ERP->>U: Project Complete
+    PA->>ARP: All analyses complete
+    ARP->>ARP: Validate analysis logs (schema v2.3)
+    ARP->>ARP: Mark READY_FOR_SYNTHESIS
+    ARP->>U: Analysis Complete
 ```
 
 ### Analysis Methodology (7 Steps)
@@ -225,6 +256,82 @@ graph LR
 - **3-Point Evidence Recording**: Start (100 chars), Mid (100 chars), End (100 chars)
 - **SHA256 Hash**: Full chunk content verification
 - **Chunk:Line References**: Every extraction must cite source location
+
+---
+
+## Phase 3: Cross-Paper Synthesis
+
+### 7-Level Hierarchical Architecture
+
+Phase 3 implements a sophisticated **7-level synthesis architecture** where Levels 1-3, 5-6 are deterministic Python scripts, and only Levels 4 & 7 use LLM subagents.
+
+```mermaid
+graph TD
+    Input[All index.md files] --> L1[Level 1: Routing Script]
+    L1 -->|_synthesis_routing.yaml| L2[Level 2: Allocation Script]
+    L2 -->|_subagent_plan.yaml| L3[Level 3: Prompts Script]
+    L3 -->|45× _prompt_*.md| L4[Level 4: Extraction Subagents]
+    L4 -->|_batch_*.yaml| L5[Level 5: Verification Script]
+    L5 -->|_verification_report.yaml| L6[Level 6: Aggregation Script]
+    L6 -->|_synthesis_{field}.yaml| L7[Level 7: Report Subagent]
+    L7 --> Output[_synthesis_report.md]
+
+    style L1 fill:#FFF3E0
+    style L2 fill:#FFF3E0
+    style L3 fill:#FFF3E0
+    style L4 fill:#E3F2FD
+    style L5 fill:#FFF3E0
+    style L6 fill:#FFF3E0
+    style L7 fill:#E3F2FD
+```
+
+### Level Breakdown
+
+| Level | Type | Purpose | Output |
+|-------|------|---------|--------|
+| **L1: Routing** | Script | Boolean chunk lookup by field | `_synthesis_routing.yaml` |
+| **L2: Allocation** | Script | Greedy bin-packing (70k tokens/batch) + L7 budget | `_subagent_plan.yaml` |
+| **L3: Prompts** | Script | Generate INPUT CONTRACT per batch | `_prompt_{batch_id}.md` |
+| **L4: Extraction** | 15 Subagents | Parallel pattern extraction with citations | `_batch_{field}_{N}.yaml` |
+| **L5: Verification** | Script | 10% sample quote-line checking (±5 line tolerance) | `_verification_report.yaml` |
+| **L6: Aggregation** | Script | Fuzzy deduplication (90% similarity threshold) | `_synthesis_{field}.yaml` |
+| **L7: Report** | Subagent | Narrative synthesis with cross-field insights | `_synthesis_report.md` |
+
+### Why 7 Levels?
+
+**Determinism**: 6/7 levels are Python scripts (reproducible)
+- L1-3: Routing, allocation, prompt generation are 100% deterministic
+- L5-6: Verification and aggregation are algorithmic
+- Only L4 & L7 require LLM intelligence
+
+**Verifiability**: Level 5 catches hallucinations
+- 10% sample verification with ±5 line tolerance
+- 90% threshold to pass
+- Re-extracts failed batches automatically
+
+**Scalability**: Parallel extraction
+- 15 concurrent subagents at Level 4
+- ~10 minutes for 23 papers (45 batches ÷ 15 = 3 rounds)
+
+**Cost-Effective**: Scripts are free
+- Only L4 extraction and L7 report use LLM
+- Saves ~70% on token costs vs. single-pass synthesis
+
+**Safe**: Token budget calculated upfront
+- Level 2 calculates Level 7 budget
+- Splits into priority passes if needed
+- INPUT CONTRACT prevents scope drift
+
+### Gap Fixes in Phase 3
+
+| Gap | Issue | Solution |
+|-----|-------|----------|
+| **G2** | No token budget for L7 | L2 calculates budget, splits if >75k synthesis tokens |
+| **G13** | No input scope control | L3 generates INPUT CONTRACT per prompt |
+| **G15** | Can't verify citations | L5 quote-line verification (10% sample, 90% threshold) |
+| **G19** | Too-generic fields | L1 sparsity check (>80% match = warning) |
+| **G22a** | Missing research context | L3 includes research_purpose in prompts |
+| **G22b** | Missing synthesis goals | L3 includes synthesis_goals in prompts |
 
 ---
 
@@ -426,12 +533,19 @@ graph LR
     style E fill:#4CAF50,color:white
 ```
 
-### Large Paper Handling
+### Large Paper Handling (Phase 2)
 
-- Papers > 75k tokens are split into parts
+- Papers > 8 chunks are split into parts (calculated in Phase 1 Step 12)
 - Each part analyzed by separate subagent
 - Merge subagent combines partial indexes
 - Final unified index.md generated
+
+### Large Synthesis Handling (Phase 3)
+
+- If synthesis files > 75k tokens, Level 2 sets `requires_split: true`
+- Level 7 processes high-priority fields first
+- Level 7 processes medium/low-priority fields second
+- Final merge pass combines all outputs
 
 ---
 
@@ -524,6 +638,7 @@ step: {current_step_number}
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 6.0 | 2026-01-01 | **MAJOR ARCHITECTURE UPDATE**: Documented 3-phase pipeline (was 2-phase), added complete Phase 3 (synthesize-research-project) with 7-level architecture, fixed orchestrator names, updated skill count to 11 components |
 | 5.0 | 2025-12-28 | Added Steps 10-13 (analysis kit, extraction guide, orchestrator), 15 concurrent subagents, _resume.md context recovery, subagent planning |
 | 4.0 | 2025-12-19 | Added analysis kit, orchestrator templates, Phase 4.5 validation |
 | 2.2 | 2025-12-19 | Added chunk:line extraction tracking, two-tier detail strategy |
@@ -532,4 +647,4 @@ step: {current_step_number}
 
 ---
 
-**Last Updated**: 2025-12-28
+**Last Updated**: 2026-01-01

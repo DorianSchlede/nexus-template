@@ -19,14 +19,13 @@ The Python script (`nexus-loader.py`) is the **MASTER CONTROLLER**. It analyzes 
 
 ---
 
-## Startup (MANDATORY)
+## Startup (AUTOMATIC)
 
-```powershell
-./00-system/startup.ps1
-# Then read: 00-system/.cache/context_core.json AND 00-system/.cache/context_metadata.json
-```
+Context is **auto-injected** via the SessionStart hook. No manual steps needed.
 
-**Then:** Use `memory_content` → Follow `instructions.action`
+The hook injects: routing rules, skills, projects, memory, and instructions via `additionalContext`.
+
+**Then:** Follow `instructions.action` from the injected context.
 
 ---
 
