@@ -3,8 +3,12 @@
 PreCompact Hook: Save Resume State
 
 This hook is triggered before Claude Code compacts the context.
-It automatically updates the active project's _resume.md file
-to preserve the current skill/phase state for the next session.
+It updates the active project's resume-context.md timestamp for
+cross-session resume detection.
+
+CRITICAL REQUIREMENTS:
+- MUST return {} (empty object) - cannot inject context via return value
+- MUST execute in <50ms
 
 Input (stdin JSON):
 {
@@ -20,8 +24,24 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+import time
+import logging
+from datetime import datetime, timezone
 from pathlib import Path
+
+# Add parent directory to path for utils imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from utils.transcript import parse_transcript_for_project, find_project_by_session_id
+
+# Performance tracking
+START_TIME = time.perf_counter()
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - PreCompact - %(levelname)s - %(message)s'
+)
 
 
 def find_nexus_root() -> Path:
@@ -51,106 +71,117 @@ def cleanup_session_cache(nexus_root: Path, session_id: str) -> bool:
         return False
 
 
-def load_cache_context(nexus_root: Path) -> dict:
-    """Load the cached startup context to get the active project."""
-    cache_file = nexus_root / "00-system" / ".cache" / "context_startup.json"
-    if not cache_file.exists():
-        return {}
-
-    try:
-        return json.loads(cache_file.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
-
-
-def get_active_project(cache_context: dict) -> dict | None:
-    """Get the most recently active IN_PROGRESS project from cache."""
-    projects = cache_context.get("metadata", {}).get("projects", [])
-
-    # Find first IN_PROGRESS project (they're sorted by most recent)
-    for project in projects:
-        if project.get("status") == "IN_PROGRESS":
-            return project
-
-    return None
-
-
-def parse_transcript_for_skill(transcript_path: str) -> str | None:
+def update_project_resume_context(nexus_root: Path, project_id: str, session_id: str) -> bool:
     """
-    Parse the transcript JSONL to find the last --skill invocation.
+    Update project's resume-context.md with session_id list and timestamp.
 
-    Looks for patterns like:
-    - python nexus-loader.py --skill execute-project
-    - python 00-system/core/nexus-loader.py --skill analyze-research-project
+    MULTI-SESSION ENHANCEMENT:
+    - Maintains session_ids list (all sessions that touched this project)
+    - Keeps legacy session_id field (most recent, for backward compat)
+    - Prevents duplicates in the list
+
+    This enables SessionStart to:
+    1. Find project via ANY session in the list (multi-session support)
+    2. Find most recently active project via last_updated
     """
-    path = Path(transcript_path).expanduser()
-    if not path.exists():
-        return None
+    project_path = nexus_root / "02-projects" / project_id / "01-planning"
+    resume_file = project_path / "resume-context.md"
 
-    last_skill = None
-    skill_pattern = re.compile(r'--skill\s+([a-z0-9-]+)', re.IGNORECASE)
-
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                try:
-                    entry = json.loads(line.strip())
-                    # Look for Bash tool calls with --skill
-                    content = str(entry)
-                    matches = skill_pattern.findall(content)
-                    if matches:
-                        last_skill = matches[-1]  # Take the last one in this entry
-                except json.JSONDecodeError:
-                    continue
-    except Exception:
-        pass
-
-    return last_skill
-
-
-def skill_to_phase(skill_name: str) -> str:
-    """Map skill name to phase."""
-    phase_map = {
-        "analyze-research-project": "analysis",
-        "synthesize-research-project": "synthesis",
-        "execute-project": "execution",
-        "create-project": "planning",
-    }
-    return phase_map.get(skill_name, "execution")
-
-
-def write_resume_file(project_path: Path, skill: str, phase: str, project_id: str) -> bool:
-    """Write the _resume.md file with current state."""
-    resume_file = project_path / "_resume.md"
-
-    now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-
-    content = f"""---
-updated: "{now}"
-phase: "{phase}"
-last_skill: "{skill}"
-project_id: "{project_id}"
----
-
-# Resume Context
-
-Auto-saved by PreCompact hook at {now}.
-
-## State
-- **Phase**: {phase}
-- **Last Skill**: {skill}
-- **Project**: {project_id}
-
-## Notes
-This file was automatically generated before context compaction.
-The next session will use this to load the correct skill.
-"""
+    if not resume_file.exists():
+        logging.info(f"No resume-context.md for project {project_id}")
+        return False
 
     try:
+        content = resume_file.read_text(encoding="utf-8")
+        timestamp = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+        # Extract existing session_ids list
+        existing_ids = []
+        session_ids_match = re.search(
+            r'session_ids:\s*\[(.*?)\]',  # Inline list format
+            content,
+            re.DOTALL
+        )
+        if session_ids_match:
+            # Parse inline list: ["id1", "id2"]
+            id_list_str = session_ids_match.group(1)
+            existing_ids = re.findall(r'"([^"]+)"', id_list_str)
+        else:
+            # Try multiline format
+            session_ids_match = re.search(
+                r'session_ids:\s*\n((?:\s*-\s*"[^"]+"\s*\n)+)',
+                content
+            )
+            if session_ids_match:
+                id_lines = session_ids_match.group(1)
+                existing_ids = re.findall(r'"([^"]+)"', id_lines)
+
+        # Add current session if not already in list
+        if session_id not in existing_ids:
+            existing_ids.append(session_id)
+            logging.info(f"Added session {session_id[:8]}... to project {project_id} (total: {len(existing_ids)} sessions)")
+        else:
+            logging.info(f"Session {session_id[:8]}... already tracked for project {project_id}")
+
+        # Format as inline YAML list for simplicity
+        session_ids_str = "[" + ", ".join([f'"{sid}"' for sid in existing_ids]) + "]"
+
+        # Update or add session_ids list
+        if "session_ids:" in content:
+            # Replace existing list (both inline and multiline formats)
+            content = re.sub(
+                r'session_ids:\s*\[.*?\]',  # Inline
+                f'session_ids: {session_ids_str}',
+                content,
+                flags=re.DOTALL
+            )
+            content = re.sub(
+                r'session_ids:\s*\n(?:\s*-\s*"[^"]+"\s*\n)+',  # Multiline
+                f'session_ids: {session_ids_str}\n',
+                content
+            )
+        else:
+            # Add new session_ids field
+            content = content.replace(
+                "---\n",
+                f'---\nsession_ids: {session_ids_str}\n',
+                1
+            )
+
+        # Update legacy session_id field (most recent, for backward compat)
+        if "session_id:" in content and "session_ids:" not in content[:content.index("session_id:")]:
+            # Only update if it's the standalone field, not inside session_ids
+            content = re.sub(
+                r'(?<!session_)session_id:\s*"[^"]*"',
+                f'session_id: "{session_id}"',
+                content
+            )
+        elif "session_ids:" in content and "session_id:" not in content:
+            # Add legacy field for backward compat
+            session_ids_line = content.find("session_ids:")
+            insert_pos = content.find("\n", session_ids_line) + 1
+            content = content[:insert_pos] + f'session_id: "{session_id}"\n' + content[insert_pos:]
+
+        # Update or add last_updated
+        if "last_updated:" in content:
+            content = re.sub(
+                r'last_updated:\s*"[^"]*"',
+                f'last_updated: "{timestamp}"',
+                content
+            )
+        else:
+            # Add last_updated after first ---
+            content = content.replace(
+                "---\n",
+                f'---\nlast_updated: "{timestamp}"\n',
+                1
+            )
+
         resume_file.write_text(content, encoding="utf-8")
+        logging.info(f"Updated resume-context.md for project {project_id} ({len(existing_ids)} sessions tracked)")
         return True
     except Exception as e:
-        print(f"Failed to write _resume.md: {e}", file=sys.stderr)
+        logging.error(f"Failed to update resume-context.md for {project_id}: {e}")
         return False
 
 
@@ -159,13 +190,12 @@ def main():
     try:
         input_data = json.load(sys.stdin)
     except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON input: {e}", file=sys.stderr)
+        logging.error(f"Invalid JSON input: {e}")
         sys.exit(1)
 
     # Get session info
     session_id = input_data.get("session_id", "unknown")
     transcript_path = input_data.get("transcript_path", "")
-    trigger = input_data.get("trigger", "unknown")
 
     # Find Nexus root
     nexus_root = find_nexus_root()
@@ -173,59 +203,30 @@ def main():
     # Clean up old session cache (new one will be created after compaction)
     cleanup_session_cache(nexus_root, session_id)
 
-    # Load cached context for active project
-    cache_context = load_cache_context(nexus_root)
-    active_project = get_active_project(cache_context)
+    # Detect active project - try session_id match first (from previous compact), then transcript
+    projects_dir = str(nexus_root / "02-projects")
+    active_project_id = find_project_by_session_id(projects_dir, session_id)
 
-    if not active_project:
-        # No active project, nothing to save
-        print(json.dumps({
-            "message": "No active project found, skipping resume state save"
-        }))
-        sys.exit(0)
+    if not active_project_id:
+        # Fallback: parse transcript for tool_use patterns
+        active_project_id, _ = parse_transcript_for_project(transcript_path)
+        if active_project_id:
+            logging.info(f"Fallback: found project {active_project_id} from transcript")
 
-    project_id = active_project.get("id", "")
-    project_file_path = active_project.get("_file_path", "")
+    # Update project's resume-context.md with session_id for exact matching
+    if active_project_id:
+        update_project_resume_context(nexus_root, active_project_id, session_id)
 
-    if not project_file_path:
-        print(json.dumps({
-            "message": f"No file path for project {project_id}"
-        }))
-        sys.exit(0)
-
-    # Derive project directory from overview.md path
-    project_path = Path(project_file_path).parent.parent
-
-    # Parse transcript for last skill
-    last_skill = parse_transcript_for_skill(transcript_path)
-
-    # Default to execute-project if no skill found
-    if not last_skill:
-        last_skill = "execute-project"
-
-    # Determine phase from skill
-    phase = skill_to_phase(last_skill)
-
-    # Write the resume file
-    success = write_resume_file(project_path, last_skill, phase, project_id)
-
-    if success:
-        # Output context for the compacted conversation
-        # This becomes part of the summary that Claude sees after compaction
-        compact_context = f"""<NexusResumeContext>
-CONTINUE PROJECT: {project_id}
-PHASE: {phase}
-LAST SKILL: {last_skill}
-
-MANDATORY NEXT STEP:
-Run: python 00-system/core/nexus-loader.py --resume --session {session_id}
-Then read the cache file and continue working on {project_id}.
-</NexusResumeContext>"""
-
-        print(compact_context)
-        sys.exit(0)
+    # Performance check
+    elapsed_ms = (time.perf_counter() - START_TIME) * 1000
+    if elapsed_ms > 50:
+        logging.warning(f"PreCompact hook exceeded 50ms budget: {elapsed_ms:.2f}ms")
     else:
-        sys.exit(1)
+        logging.info(f"PreCompact hook completed in {elapsed_ms:.2f}ms")
+
+    # CRITICAL: Return empty object (hooks cannot inject context via return value)
+    print(json.dumps({}))
+    sys.exit(0)
 
 
 if __name__ == "__main__":
