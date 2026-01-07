@@ -564,30 +564,40 @@ plan-project/templates/types/
 
 ---
 
-## ENTRY MODE CONTRACT
+## SIMPLIFIED SKILL INVOCATION (v2.3)
 
-When router calls a sub-skill:
+**Key Insight**: No special "sub-skill" contract needed. Just invoke skills normally.
 
-### Router Passes:
-```yaml
-entry_mode: from_router
-project_path: "02-projects/XX-name/"
+### How It Works:
+
+```
+Router → update resume-context.md (skill: add-integration)
+       → load skill via nexus-loader.py
+       → skill runs its normal workflow
+       → skill writes to project's 02-discovery.md
+       → skill completes, clears skill field in resume
+       → router continues with mental models
 ```
 
-### Sub-Skill MUST:
-1. Check `entry_mode` at workflow start
-2. Skip project creation steps if `entry_mode == from_router`
-3. Use provided `project_path` for file operations
-4. Write discovery findings to `{project_path}/01-planning/02-discovery.md`
-5. Return `discovery_output` as structured YAML/JSON
-6. NOT generate prose - router handles plan.md population
+### What Router Does:
+1. Detect type
+2. Create project structure
+3. Update resume-context.md: `current_skill: add-integration`
+4. Load skill: `python nexus-loader.py --skill add-integration`
+5. Skill runs normally, writes findings to `{project}/01-planning/02-discovery.md`
+6. Skill completes, updates resume-context.md: `current_skill: ""`
+7. Router continues with mental models phase
 
-### Sub-Skill Returns:
-```yaml
-discovery_output:
-  # Structured data specific to skill type
-  ...
-```
+### What Skills Do (unchanged):
+- Run their normal workflow
+- Write outputs to the active project folder (from resume-context.md)
+- No entry_mode checking needed
+- No structured discovery_output return needed
+
+### Enforcement:
+- **TodoWrite** tracks progress (AI updates resume-context.md)
+- **Steps** enforce sequence (embedded in 04-steps.md)
+- **Hook enforcement** deferred to future project
 
 ---
 
