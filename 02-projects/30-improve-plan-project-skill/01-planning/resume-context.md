@@ -2,7 +2,7 @@
 session_id: "5894137f-0884-4082-9a6a-bf2429d65e7e"
 session_ids: ["5894137f-0884-4082-9a6a-bf2429d65e7e"]
 resume_schema_version: "2.0"
-last_updated: "2026-01-07T10:49:13.904617Z"
+last_updated: "2026-01-07T11:03:18.377110Z"
 
 # PROJECT
 project_id: "30-improve-plan-project-skill"
@@ -17,20 +17,18 @@ files_to_load:
   - "01-planning/04-steps.md"
   - "02-resources/architecture-v2.md"
 
-# SUB-SKILL TRACKING (empty when not in sub-skill)
-# sub_skill: ""
-# sub_skill_step: ""
-# sub_skill_project_path: ""
+# SKILL TRACKING (v2.3 simplified - optional)
+# current_skill: ""
 
 # DISCOVERY STATE
 rediscovery_round: 0
 discovery_complete: true
 
 # PROGRESS
-current_section: 2
+current_section: 3
 current_task: 1
-total_tasks: 60
-tasks_completed: 5
+total_tasks: 63
+tasks_completed: 24
 ---
 
 ## Progress Summary
@@ -42,39 +40,30 @@ tasks_completed: 5
 - [x] 04-steps.md - Detailed execution steps broken down
 - [x] Review with stakeholder (REVISED v2.1)
 
-**Key Decisions Made (v2.1):**
+**Phase 2: Create Template Structure** - COMPLETE (19/19)
+- [x] Created templates/types/ directory with 8 subfolders
+- [x] Created all 8 _type.yaml files with semantic descriptions
+- [x] Created build templates (4 files with EARS/INCOSE)
+- [x] Created skill templates (4 files with EARS/INCOSE)
+- [x] Created integration templates (4 files, routes to add-integration)
+- [x] Created research templates (4 files, routes to create-research-project)
+- [x] Created strategy/content/process/generic templates (16 files)
+- [x] Created reference files: routing-logic.md, ears-patterns.md, incose-rules.md
+- [x] Total: 40 template files + 3 reference files = 43 files created
+
+**Key Decisions Made (v2.4 - Simplified):**
 - Router is MANDATORY for all project creation
-- Steps are the ENFORCEMENT MECHANISM (AI forgets; steps don't)
+- Steps + TodoWrite are ENFORCEMENT MECHANISM
 - 02-discovery.md is MANDATORY output (preserves intelligence)
-- resume-context.md updated EVERY phase (enables reload)
-- Mental models loaded DYNAMICALLY via skill
+- Skills invoked NORMALLY (no special entry_mode contract)
+- Hook enforcement DEFERRED to future project
 - Type detection is SEMANTIC (no keyword triggers)
-- Sub-skills loaded via EXPLICIT bash commands
 - 8 types: build, integration, research, strategy, content, process, skill, generic
 
-**Architecture Reference**: `02-resources/architecture-v2.md` (v2.2)
+**Architecture Reference**: `02-resources/architecture-v2.md` (v2.3)
 
-**Deep Discovery Complete (v2.2):**
-- [x] create-skill analysis added to discovery.md
-- [x] Comprehensive dependency matrix created
-- [x] Files to modify: 8 files identified
-- [x] Files to create: 45 files (40 templates + 5 references)
-- [x] Sub-skill routing table defined
-- [x] Entry mode contract documented
-- [x] KIRO/EARS/INCOSE patterns integrated
-- [x] Detailed gap analysis: current SKILL.md vs architecture v2.2
-- [x] Implementation order defined (Phase 2A → 2B → 2C → 3 → 4 → 5)
-
-**Planning v2.3 Updates (KIRO Patterns Applied):**
-- [x] 03-plan.md rewritten with EARS requirements (15 functional + 5 non-functional)
-- [x] 03-plan.md includes 6 Correctness Properties
-- [x] 04-steps.md rewritten with checkpoint tasks and optional marking
-- [x] All tasks reference requirements (REQ-X format)
-- [x] Optional tasks marked with `*` postfix
-- [x] 12 checkpoints distributed across phases
-
-**Phase 2: Create Template Structure** - READY TO START (0/19)
-- Next: Create `plan-project/templates/types/` directory structure
+**Phase 3: Rewrite SKILL.md** - READY TO START (0/15)
+- Next: Transform SKILL.md into router-only pattern
 
 ---
 

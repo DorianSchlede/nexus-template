@@ -1,7 +1,7 @@
 # Improve Plan-Project Skill - Execution Steps
 
 **Last Updated**: 2026-01-07
-**Status**: REVISED v2.3 - KIRO Task Patterns Applied
+**Status**: REVISED v2.4 - Simplified Skill Invocation
 **Project Type**: Build
 
 ---
@@ -11,7 +11,7 @@
 **Project Location**: `02-projects/30-improve-plan-project-skill/`
 
 **Files to Load for Execution**:
-- `02-resources/architecture-v2.md` - **SINGLE SOURCE OF TRUTH v2.2**
+- `02-resources/architecture-v2.md` - **SINGLE SOURCE OF TRUTH v2.3**
 - `02-resources/KIRO-spec.md` - Task patterns reference
 - `01-planning/03-plan.md` - Requirements and Correctness Properties
 - `01-planning/02-discovery.md` - Dependency analysis
@@ -32,70 +32,69 @@
 
 ---
 
-## Phase 2: Create Template Structure
+## Phase 2: Create Template Structure - COMPLETE
 
 **Goal**: Create `templates/types/` folder structure with all 8 type templates
 **Context**: Load `02-resources/architecture-v2.md` for _type.yaml schema
 
 ### 2.1 Create Directory Structure **[REQ-NF-1]**
 
-- [ ] Create `plan-project/templates/types/` directory
-- [ ] Create 8 subfolders: build, integration, research, strategy, content, process, skill, generic
-- [ ] **CHECKPOINT**: Verify 8 folders exist, ask user if questions arise
+- [x] Create `plan-project/templates/types/` directory
+- [x] Create 8 subfolders: build, integration, research, strategy, content, process, skill, generic
+- [x] **CHECKPOINT**: Verify 8 folders exist, ask user if questions arise
 
 ### 2.2 Create _type.yaml Files **[REQ-NF-2, REQ-2]**
 
-- [ ] Create `types/build/_type.yaml` - inline discovery, EARS enabled
-- [ ] Create `types/integration/_type.yaml` - routes to add-integration skill
-- [ ] Create `types/research/_type.yaml` - routes to create-research-project skill
-- [ ] Create `types/strategy/_type.yaml` - inline discovery, decision frameworks
-- [ ] Create `types/content/_type.yaml` - inline discovery, creative brief
-- [ ] Create `types/process/_type.yaml` - inline discovery, workflow optimization
-- [ ] Create `types/skill/_type.yaml` - routes to create-skill skill, EARS enabled
-- [ ] Create `types/generic/_type.yaml` - minimal inline discovery
-- [ ] **CHECKPOINT**: Verify all 8 _type.yaml files have valid schema
+- [x] Create `types/build/_type.yaml` - inline discovery, EARS enabled
+- [x] Create `types/integration/_type.yaml` - routes to add-integration skill
+- [x] Create `types/research/_type.yaml` - routes to create-research-project skill
+- [x] Create `types/strategy/_type.yaml` - inline discovery, decision frameworks
+- [x] Create `types/content/_type.yaml` - inline discovery, creative brief
+- [x] Create `types/process/_type.yaml` - inline discovery, workflow optimization
+- [x] Create `types/skill/_type.yaml` - routes to create-skill skill, EARS enabled
+- [x] Create `types/generic/_type.yaml` - minimal inline discovery
+- [x] **CHECKPOINT**: Verify all 8 _type.yaml files have valid schema
 
 ### 2.3 Create Templates for Build Type **[REQ-NF-4, REQ-NF-5]**
 
-- [ ] Create `types/build/overview.md` template
-- [ ] Create `types/build/discovery.md` template with EARS requirements section
-- [ ] Create `types/build/plan.md` template with Correctness Properties section
-- [ ] Create `types/build/steps.md` template with checkpoint tasks
+- [x] Create `types/build/overview.md` template
+- [x] Create `types/build/discovery.md` template with EARS requirements section
+- [x] Create `types/build/plan.md` template with Correctness Properties section
+- [x] Create `types/build/steps.md` template with checkpoint tasks
 - [ ]* Write validation tests for build templates (optional) **[Property 5]**
 
 ### 2.4 Create Templates for Skill Type **[REQ-NF-4, REQ-NF-5]**
 
-- [ ] Create `types/skill/overview.md` template
-- [ ] Create `types/skill/discovery.md` template with EARS requirements section
-- [ ] Create `types/skill/plan.md` template with Correctness Properties section
-- [ ] Create `types/skill/steps.md` template with checkpoint tasks
+- [x] Create `types/skill/overview.md` template
+- [x] Create `types/skill/discovery.md` template with EARS requirements section
+- [x] Create `types/skill/plan.md` template with Correctness Properties section
+- [x] Create `types/skill/steps.md` template with checkpoint tasks
 - [ ]* Write validation tests for skill templates (optional) **[Property 5]**
 
 ### 2.5 Create Templates for Sub-Skill Types **[REQ-4]**
 
-- [ ] Create `types/integration/` 4 templates (overview, discovery, plan, steps)
-- [ ] Create `types/research/` 4 templates (overview, discovery, plan, steps)
-- [ ] **CHECKPOINT**: Verify sub-skill routing config in _type.yaml files
+- [x] Create `types/integration/` 4 templates (overview, discovery, plan, steps)
+- [x] Create `types/research/` 4 templates (overview, discovery, plan, steps)
+- [x] **CHECKPOINT**: Verify sub-skill routing config in _type.yaml files
 
 ### 2.6 Create Templates for Inline Discovery Types **[REQ-5]**
 
-- [ ] Create `types/strategy/` 4 templates
-- [ ] Create `types/content/` 4 templates
-- [ ] Create `types/process/` 4 templates
-- [ ] Create `types/generic/` 4 templates
-- [ ] **CHECKPOINT**: Verify all 40 template files exist (8 types × 5 files)
+- [x] Create `types/strategy/` 4 templates
+- [x] Create `types/content/` 4 templates
+- [x] Create `types/process/` 4 templates
+- [x] Create `types/generic/` 4 templates
+- [x] **CHECKPOINT**: Verify all 40 template files exist (8 types × 5 files)
 
 ### 2.7 Create Reference Files **[REQ-11, REQ-12]**
 
-- [ ] Create `references/routing-logic.md` - Router decision tree
-- [ ] Create `references/entry-mode-contract.md` - Sub-skill data contract
-- [ ] Create `references/ears-patterns.md` - EARS templates for Build/Skill
-- [ ] Create `references/incose-rules.md` - INCOSE quality rules
+- [x] Create `references/routing-logic.md` - Router decision tree
+- [x] Create `references/ears-patterns.md` - EARS templates for Build/Skill
+- [x] Create `references/incose-rules.md` - INCOSE quality rules
 - [ ]* Create `references/type-detection.md` - Semantic matching guide (optional)
 
 ### 2.8 Update Resume Context
 
-- [ ] Update resume-context.md: current_section: 3, tasks_completed: +19
+- [x] Update resume-context.md: current_section: 3, tasks_completed: +19
 
 ---
 
@@ -148,49 +147,33 @@
 
 ---
 
-## Phase 4: Update Specialized Skills
+## Phase 4: Add Deprecation Notices (v2.4 Simplified)
 
-**Goal**: Add entry_mode handling to sub-skills
+**Goal**: Add deprecation notices to skills (no entry_mode needed)
 **Context**: Load current add-integration, create-research-project, create-skill SKILLs
 
-### 4.1 Update add-integration **[REQ-12, REQ-15]**
+### 4.1 Update add-integration **[REQ-13]**
 
-- [ ] Add entry_mode check at workflow start (after Step 0)
-- [ ] Add conditional: IF entry_mode=from_router THEN skip Steps 1, 6
-- [ ] Add: write findings to `{project_path}/01-planning/02-discovery.md`
-- [ ] Add deprecation notice for direct invocation
+- [ ] Add deprecation notice at workflow start
 - [ ] Add instruction: "Use `plan project` for new integrations"
-- [ ]* Write test for entry_mode behavior (optional) **[Property 3]**
+- [ ] **CHECKPOINT**: Verify deprecation notice displays correctly
 
-### 4.2 Update create-research-project **[REQ-12, REQ-15]**
+### 4.2 Update create-research-project **[REQ-13]**
 
-- [ ] Add entry_mode check at workflow start
-- [ ] Add conditional: IF entry_mode=from_router THEN skip Step 1
-- [ ] Add: write findings to `{project_path}/01-planning/02-discovery.md`
-- [ ] Add deprecation notice for direct invocation
+- [ ] Add deprecation notice at workflow start
 - [ ] Add instruction: "Use `plan project` for new research"
-- [ ]* Write test for entry_mode behavior (optional) **[Property 3]**
 
-### 4.3 Update create-skill **[REQ-12, REQ-15]**
+### 4.3 Update create-skill **[REQ-13]**
 
-- [ ] Add entry_mode check at workflow start
-- [ ] Add conditional: IF entry_mode=from_router THEN skip project creation
-- [ ] Add: write findings to `{project_path}/01-planning/02-discovery.md`
-- [ ] Add deprecation notice for direct invocation
+- [ ] Add deprecation notice at workflow start
 - [ ] Add instruction: "Use `plan project` for new skills"
-- [ ]* Write test for entry_mode behavior (optional) **[Property 3]**
-- [ ] **CHECKPOINT**: Verify all 3 skills have entry_mode handling
+- [ ] **CHECKPOINT**: Verify all 3 skills have deprecation notice
 
-### 4.4 Update SessionStart Hook (if needed) **[REQ-13]**
+### 4.4 Update Resume Context
 
-- [ ] Add sub_skill field reading from resume-context.md
-- [ ] Add routing: WHEN sub_skill present, reload that skill instead of project
-- [ ] Add sub_skill_step handling for workflow position
-- [ ]* Write test for sub_skill resume behavior (optional) **[Property 4]**
+- [ ] Update resume-context.md: current_section: 5, tasks_completed: +7
 
-### 4.5 Update Resume Context
-
-- [ ] Update resume-context.md: current_section: 5, tasks_completed: +14
+**NOTE**: Hook enforcement DEFERRED to future project.
 
 ---
 
@@ -217,20 +200,17 @@
 - [ ] Test: Skill creates 02-discovery.md with EARS requirements
 - [ ] **CHECKPOINT**: Verify discovery always completes before mental models
 
-### 5.3 Test Sub-Skill Contract **[Property 3]**
+### 5.3 Test Skill Discovery Output **[Property 3]**
 
-- [ ] Test: Router passes entry_mode=from_router to add-integration
-- [ ] Test: Router passes project_path to add-integration
-- [ ] Test: add-integration skips project creation when entry_mode=from_router
-- [ ] Test: add-integration writes to provided project_path
-- [ ]* Repeat tests for create-research-project and create-skill (optional)
+- [ ] Test: add-integration writes findings to project's 02-discovery.md
+- [ ] Test: create-research-project writes findings to project's 02-discovery.md
+- [ ] Test: create-skill writes findings to project's 02-discovery.md
 
 ### 5.4 Test Resume Context **[Property 4]**
 
-- [ ] Test: Compaction preserves sub-skill state
 - [ ] Test: Resume reloads correct context after compaction
 - [ ] Test: Phase transitions update resume-context.md correctly
-- [ ] **CHECKPOINT**: Verify state consistency across 3 simulated compactions
+- [ ] **CHECKPOINT**: Verify state consistency across resume cycle
 
 ### 5.5 Test Template Structure **[Property 5]**
 
@@ -254,29 +234,31 @@
 
 ---
 
-## Summary
+## Summary (v2.4 Simplified)
 
 | Phase | Tasks | Optional | Checkpoints |
 |-------|-------|----------|-------------|
 | Phase 1 | 5 | 0 | 0 |
 | Phase 2 | 19 | 3 | 5 |
 | Phase 3 | 15 | 1 | 2 |
-| Phase 4 | 14 | 4 | 1 |
-| Phase 5 | 20 | 2 | 4 |
-| **Total** | **73** | **10** | **12** |
+| Phase 4 | 7 | 0 | 2 |
+| Phase 5 | 17 | 1 | 4 |
+| **Total** | **63** | **5** | **13** |
 
-**Estimated Time**: ~4 hours AI time
+**Estimated Time**: ~3 hours AI time
 
 **Key Files Created**:
 - 40 template files (8 types × 5 files)
-- 5 reference files
+- 4 reference files
 - 1 rewritten SKILL.md
-- 3 updated sub-skill SKILLs
+- 3 skills with deprecation notices
 
 **Requirements Coverage**:
-- All 15 functional requirements (REQ-1 to REQ-15) mapped to tasks
+- All 13 functional requirements (REQ-1 to REQ-13) mapped to tasks
 - All 5 non-functional requirements (REQ-NF-1 to REQ-NF-5) mapped to tasks
 - All 6 correctness properties have validation tasks
+
+**NOTE**: Hook enforcement DEFERRED to future project.
 
 ---
 
