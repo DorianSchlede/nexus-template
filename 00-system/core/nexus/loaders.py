@@ -1095,22 +1095,28 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
     return _template_system_ready(context)
 
 
+def _load_state_template(template_name: str, **kwargs) -> str:
+    """Load state template from .claude/hooks/templates/ and format with kwargs."""
+    # Templates are in .claude/hooks/templates/ relative to project root
+    # loaders.py is in 00-system/core/nexus/, so go up 3 levels to project root
+    template_dir = Path(__file__).parent.parent.parent.parent / ".claude" / "hooks" / "templates"
+    template_path = template_dir / f"{template_name}.md"
+
+    try:
+        template = template_path.read_text(encoding='utf-8')
+        return template.format(**kwargs) if kwargs else template
+    except FileNotFoundError:
+        return f"Template {template_name} not found at {template_path}"
+    except KeyError as e:
+        # Return unformatted if missing variable
+        return template_path.read_text(encoding='utf-8')
+
+
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
     """STATE 1: Onboarding incomplete - gently suggest completing setup."""
     pending = context.get("pending_onboarding", [])
     pending_list = "\n".join(f"- {skill}" for skill in pending[:3])
-
-    return f"""CRITICAL: User onboarding incomplete
-
-Pending setup:
-{pending_list}
-
-Display menu, then suggest completing onboarding:
-"Before we start, would you like to configure your goals?
-Say 'setup memory' for a 5-min setup."
-
-If user declines, proceed with their request.
-Wait for user input."""
+    return _load_state_template("state_onboarding_incomplete", pending_list=pending_list)
 
 
 def _template_active_projects(context: Dict[str, Any]) -> str:
@@ -1120,69 +1126,22 @@ def _template_active_projects(context: Dict[str, Any]) -> str:
         f"- Project {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
         for p in projects
     )
-
-    return f"""ACTIVE PROJECTS DETECTED
-
-Current work:
-{project_list}
-
-Display menu with project continuations highlighted in suggestions.
-
-When user says:
-- "continue [project name/ID]" → Load execute-project immediately
-- New request → Check if it relates to existing project first
-- Unclear → Ask: "Continue existing project or start something new?"
-
-Wait for user input."""
+    return _load_state_template("state_active_projects", project_list=project_list)
 
 
 def _template_workspace_modified(context: Dict[str, Any]) -> str:
     """STATE 3: Workspace changes detected - suggest running update-workspace-map."""
-    return """WORKSPACE CHANGES DETECTED
-
-Files modified in 04-workspace/ since last session.
-
-Display menu with "validate workspace" in suggestions.
-
-When user asks about workspace:
-1. Offer to run update-workspace-map skill
-2. Show what changed
-3. Update map automatically or guide manual update
-
-Wait for user input."""
+    return _load_state_template("state_workspace_modified")
 
 
 def _template_fresh_workspace(context: Dict[str, Any]) -> str:
     """STATE 4: Fresh workspace (configured but no projects) - emphasize starting first project."""
-    return """READY TO START
-
-User has configured goals but no active projects yet.
-
-Display menu, emphasize "Start your first project" in suggestions.
-
-When user describes work:
-1. Assess if it's finite deliverable (project) vs repeatable pattern (skill)
-2. Suggest plan-project for finite work
-3. Suggest relevant skill for utilities
-
-Be proactive in offering structure.
-Wait for user input."""
+    return _load_state_template("state_fresh_workspace")
 
 
 def _template_system_ready(context: Dict[str, Any]) -> str:
     """STATE 5: System ready (fallback) - open-ended, ready for anything."""
-    return """SYSTEM READY
-
-Onboarding complete. No active projects. Workspace validated.
-
-Display menu with "What would you like to build?" emphasis.
-
-Be ready for:
-- New project request → plan-project
-- Skill execution → Match and load
-- Exploration → Explain capabilities
-
-Wait for user input."""
+    return _load_state_template("state_system_ready")
 
 
 def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
