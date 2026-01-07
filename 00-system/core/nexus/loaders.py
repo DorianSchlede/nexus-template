@@ -1224,3 +1224,156 @@ def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
 
     # Return top 5
     return suggestions[:5]
+
+
+# =============================================================================
+# CLI Discovery Functions for Integration Skills
+# =============================================================================
+# Use: load-skill {category} --help
+# Returns formatted list of all skills in a category without auto-loading them
+# =============================================================================
+
+
+def discover_skills_in_category(category: str, base_path: str = ".") -> Dict[str, Any]:
+    """
+    Discover all skills in an integration category.
+
+    This enables the `load-skill {category} --help` pattern that prevents
+    auto-loading all skills (e.g., 28 langfuse skills) at startup.
+
+    Args:
+        category: Integration category name (e.g., "langfuse", "slack", "notion")
+        base_path: Root path to Nexus installation
+
+    Returns:
+        Dictionary with:
+        - category: Category name
+        - skills: List of skill metadata dicts
+        - count: Number of skills found
+        - formatted: Ready-to-display formatted output
+
+    Usage:
+        result = discover_skills_in_category("langfuse")
+        print(result["formatted"])  # Formatted skill list
+    """
+    base = Path(base_path)
+    result = {
+        "category": category,
+        "skills": [],
+        "count": 0,
+        "formatted": "",
+    }
+
+    # Search in both user skills (03-skills/) and system skills (00-system/skills/)
+    search_dirs = [
+        base / SKILLS_DIR / category,  # 03-skills/{category}/
+        base / SYSTEM_DIR / "skills" / category,  # 00-system/skills/{category}/
+    ]
+
+    found_skills = []
+
+    for skills_dir in search_dirs:
+        if not skills_dir.exists() or not skills_dir.is_dir():
+            continue
+
+        # Find all SKILL.md files in this category
+        for skill_file in skills_dir.glob("*/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+                skill_path = metadata.get("_file_path", str(skill_file))
+
+                if not skill_name:
+                    continue
+
+                # Skip the *-connect skill (connector is loaded separately)
+                # But include it in discovery for completeness
+                found_skills.append({
+                    "name": skill_name,
+                    "description": skill_desc,
+                    "path": skill_path,
+                    "is_connector": skill_name.endswith("-connect"),
+                })
+            except Exception:
+                continue
+
+    # Sort: connector first, then alphabetically
+    found_skills.sort(key=lambda x: (not x["is_connector"], x["name"]))
+
+    result["skills"] = found_skills
+    result["count"] = len(found_skills)
+
+    # Build formatted output
+    if found_skills:
+        lines = [
+            f"{category.title()} Operations ({len(found_skills)} skills):",
+            "",
+        ]
+
+        # Group by connector vs operations
+        connector = [s for s in found_skills if s["is_connector"]]
+        operations = [s for s in found_skills if not s["is_connector"]]
+
+        if connector:
+            lines.append("[Connector]")
+            for skill in connector:
+                lines.append(f"  - {skill['name']}: {skill['description']}")
+            lines.append("")
+
+        if operations:
+            lines.append("[Operations]")
+            for skill in operations:
+                lines.append(f"  - {skill['name']}: {skill['description']}")
+            lines.append("")
+
+        lines.append(f"To load a skill: read {category}/{{skill-name}}/SKILL.md")
+
+        result["formatted"] = "\n".join(lines)
+    else:
+        result["formatted"] = f"No skills found in category: {category}"
+
+    return result
+
+
+def list_integration_categories(base_path: str = ".") -> List[Dict[str, Any]]:
+    """
+    List all available integration categories.
+
+    Scans 03-skills/ for folders with *-connect subdirectories.
+
+    Returns:
+        List of category dicts with name, path, and skill count
+    """
+    base = Path(base_path)
+    categories = []
+
+    user_skills_dir = base / SKILLS_DIR
+
+    if not user_skills_dir.exists():
+        return categories
+
+    for item in user_skills_dir.iterdir():
+        if not item.is_dir():
+            continue
+
+        # Check if this has a *-connect subdirectory
+        has_connect = False
+        for subdir in item.iterdir():
+            if subdir.is_dir() and subdir.name.endswith("-connect"):
+                has_connect = True
+                break
+
+        if has_connect:
+            # Count skills in this category
+            skill_count = sum(1 for f in item.glob("*/SKILL.md"))
+            categories.append({
+                "name": item.name,
+                "path": str(item),
+                "skill_count": skill_count,
+            })
+
+    return sorted(categories, key=lambda x: x["name"])
