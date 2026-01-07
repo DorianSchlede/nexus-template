@@ -1,0 +1,75 @@
+# Test Scenarios Template
+# Copy to: 02-projects/{PROJECT}/02-resources/tests/scenarios.yaml
+# Run with: python scripts/run-tests.py --project {PROJECT-ID}
+
+version: "1.0"
+project_id: "{PROJECT-ID}"  # e.g., "41-integrated-subagent-testing-system"
+
+scenarios:
+  # =============================================================================
+  # BASIC FLOW - Test the primary happy path
+  # =============================================================================
+  - name: "basic_flow"
+    description: "Test the primary happy path"
+    runs: 3  # Number of parallel test runs
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      THEN: {YOUR TASK INSTRUCTIONS HERE}
+
+    pass_criteria:
+      - "{Expected outcome 1}"
+      - "{Expected outcome 2}"
+      - "No errors in execution"
+
+  # =============================================================================
+  # ERROR HANDLING - Test with invalid input
+  # =============================================================================
+  - name: "error_handling"
+    description: "Test error handling with invalid input"
+    runs: 2
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      THEN: {TRY INVALID INPUT}
+
+    pass_criteria:
+      - "Error message displayed"
+      - "Did not crash or hang"
+      - "Graceful error handling"
+
+  # =============================================================================
+  # EDGE CASE - Test boundary conditions
+  # =============================================================================
+  - name: "edge_case"
+    description: "Test boundary conditions"
+    runs: 2
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      THEN: {TEST EDGE CASE}
+
+    pass_criteria:
+      - "{Edge case handled correctly}"
+      - "No unexpected behavior"
+
+# =============================================================================
+# SCHEMA DOCUMENTATION
+# =============================================================================
+#
+# version: string - Schema version (currently "1.0")
+# project_id: string - Project ID (must match folder name)
+#
+# scenarios[]:
+#   name: string - Unique scenario identifier (lowercase, underscores)
+#   description: string - Human-readable description
+#   runs: integer - Number of parallel test runs (1-10 recommended)
+#   prompt: string - Full prompt for test-orchestrator subagent
+#   pass_criteria: string[] - List of conditions for test-case-analyzer to verify
+#
+# IMPORTANT RULES:
+# 1. Every prompt MUST start with "FIRST: Read 00-system/.cache/session_start_context.xml"
+# 2. No REPORT: section needed - test-case-analyzer handles reporting
+# 3. Pass criteria should be specific and verifiable from trace observations
+# 4. Use descriptive scenario names (basic_flow, error_handling, edge_case)
+#

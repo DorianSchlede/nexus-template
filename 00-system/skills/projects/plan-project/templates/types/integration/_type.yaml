@@ -8,6 +8,8 @@ discovery:
   skill: add-integration
   skill_load_command: "python 00-system/core/nexus-loader.py --skill add-integration"
   inline: false
+  # Decision: add-integration creates complete structure (master + connect + operations)
+  # See: 02-projects/30-improve-plan-project-skill/03-working/audit-*.md
 
 outputs:
   discovery_file: "02-discovery.md"

@@ -44,10 +44,14 @@ WORKFLOW SEQUENCE (DO NOT SKIP STEPS)
 1. TYPE DETECTION      → Semantic match from _type.yaml descriptions
 2. PROJECT SETUP       → Run init_project.py with detected type
 3. DISCOVERY           → Skill-based OR inline (depends on type)
-4. MENTAL MODELS       → Run AFTER discovery (informed questioning)
+4. MENTAL MODELS       → **MANDATORY** - Run AFTER discovery
 5. RE-DISCOVERY        → If gaps found (max 2 rounds)
-6. FINALIZATION        → Merge into plan.md, generate steps.md
+6. FINALIZATION        → Fill 03-plan.md, fill 04-steps.md
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**CRITICAL CHECKPOINTS:**
+- After Phase 3: plan.md MUST have success criteria + risks (from mental models)
+- After Phase 6: plan.md MUST be filled (not template), steps.md MUST have concrete tasks
 
 ### Critical Rules
 
@@ -155,24 +159,67 @@ python 00-system/core/nexus-loader.py --skill {skill-name}
 
 **CRITICAL**: Discovery MUST complete before mental models.
 
-### Phase 3: Mental Models (After Discovery)
+### Phase 3: Mental Models (After Discovery) - MANDATORY
+
+**DO NOT SKIP THIS PHASE.** Mental models ensure project quality.
+
+#### Step 3.1: Load Available Models
 
 ```bash
-# Load mental models dynamically
+# List available mental models
 python 00-system/mental-models/scripts/select_mental_models.py --format brief
 ```
 
-1. AI selects 2-3 relevant models based on discovery findings
-2. Present options to user
-3. Load selected model files from `00-system/mental-models/models/{category}/`
-4. Apply model questions to discovery findings
-5. Capture: success_criteria, risks, gaps
-6. Update 03-plan.md with outputs
+#### Step 3.2: Select Models (AI + User)
 
-**Key Insight**: Questions are INFORMED by discovery:
+Based on discovery findings, select 2-3 relevant models:
+
+| Project Type | Recommended Models |
+|--------------|-------------------|
+| Build/Skill | First Principles, Pre-Mortem, Inversion |
+| Integration | Pre-Mortem, Systems Thinking |
+| Research | First Principles, Socratic Method |
+| Strategy | SWOT, Pre-Mortem, Second-Order Thinking |
+| Content | Jobs-to-be-Done, First Principles |
+| Process | Systems Thinking, Inversion |
+
+Present options to user:
+```
+Based on your [project_type] project, I recommend these mental models:
+1. [Model A] - [Why relevant to this project]
+2. [Model B] - [Why relevant to this project]
+
+Which would you like to apply? (or suggest others)
+```
+
+#### Step 3.3: Apply Models to Discovery
+
+Load selected model file and apply questions:
+
+```bash
+# Read model file
+cat 00-system/mental-models/models/{category}/{model-slug}.md
+```
+
+**Key Questions** (informed by discovery):
 - "Given what we found about [X], what's truly essential?"
-- "Given these constraints, what could break?"
-- "Given this plan, imagine it failed. Why?"
+- "Given these constraints [from discovery], what could break?"
+- "Given this plan [from discovery], imagine it failed. Why?"
+
+#### Step 3.4: Capture Outputs
+
+Update 03-plan.md with:
+- **Success Criteria**: Refined from discovery + mental model analysis
+- **Risks**: Identified through Pre-Mortem/Inversion
+- **Gaps**: Areas needing more discovery
+
+#### Step 3.5: Verify Completion
+
+Before proceeding to Phase 4/5:
+- [ ] At least 2 mental models applied
+- [ ] Success criteria refined in 03-plan.md
+- [ ] Risks documented in 03-plan.md
+- [ ] Gaps identified (if any)
 
 ### Phase 4: Re-Discovery (If Gaps Found)
 
@@ -188,26 +235,79 @@ ELSE IF gaps exist AND rediscovery_round >= 2:
     → Continue to Phase 5
 ```
 
-### Phase 5: Finalization
+### Phase 5: Finalization - FILL ALL TEMPLATES
 
-1. **Merge into 03-plan.md**:
-   - Discovery findings (from 02-discovery.md)
-   - Mental model outputs (success criteria, risks)
-   - Open questions / unknowns
+**DO NOT leave templates with placeholder text.** All files must have real content.
 
-2. **Finalize 04-steps.md**:
-   - Use steps.md template as base
-   - Fill in concrete tasks from discovery
-   - Add checkpoint tasks every 3-5 steps
+#### Step 5.1: Fill 03-plan.md Completely
 
-3. **Update resume-context.md**:
-   ```yaml
-   current_phase: "execution"
-   next_action: "execute-project"
-   files_to_load: [all relevant resources]
-   ```
+The plan.md file MUST contain:
 
-4. **Project Ready for Execution**
+```markdown
+## Approach
+[Actual strategy description - NOT placeholder text]
+
+## Key Decisions
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| [Real decision] | [Real choice] | [Real rationale] |
+
+## Success Criteria (from Mental Models)
+- [ ] [Specific, measurable criterion 1]
+- [ ] [Specific, measurable criterion 2]
+
+## Risks & Mitigations (from Mental Models)
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| [Real risk] | [H/M/L] | [H/M/L] | [Real mitigation] |
+
+## Dependencies (from Discovery)
+- [Real dependencies from 02-discovery.md]
+```
+
+**VERIFY**: No `{{placeholder}}` or `[To be filled]` text remains.
+
+#### Step 5.2: Fill 04-steps.md Completely
+
+Replace generic phases with concrete tasks:
+
+```markdown
+## Phase 2: [Actual Phase Name]
+- [ ] [Concrete task with expected output]
+- [ ] [Concrete task with expected output]
+- [ ] **CHECKPOINT**: Verify [what] works
+
+## Phase 3: [Actual Phase Name]
+- [ ] [Concrete task]
+- [ ]* [Optional task] (marked with *)
+```
+
+**VERIFY**: No `[Step 1]` or `[Name this phase]` text remains.
+
+#### Step 5.3: Update resume-context.md
+
+```yaml
+current_phase: "execution"
+next_action: "execute-project"
+discovery_complete: true
+files_to_load:
+  - "01-planning/01-overview.md"
+  - "01-planning/02-discovery.md"
+  - "01-planning/03-plan.md"
+  - "01-planning/04-steps.md"
+```
+
+#### Step 5.4: Final Verification Checklist
+
+Before declaring planning complete:
+- [ ] 03-plan.md has actual content (no placeholders)
+- [ ] 03-plan.md has success criteria from mental models
+- [ ] 03-plan.md has risks from mental models
+- [ ] 04-steps.md has concrete tasks (no placeholders)
+- [ ] 04-steps.md has checkpoint tasks
+- [ ] resume-context.md updated with discovery_complete: true
+
+**Project Ready for Execution**
 
 ---
 

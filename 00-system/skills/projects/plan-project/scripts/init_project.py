@@ -277,22 +277,57 @@ def sanitize_project_name(name):
     return name
 
 
-def load_type_template(project_type):
+def load_type_template(project_type, template_name):
     """
-    Load type-specific template sections from templates/ directory.
+    Load type-specific template from templates/types/{type}/ directory.
+
+    Args:
+        project_type: One of the 8 project types (build, integration, etc.)
+        template_name: Name of template file (overview.md, discovery.md, plan.md, steps.md)
+
+    Returns:
+        Template content as string, or None if not found
     """
-    templates_dir = script_dir / "templates"
-    template_file = templates_dir / f"template-{project_type}.md"
+    templates_dir = script_dir.parent / "templates" / "types" / project_type
+    template_file = templates_dir / template_name
 
     if not template_file.exists():
-        print(f"[WARNING] Template not found for type '{project_type}', using minimal")
-        return ""
+        return None
 
     try:
         return template_file.read_text(encoding='utf-8')
     except Exception as e:
-        print(f"[WARNING] Error reading template: {e}")
-        return ""
+        print(f"[WARNING] Error reading template {template_name}: {e}")
+        return None
+
+
+def get_type_config(project_type):
+    """
+    Load _type.yaml configuration for a project type.
+
+    Returns:
+        Dict with type configuration or empty dict if not found
+    """
+    type_yaml = script_dir.parent / "templates" / "types" / project_type / "_type.yaml"
+
+    if not type_yaml.exists():
+        return {}
+
+    try:
+        # Simple YAML parsing without external dependency
+        content = type_yaml.read_text(encoding='utf-8')
+        config = {}
+        for line in content.split('\n'):
+            if ':' in line and not line.strip().startswith('#'):
+                key, value = line.split(':', 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if value:
+                    config[key] = value
+        return config
+    except Exception as e:
+        print(f"[WARNING] Error reading _type.yaml for {project_type}: {e}")
+        return {}
 
 
 def get_next_project_id(projects_path):
@@ -325,7 +360,7 @@ def init_project(project_name, path, project_type='generic', description='', pro
     Args:
         project_name: Human-readable project name
         path: Path to projects directory (e.g., 02-projects)
-        project_type: One of build, research, strategy, content, process, generic
+        project_type: One of build, integration, research, strategy, content, process, skill, generic
         description: Project description for overview
         project_id_override: Optional project ID (auto-assigned if not provided)
     """
@@ -387,33 +422,30 @@ def init_project(project_name, path, project_type='generic', description='', pro
         print(f"[ERROR] Error creating 01-overview.md: {e}")
         return None
 
-    # Create 02-discovery.md
+    # Create 02-discovery.md (prefer type-specific template)
     try:
-        # Try to load from template file first
-        discovery_template_path = script_dir / "templates" / "discovery-template.md"
-        if discovery_template_path.exists():
-            discovery_content = discovery_template_path.read_text(encoding='utf-8')
-        else:
-            discovery_content = DISCOVERY_TEMPLATE
+        discovery_content = load_type_template(project_type, "discovery.md")
+        if not discovery_content:
+            # Fall back to generic template
+            discovery_template_path = script_dir / "templates" / "discovery-template.md"
+            if discovery_template_path.exists():
+                discovery_content = discovery_template_path.read_text(encoding='utf-8')
+            else:
+                discovery_content = DISCOVERY_TEMPLATE
         (planning_dir / "02-discovery.md").write_text(discovery_content, encoding='utf-8')
-        print("[OK] Created 02-discovery.md")
+        print(f"[OK] Created 02-discovery.md (type: {project_type})")
     except Exception as e:
         print(f"[ERROR] Error creating 02-discovery.md: {e}")
         return None
 
-    # Create 03-plan.md with type-specific sections
+    # Create 03-plan.md (prefer type-specific template)
     try:
-        type_sections = load_type_template(project_type)
-        plan_content = PLAN_TEMPLATE.format(
-            project_name=project_name,
-            date=current_date
-        )
-        # Inject type-specific sections before "## Open Questions"
-        if type_sections:
-            insertion_marker = "## Open Questions"
-            plan_content = plan_content.replace(
-                insertion_marker,
-                type_sections + "\n---\n\n" + insertion_marker
+        plan_content = load_type_template(project_type, "plan.md")
+        if not plan_content:
+            # Fall back to generic template
+            plan_content = PLAN_TEMPLATE.format(
+                project_name=project_name,
+                date=current_date
             )
         (planning_dir / "03-plan.md").write_text(plan_content, encoding='utf-8')
         print(f"[OK] Created 03-plan.md (type: {project_type})")
@@ -421,16 +453,19 @@ def init_project(project_name, path, project_type='generic', description='', pro
         print(f"[ERROR] Error creating 03-plan.md: {e}")
         return None
 
-    # Create 04-steps.md
+    # Create 04-steps.md (prefer type-specific template)
     try:
-        steps_content = STEPS_TEMPLATE.format(
-            project_name=project_name,
-            project_id=project_id,
-            sanitized_name=sanitized_name,
-            date=current_date
-        )
+        steps_content = load_type_template(project_type, "steps.md")
+        if not steps_content:
+            # Fall back to generic template
+            steps_content = STEPS_TEMPLATE.format(
+                project_name=project_name,
+                project_id=project_id,
+                sanitized_name=sanitized_name,
+                date=current_date
+            )
         (planning_dir / "04-steps.md").write_text(steps_content, encoding='utf-8')
-        print("[OK] Created 04-steps.md")
+        print(f"[OK] Created 04-steps.md (type: {project_type})")
     except Exception as e:
         print(f"[ERROR] Error creating 04-steps.md: {e}")
         return None
@@ -438,28 +473,44 @@ def init_project(project_name, path, project_type='generic', description='', pro
     # Create resume-context.md
     try:
         resume_content = f"""---
-resume_schema_version: "1.0"
+session_id: ""
+session_ids: []
+resume_schema_version: "2.0"
 last_updated: "{timestamp}"
 
 # PROJECT
 project_id: "{project_id}-{sanitized_name}"
 project_name: "{project_name}"
+project_type: "{project_type}"
 current_phase: "planning"
 
-# LOADING
+# LOADING - Updated dynamically
 next_action: "plan-project"
 files_to_load:
   - "01-planning/01-overview.md"
   - "01-planning/02-discovery.md"
   - "01-planning/03-plan.md"
   - "01-planning/04-steps.md"
-  - "01-planning/resume-context.md"
 
-# STATE
+# SKILL TRACKING (v2.3 simplified - optional)
+# current_skill: ""
+
+# DISCOVERY STATE
+rediscovery_round: 0
+discovery_complete: false
+
+# PROGRESS
 current_section: 1
 current_task: 1
 total_tasks: 0
 tasks_completed: 0
+---
+
+## Progress Summary
+
+**Project Type**: {project_type}
+**Phase**: Planning
+
 ---
 
 *Auto-updated by execute-project skill on task/section completion*
@@ -525,7 +576,7 @@ Project structure created:
     parser.add_argument("--path", "-p", default="02-projects",
                         help="Path to projects directory (default: 02-projects)")
     parser.add_argument("--type", "-t", default="generic",
-                        choices=["build", "research", "strategy", "content", "process", "generic"],
+                        choices=["build", "integration", "research", "strategy", "content", "process", "skill", "generic"],
                         help="Project type for template selection (default: generic)")
     parser.add_argument("--description", "-d", default="",
                         help="Project description")

@@ -518,40 +518,90 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
         "files": {},
     }
 
-    # List planning files with metadata (no content - use Read tool)
-    planning_files = [
-        "01-planning/overview.md",
-        "01-planning/plan.md",
-        "01-planning/requirements.md",
-        "01-planning/design.md",
-        "01-planning/steps.md",
-    ]
-
-    for file_rel in planning_files:
-        file_path = project_path / file_rel
-        if file_path.exists():
-            # Extract YAML metadata only
+    # Discover planning files dynamically (handles numbered prefixes like 01-overview.md)
+    planning_dir = project_path / "01-planning"
+    if planning_dir.exists():
+        for file_path in sorted(planning_dir.glob("*.md")):
+            file_rel = f"01-planning/{file_path.name}"
             metadata = extract_yaml_frontmatter(str(file_path))
-
             result["files"][file_rel] = {
                 "path": str(file_path),
                 "metadata": metadata,
-                # No content - use Read tool for file contents
             }
 
+    # Discover resources files
+    resources_dir = project_path / "02-resources"
+    if resources_dir.exists():
+        for file_path in sorted(resources_dir.rglob("*")):
+            if file_path.is_file():
+                file_rel = str(file_path.relative_to(project_path))
+                # Only extract metadata for markdown files
+                metadata = extract_yaml_frontmatter(str(file_path)) if file_path.suffix == ".md" else {}
+                result["files"][file_rel] = {
+                    "path": str(file_path),
+                    "metadata": metadata,
+                }
+
+    # Discover working files
+    working_dir = project_path / "03-working"
+    if working_dir.exists():
+        for file_path in sorted(working_dir.rglob("*")):
+            if file_path.is_file():
+                file_rel = str(file_path.relative_to(project_path))
+                metadata = extract_yaml_frontmatter(str(file_path)) if file_path.suffix == ".md" else {}
+                result["files"][file_rel] = {
+                    "path": str(file_path),
+                    "metadata": metadata,
+                }
+
     # List outputs directory
-    outputs_path = project_path / "03-outputs"
-    if outputs_path.exists():
+    outputs_dir = project_path / "04-outputs"
+    if outputs_dir.exists():
         result["outputs"] = [
-            str(f.relative_to(outputs_path)) for f in outputs_path.rglob("*") if f.is_file()
+            str(f.relative_to(outputs_dir)) for f in outputs_dir.rglob("*") if f.is_file()
         ]
+    # Fallback to old path for backwards compatibility
+    elif (project_path / "03-outputs").exists():
+        outputs_dir = project_path / "03-outputs"
+        result["outputs"] = [
+            str(f.relative_to(outputs_dir)) for f in outputs_dir.rglob("*") if f.is_file()
+        ]
+
+    # Build recommended_reads - prioritize files_to_load from resume-context if available
+    resume_context = result["files"].get("01-planning/resume-context.md", {})
+    files_to_load = resume_context.get("metadata", {}).get("files_to_load", []) if resume_context.get("metadata") else []
+
+    if files_to_load:
+        # Use curated list from resume-context, resolve to full paths
+        recommended = []
+        for rel_path in files_to_load:
+            full_path = project_path / rel_path
+            if full_path.exists():
+                recommended.append(str(full_path))
+        # Always include resume-context itself first
+        resume_path = project_path / "01-planning" / "resume-context.md"
+        if resume_path.exists() and str(resume_path) not in recommended:
+            recommended.insert(0, str(resume_path))
+    else:
+        # Fallback: prioritize key planning files, then others
+        priority_files = ["resume-context.md", "01-overview.md", "04-steps.md", "03-plan.md"]
+        recommended = []
+        other_files = []
+        for file_info in result["files"].values():
+            path = file_info["path"]
+            filename = Path(path).name
+            if filename in priority_files:
+                # Insert in priority order
+                idx = priority_files.index(filename)
+                recommended.append((idx, path))
+            else:
+                other_files.append(path)
+        recommended = [p for _, p in sorted(recommended)] + other_files
 
     # Instructions for AI
     result["_usage"] = {
         "note": "Use Read tool to load file contents in parallel",
-        "recommended_reads": [
-            f["path"] for f in result["files"].values()
-        ],
+        "recommended_reads": recommended,
     }
 
     return result

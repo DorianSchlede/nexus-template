@@ -1,0 +1,186 @@
+# Format and Lint Configuration
+# Copy this to your project root as .format-config.yaml and customize
+
+format_and_lint:
+  # File patterns to include
+  include:
+    - "**/*.py"
+    - "**/*.js"
+    - "**/*.ts"
+    - "**/*.json"
+    - "**/*.yaml"
+    - "**/*.md"
+
+  # File patterns to skip (recommended to exclude)
+  exclude:
+    - "**/node_modules/**"
+    - "**/venv/**"
+    - "**/.venv/**"
+    - "**/__pycache__/**"
+    - "**/.git/**"
+    - "**/build/**"
+    - "**/dist/**"
+    - "**/coverage/**"
+    - "**/.pytest_cache/**"
+    - "**/migrations/**"
+    - "**/vendor/**"
+    - "**/.next/**"
+
+  # Global settings
+  auto_fix: true              # Auto-fix fixable issues
+  interactive: true           # Prompt for non-auto-fixable issues
+  show_diff: true            # Show diff before applying changes
+  fail_on_errors: true       # Exit with error code if issues found
+
+  # Python configuration
+  python:
+    enabled: true
+    formatter: black          # Options: black, autopep8
+    linters:
+      - flake8               # Style checker
+      - pylint               # Code analyzer
+    import_sorter: isort      # Sort imports
+
+    # Black options
+    black:
+      line_length: 100
+      target_version: py310
+      skip_string_normalization: false
+
+    # Flake8 options
+    flake8:
+      max_line_length: 100
+      ignore:
+        - E203  # Whitespace before ':'
+        - W503  # Line break before binary operator
+      exclude:
+        - ".git"
+        - "__pycache__"
+        - "tests"
+
+    # Pylint options
+    pylint:
+      disable:
+        - C0111  # Missing docstring
+        - R0801  # Duplicate code
+      max_line_length: 100
+
+  # JavaScript/TypeScript configuration
+  javascript:
+    enabled: true
+    formatter: prettier
+    linters:
+      - eslint
+
+    # Prettier options
+    prettier:
+      print_width: 100
+      tab_width: 2
+      use_tabs: false
+      semi: true
+      single_quote: true
+      trailing_comma: es5
+      bracket_spacing: true
+      arrow_parens: always
+
+    # ESLint options
+    eslint:
+      extends:
+        - eslint:recommended
+      rules:
+        indent: [error, 2]
+        quotes: [error, single]
+        semi: [error, always]
+
+  # TypeScript configuration
+  typescript:
+    enabled: true
+    formatter: prettier
+    linters:
+      - eslint
+
+    eslint:
+      extends:
+        - eslint:recommended
+        - plugin:@typescript-eslint/recommended
+      parser: "@typescript-eslint/parser"
+      rules:
+        "@typescript-eslint/explicit-function-return-types": off
+
+  # Go configuration
+  go:
+    enabled: true
+    formatter: gofmt
+    linters:
+      - golangci-lint
+    import_sorter: goimports
+
+  # Rust configuration
+  rust:
+    enabled: true
+    formatter: rustfmt
+    linters:
+      - clippy
+
+  # JSON configuration
+  json:
+    enabled: true
+    formatter: prettier
+    linters:
+      - jsonlint
+
+    prettier:
+      print_width: 80
+
+  # YAML configuration
+  yaml:
+    enabled: true
+    formatter: prettier
+    linters:
+      - yamllint
+
+    yamllint:
+      rules:
+        line-length:
+          max: 120
+        indentation:
+          spaces: 2
+
+  # Markdown configuration
+  markdown:
+    enabled: true
+    formatter: prettier
+    linters:
+      - markdownlint
+
+    prettier:
+      print_width: 100
+
+  # Shell/Bash configuration
+  shell:
+    enabled: true
+    formatter: shfmt
+    linters:
+      - shellcheck
+
+    shfmt:
+      indent: 2
+      binary_next_line: false
+
+  # Pre-commit hook configuration
+  pre_commit_hook:
+    enabled: false           # Set to true to enable pre-commit hook
+    auto_fix: true          # Auto-fix on pre-commit
+    block_on_errors: true   # Block commit if errors found
+    block_on_warnings: false # Block commit if warnings found (override)
+    exit_message: |
+      Code formatting and linting issues found.
+      Use 'format and lint --fix' to fix automatically,
+      or fix manually and commit again.
+
+  # CI/CD configuration
+  ci_mode:
+    enabled: false
+    strict: true            # Treat warnings as errors
+    fail_fast: true         # Stop on first error
+    report_format: json     # Options: json, junit, sarif

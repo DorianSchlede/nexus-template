@@ -1,0 +1,652 @@
+# ============================================================================
+# SUBAGENT TEST SUITE: plan-project Router v2.4
+# ============================================================================
+# Project: 30-improve-plan-project-skill
+#
+# CRITICAL: Subagents must NOT know they are being tested.
+# All prompts are written as NORMAL USER REQUESTS.
+# This ensures authentic AI behavior during validation.
+#
+# Code-based tests (deterministic) are in: tests/test_plan_project.py
+# ============================================================================
+
+metadata:
+  feature: "plan-project Router v2.4"
+  version: "3.0"
+  date: "2026-01-07"
+  total_scenarios: 24
+  estimated_runtime: "30 minutes"
+  requires_ai: true
+  companion_tests: "tests/test_plan_project.py"
+  design_principle: "Subagents receive real user requests, not test instructions"
+
+# ============================================================================
+# CATEGORY 1: CORRECTNESS PROPERTIES
+# ============================================================================
+
+scenarios:
+
+  # --------------------------------------------------------------------------
+  # P1: Router Completeness
+  # --------------------------------------------------------------------------
+
+  - name: "P1_router_clear_build_intent"
+    description: "Router detects build type from clear intent"
+    category: "property"
+    property: "P1_Router_Completeness"
+    validates: ["REQ-1", "REQ-2"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to build a user dashboard for our internal tools. Can you help me plan this project?
+    pass_criteria:
+      - "Type 'build' detected"
+      - "plan-project skill loaded"
+      - "Router did not fail silently"
+    runs: 3
+    observe:
+      - "What type was detected?"
+      - "Was detection automatic or did AI ask for clarification?"
+
+  - name: "P1_router_ambiguous_prompts_user"
+    description: "Router prompts user when intent is ambiguous"
+    category: "property"
+    property: "P1_Router_Completeness"
+    validates: ["REQ-1", "REQ-2"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to start a new project.
+    pass_criteria:
+      - "User prompted to select project type"
+      - "All 8 project types presented as options"
+      - "Router did NOT assume a type without asking"
+    runs: 2
+    observe:
+      - "Did AI ask what kind of project?"
+      - "Were type options presented?"
+
+  # --------------------------------------------------------------------------
+  # P2: Discovery Sequence Integrity
+  # --------------------------------------------------------------------------
+
+  - name: "P2_discovery_before_mental_models"
+    description: "Discovery completes before mental models load"
+    category: "property"
+    property: "P2_Discovery_Sequence_Integrity"
+    validates: ["REQ-6", "REQ-9"]
+    mode: "interactive"
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to build a login feature for our app. It needs email/password auth and maybe social login later.
+    pass_criteria:
+      - "Discovery questions asked BEFORE mental models"
+      - "02-discovery.md created before mental model selection"
+      - "Workflow follows: Setup → Discovery → Mental Models"
+    runs: 2
+    observe:
+      - "What was the sequence of phases?"
+      - "When was 02-discovery.md populated?"
+    interactive_answers:
+      - trigger: "type selection"
+        answer: "Build"
+      - trigger: "discovery questions"
+        answer: "We need username/email login, password reset, and session management. Target is 1000 daily users."
+
+  # --------------------------------------------------------------------------
+  # P3: Skill Discovery Output (Skill-based routing)
+  # --------------------------------------------------------------------------
+
+  - name: "P3_integration_routes_to_skill"
+    description: "Integration type routes to add-integration skill"
+    category: "property"
+    property: "P3_Skill_Discovery_Output"
+    validates: ["REQ-4", "REQ-12"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to connect our app to Stripe for payment processing. Can you help me set up this integration?
+    pass_criteria:
+      - "Type 'integration' detected"
+      - "add-integration skill loaded"
+      - "API discovery workflow initiated"
+    runs: 2
+    observe:
+      - "What type was detected?"
+      - "What skill was loaded for discovery?"
+
+  - name: "P3_research_routes_to_skill"
+    description: "Research type routes to create-research-project skill"
+    category: "property"
+    property: "P3_Skill_Discovery_Output"
+    validates: ["REQ-4", "REQ-12"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to do a literature review on transformer architectures for my thesis. Can you help me organize this research?
+    pass_criteria:
+      - "Type 'research' detected"
+      - "create-research-project skill loaded"
+      - "Paper search workflow initiated"
+    runs: 2
+    observe:
+      - "What type was detected?"
+      - "What skill was loaded?"
+
+  - name: "P3_skill_routes_to_skill"
+    description: "Skill type routes to create-skill skill"
+    category: "property"
+    property: "P3_Skill_Discovery_Output"
+    validates: ["REQ-4", "REQ-12"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to create a new Nexus skill that automatically formats and lints code before commits. Can you help me build this?
+    pass_criteria:
+      - "Type 'skill' detected"
+      - "create-skill skill loaded"
+      - "Skill scaffolding workflow initiated"
+    runs: 2
+    observe:
+      - "What type was detected?"
+      - "What skill was loaded?"
+
+  # --------------------------------------------------------------------------
+  # P4: Resume Context Consistency
+  # --------------------------------------------------------------------------
+
+  - name: "P4_resume_context_updates"
+    description: "resume-context.md updates at phase transitions"
+    category: "property"
+    property: "P4_Resume_Context_Consistency"
+    validates: ["REQ-10", "REQ-11"]
+    mode: "interactive"
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to build an API rate limiter for our backend services. It should handle 10k requests per minute with configurable limits per endpoint.
+    pass_criteria:
+      - "resume-context.md updated after setup phase"
+      - "resume-context.md updated after discovery phase"
+      - "current_phase field reflects actual phase"
+      - "discovery_complete changes appropriately"
+    runs: 1
+    observe:
+      - "Check resume-context.md after each phase transition"
+      - "Verify state consistency"
+    interactive_answers:
+      - trigger: "type"
+        answer: "Build"
+      - trigger: "discovery"
+        answer: "Redis-based, sliding window algorithm, per-user and per-endpoint limits"
+
+  # --------------------------------------------------------------------------
+  # P6: Type Detection Determinism
+  # --------------------------------------------------------------------------
+
+  - name: "P6_determinism_build"
+    description: "Same input produces consistent type detection"
+    category: "property"
+    property: "P6_Type_Detection_Determinism"
+    validates: ["REQ-2"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to build a REST API client library for our internal services.
+    pass_criteria:
+      - "Type 'build' detected consistently across all runs"
+      - "No variation in detection result"
+    runs: 5
+    determinism_check: true
+    observe:
+      - "Record detected type for each run"
+      - "Compare results across runs"
+
+
+# ============================================================================
+# CATEGORY 2: TYPE DETECTION (Semantic Matching)
+# ============================================================================
+
+  # --------------------------------------------------------------------------
+  # Build Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_build_synonyms"
+    description: "Build type detection with varied phrasing"
+    category: "type_detection"
+    type: "build"
+    validates: ["REQ-2", "REQ-5"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to implement user authentication for our web app.
+        expected: "build"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me create a new CLI tool for database migrations?
+        expected: "build"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I'm developing a caching layer for our microservices. Where do I start?
+        expected: "build"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          We need to code a data pipeline that processes CSV files into our analytics database.
+        expected: "build"
+    pass_criteria:
+      - "Type 'build' detected for all variations"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Integration Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_integration_synonyms"
+    description: "Integration type detection with API-related requests"
+    category: "type_detection"
+    type: "integration"
+    validates: ["REQ-2", "REQ-4"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to connect our app to the Stripe API for payments.
+        expected: "integration"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me add webhook support so GitHub can notify us of new commits?
+        expected: "integration"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          We need OAuth flow with Google so users can sign in with their Google accounts.
+        expected: "integration"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I want to pull data from Airtable as an external data source for our dashboard.
+        expected: "integration"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me add an MCP server for Notion so I can query my workspace?
+        expected: "integration"
+    pass_criteria:
+      - "Type 'integration' detected for all API-related requests"
+    runs: 5
+
+  # --------------------------------------------------------------------------
+  # Research Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_research_synonyms"
+    description: "Research type detection with academic requests"
+    category: "type_detection"
+    type: "research"
+    validates: ["REQ-2", "REQ-4"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to do a systematic review of papers on transformer architectures.
+        expected: "research"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me with a technical deep-dive on vector databases? I need to understand the academic foundations.
+        expected: "research"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I'm doing competitive analysis and need to review the academic papers behind our competitors' technology.
+        expected: "research"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Help me synthesize knowledge from recent publications on agent memory systems.
+        expected: "research"
+    pass_criteria:
+      - "Type 'research' detected for academic/paper-related requests"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Strategy Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_strategy_synonyms"
+    description: "Strategy type detection with strategic planning requests"
+    category: "type_detection"
+    type: "strategy"
+    validates: ["REQ-2", "REQ-5"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to create a go-to-market strategy for our new product launch.
+        expected: "strategy"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me plan our product roadmap for Q2?
+        expected: "strategy"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          We're deciding between microservices and monolith. I need help with this architecture decision.
+        expected: "strategy"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to analyze our competitive positioning in the market.
+        expected: "strategy"
+    pass_criteria:
+      - "Type 'strategy' detected for strategic planning requests"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Content Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_content_synonyms"
+    description: "Content type detection with documentation requests"
+    category: "type_detection"
+    type: "content"
+    validates: ["REQ-2", "REQ-5"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to write comprehensive API documentation for our REST endpoints.
+        expected: "content"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me create a blog post series about AI agents for our company blog?
+        expected: "content"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I'm working on marketing copy for our new landing page.
+        expected: "content"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          We need training materials for onboarding new developers to our codebase.
+        expected: "content"
+    pass_criteria:
+      - "Type 'content' detected for documentation/writing requests"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Process Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_process_synonyms"
+    description: "Process type detection with workflow requests"
+    category: "type_detection"
+    type: "process"
+    validates: ["REQ-2", "REQ-5"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I want to optimize our deployment workflow - it's taking too long.
+        expected: "process"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me automate our code review workflow?
+        expected: "process"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Our incident response process needs improvement. Help me redesign it.
+        expected: "process"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need to create an approval process for design changes.
+        expected: "process"
+    pass_criteria:
+      - "Type 'process' detected for workflow/process requests"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Skill Type
+  # --------------------------------------------------------------------------
+
+  - name: "TD_skill_synonyms"
+    description: "Skill type detection with Nexus skill requests"
+    category: "type_detection"
+    type: "skill"
+    validates: ["REQ-2", "REQ-4"]
+    prompt_variations:
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I want to create a new Nexus skill for automated code review.
+        expected: "skill"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Can you help me build a reusable workflow for generating weekly reports?
+        expected: "skill"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          I need an automation capability that analyzes code complexity.
+        expected: "skill"
+
+      - prompt: |
+          FIRST: Read 00-system/.cache/session_start_context.xml
+
+          Help me create a skill chain that validates PRs across multiple checks.
+        expected: "skill"
+    pass_criteria:
+      - "Type 'skill' detected for Nexus skill/automation requests"
+    runs: 4
+
+  # --------------------------------------------------------------------------
+  # Generic Type (Fallback)
+  # --------------------------------------------------------------------------
+
+  - name: "TD_generic_fallback"
+    description: "Generic type for miscellaneous requests"
+    category: "type_detection"
+    type: "generic"
+    validates: ["REQ-2", "REQ-5"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to organize my personal notes and reference materials.
+    pass_criteria:
+      - "Type 'generic' detected OR user prompted to select"
+      - "Did NOT incorrectly detect as a specific type"
+    runs: 2
+    observe:
+      - "Was a type auto-detected or did AI ask?"
+
+
+# ============================================================================
+# CATEGORY 3: WORKFLOW TESTS
+# ============================================================================
+
+  - name: "WORKFLOW_mandatory_router"
+    description: "plan-project is the mandatory entry point"
+    category: "workflow"
+    validates: ["REQ-1"]
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      Create a new project called UserDashboard for me.
+    pass_criteria:
+      - "plan-project skill loaded as entry point"
+      - "Type selection presented"
+      - "No alternative project creation path used"
+    runs: 2
+    observe:
+      - "What skill was loaded?"
+      - "What was the first question asked?"
+
+  - name: "WORKFLOW_mental_models_mandatory"
+    description: "Mental models phase cannot be skipped"
+    category: "workflow"
+    validates: ["REQ-7"]
+    mode: "interactive"
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to build an API rate limiter. Let's skip the planning and just start coding.
+    pass_criteria:
+      - "Mental models still offered after discovery"
+      - "Phase could NOT be skipped even when user tried"
+      - "AI explained importance of planning"
+    runs: 1
+    observe:
+      - "Did AI enforce mental models despite user request to skip?"
+    interactive_answers:
+      - trigger: "type"
+        answer: "Build"
+      - trigger: "discovery"
+        answer: "Basic rate limiting, Redis backend, 1000 req/min limit"
+      - trigger: "mental models"
+        answer: "Can we skip this part?"
+
+
+# ============================================================================
+# CATEGORY 4: INTERACTIVE MODE (Full Workflows)
+# ============================================================================
+
+  - name: "INT_full_build_workflow"
+    description: "Complete Build workflow end-to-end"
+    category: "interactive"
+    mode: "interactive"
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I need to build a user authentication system with email/password login, password reset, and session management. Our target is about 5000 daily active users.
+    pass_criteria:
+      - "All phases completed: Setup → Discovery → Mental Models → Finalization"
+      - "02-discovery.md has real content (not template placeholders)"
+      - "03-plan.md has real content (no {{placeholders}})"
+      - "04-steps.md has concrete tasks (no [Step 1] placeholders)"
+      - "Mental models were applied"
+    runs: 1
+    observe:
+      - "Record each phase and what was produced"
+      - "Check final files for placeholder text"
+    interactive_answers:
+      - trigger: "type"
+        answer: "Build"
+      - trigger: "discovery"
+        answer: "Email/password auth, bcrypt hashing, JWT tokens, Redis sessions, password reset via email"
+      - trigger: "mental models"
+        answer: "First Principles and Pre-Mortem sound good"
+      - trigger: "additional questions"
+        answer: "No, that covers everything"
+
+  - name: "INT_rediscovery_on_gaps"
+    description: "Re-discovery triggers when gaps are identified"
+    category: "interactive"
+    mode: "interactive"
+    prompt: |
+      FIRST: Read 00-system/.cache/session_start_context.xml
+
+      I want to build a distributed cache system for our microservices.
+    pass_criteria:
+      - "Gaps identified during mental model analysis"
+      - "Re-discovery triggered (rediscovery_round > 0)"
+      - "Follow-up questions asked to fill gaps"
+    runs: 1
+    observe:
+      - "Were gaps identified?"
+      - "Was re-discovery triggered?"
+      - "Check rediscovery_round in resume-context.md"
+    interactive_answers:
+      - trigger: "type"
+        answer: "Build"
+      - trigger: "discovery"
+        answer: "I'm not sure about the scale requirements yet. Maybe Redis?"
+      - trigger: "mental models"
+        answer: "Pre-Mortem"
+      - trigger: "gaps identified"
+        answer: "We expect 100k requests per second at peak, 50GB data, 99.9% availability required"
+
+
+# ============================================================================
+# ANALYSIS CONFIGURATION
+# ============================================================================
+
+analysis:
+  aggregate_by:
+    - category
+    - property
+    - type
+
+  success_thresholds:
+    property: 100%
+    type_detection: 85%
+    workflow: 100%
+    interactive: 100%
+
+  report_format: "markdown"
+  include_traces: true
+
+  code_tests:
+    location: "tests/test_plan_project.py"
+    run_first: true
+
+# ============================================================================
+# EXECUTION NOTES
+# ============================================================================
+#
+# HOW TO RUN THESE SCENARIOS:
+#
+# 1. For single-prompt scenarios:
+#    - Spawn subagent with the prompt
+#    - Let it complete naturally
+#    - Analyze output against pass_criteria
+#
+# 2. For prompt_variations scenarios:
+#    - Run each variation as a separate subagent
+#    - Compare detected types to expected values
+#
+# 3. For interactive scenarios:
+#    - Use resume pattern when subagent asks questions
+#    - Provide answers from interactive_answers
+#    - Continue until workflow completes
+#
+# 4. For determinism_check scenarios:
+#    - Run the same prompt multiple times
+#    - Compare results for consistency
+#
+# CRITICAL: Never reveal to subagents that they are being tested.
+# The prompts are written as normal user requests.
+# ============================================================================

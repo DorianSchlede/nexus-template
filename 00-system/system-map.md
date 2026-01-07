@@ -23,7 +23,7 @@ Nexus/
 │   ├── goals.md                    # User identity
 │   └── session-reports/            # History
 │
-├── 02-projects/                    # BUILD mode work
+├── 02-projects/                    # BUILD mode work (active)
 │   └── {ID}-{name}/
 │       ├── 01-planning/            # 4 phases
 │       └── 04-outputs/             # Deliverables
@@ -31,8 +31,11 @@ Nexus/
 ├── 03-skills/                      # EXECUTE mode work
 │   └── {skill-name}/SKILL.md       # Workflows
 │
-└── 04-workspace/                   # User content
-    └── workspace-map.md            # Structure doc
+├── 04-workspace/                   # User content
+│   └── workspace-map.md            # Structure doc
+│
+└── 05-archived/                    # Completed projects
+    └── {ID}-{name}/                # Archived project folders
 ```
 </section>
 
@@ -74,9 +77,10 @@ Claude Executes
 |------|------|
 | Behavior rules | `00-system/core/orchestrator.md` |
 | User identity | `01-memory/goals.md` |
-| Project work | `02-projects/{ID}-{name}/` |
+| Active projects | `02-projects/{ID}-{name}/` |
 | Workflows | `03-skills/{name}/SKILL.md` |
 | User content | `04-workspace/` |
+| Archived projects | `05-archived/{ID}-{name}/` |
 </section>
 
 <section id="cli">
