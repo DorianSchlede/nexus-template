@@ -1,0 +1,24 @@
+name: Integration
+description: |
+  Connect external APIs, services, and systems to Nexus.
+  Use when: adding webhooks, OAuth flows, API clients, third-party service
+  connections, external data sources, MCP servers.
+
+discovery:
+  skill: add-integration
+  skill_load_command: "python 00-system/core/nexus-loader.py --skill add-integration"
+  inline: false
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "python 00-system/mental-models/scripts/select_mental_models.py --format brief"
+  max_rediscovery_rounds: 2
+
+features:
+  ears_requirements: false
+  incose_quality: false
+  correctness_properties: false
