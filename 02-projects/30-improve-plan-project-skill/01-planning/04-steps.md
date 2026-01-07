@@ -98,80 +98,80 @@
 
 ---
 
-## Phase 3: Rewrite plan-project SKILL.md
+## Phase 3: Rewrite plan-project SKILL.md - COMPLETE
 
 **Goal**: Transform SKILL.md into router-only pattern
 **Context**: Load current SKILL.md, architecture-v2.md, gap analysis from 02-discovery.md
 
 ### 3.1 Preserve Existing Sections **[REQ-1]**
 
-- [ ] Copy YAML frontmatter (lines 1-4)
-- [ ] Copy Onboarding Awareness section (lines 6-40)
-- [ ] Copy Mode Detection Logic (lines 118-135)
-- [ ] Copy Error Handling (lines 314-337)
-- [ ] Copy Why This Design rationale (lines 340-367)
+- [x] Copy YAML frontmatter (lines 1-4)
+- [x] Copy Onboarding Awareness section (lines 6-40)
+- [x] Copy Mode Detection Logic (lines 118-135)
+- [x] Copy Error Handling (lines 314-337)
+- [x] Copy Why This Design rationale (lines 340-367)
 
 ### 3.2 Rewrite Core Workflow **[REQ-2, REQ-6]**
 
-- [ ] Replace Critical Execution Requirements with router sequence
-- [ ] Add semantic type detection from _type.yaml descriptions
-- [ ] Add discovery → mental models → re-discovery flow
-- [ ] Add explicit bash commands for sub-skill loading **[REQ-4]**
-- [ ] Add template reference paths for inline discovery **[REQ-5]**
-- [ ] **CHECKPOINT**: Verify workflow matches architecture-v2.md §Full Flow
+- [x] Replace Critical Execution Requirements with router sequence
+- [x] Add semantic type detection from _type.yaml descriptions
+- [x] Add discovery → mental models → re-discovery flow
+- [x] Add explicit bash commands for sub-skill loading **[REQ-4]**
+- [x] Add template reference paths for inline discovery **[REQ-5]**
+- [x] **CHECKPOINT**: Verify workflow matches architecture-v2.md §Full Flow
 
 ### 3.3 Add New Sections **[REQ-10, REQ-11]**
 
-- [ ] Add Router Logic section with decision tree
-- [ ] Add Sub-Skill Loading section with bash commands
-- [ ] Add Entry Mode Contract reference
-- [ ] Add Template References section
-- [ ] Add resume-context.md update instructions at each phase
+- [x] Add Router Logic section with decision tree
+- [x] Add Sub-Skill Loading section with bash commands
+- [x] Add Entry Mode Contract reference
+- [x] Add Template References section
+- [x] Add resume-context.md update instructions at each phase
 
 ### 3.4 Update Resources Section **[REQ-NF-1]**
 
-- [ ] Update scripts/ to reference init_project.py with --type flag
-- [ ] Add templates/types/ structure documentation
-- [ ] Update references/ with new files
+- [x] Update scripts/ to reference init_project.py with --type flag
+- [x] Add templates/types/ structure documentation
+- [x] Update references/ with new files
 - [ ]* Write integration tests for router workflow (optional) **[Property 1, Property 2]**
 
 ### 3.5 Update Supporting Files
 
-- [ ] Update `references/workflows.md` for template-based flow
-- [ ] Update `references/project-types.md` with skill type **[REQ-NF-3]**
-- [ ] **CHECKPOINT**: Verify SKILL.md < 400 lines (router should be concise)
+- [x] Update `references/workflows.md` for template-based flow
+- [x] Update `references/project-types.md` with skill type **[REQ-NF-3]**
+- [x] **CHECKPOINT**: Verify SKILL.md < 400 lines (365 lines - PASS)
 
 ### 3.6 Update Resume Context
 
-- [ ] Update resume-context.md: current_section: 4, tasks_completed: +15
+- [x] Update resume-context.md: current_section: 4, tasks_completed: +15
 
 ---
 
-## Phase 4: Add Deprecation Notices (v2.4 Simplified)
+## Phase 4: Add Deprecation Notices (v2.4 Simplified) - COMPLETE
 
 **Goal**: Add deprecation notices to skills (no entry_mode needed)
 **Context**: Load current add-integration, create-research-project, create-skill SKILLs
 
 ### 4.1 Update add-integration **[REQ-13]**
 
-- [ ] Add deprecation notice at workflow start
-- [ ] Add instruction: "Use `plan project` for new integrations"
-- [ ] **CHECKPOINT**: Verify deprecation notice displays correctly
+- [x] Add deprecation notice at workflow start
+- [x] Add instruction: "Use `plan project` for new integrations"
+- [x] **CHECKPOINT**: Verify deprecation notice displays correctly
 
 ### 4.2 Update create-research-project **[REQ-13]**
 
-- [ ] Add deprecation notice at workflow start
-- [ ] Add instruction: "Use `plan project` for new research"
+- [x] Add deprecation notice at workflow start
+- [x] Add instruction: "Use `plan project` for new research"
 
 ### 4.3 Update create-skill **[REQ-13]**
 
-- [ ] Add deprecation notice at workflow start
-- [ ] Add instruction: "Use `plan project` for new skills"
-- [ ] **CHECKPOINT**: Verify all 3 skills have deprecation notice
+- [x] Add deprecation notice at workflow start
+- [x] Add instruction: "Use `plan project` for new skills"
+- [x] **CHECKPOINT**: Verify all 3 skills have deprecation notice
 
 ### 4.4 Update Resume Context
 
-- [ ] Update resume-context.md: current_section: 5, tasks_completed: +7
+- [x] Update resume-context.md: current_section: 5, tasks_completed: +7
 
 **NOTE**: Hook enforcement DEFERRED to future project.
 

@@ -2,7 +2,7 @@
 session_id: "5894137f-0884-4082-9a6a-bf2429d65e7e"
 session_ids: ["5894137f-0884-4082-9a6a-bf2429d65e7e"]
 resume_schema_version: "2.0"
-last_updated: "2026-01-07T11:03:18.377110Z"
+last_updated: "2026-01-07T13:00:00Z"
 
 # PROJECT
 project_id: "30-improve-plan-project-skill"
@@ -25,10 +25,10 @@ rediscovery_round: 0
 discovery_complete: true
 
 # PROGRESS
-current_section: 3
+current_section: 5
 current_task: 1
 total_tasks: 63
-tasks_completed: 24
+tasks_completed: 46
 ---
 
 ## Progress Summary
@@ -51,6 +51,20 @@ tasks_completed: 24
 - [x] Created reference files: routing-logic.md, ears-patterns.md, incose-rules.md
 - [x] Total: 40 template files + 3 reference files = 43 files created
 
+**Phase 3: Rewrite SKILL.md** - COMPLETE (15/15)
+- [x] Rewritten SKILL.md with router pattern (365 lines)
+- [x] Added 8-type semantic detection table
+- [x] Added discovery → mental models → re-discovery flow
+- [x] Updated workflows.md (simplified to reference pointer)
+- [x] Updated project-types.md with skill type
+- [x] Archived old SKILL.md to 05-archived/
+
+**Phase 4: Add Deprecation Notices** - COMPLETE (7/7)
+- [x] Added deprecation notice to add-integration
+- [x] Added deprecation notice to create-research-project
+- [x] Added deprecation notice to create-skill
+- [x] All recommend "plan project for X" instead
+
 **Key Decisions Made (v2.4 - Simplified):**
 - Router is MANDATORY for all project creation
 - Steps + TodoWrite are ENFORCEMENT MECHANISM
@@ -62,8 +76,8 @@ tasks_completed: 24
 
 **Architecture Reference**: `02-resources/architecture-v2.md` (v2.3)
 
-**Phase 3: Rewrite SKILL.md** - READY TO START (0/15)
-- Next: Transform SKILL.md into router-only pattern
+**Phase 5: Testing & Validation** - READY TO START (0/17)
+- Next: Test type detection and discovery flows
 
 ---
 
