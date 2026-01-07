@@ -1,6 +1,6 @@
 ---
 name: setup-memory
-description: "Triggers: setup memory, my goals, my role, about me, personalize."
+description: "setup memory, my goals, my role, about me, personalize."
 onboarding: true
 priority: critical
 ---

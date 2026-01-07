@@ -1,6 +1,6 @@
 ---
 name: setup-workspace
-description: "Triggers: setup workspace, organize folders, where to put files."
+description: "setup workspace, organize folders, where to put files."
 onboarding: true
 priority: high
 ---

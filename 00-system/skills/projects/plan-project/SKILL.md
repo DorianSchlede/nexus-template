@@ -1,6 +1,6 @@
 ---
 name: plan-project
-description: "Triggers: create project, new project, start project, plan project, build [X]."
+description: "create project, new project, start project, plan project, build [X]."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

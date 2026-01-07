@@ -1,6 +1,6 @@
 ---
 name: import-skill
-description: "Triggers: import skill, download skill, install skill, get skill."
+description: "import skill, download skill, install skill, get skill."
 ---
 
 # Import Skill from Marketplace

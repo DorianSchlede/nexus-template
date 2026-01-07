@@ -1,6 +1,6 @@
 ---
 name: hubspot-connect
-description: "Triggers: hubspot, crm, contacts, companies, deals."
+description: "hubspot, crm, contacts, companies, deals."
 ---
 
 # HubSpot Connect

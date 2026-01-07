@@ -1,6 +1,6 @@
 ---
 name: add-integration
-description: "Triggers: add integration, new integration, integrate with, connect to [service]."
+description: "add integration, new integration, integrate with, connect to [service]."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

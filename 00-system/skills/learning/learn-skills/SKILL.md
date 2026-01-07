@@ -1,6 +1,6 @@
 ---
 name: learn-skills
-description: "Triggers: learn skills, how do skills work, skill tutorial."
+description: "learn skills, how do skills work, skill tutorial."
 onboarding: true
 priority: high
 ---

@@ -1,6 +1,6 @@
 ---
 name: validate-skill-functionality
-description: "Triggers: validate skill, check skill, review skill execution."
+description: "validate skill, check skill, review skill execution."
 ---
 
 # Validate Skill Functionality

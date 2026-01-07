@@ -1,6 +1,6 @@
 ---
 name: slack-connect
-description: "Triggers: slack, connect slack, slack message, send to slack."
+description: "slack, connect slack, slack message, send to slack."
 ---
 
 # Slack Connect

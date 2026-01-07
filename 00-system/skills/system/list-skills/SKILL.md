@@ -1,6 +1,6 @@
 ---
 name: list-skills
-description: "Triggers: list skills, show skills, what skills, available skills."
+description: "list skills, show skills, what skills, available skills."
 ---
 
 # List Skills

@@ -1,6 +1,6 @@
 ---
 name: google-connect
-description: "Triggers: connect google, setup google, google integration."
+description: "connect google, setup google, google integration."
 version: "1.0"
 ---
 

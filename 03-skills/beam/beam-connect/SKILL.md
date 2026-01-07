@@ -1,6 +1,6 @@
 ---
 name: beam-connect
-description: "Triggers: beam, beam agent, beam task, beam analytics."
+description: "beam, beam agent, beam task, beam analytics."
 ---
 
 # Beam Connect

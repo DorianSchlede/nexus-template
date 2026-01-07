@@ -1,6 +1,6 @@
 ---
 name: notebooklm-connect
-description: "Triggers: notebooklm, create notebook, audio overview, podcast."
+description: "notebooklm, create notebook, audio overview, podcast."
 ---
 
 # NotebookLM Connect

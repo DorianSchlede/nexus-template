@@ -1,6 +1,6 @@
 ---
 name: update-nexus
-description: "Triggers: update nexus, sync nexus, check for updates, upgrade nexus."
+description: "update nexus, sync nexus, check for updates, upgrade nexus."
 ---
 
 # Update Nexus

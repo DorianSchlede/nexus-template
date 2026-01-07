@@ -1,6 +1,6 @@
 ---
 name: share-skill
-description: "Triggers: share skill, upload skill, publish skill."
+description: "share skill, upload skill, publish skill."
 ---
 
 # Share Skill to Marketplace

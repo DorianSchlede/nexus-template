@@ -1,6 +1,6 @@
 ---
 name: notebooklm
-description: "Triggers: notebooklm, create notebook, audio overview, podcast."
+description: "notebooklm, create notebook, audio overview, podcast."
 ---
 
 # NotebookLM Integration

@@ -1,6 +1,6 @@
 ---
 name: learn-nexus
-description: "Triggers: learn nexus, nexus tutorial, how nexus works."
+description: "learn nexus, nexus tutorial, how nexus works."
 onboarding: true
 priority: medium
 ---

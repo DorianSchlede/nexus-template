@@ -1,6 +1,6 @@
 ---
 name: slack-power
-description: "Triggers: slack power, meeting prep, channel digest, collect links, query meeting."
+description: "slack power, meeting prep, channel digest, collect links, query meeting."
 ---
 
 # Slack Power

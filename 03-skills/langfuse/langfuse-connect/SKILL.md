@@ -1,6 +1,6 @@
 ---
 name: langfuse-connect
-description: "Triggers: langfuse, traces, observations, llm tracing."
+description: "langfuse, traces, observations, llm tracing."
 ---
 
 # Langfuse Connect

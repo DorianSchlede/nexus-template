@@ -1,6 +1,6 @@
 ---
 name: research-pipeline
-description: "Triggers: research papers, analyze papers, paper synthesis, literature review."
+description: "research papers, analyze papers, paper synthesis, literature review."
 type: skill-chain
 version: "2.0"
 ---

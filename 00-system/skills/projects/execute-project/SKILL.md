@@ -1,6 +1,6 @@
 ---
 name: execute-project
-description: "Triggers: continue [project], resume, work on, check progress, execute project, project [ID/name]."
+description: "continue [project], resume, work on, check progress, execute project, project [ID/name]."
 ---
 
 # Execute Project

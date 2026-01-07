@@ -1,6 +1,6 @@
 ---
 name: validate-docs-implementation
-description: "Triggers: validate docs, docs vs implementation, check documentation."
+description: "validate docs, docs vs implementation, check documentation."
 ---
 
 # Validate Documentation vs Implementation

@@ -1,6 +1,6 @@
 ---
 name: create-skill-algorithm
-description: "Triggers: create skill chain, build algorithm, generate skill chain."
+description: "create skill chain, build algorithm, generate skill chain."
 type: meta-skill
 version: "1.0"
 ---

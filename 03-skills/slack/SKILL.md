@@ -1,6 +1,6 @@
 ---
 name: slack
-description: "Triggers: send slack message, search slack, list channels, upload to slack."
+description: "send slack message, search slack, list channels, upload to slack."
 version: "1.1"
 ---
 

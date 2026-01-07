@@ -1,6 +1,6 @@
 ---
 name: notion-connect
-description: "Triggers: notion, connect notion, query [database], add to [database]."
+description: "notion, connect notion, query [database], add to [database]."
 version: "1.1"
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: airtable-connect
-description: "Triggers: airtable, connect airtable, query [base], add to [table]."
+description: "airtable, connect airtable, query [base], add to [table]."
 version: "1.1"
 ---
 

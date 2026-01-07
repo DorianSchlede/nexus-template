@@ -1,6 +1,6 @@
 ---
 name: search-skill-database
-description: "Triggers: search skills, find skill, browse skills, skill marketplace."
+description: "search skills, find skill, browse skills, skill marketplace."
 ---
 
 # Search Skill Marketplace

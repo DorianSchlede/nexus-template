@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: "Triggers: create skill, new skill, automate this, make reusable."
+description: "create skill, new skill, automate this, make reusable."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

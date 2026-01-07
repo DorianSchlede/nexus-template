@@ -1,6 +1,6 @@
 ---
 name: archive-project
-description: "Triggers: archive project, archive [name], move to archived."
+description: "archive project, archive [name], move to archived."
 ---
 
 # Archive Project

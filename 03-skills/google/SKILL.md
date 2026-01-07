@@ -1,7 +1,7 @@
 ---
 name: google-integration
 version: 1.1
-description: "Triggers: google, gmail, email, google docs, sheets, calendar, drive."
+description: "google, gmail, email, google docs, sheets, calendar, drive."
 ---
 
 # Google Integration

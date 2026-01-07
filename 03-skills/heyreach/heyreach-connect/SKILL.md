@@ -1,6 +1,6 @@
 ---
 name: heyreach-connect
-description: "Triggers: heyreach, linkedin outreach, linkedin campaigns."
+description: "heyreach, linkedin outreach, linkedin campaigns."
 ---
 
 # HeyReach Connect

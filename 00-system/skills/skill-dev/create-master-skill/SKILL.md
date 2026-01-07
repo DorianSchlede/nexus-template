@@ -1,6 +1,6 @@
 ---
 name: create-master-skill
-description: "Triggers: create master skill, integration master, shared skill library."
+description: "create master skill, integration master, shared skill library."
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

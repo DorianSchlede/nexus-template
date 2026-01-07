@@ -1,6 +1,6 @@
 ---
 name: generate-philosophy-doc
-description: "Triggers: create philosophy doc, generate standards, build best practices guide."
+description: "create philosophy doc, generate standards, build best practices guide."
 ---
 
 # Generate Philosophy Document

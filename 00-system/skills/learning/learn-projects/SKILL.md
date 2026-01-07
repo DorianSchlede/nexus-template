@@ -1,6 +1,6 @@
 ---
 name: learn-projects
-description: "Triggers: learn projects, how do projects work, project tutorial."
+description: "learn projects, how do projects work, project tutorial."
 onboarding: true
 priority: high
 ---

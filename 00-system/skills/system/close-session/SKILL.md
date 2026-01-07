@@ -1,6 +1,6 @@
 ---
 name: close-session
-description: "Triggers: done, finish, close, wrap up, end session."
+description: "done, finish, close, wrap up, end session."
 ---
 
 # Close Session

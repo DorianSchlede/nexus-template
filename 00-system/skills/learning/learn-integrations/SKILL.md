@@ -1,6 +1,6 @@
 ---
 name: learn-integrations
-description: "Triggers: learn integrations, what is MCP, how to integrate."
+description: "learn integrations, what is MCP, how to integrate."
 onboarding: true
 priority: high
 ---

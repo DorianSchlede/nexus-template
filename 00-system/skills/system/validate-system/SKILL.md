@@ -1,6 +1,6 @@
 ---
 name: validate-system
-description: "Triggers: validate system, check system, fix problems."
+description: "validate system, check system, fix problems."
 ---
 
 # Validate System

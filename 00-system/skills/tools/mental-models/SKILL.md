@@ -1,6 +1,6 @@
 ---
 name: mental-models
-description: "Triggers: mental model, think through this, help me decide, first principles, pre-mortem."
+description: "mental model, think through this, help me decide, first principles, pre-mortem."
 ---
 
 # Mental Models

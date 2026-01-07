@@ -1,6 +1,6 @@
 ---
 name: heyreach
-description: "Triggers: heyreach, linkedin outreach, linkedin campaigns, add leads."
+description: "heyreach, linkedin outreach, linkedin campaigns, add leads."
 ---
 
 # HeyReach Integration

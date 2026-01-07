@@ -1,6 +1,6 @@
 ---
 name: update-workspace-map
-description: "Triggers: validate workspace, update workspace map, check workspace."
+description: "validate workspace, update workspace map, check workspace."
 ---
 
 # Validate Workspace Map

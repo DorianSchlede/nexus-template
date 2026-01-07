@@ -1,6 +1,6 @@
 ---
 name: explain-nexus
-description: "Triggers: explain nexus, what is nexus, how does nexus work, about nexus."
+description: "explain nexus, what is nexus, how does nexus work, about nexus."
 ---
 
 # Explain Nexus
