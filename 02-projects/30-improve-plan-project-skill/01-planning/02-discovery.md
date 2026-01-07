@@ -431,40 +431,41 @@ create-skill/
 
 ## COMPREHENSIVE DEPENDENCY ANALYSIS
 
-### Current State vs Architecture v2.2
+### Current State vs Architecture v2.3 (Simplified)
 
-| Component | Current State | Architecture v2.2 Target | Gap |
+| Component | Current State | Architecture v2.3 Target | Gap |
 |-----------|---------------|--------------------------|-----|
 | **plan-project/SKILL.md** | 370 lines, old workflow | Router-only pattern | MAJOR rewrite |
-| **init_project.py** | 6 types, schema v1.0 | 8 types, schema v2.0 | Add skill type, overview.md |
+| **init_project.py** | 6 types, schema v1.0 | 8 types, schema v2.0 | Add skill type |
 | **Templates folder** | `scripts/templates/` (6 files) | `templates/types/` (8×5 files) | NEW structure |
-| **resume-context.md schema** | v1.0 (no sub_skill) | v2.0 (sub_skill tracking) | ADD fields |
+| **resume-context.md schema** | v1.0 | v2.0 (current_skill field) | ADD field |
 | **Type detection** | Keyword-based (--type arg) | Semantic (_type.yaml) | NEW approach |
 | **Mental models** | Hardcoded in workflows.md | Dynamic via script | EXISTS |
-| **add-integration** | Standalone skill | Sub-skill of router | ADD entry_mode |
-| **create-research-project** | Standalone skill | Sub-skill of router | ADD entry_mode |
-| **create-skill** | Standalone skill | Sub-skill of router | ADD entry_mode |
-| **SessionStart hook** | No sub_skill support | Sub_skill resume | ADD handling |
+| **add-integration** | Standalone skill | Normal invocation + deprecation notice | Minor update |
+| **create-research-project** | Standalone skill | Normal invocation + deprecation notice | Minor update |
+| **create-skill** | Standalone skill | Normal invocation + deprecation notice | Minor update |
+| **SessionStart hook** | No skill tracking | DEFERRED to future project | No change now |
 
 ---
 
-## FILES TO MODIFY (Complete List)
+## FILES TO MODIFY (Complete List - v2.3 Simplified)
 
-### Core Skill Files (7 files)
+### Core Skill Files (4 files)
 | File | Changes |
 |------|---------|
 | `00-system/skills/projects/plan-project/SKILL.md` | **REWRITE** - Router logic only |
 | `00-system/skills/projects/plan-project/scripts/init_project.py` | ADD: --type skill, schema v2.0 |
 | `00-system/skills/projects/plan-project/references/workflows.md` | **REWRITE** - Template flow |
 | `00-system/skills/projects/plan-project/references/project-types.md` | ADD: skill type |
-| `00-system/skills/system/add-integration/SKILL.md` | ADD: entry_mode check |
-| `03-skills/research-pipeline/orchestrators/create-research-project/SKILL.md` | ADD: entry_mode |
-| `00-system/skills/skill-dev/create-skill/SKILL.md` | ADD: entry_mode check |
 
-### Hook Files (1 file)
+### Skills to Update (3 files) - DEPRECATION NOTICE ONLY
 | File | Changes |
 |------|---------|
-| `.claude/hooks/session_start.py` | ADD: sub_skill field reading & routing |
+| `00-system/skills/system/add-integration/SKILL.md` | ADD: deprecation notice, recommend plan-project |
+| `03-skills/research-pipeline/orchestrators/create-research-project/SKILL.md` | ADD: deprecation notice |
+| `00-system/skills/skill-dev/create-skill/SKILL.md` | ADD: deprecation notice |
+
+**NOTE**: No entry_mode contract needed (v2.3 simplification). Skills run normally.
 
 ---
 
@@ -524,14 +525,15 @@ plan-project/templates/types/
     └── steps.md
 ```
 
-### Reference Files (5 files)
+### Reference Files (4 files - v2.3 Simplified)
 | File | Purpose |
 |------|---------|
-| `references/routing-logic.md` | How router works, bash commands |
+| `references/routing-logic.md` | How router works, skill invocation |
 | `references/type-detection.md` | Semantic matching guide |
-| `references/entry-mode-contract.md` | Sub-skill data contract |
 | `references/ears-patterns.md` | EARS requirement templates |
 | `references/incose-rules.md` | INCOSE quality rules |
+
+**NOTE**: No entry-mode-contract.md needed (v2.3 simplification).
 
 ---
 
@@ -544,23 +546,28 @@ plan-project/templates/types/
 | **create-skill skill** | Skill discovery | Skill scaffolding |
 | **mental-models skill** | ALL types | 59 models, 12 categories |
 | **select_mental_models.py** | Dynamic loading | Already exists |
-| **SessionStart hook** | Resume flow | Sub_skill routing needed |
-| **nexus-loader.py** | Sub-skill loading | Already supports --skill |
+| **nexus-loader.py** | Skill loading | Already supports --skill |
+
+**NOTE**: SessionStart hook changes DEFERRED to future project (v2.3).
 
 ---
 
-## SUB-SKILL ROUTING TABLE
+## SKILL ROUTING TABLE (v2.3 - Simplified)
 
-| Type | Discovery Method | Skill | Load Command |
-|------|------------------|-------|--------------|
-| **build** | Inline | - | - |
-| **integration** | Skill | add-integration | `python 00-system/core/nexus-loader.py --skill add-integration` |
-| **research** | Skill | create-research-project | `python 00-system/core/nexus-loader.py --skill create-research-project` |
-| **strategy** | Inline | - | - |
-| **content** | Inline | - | - |
-| **process** | Inline | - | - |
-| **skill** | Skill | create-skill | `python 00-system/core/nexus-loader.py --skill create-skill` |
-| **generic** | Inline | - | - |
+Skills are invoked normally - no special contract needed.
+
+| Type | Discovery Method | Skill to Load | Notes |
+|------|------------------|---------------|-------|
+| **build** | Inline | - | Use discovery.md template |
+| **integration** | Skill | add-integration | Runs normal workflow |
+| **research** | Skill | create-research-project | Runs normal workflow |
+| **strategy** | Inline | - | Use discovery.md template |
+| **content** | Inline | - | Use discovery.md template |
+| **process** | Inline | - | Use discovery.md template |
+| **skill** | Skill | create-skill | Runs normal workflow |
+| **generic** | Inline | - | Use discovery.md template |
+
+**Load Command**: `python 00-system/core/nexus-loader.py --skill {skill-name}`
 
 ---
 
@@ -601,20 +608,19 @@ Router → update resume-context.md (skill: add-integration)
 
 ---
 
-## UPDATED RISKS & MITIGATIONS
+## UPDATED RISKS & MITIGATIONS (v2.3)
 
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | Breaking existing projects | Medium | High | Migration script for resume-context.md |
-| AI forgetting sub-skill return | HIGH | High | **Steps as enforcement mechanism** |
+| AI forgetting to return to router | Medium | Medium | Steps enforce sequence, TodoWrite tracks |
 | Template explosion (45 files) | Medium | Medium | Use template inheritance where possible |
-| SessionStart hook complexity | Medium | High | Incremental changes, test thoroughly |
 | Type detection ambiguity | Low | Medium | Clear semantic descriptions in _type.yaml |
-| Entry mode not checked | Medium | High | Deprecation notices in skills |
+| Skills not writing to project folder | Low | Medium | Document convention in SKILL.md |
 
 ---
 
-## RESOLVED OPEN QUESTIONS (v2.2)
+## RESOLVED OPEN QUESTIONS (v2.3)
 
 | Question | Resolution |
 |----------|------------|
@@ -624,8 +630,9 @@ Router → update resume-context.md (skill: add-integration)
 | What happens to Phase 2/3 of research? | Unchanged - only Phase 1 merges |
 | Should type detection use keywords? | **NO** - semantic matching from description |
 | How to handle mental model timing? | AFTER discovery, BEFORE finalization |
-| How to prevent AI forgetting returns? | Steps are ENFORCEMENT MECHANISM |
-| Should init_project.py change? | ADD: schema v2.0, sub_skill fields |
+| How to prevent AI forgetting returns? | Steps + TodoWrite enforce sequence |
+| Do we need entry_mode contract? | **NO** - just invoke skills normally (v2.3 simplification) |
+| Do we need hook enforcement? | **DEFERRED** - future project, not this one |
 
 ---
 
@@ -748,7 +755,7 @@ For **build** and **skill** types, the plan.md template MUST include:
 
 ---
 
-## IMPLEMENTATION ORDER (RECOMMENDED)
+## IMPLEMENTATION ORDER (v2.3 Simplified)
 
 Based on dependency analysis, implement in this order:
 
@@ -761,26 +768,28 @@ Based on dependency analysis, implement in this order:
 4. Create build type templates (with EARS/INCOSE)
 5. Create skill type templates (with EARS/INCOSE)
 6. Create inline discovery templates (strategy, content, process, generic)
-7. Create sub-skill routing templates (integration, research)
+7. Create skill-invocation templates (integration, research)
 
 ### Phase 2C: References (Depends on 2A)
 8. Create routing-logic.md
-9. Create entry-mode-contract.md
-10. Create ears-patterns.md and incose-rules.md
+9. Create ears-patterns.md and incose-rules.md
+10. Create type-detection.md
 
 ### Phase 3: SKILL.md Rewrite (Depends on 2A, 2B, 2C)
 11. Rewrite SKILL.md with router pattern
-12. Update workflows.md references
+12. Update workflows.md and project-types.md
 
-### Phase 4: Sub-Skill Updates (Depends on Phase 3)
-13. Add entry_mode to add-integration
-14. Add entry_mode to create-research-project
-15. Add entry_mode to create-skill
+### Phase 4: Deprecation Notices (Simple)
+13. Add deprecation notice to add-integration
+14. Add deprecation notice to create-research-project
+15. Add deprecation notice to create-skill
 
 ### Phase 5: Testing (Depends on Phase 4)
 16. Test all 8 types through router
-17. Test sub-skill entry/return
+17. Test skill invocation flow
 18. Test resume-context.md updates
+
+**NOTE**: Hook enforcement DEFERRED to future project.
 
 ---
 

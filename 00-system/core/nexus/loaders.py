@@ -1075,7 +1075,11 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
     Returns:
         Markdown string with clear next-action directive
     """
-    # Priority 1: Onboarding incomplete
+    # Priority 0: First run (no goals, no projects) - auto-trigger setup
+    if not context.get("goals_personalized", False) and context.get("total_projects", 0) == 0:
+        return _template_first_run(context)
+
+    # Priority 1: Onboarding incomplete (goals set but other onboarding pending)
     if len(context.get("pending_onboarding", [])) > 0:
         return _template_onboarding_incomplete(context)
 
@@ -1087,8 +1091,8 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
     if context.get("workspace_needs_validation", False):
         return _template_workspace_modified(context)
 
-    # Priority 4: Fresh start (configured, no projects)
-    if context.get("total_projects", 0) == 0 and context.get("goals_personalized", False):
+    # Priority 4: Fresh start (goals configured, no projects yet)
+    if context.get("total_projects", 0) == 0:
         return _template_fresh_workspace(context)
 
     # Priority 5: System ready (fallback)
@@ -1110,6 +1114,11 @@ def _load_state_template(template_name: str, **kwargs) -> str:
     except KeyError as e:
         # Return unformatted if missing variable
         return template_path.read_text(encoding='utf-8')
+
+
+def _template_first_run(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 0: First run - auto-trigger setup-memory skill."""
+    return _load_state_template("startup_first_run")
 
 
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:

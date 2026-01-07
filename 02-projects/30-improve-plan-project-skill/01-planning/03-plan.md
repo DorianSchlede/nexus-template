@@ -1,7 +1,7 @@
 # Improve Plan-Project Skill - Plan
 
 **Last Updated**: 2026-01-07
-**Status**: REVISED v2.3 - KIRO/EARS/INCOSE Applied
+**Status**: REVISED v2.4 - Simplified Skill Invocation
 **Project Type**: Build
 
 ---
@@ -9,11 +9,11 @@
 ## Context
 
 **Load Before Reading**:
-- `02-resources/architecture-v2.md` - **SINGLE SOURCE OF TRUTH v2.2**
+- `02-resources/architecture-v2.md` - **SINGLE SOURCE OF TRUTH v2.3**
 - `02-resources/KIRO-spec.md` - EARS patterns, INCOSE rules, task patterns
 - `01-planning/02-discovery.md` - Full analysis of dependencies
 
-**Critical Insight**: Steps are the ONLY enforcement mechanism. AI will forget to return from sub-skills.
+**Critical Insight**: Skills are invoked normally - no special contract needed. Steps + TodoWrite enforce sequence.
 
 ---
 
@@ -27,7 +27,7 @@
 
 **REQ-3**: WHEN project type is detected, THE router SHALL create project structure using init_project.py with the detected type.
 
-**REQ-4**: WHEN project type requires sub-skill discovery (integration, research, skill), THE router SHALL load the sub-skill via explicit bash command: `python 00-system/core/nexus-loader.py --skill {skill-name}`.
+**REQ-4**: WHEN project type requires skill-based discovery (integration, research, skill), THE router SHALL load the skill normally via: `python 00-system/core/nexus-loader.py --skill {skill-name}`.
 
 **REQ-5**: WHEN project type uses inline discovery (build, strategy, content, process, generic), THE router SHALL use the discovery.md template from `templates/types/{type}/`.
 
@@ -41,15 +41,13 @@
 
 **REQ-10**: THE router SHALL update resume-context.md at every phase transition with current_phase, current_section, and files_to_load.
 
-**REQ-11**: WHEN a sub-skill is loaded, THE router SHALL pass `entry_mode: from_router` and `project_path` to the sub-skill.
+**REQ-11**: WHEN a skill is loaded for discovery, THE router SHALL set `current_skill` field in resume-context.md.
 
-**REQ-12**: WHEN entry_mode equals "from_router", THE sub-skill SHALL skip project creation steps and write findings to the provided project_path.
+**REQ-12**: WHEN skill-based discovery completes, THE skill SHALL write findings to `{project_path}/01-planning/02-discovery.md`.
 
-**REQ-13**: WHILE a sub-skill is active, THE resume-context.md SHALL contain sub_skill, sub_skill_step, and sub_skill_project_path fields.
+**REQ-13**: IF a user directly invokes add-integration, create-research-project, or create-skill, THEN THE skill SHALL display a deprecation notice and instruct the user to use plan-project instead.
 
-**REQ-14**: WHEN sub-skill completes, THE router SHALL clear sub_skill fields from resume-context.md and verify 02-discovery.md has content.
-
-**REQ-15**: IF a user directly invokes add-integration, create-research-project, or create-skill, THEN THE skill SHALL display a deprecation notice and instruct the user to use plan-project instead.
+**NOTE**: Hook enforcement for skill tracking is DEFERRED to future project.
 
 ### Non-Functional Requirements
 
@@ -86,13 +84,13 @@ For all user requests containing project creation intent, the router either succ
 For any project creation workflow, the discovery phase completes and writes to 02-discovery.md BEFORE mental models are loaded.
 **Validates**: REQ-6, REQ-9
 
-**Property 3: Sub-Skill Contract Enforcement**
-For all sub-skill invocations from the router, the sub-skill receives entry_mode="from_router" AND project_path, AND the sub-skill writes discovery output to the provided path without creating a new project structure.
-**Validates**: REQ-11, REQ-12
+**Property 3: Skill Discovery Output**
+For all skill-based discovery invocations, the skill writes discovery findings to the project's 02-discovery.md file.
+**Validates**: REQ-12
 
 **Property 4: Resume Context Consistency**
-For any phase transition in the workflow, the resume-context.md file reflects the actual current state including current_phase, current_section, tasks_completed, and (if applicable) sub_skill fields.
-**Validates**: REQ-10, REQ-13, REQ-14
+For any phase transition in the workflow, the resume-context.md file reflects the actual current state including current_phase, current_section, and tasks_completed.
+**Validates**: REQ-10, REQ-11
 
 **Property 5: Template Structure Invariant**
 For all 8 project types, the templates/types/{type}/ folder contains exactly 5 files (_type.yaml, overview.md, discovery.md, plan.md, steps.md) with valid content.
@@ -134,7 +132,7 @@ plan-project (MANDATORY ROUTER)
 
 ---
 
-## Key Decisions (REVISED v2.2)
+## Key Decisions (REVISED v2.4 - Simplified)
 
 | Decision | Choice | Rationale | Validates |
 |----------|--------|-----------|-----------|
@@ -142,11 +140,11 @@ plan-project (MANDATORY ROUTER)
 | Type detection | **SEMANTIC** | AI matches from description, no keywords | REQ-2 |
 | Discovery timing | **BEFORE mental models** | Can't stress-test what you don't understand | REQ-6 |
 | Discovery output | **02-discovery.md MANDATORY** | Preserves intelligence across compaction | REQ-9 |
-| Sub-skill loading | **EXPLICIT bash commands** | `nexus-loader.py --skill X` | REQ-4 |
-| Entry mode contract | **from_router + project_path** | Sub-skills don't create projects | REQ-11, REQ-12 |
-| Steps | **ENFORCEMENT MECHANISM** | AI forgets; steps don't | REQ-10 |
+| Skill invocation | **NORMAL** | No special contract, skills run their workflow | REQ-4 |
+| Enforcement | **Steps + TodoWrite** | AI forgets; steps don't | REQ-10 |
 | Template structure | **types/{type}/ folder** | Self-contained, auto-discoverable | REQ-NF-1 |
 | EARS/INCOSE | **Build + Skill types** | Testable requirements for code projects | REQ-NF-4, REQ-NF-5 |
+| Hook enforcement | **DEFERRED** | Future project, not this one | - |
 
 ---
 
@@ -176,7 +174,7 @@ plan-project/
 │
 └── references/
     ├── routing-logic.md          # Router decision tree
-    ├── entry-mode-contract.md    # Sub-skill contract [REQ-11, REQ-12]
+    ├── type-detection.md         # Semantic matching guide
     ├── ears-patterns.md          # EARS templates [REQ-NF-4]
     └── incose-rules.md           # Quality rules [REQ-NF-4]
 ```
