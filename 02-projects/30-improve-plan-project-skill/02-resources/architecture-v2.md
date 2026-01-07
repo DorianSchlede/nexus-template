@@ -1,17 +1,17 @@
 # Architecture v2: Mandatory Router + Template-First + Discovery-First
 
 **Date**: 2026-01-07
-**Version**: 2.2 (EARS/INCOSE integration)
-**Status**: IN REVIEW
+**Version**: 2.3 (Simplified Skill Invocation)
+**Status**: APPROVED
 **Supersedes**: architecture-decision.md, revised-architecture.md, mental-models-analysis.md, template-system-design.md
 
 ---
 
 ## Executive Summary
 
-plan-project becomes the **mandatory router** for all project creation. Templates define types. Discovery happens **before** mental models. **Steps enforce sequence** to prevent context loss.
+plan-project becomes the **mandatory router** for all project creation. Templates define types. Discovery happens **before** mental models. **Steps + TodoWrite enforce sequence**.
 
-**Critical Insight**: The AI WILL forget to return from sub-skills. Steps are the ONLY enforcement mechanism.
+**Critical Insight**: Skills are invoked normally - no special contract needed. Steps + TodoWrite track state.
 
 ---
 
@@ -20,13 +20,13 @@ plan-project becomes the **mandatory router** for all project creation. Template
 1. **Router is MANDATORY** - All project creation goes through plan-project
 2. **Templates define types** - Add a type by adding a folder (no code changes)
 3. **Discovery BEFORE mental models** - Can't stress-test what you don't understand
-4. **Steps enforce sequence** - AI forgets; steps don't. Steps are the core leverage.
+4. **Steps + TodoWrite enforce sequence** - AI forgets; steps don't
 5. **Discovery outputs to 02-discovery.md** - MANDATORY file, preserves intelligence across compaction
 6. **Resume-context.md is dynamic** - Updated every phase, enables proper reload
 7. **Mental models loaded dynamically** - Via mental-models skill, not hardcoded
-8. **Sub-skills loaded via bash** - Explicit `nexus-loader.py --skill X` commands
+8. **Skills invoked normally** - No special entry_mode contract needed (v2.3)
 9. **No keyword triggers** - AI semantically matches from type description
-10. **AI scales naturally** - No sub-types or scope parameters, AI judges depth
+10. **Hook enforcement DEFERRED** - Future project, not this one
 
 ---
 
@@ -478,29 +478,39 @@ Templates use placeholders that get filled by discovery and mental models.
 
 ---
 
-## Specialized Skill Contract
+## Simplified Skill Invocation (v2.3)
 
-When router calls a skill:
+**Key Insight**: No special contract needed. Skills run their normal workflow.
 
-```yaml
-# Router passes to skill
-entry_mode: from_router
-project_path: "02-projects/31-hubspot-integration/"
+### How It Works:
+
+```
+Router → update resume-context.md (current_skill: add-integration)
+       → load skill via nexus-loader.py --skill {name}
+       → skill runs its normal workflow
+       → skill writes to project's 02-discovery.md
+       → skill completes, clears current_skill in resume
+       → router continues with mental models
 ```
 
-Skill MUST:
-1. Check `entry_mode` at workflow start
-2. Skip project creation steps if `entry_mode == from_router`
-3. Use provided `project_path` for all file operations
-4. Return `discovery_output` as structured YAML/JSON
-5. NOT generate prose - router handles plan.md population
+### What Router Does:
+1. Detect type
+2. Create project structure
+3. Update resume-context.md: `current_skill: add-integration`
+4. Load skill: `python nexus-loader.py --skill add-integration`
+5. Skill runs normally, writes findings to project folder
+6. Router continues with mental models phase
 
-Skill returns:
-```yaml
-discovery_output:
-  # Structured data specific to skill type
-  ...
-```
+### What Skills Do (unchanged):
+- Run their normal workflow
+- Write outputs to the active project folder
+- No entry_mode checking needed
+- No structured discovery_output return needed
+
+### Enforcement:
+- **Steps** enforce sequence (embedded in 04-steps.md)
+- **TodoWrite** tracks progress
+- **Hook enforcement** DEFERRED to future project
 
 ---
 
@@ -522,7 +532,7 @@ discovery_output:
 
 ---
 
-## Resume Context Schema (CRITICAL)
+## Resume Context Schema (v2.3 Simplified)
 
 Resume context enables proper reload after compaction. **Must be updated at every phase transition.**
 
@@ -547,10 +557,8 @@ files_to_load:
   - "01-planning/04-steps.md"
   - "02-resources/integration-config.json"  # Type-specific resources
 
-# SUB-SKILL TRACKING (when routing to another skill)
-sub_skill: "add-integration"               # Current sub-skill (if any)
-sub_skill_step: "discovery"                # What the sub-skill is doing
-sub_skill_project_path: "02-projects/30-x/" # Where sub-skill writes
+# SKILL TRACKING (v2.3 simplified - optional)
+current_skill: ""                          # Current skill if any (e.g., "add-integration")
 
 # DISCOVERY STATE
 rediscovery_round: 0                       # 0, 1, or 2
@@ -564,28 +572,26 @@ tasks_completed: 8
 ---
 ```
 
-### Resume Context Update Rules
+### Resume Context Update Rules (v2.3)
 
 1. **On Phase Transition**: Update `current_phase`, `files_to_load`
-2. **On Sub-Skill Entry**: Add `sub_skill`, `sub_skill_step`, `sub_skill_project_path`
-3. **On Sub-Skill Exit**: Remove sub-skill fields, verify `02-discovery.md` has content
+2. **On Skill Entry**: Set `current_skill` (optional, for tracking)
+3. **On Skill Exit**: Clear `current_skill`, verify `02-discovery.md` has content
 4. **On Re-Discovery**: Increment `rediscovery_round`
 5. **On Task Completion**: Update progress counters
+
+**NOTE**: Hook enforcement for skill tracking is DEFERRED to future project.
 
 ### SessionStart Hook Integration
 
 The SessionStart hook reads `resume-context.md` to determine what to load:
 
 ```python
-# Simplified hook logic
-if resume_context.sub_skill:
-    # We were in a sub-skill, reload it
-    inject_context(resume_context.sub_skill)
-    inject_instruction(f"Continue {resume_context.sub_skill_step}")
-else:
-    # Normal project resume
-    inject_files(resume_context.files_to_load)
-    inject_instruction(f"Continue from {resume_context.current_phase}")
+# Current hook logic (v2.3 - simplified)
+# Hook enforcement for skill tracking is DEFERRED to future project
+# For now, normal project resume:
+inject_files(resume_context.files_to_load)
+inject_instruction(f"Continue from {resume_context.current_phase}")
 ```
 
 ---
@@ -896,7 +902,7 @@ mental_models:
 
 ---
 
-## Key Decisions
+## Key Decisions (v2.3 Updated)
 
 | Decision | Choice | Rationale |
 |----------|--------|-----------|
@@ -912,9 +918,9 @@ mental_models:
 | Type detection | **SEMANTIC from description** | No keyword triggers needed |
 | Discovery output | **02-discovery.md MANDATORY** | Preserves intelligence across compaction |
 | Resume context | **DYNAMIC updates every phase** | Enables proper reload |
-| Sub-skill loading | **EXPLICIT bash commands** | `nexus-loader.py --skill X` |
-| Steps | **ENFORCEMENT MECHANISM** | AI forgets; steps don't |
-| Process vs Skill | **KEEP SEPARATE** | Process=workflow, Skill=new capability |
+| Skill invocation | **NORMAL (v2.3)** | No special contract needed |
+| Steps + TodoWrite | **ENFORCEMENT MECHANISM** | AI forgets; steps don't |
+| Hook enforcement | **DEFERRED** | Future project, not this one |
 | Requirements format | **EARS patterns (Build/Skill)** | Battle-tested at Amazon scale |
 | Quality rules | **INCOSE (Build/Skill)** | Industry standard for requirement quality |
 | Task checkpoints | **ALL types** | Verification points every 3-5 tasks |
@@ -922,31 +928,34 @@ mental_models:
 
 ---
 
-## Migration: Existing Skills
+## Migration: Existing Skills (v2.3 Simplified)
 
 ### add-integration
 
 **Current behavior**: 7 steps, creates project, scaffolds integration
 
-**New behavior**:
-- Add `entry_mode` check at start
-- When `entry_mode == from_router`:
-  - Skip Step 1 (project creation) - router did this
-  - Skip Step 6 (project setup) - router did this
-  - Return `discovery_output` instead of continuing to scaffold
-- Direct invocation: Show deprecation notice
+**New behavior (v2.3)**:
+- Add deprecation notice at workflow start
+- Recommend using `plan project` for new integrations
+- Skills run their normal workflow (no entry_mode changes needed)
 
 ### create-research-project
 
 **Current behavior**: 13 steps, creates project, downloads papers, generates kits
 
-**New behavior**:
-- Add `entry_mode` check at start
-- When `entry_mode == from_router`:
-  - Skip Step 1 (project creation) - router did this
-  - Continue through Step 13 (research needs all steps)
-  - Return `discovery_output` with briefing/kit paths
-- Direct invocation: Show deprecation notice
+**New behavior (v2.3)**:
+- Add deprecation notice at workflow start
+- Recommend using `plan project` for new research
+- Skills run their normal workflow (no entry_mode changes needed)
+
+### create-skill
+
+**Current behavior**: Skill creation guidance with init_skill.py
+
+**New behavior (v2.3)**:
+- Add deprecation notice at workflow start
+- Recommend using `plan project` for new skills
+- Skills run their normal workflow (no entry_mode changes needed)
 
 ---
 
@@ -1059,13 +1068,14 @@ Router:
 | v2 | 2026-01-07 | Discovery-first, mental models after, re-discovery loop |
 | v2.1 | 2026-01-07 | **Major revision**: Steps as enforcement mechanism, mandatory 02-discovery.md, dynamic resume-context.md, dynamic mental model loading, semantic type matching (no keywords), explicit bash commands for sub-skills, added "skill" type, process vs skill separation |
 | v2.2 | 2026-01-07 | **EARS/INCOSE integration**: Added EARS requirement patterns for Build/Skill types, INCOSE quality rules, Correctness Properties for property-based testing, Checkpoint tasks for all types, Optional task marking with `*` postfix, Task reference format linking to requirements |
+| v2.3 | 2026-01-07 | **Simplified skill invocation**: Removed entry_mode contract - skills run normally. Hook enforcement DEFERRED to future project. Steps + TodoWrite are enforcement mechanism. Reduced complexity significantly. |
 
 ---
 
 ## Open Questions (For Future)
 
-- [ ] Should create-skill skill exist or can skill creation be template-only?
-- [ ] How to handle SessionStart hook changes for sub-skill tracking?
+- [x] Should create-skill skill exist? → **YES** - at `00-system/skills/skill-dev/create-skill/`
+- [ ] Hook enforcement for skill tracking? → **DEFERRED** to future project
 - [ ] Should discovery.md template have required vs optional questions?
 - [ ] Version control strategy for resources (v1, v2, etc.)?
 

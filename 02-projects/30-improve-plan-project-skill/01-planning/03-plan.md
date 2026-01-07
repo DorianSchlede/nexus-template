@@ -183,21 +183,22 @@ plan-project/
 
 ## Dependencies & Links
 
-**Files to Modify** (8 files):
+**Files to Modify** (7 files):
 | File | Changes | Validates |
 |------|---------|-----------|
 | `plan-project/SKILL.md` | Rewrite to router pattern | REQ-1, REQ-2, REQ-6 |
 | `plan-project/scripts/init_project.py` | Add skill type, schema v2.0 | REQ-3 |
 | `plan-project/references/workflows.md` | Rewrite for template flow | REQ-6 |
 | `plan-project/references/project-types.md` | Add skill type | REQ-NF-3 |
-| `add-integration/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
-| `create-research-project/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
-| `create-skill/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
-| `.claude/hooks/session_start.py` | Add sub_skill routing | REQ-13 |
+| `add-integration/SKILL.md` | Add deprecation notice | REQ-13 |
+| `create-research-project/SKILL.md` | Add deprecation notice | REQ-13 |
+| `create-skill/SKILL.md` | Add deprecation notice | REQ-13 |
 
-**Files to Create** (45 files):
+**Files to Create** (44 files):
 - 40 templates: 8 types × 5 files (_type.yaml, overview.md, discovery.md, plan.md, steps.md)
-- 5 references: routing-logic.md, entry-mode-contract.md, ears-patterns.md, incose-rules.md, type-detection.md
+- 4 references: routing-logic.md, type-detection.md, ears-patterns.md, incose-rules.md
+
+**NOTE**: Hook changes DEFERRED to future project.
 
 **External Systems**:
 - WebSearch (integration API discovery)
@@ -207,18 +208,22 @@ plan-project/
 
 ---
 
-## Sub-Skill Routing Table
+## Skill Routing Table (v2.4 Simplified)
 
-| Type | Discovery | Skill | Load Command | Validates |
-|------|-----------|-------|--------------|-----------|
-| build | Inline | - | - | REQ-5 |
-| integration | Skill | add-integration | `python 00-system/core/nexus-loader.py --skill add-integration` | REQ-4 |
-| research | Skill | create-research-project | `python 00-system/core/nexus-loader.py --skill create-research-project` | REQ-4 |
-| strategy | Inline | - | - | REQ-5 |
-| content | Inline | - | - | REQ-5 |
-| process | Inline | - | - | REQ-5 |
-| skill | Skill | create-skill | `python 00-system/core/nexus-loader.py --skill create-skill` | REQ-4 |
-| generic | Inline | - | - | REQ-5 |
+Skills are invoked normally - no special contract needed.
+
+| Type | Discovery | Skill to Load | Validates |
+|------|-----------|---------------|-----------|
+| build | Inline | - | REQ-5 |
+| integration | Skill | add-integration | REQ-4 |
+| research | Skill | create-research-project | REQ-4 |
+| strategy | Inline | - | REQ-5 |
+| content | Inline | - | REQ-5 |
+| process | Inline | - | REQ-5 |
+| skill | Skill | create-skill | REQ-4 |
+| generic | Inline | - | REQ-5 |
+
+**Load Command**: `python 00-system/core/nexus-loader.py --skill {skill-name}`
 
 ---
 
@@ -232,7 +237,7 @@ Each correctness property maps to a property-based test:
 |----------|---------------|---------|
 | P1: Router Completeness | Fuzz test with varied user inputs, verify type detection | hypothesis (Python) |
 | P2: Discovery Sequence | Verify 02-discovery.md timestamp < mental model load time | - |
-| P3: Sub-Skill Contract | Mock sub-skill, verify entry_mode and project_path passed | pytest |
+| P3: Skill Discovery Output | Verify skills write to project's 02-discovery.md | pytest |
 | P4: Resume Context | State machine verification across phase transitions | - |
 | P5: Template Structure | File existence and schema validation | pytest |
 | P6: Type Detection | Determinism test with same input repeated | hypothesis |
@@ -243,19 +248,20 @@ Each correctness property maps to a property-based test:
 |-----------|------------|
 | Type detection | 8 types × 3 synonyms each |
 | _type.yaml parsing | Valid/invalid schema |
-| Entry mode handling | from_router vs direct invocation |
+| Skill invocation | Normal flow, deprecation notices |
 | Resume context updates | Each phase transition |
 
 ---
 
-## Open Questions (ALL RESOLVED)
+## Open Questions (ALL RESOLVED - v2.4)
 
 | Question | Resolution | Validates |
 |----------|------------|-----------|
 | Router mandatory? | YES - single entry point | REQ-1 |
 | Type detection method? | Semantic from _type.yaml description | REQ-2 |
 | Discovery timing? | BEFORE mental models | REQ-6 |
-| Sub-skill contract? | entry_mode + project_path | REQ-11, REQ-12 |
+| Skill invocation? | NORMAL - no special contract needed (v2.4) | REQ-4 |
+| Hook enforcement? | DEFERRED - future project | - |
 | EARS/INCOSE scope? | Build + Skill types only | REQ-NF-4, REQ-NF-5 |
 
 ---

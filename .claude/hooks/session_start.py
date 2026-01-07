@@ -412,7 +412,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_projects, build_skills_xml, load_full_startup_context, build_next_action_instruction
+        from nexus.loaders import scan_projects, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction
         from nexus.state import (
             check_goals_personalized,
             check_workspace_configured,
@@ -482,8 +482,8 @@ ACTION: {action}
     </project>''')
     xml_parts.append('  </active-projects>')
 
-    # Skills (from build_skills_xml)
-    skills_xml = build_skills_xml(str(base_path))
+    # Skills (from build_skills_xml_compact - CLI discovery pattern)
+    skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
     # State detection

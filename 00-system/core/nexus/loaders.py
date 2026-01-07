@@ -672,9 +672,179 @@ def load_skill_slim(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
 # =============================================================================
 
 
+def build_skills_xml_compact(base_path: str = ".") -> str:
+    """
+    Build COMPACT XML representation of skills using CLI discovery pattern.
+
+    Token-optimized (~2,500 tokens vs ~9,500 for full):
+    - System skills: Full descriptions (essential for routing)
+    - Integration categories: Just connector + CLI hint + operations count
+    - User skill categories: Grouped by folder with CLI hint
+
+    Use 'load-skill {category} --help' for full skill listings.
+
+    Returns:
+        XML string ready for inclusion in nexus-context
+    """
+    from xml.sax.saxutils import escape
+
+    xml_parts = []
+
+    # === SYSTEM SKILLS (00-system/skills/) - Full descriptions (essential) ===
+    system_skills_dir = Path(base_path) / SYSTEM_DIR / "skills"
+    categories: Dict[str, List[Dict[str, str]]] = {}
+
+    if system_skills_dir.exists():
+        for skill_file in system_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+
+                if not skill_name:
+                    continue
+
+                # Determine category from path
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "other"
+                except (ValueError, IndexError):
+                    category = "other"
+
+                if category not in categories:
+                    categories[category] = []
+
+                categories[category].append({
+                    "name": skill_name,
+                    "description": skill_desc,
+                })
+            except Exception:
+                continue
+
+    # Build system-skills XML (full descriptions)
+    xml_parts.append('  <system-skills location="00-system/skills/">')
+    for category, skills in sorted(categories.items()):
+        xml_parts.append(f'    <category name="{escape(category)}">')
+        for skill in skills:
+            desc = escape(skill['description']) if skill['description'] else ""
+            xml_parts.append(f'      <skill name="{escape(skill["name"])}">{desc}</skill>')
+        xml_parts.append('    </category>')
+    xml_parts.append('  </system-skills>')
+
+    # === INTEGRATION CATEGORIES (03-skills/*-connect/) - CLI pattern ===
+    user_skills_dir = Path(base_path) / SKILLS_DIR
+    integration_categories: Dict[str, Dict[str, Any]] = {}
+
+    if user_skills_dir.exists():
+        for skill_file in user_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+
+                if not skill_name:
+                    continue
+
+                # Get parent folder as category
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("03-skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "user"
+                except (ValueError, IndexError):
+                    category = "user"
+
+                if skill_name.endswith("-connect"):
+                    # This is a connector skill
+                    if category not in integration_categories:
+                        integration_categories[category] = {
+                            "connector": None,
+                            "operations": 0
+                        }
+                    integration_categories[category]["connector"] = {
+                        "name": skill_name,
+                        "description": skill_desc
+                    }
+                else:
+                    # Count as operation in this category
+                    if category not in integration_categories:
+                        integration_categories[category] = {
+                            "connector": None,
+                            "operations": 0
+                        }
+                    integration_categories[category]["operations"] += 1
+
+            except Exception:
+                continue
+
+    # Build integration-skills XML (CLI pattern - connector + count + hint)
+    xml_parts.append('  <integration-skills location="03-skills/*-connect/">')
+    for category, data in sorted(integration_categories.items()):
+        if data["connector"]:
+            conn = data["connector"]
+            desc = escape(conn['description']) if conn['description'] else ""
+            ops = data["operations"]
+            xml_parts.append(f'    <category name="{escape(category)}" operations="{ops}">')
+            xml_parts.append(f'      <connector name="{escape(conn["name"])}">{desc}</connector>')
+            if ops > 0:
+                xml_parts.append(f'      <cli>load-skill {escape(category)} --help</cli>')
+            xml_parts.append('    </category>')
+    xml_parts.append('  </integration-skills>')
+
+    # === USER SKILLS (03-skills/ non-connect) - Category summary ===
+    user_categories: Dict[str, List[str]] = {}
+
+    if user_skills_dir.exists():
+        for skill_file in user_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                if not skill_name or skill_name.endswith("-connect"):
+                    continue
+
+                # Get parent folder as category
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("03-skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "user"
+                except (ValueError, IndexError):
+                    category = "user"
+
+                # Skip if this is an integration category (has connector)
+                if category in integration_categories:
+                    continue
+
+                if category not in user_categories:
+                    user_categories[category] = []
+                user_categories[category].append(skill_name)
+
+            except Exception:
+                continue
+
+    # Build user-skills XML (category summary with skill count)
+    xml_parts.append('  <user-skills location="03-skills/">')
+    for category, skills in sorted(user_categories.items()):
+        count = len(skills)
+        xml_parts.append(f'    <category name="{escape(category)}" count="{count}">')
+        xml_parts.append(f'      <cli>load-skill {escape(category)} --help</cli>')
+        xml_parts.append('    </category>')
+    xml_parts.append('  </user-skills>')
+
+    return '\n'.join(xml_parts)
+
+
 def build_skills_xml(base_path: str = ".") -> str:
     """
-    Build XML representation of all skills for STARTUP mode context injection.
+    Build FULL XML representation of all skills (DEPRECATED - use build_skills_xml_compact).
 
     Returns XML string with:
     - <system-skills> - All skills from 00-system/skills/ grouped by category
