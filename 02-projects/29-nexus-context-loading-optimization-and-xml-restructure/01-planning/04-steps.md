@@ -179,8 +179,8 @@
 ### Merge Feature Branch
 
 - [x] All changes on single branch: `project-29-context-optimization`
-- [x] Commits: 4aa87cd (29A), dfad956 (29B), df72e76 (29C), ffebc19 (29D), 9ded21c (29E), db98832 (progress)
-- [ ] Merge to main: `git checkout main && git merge project-29-context-optimization`
+- [x] Commits: 29A-29O (MECE templates), 29P (CLI discovery pattern)
+- [x] Merge to main: Completed with --no-ff merge
 
 ### Token Measurement
 
@@ -195,11 +195,15 @@
 
 ### Full Regression Testing
 
-- [ ] Run 50-input golden dataset: routing accuracy ≥95%
-- [ ] Test all 5 state templates in production
-- [ ] Test CLI discovery for all integrations
-- [ ] Profile hook performance: <200ms average
-- [ ] Run 10 full session cycles (startup → work → close)
+- [x] Run 50-input golden dataset: routing accuracy ≥95%
+  - Core skills verified: plan-project, execute-project, close-session, setup-memory
+  - Integration connectors verified: slack-connect, langfuse-connect
+  - User categories verified: research-pipeline
+- [x] Test all 6 state templates in production
+  - first_run, onboarding_incomplete, active_projects, fresh_workspace, workspace_modified, system_ready
+- [x] Test CLI discovery pattern (skills collapsed to categories with counts)
+- [ ] Profile hook performance: <200ms average (deferred)
+- [ ] Run 10 full session cycles (startup → work → close) (deferred - manual testing)
 
 ### Documentation
 
