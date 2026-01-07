@@ -1,92 +1,95 @@
-# Memory Map
+<nexus-memory-map version="v4.0" updated="2026-01-07">
+<!--
+================================================================================
+NEXUS MEMORY MAP - PERSISTENCE LAYER
+================================================================================
+Purpose: What memory files contain, their schemas, and how they evolve
+For file locations: See system-map.md
+For behavior rules: See orchestrator.md
+================================================================================
+-->
 
-<!-- AI CONTEXT FILE -->
-<!-- Purpose: Help AI navigate the memory system -->
-<!-- Updated by: System (static framework documentation) -->
+<section id="files">
+## Memory Files
 
-> **Purpose**: Help AI navigate the memory system
->
-> **Audience**: AI agent (loaded every session via --startup)
->
-> **Maintenance**: Static system documentation
+| File | Purpose | Updated By |
+|------|---------|------------|
+| goals.md | User identity + objectives | setup-memory |
+| core-learnings.md | Accumulated insights | close-session |
+| user-config.yaml | Preferences + tracking | setup-memory |
+| integrations/*.yaml | Integration configs | *-connect skills |
+| session-reports/*.md | Session history | close-session |
+</section>
 
----
+<section id="schemas">
+## File Schemas
 
-## Memory System Overview
+### goals.md
+```
+Current Role: [job title, context]
+Short-Term Goal (3 months): [specific objective]
+  - Success Metrics: [checkboxes]
+Long-Term Vision (1-3 years): [direction]
+Work Style: [focus areas, preferences]
+```
 
-The `01-memory/` folder contains context that persists across all sessions:
+### user-config.yaml
+```yaml
+user_preferences:
+  language: "English"
+  timezone: ""
+  date_format: "YYYY-MM-DD"
 
-### Core Files (Always Loaded)
+learning_tracker:
+  completed:
+    setup_memory: true/false
+    setup_workspace: true/false
+    learn_integrations: true/false
+    # ... more skills
+```
 
-**goals.md** - What you want to achieve
-- Current role and work context
-- Short-term goal (3 months)
-- Long-term vision (1-3 years)
-- Success metrics
+### core-learnings.md
+```
+## What Works (Successes)
+- Pattern that succeeded
 
-**roadmap.md** - How you'll get there
-- Goal breakdown into milestones
-- Timeline and sequencing
-- Key activities per milestone
+## What to Avoid (Mistakes)
+- Pattern that failed
 
-**core-learnings.md** - What you've learned
-- What works well (successes)
-- What to avoid (mistakes)
-- Best practices (patterns)
-- Insights (strategic realizations)
+## Best Practices
+- Reusable pattern
 
-**memory-map.md** - This file
-- System navigation for AI
-- Structure explanation
+## Insights
+- Strategic realization
+```
 
-**user-config.yaml** - Your preferences
-- Language preference
-- Timezone
-- Date format
+### integrations/*.yaml
+```yaml
+# e.g., langfuse.yaml, airtable-bases.yaml
+api_key: [stored securely]
+project_id: [connection info]
+# Integration-specific config
+```
+</section>
 
----
+<section id="evolution">
+## How Memory Grows
 
-## Session Reports (Historical)
+```
+Fresh Install → setup-memory → Working → close-session → Next Session
+                    ↓              ↓           ↓
+              goals.md set    work done    learnings captured
+              user-config                  session-report created
+```
 
-**session-reports/** - Generated after each session
-- Dated session summaries
-- Progress tracking
-- Key decisions and outcomes
-- Never loaded automatically (only on request)
+### Update Triggers
 
----
+| Event | Files Updated |
+|-------|---------------|
+| `setup-memory` skill | goals.md, user-config.yaml |
+| `close-session` skill | core-learnings.md, session-reports/{date}.md |
+| `*-connect` skills | integrations/{service}.yaml |
+| Learning skill completed | user-config.yaml (learning_tracker) |
+</section>
 
-## When AI Loads Memory Files
-
-**Every Session** (via --startup):
-- goals.md
-- memory-map.md
-- user-config.yaml
-
-**Strategic Discussion**:
-- roadmap.md (when talking about milestones, timeline, planning)
-
-**Pattern Recognition**:
-- core-learnings.md (when similar situations arise)
-
-**Historical Context**:
-- session-reports/ (only when user explicitly asks about past sessions)
-
----
-
-## How Memory Evolves
-
-**Quick Start** (Smart Defaults):
-- Template files auto-created on first run
-- User can work immediately
-- Personalize anytime with "setup goals" skill
-
-**Personalized** (After setup-goals skill):
-- goals.md -> Populated with user's actual goals
-- roadmap.md -> Created with milestones
-- user-config.yaml -> Language and preferences set
-- core-learnings.md -> Grows over time via close-session
-
----
-
-**This map helps the AI understand your memory system structure.**
+</nexus-memory-map>
