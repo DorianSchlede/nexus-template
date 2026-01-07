@@ -820,7 +820,7 @@ def build_skills_xml_compact(base_path: str = ".") -> str:
                     category = "user"
 
                 # Skip if this is an integration category (has connector)
-                if category in integration_categories:
+                if category in integration_categories and integration_categories[category].get("connector"):
                     continue
 
                 if category not in user_categories:
