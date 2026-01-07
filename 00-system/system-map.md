@@ -1,9 +1,14 @@
-# System Map - Core Essentials
+<nexus-system-map version="v4.0" updated="2026-01-07">
+<!--
+================================================================================
+NEXUS SYSTEM MAP - STRUCTURE REFERENCE
+================================================================================
+Purpose: Navigate Nexus structure and file locations
+For AI behavior rules: See orchestrator.md
+================================================================================
+-->
 
-**Purpose**: Navigate Nexus structure and understand execution flow
-
----
-
+<section id="structure">
 ## Core Structure
 
 ```
@@ -29,9 +34,9 @@ Nexus/
 └── 04-workspace/                   # User content
     └── workspace-map.md            # Structure doc
 ```
+</section>
 
----
-
+<section id="execution-flow">
 ## Execution Flow
 
 ```
@@ -49,9 +54,9 @@ Claude Executes
 - If EXECUTE work → load skill
 - If unclear → display menu
 ```
+</section>
 
----
-
+<section id="quick-decisions">
 ## Quick Decisions
 
 | User Says | You Do |
@@ -60,9 +65,9 @@ Claude Executes
 | "Continue project 29" | execute-project |
 | "Send slack message" | Load skill |
 | "What can you do?" | Display menu |
+</section>
 
----
-
+<section id="file-locations">
 ## File Locations
 
 | Need | Path |
@@ -72,9 +77,9 @@ Claude Executes
 | Project work | `02-projects/{ID}-{name}/` |
 | Workflows | `03-skills/{name}/SKILL.md` |
 | User content | `04-workspace/` |
+</section>
 
----
-
+<section id="cli">
 ## CLI Commands
 
 ```bash
@@ -87,7 +92,6 @@ python 00-system/core/nexus-loader.py --skill {name}
 # Discover skills in category
 load-skill {category} --help
 ```
+</section>
 
----
-
-**That's it. Everything else is progressive disclosure.**
+</nexus-system-map>
