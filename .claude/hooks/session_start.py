@@ -412,7 +412,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_projects, build_skills_xml, load_full_startup_context
+        from nexus.loaders import scan_projects, build_skills_xml, load_full_startup_context, build_next_action_instruction
         from nexus.state import (
             check_goals_personalized,
             check_workspace_configured,
@@ -523,11 +523,17 @@ ACTION: {action}
     xml_parts.append(f'''
   <action>{action}</action>''')
 
-    if action == "display_menu":
-        instruction_content = load_instruction_template("startup_menu")
-    else:
-        # continue_working (cases 4-6)
-        instruction_content = load_instruction_template("startup_continue")
+    # Build context for MECE state templates
+    mece_context = {
+        "pending_onboarding": pending_onboarding,
+        "active_projects": active_projects,
+        "workspace_needs_validation": False,  # TODO: detect workspace changes
+        "total_projects": len(all_projects),
+        "goals_personalized": goals_personalized,
+    }
+
+    # Use MECE state templates for dynamic instruction generation
+    instruction_content = build_next_action_instruction(mece_context)
 
     xml_parts.append(f'''
   <instruction importance="MANDATORY">
