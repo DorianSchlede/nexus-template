@@ -1,6 +1,6 @@
 ---
 name: learn-nexus
-description: "Master Nexus philosophy and best practices. Load when user mentions: learn nexus, nexus tutorial, system mastery, nexus best practices, how nexus works, nexus philosophy, nexus design, understand nexus, nexus deep dive. 15-18 min."
+description: "learn nexus, nexus tutorial, how nexus works."
 onboarding: true
 priority: medium
 ---

@@ -412,7 +412,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_projects, build_skills_xml, load_full_startup_context
+        from nexus.loaders import scan_projects, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction
         from nexus.state import (
             check_goals_personalized,
             check_workspace_configured,
@@ -482,8 +482,8 @@ ACTION: {action}
     </project>''')
     xml_parts.append('  </active-projects>')
 
-    # Skills (from build_skills_xml)
-    skills_xml = build_skills_xml(str(base_path))
+    # Skills (from build_skills_xml_compact - CLI discovery pattern)
+    skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
     # State detection
@@ -523,11 +523,17 @@ ACTION: {action}
     xml_parts.append(f'''
   <action>{action}</action>''')
 
-    if action == "display_menu":
-        instruction_content = load_instruction_template("startup_menu")
-    else:
-        # continue_working (cases 4-6)
-        instruction_content = load_instruction_template("startup_continue")
+    # Build context for MECE state templates
+    mece_context = {
+        "pending_onboarding": pending_onboarding,
+        "active_projects": active_projects,
+        "workspace_needs_validation": False,  # TODO: detect workspace changes
+        "total_projects": len(all_projects),
+        "goals_personalized": goals_personalized,
+    }
+
+    # Use MECE state templates for dynamic instruction generation
+    instruction_content = build_next_action_instruction(mece_context)
 
     xml_parts.append(f'''
   <instruction importance="MANDATORY">
@@ -571,8 +577,8 @@ def build_compact_xml(project_dir: str, session_id: str, source: str, mode_resul
     resume_metadata = load_resume_context(project_dir, project_id)
     files_to_load = resume_metadata.get("files_to_load", []) if resume_metadata else []
 
-    # For execution phase, only load overview + steps
-    if phase == "execution":
+    # Fallback: if resume-context has no files_to_load, use defaults for execution
+    if not files_to_load and phase == "execution":
         files_to_load = ["01-planning/01-overview.md", "01-planning/04-steps.md"]
 
     # Get current task from 04-steps.md
@@ -625,6 +631,7 @@ SKILL: {skill}
     system_files = [
         ("00-system/core/orchestrator.md", "AI behavior rules, routing, menu display"),
         ("00-system/system-map.md", "Folder structure and metadata formats"),
+        ("01-memory/memory-map.md", "Memory persistence layer"),
         ("04-workspace/workspace-map.md", "User workspace organization"),
     ]
 

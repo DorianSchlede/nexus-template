@@ -1,7 +1,7 @@
 ---
 name: google-integration
 version: 1.1
-description: "Complete Google Workspace integration (Gmail, Docs, Sheets, Calendar, Drive, Tasks, Slides). Load when user mentions 'google', 'gmail', 'email', 'google docs', 'google sheets', 'spreadsheet', 'google calendar', 'schedule meeting', 'calendar', 'google drive', 'upload file', 'download file', 'google tasks', 'todo', 'google slides', 'presentation', or any Google service operation."
+description: "google, gmail, email, google docs, sheets, calendar, drive."
 ---
 
 # Google Integration

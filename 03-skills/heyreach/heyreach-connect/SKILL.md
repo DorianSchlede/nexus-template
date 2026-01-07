@@ -1,6 +1,6 @@
 ---
 name: heyreach-connect
-description: "Connect to HeyReach for LinkedIn automation. Load when user mentions 'heyreach', 'linkedin outreach', 'linkedin campaigns', 'heyreach campaigns', 'add leads', 'campaign stats'. Meta-skill that validates config and routes to operations."
+description: "heyreach, linkedin outreach, linkedin campaigns."
 ---
 
 # HeyReach Connect

@@ -1,6 +1,6 @@
 ---
 name: notebooklm
-description: Complete NotebookLM Enterprise integration (notebooks, sources, audio overviews). Load when user mentions 'notebooklm', 'notebook lm', 'create notebook', 'audio overview', 'podcast', 'add sources to notebook', or any NotebookLM operations.
+description: "notebooklm, create notebook, audio overview, podcast."
 ---
 
 # NotebookLM Integration

@@ -672,9 +672,179 @@ def load_skill_slim(skill_name: str, base_path: str = ".") -> Dict[str, Any]:
 # =============================================================================
 
 
+def build_skills_xml_compact(base_path: str = ".") -> str:
+    """
+    Build COMPACT XML representation of skills using CLI discovery pattern.
+
+    Token-optimized (~2,500 tokens vs ~9,500 for full):
+    - System skills: Full descriptions (essential for routing)
+    - Integration categories: Just connector + CLI hint + operations count
+    - User skill categories: Grouped by folder with CLI hint
+
+    Use 'load-skill {category} --help' for full skill listings.
+
+    Returns:
+        XML string ready for inclusion in nexus-context
+    """
+    from xml.sax.saxutils import escape
+
+    xml_parts = []
+
+    # === SYSTEM SKILLS (00-system/skills/) - Full descriptions (essential) ===
+    system_skills_dir = Path(base_path) / SYSTEM_DIR / "skills"
+    categories: Dict[str, List[Dict[str, str]]] = {}
+
+    if system_skills_dir.exists():
+        for skill_file in system_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+
+                if not skill_name:
+                    continue
+
+                # Determine category from path
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "other"
+                except (ValueError, IndexError):
+                    category = "other"
+
+                if category not in categories:
+                    categories[category] = []
+
+                categories[category].append({
+                    "name": skill_name,
+                    "description": skill_desc,
+                })
+            except Exception:
+                continue
+
+    # Build system-skills XML (full descriptions)
+    xml_parts.append('  <system-skills location="00-system/skills/">')
+    for category, skills in sorted(categories.items()):
+        xml_parts.append(f'    <category name="{escape(category)}">')
+        for skill in skills:
+            desc = escape(skill['description']) if skill['description'] else ""
+            xml_parts.append(f'      <skill name="{escape(skill["name"])}">{desc}</skill>')
+        xml_parts.append('    </category>')
+    xml_parts.append('  </system-skills>')
+
+    # === INTEGRATION CATEGORIES (03-skills/*-connect/) - CLI pattern ===
+    user_skills_dir = Path(base_path) / SKILLS_DIR
+    integration_categories: Dict[str, Dict[str, Any]] = {}
+
+    if user_skills_dir.exists():
+        for skill_file in user_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+
+                if not skill_name:
+                    continue
+
+                # Get parent folder as category
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("03-skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "user"
+                except (ValueError, IndexError):
+                    category = "user"
+
+                if skill_name.endswith("-connect"):
+                    # This is a connector skill
+                    if category not in integration_categories:
+                        integration_categories[category] = {
+                            "connector": None,
+                            "operations": 0
+                        }
+                    integration_categories[category]["connector"] = {
+                        "name": skill_name,
+                        "description": skill_desc
+                    }
+                else:
+                    # Count as operation in this category
+                    if category not in integration_categories:
+                        integration_categories[category] = {
+                            "connector": None,
+                            "operations": 0
+                        }
+                    integration_categories[category]["operations"] += 1
+
+            except Exception:
+                continue
+
+    # Build integration-skills XML (CLI pattern - connector + count + hint)
+    xml_parts.append('  <integration-skills location="03-skills/*-connect/">')
+    for category, data in sorted(integration_categories.items()):
+        if data["connector"]:
+            conn = data["connector"]
+            desc = escape(conn['description']) if conn['description'] else ""
+            ops = data["operations"]
+            xml_parts.append(f'    <category name="{escape(category)}" operations="{ops}">')
+            xml_parts.append(f'      <connector name="{escape(conn["name"])}">{desc}</connector>')
+            if ops > 0:
+                xml_parts.append(f'      <cli>load-skill {escape(category)} --help</cli>')
+            xml_parts.append('    </category>')
+    xml_parts.append('  </integration-skills>')
+
+    # === USER SKILLS (03-skills/ non-connect) - Category summary ===
+    user_categories: Dict[str, List[str]] = {}
+
+    if user_skills_dir.exists():
+        for skill_file in user_skills_dir.glob("**/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                if not skill_name or skill_name.endswith("-connect"):
+                    continue
+
+                # Get parent folder as category
+                parts = skill_file.parts
+                try:
+                    skills_idx = parts.index("03-skills")
+                    category = parts[skills_idx + 1] if skills_idx + 1 < len(parts) else "user"
+                except (ValueError, IndexError):
+                    category = "user"
+
+                # Skip if this is an integration category (has connector)
+                if category in integration_categories and integration_categories[category].get("connector"):
+                    continue
+
+                if category not in user_categories:
+                    user_categories[category] = []
+                user_categories[category].append(skill_name)
+
+            except Exception:
+                continue
+
+    # Build user-skills XML (category summary with skill count)
+    xml_parts.append('  <user-skills location="03-skills/">')
+    for category, skills in sorted(user_categories.items()):
+        count = len(skills)
+        xml_parts.append(f'    <category name="{escape(category)}" count="{count}">')
+        xml_parts.append(f'      <cli>load-skill {escape(category)} --help</cli>')
+        xml_parts.append('    </category>')
+    xml_parts.append('  </user-skills>')
+
+    return '\n'.join(xml_parts)
+
+
 def build_skills_xml(base_path: str = ".") -> str:
     """
-    Build XML representation of all skills for STARTUP mode context injection.
+    Build FULL XML representation of all skills (DEPRECATED - use build_skills_xml_compact).
 
     Returns XML string with:
     - <system-skills> - All skills from 00-system/skills/ grouped by category
@@ -1051,3 +1221,297 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     result["instruction"] = "\n".join(instruction_parts)
 
     return result
+
+
+# =============================================================================
+# State Template Functions for Dynamic Instructions (MECE Compliant)
+# =============================================================================
+# These functions generate state-specific instructions using priority-based selection.
+# Uses MECE principle: Mutually Exclusive, Collectively Exhaustive.
+# First match wins - no overlapping states.
+# =============================================================================
+
+
+def build_next_action_instruction(context: Dict[str, Any]) -> str:
+    """
+    Generate state-specific instruction using priority-based selection.
+
+    Uses MECE principle: Mutually Exclusive, Collectively Exhaustive.
+    First match wins - no overlapping states.
+
+    Args:
+        context: Full startup context with stats, projects, onboarding
+
+    Returns:
+        Markdown string with clear next-action directive
+    """
+    # Priority 0: First run (no goals, no projects) - auto-trigger setup
+    if not context.get("goals_personalized", False) and context.get("total_projects", 0) == 0:
+        return _template_first_run(context)
+
+    # Priority 1: Onboarding incomplete (goals set but other onboarding pending)
+    if len(context.get("pending_onboarding", [])) > 0:
+        return _template_onboarding_incomplete(context)
+
+    # Priority 2: Active work exists
+    if len(context.get("active_projects", [])) > 0:
+        return _template_active_projects(context)
+
+    # Priority 3: Workspace needs sync
+    if context.get("workspace_needs_validation", False):
+        return _template_workspace_modified(context)
+
+    # Priority 4: Fresh start (goals configured, no projects yet)
+    if context.get("total_projects", 0) == 0:
+        return _template_fresh_workspace(context)
+
+    # Priority 5: System ready (fallback)
+    return _template_system_ready(context)
+
+
+def _load_state_template(template_name: str, **kwargs) -> str:
+    """Load state template from .claude/hooks/templates/ and format with kwargs."""
+    # Templates are in .claude/hooks/templates/ relative to project root
+    # loaders.py is in 00-system/core/nexus/, so go up 3 levels to project root
+    template_dir = Path(__file__).parent.parent.parent.parent / ".claude" / "hooks" / "templates"
+    template_path = template_dir / f"{template_name}.md"
+
+    try:
+        template = template_path.read_text(encoding='utf-8')
+        return template.format(**kwargs) if kwargs else template
+    except FileNotFoundError:
+        return f"Template {template_name} not found at {template_path}"
+    except KeyError as e:
+        # Return unformatted if missing variable
+        return template_path.read_text(encoding='utf-8')
+
+
+def _template_first_run(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 0: First run - auto-trigger setup-memory skill."""
+    return _load_state_template("startup_first_run")
+
+
+def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 1: Onboarding incomplete - gently suggest completing setup."""
+    pending = context.get("pending_onboarding", [])
+    pending_list = "\n".join(f"- {skill}" for skill in pending[:3])
+    return _load_state_template("startup_onboarding_incomplete", pending_list=pending_list)
+
+
+def _template_active_projects(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 2: Active projects exist - highlight project continuations."""
+    projects = context.get("active_projects", [])[:2]  # Max 2
+    project_list = "\n".join(
+        f"- Project {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
+        for p in projects
+    )
+    return _load_state_template("startup_active_projects", project_list=project_list)
+
+
+def _template_workspace_modified(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 3: Workspace changes detected - suggest running update-workspace-map."""
+    return _load_state_template("startup_workspace_modified")
+
+
+def _template_fresh_workspace(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 4: Fresh workspace (configured but no projects) - emphasize starting first project."""
+    return _load_state_template("startup_fresh_workspace")
+
+
+def _template_system_ready(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 5: System ready (fallback) - open-ended, ready for anything."""
+    return _load_state_template("startup_system_ready")
+
+
+def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
+    """
+    Build prioritized list of suggested actions based on state.
+
+    Returns ordered list of suggestions (max 5).
+    """
+    suggestions = []
+
+    # Priority 1: Critical onboarding
+    if not context.get("goals_personalized"):
+        suggestions.append("'setup memory' - configure your goals and role (5 min)")
+
+    if not context.get("workspace_configured"):
+        suggestions.append("'setup workspace' - organize your folder structure (10 min)")
+
+    # Priority 2: Active work
+    active_projects = context.get("active_projects", [])
+
+    for proj in active_projects[:2]:  # Max 2 project suggestions
+        name = proj.get("name", "Unknown")
+        progress = proj.get("progress", 0)
+        suggestions.append(f"'continue {name}' - resume at {progress}%")
+
+    # Priority 3: Workspace maintenance
+    if context.get("workspace_needs_validation"):
+        suggestions.append("'validate workspace' - sync workspace-map.md")
+
+    # Priority 4: End of session
+    suggestions.append("'close session' - save progress and learnings")
+
+    # Priority 5: Exploration (if room)
+    if len(suggestions) < 5:
+        if context.get("total_projects") == 0:
+            suggestions.append("'create project' - start your first project")
+        else:
+            suggestions.append("'explain nexus' - learn system capabilities")
+
+    # Return top 5
+    return suggestions[:5]
+
+
+# =============================================================================
+# CLI Discovery Functions for Integration Skills
+# =============================================================================
+# Use: load-skill {category} --help
+# Returns formatted list of all skills in a category without auto-loading them
+# =============================================================================
+
+
+def discover_skills_in_category(category: str, base_path: str = ".") -> Dict[str, Any]:
+    """
+    Discover all skills in an integration category.
+
+    This enables the `load-skill {category} --help` pattern that prevents
+    auto-loading all skills (e.g., 28 langfuse skills) at startup.
+
+    Args:
+        category: Integration category name (e.g., "langfuse", "slack", "notion")
+        base_path: Root path to Nexus installation
+
+    Returns:
+        Dictionary with:
+        - category: Category name
+        - skills: List of skill metadata dicts
+        - count: Number of skills found
+        - formatted: Ready-to-display formatted output
+
+    Usage:
+        result = discover_skills_in_category("langfuse")
+        print(result["formatted"])  # Formatted skill list
+    """
+    base = Path(base_path)
+    result = {
+        "category": category,
+        "skills": [],
+        "count": 0,
+        "formatted": "",
+    }
+
+    # Search in both user skills (03-skills/) and system skills (00-system/skills/)
+    search_dirs = [
+        base / SKILLS_DIR / category,  # 03-skills/{category}/
+        base / SYSTEM_DIR / "skills" / category,  # 00-system/skills/{category}/
+    ]
+
+    found_skills = []
+
+    for skills_dir in search_dirs:
+        if not skills_dir.exists() or not skills_dir.is_dir():
+            continue
+
+        # Find all SKILL.md files in this category
+        for skill_file in skills_dir.glob("*/SKILL.md"):
+            try:
+                metadata = extract_yaml_frontmatter(str(skill_file))
+                if not metadata or "error" in metadata:
+                    continue
+
+                skill_name = metadata.get("name", "").strip()
+                skill_desc = metadata.get("description", "").strip()
+                skill_path = metadata.get("_file_path", str(skill_file))
+
+                if not skill_name:
+                    continue
+
+                # Skip the *-connect skill (connector is loaded separately)
+                # But include it in discovery for completeness
+                found_skills.append({
+                    "name": skill_name,
+                    "description": skill_desc,
+                    "path": skill_path,
+                    "is_connector": skill_name.endswith("-connect"),
+                })
+            except Exception:
+                continue
+
+    # Sort: connector first, then alphabetically
+    found_skills.sort(key=lambda x: (not x["is_connector"], x["name"]))
+
+    result["skills"] = found_skills
+    result["count"] = len(found_skills)
+
+    # Build formatted output
+    if found_skills:
+        lines = [
+            f"{category.title()} Operations ({len(found_skills)} skills):",
+            "",
+        ]
+
+        # Group by connector vs operations
+        connector = [s for s in found_skills if s["is_connector"]]
+        operations = [s for s in found_skills if not s["is_connector"]]
+
+        if connector:
+            lines.append("[Connector]")
+            for skill in connector:
+                lines.append(f"  - {skill['name']}: {skill['description']}")
+            lines.append("")
+
+        if operations:
+            lines.append("[Operations]")
+            for skill in operations:
+                lines.append(f"  - {skill['name']}: {skill['description']}")
+            lines.append("")
+
+        lines.append(f"To load a skill: read {category}/{{skill-name}}/SKILL.md")
+
+        result["formatted"] = "\n".join(lines)
+    else:
+        result["formatted"] = f"No skills found in category: {category}"
+
+    return result
+
+
+def list_integration_categories(base_path: str = ".") -> List[Dict[str, Any]]:
+    """
+    List all available integration categories.
+
+    Scans 03-skills/ for folders with *-connect subdirectories.
+
+    Returns:
+        List of category dicts with name, path, and skill count
+    """
+    base = Path(base_path)
+    categories = []
+
+    user_skills_dir = base / SKILLS_DIR
+
+    if not user_skills_dir.exists():
+        return categories
+
+    for item in user_skills_dir.iterdir():
+        if not item.is_dir():
+            continue
+
+        # Check if this has a *-connect subdirectory
+        has_connect = False
+        for subdir in item.iterdir():
+            if subdir.is_dir() and subdir.name.endswith("-connect"):
+                has_connect = True
+                break
+
+        if has_connect:
+            # Count skills in this category
+            skill_count = sum(1 for f in item.glob("*/SKILL.md"))
+            categories.append({
+                "name": item.name,
+                "path": str(item),
+                "skill_count": skill_count,
+            })
+
+    return sorted(categories, key=lambda x: x["name"])

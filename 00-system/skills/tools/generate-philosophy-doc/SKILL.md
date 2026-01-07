@@ -1,6 +1,6 @@
 ---
 name: generate-philosophy-doc
-description: Generate comprehensive philosophy and standards documents for any domain (UX design, landing pages, email outbound, API design, etc.). Load when user says "create philosophy doc", "generate standards for [domain]", "build best practices guide", or "create benchmarking document". Conducts deep research, synthesizes findings, and produces structured philosophy documents with principles, frameworks, anti-patterns, checklists, case studies, and metrics.
+description: "create philosophy doc, generate standards, build best practices guide."
 ---
 
 # Generate Philosophy Document

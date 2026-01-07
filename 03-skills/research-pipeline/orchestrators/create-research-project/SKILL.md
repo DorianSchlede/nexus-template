@@ -1,6 +1,19 @@
 ---
 name: create-research-project
 description: "Create research projects with paper selection, download, and preprocessing (Phase 1). Load when user says 'create research project', 'new research', 'start research on [topic]'. Delivers analysis-ready chunks. For EXECUTING analysis, use 'execute-research-project' skill."
+---
+
+## DEPRECATION NOTICE
+
+**This skill is being deprecated for direct invocation.** For new research projects, use:
+
+```
+plan project for [topic] research
+```
+
+The router will detect "research" type and invoke this skill's discovery workflow automatically.
+
+**Why?** The plan-project router ensures all projects get proper discovery, mental models, and planning structure.
 
 ---
 

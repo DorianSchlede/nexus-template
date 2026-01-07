@@ -2,19 +2,37 @@
 
 **Purpose**: Guide AI in offering appropriate project types and adapting planning templates based on user needs.
 
+**Router Pattern**: plan-project semantically matches user input against _type.yaml descriptions.
+
 ---
 
-## Project Type Categories
+## 8 Project Types
 
-When user initiates project creation, AI should offer these categories:
+| Type | When to Use | Discovery Method |
+|------|-------------|------------------|
+| **build** | Creating software, features, tools, systems | Inline |
+| **integration** | Connecting APIs, external services, webhooks | Skill: add-integration |
+| **research** | Academic papers, systematic analysis | Skill: create-research-project |
+| **strategy** | Business decisions, planning, analysis | Inline |
+| **content** | Marketing, documentation, creative work | Inline |
+| **process** | Workflow optimization, automation | Inline |
+| **skill** | Creating Nexus skills and capabilities | Skill: create-skill |
+| **generic** | Doesn't fit other categories | Inline |
 
-### 1. Build/Create Projects
+---
+
+## Type Descriptions
+
+### 1. Build Projects
+
 **Description**: Building something tangible (software, product, system, tool)
 
 **Examples**:
 - "Build lead qualification workflow"
 - "Create customer dashboard"
-- "Develop API integration"
+- "Develop authentication system"
+
+**Discovery Method**: Inline (EARS requirements format)
 
 **Adaptive Sections for plan.md**:
 - Technical Architecture
@@ -22,15 +40,54 @@ When user initiates project creation, AI should offer these categories:
 - Integration Points
 - Testing Approach
 
+**Special Features**:
+- EARS-formatted requirements in discovery.md
+- Correctness Properties in plan.md
+- INCOSE quality rules applied
+
 ---
 
-### 2. Research/Analysis Projects
-**Description**: Investigating, analyzing, or studying something
+### 2. Integration Projects
+
+**Description**: Connecting external APIs and services to Nexus
 
 **Examples**:
-- "Analyze competitor landscape"
-- "Research market opportunities"
-- "Evaluate technology options"
+- "Add Slack integration"
+- "Connect HubSpot API"
+- "Integrate payment gateway"
+
+**Discovery Method**: Skill (add-integration)
+
+**What add-integration does**:
+- WebSearch for API documentation
+- Parse endpoints and auth methods
+- User selects which endpoints to implement
+- Creates integration config JSON
+
+**Adaptive Sections for plan.md**:
+- API Architecture
+- Authentication Flow
+- Endpoint Mapping
+- Error Handling Strategy
+
+---
+
+### 3. Research Projects
+
+**Description**: Systematic investigation and analysis of academic papers or topics
+
+**Examples**:
+- "Research ontology comparison"
+- "Analyze AI agent frameworks"
+- "Survey knowledge graph approaches"
+
+**Discovery Method**: Skill (create-research-project)
+
+**What create-research-project does**:
+- Define research question and extraction schema
+- Search 9 academic APIs
+- Download and preprocess papers
+- Generate analysis kit for synthesis
 
 **Adaptive Sections for plan.md**:
 - Research Methodology
@@ -40,13 +97,16 @@ When user initiates project creation, AI should offer these categories:
 
 ---
 
-### 3. Strategy/Planning Projects
+### 4. Strategy Projects
+
 **Description**: Making decisions, planning direction, defining strategy
 
 **Examples**:
 - "Q1 marketing strategy"
 - "Product roadmap planning"
 - "Business model design"
+
+**Discovery Method**: Inline (decision framework questions)
 
 **Adaptive Sections for plan.md**:
 - Situation Analysis
@@ -56,13 +116,16 @@ When user initiates project creation, AI should offer these categories:
 
 ---
 
-### 4. Content/Creative Projects
+### 5. Content Projects
+
 **Description**: Creating content (writing, design, media, campaigns)
 
 **Examples**:
 - "Create sales deck"
 - "Write product documentation"
 - "Design marketing campaign"
+
+**Discovery Method**: Inline (creative brief questions)
 
 **Adaptive Sections for plan.md**:
 - Creative Brief
@@ -72,13 +135,16 @@ When user initiates project creation, AI should offer these categories:
 
 ---
 
-### 5. Process/Operations Projects
+### 6. Process Projects
+
 **Description**: Improving processes, documenting workflows, operational changes
 
 **Examples**:
 - "Streamline onboarding process"
 - "Document support workflow"
 - "Optimize deployment pipeline"
+
+**Discovery Method**: Inline (current/future state questions)
 
 **Adaptive Sections for plan.md**:
 - Current State Analysis
@@ -88,7 +154,38 @@ When user initiates project creation, AI should offer these categories:
 
 ---
 
-### 6. Generic/Flexible Projects
+### 7. Skill Projects (NEW)
+
+**Description**: Creating new Nexus skills and automation capabilities
+
+**Examples**:
+- "Create Slack power skill"
+- "Build data extraction skill"
+- "Develop meeting notes automation"
+
+**Discovery Method**: Skill (create-skill)
+
+**What create-skill does**:
+- Skill-worthiness assessment (3-criteria framework)
+- Define triggers and complexity
+- Scaffold skill structure
+- Generate SKILL.md and references
+
+**Adaptive Sections for plan.md**:
+- Skill Architecture
+- Trigger Design
+- Workflow Steps
+- Testing Strategy
+
+**Special Features**:
+- EARS-formatted requirements in discovery.md
+- Correctness Properties in plan.md
+- Follows skill-format-specification.md
+
+---
+
+### 8. Generic Projects
+
 **Description**: Doesn't fit other categories or user prefers minimal structure
 
 **Examples**:
@@ -96,219 +193,80 @@ When user initiates project creation, AI should offer these categories:
 - "Personal learning goals"
 - Custom work
 
+**Discovery Method**: Inline (minimal questions)
+
 **Adaptive Sections for plan.md**:
 - Keep minimal base template
 - User defines structure as needed
 
 ---
 
-## AI Workflow for Project Type Selection
+## Type Detection (Semantic Matching)
 
-### Step 1: Analyze Project Description
+The router does NOT use keyword triggers. Instead:
 
-When user says "Create project for [description]", AI should:
-
-1. **Parse description** for keywords
-2. **Infer likely type** based on content
-3. **Offer suggestion** with option to adjust
+1. **Read all _type.yaml descriptions**
+2. **Compare user input semantically** against descriptions
+3. **Select best match** OR ask user if ambiguous
 
 **Example**:
 ```
-User: "Create project for lead qualification workflow"
+User: "plan project for slack notifications"
 
-AI: "I'll create a project for lead qualification workflow.
+AI reads _type.yaml descriptions:
+- integration: "Connect external APIs and services" ← best match
+- build: "Create software, features, tools"
+- skill: "Create Nexus skills"
 
-Based on your description, this looks like a **Build/Create** project.
-I'll add sections for:
-- Technical Architecture
-- Implementation Strategy
-- Integration Points
-
-Sound good, or would you prefer a different approach?"
+AI: "This looks like an Integration project. I'll use add-integration
+     to discover Slack's API. Sound right?"
 ```
 
-### Step 2: Confirm or Adjust
-
-User can:
-- **Accept**: "Yes" / "Sounds good" → Proceed with suggested type
-- **Adjust**: "Actually, this is more research" → Switch to Research type
-- **Minimal**: "Keep it simple" → Use generic template
-
-### Step 3: Create with Adaptive Sections
-
-AI creates base structure + adds type-specific sections to plan.md
-
----
-
-## Mental Models for Collaborative Planning
-
-During planning session, AI should proactively use these thinking frameworks:
-
-### 1. Socratic Questioning
-
-**Purpose**: Help user think deeper about their approach
-
-**Questions to Ask**:
-- "What assumptions are you making?"
-- "What evidence supports this approach?"
-- "How would you know if this assumption is wrong?"
-- "What would need to be true for this to work?"
-
-**When to Use**: During "Approach" and "Key Decisions" sections
-
-**Example**:
-```
-User: "We'll use GPT-4 for lead qualification"
-
-AI: "Good choice. Let me ask: What assumptions are you making about GPT-4's accuracy?
-Have you tested it with sample leads? What's your fallback if accuracy is below expectations?"
-```
-
----
-
-### 2. Devil's Advocate
-
-**Purpose**: Identify risks and blind spots
-
-**Questions to Ask**:
-- "What could go wrong with this plan?"
-- "What are you not considering?"
-- "What would make this fail?"
-- "Who might disagree with this approach and why?"
-
-**When to Use**: After user defines approach, before finalizing plan
-
-**Example**:
-```
-User: "Sales team will adopt this immediately"
-
-AI: "Let me play devil's advocate: What if sales team doesn't trust AI qualification?
-What if they ignore the notifications? How will you handle resistance to change?"
-```
-
----
-
-### 3. First Principles Thinking
-
-**Purpose**: Break down to fundamental truths
-
-**Questions to Ask**:
-- "What's the core problem we're solving?"
-- "What are the fundamental constraints?"
-- "If we started from scratch, how would we approach this?"
-
-**When to Use**: When user seems stuck or approach feels overly complex
-
----
-
-### 4. Pre-Mortem Analysis
-
-**Purpose**: Imagine failure and work backward
-
-**Questions to Ask**:
-- "Imagine this project failed. What went wrong?"
-- "What early warning signs would we see?"
-- "How could we prevent that failure?"
-
-**When to Use**: During risk assessment and mitigation planning
-
----
-
-### 5. Stakeholder Mapping
-
-**Purpose**: Identify all affected parties
-
-**Questions to Ask**:
-- "Who will be impacted by this?"
-- "Who needs to approve or support this?"
-- "Who might resist and why?"
-
-**When to Use**: During Context and Dependencies sections
-
----
-
-## Adaptive Section Templates
-
-### For Build/Create Projects
+### If Ambiguous
 
 ```markdown
-## Technical Architecture
+I detected this could be a few different project types:
 
-**System Components**:
-- [Component 1] - [Purpose]
-- [Component 2] - [Purpose]
+1. **Integration** - Connecting Slack API
+2. **Build** - Building notification system
+3. **Skill** - Creating reusable notification skill
 
-**Data Flow**:
-[How information moves through the system]
-
-**Technology Stack**:
-- [Tool/Framework] - [Why chosen]
-
-## Implementation Strategy
-
-**Development Phases**:
-1. [Phase 1] - [Scope]
-2. [Phase 2] - [Scope]
-
-**Testing Approach**:
-- [How you'll validate]
-
-**Deployment Plan**:
-- [How you'll launch]
+Which type best matches what you're building?
 ```
 
-### For Research/Analysis Projects
+---
+
+## EARS Requirements (Build/Skill Types)
+
+For **build** and **skill** projects, discovery includes EARS-formatted requirements:
+
+| Pattern | Template | Example |
+|---------|----------|---------|
+| Ubiquitous | THE `<system>` SHALL `<response>` | THE API SHALL validate inputs |
+| Event-driven | WHEN `<trigger>`, THE `<system>` SHALL `<response>` | WHEN user clicks, THE form SHALL submit |
+| State-driven | WHILE `<condition>`, THE `<system>` SHALL `<response>` | WHILE loading, THE UI SHALL show spinner |
+| Unwanted | IF `<condition>`, THEN THE `<system>` SHALL `<response>` | IF error, THEN THE system SHALL log |
+| Optional | WHERE `<option>`, THE `<system>` SHALL `<response>` | WHERE debug mode, THE logger SHALL verbose |
+| Complex | Combined patterns | WHERE admin, WHEN delete, THE system SHALL confirm |
+
+**See**: [ears-patterns.md](ears-patterns.md) for full guide.
+
+---
+
+## Correctness Properties (Build/Skill Types)
+
+For **build** and **skill** projects, plan.md includes Correctness Properties:
 
 ```markdown
-## Research Methodology
+## Correctness Properties
 
-**Research Questions**:
-- [Question 1]
-- [Question 2]
+**Property 1: Input Validation**
+For all user inputs, the system either accepts valid input OR returns descriptive error.
+**Validates**: REQ-2, REQ-3
 
-**Data Sources**:
-- [Source 1] - [What it provides]
-- [Source 2] - [What it provides]
-
-**Analysis Framework**:
-[How you'll analyze findings]
-
-## Synthesis Plan
-
-**Reporting Format**:
-[How findings will be presented]
-
-**Key Stakeholders**:
-[Who needs the insights]
-```
-
-### For Strategy/Planning Projects
-
-```markdown
-## Situation Analysis
-
-**Current State**:
-[Where things stand now]
-
-**Problem Definition**:
-[What needs to change]
-
-**Stakeholder Landscape**:
-[Who's involved and their interests]
-
-## Strategic Options
-
-**Option 1**: [Approach]
-- Pros: [Benefits]
-- Cons: [Drawbacks]
-- Risks: [What could go wrong]
-
-**Option 2**: [Approach]
-- Pros: [Benefits]
-- Cons: [Drawbacks]
-- Risks: [What could go wrong]
-
-**Recommendation**: [Which option and why]
+**Property 2: State Consistency**
+For any operation sequence, resume-context.md reflects actual state.
+**Validates**: REQ-4
 ```
 
 ---
@@ -327,33 +285,20 @@ Before completing plan.md, AI must:
 - [ ] **Find external system configs** (MCP servers, integrations)
 - [ ] **Document all connections** in Dependencies & Links section
 
-### Example Research Process
+---
 
-```
-User: "Create project for lead qualification workflow"
+## Mental Models (After Discovery)
 
-AI: [Scans codebase]
-    Found:
-    - 03-skills/lead-qualification/SKILL.md
-    - 04-workspace/airtable-schemas/leads.json
-    - .mcp.json (Airtable MCP server configured)
-    
-    [Checks projects]
-    Found:
-    - Project 03: CRM Integration (uses same Airtable base)
-    
-    [Populates Dependencies section]
-    **Files Impacted**:
-    - `03-skills/lead-qualification/SKILL.md` - Main workflow logic
-    - `04-workspace/airtable-schemas/leads.json` - Lead data schema
-    
-    **External Systems**:
-    - Airtable Base: "Leads" - Source of lead data
-    - Slack Workspace: #sales - Notification destination
-    
-    **Related Projects**:
-    - Project 03: CRM Integration - Shares Airtable connection
-```
+Mental models are applied AFTER discovery, not before:
+
+1. **First Principles** - Strip assumptions, find fundamental truths
+2. **Pre-Mortem** - Imagine failure before implementation
+3. **Devil's Advocate** - Identify risks and blind spots
+4. **Stakeholder Mapping** - Identify affected parties
+
+**Key Insight**: Questions are INFORMED by discovery:
+- "Given your requirement REQ-1, what assumptions are embedded?"
+- "Given these API constraints, what could break?"
 
 ---
 
@@ -361,14 +306,14 @@ AI: [Scans codebase]
 
 Before completing project creation, verify:
 
-- [ ] Project type identified and appropriate sections added
-- [ ] Socratic questions asked during Approach section
-- [ ] Devil's advocate questions asked for risk assessment
-- [ ] Dependencies & Links section fully researched and populated
-- [ ] All examples are brief and generic (not overly specific)
-- [ ] Mental Models Applied section documents thinking frameworks used
-- [ ] User has confirmed understanding of approach
+- [ ] Project type correctly detected (semantic matching)
+- [ ] Discovery completed BEFORE mental models
+- [ ] Discovery findings written to 02-discovery.md
+- [ ] Mental models applied to discovery findings
+- [ ] Dependencies & Links section researched and populated
+- [ ] Resume-context.md updated with phase transitions
+- [ ] User confirmed understanding at each pause
 
 ---
 
-**Remember**: The goal is **collaborative depth**, not speed. Take time to help user think through their project thoroughly.
+**Remember**: The router ensures every project gets proper discovery and mental model application. Discovery BEFORE mental models ensures informed questioning.

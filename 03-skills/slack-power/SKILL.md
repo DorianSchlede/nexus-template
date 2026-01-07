@@ -1,6 +1,6 @@
 ---
 name: slack-power
-description: "Power workflows for Slack: extract schemas, find action items, meeting prep, channel digests, link collection, query transcripts. Load when user says 'slack power', 'extract from slack', 'meeting prep', 'channel digest', 'collect links', 'query meeting', 'was haben wir besprochen', or any slack workflow trigger."
+description: "slack power, meeting prep, channel digest, collect links, query meeting."
 ---
 
 # Slack Power

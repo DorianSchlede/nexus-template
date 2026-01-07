@@ -1,6 +1,6 @@
 ---
 name: list-skills
-description: List all available skills in Nexus with descriptions. Load when user says "list skills", "show skills", "what skills", "available skills", "skill list", "all skills", or asks what they can do with Nexus.
+description: "list skills, show skills, what skills, available skills."
 ---
 
 # List Skills

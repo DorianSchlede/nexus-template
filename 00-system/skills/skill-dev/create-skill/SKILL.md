@@ -1,9 +1,23 @@
 ---
 name: create-skill
-description: "Create reusable workflow skills. Load when user wants to automate repeating work. Keywords: create skill, new skill, automate this, make reusable, save workflow. Suggest when user describes patterns (every week I..., I always...)."
+description: "create skill, new skill, automate this, make reusable."
 ---
 
-## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+## DEPRECATION NOTICE
+
+**This skill is being deprecated for direct invocation.** For new skills, use:
+
+```
+plan project for [name] skill
+```
+
+The router will detect "skill" type and invoke this skill's discovery workflow automatically.
+
+**Why?** The plan-project router ensures all projects get proper discovery, mental models, and planning structure.
+
+---
+
+## Onboarding Awareness (CHECK BEFORE STARTING)
 
 **Before creating a skill, AI MUST check `stats.pending_onboarding` for `learn_skills`:**
 

@@ -1,6 +1,6 @@
 ---
 name: learn-integrations
-description: "Learn about Nexus integrations and MCP. Load when user mentions: learn integrations, what is MCP, connect tools, integration tutorial, add integration, external tools, API connections, third party, how to integrate. 10-12 min."
+description: "learn integrations, what is MCP, how to integrate."
 onboarding: true
 priority: high
 ---

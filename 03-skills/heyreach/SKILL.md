@@ -1,6 +1,6 @@
 ---
 name: heyreach
-description: "HeyReach LinkedIn automation integration. Load when user mentions 'heyreach', 'linkedin outreach', 'linkedin campaigns', 'list campaigns', 'add leads', 'campaign stats', or any LinkedIn automation operations."
+description: "heyreach, linkedin outreach, linkedin campaigns, add leads."
 ---
 
 # HeyReach Integration

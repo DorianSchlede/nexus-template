@@ -1,6 +1,6 @@
 ---
 name: archive-project
-description: Load when user says "archive project", "archive [project-name]", "move to archived". Moves completed projects to 05-archived/ folder for clean project list.
+description: "archive project, archive [name], move to archived."
 ---
 
 # Archive Project

@@ -1,6 +1,6 @@
 ---
 name: import-skill
-description: Import a skill from the Skill Marketplace (Airtable). Load when user mentions "import skill", "download skill", "get skill", "install skill", "add skill", or selects a skill to import after searching.
+description: "import skill, download skill, install skill, get skill."
 ---
 
 # Import Skill from Marketplace

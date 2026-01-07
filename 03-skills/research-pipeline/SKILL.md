@@ -1,6 +1,6 @@
 ---
 name: research-pipeline
-description: "Academic paper research, analysis, and synthesis skill-chain. Load when user mentions 'research papers', 'analyze papers', 'paper synthesis', 'academic research', 'literature review', 'create research project', 'execute research project', 'search papers', 'preprocess pdf', 'paper query', 'paper manage'. This is the MASTER entry point - routes to appropriate child skills."
+description: "research papers, analyze papers, paper synthesis, literature review."
 type: skill-chain
 version: "2.0"
 ---

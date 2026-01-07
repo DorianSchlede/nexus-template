@@ -1,6 +1,6 @@
 ---
 name: validate-docs-implementation
-description: Load when user says "validate docs", "check documentation consistency", "docs vs implementation", or "find documentation mismatches". Systematically compares implementation code against documentation to identify and fix inconsistencies.
+description: "validate docs, docs vs implementation, check documentation."
 ---
 
 # Validate Documentation vs Implementation

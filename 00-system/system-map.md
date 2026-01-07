@@ -1,132 +1,97 @@
-# Nexus System Map
+<nexus-system-map version="v4.0" updated="2026-01-07">
+<!--
+================================================================================
+NEXUS SYSTEM MAP - STRUCTURE REFERENCE
+================================================================================
+Purpose: Navigate Nexus structure and file locations
+For AI behavior rules: See orchestrator.md
+================================================================================
+-->
 
-<!-- AI CONTEXT FILE -->
-<!-- Purpose: System structure reference (NOT behavior rules) -->
-<!-- For AI behavior/routing: See orchestrator.md -->
-
-**System structure reference for Nexus-v4.**
-
-> **Purpose**: Help AI navigate system structure and file locations
->
-> **For AI behavior rules**: See [orchestrator.md](core/orchestrator.md)
->
-> **Maintenance**: Static (part of system framework)
-
----
-
-## 🗺️ Navigation Hub
-
-| Document | Purpose |
-|----------|---------|
-| **[Orchestrator](core/orchestrator.md)** | AI behavior rules, routing, menu display |
-| **[Framework Overview](documentation/framework-overview.md)** | Complete system guide (detailed) |
-| **[Memory Map](../01-memory/memory-map.md)** | Context persistence system |
-| **[Workspace Map](../04-workspace/workspace-map.md)** | User's custom folders |
-
----
-
-## 📁 System Structure
+<section id="structure">
+## Core Structure
 
 ```
-Nexus-v4/
-│
-├── CLAUDE.md                       # 🚀 Entry point (loads orchestrator)
-│
-├── 00-system/                      # SYSTEM FRAMEWORK
-│   ├── system-map.md               # THIS FILE
+Nexus/
+├── 00-system/
 │   ├── core/
-│   │   ├── orchestrator.md         # AI behavior rules
-│   │   └── nexus-loader.py         # Master controller script
-│   ├── skills/                     # System skills
-│   │   ├── create-project/
-│   │   ├── execute-project/
-│   │   ├── create-skill/
-│   │   ├── setup-goals/
-│   │   ├── setup-workspace/
-│   │   ├── learn-integrations/
-│   │   ├── learn-projects/
-│   │   ├── learn-skills/
-│   │   ├── learn-nexus/
-│   │   ├── close-session/
-│   │   └── ...more
-│   └── documentation/
-│       ├── framework-overview.md
-│       └── product-overview.md
+│   │   ├── orchestrator.md         # Behavior rules, routing
+│   │   └── nexus-loader.py         # Context injection
+│   └── skills/                     # System workflows
 │
-├── 01-memory/                      # CONTEXT PERSISTENCE
-│   ├── goals.md                    # User objectives
-│   ├── user-config.yaml            # Preferences
-│   ├── core-learnings.md           # Accumulated insights
-│   └── session-reports/            # Historical sessions
+├── 01-memory/
+│   ├── goals.md                    # User identity
+│   └── session-reports/            # History
 │
-├── 02-projects/                    # TEMPORAL WORK
-│   └── {ID}-{name}/                # User projects
-│       ├── 01-planning/
-│       │   ├── overview.md         # YAML metadata
-│       │   └── steps.md            # Task checkboxes
-│       ├── 02-resources/
-│       ├── 03-working/
-│       └── 04-outputs/
+├── 02-projects/                    # BUILD mode work
+│   └── {ID}-{name}/
+│       ├── 01-planning/            # 4 phases
+│       └── 04-outputs/             # Deliverables
 │
-├── 03-skills/                      # USER SKILLS (priority over system)
-│   └── {skill-name}/
-│       ├── SKILL.md                # YAML + workflow
-│       ├── references/
-│       └── scripts/
+├── 03-skills/                      # EXECUTE mode work
+│   └── {skill-name}/SKILL.md       # Workflows
 │
-└── 04-workspace/                   # USER CONTENT
-    ├── workspace-map.md            # Folder structure documentation
-    └── [Your folders]/
+└── 04-workspace/                   # User content
+    └── workspace-map.md            # Structure doc
 ```
+</section>
 
----
+<section id="execution-flow">
+## Execution Flow
 
-## 🗂️ YAML Metadata
-
-### Project YAML (overview.md)
-```yaml
----
-id: 10-website-redesign
-name: Website Redesign
-status: IN_PROGRESS
-description: Load when user mentions "website", "redesign"
-created: 2025-11-01
----
 ```
-**Note**: `tasks_total`, `tasks_completed`, `progress` auto-calculated from steps.md
-
-### Skill YAML (SKILL.md)
-```yaml
----
-name: weekly-status-report
-description: Load when user says "status report", "weekly update"
----
+Session Starts
+     ↓
+Hook Injects Context (<200ms)
+- orchestrator.md (behavior)
+- skills catalog (what's available)
+- active projects (current work)
+- user goals (identity)
+- dynamic instructions (what to do next)
+     ↓
+Claude Executes
+- If BUILD work → plan-project or execute-project
+- If EXECUTE work → load skill
+- If unclear → display menu
 ```
+</section>
 
----
+<section id="quick-decisions">
+## Quick Decisions
 
-## 📂 File Naming
+| User Says | You Do |
+|-----------|--------|
+| "Build X" / "Create X" | plan-project |
+| "Continue project 29" | execute-project |
+| "Send slack message" | Load skill |
+| "What can you do?" | Display menu |
+</section>
 
-| Type | Format | Example |
-|------|--------|---------|
-| Projects | `{ID}-{name}` | `10-website-redesign` |
-| Skills | `{skill-name}` | `weekly-status-report` |
-| Memory | Fixed names | `goals.md`, `user-config.yaml` |
+<section id="file-locations">
+## File Locations
 
-**Naming rules**: lowercase-with-hyphens, verb-based for skills
+| Need | Path |
+|------|------|
+| Behavior rules | `00-system/core/orchestrator.md` |
+| User identity | `01-memory/goals.md` |
+| Project work | `02-projects/{ID}-{name}/` |
+| Workflows | `03-skills/{name}/SKILL.md` |
+| User content | `04-workspace/` |
+</section>
 
----
-
-## 🔧 CLI Reference
+<section id="cli">
+## CLI Commands
 
 ```bash
-python 00-system/core/nexus-loader.py --startup    # Load session context
-python 00-system/core/nexus-loader.py --project ID # Load specific project
-python 00-system/core/nexus-loader.py --skill name # Load specific skill
+# Load project context
+python 00-system/core/nexus-loader.py --project {ID}
+
+# Load skill
+python 00-system/core/nexus-loader.py --skill {name}
+
+# Discover skills in category
+load-skill {category} --help
 ```
+</section>
 
-**Output**: JSON with `system_state`, `memory_content`, `instructions`, `metadata`
-
----
-
-**Version**: 4.0 | **Updated**: 2025-12-11
+</nexus-system-map>

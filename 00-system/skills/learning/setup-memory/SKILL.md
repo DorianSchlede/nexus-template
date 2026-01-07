@@ -1,6 +1,6 @@
 ---
 name: setup-memory
-description: "Configure Nexus memory with your role, goals, and preferences. Load when user wants to personalize the system or teach Nexus about themselves. Keywords: setup memory, personalize, configure, my goals, my role, about me, preferences. 8 min."
+description: "setup memory, my goals, my role, about me, personalize."
 onboarding: true
 priority: critical
 ---

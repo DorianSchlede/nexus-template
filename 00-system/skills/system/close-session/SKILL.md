@@ -1,6 +1,6 @@
 ---
 name: close-session
-description: Load when user says "done", "finish", "complete", "close", "wrap up", "end session", or any system skill/project completes
+description: "done, finish, close, wrap up, end session."
 ---
 
 # Close Session

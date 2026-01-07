@@ -1,6 +1,6 @@
 ---
 name: setup-workspace
-description: "Organize your 04-workspace/ folder structure. Load when user mentions: setup workspace, organize folders, folder structure, configure workspace, my files, file organization, where to put files, workspace setup, directories, storage. 5-8 min."
+description: "setup workspace, organize folders, where to put files."
 onboarding: true
 priority: high
 ---

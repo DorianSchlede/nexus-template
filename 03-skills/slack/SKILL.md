@@ -1,6 +1,6 @@
 ---
 name: slack
-description: Complete Slack integration skill. Load when user wants to send messages, search Slack, manage channels, list users, upload files, add reactions, set reminders, or interact with Slack workspace.
+description: "send slack message, search slack, list channels, upload to slack."
 version: "1.1"
 ---
 

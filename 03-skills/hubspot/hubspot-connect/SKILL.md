@@ -1,6 +1,6 @@
 ---
 name: hubspot-connect
-description: "Connect to HubSpot CRM for contact, company, deal, and engagement management. Load when user mentions 'hubspot', 'crm', 'contacts', 'companies', 'deals', 'list contacts', 'create contact', 'search deals', or any HubSpot CRM operations. Meta-skill that validates config, discovers CRM objects, and routes to appropriate operations."
+description: "hubspot, crm, contacts, companies, deals."
 ---
 
 # HubSpot Connect

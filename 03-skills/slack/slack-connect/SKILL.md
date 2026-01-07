@@ -1,6 +1,6 @@
 ---
 name: slack-connect
-description: Connect to Slack workspace for messaging and channel management. Load when user mentions 'slack', 'connect slack', 'slack message', 'slack channel', 'send to slack', or any Slack operations. Meta-skill that validates config, discovers workspace, and routes to appropriate operations.
+description: "slack, connect slack, slack message, send to slack."
 ---
 
 # Slack Connect

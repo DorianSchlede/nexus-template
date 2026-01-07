@@ -16,7 +16,7 @@ from urllib.parse import urlencode
 
 
 SCRIPT_DIR = Path(__file__).parent
-PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent.parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # 03-skills/slack/slack-master/scripts -> strategy-nexus
 ENV_FILE = PROJECT_ROOT / ".env"
 BASE_URL = "https://slack.com/api"
 

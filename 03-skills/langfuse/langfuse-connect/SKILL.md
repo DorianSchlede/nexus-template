@@ -1,6 +1,6 @@
 ---
 name: langfuse-connect
-description: "Complete Langfuse integration (traces, observations, sessions, scores, models). Load when user mentions 'langfuse', 'traces', 'observations', 'llm tracing', 'observability', 'langfuse scores', 'langfuse sessions', 'list traces', 'get trace'."
+description: "langfuse, traces, observations, llm tracing."
 ---
 
 # Langfuse Connect
