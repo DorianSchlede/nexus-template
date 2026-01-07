@@ -302,11 +302,13 @@ research-pipeline/
    - Answer: Unchanged. Only Phase 1 (planning) merges into plan-project.
    - `execute-research-project` → `analyze-research-project` → `synthesize-research-project`
 
-### Open Questions
+### Open Questions (ALL RESOLVED in v2.1)
 - [x] Should scaffold_integration.py move to plan-project? → **NO, keep in add-integration, call via reference**
-- [x] How to handle type-specific plan.md structure? → **Type-specific reference docs**
-- [ ] Should plan-project auto-detect type from user input? (e.g., "integrate Slack" → Integration)
-- [ ] Should type selection happen before or after mental model selection?
+- [x] How to handle type-specific plan.md structure? → **Type-specific templates in types/{type}/ folders**
+- [x] Should plan-project auto-detect type from user input? → **YES, semantic matching from _type.yaml descriptions**
+- [x] Should type selection happen before or after mental model selection? → **BEFORE, but mental models run AFTER discovery**
+- [x] How to preserve context across compaction? → **02-discovery.md MANDATORY + resume-context.md dynamic updates**
+- [x] How to prevent AI forgetting to return from sub-skills? → **Steps are ENFORCEMENT MECHANISM**
 
 ---
 
@@ -326,4 +328,451 @@ This means plan-project handles **discovery and configuration**, not execution.
 
 ---
 
+## Kiro Spec-Driven Development Patterns (NEW DISCOVERY)
+
+**Source**: Amazon's Kiro IDE - battle-tested at scale
+
+### What Kiro Does (3 Phases)
+
+| Phase | Artifact | Key Features |
+|-------|----------|--------------|
+| **Requirements** | `requirements.md` | EARS patterns, INCOSE quality rules, iterate until approved |
+| **Design** | `design.md` | Research → Design → Correctness Properties → Testing Strategy |
+| **Tasks** | `tasks.md` | Coding tasks only, property tests as sub-tasks, checkpoints |
+
+### EARS Patterns (6 Requirement Templates)
+
+Every requirement follows exactly ONE pattern:
+
+1. **Ubiquitous**: THE `<system>` SHALL `<response>`
+2. **Event-driven**: WHEN `<trigger>`, THE `<system>` SHALL `<response>`
+3. **State-driven**: WHILE `<condition>`, THE `<system>` SHALL `<response>`
+4. **Unwanted**: IF `<condition>`, THEN THE `<system>` SHALL `<response>`
+5. **Optional**: WHERE `<option>`, THE `<system>` SHALL `<response>`
+6. **Complex**: [WHERE] [WHILE] [WHEN/IF] THE `<system>` SHALL `<response>`
+
+### INCOSE Quality Rules
+
+**Clarity**: Active voice, no vague terms, no pronouns, consistent terminology
+**Testability**: Explicit conditions, measurable criteria, one thought per requirement
+**Completeness**: No escape clauses, no absolutes, solution-free
+
+### Correctness Properties
+
+Universal quantifications for property-based testing:
+- Each property has "for all" or "for any" statement
+- Each property references requirements it validates
+- Enables property-based testing (not just example-based)
+
+### Task Patterns
+
+**Checkpoints**: `- [ ] **CHECKPOINT**: Verify X works, ask user if questions arise`
+**Optional marking**: `- [ ]* Write unit tests (optional)` - `*` postfix
+**No standalone test phases**: Tests are sub-tasks of implementation
+**Reference format**: `- [ ] Implement X **[REQ-2]**`
+
+### How We Adopt This
+
+| Pattern | Adoption | Types |
+|---------|----------|-------|
+| EARS requirements | Full | Build, Skill |
+| INCOSE quality rules | Full | Build, Skill |
+| Correctness properties | Full | Build, Skill |
+| Checkpoint tasks | Full | ALL types |
+| Optional `*` marking | Full | ALL types |
+| Task references | Full | ALL types |
+
+**Rationale**: Build/Skill produce testable code → need formal requirements. Other types don't produce code → checkpoints and optional marking still useful.
+
+---
+
+## Create-Skill Skill Analysis (COMPLETE)
+
+### Location
+`00-system/skills/skill-dev/create-skill/`
+
+### What It Does
+1. **Pre-flight check**: Suggests 'learn skills' tutorial for first-time users
+2. **Anti-pattern detection**: Identifies when repetitive items should be skills
+3. **Skill creation guidance**: Provides SKILL.md format, bundled resources structure
+4. **Scripts for validation**: init_skill.py, quick_validate.py, package_skill.py
+
+### Key Files
+```
+create-skill/
+├── SKILL.md                    # Skill creation guidance
+├── scripts/
+│   ├── init_skill.py           # Scaffold new skill structure
+│   ├── package_skill.py        # Package for distribution
+│   ├── quick_validate.py       # Fast validation
+│   └── validate_for_notion.py  # Notion export validation
+└── references/
+    ├── description-guide.md    # How to write descriptions
+    ├── error-scenarios.md      # Common errors
+    ├── naming-guidelines.md    # Naming conventions
+    ├── output-patterns.md      # Output format patterns
+    ├── skill-format-specification.md  # Full format spec
+    ├── splitting-large-skills.md      # When to split skills
+    └── workflows.md            # Workflow patterns
+```
+
+### Key Workflow Features to Preserve
+1. **Skill-worthiness criteria** - 3-criteria framework for when to create skills
+2. **Anatomy structure** - SKILL.md + scripts/ + references/ + assets/
+3. **Degrees of freedom** - High/Medium/Low freedom based on task fragility
+4. **Conciseness principle** - Only add what Claude doesn't already know
+
+### Integration with Router
+- Route type "skill" → `create-skill` skill
+- Skill load command: `python 00-system/core/nexus-loader.py --skill create-skill`
+- Entry mode: `from_router`
+
+---
+
+## COMPREHENSIVE DEPENDENCY ANALYSIS
+
+### Current State vs Architecture v2.2
+
+| Component | Current State | Architecture v2.2 Target | Gap |
+|-----------|---------------|--------------------------|-----|
+| **plan-project/SKILL.md** | 370 lines, old workflow | Router-only pattern | MAJOR rewrite |
+| **init_project.py** | 6 types, schema v1.0 | 8 types, schema v2.0 | Add skill type, overview.md |
+| **Templates folder** | `scripts/templates/` (6 files) | `templates/types/` (8×5 files) | NEW structure |
+| **resume-context.md schema** | v1.0 (no sub_skill) | v2.0 (sub_skill tracking) | ADD fields |
+| **Type detection** | Keyword-based (--type arg) | Semantic (_type.yaml) | NEW approach |
+| **Mental models** | Hardcoded in workflows.md | Dynamic via script | EXISTS |
+| **add-integration** | Standalone skill | Sub-skill of router | ADD entry_mode |
+| **create-research-project** | Standalone skill | Sub-skill of router | ADD entry_mode |
+| **create-skill** | Standalone skill | Sub-skill of router | ADD entry_mode |
+| **SessionStart hook** | No sub_skill support | Sub_skill resume | ADD handling |
+
+---
+
+## FILES TO MODIFY (Complete List)
+
+### Core Skill Files (7 files)
+| File | Changes |
+|------|---------|
+| `00-system/skills/projects/plan-project/SKILL.md` | **REWRITE** - Router logic only |
+| `00-system/skills/projects/plan-project/scripts/init_project.py` | ADD: --type skill, schema v2.0 |
+| `00-system/skills/projects/plan-project/references/workflows.md` | **REWRITE** - Template flow |
+| `00-system/skills/projects/plan-project/references/project-types.md` | ADD: skill type |
+| `00-system/skills/system/add-integration/SKILL.md` | ADD: entry_mode check |
+| `03-skills/research-pipeline/orchestrators/create-research-project/SKILL.md` | ADD: entry_mode |
+| `00-system/skills/skill-dev/create-skill/SKILL.md` | ADD: entry_mode check |
+
+### Hook Files (1 file)
+| File | Changes |
+|------|---------|
+| `.claude/hooks/session_start.py` | ADD: sub_skill field reading & routing |
+
+---
+
+## FILES TO CREATE (Complete List)
+
+### Template Structure (40 files: 8 types × 5 files)
+
+```
+plan-project/templates/types/
+├── build/
+│   ├── _type.yaml        # Semantic description, inline discovery
+│   ├── overview.md       # Overview template
+│   ├── discovery.md      # EARS requirements (Build type)
+│   ├── plan.md           # Correctness Properties section
+│   └── steps.md          # Checkpoint tasks
+├── integration/
+│   ├── _type.yaml        # Routes to add-integration skill
+│   ├── overview.md
+│   ├── discovery.md      # API discovery output format
+│   ├── plan.md
+│   └── steps.md
+├── research/
+│   ├── _type.yaml        # Routes to create-research-project skill
+│   ├── overview.md
+│   ├── discovery.md      # RQ + extraction schema output
+│   ├── plan.md
+│   └── steps.md
+├── strategy/
+│   ├── _type.yaml        # Inline discovery, decision frameworks
+│   ├── overview.md
+│   ├── discovery.md
+│   ├── plan.md
+│   └── steps.md
+├── content/
+│   ├── _type.yaml        # Inline discovery, creative brief
+│   ├── overview.md
+│   ├── discovery.md
+│   ├── plan.md
+│   └── steps.md
+├── process/
+│   ├── _type.yaml        # Inline discovery, workflow optimization
+│   ├── overview.md
+│   ├── discovery.md
+│   ├── plan.md
+│   └── steps.md
+├── skill/
+│   ├── _type.yaml        # Routes to create-skill skill
+│   ├── overview.md
+│   ├── discovery.md      # EARS requirements (Skill type)
+│   ├── plan.md           # Correctness Properties section
+│   └── steps.md
+└── generic/
+    ├── _type.yaml        # Minimal inline discovery
+    ├── overview.md
+    ├── discovery.md
+    ├── plan.md
+    └── steps.md
+```
+
+### Reference Files (5 files)
+| File | Purpose |
+|------|---------|
+| `references/routing-logic.md` | How router works, bash commands |
+| `references/type-detection.md` | Semantic matching guide |
+| `references/entry-mode-contract.md` | Sub-skill data contract |
+| `references/ears-patterns.md` | EARS requirement templates |
+| `references/incose-rules.md` | INCOSE quality rules |
+
+---
+
+## EXTERNAL SYSTEM DEPENDENCIES
+
+| System | Used By | Notes |
+|--------|---------|-------|
+| **WebSearch** | Integration discovery | API doc lookup |
+| **paper-search skill** | Research discovery | 9 academic APIs |
+| **create-skill skill** | Skill discovery | Skill scaffolding |
+| **mental-models skill** | ALL types | 59 models, 12 categories |
+| **select_mental_models.py** | Dynamic loading | Already exists |
+| **SessionStart hook** | Resume flow | Sub_skill routing needed |
+| **nexus-loader.py** | Sub-skill loading | Already supports --skill |
+
+---
+
+## SUB-SKILL ROUTING TABLE
+
+| Type | Discovery Method | Skill | Load Command |
+|------|------------------|-------|--------------|
+| **build** | Inline | - | - |
+| **integration** | Skill | add-integration | `python 00-system/core/nexus-loader.py --skill add-integration` |
+| **research** | Skill | create-research-project | `python 00-system/core/nexus-loader.py --skill create-research-project` |
+| **strategy** | Inline | - | - |
+| **content** | Inline | - | - |
+| **process** | Inline | - | - |
+| **skill** | Skill | create-skill | `python 00-system/core/nexus-loader.py --skill create-skill` |
+| **generic** | Inline | - | - |
+
+---
+
+## ENTRY MODE CONTRACT
+
+When router calls a sub-skill:
+
+### Router Passes:
+```yaml
+entry_mode: from_router
+project_path: "02-projects/XX-name/"
+```
+
+### Sub-Skill MUST:
+1. Check `entry_mode` at workflow start
+2. Skip project creation steps if `entry_mode == from_router`
+3. Use provided `project_path` for file operations
+4. Write discovery findings to `{project_path}/01-planning/02-discovery.md`
+5. Return `discovery_output` as structured YAML/JSON
+6. NOT generate prose - router handles plan.md population
+
+### Sub-Skill Returns:
+```yaml
+discovery_output:
+  # Structured data specific to skill type
+  ...
+```
+
+---
+
+## UPDATED RISKS & MITIGATIONS
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Breaking existing projects | Medium | High | Migration script for resume-context.md |
+| AI forgetting sub-skill return | HIGH | High | **Steps as enforcement mechanism** |
+| Template explosion (45 files) | Medium | Medium | Use template inheritance where possible |
+| SessionStart hook complexity | Medium | High | Incremental changes, test thoroughly |
+| Type detection ambiguity | Low | Medium | Clear semantic descriptions in _type.yaml |
+| Entry mode not checked | Medium | High | Deprecation notices in skills |
+
+---
+
+## RESOLVED OPEN QUESTIONS (v2.2)
+
+| Question | Resolution |
+|----------|------------|
+| Does create-skill skill exist? | **YES** - at `00-system/skills/skill-dev/create-skill/` |
+| Where do type-specific workflows live? | `templates/types/{type}/` folders |
+| How do deprecated skills redirect? | Auto-invoke plan-project with deprecation notice |
+| What happens to Phase 2/3 of research? | Unchanged - only Phase 1 merges |
+| Should type detection use keywords? | **NO** - semantic matching from description |
+| How to handle mental model timing? | AFTER discovery, BEFORE finalization |
+| How to prevent AI forgetting returns? | Steps are ENFORCEMENT MECHANISM |
+| Should init_project.py change? | ADD: schema v2.0, sub_skill fields |
+
+---
+
+## DETAILED GAP ANALYSIS: Current SKILL.md vs Architecture v2.2
+
+### Section-by-Section Comparison
+
+| Current SKILL.md Section | Architecture v2.2 Target | Gap Type | Action Required |
+|--------------------------|-------------------------|----------|-----------------|
+| **Onboarding Awareness** (lines 6-40) | Keep | PRESERVE | No change needed |
+| **Critical Execution Requirements** (43-82) | Router pattern | REWRITE | Replace with router sequence |
+| **Two Modes** (102-114) | Keep but simplify | MODIFY | Mode detection stays, workflow refs change |
+| **Mode Detection Logic** (118-135) | Keep | PRESERVE | No change needed |
+| **Quick Start / One True Workflow** (138-171) | Router pattern | REWRITE | Replace with template-based flow |
+| **Mental Models Selection** (175-242) | Keep but move timing | MODIFY | Run AFTER discovery, not during plan.md |
+| **Dependency Research** (245-268) | Integrated into discovery | ABSORB | Move to discovery.md templates |
+| **Example Interaction Flow** (272-293) | Update for new flow | MODIFY | New example with router pattern |
+| **Resources** (296-310) | Expand with templates | MODIFY | Add templates/types/ structure |
+| **Error Handling** (314-337) | Keep | PRESERVE | No change needed |
+| **Why This Design** (340-367) | Keep rationale | PRESERVE | No change needed |
+
+### Critical Structural Changes
+
+| Current Structure | v2.2 Structure | Migration Path |
+|-------------------|----------------|----------------|
+| Single workflow in SKILL.md | Router + template references | Split into router logic + templates |
+| `scripts/templates/` (6 files) | `templates/types/` (40 files) | Create new structure, deprecate old |
+| Mental models in plan.md step | Mental models after discovery | Resequence workflow |
+| No type-specific discovery | discovery.md per type | Create 8 discovery templates |
+| No sub-skill routing | _type.yaml with skill reference | Add routing table |
+
+### Lines to KEEP (Copy Forward)
+
+| Line Range | Content | Reason |
+|------------|---------|--------|
+| 1-4 | YAML frontmatter | Identity |
+| 6-40 | Onboarding awareness | UX quality |
+| 118-135 | Mode detection logic | Still valid |
+| 314-337 | Error handling | Still valid |
+| 340-367 | Why this design | Philosophy |
+
+### Lines to REWRITE
+
+| Line Range | Current Content | New Content |
+|------------|-----------------|-------------|
+| 43-82 | Old critical requirements | Router pattern requirements |
+| 138-171 | One true workflow | Template-based workflow |
+| 175-242 | Mental models (during plan) | Mental models (after discovery) |
+| 272-293 | Old example flow | Router pattern example |
+| 296-310 | Resources section | Expanded with templates |
+
+### New Sections to ADD
+
+| Section | Purpose | Content Source |
+|---------|---------|----------------|
+| **Router Logic** | Core decision tree | architecture-v2.md §Full Flow |
+| **Type Detection** | Semantic matching | architecture-v2.md §_type.yaml |
+| **Sub-Skill Loading** | Bash commands | architecture-v2.md §Sub-Skill Routing |
+| **Discovery Sequence** | BEFORE mental models | architecture-v2.md §The Sequence |
+| **Template References** | Type folder structure | architecture-v2.md §Directory Structure |
+| **Entry Mode Contract** | For sub-skills | discovery.md §Entry Mode Contract |
+
+---
+
+## KIRO/EARS/INCOSE RECONCILIATION
+
+### Already Integrated in architecture-v2.md v2.2
+
+| Pattern | Location in architecture-v2.md | Status |
+|---------|--------------------------------|--------|
+| EARS Patterns | §EARS Requirements Patterns | ✅ Complete |
+| INCOSE Quality Rules | §EARS Requirements Patterns | ✅ Complete |
+| Correctness Properties | §Correctness Properties | ✅ Complete |
+| Checkpoint Tasks | §Task Patterns | ✅ Complete |
+| Optional `*` marking | §Task Patterns | ✅ Complete |
+| Task References | §Task Patterns | ✅ Complete |
+
+### Application Matrix
+
+| Project Type | EARS Requirements | Correctness Properties | Checkpoints | Optional Tasks |
+|--------------|-------------------|------------------------|-------------|----------------|
+| **build** | YES (mandatory) | YES (mandatory) | YES | YES |
+| **skill** | YES (mandatory) | YES (mandatory) | YES | YES |
+| **integration** | NO (API discovery only) | NO | YES | YES |
+| **research** | NO (RQ/schema only) | NO | YES | YES |
+| **strategy** | NO (decisions only) | NO | YES | YES |
+| **content** | NO (creative brief) | NO | YES | YES |
+| **process** | NO (workflow only) | NO | YES | YES |
+| **generic** | NO | NO | YES | YES |
+
+### Template Implications
+
+For **build** and **skill** types, the discovery.md template MUST include:
+```markdown
+## Requirements (EARS Format)
+
+### Functional Requirements
+**REQ-1**: [EARS pattern]
+**REQ-2**: [EARS pattern]
+
+### Non-Functional Requirements
+**REQ-NF-1**: [EARS pattern]
+
+### Quality Checklist
+- [ ] All requirements use EARS patterns
+- [ ] No vague terms
+- [ ] Each requirement independently testable
+```
+
+For **build** and **skill** types, the plan.md template MUST include:
+```markdown
+## Correctness Properties
+
+**Property 1**: [Universal quantification]
+**Validates**: REQ-X, REQ-Y
+
+**Property 2**: [Universal quantification]
+**Validates**: REQ-Z
+```
+
+---
+
+## IMPLEMENTATION ORDER (RECOMMENDED)
+
+Based on dependency analysis, implement in this order:
+
+### Phase 2A: Foundation (No Dependencies)
+1. Create `templates/types/` directory structure
+2. Create _type.yaml for all 8 types
+3. Create generic templates (overview, discovery, plan, steps)
+
+### Phase 2B: Type-Specific Templates (Depends on 2A)
+4. Create build type templates (with EARS/INCOSE)
+5. Create skill type templates (with EARS/INCOSE)
+6. Create inline discovery templates (strategy, content, process, generic)
+7. Create sub-skill routing templates (integration, research)
+
+### Phase 2C: References (Depends on 2A)
+8. Create routing-logic.md
+9. Create entry-mode-contract.md
+10. Create ears-patterns.md and incose-rules.md
+
+### Phase 3: SKILL.md Rewrite (Depends on 2A, 2B, 2C)
+11. Rewrite SKILL.md with router pattern
+12. Update workflows.md references
+
+### Phase 4: Sub-Skill Updates (Depends on Phase 3)
+13. Add entry_mode to add-integration
+14. Add entry_mode to create-research-project
+15. Add entry_mode to create-skill
+
+### Phase 5: Testing (Depends on Phase 4)
+16. Test all 8 types through router
+17. Test sub-skill entry/return
+18. Test resume-context.md updates
+
+---
+
+*This discovery document is MANDATORY output. It preserves intelligence across compaction.*
 *Auto-populate 03-plan.md Dependencies section from findings above*

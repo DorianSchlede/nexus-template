@@ -1,64 +1,152 @@
 # Improve Plan-Project Skill - Plan
 
 **Last Updated**: 2026-01-07
-**Status**: REVISED after stakeholder review
+**Status**: REVISED v2.3 - KIRO/EARS/INCOSE Applied
+**Project Type**: Build
 
 ---
 
 ## Context
 
 **Load Before Reading**:
-- `01-planning/01-overview.md` - Purpose and success criteria
-- `01-planning/02-discovery.md` - Full analysis of add-integration and research-pipeline
-- `02-resources/revised-architecture.md` - **CURRENT** architecture (supersedes others)
-- `02-resources/architecture-decision.md` - Original router pattern decision
-- `02-resources/mental-models-analysis.md` - Mental model injection timing
+- `02-resources/architecture-v2.md` - **SINGLE SOURCE OF TRUTH v2.2**
+- `02-resources/KIRO-spec.md` - EARS patterns, INCOSE rules, task patterns
+- `01-planning/02-discovery.md` - Full analysis of dependencies
+
+**Critical Insight**: Steps are the ONLY enforcement mechanism. AI will forget to return from sub-skills.
 
 ---
 
-## Approach: MANDATORY Router + Template-First
+## Requirements (EARS Format)
 
-**Decision**: plan-project is the ONLY way to create projects. Templates define types.
+### Functional Requirements
+
+**REQ-1**: THE plan-project skill SHALL be the mandatory router for all project creation in Nexus.
+
+**REQ-2**: WHEN a user requests project creation, THE router SHALL detect project type by semantic matching against _type.yaml descriptions.
+
+**REQ-3**: WHEN project type is detected, THE router SHALL create project structure using init_project.py with the detected type.
+
+**REQ-4**: WHEN project type requires sub-skill discovery (integration, research, skill), THE router SHALL load the sub-skill via explicit bash command: `python 00-system/core/nexus-loader.py --skill {skill-name}`.
+
+**REQ-5**: WHEN project type uses inline discovery (build, strategy, content, process, generic), THE router SHALL use the discovery.md template from `templates/types/{type}/`.
+
+**REQ-6**: THE router SHALL execute discovery BEFORE mental models in the workflow sequence.
+
+**REQ-7**: WHEN discovery completes, THE router SHALL load mental models dynamically via `python 00-system/mental-models/scripts/select_mental_models.py`.
+
+**REQ-8**: WHEN mental models identify gaps AND rediscovery_round is less than 2, THE router SHALL trigger re-discovery for identified gaps.
+
+**REQ-9**: THE router SHALL write all discovery findings to `{project_path}/01-planning/02-discovery.md`.
+
+**REQ-10**: THE router SHALL update resume-context.md at every phase transition with current_phase, current_section, and files_to_load.
+
+**REQ-11**: WHEN a sub-skill is loaded, THE router SHALL pass `entry_mode: from_router` and `project_path` to the sub-skill.
+
+**REQ-12**: WHEN entry_mode equals "from_router", THE sub-skill SHALL skip project creation steps and write findings to the provided project_path.
+
+**REQ-13**: WHILE a sub-skill is active, THE resume-context.md SHALL contain sub_skill, sub_skill_step, and sub_skill_project_path fields.
+
+**REQ-14**: WHEN sub-skill completes, THE router SHALL clear sub_skill fields from resume-context.md and verify 02-discovery.md has content.
+
+**REQ-15**: IF a user directly invokes add-integration, create-research-project, or create-skill, THEN THE skill SHALL display a deprecation notice and instruct the user to use plan-project instead.
+
+### Non-Functional Requirements
+
+**REQ-NF-1**: THE template structure SHALL use `templates/types/{type}/` folders containing exactly 5 files: _type.yaml, overview.md, discovery.md, plan.md, steps.md.
+
+**REQ-NF-2**: THE _type.yaml schema SHALL include: name, description, discovery.skill (optional), discovery.inline (boolean), outputs.discovery_file, mental_models.dynamic.
+
+**REQ-NF-3**: THE router SHALL support exactly 8 project types: build, integration, research, strategy, content, process, skill, generic.
+
+**REQ-NF-4**: FOR build and skill project types, THE discovery.md template SHALL include EARS-formatted requirements and INCOSE quality checklist.
+
+**REQ-NF-5**: FOR build and skill project types, THE plan.md template SHALL include Correctness Properties section with universal quantifications.
+
+### Quality Checklist
+
+- [x] All requirements use EARS patterns (THE/WHEN/WHILE/IF/WHERE)
+- [x] No vague terms (quickly, adequate, reasonable)
+- [x] No pronouns (it, them, they) - specific names used
+- [x] Each requirement independently testable
+- [x] Active voice throughout
+- [x] No escape clauses (where possible, if feasible)
+
+---
+
+## Correctness Properties
+
+*Correctness properties are universally quantified statements that must hold for all valid inputs. They enable property-based testing rather than just example-based testing.*
+
+**Property 1: Router Completeness**
+For all user requests containing project creation intent, the router either successfully detects a project type from the 8 supported types OR prompts the user to select a type explicitly.
+**Validates**: REQ-1, REQ-2
+
+**Property 2: Discovery Sequence Integrity**
+For any project creation workflow, the discovery phase completes and writes to 02-discovery.md BEFORE mental models are loaded.
+**Validates**: REQ-6, REQ-9
+
+**Property 3: Sub-Skill Contract Enforcement**
+For all sub-skill invocations from the router, the sub-skill receives entry_mode="from_router" AND project_path, AND the sub-skill writes discovery output to the provided path without creating a new project structure.
+**Validates**: REQ-11, REQ-12
+
+**Property 4: Resume Context Consistency**
+For any phase transition in the workflow, the resume-context.md file reflects the actual current state including current_phase, current_section, tasks_completed, and (if applicable) sub_skill fields.
+**Validates**: REQ-10, REQ-13, REQ-14
+
+**Property 5: Template Structure Invariant**
+For all 8 project types, the templates/types/{type}/ folder contains exactly 5 files (_type.yaml, overview.md, discovery.md, plan.md, steps.md) with valid content.
+**Validates**: REQ-NF-1, REQ-NF-3
+
+**Property 6: Type Detection Determinism**
+For any given user input describing a project, repeated semantic matching against _type.yaml descriptions produces the same project type detection result.
+**Validates**: REQ-2
+
+---
+
+## Approach: MANDATORY Router + Template-First + Discovery-First
+
+**Decision**: plan-project is the ONLY way to create projects. Discovery happens BEFORE mental models.
 
 ```
 plan-project (MANDATORY ROUTER)
     │
-    ├── Step 1: Type detection
-    │   └── Match keywords against templates/types/*/_type.yaml
+    ├── PHASE 1: SETUP [REQ-1, REQ-2, REQ-3]
+    │   ├── Type detection (semantic from _type.yaml)
+    │   ├── Create project structure (init_project.py)
+    │   └── Load templates from types/{type}/
     │
-    ├── Step 2: Mental models (ALWAYS, scaled by type)
-    │   └── Quick types: First Principles + Success Criteria
-    │   └── Complex types: Full suite with type-specific focus
+    ├── PHASE 2: DISCOVERY [REQ-4, REQ-5, REQ-9]
+    │   ├── Route to skill (integration→add-integration, research→create-research-project, skill→create-skill)
+    │   └── OR use inline discovery.md (build, strategy, content, process, generic)
     │
-    ├── Step 3: Create project structure
-    │   └── init_project.py --type X
-    │   └── Populate plan.md + steps.md from type templates
+    ├── PHASE 3: MENTAL MODELS [REQ-6, REQ-7]
+    │   ├── Load dynamically via select_mental_models.py
+    │   ├── Apply to discovery findings
+    │   └── Identify gaps for re-discovery
     │
-    ├── Step 4: Type-specific discovery
-    │   ├── IF has skill → Route (entry_mode=from_router)
-    │   └── ELSE → Use inline discovery.md template
+    ├── PHASE 4: RE-DISCOVERY [REQ-8]
+    │   └── Fill gaps (max 2 rounds)
     │
-    └── Returns project ready for execution
+    └── PHASE 5: FINALIZATION [REQ-10]
+        └── Merge into plan.md, generate steps.md, update resume-context.md
 ```
-
-**Why Mandatory Router?**
-1. **Consistency** - Mental models ALWAYS applied
-2. **Extensibility** - Add type = add folder (no code changes)
-3. **Single entry point** - Users learn one command
-4. **This is the product core** - Different tasks need different planning
 
 ---
 
-## Key Decisions (REVISED)
+## Key Decisions (REVISED v2.2)
 
-| Decision | Choice | Why |
-|----------|--------|-----|
-| Router | **MANDATORY** | No direct skill invocation for project creation |
-| Template structure | **types/{type}/ folder** | Self-contained, auto-discoverable |
-| Type detection | **From _type.yaml keywords** | Declarative, no code changes to add types |
-| Mental models | **Per-type in _type.yaml** | Different types need different depth |
-| Backwards compat | **NO** | Clean break, deprecate direct invocation |
-| Naming | **Keep "Project"** | Distinct enough from Claude/ChatGPT projects |
+| Decision | Choice | Rationale | Validates |
+|----------|--------|-----------|-----------|
+| Router | **MANDATORY** | Single entry point, consistent quality | REQ-1 |
+| Type detection | **SEMANTIC** | AI matches from description, no keywords | REQ-2 |
+| Discovery timing | **BEFORE mental models** | Can't stress-test what you don't understand | REQ-6 |
+| Discovery output | **02-discovery.md MANDATORY** | Preserves intelligence across compaction | REQ-9 |
+| Sub-skill loading | **EXPLICIT bash commands** | `nexus-loader.py --skill X` | REQ-4 |
+| Entry mode contract | **from_router + project_path** | Sub-skills don't create projects | REQ-11, REQ-12 |
+| Steps | **ENFORCEMENT MECHANISM** | AI forgets; steps don't | REQ-10 |
+| Template structure | **types/{type}/ folder** | Self-contained, auto-discoverable | REQ-NF-1 |
+| EARS/INCOSE | **Build + Skill types** | Testable requirements for code projects | REQ-NF-4, REQ-NF-5 |
 
 ---
 
@@ -66,88 +154,111 @@ plan-project (MANDATORY ROUTER)
 
 ```
 plan-project/
-├── SKILL.md                      # Simplified router logic
+├── SKILL.md                      # Router logic only
 ├── scripts/
 │   └── init_project.py           # Enhanced with type support
 │
 ├── templates/
 │   └── types/                    # ONE FOLDER PER TYPE
 │       ├── build/
-│       │   ├── _type.yaml        # Type metadata
-│       │   ├── plan.md
-│       │   ├── steps.md
-│       │   └── discovery.md
-│       ├── integration/          # Routes to add-integration
-│       ├── research/             # Routes to create-research-project
-│       ├── strategy/
-│       ├── content/
-│       ├── process/
-│       └── generic/
+│       │   ├── _type.yaml        # Semantic description, inline discovery
+│       │   ├── overview.md       # Overview template
+│       │   ├── discovery.md      # EARS requirements template [REQ-NF-4]
+│       │   ├── plan.md           # Correctness Properties template [REQ-NF-5]
+│       │   └── steps.md          # Checkpoint tasks template
+│       ├── integration/          # Routes to add-integration [REQ-4]
+│       ├── research/             # Routes to create-research-project [REQ-4]
+│       ├── strategy/             # Inline discovery
+│       ├── content/              # Inline discovery
+│       ├── process/              # Inline discovery
+│       ├── skill/                # Routes to create-skill [REQ-4]
+│       └── generic/              # Minimal inline discovery
 │
 └── references/
-    ├── type-detection.md         # Auto-generated from _type.yaml files
-    └── routing-logic.md
+    ├── routing-logic.md          # Router decision tree
+    ├── entry-mode-contract.md    # Sub-skill contract [REQ-11, REQ-12]
+    ├── ears-patterns.md          # EARS templates [REQ-NF-4]
+    └── incose-rules.md           # Quality rules [REQ-NF-4]
 ```
 
 ---
 
 ## Dependencies & Links
 
-**Files to Modify**:
-- `00-system/skills/projects/plan-project/SKILL.md` - Simplify to reference templates
-- `00-system/skills/system/add-integration/SKILL.md` - Add entry_mode handling
-- `03-skills/research-pipeline/orchestrators/create-research-project/SKILL.md` - Add entry_mode
+**Files to Modify** (8 files):
+| File | Changes | Validates |
+|------|---------|-----------|
+| `plan-project/SKILL.md` | Rewrite to router pattern | REQ-1, REQ-2, REQ-6 |
+| `plan-project/scripts/init_project.py` | Add skill type, schema v2.0 | REQ-3 |
+| `plan-project/references/workflows.md` | Rewrite for template flow | REQ-6 |
+| `plan-project/references/project-types.md` | Add skill type | REQ-NF-3 |
+| `add-integration/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
+| `create-research-project/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
+| `create-skill/SKILL.md` | Add entry_mode check | REQ-12, REQ-15 |
+| `.claude/hooks/session_start.py` | Add sub_skill routing | REQ-13 |
 
-**Files to Create**:
-- `plan-project/templates/types/build/_type.yaml` + templates
-- `plan-project/templates/types/integration/_type.yaml` + templates
-- `plan-project/templates/types/research/_type.yaml` + templates
-- `plan-project/templates/types/strategy/_type.yaml` + templates
-- `plan-project/templates/types/content/_type.yaml` + templates
-- `plan-project/templates/types/process/_type.yaml` + templates
-- `plan-project/templates/types/generic/_type.yaml` + templates
-- `plan-project/references/routing-logic.md`
+**Files to Create** (45 files):
+- 40 templates: 8 types × 5 files (_type.yaml, overview.md, discovery.md, plan.md, steps.md)
+- 5 references: routing-logic.md, entry-mode-contract.md, ears-patterns.md, incose-rules.md, type-detection.md
 
 **External Systems**:
 - WebSearch (integration API discovery)
 - paper-search skill (research paper discovery)
+- create-skill skill (skill scaffolding)
+- mental-models skill (dynamic model loading)
 
 ---
 
-## Implementation Phases
+## Sub-Skill Routing Table
 
-### Phase 1: Create Template Structure (~1 hr)
-- Create `templates/types/` directory structure
-- Write _type.yaml for each type
-- Write plan.md, steps.md, discovery.md for each type
-
-### Phase 2: Update plan-project SKILL.md (~30 min)
-- Simplify to reference templates
-- Add type detection from _type.yaml keywords
-- Add routing logic
-
-### Phase 3: Update Specialized Skills (~30 min)
-- Add entry_mode to add-integration
-- Add entry_mode to create-research-project
-- Add deprecation notice for direct invocation
-
-### Phase 4: Testing (~30 min)
-- Test router → integration flow
-- Test router → research flow
-- Test all inline types (build, strategy, etc.)
-
-**Total: ~2.5 hours AI time**
+| Type | Discovery | Skill | Load Command | Validates |
+|------|-----------|-------|--------------|-----------|
+| build | Inline | - | - | REQ-5 |
+| integration | Skill | add-integration | `python 00-system/core/nexus-loader.py --skill add-integration` | REQ-4 |
+| research | Skill | create-research-project | `python 00-system/core/nexus-loader.py --skill create-research-project` | REQ-4 |
+| strategy | Inline | - | - | REQ-5 |
+| content | Inline | - | - | REQ-5 |
+| process | Inline | - | - | REQ-5 |
+| skill | Skill | create-skill | `python 00-system/core/nexus-loader.py --skill create-skill` | REQ-4 |
+| generic | Inline | - | - | REQ-5 |
 
 ---
 
-## Open Questions (RESOLVED)
+## Testing Strategy
 
-- [x] Should plan-project auto-detect type? → Yes, from _type.yaml keywords
-- [x] Mental model timing? → Before discovery, scaled by type
-- [x] Template format? → Markdown with YAML frontmatter
-- [x] How to pass mental model outputs to specialized skills? → Via entry_mode contract
-- [x] Backwards compatibility? → NO, mandatory router only
-- [x] Rename "project"? → NO, keep as is
+### Property-Based Tests
+
+Each correctness property maps to a property-based test:
+
+| Property | Test Strategy | Library |
+|----------|---------------|---------|
+| P1: Router Completeness | Fuzz test with varied user inputs, verify type detection | hypothesis (Python) |
+| P2: Discovery Sequence | Verify 02-discovery.md timestamp < mental model load time | - |
+| P3: Sub-Skill Contract | Mock sub-skill, verify entry_mode and project_path passed | pytest |
+| P4: Resume Context | State machine verification across phase transitions | - |
+| P5: Template Structure | File existence and schema validation | pytest |
+| P6: Type Detection | Determinism test with same input repeated | hypothesis |
+
+### Unit Tests
+
+| Component | Test Cases |
+|-----------|------------|
+| Type detection | 8 types × 3 synonyms each |
+| _type.yaml parsing | Valid/invalid schema |
+| Entry mode handling | from_router vs direct invocation |
+| Resume context updates | Each phase transition |
+
+---
+
+## Open Questions (ALL RESOLVED)
+
+| Question | Resolution | Validates |
+|----------|------------|-----------|
+| Router mandatory? | YES - single entry point | REQ-1 |
+| Type detection method? | Semantic from _type.yaml description | REQ-2 |
+| Discovery timing? | BEFORE mental models | REQ-6 |
+| Sub-skill contract? | entry_mode + project_path | REQ-11, REQ-12 |
+| EARS/INCOSE scope? | Build + Skill types only | REQ-NF-4, REQ-NF-5 |
 
 ---
 

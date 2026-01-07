@@ -1113,35 +1113,35 @@ def _load_state_template(template_name: str, **kwargs) -> str:
 
 
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
-    """STATE 1: Onboarding incomplete - gently suggest completing setup."""
+    """STARTUP STATE 1: Onboarding incomplete - gently suggest completing setup."""
     pending = context.get("pending_onboarding", [])
     pending_list = "\n".join(f"- {skill}" for skill in pending[:3])
-    return _load_state_template("state_onboarding_incomplete", pending_list=pending_list)
+    return _load_state_template("startup_onboarding_incomplete", pending_list=pending_list)
 
 
 def _template_active_projects(context: Dict[str, Any]) -> str:
-    """STATE 2: Active projects exist - highlight project continuations."""
+    """STARTUP STATE 2: Active projects exist - highlight project continuations."""
     projects = context.get("active_projects", [])[:2]  # Max 2
     project_list = "\n".join(
         f"- Project {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
         for p in projects
     )
-    return _load_state_template("state_active_projects", project_list=project_list)
+    return _load_state_template("startup_active_projects", project_list=project_list)
 
 
 def _template_workspace_modified(context: Dict[str, Any]) -> str:
-    """STATE 3: Workspace changes detected - suggest running update-workspace-map."""
-    return _load_state_template("state_workspace_modified")
+    """STARTUP STATE 3: Workspace changes detected - suggest running update-workspace-map."""
+    return _load_state_template("startup_workspace_modified")
 
 
 def _template_fresh_workspace(context: Dict[str, Any]) -> str:
-    """STATE 4: Fresh workspace (configured but no projects) - emphasize starting first project."""
-    return _load_state_template("state_fresh_workspace")
+    """STARTUP STATE 4: Fresh workspace (configured but no projects) - emphasize starting first project."""
+    return _load_state_template("startup_fresh_workspace")
 
 
 def _template_system_ready(context: Dict[str, Any]) -> str:
-    """STATE 5: System ready (fallback) - open-ended, ready for anything."""
-    return _load_state_template("state_system_ready")
+    """STARTUP STATE 5: System ready (fallback) - open-ended, ready for anything."""
+    return _load_state_template("startup_system_ready")
 
 
 def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
