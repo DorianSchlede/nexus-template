@@ -1,6 +1,6 @@
-# create-project Workflows
+# plan-project Workflows
 
-Complete workflows for both workspace setup and project creation modes.
+Complete workflows for workspace setup and router-based project creation.
 
 ---
 
@@ -15,18 +15,13 @@ Complete workflows for both workspace setup and project creation modes.
 - [Step WS-6: Completion Message](#step-ws-6-completion-message)
 - [Step WS-7: Auto-Trigger close-session](#step-ws-7-auto-trigger-close-session)
 
-### Project Creation Workflow
-- [Step 1: Initialize TodoList](#step-1-initialize-todolist)
-- [Step 2: Initial Discovery](#step-2-initial-discovery)
-- [Step 3: Validate Inputs](#step-3-validate-inputs)
-- [Step 4: Create Folder Structure](#step-4-create-folder-structure)
-- [Step 5: Fill overview.md](#step-5-fill-overviewmd-quick)
-- [Step 6: INTERACTIVE - plan.md](#step-6-️-interactive---planmd)
-- [Step 7: INTERACTIVE - steps.md](#step-7-️-interactive---stepsmd)
-- [Step 9: Update project-map.md](#step-9-update-project-mapmd)
-- [Step 10: Display Complete Structure](#step-10-display-complete-project-structure)
-- [Step 11: CRITICAL - Separate Session](#step-11-️-critical-instruction---separate-session)
-- [Step 12: Auto-Trigger close-session](#step-12-auto-trigger-close-session)
+### Project Creation Workflow (Router Pattern)
+- [Phase 1: Type Detection & Setup](#phase-1-type-detection--setup)
+- [Phase 2: Discovery](#phase-2-discovery)
+- [Phase 3: Mental Models](#phase-3-mental-models)
+- [Phase 4: Re-Discovery](#phase-4-re-discovery-if-needed)
+- [Phase 5: Finalization](#phase-5-finalization)
+- [Phase 6: Close Session](#phase-6-close-session)
 
 ---
 
@@ -140,13 +135,13 @@ touch User-Folders/{folder1}/.gitkeep User-Folders/{folder2}/.gitkeep ...
 
 **Display Confirmation**:
 ```markdown
-✅ Workspace Created!
+Workspace Created!
 
-📁 User-Folders/
-├── 📂 {folder1}/ ✓
-├── 📂 {folder2}/ ✓
-├── 📂 {folder3}/ ✓
-└── 📂 _archive/ ✓
+User-Folders/
+├── {folder1}/ ✓
+├── {folder2}/ ✓
+├── {folder3}/ ✓
+└── _archive/ ✓
 
 All folders created with .gitkeep files for git tracking.
 
@@ -180,7 +175,7 @@ Write updated `02-projects/project-map.md`.
 
 Display:
 ```markdown
-🎉 Workspace Setup Complete!
+Workspace Setup Complete!
 
 Your User-Folders/ structure is now ready based on your work context.
 
@@ -213,328 +208,458 @@ Auto-triggering close-session to save your workspace...
 
 [close-session workflow executes]
 
-✅ Session saved! Your workspace is ready.
+Session saved! Your workspace is ready.
 
-See you next time—ready to do real work! 🚀
+See you next time—ready to do real work!
 ```
 
 ---
 
-# Project Creation Workflow
+# Project Creation Workflow (Router Pattern)
 
-**Purpose**: Full collaborative project planning (20-30 minutes)
+**Purpose**: Full collaborative project planning with mandatory router.
 
-**When to use**: When `User-Folders/` exists and user wants to create a new project.
+**Time Estimate**: 20-30 minutes
+
+**Key Principle**: Discovery BEFORE Mental Models
 
 ---
 
-## Step 1: Initialize TodoList
+## Phase 1: Type Detection & Setup
 
-Create TodoWrite with all workflow steps:
+### Step 1.1: Initialize TodoList
+
+Create TodoWrite with router workflow phases:
 ```
-- [ ] Initial discovery
-- [ ] Validate inputs
-- [ ] Create folder structure
-- [ ] Fill overview.md
-- [ ] Interactive plan.md (with pause)
-- [ ] Interactive steps.md (with pause)
-- [ ] Update 02-projects/project-map.md
-- [ ] Display complete structure
-- [ ] Instruct separate session execution
-- [ ] Auto-trigger close-session
+- [ ] Type detection
+- [ ] Project setup (init_project.py)
+- [ ] Discovery (skill-based or inline)
+- [ ] Mental models (after discovery)
+- [ ] Re-discovery (if gaps found)
+- [ ] Finalization (plan.md, steps.md)
+- [ ] Update resume-context.md
+- [ ] Close session
 ```
 
-This creates transparency and allows progress tracking during project creation.
+### Step 1.2: Detect Project Type
 
-**Mark tasks complete as you finish each step throughout this workflow.**
+**Read all _type.yaml files**:
+```bash
+# AI reads templates/types/*/_type.yaml descriptions
+```
 
----
+**Semantic Matching**:
+- Compare user input against each type's description
+- Select best match OR ask user to choose if ambiguous
 
-## Step 2: Initial Discovery
+**Type Detection Table**:
 
-Ask user:
+| Type | Description Pattern | Discovery Method |
+|------|---------------------|------------------|
+| build | software, feature, tool, system | Inline |
+| integration | API, webhook, external service | Skill: add-integration |
+| research | papers, academic, systematic review | Skill: create-research-project |
+| strategy | business decision, planning, analysis | Inline |
+| content | marketing, documentation, creative | Inline |
+| process | workflow, automation, optimization | Inline |
+| skill | Nexus skill, automation capability | Skill: create-skill |
+| generic | anything else | Inline |
 
-**Question 1**: "What's this project about?" (1-2 sentences)
-- Capture user's response
-- Summarize understanding
+**If ambiguous**, ask user:
+```markdown
+I detected this could be a few different project types:
 
-**Question 2**: "What would you like to call this project?"
-- Suggest ID based on existing projects in 02-projects/project-map.md
-  - Example: If highest project ID is 05, suggest 06
-  - If no projects yet (only onboarding), suggest 05
-- Suggest name format: lowercase-with-hyphens
-- Example: "I'd suggest: `06-client-proposal-system`. Sound good?"
-- User confirms or provides alternative
+1. **Build** - Creating software/tools
+2. **Integration** - Connecting external APIs
 
-**Important**: Be conversational and collaborative, not robotic!
+Which type best matches what you're building?
+```
 
----
+### Step 1.3: Create Project Structure
 
-## Step 3: Validate Inputs
+```bash
+python 00-system/skills/projects/plan-project/scripts/init_project.py \
+  "Project Name" --type {detected_type} --path 02-projects
+```
 
-Check:
-- [ ] ID is numeric, zero-padded (00, 01, ..., 10, 11, ...)
-- [ ] Name is lowercase-with-hyphens format
-- [ ] Name is unique (check against 02-projects/project-map.md)
-- [ ] Project folder doesn't already exist in Projects/
-
-**If validation fails**:
-- Explain issue clearly
-- Suggest correction
-- Ask for revised input
-
-**If validation passes**:
-- Confirm: "Perfect! Creating project `{ID}-{name}`..."
-
----
-
-## Step 4: Create Folder Structure
-
-Create:
+**Output**:
 ```
 02-projects/{ID}-{name}/
 ├── 01-planning/
-│   ├── overview.md
-│   ├── plan.md
-│   └── steps.md
+│   ├── 01-overview.md     (from type template)
+│   ├── 02-discovery.md    (from type template)
+│   ├── 03-plan.md         (from type template)
+│   ├── 04-steps.md        (from type template)
+│   └── resume-context.md  (initialized)
 ├── 02-resources/
 ├── 03-working/
 └── 04-outputs/
 ```
 
-Confirm creation:
-```
-✓ Created Projects/{ID}-{name}/
-✓ Created /planning folder
-✓ Created /outputs folder
+### Step 1.4: Initialize Resume Context
+
+Write initial resume-context.md:
+```yaml
+---
+session_ids: ["{current_session_id}"]
+project_id: "{ID}-{name}"
+project_name: "{Human Readable Name}"
+current_phase: "planning"
+
+next_action: "plan-project"
+files_to_load:
+  - "01-planning/02-discovery.md"
+
+rediscovery_round: 0
+discovery_complete: false
+
+current_section: 1
+tasks_completed: 0
+---
 ```
 
 ---
 
-## Step 5: Fill overview.md (Quick)
+## Phase 2: Discovery
 
-Write `Projects/{ID}-{name}/planning/overview.md` with YAML frontmatter and basic content.
+**CRITICAL**: Discovery MUST complete before mental models.
 
-Confirm: "✓ overview.md created"
+### Check Discovery Method
 
----
+Read `templates/types/{type}/_type.yaml`:
 
-## Step 6: ⚠️ INTERACTIVE - plan.md
+```yaml
+discovery:
+  skill: add-integration  # If present → skill-based
+  inline: true            # If true → inline discovery
+```
 
-**Auto-Select Mental Models** (metadata-driven):
+### Skill-Based Discovery (integration, research, skill)
 
 ```bash
-python 00-system/mental-models/scripts/select_mental_models.py \
-  --project-type "{project_type}" \
-  --complexity "Medium"
+# Update resume-context.md
+current_skill: "add-integration"
+
+# Load skill normally
+python 00-system/core/nexus-loader.py --skill add-integration
 ```
 
-**Script Output Example:**
-```json
-{
-  "tier_1_always": [
-    {"name": "Socratic Questioning", "file": "socratic-questioning.md", "path": "..."},
-    {"name": "Devil's Advocate", "file": "devils-advocate.md", "path": "..."}
-  ],
-  "tier_2_recommended": [
-    {"name": "Design Thinking", "file": "design-thinking.md", "path": "..."},
-    {"name": "MVP Thinking", "file": "mvp-thinking.md", "path": "..."}
-  ],
-  "tier_3_available": [],
-  "files_to_load": ["path1", "path2", "path3", "path4"]
-}
+**Skill runs its workflow**:
+- add-integration: WebSearch for API docs, endpoint selection
+- create-research-project: Paper search, RQ definition
+- create-skill: Skill-worthiness check, scaffolding
+
+**Skill writes findings to**:
+```
+{project}/01-planning/02-discovery.md
 ```
 
-**Present Curated List to User:**
+**When skill completes**:
+```yaml
+# Clear skill from resume
+current_skill: ""
+discovery_complete: true
+```
+
+### Inline Discovery (build, strategy, content, process, generic)
+
+**Load discovery template**:
+```bash
+# Read templates/types/{type}/discovery.md
+```
+
+**Ask discovery questions interactively**:
+
+For **build** type (EARS requirements):
+```markdown
+Let's define the requirements for your project.
+
+**What should the system DO?**
+(I'll help format these as EARS requirements)
+
+Example: "The API should validate user input"
+→ THE API SHALL validate all user input before processing
+
+What's the first requirement?
+```
+
+For **strategy** type:
+```markdown
+Let's understand your strategic decision.
+
+1. What decision are you trying to make?
+2. What are the key constraints?
+3. Who are the stakeholders?
+4. What does success look like?
+```
+
+**Write answers to**:
+```
+{project}/01-planning/02-discovery.md
+```
+
+**Update resume**:
+```yaml
+discovery_complete: true
+```
+
+---
+
+## Phase 3: Mental Models
+
+**CRITICAL**: Run AFTER discovery, not before.
+
+### Step 3.1: Load Mental Models
+
+```bash
+python 00-system/mental-models/scripts/select_mental_models.py --format brief
+```
+
+### Step 3.2: AI Selects 2-3 Relevant Models
+
+Based on:
+- Discovery findings
+- Project type
+- Complexity
+
+**Present to user**:
+```markdown
+Based on your discovery findings, I recommend these mental models:
+
+1. **First Principles** - Strip assumptions, find fundamental truths
+   Good for: Your requirements involve novel patterns
+
+2. **Pre-Mortem** - Imagine failure before implementation
+   Good for: Identifying risks in your integration points
+
+Which would you like to apply? (or suggest others)
+```
+
+### Step 3.3: Load Selected Model Files
+
+```bash
+# Example
+Read: 00-system/mental-models/models/cognitive/first-principles.md
+Read: 00-system/mental-models/models/diagnostic/pre-mortem.md
+```
+
+### Step 3.4: Apply Models to Discovery
+
+**Key Insight**: Questions are INFORMED by discovery:
 
 ```markdown
-For your {project_type} project (Medium complexity), I'll apply these mental models:
+## First Principles (informed by discovery)
 
-✅ **Always Applied (Tier 1):**
-- Socratic Questioning (surface assumptions and test reasoning)
-- Devil's Advocate (identify risks and blind spots)
+Looking at your requirements from discovery:
+- REQ-1: THE system SHALL validate all inputs
+- REQ-2: WHEN validation fails, THE system SHALL return errors
 
-✅ **Recommended for {project_type} (Tier 2):**
-- Design Thinking (user-centered iterative problem solving)
-- MVP Thinking (build minimum viable version for rapid learning)
+**What assumptions are embedded here?**
+- Are you assuming all inputs come from trusted sources?
+- Is real-time validation always necessary?
 
-💡 **Also Available (Tier 3):**
-[List if any Tier 3 models available]
-
-These {X} models were auto-selected based on your project type and complexity.
-
-Want to add/remove any? Or proceed with these models?
+**What's the fundamental problem you're solving?**
 ```
 
-**Wait for User Confirmation**
+### Step 3.5: Capture Outputs
 
-**Load Selected Models** (progressive disclosure):
+- **Success criteria**: What must be true for success?
+- **Risks**: What could go wrong?
+- **Gaps**: What don't we know yet?
 
-```python
-# Use files_to_load from script output
-for file_path in script_output['files_to_load']:
-    Read(file_path)
-```
+**Update 03-plan.md** with mental model outputs.
 
-**Note:** Only 4-6 models loaded (~6K tokens) instead of all 30+ models (~15K tokens)!
+---
 
-**Elicitation Process**:
-1. Ask opening questions from selected mental model
-2. Listen to user responses
-3. Ask deepening and clarifying questions
-4. Probe on unclear areas
-5. Validate understanding
-6. Continue until comprehensive understanding
+## Phase 4: Re-Discovery (If Needed)
 
-**Collaborative Writing**:
-1. Draft plan.md based on elicitation
-2. Present draft to user
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🛑 MANDATORY PAUSE - DO NOT SKIP! 🛑
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-**STOP HERE** - User must review before proceeding!
+### Check for Gaps
 
 ```
-Here's the plan document based on our discussion:
-
-[Display plan.md content in full]
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Let's review this together. Does this capture everything?
-
-Take your time to read through. Let me know:
-- Does this accurately reflect what you need?
-- Is anything missing?
-- Should anything be changed or clarified?
-- Are you happy with this?
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-REQUIRED: Reply with your feedback, or say "this looks good" to proceed.
-
-DO NOT CONTINUE until user confirms satisfaction!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+IF gaps identified AND rediscovery_round < 2:
+    → Go to Step 4.1
+ELSE:
+    → Go to Phase 5
 ```
 
-**Iteration Loop**:
-- **IF** user provides feedback: Make changes, present updated version, pause again
-- **IF** user confirms: Write final version, proceed to Step 7
+### Step 4.1: Update Resume
 
----
-
-## Step 6: ⚠️ INTERACTIVE - plan.md
-
-Same collaborative process:
-1. Offer mental models
-2. User picks model(s)
-3. Elicitation process
-4. Draft plan.md
-5. MANDATORY PAUSE for user review
-6. Iteration until confirmed
-7. Write final version
-
----
-
-## Step 7: ⚠️ INTERACTIVE - steps.md
-
-Same collaborative process:
-1. Offer mental models
-2. User picks model(s)
-3. Elicitation process
-4. Draft steps.md with checkboxes
-5. MANDATORY PAUSE for user review
-6. Iteration until confirmed
-7. Write final version
-
----
-
-## Step 9: Update project-map.md
-
-Load `02-projects/project-map.md` and update:
-
-1. Count tasks from steps.md (total checkboxes)
-2. Add project entry to Active Projects section
-3. Update Current Focus section
-4. Update "Last Updated" timestamp
-
-Write updated file.
-
----
-
-## Step 10: Display Complete Project Structure
-
-Show user the complete structure:
-
+```yaml
+rediscovery_round: 1  # or 2
 ```
-✅ Project Created Successfully!
 
-📁 02-projects/{ID}-{name}/
-├── 📂 01-planning/
-│   ├── ✓ overview.md
-│   ├── ✓ plan.md
-│   └── ✓ steps.md
-├── 📂 02-resources/
-├── 📂 03-working/
-└── 📂 04-outputs/
+### Step 4.2: Focused Re-Discovery
 
----
+Only address identified gaps:
 
-Status: PLANNING
-Total Tasks: {X}
-Estimated Time: {from steps.md}
+```markdown
+Mental models identified these gaps:
+1. "What happens when the external API is unavailable?"
+2. "How do we handle rate limiting?"
 
----
+Let's fill in these gaps before finalizing the plan.
+```
 
-All planning documents are ready! 📋
+### Step 4.3: Return to Phase 3
+
+Re-apply mental models with new information.
+
+### If Max Rounds Reached
+
+```markdown
+## Open Questions
+
+After 2 discovery rounds, these remain unknown:
+- [ ] Exact rate limits for external API
+- [ ] Authentication token refresh timing
+
+Proceeding with known unknowns. Will validate during execution.
 ```
 
 ---
 
-## Step 11: ⚠️ CRITICAL INSTRUCTION - Separate Session
+## Phase 5: Finalization
 
-Display this message:
+### Step 5.1: Merge Into 03-plan.md
 
+Combine:
+- Discovery findings (from 02-discovery.md)
+- Mental model outputs (success criteria, risks)
+- Open questions / unknowns
+
+**Present to user**:
+```markdown
+Here's your complete project plan:
+
+[Display plan.md content]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REVIEW PAUSE
+
+Does this capture everything?
+- Any missing requirements?
+- Any risks not addressed?
+- Ready to proceed?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
-🎯 IMPORTANT: Context Management Best Practice
 
-This project is now fully planned and ready to execute.
+### Step 5.2: Finalize 04-steps.md
 
-To maintain clean context boundaries and better focus, please work
-on this project in a SEPARATE SESSION (not right now).
+Use steps.md template as base:
+- Fill in concrete tasks from discovery
+- Add checkpoint tasks every 3-5 steps
+- Reference requirements: `- [ ] Implement X **[REQ-2]**`
+
+**Present to user**:
+```markdown
+Here are your execution steps:
+
+[Display steps.md content]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REVIEW PAUSE
+
+Are these steps clear and complete?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### Step 5.3: Update Resume Context
+
+```yaml
+---
+current_phase: "execution"
+next_action: "execute-project"
+files_to_load:
+  - "01-planning/02-discovery.md"
+  - "01-planning/03-plan.md"
+  - "01-planning/04-steps.md"
+discovery_complete: true
+---
+```
+
+### Step 5.4: Display Completion
+
+```markdown
+Project Planning Complete!
+
+{ID}-{name}/
+├── 01-planning/
+│   ├── 01-overview.md ✓
+│   ├── 02-discovery.md ✓
+│   ├── 03-plan.md ✓
+│   ├── 04-steps.md ✓
+│   └── resume-context.md ✓
+├── 02-resources/
+├── 03-working/
+└── 04-outputs/
+
+Status: READY FOR EXECUTION
+Tasks: {X} total
+Type: {type}
+
+---
+
+To execute this project, say "continue project" in a new session.
+```
+
+---
+
+## Phase 6: Close Session
+
+### Step 6.1: Explain Separate Session
+
+```markdown
+IMPORTANT: Context Management
+
+This project is now planned and ready to execute.
+
+For clean context boundaries:
+1. Close this session now
+2. Return later and say "continue project {name}"
+3. execute-project will load your context
 
 Why separate sessions?
 - Clean mental context for execution
 - Better focus without planning overhead
-- Proper memory management (close-session preserves state)
-- Easier to pause and resume work
+- Proper memory management
 
----
-
-What to do next:
-
-1. Close this session: Say "done for now" or "close session"
-2. Return later: Load Nexus and say "continue working" or "work on {project-name}"
-3. System will resume: Loads your project and shows the first task
-
-This ensures your work sessions stay focused and organized!
-
----
-
-Ready to close this session?
+Ready to close?
 ```
 
-**Wait for user acknowledgment** before proceeding to Step 12.
-
----
-
-## Step 12: Trigger close-session
+### Step 6.2: Trigger close-session
 
 ```bash
 python 00-system/core/nexus-loader.py --skill close-session
 ```
-Then execute close-session workflow per SKILL.md
+
+---
+
+## Summary: Router Workflow Sequence
+
+```
+1. TYPE DETECTION
+   └── Semantic match against _type.yaml descriptions
+
+2. PROJECT SETUP
+   └── init_project.py with --type flag
+
+3. DISCOVERY (skill-based OR inline)
+   └── Writes to 02-discovery.md (MANDATORY)
+
+4. MENTAL MODELS (AFTER discovery)
+   └── Informed by discovery findings
+
+5. RE-DISCOVERY (if gaps, max 2 rounds)
+   └── Fill specific gaps
+
+6. FINALIZATION
+   └── Merge into plan.md, steps.md
+
+7. CLOSE SESSION
+   └── Save state, ready for execution
+```
+
+**Key Principle**: Discovery BEFORE Mental Models ensures informed questioning.
 
 ---
 
