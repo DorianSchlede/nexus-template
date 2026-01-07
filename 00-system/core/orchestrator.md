@@ -112,10 +112,13 @@ Smart routing does NOT apply:
 
 | Priority | Trigger | Action |
 |----------|---------|--------|
-| **0. Integration Exists** | "add/integrate [name]" where name is in `stats.configured_integrations` | Redirect to `{name}-connect` skill, explain it's already built |
-| **1. Skill Match** | Message matches any skill description in `metadata.skills` | Load skill → Execute workflow |
-| **2. Project Reference** | User mentions ANY project by name, ID, or number | **ALWAYS** load `execute-project` skill first |
-| **3. General** | No match | Respond naturally. For Nexus questions → `00-system/documentation/product-overview.md` |
+| **1. System Skill** | Match `00-system/skills/` skill triggers | Load system skill (core utilities) |
+| **2. User Skill** | Match `03-skills/` skill triggers | Load user skill (customizations) |
+| **3. Project Reference** | User mentions project by name/ID/number | Load `execute-project` skill |
+| **4. New Build** | "build/create/plan" + new work | Load `plan-project` skill |
+| **5. General** | No match | Respond naturally |
+
+**Why System First?** Core utilities (`close-session`, `validate-system`, `setup-memory`) MUST work even if user creates conflicting skill names.
 
 ---
 
@@ -125,19 +128,19 @@ Don't just match keywords - **understand user intent**:
 
 | Skill | Intent Signal | Check First |
 |-------|--------------|-------------|
-| `create-project` | User wants to START something NEW with a deliverable | Is this new work? No existing project matches? |
+| `plan-project` | User wants to BUILD something NEW with deliverable | Is this new work? No existing project matches? |
 | `execute-project` | User references EXISTING project | Does name/ID match `metadata.projects`? |
 | `create-skill` | User wants to AUTOMATE repeating work | Is this a pattern they do regularly? |
 
 **Decision flow:**
 1. Check if user mentions existing project name/ID → `execute-project`
-2. Check if user wants to create new finite work → `create-project`
+2. Check if user wants to create new finite work → `plan-project`
 3. Check if user wants to automate patterns → `create-skill`
-4. Match against skill descriptions in `metadata.skills`
+4. Match against skill triggers in `metadata.skills`
 
 **Key distinction:**
 - "work on website" + website project exists → `execute-project`
-- "work on website" + no website project → `create-project` (suggest)
+- "work on website" + no website project → `plan-project` (suggest)
 
 ---
 
@@ -161,8 +164,9 @@ The loader returns `stats.pending_onboarding[]` - use this data to suggest at co
 ### NEVER Do
 
 - ❌ Read project files directly → use `execute-project`
-- ❌ Create project/skill folders directly → use create skills
+- ❌ Create project/skill folders directly → use `plan-project` or `create-skill`
 - ❌ Auto-load learning skills → suggest, user decides
+- ❌ Skip planning to jump to execution → quality over speed
 
 ---
 
