@@ -3,7 +3,21 @@ name: add-integration
 description: "add integration, new integration, integrate with, connect to [service]."
 ---
 
-## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+## DEPRECATION NOTICE
+
+**This skill is being deprecated.** For new integrations, use:
+
+```
+plan project for [service] integration
+```
+
+The router will detect "integration" type and invoke this skill's discovery workflow automatically.
+
+**Why?** The plan-project router ensures all projects get proper discovery, mental models, and planning structure.
+
+---
+
+## Onboarding Awareness (CHECK BEFORE STARTING)
 
 **Before building an integration, AI MUST check `stats.pending_onboarding` for `learn_integrations`:**
 

@@ -3,7 +3,21 @@ name: create-skill
 description: "create skill, new skill, automate this, make reusable."
 ---
 
-## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+## DEPRECATION NOTICE
+
+**This skill is being deprecated for direct invocation.** For new skills, use:
+
+```
+plan project for [name] skill
+```
+
+The router will detect "skill" type and invoke this skill's discovery workflow automatically.
+
+**Why?** The plan-project router ensures all projects get proper discovery, mental models, and planning structure.
+
+---
+
+## Onboarding Awareness (CHECK BEFORE STARTING)
 
 **Before creating a skill, AI MUST check `stats.pending_onboarding` for `learn_skills`:**
 
