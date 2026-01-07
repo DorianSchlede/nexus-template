@@ -1,6 +1,6 @@
 ---
 name: mental-models
-description: Load when user says "mental model", "think through this", "structured thinking", "help me decide", "analyze this problem", "first principles", "pre-mortem", "stakeholder mapping", "what framework should I use", or any specific model name. Provides 59 thinking frameworks for decision-making, problem decomposition, and strategic analysis.
+description: "Triggers: mental model, think through this, help me decide, first principles, pre-mortem."
 ---
 
 # Mental Models

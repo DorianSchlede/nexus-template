@@ -1,6 +1,6 @@
 ---
 name: search-skill-database
-description: Search the Skill Marketplace for available skills. Load when user mentions "search skills", "find skill", "browse skills", "list skills", "what skills are available", or "skill marketplace".
+description: "Triggers: search skills, find skill, browse skills, skill marketplace."
 ---
 
 # Search Skill Marketplace

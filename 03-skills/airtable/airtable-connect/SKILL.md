@@ -1,6 +1,6 @@
 ---
 name: airtable-connect
-description: "Connect to any Airtable base by name. Load when user mentions 'airtable', 'connect airtable', 'setup airtable', 'query [base-name]', 'add to [table]', 'create table', 'add field', 'airtable bases', or any base name from persistent context. Meta-skill that discovers workspace, caches schemas, and routes to appropriate operations."
+description: "Triggers: airtable, connect airtable, query [base], add to [table]."
 version: "1.1"
 ---
 

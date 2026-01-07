@@ -1,6 +1,6 @@
 ---
 name: validate-skill-functionality
-description: Load when user says "validate skill", "validate this skill", "review skill execution", "check skill", or "skill validation" at the end of executing a skill. Post-execution review workflow for validating that a skill worked correctly, documenting findings, and identifying issues.
+description: "Triggers: validate skill, check skill, review skill execution."
 ---
 
 # Validate Skill Functionality

@@ -1,6 +1,6 @@
 ---
 name: validate-system
-description: Validate Nexus-v3 system integrity and fix common issues automatically. Load when user mentions "validate system", "check system", or "fix problems". Runs comprehensive checks on folder structure, metadata files, and framework consistency with auto-repair capabilities.
+description: "Triggers: validate system, check system, fix problems."
 ---
 
 # Validate System

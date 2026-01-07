@@ -1,6 +1,6 @@
 ---
 name: create-master-skill
-description: Create a master system skill (shared resource library) for any integration. Load when user mentions "create master skill", "new master skill", "shared skill library", "integration master", or wants to build a reusable skill foundation for multiple related skills.
+description: "Triggers: create master skill, integration master, shared skill library."
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

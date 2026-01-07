@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: "Create reusable workflow skills. Load when user wants to automate repeating work. Keywords: create skill, new skill, automate this, make reusable, save workflow. Suggest when user describes patterns (every week I..., I always...)."
+description: "Triggers: create skill, new skill, automate this, make reusable."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

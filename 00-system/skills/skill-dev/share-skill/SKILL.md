@@ -1,6 +1,6 @@
 ---
 name: share-skill
-description: Upload a local skill to the Skill Marketplace. Load when user mentions "share skill", "upload skill", "push skill", "publish skill", "add skill to marketplace", or after creating a new skill.
+description: "Triggers: share skill, upload skill, publish skill."
 ---
 
 # Share Skill to Marketplace

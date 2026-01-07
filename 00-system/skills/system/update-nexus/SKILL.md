@@ -1,6 +1,6 @@
 ---
 name: update-nexus
-description: Update Nexus system files from upstream repository. Load when user says "update nexus", "sync nexus", "get nexus updates", "check for updates", "upgrade nexus". Safely pulls system updates while protecting user data.
+description: "Triggers: update nexus, sync nexus, check for updates, upgrade nexus."
 ---
 
 # Update Nexus

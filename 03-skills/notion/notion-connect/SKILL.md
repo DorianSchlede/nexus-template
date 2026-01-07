@@ -1,6 +1,6 @@
 ---
 name: notion-connect
-description: "Connect to any Notion database by name. Load when user mentions 'notion', 'connect notion', 'setup notion', 'query [database-name]', 'add to [database]', 'notion databases', or any database name from persistent context. Meta-skill that discovers workspace, caches schemas, and routes to appropriate operations."
+description: "Triggers: notion, connect notion, query [database], add to [database]."
 version: "1.1"
 ---
 

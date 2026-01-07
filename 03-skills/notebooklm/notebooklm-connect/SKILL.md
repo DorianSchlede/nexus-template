@@ -1,6 +1,6 @@
 ---
 name: notebooklm-connect
-description: Connect to NotebookLM Enterprise for notebook and audio overview operations. Load when user mentions 'notebooklm', 'notebook lm', 'create notebook', 'audio overview', 'podcast', 'add sources to notebook', or any NotebookLM operations.
+description: "Triggers: notebooklm, create notebook, audio overview, podcast."
 ---
 
 # NotebookLM Connect

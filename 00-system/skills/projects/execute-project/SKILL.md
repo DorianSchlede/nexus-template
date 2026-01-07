@@ -1,6 +1,6 @@
 ---
 name: execute-project
-description: "The ONLY way to work on existing projects. Load when user mentions ANY project by name, ID, or number. Triggers: continue, resume, work on, check progress, status, execute project. Provides: task tracking, bulk-complete, section-based execution, resume state management."
+description: "Triggers: continue [project], resume, work on, check progress, execute project, project [ID/name]."
 ---
 
 # Execute Project

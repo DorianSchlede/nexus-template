@@ -1,6 +1,6 @@
 ---
 name: plan-project
-description: "Plan new projects. Load when user wants to START something new with a deliverable endpoint. Keywords: plan project, create project, new project, start project."
+description: "Triggers: create project, new project, start project, plan project, build [X]."
 ---
 
 ## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)

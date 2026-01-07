@@ -1,6 +1,6 @@
 ---
 name: create-skill-algorithm
-description: "Create a new nested skill-chain. Load when user mentions 'create skill chain', 'new skill chain', 'build algorithm', 'generate skill chain'. Interactive workflow that defines phases, orchestrators, and sub-skills, then generates the complete nested folder structure."
+description: "Triggers: create skill chain, build algorithm, generate skill chain."
 type: meta-skill
 version: "1.0"
 ---

@@ -1,6 +1,6 @@
 ---
 name: learn-skills
-description: "Learn how Nexus skills work. Load when user mentions: learn skills, how do skills work, what is a skill, skill tutorial, skill structure, understand skills, explain skills, when to create skill, skill vs project. 10-12 min."
+description: "Triggers: learn skills, how do skills work, skill tutorial."
 onboarding: true
 priority: high
 ---

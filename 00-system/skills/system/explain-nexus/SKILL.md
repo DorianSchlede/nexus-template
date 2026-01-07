@@ -1,6 +1,6 @@
 ---
 name: explain-nexus
-description: Explain what Nexus is and how it works. Load when user says "explain nexus", "what is nexus", "how does nexus work", "nexus overview", "about nexus", or asks for help understanding the system.
+description: "Triggers: explain nexus, what is nexus, how does nexus work, about nexus."
 ---
 
 # Explain Nexus

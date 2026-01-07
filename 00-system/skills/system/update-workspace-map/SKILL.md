@@ -1,6 +1,6 @@
 ---
 name: update-workspace-map
-description: Validate workspace-map.md accuracy against actual 04-workspace/ structure (3 levels deep). Load when user says "validate workspace map", "update workspace map", "check workspace map", or from close-session. Ensures deep structure validation with comprehensive documentation.
+description: "Triggers: validate workspace, update workspace map, check workspace."
 ---
 
 # Validate Workspace Map
