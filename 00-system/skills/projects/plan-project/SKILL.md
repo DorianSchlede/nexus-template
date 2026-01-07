@@ -3,7 +3,7 @@ name: plan-project
 description: "create project, new project, start project, plan project, build [X]."
 ---
 
-## 🎯 Onboarding Awareness (CHECK BEFORE STARTING)
+## Onboarding Awareness (CHECK BEFORE STARTING)
 
 **Before creating a project, AI MUST check user-config.yaml for incomplete onboarding:**
 
@@ -16,7 +16,7 @@ learn_projects: false  → SUGGEST 'learn projects' skill FIRST
 
 **If `learn_projects: false` AND this is user's FIRST project:**
 ```
-💡 Before creating your first project, would you like a quick 8-minute tutorial
+Before creating your first project, would you like a quick 8-minute tutorial
 on how Nexus projects work? It covers:
 - When to use projects vs skills (avoid common mistakes)
 - Project structure and lifecycle
@@ -27,91 +27,66 @@ Say 'learn projects' to start the tutorial, or 'skip' to create directly.
 
 **If user says 'skip':** Proceed with project creation but add this note at the end:
 ```
-💡 Tip: Run 'learn projects' later if you want to understand the project system deeply.
+Tip: Run 'learn projects' later if you want to understand the project system deeply.
 ```
 
 **If `learn_projects: true`:** Proceed normally without suggestion.
 
-### Recommended Onboarding Sequence
+---
 
-When checking `learning_tracker.completed`, if user hasn't done core onboarding:
-1. `setup_goals: false` → Consider suggesting (but don't block project creation)
-2. `learn_projects: false` → Suggest before FIRST project (high priority)
+## MANDATORY ROUTER PATTERN
+
+**plan-project is the ONLY entry point for all project creation.**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WORKFLOW SEQUENCE (DO NOT SKIP STEPS)
+
+1. TYPE DETECTION      → Semantic match from _type.yaml descriptions
+2. PROJECT SETUP       → Run init_project.py with detected type
+3. DISCOVERY           → Skill-based OR inline (depends on type)
+4. MENTAL MODELS       → Run AFTER discovery (informed questioning)
+5. RE-DISCOVERY        → If gaps found (max 2 rounds)
+6. FINALIZATION        → Merge into plan.md, generate steps.md
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### Critical Rules
+
+- Discovery happens BEFORE mental models (can't stress-test what you don't understand)
+- 02-discovery.md is MANDATORY output (preserves intelligence across compaction)
+- Skills are invoked normally (no special contract needed)
+- Steps + TodoWrite enforce sequence
+- Update resume-context.md at every phase transition
 
 ---
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️ CRITICAL EXECUTION REQUIREMENTS ⚠️
+## Type Detection
 
-WORKFLOW: Structure FIRST, Collaborative Planning SECOND
+**8 Project Types** - AI semantically matches user input against descriptions:
 
-MANDATORY STEPS (DO NOT SKIP):
-1. ✅ Create TodoWrite with ALL steps
-2. ✅ Offer project type selection (Build, Research, Strategy, Content, Process, Generic)
-3. ✅ Ask project name
-4. ✅ RUN init_project.py IMMEDIATELY (creates 4 directories + 3 planning files)
-5. ✅ Display created structure
-6. ✅ Load overview.md → Fill collaboratively → PAUSE → User confirms
-7. ✅ Load plan.md → Apply mental models → Research dependencies → PAUSE → User confirms
-8. ✅ Load steps.md → Break down execution → PAUSE → User confirms
-9. ✅ Close session
+| Type | When to Use | Discovery Method |
+|------|-------------|------------------|
+| **build** | Creating software, features, tools | Inline |
+| **integration** | Connecting APIs, external services | Skill: add-integration |
+| **research** | Academic papers, systematic analysis | Skill: create-research-project |
+| **strategy** | Business decisions, planning | Inline |
+| **content** | Marketing, documentation, creative | Inline |
+| **process** | Workflow optimization, automation | Inline |
+| **skill** | Creating Nexus skills | Skill: create-skill |
+| **generic** | Anything else | Inline |
 
-ANTI-PATTERN (DO NOT DO THIS):
-❌ Skip project type selection
-❌ Skip running init_project.py
-❌ Try to create files manually
-❌ Generate content before structure exists
-❌ Skip mental model questions (Socratic, devil's advocate)
-❌ Skip dependency research
-❌ Skip pauses between documents
-❌ Complete skill in single response
+### Detection Flow
 
-CORRECT PATTERN (DO THIS):
-✅ TodoWrite → Offer types → Ask name → RUN SCRIPT → Files created
-✅ Then: Load overview.md → Fill collaboratively → PAUSE → Confirm
-✅ Then: Load plan.md → Ask Socratic questions → Research dependencies → Add adaptive sections → PAUSE → Confirm
-✅ Then: Load steps.md → Break down phases → PAUSE → Confirm
-✅ Then: Close session
+```
+User: "plan project for X"
+    │
+    ├── Read all templates/types/*/_type.yaml
+    ├── Compare user input against each description
+    ├── Select best match OR ask user to choose
+    │
+    └── Proceed with detected type
+```
 
-MENTAL MODELS (MANDATORY):
-✅ Socratic Questioning during Approach section
-✅ Devil's Advocate during risk assessment
-✅ Dependency Research before completing plan.md
-
-SCRIPT RUNS FIRST - ALWAYS!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-# Plan Project
-
-Collaborative project design with intelligent, adaptive planning and deep thinking frameworks.
-
-## Purpose
-
-The `plan-project` skill creates project structure and guides you through collaborative planning. The workflow: **Create structure FIRST** (via script), **THEN** fill in the templates with AI-guided depth.
-
-**Key Features:**
-- **Script-Generated Structure**: 4 directories (01-planning/, 02-resources/, 03-working/, 04-outputs/) + 3 planning files (overview, plan, steps) created immediately
-- **Adaptive Planning**: Templates expand based on project type (Build, Research, Strategy, etc.)
-- **Deep Thinking**: AI applies Socratic questioning and Devil's Advocate models
-- **Dependency Research**: AI proactively finds and links related files/systems
-- **Mandatory Pauses**: Review each document before proceeding
-- **Separate Session Principle**: Project created now, executed later
-
----
-
-## Two Modes
- 
- This skill operates in two modes based on system state:
- 
- ### 1. Workspace Setup Mode
- **When**: `02-projects/` directory doesn't exist
- **Purpose**: Create initial workspace folder structure (10-15 min)
- **Workflow**: See [workflows.md#workspace-setup](references/workflows.md#workspace-setup-workflow)
- 
- ### 2. Project Creation Mode
- **When**: `02-projects/` exists
- **Purpose**: Full collaborative project planning (20-30 min)
- **Workflow**: See [workflows.md#project-creation](references/workflows.md#project-creation-workflow)
+**No keyword triggers** - Type detection is semantic from description field.
 
 ---
 
@@ -126,7 +101,6 @@ The `plan-project` skill creates project structure and guides you through collab
    - IF exists → **PROJECT_CREATION mode**
    - IF not exists → **WORKSPACE_SETUP mode** (System not initialized)
 
-**Decision Tree**:
 ```
 02-projects/ exists?
 ├── YES → PROJECT_CREATION mode
@@ -135,179 +109,192 @@ The `plan-project` skill creates project structure and guides you through collab
 
 ---
 
-## Quick Start
+## Router Workflow
 
-### The One True Workflow: Intelligent Planning
+### Phase 1: Setup
 
-**There is only ONE way to create projects** - always run the script first, then collaboratively plan with depth:
+```bash
+# 1.1 Detect type from user input (semantic matching)
+# 1.2 Create project structure
+python 00-system/skills/projects/plan-project/scripts/init_project.py "Project Name" --type {type} --path 02-projects
 
-**Step 1: Initiation (< 1 minute)** ⚡
-- Offer project types (Build, Research, Strategy, etc.)
-- Run `scripts/init_project.py "Project Name" --path 02-projects`
-- Auto-generates 4 directories: `01-planning/`, `02-resources/`, `03-working/`, `04-outputs/`
-- Auto-generates 3 planning files in 01-planning/: `overview.md`, `plan.md`, `steps.md`
+# 1.3 Load templates from types/{type}/
+# 1.4 Initialize resume-context.md
+```
 
-**Step 2: Collaborative Planning (15-30 minutes)** 🤔
-- **overview.md**: Define purpose and success criteria
-- **plan.md**:
-  - AI suggests adaptive sections based on type
-  - AI asks Socratic questions to test assumptions
-  - AI researches dependencies and populates links
-  - AI plays Devil's Advocate to identify risks
-- **steps.md**: Break down execution into phases
+**Output**: Project folder with 4 directories + planning file templates
 
-**Step 3: Save & Execute Later** 💾
-- Close session to save progress
-- Execute project in a separate session with clean context
+### Phase 2: Discovery
 
-### Workflow Steps
+**Check _type.yaml for discovery method:**
 
-1. **Detect mode** using logic above
-2. **Offer project types** from [project-types.md](references/project-types.md)
-3. **Run init_project.py** to create structure immediately
-4. **Display** created structure
-5. **Load workflow** from [workflows.md](references/workflows.md)
-6. **Follow workflow step-by-step** with mandatory pauses
-7. **Close session** to save state
+#### Skill-Based Discovery (integration, research, skill)
 
----
+```bash
+# Update resume-context.md with current_skill
+# Load skill normally:
+python 00-system/core/nexus-loader.py --skill {skill-name}
 
-## ⚠️ MANDATORY: Mental Models Selection
+# Skill runs its workflow and writes to project's 02-discovery.md
+# Clear current_skill when complete
+```
 
-**CRITICAL**: Do NOT skip this step, even if you know which models to use from memory!
+| Type | Skill to Load |
+|------|---------------|
+| integration | add-integration |
+| research | create-research-project |
+| skill | create-skill |
 
-During the **plan.md** phase, AI **MUST run** select_mental_models.py script FIRST, then offer 2-3 relevant options to user.
+#### Inline Discovery (build, strategy, content, process, generic)
 
-**Required Workflow** (DO NOT SKIP):
-1. **Run script FIRST** (before applying ANY models):
-   ```bash
-   python 00-system/mental-models/scripts/select_mental_models.py --format brief
+```bash
+# Load discovery.md template from templates/types/{type}/
+# Ask discovery questions interactively
+# Write answers to project's 02-discovery.md
+```
+
+**CRITICAL**: Discovery MUST complete before mental models.
+
+### Phase 3: Mental Models (After Discovery)
+
+```bash
+# Load mental models dynamically
+python 00-system/mental-models/scripts/select_mental_models.py --format brief
+```
+
+1. AI selects 2-3 relevant models based on discovery findings
+2. Present options to user
+3. Load selected model files from `00-system/mental-models/models/{category}/`
+4. Apply model questions to discovery findings
+5. Capture: success_criteria, risks, gaps
+6. Update 03-plan.md with outputs
+
+**Key Insight**: Questions are INFORMED by discovery:
+- "Given what we found about [X], what's truly essential?"
+- "Given these constraints, what could break?"
+- "Given this plan, imagine it failed. Why?"
+
+### Phase 4: Re-Discovery (If Gaps Found)
+
+```
+IF gaps exist AND rediscovery_round < 2:
+    → Increment rediscovery_round in resume-context.md
+    → Focus discovery on identified gaps
+    → Return to Phase 3
+
+ELSE IF gaps exist AND rediscovery_round >= 2:
+    → Log unknowns in plan.md "Open Questions" section
+    → Note: "Proceeding with known unknowns after 2 rounds"
+    → Continue to Phase 5
+```
+
+### Phase 5: Finalization
+
+1. **Merge into 03-plan.md**:
+   - Discovery findings (from 02-discovery.md)
+   - Mental model outputs (success criteria, risks)
+   - Open questions / unknowns
+
+2. **Finalize 04-steps.md**:
+   - Use steps.md template as base
+   - Fill in concrete tasks from discovery
+   - Add checkpoint tasks every 3-5 steps
+
+3. **Update resume-context.md**:
+   ```yaml
+   current_phase: "execution"
+   next_action: "execute-project"
+   files_to_load: [all relevant resources]
    ```
 
-2. **Review script output**: JSON array with all available mental models (59 models across 12 categories)
-
-3. **Offer 2-3 relevant models** to user based on project type/context with brief (3-7 words) descriptions
-
-4. **Wait for user selection**: User chooses which models to apply (or none)
-
-5. **Load the specific model file** only after user selects:
-   ```bash
-   # Individual model files are in: 00-system/mental-models/models/{category}/{model-slug}.md
-   # Example: 00-system/mental-models/models/cognitive/first-principles.md
-   ```
-
-6. **Apply questions** from selected models to fill plan.md collaboratively
-
-**DO NOT**:
-- ❌ Skip running select_mental_models.py script
-- ❌ Apply models from memory without offering choice
-- ❌ Auto-select models without user confirmation
-- ❌ Skip user selection step
-
-**Example Offer**:
-```markdown
-Now let's dive into planning. I've reviewed the mental models catalog and recommend for your Build/Create project:
-
-1. **First Principles** – Strip assumptions, find fundamental truths
-   Best for: Novel projects, challenging assumptions
-
-2. **Pre-Mortem** – Imagine failure modes before implementation
-   Best for: High-stakes projects, risk mitigation
-
-3. **Stakeholder Mapping** – Identify all affected parties and interests
-   Best for: Multi-party projects, organizational work
-
-Which approach(es) sound most useful? Or we can combine them!
-```
-
-**Loading Pattern**:
-```markdown
-User picks: "First Principles + Pre-Mortem"
-
-AI loads individual model files:
-→ Read: 00-system/mental-models/models/cognitive/first-principles.md
-→ Read: 00-system/mental-models/models/diagnostic/pre-mortem.md
-→ Apply questions from both models to fill plan.md
-```
-
-**Benefits**:
-- ✅ **Proactive** - AI always loads mental-models, shows what's available
-- ✅ **User choice** - User picks which models (or none) to apply
-- ✅ **Efficient metadata** - Brief (3-7 words) but descriptive
-- ✅ **Individual files** - Each model has its own file with full details
-- ✅ **Script-parseable** - YAML frontmatter for programmatic access
-- ✅ **Maintainable** - Update one model file, all skills benefit
-
-**See**: [`mental-models framework`](../../mental-models/mental-models.md) for full catalog and offering guidance
+4. **Project Ready for Execution**
 
 ---
 
-## Dependency Research
+## Resume Context Updates
 
-Before finalising **plan.md**, the AI will automatically:
+**Update at EVERY phase transition:**
 
-- Scan the codebase for files that reference the same domain (using `codebase_search`).
-- Look for existing **skills** that could be reused (e.g. `lead-qualification`).
-- Identify external system configurations (MCP servers, Airtable schemas, Slack channels).
-- Populate the **Dependencies & Links** section with concrete file paths and system names.
+```yaml
+# resume-context.md frontmatter
+---
+session_ids: ["uuid-1", "uuid-2"]
+project_id: "30-project-name"
+project_name: "Human Readable Name"
+current_phase: "planning|execution"
 
-**Example auto‑generated section**:
+# LOADING
+next_action: "plan-project|execute-project"
+files_to_load:
+  - "01-planning/02-discovery.md"  # MANDATORY
+  - "01-planning/03-plan.md"
+  - "01-planning/04-steps.md"
 
-```markdown
-## Dependencies & Links
-**Files Impacted**:
-- `03-skills/lead-qualification/SKILL.md` – main workflow definition
-- `04-workspace/airtable-schemas/leads.json` – lead data schema
+# SKILL TRACKING (optional)
+current_skill: ""  # Set when skill loaded, clear when complete
 
-**External Systems**:
-- Airtable Base: "Leads" – source of lead data
-- Slack Workspace: #sales – notification destination
+# DISCOVERY STATE
+rediscovery_round: 0  # 0, 1, or 2
+discovery_complete: false
 
-**Related Projects**:
-- Project 03: CRM Integration – shares Airtable connection
+# PROGRESS
+current_section: 1
+tasks_completed: 0
+---
 ```
 
 ---
 
-## Example Interaction Flow
+## EARS Requirements (Build/Skill Types Only)
 
-```
-AI: "What would you like to name your project?"
-User: "Lead qualification workflow"
+For **build** and **skill** project types, discovery.md includes EARS-formatted requirements:
 
-AI: "Great. This looks like a **Build/Create** project. I’ll add sections for Technical Architecture, Implementation Strategy, and Integration Points. Does that sound good?"
-User: "Yes, go ahead."
+| Pattern | Template |
+|---------|----------|
+| Ubiquitous | THE `<system>` SHALL `<response>` |
+| Event-driven | WHEN `<trigger>`, THE `<system>` SHALL `<response>` |
+| State-driven | WHILE `<condition>`, THE `<system>` SHALL `<response>` |
+| Unwanted | IF `<condition>`, THEN THE `<system>` SHALL `<response>` |
+| Optional | WHERE `<option>`, THE `<system>` SHALL `<response>` |
+| Complex | [WHERE] [WHILE] [WHEN/IF] THE `<system>` SHALL `<response>` |
 
-AI: (runs init_project.py) → creates files.
-
-AI: "Your project structure is ready. Let’s start with **overview.md**. What problem are you solving?"
-User: "We lose leads because manual qualification takes too long."
-
-AI: (fills purpose) → asks Socratic questions:
-"What assumptions are you making about the current qualification time?"
-User: "We estimate 30 minutes per lead based on recent logs."
-
-AI: (adds to success criteria) → moves to **plan.md**.
-AI: "I’ll now ask a few Socratic questions about your approach and then run a quick dependency scan."
-... (continues) ...
-```
+**See**: [references/ears-patterns.md](references/ears-patterns.md) for full guide.
 
 ---
 
 ## Resources
 
 ### scripts/
-- **init_project.py**: ⚡ Quick project template generator
-  - Auto-generates project structure with 4 directories (01-planning/, 02-resources/, 03-working/, 04-outputs/)
-  - Auto-assigns next available project ID
-  - Creates 3 planning files in 01-planning/: overview.md, plan.md, steps.md from templates
-  - Usage: `python scripts/init_project.py "Project Name" --path 02-projects`
+- **init_project.py**: Project template generator with `--type` flag
+  - Usage: `python scripts/init_project.py "Name" --type build --path 02-projects`
+  - Auto-generates structure with type-specific templates
+
+### templates/types/
+```
+types/
+├── build/          # Inline discovery, EARS requirements
+├── integration/    # Routes to add-integration skill
+├── research/       # Routes to create-research-project skill
+├── strategy/       # Inline discovery, decision frameworks
+├── content/        # Inline discovery, creative brief
+├── process/        # Inline discovery, workflow optimization
+├── skill/          # Routes to create-skill skill, EARS requirements
+└── generic/        # Minimal inline discovery
+```
+
+Each type folder contains:
+- `_type.yaml` - Type configuration and description
+- `overview.md` - Overview template
+- `discovery.md` - Discovery questions/structure
+- `plan.md` - Plan template
+- `steps.md` - Steps template
 
 ### references/
-- **project-types.md**: Guide for offering project types and adaptive planning
-- **workflows.md**: Complete interactive planning workflows for both modes
-- **mental-models.md**: Full mental models catalog
-- **project-schema.yaml**: YAML frontmatter schema documentation
+- **routing-logic.md**: Router decision tree and workflow
+- **ears-patterns.md**: EARS requirement templates
+- **incose-rules.md**: INCOSE quality rules
+- **project-types.md**: Type descriptions and guidance
+- **workflows.md**: Detailed workflow documentation
 
 ---
 
@@ -327,43 +314,51 @@ AI: "I’ll now ask a few Socratic questions about your approach and then run a 
 - Suggest: "Please run 00-setup-memory project first"
 - DO NOT create project
 
+### Discovery Skill Not Found
+- Fall back to inline discovery.md template
+- Log warning for user
+
 ### User Abandons Mid-Creation
 - Save partial work to temp file
 - Inform: "Progress saved. Say 'continue project creation' to resume."
-
-### User Skips Review
-- Remind: "It's important we get this right!"
-- Gently insist on review before proceeding
 
 ---
 
 ## Why This Design?
 
-**Why Interactive?**
-- Quality over speed: Thoughtful planning prevents rework
-- User ownership: Collaborative design ensures buy-in
-- Learning: Mental models teach strategic thinking
-- Accuracy: Pauses catch issues early
+**Why Mandatory Router?**
+- Single entry point ensures consistent quality
+- All projects get proper discovery and mental model application
+- Prevents shortcuts that lead to poor planning
 
-**Why Mandatory Pauses?**
-- Validation: User confirms understanding before proceeding
-- Iteration: Catch issues before they cascade
-- Ownership: User feels involved, not just spectator
-- Quality: Better planning = smoother execution
+**Why Discovery BEFORE Mental Models?**
+- Can't stress-test what you don't understand
+- Mental models are INFORMED by discovery findings
+- Questions become specific, not abstract
 
-**Why Separate Session?**
+**Why 8 Types?**
+- Semantic detection (not keywords) handles edge cases
+- Each type has appropriate discovery method
+- Build/Skill get EARS requirements; others get simpler discovery
+
+**Why Skills Invoked Normally?**
+- No special contract needed (v2.4 simplification)
+- Skills write to project's 02-discovery.md
+- Steps + TodoWrite enforce sequence
+
+**Why Separate Sessions?**
 - Context management: Clean boundaries between planning and execution
 - Focus: Execution session loads only execution context
 - Memory: close-session properly saves state between phases
-- UX: Matches natural work rhythm (plan now, execute later)
 
 ---
 
 **Integration**:
-- close-session automatically updates project-map.md every session
+- close-session automatically updates project state every session
 - validate-system checks project structure integrity
 - Skills can reference project outputs in their workflows
+- execute-project continues from where plan-project finishes
 
 ---
 
-**Remember**: This is a COLLABORATIVE DESIGN SESSION, not a quick generation tool. The time invested in thorough planning pays dividends during execution!
+**Remember**: This is a COLLABORATIVE DESIGN SESSION with proper discovery and mental model application. The router ensures every project gets the depth it deserves!
