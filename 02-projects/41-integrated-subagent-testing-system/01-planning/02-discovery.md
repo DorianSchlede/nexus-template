@@ -73,7 +73,7 @@
 |---------|----------|----------------|
 | Langfuse trace fetching | `03-skills/langfuse/langfuse-get-session/scripts/get_session.py` | Use as reference for API calls |
 | Langfuse trace hierarchy | Project 36 `trace-structure-analysis.md` | Session → Trace → Observation pattern |
-| Session scorer structure | `.claude/agents/general-session-scorer.md` | Reuse scoring dimensions where applicable |
+| Session scorer structure | `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md` | Reuse scoring dimensions where applicable |
 | Worktree management | `validate-feature/scripts/worktree-manager.py` | Keep and enhance |
 | Test orchestrator | `.claude/agents/test-orchestrator.md` | Keep as-is (authentic behavior) |
 | Langfuse client | `03-skills/langfuse/langfuse-master/scripts/langfuse_client.py` | Reuse for API calls |

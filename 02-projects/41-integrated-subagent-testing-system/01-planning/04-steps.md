@@ -29,7 +29,7 @@
 
 - [x] Rename `.claude/agents/trace-analyzer.md` → `test-case-analyzer.md` **[REQ-5]**
 - [x] Update trigger phrase to "spawn test-case-analyzer"
-- [x] Update test-case-analyzer to use Langfuse skill patterns from general-session-scorer
+- [x] Update test-case-analyzer to use Langfuse skill patterns from scorer-prompt.md
 - [x] Simplify `validate-feature/SKILL.md` to single worktree flow **[REQ-2]**
 - [x] Remove manual/interactive modes documentation
 - [x] **CHECKPOINT**: Both subagents have correct trigger phrases

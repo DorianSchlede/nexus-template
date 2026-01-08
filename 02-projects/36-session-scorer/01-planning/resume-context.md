@@ -7,7 +7,7 @@ last_updated: "2026-01-07T20:04:15.991101Z"
 # PROJECT
 project_id: "36-session-scorer"
 project_name: "Session Scorer"
-current_phase: "phase-1"
+current_phase: "phase-2"
 status: "IN_PROGRESS"
 
 # LOADING
@@ -17,36 +17,40 @@ files_to_load:
   - "01-planning/02-discovery.md"
   - "01-planning/03-plan.md"
   - "01-planning/04-steps.md"
-  - ".claude/agents/general-session-scorer.md"
+  - "00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md"
   - "02-resources/reference/config-ids.md"
 
 # STATE
-current_section: 1
+current_section: 2
 current_task: 1
 total_tasks: 31
-tasks_completed: 9
+tasks_completed: 22
 ---
 
 ## Current Position
 
-**Status**: IN_PROGRESS (Phase 1: Subagent Testing)
+**Status**: IN_PROGRESS (Phase 2: Orchestrator Implementation)
 
 **Phase 0: Project Setup** - COMPLETE
+**Phase 1: Subagent Testing** - COMPLETE
 
 ### What Was Done
-- Created general-session-scorer subagent (`.claude/agents/general-session-scorer.md`)
+- Created scoring prompt (`00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md`)
+- Created SKILL.md with orchestration logic
+- Discovered custom subagent_type bug (GitHub Issue #11205) - using general-purpose instead
 - Copied P35 outputs to resources
 - Aligned all plan files with P35 dimensions
 - Updated architecture: subagent fetches directly from Langfuse (no pre-summarization)
+- **Phase 1 COMPLETE**: Tested scoring on session 282286a0f66de884760184bc6aab291e
 
 ### Architecture Summary
 
 ```
-ORCHESTRATOR → spawn general-session-scorer → SUBAGENT FETCHES & SCORES → JSON RESULT → ORCHESTRATOR STORES SCORES
+ORCHESTRATOR → spawn general-purpose with prompt file read → SUBAGENT FETCHES & SCORES → JSON RESULT → ORCHESTRATOR STORES SCORES
 ```
 
-The subagent:
-1. Reads Nexus context
+The subagent (via general-purpose):
+1. Reads `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md`
 2. Fetches session from Langfuse using skills
 3. Analyzes traces for evidence
 4. Scores 6 dimensions
@@ -57,20 +61,19 @@ The orchestrator:
 2. Calculates overall_quality (weighted aggregate)
 3. Stores 7 scores to Langfuse
 
-### Next Steps (Phase 1)
+### Next Steps (Phase 2)
 
-1. **Find Test Session**
-   - List recent sessions from Langfuse
-   - Pick a small session (5-10 traces)
+1. **Score Session CLI**
+   - Create `scripts/score_session.py` CLI
+   - Implement `calculate_overall_quality()` function
 
-2. **Test Subagent**
-   - Spawn general-session-scorer via Task tool
-   - Verify it fetches and scores correctly
+2. **Score Storage**
+   - Implement NUMERIC and CATEGORICAL score storage
+   - Test storing all 7 scores to Langfuse
 
-3. **Validate Output**
-   - Check JSON schema compliance
-   - Verify all 6 dimensions scored
-   - Check evidence and rationales
+3. **End-to-End Test**
+   - Run full pipeline on test session
+   - Verify scores appear in Langfuse UI
 
 ### Key Context
 
@@ -87,12 +90,13 @@ CONFIG_IDS = {
 }
 ```
 
-**Subagent Invocation**:
+**Subagent Invocation** (uses general-purpose due to custom subagent bug):
 ```
 Task(
-    subagent_type="general-session-scorer",
+    subagent_type="general-purpose",
     model="sonnet",
-    prompt="spawn general-session-scorer: Score session {session_id}"
+    prompt="FIRST: Read 00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md
+THEN: Score session {session_id} following those instructions exactly."
 )
 ```
 
@@ -107,9 +111,11 @@ Task(
 
 ### Required Files
 
-- `.claude/agents/general-session-scorer.md` - Subagent definition
+- `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md` - Scoring instructions
+- `00-system/skills/meta/langfuse-score-session/SKILL.md` - Orchestration logic
 - `02-resources/reference/config-ids.md` - Score config IDs
 - `02-resources/reference/enhanced-scoring-design.md` - Full design
+- `03-working/key-learnings.md` - Architecture decisions
 
 ---
 

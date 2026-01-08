@@ -26,7 +26,7 @@ Available agents: general-purpose, statusline-setup, Explore, Plan, claude-code-
 
 **Impact on Architecture**:
 - Removed `.claude/agents/general-session-scorer.md` (moved to TRASH)
-- Created `03-skills/langfuse/langfuse-score-session/prompts/scorer-prompt.md` instead
+- Created `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md` instead
 - SKILL.md defines invocation pattern that tells subagent to read prompt file first
 
 ---
@@ -45,7 +45,7 @@ Task(
     model="sonnet",
     prompt="""
 FIRST: Read the scoring instructions from this file:
-c:/Users/dsber/infinite/auto-company/strategy-nexus/03-skills/langfuse/langfuse-score-session/prompts/scorer-prompt.md
+00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md
 
 THEN: Score session {session_id} following those instructions exactly.
 Return ONLY the JSON output as specified in the prompt.

@@ -70,7 +70,7 @@
 │  │  Enhanced Existing Subagents                                          │   │
 │  │                                                                        │   │
 │  │  test-case-analyzer.md  ←── Add root cause analysis section           │   │
-│  │  general-session-scorer.md ←── (Optional) Add failure mode output     │   │
+│  │  scorer-prompt.md         ←── (Optional) Add failure mode output     │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘

@@ -163,7 +163,7 @@
 
 ### 4.2 (Optional) Enhance Session Scorer
 
-- [ ]* Read `.claude/agents/general-session-scorer.md`
+- [ ]* Read `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md`
 - [ ]* Add failure mode detection when score is low
 - [ ]* Output failure modes alongside scores
 - [ ] **CHECKPOINT**: Session scorer enhanced (optional)

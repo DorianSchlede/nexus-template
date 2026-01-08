@@ -47,7 +47,7 @@ Transform the manual `validate-feature` meta-skill (Project 34) into an **integr
   - Default behavior in `run-tests.py`, uses `worktree-manager.py`
 - [x] Test results written to `04-outputs/validation-reports/`
   - `test-case-analyzer` writes to this location
-- [x] Langfuse trace fetching uses established patterns (from general-session-scorer)
+- [x] Langfuse trace fetching uses established patterns (from scorer-prompt.md)
   - `fetch-traces.py` with retry logic (5s, 10s, 15s) and GET /traces/{id}
 - [x] Renamed analyzer: `test-case-analyzer` (not trace-analyzer)
   - Created `.claude/agents/test-case-analyzer.md`, removed trace-analyzer

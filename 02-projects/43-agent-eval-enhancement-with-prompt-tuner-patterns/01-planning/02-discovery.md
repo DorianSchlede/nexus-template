@@ -108,7 +108,7 @@
 | File | Changes Needed |
 |------|----------------|
 | `.claude/agents/test-case-analyzer.md` | Add root cause analysis section from failure prompt |
-| `.claude/agents/general-session-scorer.md` | Optionally add failure mode output |
+| `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md` | Optionally add failure mode output |
 
 ### Files to Create
 
@@ -136,9 +136,9 @@
 
 | Pattern | Location | Reuse Strategy |
 |---------|----------|----------------|
-| Session fetching | `general-session-scorer.md` | Copy Langfuse skill invocation pattern |
-| Trace analysis | `general-session-scorer.md` | Reuse trace examination approach |
-| JSON output schema | `general-session-scorer.md` | Follow same structured output pattern |
+| Session fetching | `scorer-prompt.md` | Copy Langfuse skill invocation pattern |
+| Trace analysis | `scorer-prompt.md` | Reuse trace examination approach |
+| JSON output schema | `scorer-prompt.md` | Follow same structured output pattern |
 | Skill structure | `03-skills/langfuse/*` | Copy folder structure and SKILL.md format |
 | Root cause categories | `prompt-failure-modes.ts` | Adapt taxonomy for agent context |
 

@@ -308,7 +308,7 @@ Task(subagent_type="general-purpose", prompt="FIRST: Read 00-system/skills/meta/
 ## Output Artifacts
 
 After completion:
-- `03-skills/langfuse/langfuse-score-session/` - Complete skill
+- `00-system/skills/meta/langfuse-score-session/` - Complete skill
 - `03-working/subagent-testing.md` - Testing notes
 - `04-outputs/validation-results.md` - Test results
 - `04-outputs/performance-metrics.md` - Time/cost analysis

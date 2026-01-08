@@ -31,7 +31,7 @@ Extract the sophisticated analysis patterns from Mutagent's **prompt-tuner pipel
 1. **Enhanced subagents** with deeper analysis capabilities
 2. **Reusable skills** for failure analysis, success analysis, and eval criteria generation
 
-**Key Principle**: No new pipeline - enhance existing subagents (`general-session-scorer`, `test-case-analyzer`) with prompt-tuner's intelligence.
+**Key Principle**: No new pipeline - enhance existing scoring prompt (`scorer-prompt.md`) and `test-case-analyzer` subagent with prompt-tuner's intelligence.
 
 ---
 
@@ -71,7 +71,7 @@ Extract the sophisticated analysis patterns from Mutagent's **prompt-tuner pipel
 
 | Subagent | Enhancement | Based On |
 |----------|-------------|----------|
-| `general-session-scorer` | Add failure mode detection | failure-analysis-prompt |
+| `scorer-prompt.md` | Add failure mode detection | failure-analysis-prompt |
 | `test-case-analyzer` | Root cause analysis, not just PASS/FAIL | failure-analysis-prompt |
 | `agent-failure-analyzer` (NEW) | Dedicated failure analysis | failure-analysis-prompt |
 | `agent-success-analyzer` (NEW) | Dedicated success pattern extraction | success-analysis-prompt |
@@ -129,7 +129,7 @@ Extract the sophisticated analysis patterns from Mutagent's **prompt-tuner pipel
 - [ ] Tested on real session traces
 
 **Nice to have**:
-- [ ] `general-session-scorer` enhanced with failure mode output
+- [ ] `scorer-prompt.md` enhanced with failure mode output
 - [ ] Agent improvement suggestions based on failures
 
 ---
@@ -175,7 +175,7 @@ Medium-Large (4-6 sessions)
 - `types/prompt-success-modes.ts`
 
 **Existing Nexus Assets**:
-- `.claude/agents/general-session-scorer.md`
+- `00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md` (scoring instructions)
 - `.claude/agents/test-case-analyzer.md`
 - `02-projects/36-session-scorer/`
 - `02-projects/41-integrated-subagent-testing-system/`

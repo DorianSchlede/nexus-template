@@ -15,7 +15,7 @@
 - [x] Write 02-discovery.md with initial findings
 - [x] Write 03-plan.md with execution strategy
 - [x] Write 04-steps.md (this file)
-- [x] Create general-session-scorer subagent (`.claude/agents/general-session-scorer.md`)
+- [x] Create scorer prompt (`00-system/skills/meta/langfuse-score-session/prompts/scorer-prompt.md`)
 - [x] Copy P35 outputs to resources (enhanced-scoring-design.md, config-ids.md, p35-setup-complete.md)
 - [x] Align all plan files with P35 dimensions
 
@@ -29,29 +29,29 @@
 - [x] Document session_id: `282286a0f66de884760184bc6aab291e` (10 traces, subagent research session)
 
 ### 1.2 Test Subagent Invocation
-- [ ] Spawn general-session-scorer subagent via Task tool
-- [ ] Verify subagent reads Nexus context
-- [ ] Verify subagent fetches from Langfuse
-- [ ] Check for any errors in invocation
+- [x] Spawn scorer via general-purpose subagent with prompt file read
+- [x] Verify subagent reads scoring instructions
+- [x] Verify subagent fetches from Langfuse
+- [x] Check for any errors in invocation
 
 ### 1.3 Validate Output
-- [ ] Verify JSON output matches schema
-- [ ] Check all 6 dimensions are scored
-- [ ] Verify evidence is cited from traces
-- [ ] Verify rationales are present
-- [ ] Check metadata (confidence, notes)
+- [x] Verify JSON output matches schema
+- [x] Check all 6 dimensions are scored
+- [x] Verify evidence is cited from traces
+- [x] Verify rationales are present
+- [x] Check metadata (confidence, notes)
 
 ### 1.4 Document Findings
-- [ ] Create `03-working/subagent-testing.md`
-- [ ] Note any issues or adjustments needed
-- [ ] Update subagent definition if required
+- [x] Create `03-working/subagent-testing.md`
+- [x] Note any issues or adjustments needed
+- [x] Create `03-working/key-learnings.md` with architecture decisions
 
 ---
 
 ## Phase 2: Orchestrator Implementation
 
 ### 2.1 Score Session CLI
-- [ ] Create `03-skills/langfuse/langfuse-score-session/` folder structure
+- [x] Create `00-system/skills/meta/langfuse-score-session/` folder structure
 - [ ] Create `scripts/score_session.py` CLI
 - [ ] Implement `calculate_overall_quality()` function
 - [ ] Test calculation with mock data
@@ -63,7 +63,7 @@
 - [ ] Test storing all 7 scores
 
 ### 2.3 Skill Definition
-- [ ] Create `SKILL.md` with usage examples
+- [x] Create `SKILL.md` with usage examples
 - [ ] Document CLI options (--session-id, --dry-run)
 - [ ] Add troubleshooting section
 
