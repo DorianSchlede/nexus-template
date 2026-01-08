@@ -1,6 +1,6 @@
 # Nexus CLI and Cleanup - Execution Steps
 
-**Last Updated**: 2026-01-07
+**Last Updated**: 2026-01-08
 
 ---
 
@@ -8,138 +8,166 @@
 
 **Project Location**: `02-projects/31-nexus-cli-and-cleanup/`
 
-**Files to Load for Execution**:
+**Files to Load**:
 - `01-planning/01-overview.md` - Purpose, success criteria
-- `01-planning/04-steps.md` - This file (execution tasks)
-- `01-planning/resume-context.md` - Resume state
+- `01-planning/02-discovery.md` - **DEEP DISCOVERY with line numbers**
+- `01-planning/03-plan.md` - Approach, technical implementation
+- `01-planning/04-steps.md` - This file
 
-**Output Locations**:
-- `03-working/` - Work in progress files
-- `04-outputs/` - Final deliverables
-
----
-
-## Phase 1: CLI Discovery Implementation
-
-### 1.1 Add --discover flag to nexus-loader.py
-
-- [ ] Read current nexus-loader.py argument parser
-- [ ] Add `--discover CATEGORY` argument
-- [ ] Wire up to `discover_skills_in_category()` function
-- [ ] Return formatted output to stdout
-- [ ] Test: `python nexus-loader.py --discover langfuse`
-
-### 1.2 Update XML CLI hints
-
-- [ ] Update `<cli>` tags in build_skills_xml_compact() to show actual command
-- [ ] Change from `load-skill {category} --help` to `python nexus-loader.py --discover {category}`
-
-### 1.3 Document CLI usage in orchestrator.md
-
-- [ ] Add skill discovery section explaining CLI pattern
-- [ ] Show example usage
+**Key Discovery Reference**:
+- nexus-loader.py: L101-121 (args), L128-152 (dispatch)
+- loaders.py: L1375-1478 (discover), L1480-1518 (list categories)
+- session_start.py: L36, L858-862 (timing already exists)
+- orchestrator.md: L244-254 (CLI hints)
+- system-map.md: L82-95 (CLI section)
 
 ---
 
-## Phase 2: Performance Profiling
+## Phase 1: CLI Implementation
 
-### 2.1 Measure hook execution time
+### 1.1 Add --discover and --list-categories flags
 
-- [ ] Add timing instrumentation to session_start.py
-- [ ] Run 10 startup cycles
-- [ ] Record times below
-- [ ] Verify <200ms average
+- [ ] Add arguments to nexus-loader.py (after L120):
+  ```python
+  parser.add_argument('--discover', help='Discover skills in category (e.g., langfuse)')
+  parser.add_argument('--list-categories', action='store_true', help='List all integration categories')
+  ```
 
-**Measurements**:
-```
-Run 1: ___ ms
-Run 2: ___ ms
-Run 3: ___ ms
-Run 4: ___ ms
-Run 5: ___ ms
-Average: ___ ms
-Target: <200ms
-```
+- [ ] Add dispatch logic (after L147):
+  ```python
+  elif args.discover:
+      from nexus.loaders import discover_skills_in_category
+      result = discover_skills_in_category(args.discover, args.base_path)
+  elif args.list_categories:
+      from nexus.loaders import list_integration_categories
+      result = {"categories": list_integration_categories(args.base_path)}
+  ```
 
-### 2.2 Optimize if needed
+### 1.2 Test CLI
 
-- [ ] (Conditional) Profile slow operations if >200ms
-- [ ] (Conditional) Implement fixes
-
----
-
-## Phase 3: Documentation Updates
-
-### 3.1 Update system-map.md
-
-- [ ] Document 6 startup state templates
-- [ ] Add CLI discovery section
-- [ ] Update skills catalog description
-- [ ] Verify all file paths accurate
-
-### 3.2 Review startup templates
-
-- [ ] Check all 6 templates in .claude/hooks/templates/
-- [ ] Ensure instructions are clear
-- [ ] Fix any formatting issues
+- [ ] Test: `python 00-system/core/nexus-loader.py --discover langfuse`
+  - Expected: JSON with 71 skills
+- [ ] Test: `python 00-system/core/nexus-loader.py --list-categories`
+  - Expected: JSON list of integration categories
+- [ ] Test: `python 00-system/core/nexus-loader.py --discover nonexistent`
+  - Expected: Helpful error message
 
 ---
 
-## Phase 4: Project 29 Cleanup
+## Phase 2: Documentation Updates
 
-### 4.1 Create final summary
+### 2.1 Update orchestrator.md (L244-254)
 
-- [ ] Write 04-outputs/SUMMARY.md for Project 29
-- [ ] Document token savings (60.9%)
-- [ ] Document key changes
-- [ ] Document lessons learned
+- [ ] Change CLI discovery section from `load-skill` to actual command:
+  ```bash
+  # List all integration categories
+  python 00-system/core/nexus-loader.py --list-categories
+
+  # Discover skills in a category
+  python 00-system/core/nexus-loader.py --discover langfuse
+
+  # Load specific skill
+  python 00-system/core/nexus-loader.py --skill langfuse-get-trace
+  ```
+
+### 2.2 Update system-map.md (L92-94)
+
+- [ ] Change CLI section from `load-skill {category} --help` to:
+  ```bash
+  # Discover skills in category
+  python 00-system/core/nexus-loader.py --discover {category}
+
+  # List all categories
+  python 00-system/core/nexus-loader.py --list-categories
+  ```
+
+---
+
+## Phase 3: Performance Verification
+
+### 3.1 Read existing performance logs
+
+- [ ] Check `00-system/.cache/session_start_output.log` for timing
+- [ ] Verify average <200ms
+- [ ] Document findings:
+  ```
+  Performance Results:
+  - Average: ___ ms
+  - Target: <200ms
+  - Status: PASS/FAIL
+  ```
+
+*(No new instrumentation needed - session_start.py L858-862 already logs timing)*
+
+---
+
+## Phase 4: Project 29 Closure
+
+### 4.1 Create Project 29 summary
+
+- [ ] Write `02-projects/29-.../04-outputs/SUMMARY.md`:
+  - Token reduction achieved (60.9%)
+  - Key changes implemented
+  - Lessons learned
+  - Deferred items (moved to Project 31)
 
 ### 4.2 Update Project 29 status
 
-- [ ] Change status: PLANNING -> COMPLETE
-- [ ] Update resume-context.md
+- [ ] Change status in 01-overview.md: PLANNING → COMPLETE
+- [ ] Update 04-steps.md to mark deferred items as "Moved to Project 31"
 
-### 4.3 Archive resources
+### 4.3 Archive Project 29
 
-- [ ] Move TRASH folder contents to archive/ or delete
-- [ ] Clean up deprecated files
-- [ ] Run archive-project skill
+- [ ] Run archive-project skill or move to 05-archived/
 
 ---
 
 ## Phase 5: Project 30 Review
 
-- [ ] Check 02-projects/30-improve-plan-project-skill/ status
-- [ ] Determine if complete or needs continuation
-- [ ] Update status if complete
+- [ ] Check `02-projects/30-improve-plan-project-skill/` status
+- [ ] If complete: Update status and archive
+- [ ] If incomplete: Document remaining work
 
 ---
 
-## Phase 6: Completion
+## Phase 6: Cleanup & Completion
 
-- [ ] Update this project status: PLANNING -> COMPLETE
+### 6.1 Cleanup
+
+- [ ] Delete any *.backup files
+- [ ] Remove deprecated TRASH folders if present
+- [ ] Verify no orphaned files
+
+### 6.2 Project 31 completion
+
+- [ ] Update this project status: PLANNING → COMPLETE
+- [ ] Update resume-context.md with final state
 - [ ] Commit all changes
-- [ ] Archive this project
 
 ---
 
 ## Success Criteria
 
-**Must Achieve**:
-- [ ] `python nexus-loader.py --discover langfuse` works
-- [ ] Hook execution <200ms (measured)
-- [ ] system-map.md updated
-- [ ] Project 29 archived
+| Criteria | Test | Status |
+|----------|------|--------|
+| `--discover` works | `nexus-loader.py --discover langfuse` returns 71 skills | [ ] |
+| `--list-categories` works | Returns list of integration categories | [ ] |
+| Performance <200ms | Check cache logs | [ ] |
+| orchestrator.md updated | L244-254 shows executable commands | [ ] |
+| system-map.md updated | L92-94 shows executable commands | [ ] |
+| Project 29 archived | Moved to 05-archived/ with summary | [ ] |
 
 ---
 
 ## Notes
 
-**Current blockers**: None
+**Blockers**: None
 
 **Dependencies**:
-- nexus-loader.py (add --discover flag)
-- loaders.py (discover_skills_in_category already implemented)
+- loaders.py functions already implemented (L1375-1518)
+- session_start.py timing already exists (L858-862)
+
+**Estimated Duration**: 1-2 hours (mostly wiring and docs)
 
 ---
 

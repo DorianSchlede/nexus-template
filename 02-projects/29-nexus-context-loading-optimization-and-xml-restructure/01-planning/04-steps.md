@@ -202,30 +202,30 @@
 - [x] Test all 6 state templates in production
   - first_run, onboarding_incomplete, active_projects, fresh_workspace, workspace_modified, system_ready
 - [x] Test CLI discovery pattern (skills collapsed to categories with counts)
-- [ ] Profile hook performance: <200ms average (deferred)
-- [ ] Run 10 full session cycles (startup → work → close) (deferred - manual testing)
+- [x] Profile hook performance: <200ms average → **MOVED TO PROJECT 31**
+- [x] Run 10 full session cycles → **MOVED TO PROJECT 31**
 
 ### Documentation
 
-- [ ] Update system-map.md with new architecture
-- [ ] Document CLI usage in relevant skill files
-- [ ] Update orchestrator.md inline comments
-- [ ] Create migration notes for any breaking changes
+- [x] Update system-map.md with new architecture → **MOVED TO PROJECT 31**
+- [x] Document CLI usage in relevant skill files → **MOVED TO PROJECT 31**
+- [x] Update orchestrator.md inline comments → **MOVED TO PROJECT 31**
+- [x] Create migration notes for any breaking changes → N/A (no breaking changes)
 
 ### Cleanup
 
-- [ ] Delete backup files (*.backup)
-- [ ] Remove feature flags if stable
-- [ ] Archive project resources to 04-outputs/
+- [x] Delete backup files (*.backup) → **MOVED TO PROJECT 31**
+- [x] Remove feature flags if stable → N/A (no feature flags used)
+- [x] Archive project resources to 04-outputs/ → **MOVED TO PROJECT 31**
 
 ---
 
 ## Phase 8: Completion
 
-- [ ] Update project status: PLANNING → COMPLETE
-- [ ] Create final summary in 04-outputs/SUMMARY.md
+- [x] Update project status: PLANNING → **COMPLETE** (remaining work in Project 31)
+- [x] Create final summary in 04-outputs/SUMMARY.md → **MOVED TO PROJECT 31**
 - [ ] Run close-session to capture learnings
-- [ ] Suggest archive-project
+- [ ] Archive project (after Project 31 completes remaining tasks)
 
 ---
 

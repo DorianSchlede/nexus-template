@@ -1,6 +1,6 @@
 # Nexus CLI and Cleanup - Plan
 
-**Last Updated**: 2026-01-07
+**Last Updated**: 2026-01-08
 
 ---
 
@@ -8,146 +8,163 @@
 
 **Load Before Reading**:
 - `01-planning/01-overview.md` - Purpose and success criteria
-- `01-planning/02-discovery.md` - Dependencies discovered
+- `01-planning/02-discovery.md` - **DEEP DISCOVERY with exact line numbers**
 
 **Background**:
-This project completes remaining work from Project 29 (Context Loading Optimization) which achieved 60.9% token reduction. Several items were deferred during implementation:
-- CLI discovery hint exists but isn't executable
-- Performance not measured
-- Documentation not updated
-- Project 29 not formally archived
+This project completes remaining work from Project 29 (Context Loading Optimization) which achieved 60.9% token reduction. The deep discovery revealed:
+- CLI discovery functions exist but aren't wired to CLI
+- Performance instrumentation already exists (no new code needed)
+- Documentation has non-executable CLI hints
+- Project 29 ready for archival
+
+---
+
+## Deep Discovery Summary
+
+### What's Already Implemented (No Work Needed)
+
+| Component | Location | Status |
+|-----------|----------|--------|
+| `discover_skills_in_category()` | loaders.py L1375-1478 | ✅ Fully implemented |
+| `list_integration_categories()` | loaders.py L1480-1518 | ✅ Fully implemented |
+| Performance timing | session_start.py L36, L858-862 | ✅ Already instrumented |
+| 6 MECE state templates | .claude/hooks/templates/ | ✅ All implemented |
+| add-integration skill | 00-system/skills/system/add-integration/ | ✅ Full 622 lines |
+
+### What Needs Implementation
+
+| Component | Location | Change Required |
+|-----------|----------|-----------------|
+| `--discover` flag | nexus-loader.py L101-121, L128-152 | Add argument + dispatch |
+| `--list-categories` flag | nexus-loader.py L101-121, L128-152 | Add argument + dispatch |
+| CLI hint update | orchestrator.md L244-254 | Change to actual command |
+| CLI hint update | system-map.md L82-95 | Change to actual command |
 
 ---
 
 ## Approach
 
-**Strategy**: Incremental completion with immediate testing
+**Strategy**: Minimal wiring with immediate testing
 
-1. **CLI First** - Implement the --discover flag since it's a concrete deliverable that unblocks skill discovery
-2. **Measure** - Profile hook performance before any optimization (baseline)
-3. **Document** - Update docs to reflect current state
-4. **Close** - Archive completed projects properly
+1. **CLI Wiring** - Add two flags that connect to existing functions
+2. **Doc Updates** - Fix CLI hints to show executable commands
+3. **Verify Performance** - Read existing logs (no new instrumentation)
+4. **Close** - Archive completed projects
 
-**Principle**: Ship working code, not perfect code. Each phase delivers testable value.
+**Principle**: The heavy lifting is done. This is just wiring and documentation.
 
 ---
 
 ## Key Decisions
 
-| Decision | Choice | Why |
-|----------|--------|-----|
-| CLI command style | `--discover CATEGORY` flag | Consistent with existing nexus-loader.py patterns |
-| Update XML hints | Yes, change to actual command | Prevents confusion when Claude sees non-executable hints |
-| Performance target | <200ms | Original Project 29 requirement |
-| Project 29 status | Archive after summary | Formal closure for project tracking |
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| CLI command style | `--discover CATEGORY` | Consistent with nexus-loader.py patterns |
+| Add list-categories | `--list-categories` | Function exists at L1480, useful for discovery |
+| Skip timing code | Already exists | session_start.py L858-862 logs timing |
+| Update XML hints | Yes | Prevents confusion with non-executable hints |
+| JSON output | `json.dumps(result, indent=2)` | Follow existing pattern |
 
 ---
 
-## Dependencies & Links
+## Technical Implementation
 
-**Files Impacted**:
-- `00-system/core/nexus-loader.py` - Add --discover argument
-- `00-system/core/nexus/loaders.py` - discover_skills_in_category() already implemented
-- `00-system/core/orchestrator.md` - Add skill discovery docs
-- `00-system/system-map.md` - Update architecture docs
-- `.claude/hooks/session_start.py` - Add timing if not present
+### nexus-loader.py Changes
 
-**External Systems**:
-- None (all local Python)
-
-**Related Projects**:
-- **Project 29**: 02-projects/29-nexus-context-loading-optimization-and-xml-restructure/
-- **Project 30**: 02-projects/30-improve-plan-project-skill/
-
----
-
-## Technical Architecture
-
-**CLI Discovery Flow**:
-```
-User/Claude runs: python nexus-loader.py --discover langfuse
-                         │
-                         ▼
-              Parse --discover argument
-                         │
-                         ▼
-         Call discover_skills_in_category("langfuse")
-                         │
-                         ▼
-        Scan 03-skills/langfuse/**SKILL.md
-                         │
-                         ▼
-        Extract YAML frontmatter (name, description)
-                         │
-                         ▼
-        Format and print to stdout
-```
-
-**Performance Measurement**:
+**Add arguments (after L120)**:
 ```python
-# In session_start.py
-import time
-start = time.perf_counter()
-# ... hook execution ...
-duration_ms = (time.perf_counter() - start) * 1000
-logging.info(f"Hook execution: {duration_ms:.1f}ms")
+parser.add_argument('--discover', help='Discover skills in category (e.g., langfuse)')
+parser.add_argument('--list-categories', action='store_true', help='List all integration categories')
+```
+
+**Add dispatch (after L147)**:
+```python
+elif args.discover:
+    from nexus.loaders import discover_skills_in_category
+    result = discover_skills_in_category(args.discover, args.base_path)
+elif args.list_categories:
+    from nexus.loaders import list_integration_categories
+    result = {"categories": list_integration_categories(args.base_path)}
+```
+
+### orchestrator.md Changes (L244-254)
+
+**From**:
+```bash
+load-skill langfuse --help
+```
+
+**To**:
+```bash
+python 00-system/core/nexus-loader.py --discover langfuse
+python 00-system/core/nexus-loader.py --list-categories
+```
+
+### system-map.md Changes (L92-94)
+
+**From**:
+```bash
+load-skill {category} --help
+```
+
+**To**:
+```bash
+python 00-system/core/nexus-loader.py --discover {category}
 ```
 
 ---
 
-## Implementation Strategy
+## Inherited from Project 29
 
-**Phase 1: CLI Discovery (Day 1)**
-- Add --discover flag to nexus-loader.py
-- Test with `--discover langfuse`
-- Update XML hints in build_skills_xml_compact()
+### Remaining Tasks (Moved Here)
 
-**Phase 2: Performance (Day 1)**
-- Add timing to session_start.py
-- Run 5-10 startup cycles
-- Document results
+From Project 29 Phase 7-8:
+- [ ] Profile hook performance: <200ms average
+- [ ] Update system-map.md with new architecture
+- [ ] Document CLI usage in relevant skill files
+- [ ] Update orchestrator.md inline comments
+- [ ] Delete backup files (*.backup)
+- [ ] Archive project resources to 04-outputs/
+- [ ] Create final summary in 04-outputs/SUMMARY.md
 
-**Phase 3: Documentation (Day 1-2)**
-- Update system-map.md with new architecture
-- Review and fix startup templates
+### Completed in Project 29
 
-**Phase 4: Cleanup (Day 2)**
-- Write Project 29 summary
-- Archive Project 29
-- Review Project 30 status
-
-**Testing Approach**:
-- CLI: `python nexus-loader.py --discover langfuse` returns 71 skills
-- Performance: Average <200ms across 10 runs
-- Docs: Manual review for accuracy
+- [x] Token reduction ≥30% → **ACHIEVED: 60.9% reduction**
+- [x] Routing accuracy ≥95% → Skills routing verified
+- [x] MECE state templates → 6 startup states implemented
+- [x] CLI discovery pattern → Skills collapsed to categories
+- [x] Merge feature branch to main
 
 ---
 
 ## Risk Assessment
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Hook performance >200ms | Medium | Profile and optimize hot paths |
-| Breaking existing functionality | High | Test after each change |
-| Documentation drift | Low | Update docs in same PR as code |
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Breaking existing args | LOW | High | Test all args after changes |
+| Category not found | LOW | Low | Function returns helpful message |
+| Import errors | LOW | Medium | Functions already exported |
 
 ---
 
-## Open Questions
+## Open Questions (All Resolved)
 
-- [x] Should we keep `load-skill` syntax or switch to `--discover`? → **Use --discover (consistent with CLI)**
-- [ ] Should we add `--list-categories` flag too?
-- [ ] How to handle category not found errors?
+- [x] Keep `load-skill` or `--discover`? → **Use --discover**
+- [x] Add `--list-categories`? → **Yes, function exists**
+- [x] Add timing instrumentation? → **No, already exists**
+- [x] JSON or text output? → **JSON with indent=2**
+- [x] Category not found handling? → **Function returns helpful message**
 
 ---
 
 ## Success Metrics
 
-1. **CLI Works**: `python nexus-loader.py --discover langfuse` outputs skill list
-2. **Performance**: Hook execution <200ms (measured)
-3. **Documentation**: system-map.md accurately reflects current architecture
-4. **Closure**: Project 29 archived with summary
+1. **CLI Works**: `python nexus-loader.py --discover langfuse` outputs 71 skills
+2. **Categories Work**: `python nexus-loader.py --list-categories` lists integrations
+3. **Performance**: Verify <200ms from existing logs
+4. **Documentation**: orchestrator.md and system-map.md show executable commands
+5. **Closure**: Project 29 archived with summary
 
 ---
 
-*Next: Execute phases in 04-steps.md*
+*Next: Execute in 04-steps.md*
