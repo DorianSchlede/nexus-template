@@ -3,10 +3,10 @@
 # Purpose: Store persistent user preferences (loaded every session)
 # Updated: Set during onboarding, modified anytime
 
-smart_default: false
+smart_default: true
 
 user_preferences:
-  language: "English"
+  language: ""
   timezone: ""
   date_format: "YYYY-MM-DD"
 
@@ -14,7 +14,7 @@ user_preferences:
     python_cmd: "python"
 
 onboarding:
-  status: "skipped"
+  status: "not_started"
   current_session: 0
   last_completed: null
   sessions_completed: []
@@ -22,8 +22,8 @@ onboarding:
 learning_tracker:
   session_count: 0
   completed:
-    setup_memory: true
-    setup_workspace: true
+    setup_memory: false
+    setup_workspace: false
     learn_integrations: false
     learn_projects: false
     learn_skills: false

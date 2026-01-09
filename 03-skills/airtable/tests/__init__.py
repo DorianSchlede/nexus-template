@@ -1,1 +1,0 @@
-# Airtable Skills Test Suite
