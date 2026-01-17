@@ -1,0 +1,24 @@
+name: Skill
+description: |
+  Create new Nexus skills or automation capabilities.
+  Use when: building reusable workflows, automation, new commands,
+  AI-executable procedures, skill chains, orchestrators.
+
+discovery:
+  skill: create-skill
+  skill_load_command: "python 00-system/core/nexus-loader.py --skill create-skill"
+  inline: false
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "python 00-system/mental-models/scripts/select_mental_models.py --format brief"
+  max_rediscovery_rounds: 1
+
+features:
+  ears_requirements: true
+  incose_quality: true
+  correctness_properties: true

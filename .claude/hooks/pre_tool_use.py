@@ -94,7 +94,7 @@ def parse_shortcut_for_type(shortcut):
 
     Formats:
     - ~agent:meta-architect -> type=agent, id=meta-architect
-    - ~task:create-project -> type=task, id=create-project
+    - ~task:plan-build -> type=task, id=plan-build
     - ~skill:paper-search -> type=skill, id=paper-search
     - ~workflow:research -> type=workflow, id=research
 

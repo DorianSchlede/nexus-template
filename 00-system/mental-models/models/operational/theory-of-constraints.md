@@ -7,7 +7,7 @@ when_to_use:
   - Throughput improvement
   - System optimization
   - Manufacturing
-  - Project management
+  - Build management
 best_for: Maximizing output by focusing on the bottleneck
 ---
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """
 SessionStart Hook - MVC v3.2 + Resume Enhancement (Minimum Viable Context)
 
@@ -8,11 +9,11 @@ Key changes in v3.2:
 - Skill priority CORRECTED: 00-system/skills/ > 03-skills/
 - Extended never_do rules from create-skill
 - Plan/Execute mode rules added
-- Routing: Skill -> Integration -> Project
+- Routing: Skill -> Integration -> Build
 
 Phase 2 Resume Enhancement:
 - Reads precompact_state.json (FLAT schema) from PreCompact hook
-- Loads resume-context.md from detected project
+- Loads resume-context.md from detected build
 - Injects catastrophic loading instructions via additionalContext
 - Performance target: <200ms execution time
 
@@ -46,13 +47,55 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.http import send_to_server
 from utils.server import ensure_server_running
-from utils.transcript import parse_transcript_for_project, find_project_by_session_id
+from utils.transcript import parse_transcript_for_build, find_build_by_session_id
 from utils.xml import escape_xml_content, escape_xml_attribute, load_file_to_xml
 
 
-def determine_context_mode(source: str, transcript_path: str, project_dir: str, session_id: str = "") -> dict:
+def extract_user_preferences(config_path: Path) -> dict:
     """
-    Determine context mode based on session source and project detection.
+    Extract user preferences from user-config.yaml using regex (no yaml dependency).
+
+    Returns:
+        Dict with language, timezone, date_format (empty strings if not set)
+    """
+    preferences = {
+        "language": "",
+        "timezone": "",
+        "date_format": "YYYY-MM-DD"
+    }
+
+    if not config_path.exists():
+        return preferences
+
+    try:
+        content = config_path.read_text(encoding="utf-8")
+
+        # Extract language (handles both quoted and unquoted values)
+        lang_match = re.search(r'language:\s*["\']?([^"\'\n]*)["\']?', content)
+        if lang_match and lang_match.group(1).strip():
+            preferences["language"] = lang_match.group(1).strip()
+
+        # Extract timezone
+        tz_match = re.search(r'timezone:\s*["\']?([^"\'\n]*)["\']?', content)
+        if tz_match and tz_match.group(1).strip():
+            preferences["timezone"] = tz_match.group(1).strip()
+
+        # Extract date_format
+        df_match = re.search(r'date_format:\s*["\']?([^"\'\n]*)["\']?', content)
+        if df_match and df_match.group(1).strip():
+            preferences["date_format"] = df_match.group(1).strip()
+
+        logging.info(f"User preferences extracted: language={preferences['language'] or 'not set'}")
+
+    except Exception as e:
+        logging.warning(f"Failed to extract user preferences: {e}")
+
+    return preferences
+
+
+def determine_context_mode(source: str, transcript_path: str, build_dir: str, session_id: str = "") -> dict:
+    """
+    Determine context mode based on session source and build detection.
 
     Detection priority:
     1. session_id match in resume-context.md (exact, bulletproof)
@@ -60,78 +103,78 @@ def determine_context_mode(source: str, transcript_path: str, project_dir: str, 
 
     Returns dict with:
     - mode: "startup" | "compact"
-    - project_id: str | None
+    - build_id: str | None
     - phase: "planning" | "execution" | None
-    - skill: "plan-project" | "execute-project" | None
+    - skill: "plan-build" | "execute-build" | None
     - action: "display_menu" | "continue_working"
 
     Cases:
     1. new → startup + display_menu
-    2. compact + project + planning → compact + plan-project + continue
-    3. compact + project + execution → compact + execute-project + continue
-    4. compact + no_project → startup + continue_working
-    5. resume + project + planning → compact + plan-project + continue
-    6. resume + project + execution → compact + execute-project + continue
-    7. resume + no_project → startup + display_menu (tries most recent first)
+    2. compact + build + planning → compact + plan-build + continue
+    3. compact + build + execution → compact + execute-build + continue
+    4. compact + no_build → startup + continue_working
+    5. resume + build + planning → compact + plan-build + continue
+    6. resume + build + execution → compact + execute-build + continue
+    7. resume + no_build → startup + display_menu (tries most recent first)
 
-    NOTE: Once in a project, you STAY in project context. No skill switch detection.
+    NOTE: Once in a build, you STAY in build context. No skill switch detection.
     """
     # Rule 1: New session = STARTUP with menu
     if source == "new":
         logging.info("Case 1: new session → startup + display_menu")
         return {
             "mode": "startup",
-            "project_id": None,
+            "build_id": None,
             "phase": None,
             "skill": None,
             "action": "display_menu"
         }
 
-    # Rule 2: PRIMARY - Find project by session_id match (bulletproof)
-    projects_path = str(Path(project_dir) / "02-projects")
-    last_project = find_project_by_session_id(projects_path, session_id)
+    # Rule 2: PRIMARY - Find build by session_id match (bulletproof)
+    builds_path = str(Path(build_dir) / "02-builds")
+    last_build = find_build_by_session_id(builds_path, session_id)
 
     # Rule 2b: FALLBACK - Parse transcript for tool_use patterns
-    if not last_project:
-        last_project, _ = parse_transcript_for_project(transcript_path)
-        if last_project:
-            logging.info(f"Fallback: found project {last_project} from transcript")
+    if not last_build:
+        last_build, _ = parse_transcript_for_build(transcript_path)
+        if last_build:
+            logging.info(f"Fallback: found build {last_build} from transcript")
 
-    # Rule 3: Compact without project = STARTUP + continue_working
-    # NOTE: We no longer check for skill switches - once in a project, stay in project
-    if source == "compact" and not last_project:
-        logging.info("Case 5-6: compact + no_project → startup + continue_working")
+    # Rule 3: Compact without build = STARTUP + continue_working
+    # NOTE: We no longer check for skill switches - once in a build, stay in build
+    if source == "compact" and not last_build:
+        logging.info("Case 5-6: compact + no_build → startup + continue_working")
         return {
             "mode": "startup",
-            "project_id": None,
+            "build_id": None,
             "phase": None,
             "skill": None,
             "action": "continue_working"
         }
 
-    # Rule 5: Resume without project = STARTUP with menu
-    if source == "resume" and not last_project:
-        # For resume, try most recent project by timestamp
-        last_project = find_most_recent_project(project_dir)
-        if not last_project:
-            logging.info("Case 10: resume + no_project → startup + display_menu")
+    # Rule 5: Resume without build = STARTUP with menu
+    if source == "resume" and not last_build:
+        # For resume, try most recent build by timestamp
+        last_build = find_most_recent_build(build_dir)
+        if not last_build:
+            logging.info("Case 10: resume + no_build → startup + display_menu")
             return {
                 "mode": "startup",
-                "project_id": None,
+                "build_id": None,
                 "phase": None,
                 "skill": None,
                 "action": "display_menu"
             }
 
-    # Rule 6: Project work detected - determine phase
-    if last_project:
-        detected_skill = detect_project_phase(project_dir, last_project)
-        phase = "planning" if detected_skill == "plan-project" else "execution"
+    # Rule 6: Build work detected - determine phase
+    if last_build:
+        detected_skill = detect_build_phase(build_dir, last_build)
+        phase = "planning" if detected_skill == "plan-build" else "execution"
 
-        logging.info(f"Cases 2-3/7-9: {source} + project={last_project} + phase={phase} → compact + {detected_skill} + continue_working")
+        logging.info(f"Cases 2-3/7-9: {source} + build={last_build} + phase={phase} → compact + {detected_skill} + continue_working")
         return {
             "mode": "compact",
-            "project_id": last_project,
+            "build_id": last_build,
             "phase": phase,
             "skill": detected_skill,
             "action": "continue_working"
@@ -141,72 +184,72 @@ def determine_context_mode(source: str, transcript_path: str, project_dir: str, 
     logging.info("Fallback: startup + display_menu")
     return {
         "mode": "startup",
-        "project_id": None,
+        "build_id": None,
         "phase": None,
         "skill": None,
         "action": "display_menu"
     }
 
 
-def find_most_recent_project(project_dir: str) -> str | None:
+def find_most_recent_build(build_dir: str) -> str | None:
     """
-    Find the most recently updated non-COMPLETE project for RESUME source.
+    Find the most recently updated non-COMPLETE build for RESUME source.
 
-    Uses project_state utility to filter by status (excludes COMPLETE by default).
+    Uses build_state utility to filter by status (excludes COMPLETE by default).
     Falls back to legacy implementation if utility not available.
 
     Returns:
-        Project ID or None if no projects found
+        Build ID or None if no builds found
     """
     # Try enhanced detection first
     try:
-        from utils.project_state import find_most_recent_project_enhanced
+        from utils.build_state import find_most_recent_build_enhanced
 
-        projects_dir = Path(project_dir) / "02-projects"
+        builds_dir = Path(build_dir) / "02-builds"
 
-        if not projects_dir.exists():
+        if not builds_dir.exists():
             return None
 
-        # Use enhanced detection (excludes COMPLETE projects)
-        state = find_most_recent_project_enhanced(
-            projects_dir,
+        # Use enhanced detection (excludes COMPLETE builds)
+        state = find_most_recent_build_enhanced(
+            builds_dir,
             exclude_complete=True,
             exclude_archived=True
         )
 
         if state:
-            project_folder = f"{state.project_id}-{state.name.lower().replace(' ', '-')}"
-            logging.info(f"Most recent project: {project_folder} ({state.progress_percent}% complete, status={state.status})")
-            return project_folder
+            build_folder = f"{state.build_id}-{state.name.lower().replace(' ', '-')}"
+            logging.info(f"Most recent build: {build_folder} ({state.progress_percent}% complete, status={state.status})")
+            return build_folder
         else:
-            logging.info("No active projects found")
+            logging.info("No active builds found")
             return None
 
     except ImportError:
         # Fallback to legacy implementation
-        logging.warning("project_state utility not available, using legacy most-recent detection")
+        logging.warning("build_state utility not available, using legacy most-recent detection")
         pass
 
     # Legacy fallback implementation
-    projects_dir = Path(project_dir) / "02-projects"
+    builds_dir = Path(build_dir) / "02-builds"
 
-    if not projects_dir.exists():
+    if not builds_dir.exists():
         return None
 
-    most_recent_project = None
+    most_recent_build = None
     most_recent_time = None
 
-    for project_path in projects_dir.iterdir():
-        if not project_path.is_dir():
+    for build_path in builds_dir.iterdir():
+        if not build_path.is_dir():
             continue
 
-        # Skip archived projects
-        project_name = project_path.name
-        if project_name.startswith("_") or project_name.startswith("."):
+        # Skip archived builds
+        build_name = build_path.name
+        if build_name.startswith("_") or build_name.startswith("."):
             continue
 
         # Check for resume-context.md
-        resume_file = project_path / "01-planning" / "resume-context.md"
+        resume_file = build_path / "01-planning" / "resume-context.md"
         if not resume_file.exists():
             continue
 
@@ -222,20 +265,20 @@ def find_most_recent_project(project_dir: str) -> str | None:
 
                 if most_recent_time is None or timestamp > most_recent_time:
                     most_recent_time = timestamp
-                    most_recent_project = project_name
+                    most_recent_build = build_name
         except Exception as e:
-            logging.warning(f"Error reading resume-context.md for {project_name}: {e}")
+            logging.warning(f"Error reading resume-context.md for {build_name}: {e}")
             continue
 
-    if most_recent_project:
-        logging.info(f"Most recent project: {most_recent_project} (last_updated: {most_recent_time})")
+    if most_recent_build:
+        logging.info(f"Most recent build: {most_recent_build} (last_updated: {most_recent_time})")
     else:
-        logging.info("No projects with resume-context.md found")
+        logging.info("No builds with resume-context.md found")
 
-    return most_recent_project
+    return most_recent_build
 
 
-def detect_project_phase(project_dir: str, project_id: str) -> str:
+def detect_build_phase(build_dir: str, build_id: str) -> str:
     """
     Detect planning vs execution phase with metadata-first approach.
 
@@ -243,29 +286,29 @@ def detect_project_phase(project_dir: str, project_id: str) -> str:
     1. resume-context.md current_phase + next_action (explicit, authoritative)
     2. 04-steps.md Phase 1 checkbox analysis (fallback)
 
-    Returns: "plan-project" or "execute-project"
+    Returns: "plan-build" or "execute-build"
     """
     # Import here to avoid circular dependency
     try:
-        from utils.project_state import detect_phase_from_metadata
+        from utils.build_state import detect_phase_from_metadata
 
-        project_path = Path(project_dir) / "02-projects" / project_id
-        phase, skill = detect_phase_from_metadata(project_path)
+        build_path = Path(build_dir) / "02-builds" / build_id
+        phase, skill = detect_phase_from_metadata(build_path)
 
-        logging.info(f"Detected phase for {project_id}: {phase} → {skill}")
+        logging.info(f"Detected phase for {build_id}: {phase} → {skill}")
         return skill
 
     except ImportError:
         # Fallback to legacy logic if utils not available
-        logging.warning("project_state utility not available, using legacy phase detection")
+        logging.warning("build_state utility not available, using legacy phase detection")
         pass
 
     # Legacy fallback implementation
-    steps_file = Path(project_dir) / "02-projects" / project_id / "01-planning" / "04-steps.md"
+    steps_file = Path(build_dir) / "02-builds" / build_id / "01-planning" / "04-steps.md"
 
     if not steps_file.exists():
-        logging.info(f"No 04-steps.md found for {project_id} - defaulting to plan-project")
-        return "plan-project"
+        logging.info(f"No 04-steps.md found for {build_id} - defaulting to plan-build")
+        return "plan-build"
 
     try:
         content = steps_file.read_text(encoding='utf-8')
@@ -273,8 +316,8 @@ def detect_project_phase(project_dir: str, project_id: str) -> str:
         # Find Phase 1 section (stops at Phase 2 or end of file)
         phase1_match = re.search(r'## Phase 1[^\n]*\n(.*?)(?=\n## Phase 2|\n## Phase|\Z)', content, re.DOTALL)
         if not phase1_match:
-            logging.info(f"No Phase 1 section found in {project_id}/04-steps.md - defaulting to plan-project")
-            return "plan-project"
+            logging.info(f"No Phase 1 section found in {build_id}/04-steps.md - defaulting to plan-build")
+            return "plan-build"
 
         phase1_content = phase1_match.group(1)
 
@@ -282,23 +325,23 @@ def detect_project_phase(project_dir: str, project_id: str) -> str:
         total_tasks = len(re.findall(r'- \[[ x]\]', phase1_content))
         completed_tasks = len(re.findall(r'- \[x\]', phase1_content))
 
-        logging.info(f"Phase 1 progress for {project_id}: {completed_tasks}/{total_tasks} tasks complete")
+        logging.info(f"Phase 1 progress for {build_id}: {completed_tasks}/{total_tasks} tasks complete")
 
         if total_tasks > 0 and completed_tasks == total_tasks:
-            logging.info(f"Phase 1 COMPLETE for {project_id} - using execute-project")
-            return "execute-project"
+            logging.info(f"Phase 1 COMPLETE for {build_id} - using execute-build")
+            return "execute-build"
 
-        logging.info(f"Phase 1 INCOMPLETE for {project_id} - using plan-project")
-        return "plan-project"
+        logging.info(f"Phase 1 INCOMPLETE for {build_id} - using plan-build")
+        return "plan-build"
 
     except Exception as e:
-        logging.error(f"Error detecting phase for {project_id}: {e}")
-        return "plan-project"
+        logging.error(f"Error detecting phase for {build_id}: {e}")
+        return "plan-build"
 
 
-def load_resume_context(project_dir: str, project_id: str) -> dict | None:
+def load_resume_context(build_dir: str, build_id: str) -> dict | None:
     """
-    Load resume-context.md from detected project.
+    Load resume-context.md from detected build.
 
     Checks both new name (resume-context.md) and legacy name (_resume.md)
     for backward compatibility during migration.
@@ -306,16 +349,16 @@ def load_resume_context(project_dir: str, project_id: str) -> dict | None:
     Returns:
         Dict with files_to_load list or None if file doesn't exist/invalid
     """
-    project_path = Path(project_dir) / "02-projects" / project_id / "01-planning"
+    build_path = Path(build_dir) / "02-builds" / build_id / "01-planning"
 
     # Check new name first
-    new_file = project_path / "resume-context.md"
-    old_file = project_path / "_resume.md"
+    new_file = build_path / "resume-context.md"
+    old_file = build_path / "_resume.md"
 
     resume_file = new_file if new_file.exists() else (old_file if old_file.exists() else None)
 
     if not resume_file:
-        logging.info(f"No resume file found for project {project_id}")
+        logging.info(f"No resume file found for build {build_id}")
         return None
 
     try:
@@ -362,7 +405,7 @@ def load_instruction_template(name: str, **kwargs) -> str:
 
     Args:
         name: Template name (without .md extension)
-        **kwargs: Format variables (project_id, current_task, etc.)
+        **kwargs: Format variables (build_id, current_task, etc.)
 
     Returns:
         Formatted template content
@@ -383,18 +426,18 @@ def load_instruction_template(name: str, **kwargs) -> str:
 # XML Context Builders (Phase 3 - XML Context Restructure)
 # ============================================================================
 
-def build_startup_xml(project_dir: str, session_id: str, source: str, action: str = "display_menu") -> str:
+def build_startup_xml(build_dir: str, session_id: str, source: str, action: str = "display_menu") -> str:
     """
     Build complete STARTUP mode XML context.
 
     STARTUP mode is for:
     - Fresh sessions (source="new")
-    - Non-project continuations (compact/resume without active project)
+    - Non-build continuations (compact/resume without active build)
 
     Token target: ~20K max
 
     Args:
-        project_dir: Root project directory
+        build_dir: Root build directory
         session_id: Current session UUID
         source: Session source (new|compact|resume)
         action: "display_menu" or "continue_working"
@@ -402,7 +445,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
     Returns:
         Complete XML context string
     """
-    base_path = Path(project_dir)
+    base_path = Path(build_dir)
     timestamp = datetime.now().isoformat()
 
     # Load required data
@@ -412,7 +455,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_projects, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction
+        from nexus.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction
         from nexus.state import (
             check_goals_personalized,
             check_workspace_configured,
@@ -440,7 +483,7 @@ def build_startup_xml(project_dir: str, session_id: str, source: str, action: st
 NEXUS OPERATING SYSTEM - PRIMARY CONTEXT INJECTION
 ================================================================================
 This is the HYPER IMPORTANT primary working mode of Claude Code operating
-inside the NEXUS system. All routing decisions, skill loading, and project
+inside the NEXUS system. All routing decisions, skill loading, and build
 management flows through this context.
 
 MODE: startup ({source} session)
@@ -449,6 +492,19 @@ ACTION: {action}
 -->
 
   <session id="{escape_xml_attribute(session_id)}" source="{escape_xml_attribute(source)}" timestamp="{timestamp}"/>''')
+
+    # User preferences (language, timezone) - CRITICAL for non-English users
+    config_path = base_path / "01-memory" / "user-config.yaml"
+    user_prefs = extract_user_preferences(config_path)
+
+    if user_prefs["language"]:
+        xml_parts.append(f'''
+  <user-preferences>
+    <language importance="CRITICAL">{escape_xml_content(user_prefs["language"])}</language>
+    <instruction>You MUST respond in {escape_xml_content(user_prefs["language"])} for ALL communication with the user.</instruction>
+  </user-preferences>''')
+    if user_prefs["timezone"]:
+        xml_parts.append(f'''    <timezone>{escape_xml_content(user_prefs["timezone"])}</timezone>''')
 
     # Orchestrator content
     orchestrator_path = base_path / "00-system" / "core" / "orchestrator.md"
@@ -465,34 +521,47 @@ ACTION: {action}
 {goals_content}
   </user-goals>''')
 
-    # Active projects (include ACTIVE for backwards compatibility with older projects)
-    all_projects = scan_projects(str(base_path), minimal=True)
-    active_projects = [p for p in all_projects if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")]
+    # Active builds (include ACTIVE for backwards compatibility with older builds)
+    all_builds = scan_builds(str(base_path), minimal=True)
+    active_builds = [p for p in all_builds if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")]
 
-    xml_parts.append('\n  <active-projects>')
-    for proj in active_projects:
+    xml_parts.append('\n  <active-builds>')
+    for proj in active_builds:
         proj_id = escape_xml_attribute(str(proj.get("id", "")))
         proj_name = escape_xml_content(str(proj.get("name", "")))
         proj_status = escape_xml_attribute(str(proj.get("status", "")))
         proj_progress = proj.get("progress", 0)
         proj_task = escape_xml_content(str(proj.get("current_task", "")))
-        xml_parts.append(f'''    <project id="{proj_id}" status="{proj_status}" progress="{proj_progress}">
+        xml_parts.append(f'''    <build id="{proj_id}" status="{proj_status}" progress="{proj_progress}">
       <name>{proj_name}</name>
       <current-task>{proj_task}</current-task>
-    </project>''')
-    xml_parts.append('  </active-projects>')
+    </build>''')
+    xml_parts.append('  </active-builds>')
 
     # Skills (from build_skills_xml_compact - CLI discovery pattern)
     skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
-    # State detection
+    # State detection with detailed logging
+    from nexus.utils import is_template_file
+
+    goals_is_template = is_template_file(str(goals_path))
     goals_personalized = check_goals_personalized(goals_path)
+
+    workspace_map_path = base_path / "04-workspace" / "workspace-map.md"
+    workspace_is_template = is_template_file(str(workspace_map_path))
     workspace_configured = check_workspace_configured(base_path)
+
+    logging.info(f"State detection: goals_path={goals_path}, exists={goals_path.exists()}")
+    logging.info(f"State detection: goals_is_template={goals_is_template}, goals_personalized={goals_personalized}")
+    logging.info(f"State detection: workspace_map_path={workspace_map_path}, exists={workspace_map_path.exists()}")
+    logging.info(f"State detection: workspace_is_template={workspace_is_template}, workspace_configured={workspace_configured}")
 
     config_path = base_path / "01-memory" / "user-config.yaml"
     learning_completed = extract_learning_completed(config_path)
     pending_onboarding = build_pending_onboarding(learning_completed)
+
+    logging.info(f"State detection: pending_onboarding count={len(pending_onboarding)}")
 
     onboarding_complete = len(pending_onboarding) == 0
 
@@ -515,9 +584,9 @@ ACTION: {action}
     xml_parts.append('  </state>')
 
     # Stats
-    total_skills = len([s for s in scan_projects(str(base_path), minimal=True)])  # Approximate
+    total_skills = len([s for s in scan_builds(str(base_path), minimal=True)])  # Approximate
     xml_parts.append(f'''
-  <stats projects="{len(all_projects)}" active="{len(active_projects)}" skills="50"/>''')
+  <stats builds="{len(all_builds)}" active="{len(active_builds)}" skills="50"/>''')
 
     # Action and instruction
     xml_parts.append(f'''
@@ -526,9 +595,9 @@ ACTION: {action}
     # Build context for MECE state templates
     mece_context = {
         "pending_onboarding": pending_onboarding,
-        "active_projects": active_projects,
+        "active_builds": active_builds,
         "workspace_needs_validation": False,  # TODO: detect workspace changes
-        "total_projects": len(all_projects),
+        "total_builds": len(all_builds),
         "goals_personalized": goals_personalized,
     }
 
@@ -545,36 +614,36 @@ ACTION: {action}
     return '\n'.join(xml_parts)
 
 
-def build_compact_xml(project_dir: str, session_id: str, source: str, mode_result: dict) -> str:
+def build_compact_xml(build_dir: str, session_id: str, source: str, mode_result: dict) -> str:
     """
-    Build complete COMPACT mode XML context for project continuation.
+    Build complete COMPACT mode XML context for build continuation.
 
     COMPACT mode is for:
-    - Project work continuation after auto-summary
-    - Resume with active project
+    - Build work continuation after auto-summary
+    - Resume with active build
 
     Token target: ~10K max
 
     Args:
-        project_dir: Root project directory
+        build_dir: Root build directory
         session_id: Current session UUID
         source: Session source (compact|resume)
-        mode_result: Dict from determine_context_mode() with project_id, phase, skill
+        mode_result: Dict from determine_context_mode() with build_id, phase, skill
 
     Returns:
         Complete XML context string
     """
-    base_path = Path(project_dir)
+    base_path = Path(build_dir)
     timestamp = datetime.now().isoformat()
 
-    project_id = mode_result.get("project_id", "")
+    build_id = mode_result.get("build_id", "")
     phase = mode_result.get("phase", "execution")
-    skill = mode_result.get("skill", "execute-project")
+    skill = mode_result.get("skill", "execute-build")
 
-    project_path = base_path / "02-projects" / project_id
+    build_path = base_path / "02-builds" / build_id
 
     # Load resume-context for files_to_load
-    resume_metadata = load_resume_context(project_dir, project_id)
+    resume_metadata = load_resume_context(build_dir, build_id)
     files_to_load = resume_metadata.get("files_to_load", []) if resume_metadata else []
 
     # Fallback: if resume-context has no files_to_load, use defaults for execution
@@ -585,7 +654,7 @@ def build_compact_xml(project_dir: str, session_id: str, source: str, mode_resul
     current_task = ""
     completed = 0
     total = 0
-    steps_file = project_path / "01-planning" / "04-steps.md"
+    steps_file = build_path / "01-planning" / "04-steps.md"
     if steps_file.exists():
         try:
             content = steps_file.read_text(encoding='utf-8')
@@ -606,14 +675,14 @@ def build_compact_xml(project_dir: str, session_id: str, source: str, mode_resul
     xml_parts.append(f'''<nexus-context version="v4" mode="compact">
 <!--
 ================================================================================
-NEXUS OPERATING SYSTEM - PROJECT CONTINUATION CONTEXT
+NEXUS OPERATING SYSTEM - BUILD CONTINUATION CONTEXT
 ================================================================================
-This is the HYPER IMPORTANT project continuation mode of Claude Code operating
-inside the NEXUS system. User was actively working on a project in the previous
+This is the HYPER IMPORTANT build continuation mode of Claude Code operating
+inside the NEXUS system. User was actively working on a build in the previous
 session - load full context and continue.
 
-MODE: compact (continuing project work after auto-summary)
-PROJECT: {project_id}
+MODE: compact (continuing build work after auto-summary)
+BUILD: {build_id}
 PHASE: {phase}
 SKILL: {skill}
 ================================================================================
@@ -621,11 +690,22 @@ SKILL: {skill}
 
   <session id="{escape_xml_attribute(session_id)}" source="{escape_xml_attribute(source)}" timestamp="{timestamp}"/>
 
-  <resume-project id="{escape_xml_attribute(project_id)}" phase="{escape_xml_attribute(phase)}">
+  <resume-build id="{escape_xml_attribute(build_id)}" phase="{escape_xml_attribute(phase)}">
     <skill>{escape_xml_content(skill)}</skill>
     <current-task>{escape_xml_content(current_task)}</current-task>
     <progress>{completed}/{total} tasks</progress>
-  </resume-project>''')
+  </resume-build>''')
+
+    # User preferences (language, timezone) - CRITICAL for non-English users
+    config_path = base_path / "01-memory" / "user-config.yaml"
+    user_prefs = extract_user_preferences(config_path)
+
+    if user_prefs["language"]:
+        xml_parts.append(f'''
+  <user-preferences>
+    <language importance="CRITICAL">{escape_xml_content(user_prefs["language"])}</language>
+    <instruction>You MUST respond in {escape_xml_content(user_prefs["language"])} for ALL communication with the user.</instruction>
+  </user-preferences>''')
 
     # System files
     system_files = [
@@ -643,21 +723,21 @@ SKILL: {skill}
             xml_parts.append(xml)
     xml_parts.append('  </system-files>')
 
-    # Project files
-    xml_parts.append(f'\n  <project-files project-id="{escape_xml_attribute(project_id)}">')
+    # Build files
+    xml_parts.append(f'\n  <build-files build-id="{escape_xml_attribute(build_id)}">')
     for file_path in files_to_load:
-        full_path = project_path / file_path
+        full_path = build_path / file_path
         xml = load_file_to_xml(full_path, "file", file_path, indent=4)
         if xml:
             xml_parts.append(xml)
-    xml_parts.append('  </project-files>')
+    xml_parts.append('  </build-files>')
 
     # Skill file
     skill_paths = {
-        "plan-project": "00-system/skills/projects/plan-project/SKILL.md",
-        "execute-project": "00-system/skills/projects/execute-project/SKILL.md",
+        "plan-build": "00-system/skills/builds/plan-build/SKILL.md",
+        "execute-build": "00-system/skills/builds/execute-build/SKILL.md",
     }
-    skill_path = skill_paths.get(skill, f"00-system/skills/projects/{skill}/SKILL.md")
+    skill_path = skill_paths.get(skill, f"00-system/skills/builds/{skill}/SKILL.md")
     skill_file = base_path / skill_path
     skill_xml = load_file_to_xml(skill_file, "skill-file", skill_path, indent=2)
     if skill_xml:
@@ -672,13 +752,13 @@ SKILL: {skill}
     if phase == "planning":
         instruction_content = load_instruction_template(
             "compact_planning",
-            project_id=project_id,
+            build_id=build_id,
             current_task=escaped_task
         )
     else:
         instruction_content = load_instruction_template(
             "compact_execution",
-            project_id=project_id,
+            build_id=build_id,
             current_task=escaped_task
         )
 
@@ -696,7 +776,7 @@ SKILL: {skill}
 # Langfuse Auto-Start Functions
 # ============================================================================
 
-def ensure_langfuse_running(project_dir: str) -> dict:
+def ensure_langfuse_running(build_dir: str) -> dict:
     """
     Ensure Langfuse containers and monitor are running.
 
@@ -712,7 +792,7 @@ def ensure_langfuse_running(project_dir: str) -> dict:
     import subprocess
 
     result = {"langfuse": "unknown", "monitor": "unknown"}
-    langfuse_dir = Path(project_dir) / "04-workspace" / "langfuse"
+    langfuse_dir = Path(build_dir) / "04-workspace" / "langfuse"
 
     # Skip if langfuse not installed
     if not langfuse_dir.exists():
@@ -795,7 +875,7 @@ def main():
         source = input_data.get("source", "startup")
         transcript_path = input_data.get("transcript_path", "unknown")
 
-        project_dir = os.environ.get("CLAUDE_PROJECT_DIR", "")
+        build_dir = os.environ.get("CLAUDE_BUILD_DIR", "")
 
         # 1. Write session ID to session-specific file for tracking
         if session_id != "unknown":
@@ -810,32 +890,32 @@ def main():
                 pass
 
         # 1.5. Auto-start Langfuse if installed (fire-and-forget)
-        if project_dir:
-            langfuse_status = ensure_langfuse_running(project_dir)
+        if build_dir:
+            langfuse_status = ensure_langfuse_running(build_dir)
             logging.info(f"Langfuse auto-start: {langfuse_status}")
 
         # =======================================================================
-        # NEW XML CONTEXT INJECTION (Project 30 - XML Context Restructure)
+        # NEW XML CONTEXT INJECTION (Build 30 - XML Context Restructure)
         # =======================================================================
         # Uses determine_context_mode() to detect STARTUP vs COMPACT mode
         # Then calls appropriate XML builder function
         # =======================================================================
 
         # 2. Determine context mode using transcript analysis
-        mode_result = determine_context_mode(source, transcript_path, project_dir, session_id)
+        mode_result = determine_context_mode(source, transcript_path, build_dir, session_id)
         mode = mode_result.get("mode", "startup")
         action = mode_result.get("action", "display_menu")
 
-        logging.info(f"Context mode determined: mode={mode}, action={action}, project={mode_result.get('project_id')}")
+        logging.info(f"Context mode determined: mode={mode}, action={action}, build={mode_result.get('build_id')}")
 
         # 3. Build XML context based on mode
-        if mode == "compact" and mode_result.get("project_id"):
-            # COMPACT mode: Project continuation with full context
-            additional_context_str = build_compact_xml(project_dir, session_id, source, mode_result)
+        if mode == "compact" and mode_result.get("build_id"):
+            # COMPACT mode: Build continuation with full context
+            additional_context_str = build_compact_xml(build_dir, session_id, source, mode_result)
             logging.info(f"Built COMPACT XML context ({len(additional_context_str)} chars)")
         else:
-            # STARTUP mode: Full menu with all skills and projects
-            additional_context_str = build_startup_xml(project_dir, session_id, source, action)
+            # STARTUP mode: Full menu with all skills and builds
+            additional_context_str = build_startup_xml(build_dir, session_id, source, action)
             logging.info(f"Built STARTUP XML context ({len(additional_context_str)} chars)")
 
         # 4. Output as proper hook response with additionalContext
@@ -847,10 +927,10 @@ def main():
         }
 
         # systemMessage shown to user in UI
-        project_id = mode_result.get("project_id")
-        if mode == "compact" and project_id:
+        build_id = mode_result.get("build_id")
+        if mode == "compact" and build_id:
             phase = mode_result.get("phase", "execution")
-            hook_output["systemMessage"] = f"SessionStart:{mode} hook success: Resumed {project_id} ({phase})"
+            hook_output["systemMessage"] = f"SessionStart:{mode} hook success: Resumed {build_id} ({phase})"
         else:
             hook_output["systemMessage"] = f"SessionStart:{mode} hook success: Success"
 
@@ -864,9 +944,9 @@ def main():
         print(json.dumps(hook_output), flush=True)
 
         # 6. Log output to file for debugging
-        if project_dir:
+        if build_dir:
             try:
-                cache_dir = Path(project_dir) / "00-system" / ".cache"
+                cache_dir = Path(build_dir) / "00-system" / ".cache"
                 cache_dir.mkdir(parents=True, exist_ok=True)
 
                 # Summary log
@@ -878,7 +958,7 @@ def main():
                     f.write(f"Source: {source}\n")
                     f.write(f"Mode: {mode}\n")
                     f.write(f"Action: {action}\n")
-                    f.write(f"Project: {project_id or 'None'}\n")
+                    f.write(f"Build: {build_id or 'None'}\n")
                     f.write(f"Phase: {mode_result.get('phase', 'N/A')}\n")
                     f.write(f"Skill: {mode_result.get('skill', 'N/A')}\n")
                     f.write(f"Performance: {elapsed_ms:.2f}ms\n")
@@ -921,7 +1001,7 @@ def main():
                 "source_app": "nexus",
                 "source": source,
                 "mode": mode,
-                "project_id": project_id,
+                "build_id": build_id,
                 "timestamp": datetime.now().isoformat()
             }
         )

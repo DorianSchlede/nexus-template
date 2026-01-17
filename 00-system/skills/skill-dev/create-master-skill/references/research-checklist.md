@@ -10,7 +10,7 @@
 
 **Time:** 30-60 minutes of focused research
 
-**Output:** `02-resources/research.md` in the planning project
+**Output:** `02-resources/research.md` in the planning build
 
 ---
 
@@ -271,7 +271,7 @@ client = Client(api_key="...")
 
 ## Research Output Template
 
-Save all findings to: `02-projects/{ID}-{integration}-master-skill/02-resources/research.md`
+Save all findings to: `02-builds/{ID}-{integration}-master-skill/02-resources/research.md`
 
 ```markdown
 # {Integration} API Research
@@ -345,7 +345,7 @@ Before proceeding to architecture phase:
 - [ ] Error codes cataloged
 - [ ] Rate limits known
 - [ ] At least 3 potential child skills identified
-- [ ] Research saved to project resources
+- [ ] Research saved to build resources
 
 ---
 

@@ -1,8 +1,8 @@
 ================================================================================
-MANDATORY: PROJECT PLANNING CONTINUATION
+MANDATORY: BUILD PLANNING CONTINUATION
 ================================================================================
 
-Project: {project_id}
+Build: {build_id}
 Phase: PLANNING (Phase 1 incomplete)
 
 STEP 1 - MANDATORY: Initialize TodoWrite
@@ -10,7 +10,7 @@ STEP 1 - MANDATORY: Initialize TodoWrite
 - Create todo list with all unchecked planning tasks
 - Mark first unchecked task as in_progress
 
-STEP 2 - MANDATORY: Follow plan-project skill
+STEP 2 - MANDATORY: Follow plan-build skill
 - Complete planning documents: overview → discovery → plan → steps
 - Use mental models for key decisions (suggest if appropriate)
 - Pause for user confirmation at each document

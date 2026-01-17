@@ -16,7 +16,7 @@ black *.py && flake8 *.py
 flake8 *.py && black *.py  # black will undo flake8 analysis
 ```
 
-### 2. Configure Project Defaults
+### 2. Configure Build Defaults
 
 Add configuration files to version control so all contributors use the same rules.
 
@@ -474,7 +474,7 @@ git commit --no-verify -m "hotfix: critical bug"
 **Solution**: Commit `.format-config.yaml` and run `format code --all` before first commit
 
 ```bash
-# On new project setup
+# On new build setup
 cp .format-config.yaml.template .format-config.yaml
 format code --all
 git add . && git commit -m "style: format entire codebase"
@@ -516,7 +516,7 @@ git add . && git commit -m "style: format entire codebase"
 # Faster: Only staged files
 format code --staged
 
-# Slower: Entire project
+# Slower: Entire build
 format code --all
 ```
 
@@ -542,7 +542,7 @@ eslint --cache .  # Uses .eslintcache
 
 ## Next Steps
 
-1. **Review your project**: Do you have consistent style rules?
+1. **Review your build**: Do you have consistent style rules?
 2. **Install hooks**: Run `format code --install-hook`
 3. **Configure tools**: Copy `.format-config.yaml.template` and customize
 4. **Test locally**: Run `format code --all` on a branch

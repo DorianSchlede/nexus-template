@@ -17,7 +17,7 @@ best_for: Making decisions you won't regret later in life
 
 ## The Framework (Jeff Bezos Version)
 
-1. Project yourself to age 80
+1. Build yourself to age 80
 2. Look back at this decision
 3. Ask: "Will I regret NOT doing this?"
 4. Minimize the regret

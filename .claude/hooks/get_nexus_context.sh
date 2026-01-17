@@ -13,14 +13,14 @@
 #
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-CACHE_FILE="$PROJECT_DIR/00-system/.cache/session_start_context.xml"
+BUILD_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+CACHE_FILE="$BUILD_DIR/00-system/.cache/session_start_context.xml"
 
 # Check for --regenerate flag
 if [[ "$1" == "--regenerate" ]]; then
     # Regenerate by calling the Python hook with mock input
     echo '{"session_id":"subagent-context","source":"startup","transcript_path":""}' | \
-        CLAUDE_PROJECT_DIR="$PROJECT_DIR" python "$SCRIPT_DIR/session_start.py" 2>/dev/null
+        CLAUDE_BUILD_DIR="$BUILD_DIR" python "$SCRIPT_DIR/session_start.py" 2>/dev/null
 
     # Now output the fresh cache
     if [[ -f "$CACHE_FILE" ]]; then

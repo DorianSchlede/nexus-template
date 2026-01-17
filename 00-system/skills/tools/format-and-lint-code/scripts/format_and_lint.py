@@ -45,7 +45,7 @@ class ToolResult:
 
 
 class LanguageDetector:
-    """Detects languages and available tools in project."""
+    """Detects languages and available tools in build."""
 
     LANGUAGE_EXTENSIONS = {
         'python': ['.py'],
@@ -106,7 +106,7 @@ class LanguageDetector:
 
     def detect(self, file_patterns: List[str] = None, exclude_patterns: List[str] = None) -> Dict:
         """
-        Detect languages and files in project.
+        Detect languages and files in build.
 
         Args:
             file_patterns: List of glob patterns to include

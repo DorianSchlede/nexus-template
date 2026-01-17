@@ -1,5 +1,5 @@
 # Format and Lint Configuration
-# Copy this to your project root as .format-config.yaml and customize
+# Copy this to your build root as .format-config.yaml and customize
 
 format_and_lint:
   # File patterns to include

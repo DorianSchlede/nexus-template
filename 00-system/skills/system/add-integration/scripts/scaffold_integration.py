@@ -3,7 +3,7 @@
 Integration Scaffolding Script
 
 Generates the complete integration skill structure from templates.
-Used during project execution phase (not during add-integration skill planning).
+Used during build execution phase (not during add-integration skill planning).
 
 Usage:
     python scaffold_integration.py --config integration_config.json

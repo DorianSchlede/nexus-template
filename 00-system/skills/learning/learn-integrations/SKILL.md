@@ -1,6 +1,6 @@
 ---
 name: learn-integrations
-description: "learn integrations, what is MCP, how to integrate."
+description: "Learn about Nexus integrations and MCP. Load when user mentions: learn integrations, what is MCP, connect tools, integration tutorial, add integration, external tools, API connections, third party, how to integrate. 10-12 min."
 onboarding: true
 priority: high
 ---
@@ -255,7 +255,7 @@ OTHER USE CASES:
    • 'connect slack' - Set up Slack
    • 'connect google' - Set up Google Workspace (7 services)
    • 'add integration' - Any other tool
-   • 'learn projects' or 'learn skills' - Continue learning
+   • 'learn builds' or 'learn skills' - Continue learning
    ```
 
 3. **Prompt close-session**:

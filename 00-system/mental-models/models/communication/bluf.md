@@ -32,10 +32,10 @@ best_for: Getting your point across to busy people immediately
 ## Example
 
 **Bad** (burying the lead):
-"I wanted to follow up on our conversation from last week about the Henderson project. After reviewing the timeline and talking to the team, and considering the budget constraints we discussed, I think we might need to reconsider..."
+"I wanted to follow up on our conversation from last week about the Henderson build. After reviewing the timeline and talking to the team, and considering the budget constraints we discussed, I think we might need to reconsider..."
 
 **Good** (BLUF):
-"I recommend delaying the Henderson project by 2 weeks.
+"I recommend delaying the Henderson build by 2 weeks.
 
 Background: The vendor delivery slipped, and rushing would compromise quality.
 

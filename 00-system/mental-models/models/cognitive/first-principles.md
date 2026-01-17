@@ -8,7 +8,7 @@ when_to_use:
   - Challenging conventional wisdom
   - Getting to the core of complex issues
   - Designing from scratch
-best_for: Novel projects, challenging assumptions
+best_for: Novel builds, challenging assumptions
 ---
 
 # First Principles

@@ -11,8 +11,8 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 
 
-class ProjectStatus(Enum):
-    """Project lifecycle states."""
+class BuildStatus(Enum):
+    """Build lifecycle states."""
 
     PLANNING = "PLANNING"
     IN_PROGRESS = "IN_PROGRESS"
@@ -30,10 +30,10 @@ class SystemState(Enum):
     # Goals exist but still templates
     GOALS_NOT_PERSONALIZED = "goals_not_personalized"
 
-    # Operational with active projects
-    OPERATIONAL_WITH_ACTIVE_PROJECTS = "operational_with_active_projects"
+    # Operational with active builds
+    OPERATIONAL_WITH_ACTIVE_BUILDS = "operational_with_active_builds"
 
-    # Operational with no active projects
+    # Operational with no active builds
     OPERATIONAL = "operational"
 
     # Resume mode (after context summary)
@@ -41,12 +41,12 @@ class SystemState(Enum):
 
 
 @dataclass
-class Project:
-    """Represents a Nexus project with metadata and progress."""
+class Build:
+    """Represents a Nexus build with metadata and progress."""
 
     id: str
     name: str
-    status: ProjectStatus
+    status: BuildStatus
     description: str = ""
     created: Optional[str] = None
     updated: Optional[str] = None
@@ -71,7 +71,7 @@ class Project:
                 "id": self.id,
                 "name": self.name,
                 "description": self.description,
-                "status": self.status.value if isinstance(self.status, ProjectStatus) else self.status,
+                "status": self.status.value if isinstance(self.status, BuildStatus) else self.status,
                 "onboarding": self.onboarding,
                 "created": self.created,
                 "updated": self.updated,
@@ -87,7 +87,7 @@ class Project:
             "id": self.id,
             "name": self.name,
             "description": self.description,
-            "status": self.status.value if isinstance(self.status, ProjectStatus) else self.status,
+            "status": self.status.value if isinstance(self.status, BuildStatus) else self.status,
             "onboarding": self.onboarding,
             "created": self.created,
             "updated": self.updated,
@@ -100,14 +100,14 @@ class Project:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "Project":
-        """Create a Project from a dictionary."""
+    def from_dict(cls, data: Dict[str, Any]) -> "Build":
+        """Create a Build from a dictionary."""
         status = data.get("status", "PLANNING")
         if isinstance(status, str):
             try:
-                status = ProjectStatus(status)
+                status = BuildStatus(status)
             except ValueError:
-                status = ProjectStatus.PLANNING
+                status = BuildStatus.PLANNING
 
         return cls(
             id=data.get("id", ""),
@@ -182,7 +182,7 @@ class Integration:
 class Instructions:
     """Execution instructions returned by the loader."""
 
-    action: str  # "display_menu", "continue_working", "load_and_execute_project"
+    action: str  # "display_menu", "continue_working", "load_and_execute_build"
     execution_mode: str  # "interactive", "immediate"
     message: str
     reason: str
@@ -191,8 +191,8 @@ class Instructions:
 
     # Optional fields for specific actions
     suggest_onboarding: bool = False
-    suggest_project: Optional[str] = None
-    project_id: Optional[str] = None
+    suggest_build: Optional[str] = None
+    build_id: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -207,10 +207,10 @@ class Instructions:
             result["display_hints"] = self.display_hints
         if self.suggest_onboarding:
             result["suggest_onboarding"] = self.suggest_onboarding
-        if self.suggest_project:
-            result["suggest_project"] = self.suggest_project
-        if self.project_id:
-            result["project_id"] = self.project_id
+        if self.suggest_build:
+            result["suggest_build"] = self.suggest_build
+        if self.build_id:
+            result["build_id"] = self.build_id
         return result
 
 
@@ -242,9 +242,9 @@ class Stats:
     files_embedded: int = 0
     mandatory_maps_loaded: int = 0
     mandatory_maps_total: int = 0
-    total_projects: int = 0
-    active_projects: int = 0
-    non_complete_projects: int = 0
+    total_builds: int = 0
+    active_builds: int = 0
+    non_complete_builds: int = 0
     total_skills: int = 0
     user_skills: int = 0
     goals_personalized: bool = False
@@ -265,9 +265,9 @@ class Stats:
             "files_embedded": self.files_embedded,
             "mandatory_maps_loaded": self.mandatory_maps_loaded,
             "mandatory_maps_total": self.mandatory_maps_total,
-            "total_projects": self.total_projects,
-            "active_projects": self.active_projects,
-            "non_complete_projects": self.non_complete_projects,
+            "total_builds": self.total_builds,
+            "active_builds": self.active_builds,
+            "non_complete_builds": self.non_complete_builds,
             "total_skills": self.total_skills,
             "user_skills": self.user_skills,
             "goals_personalized": self.goals_personalized,
@@ -287,7 +287,7 @@ class StartupResult:
     """Complete result from startup/resume operations."""
 
     loaded_at: str
-    bundle: str  # "startup", "resume", "project", "skill", "metadata"
+    bundle: str  # "startup", "resume", "build", "skill", "metadata"
     system_state: Optional[str] = None
     memory_content: Dict[str, str] = field(default_factory=dict)
     instructions: Optional[Dict[str, Any]] = None

@@ -86,7 +86,7 @@ def check_config():
 
         if not ENV_FILE.exists():
             result["ai_action"] = "create_env_file"
-            result["fix_instructions"].insert(0, "Create .env file at project root")
+            result["fix_instructions"].insert(0, "Create .env file at build root")
 
     return result
 

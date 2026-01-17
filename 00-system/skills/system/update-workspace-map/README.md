@@ -29,7 +29,7 @@ User says:
 - "workspace validation"
 
 #### C. During onboarding
-- Project 03 (System Mastery), Task 5.6
+- Build 03 (System Mastery), Task 5.6
 - Teaches users about workspace organization
 - Validates initial setup
 
@@ -71,12 +71,12 @@ python 00-system/skills/validate-workspace-map/scripts/validate-workspace.py
 {
   "status": "needs_update",
   "comparison": {
-    "missing_from_map": ["Projects/", "Notes/"],
+    "missing_from_map": ["Builds/", "Notes/"],
     "extra_in_map": ["OldClients/"],
     "perfect_match": false
   },
   "recommendations": [
-    "Document 2 new folders: Projects/, Notes/",
+    "Document 2 new folders: Builds/, Notes/",
     "Remove 1 stale entry: OldClients/"
   ]
 }
@@ -101,7 +101,7 @@ When mismatches are detected:
 Discrepancies found:
 
 Missing from map (exist but not documented):
-• Projects/
+• Builds/
 • Notes/
 
 Extra in map (documented but don't exist):
@@ -156,9 +156,9 @@ Would you like me to help update workspace-map.md now?
 - **Location**: [00-system/core/orchestrator.md](../../core/orchestrator.md)
 
 ### 3. Onboarding
-- **Project 03, Task 5.6**: Initial workspace setup
+- **Build 03, Task 5.6**: Initial workspace setup
 - **Teaches validation**: Users learn the system
-- **Location**: [02-projects/00-onboarding/03-system-mastery/](../../../02-projects/00-onboarding/03-system-mastery/)
+- **Location**: [02-builds/00-onboarding/03-system-mastery/](../../../02-builds/00-onboarding/03-system-mastery/)
 
 ## Technical Details
 
@@ -218,7 +218,7 @@ AI: Validating workspace-map.md...
 Discrepancies found:
 
 Missing from map (exist but not documented):
-• Projects/
+• Builds/
 
 Extra in map (documented but don't exist):
 • OldClients/
@@ -227,17 +227,17 @@ Would you like me to help update workspace-map.md now?
 
 User: "yes"
 
-AI: I see you have a "Projects/" folder in 04-workspace/.
+AI: I see you have a "Builds/" folder in 04-workspace/.
     What should I note about this folder?
 
-User: "Active client projects and deliverables"
+User: "Active client builds and deliverables"
 
 AI: "OldClients/" is documented but doesn't exist. I'll remove it.
 
     ✅ workspace-map.md updated and validated!
 
     Updated sections:
-    • Added: Projects/ (Active client projects and deliverables)
+    • Added: Builds/ (Active client builds and deliverables)
     • Removed: OldClients/ (stale)
 
     workspace-map.md now accurately reflects your 04-workspace/ structure.

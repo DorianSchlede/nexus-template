@@ -2,7 +2,7 @@
 Loaders for Nexus.
 
 This module handles scanning and loading of:
-- Projects (from 02-projects/)
+- Builds (from 02-builds/)
 - Skills (from 03-skills/ and 00-system/skills/)
 - Memory files (from 01-memory/)
 - Integrations (from .env and skill folders)
@@ -15,7 +15,7 @@ from typing import Any, Dict, List, Optional
 from .config import (
     INTEGRATION_ENV_VARS,
     MEMORY_DIR,
-    PROJECTS_DIR,
+    BUILDS_DIR,
     SKILLS_DIR,
     SYSTEM_DIR,
     get_templates_dir,
@@ -29,9 +29,9 @@ from .utils import (
 )
 
 
-def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, Any]]:
+def scan_builds(base_path: str = ".", minimal: bool = True) -> List[Dict[str, Any]]:
     """
-    Scan all projects and extract YAML metadata + count actual tasks.
+    Scan all builds and extract YAML metadata + count actual tasks.
 
     Args:
         base_path: Root path to scan from
@@ -39,12 +39,12 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
                  If False, return all YAML fields
 
     Returns:
-        List of project metadata dictionaries
+        List of build metadata dictionaries
     """
-    projects = []
-    projects_dir = Path(base_path) / PROJECTS_DIR
+    builds = []
+    builds_dir = Path(base_path) / BUILDS_DIR
 
-    if not projects_dir.exists():
+    if not builds_dir.exists():
         return []
 
     # Look for all 01-overview.md files (numbered naming convention)
@@ -54,12 +54,12 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
     ]
 
     for pattern in patterns:
-        for overview_file in projects_dir.glob(pattern):
+        for overview_file in builds_dir.glob(pattern):
             metadata = extract_yaml_frontmatter(str(overview_file))
             if metadata and "error" not in metadata:
                 # Count actual checkboxes from 04-steps.md (numbered naming convention)
-                project_dir = overview_file.parent.parent
-                steps_file = project_dir / "01-planning" / "04-steps.md"
+                build_dir = overview_file.parent.parent
+                steps_file = build_dir / "01-planning" / "04-steps.md"
 
                 total, completed, uncompleted = count_checkboxes(steps_file)
 
@@ -96,9 +96,9 @@ def scan_projects(base_path: str = ".", minimal: bool = True) -> List[Dict[str, 
                         "_file_path": metadata.get("_file_path"),
                     }
 
-                projects.append(metadata)
+                builds.append(metadata)
 
-    return projects
+    return builds
 
 
 def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, Any]]:
@@ -112,8 +112,8 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
 
     Returns:
         List of skill metadata dictionaries, ordered by priority:
-        1. CORE skills (create-project, execute-project, create-skill)
-        2. LEARNING skills (setup-goals, learn-projects, etc.)
+        1. CORE skills (plan-build, execute-build, create-skill)
+        2. LEARNING skills (setup-goals, learn-builds, etc.)
         3. All other skills
     """
     skills = []
@@ -121,11 +121,11 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
     learning_skills = []
 
     # CORE SKILLS - highest priority, always at top
-    CORE_SKILL_NAMES = {"create-project", "execute-project", "create-skill"}
+    CORE_SKILL_NAMES = {"plan-build", "execute-build", "create-skill"}
 
     # LEARNING SKILLS - second priority, for onboarding
     LEARNING_SKILL_NAMES = {
-        "setup-memory", "setup-workspace", "learn-projects",
+        "setup-memory", "setup-workspace", "learn-builds",
         "learn-skills", "learn-integrations", "learn-nexus"
     }
 
@@ -179,7 +179,7 @@ def scan_skills_tiered(base_path: str = ".") -> Dict[str, Any]:
     Returns:
         {
             "core": {
-                "projects": [{"name": "create-project", "description": "..."}, ...],
+                "builds": [{"name": "plan-build", "description": "..."}, ...],
                 "learning": [...],
                 ...
             },
@@ -211,7 +211,7 @@ def scan_skills_tiered(base_path: str = ".") -> Dict[str, Any]:
                     if not skill_name:
                         continue
 
-                    # Determine category from path (e.g., 00-system/skills/projects/create-project)
+                    # Determine category from path (e.g., 00-system/skills/builds/plan-build)
                     skill_path = Path(metadata.get("_file_path", ""))
                     try:
                         # Get category (parent folder of skill)
@@ -471,55 +471,55 @@ def create_smart_defaults(base_path: str) -> Dict[str, Any]:
     return result
 
 
-def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[str, Any]:
+def load_build(build_id: str, base_path: str = ".", part: int = 0) -> Dict[str, Any]:
     """
-    Load project context with metadata and file paths.
+    Load build context with metadata and file paths.
 
     Returns metadata and paths for all planning files. AI should use Read tool
     to load file contents (keeps output under bash limit).
 
     Args:
-        project_id: Project ID or folder name prefix
+        build_id: Build ID or folder name prefix
         base_path: Root path to Nexus installation
         part: Reserved for future use (ignored)
 
     Returns:
-        Dictionary with project metadata and file paths (use Read for content)
+        Dictionary with build metadata and file paths (use Read for content)
     """
     from datetime import datetime
 
     base = Path(base_path)
-    project_path = None
+    build_path = None
 
-    # Find project by ID
+    # Find build by ID
     search_dirs = [
-        base / PROJECTS_DIR,
-        base / PROJECTS_DIR / "00-onboarding",
+        base / BUILDS_DIR,
+        base / BUILDS_DIR / "00-onboarding",
     ]
 
     for search_dir in search_dirs:
         if not search_dir.exists():
             continue
         for proj_dir in search_dir.glob("*"):
-            if proj_dir.is_dir() and proj_dir.name.startswith(project_id):
-                project_path = proj_dir
+            if proj_dir.is_dir() and proj_dir.name.startswith(build_id):
+                build_path = proj_dir
                 break
-        if project_path:
+        if build_path:
             break
 
-    if not project_path:
-        return {"error": f"Project not found: {project_id}"}
+    if not build_path:
+        return {"error": f"Build not found: {build_id}"}
 
     result = {
         "loaded_at": datetime.now().isoformat(),
-        "bundle": "project",
-        "project_id": project_id,
-        "project_path": str(project_path),
+        "bundle": "build",
+        "build_id": build_id,
+        "build_path": str(build_path),
         "files": {},
     }
 
     # Discover planning files dynamically (handles numbered prefixes like 01-overview.md)
-    planning_dir = project_path / "01-planning"
+    planning_dir = build_path / "01-planning"
     if planning_dir.exists():
         for file_path in sorted(planning_dir.glob("*.md")):
             file_rel = f"01-planning/{file_path.name}"
@@ -530,11 +530,11 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
             }
 
     # Discover resources files
-    resources_dir = project_path / "02-resources"
+    resources_dir = build_path / "02-resources"
     if resources_dir.exists():
         for file_path in sorted(resources_dir.rglob("*")):
             if file_path.is_file():
-                file_rel = str(file_path.relative_to(project_path))
+                file_rel = str(file_path.relative_to(build_path))
                 # Only extract metadata for markdown files
                 metadata = extract_yaml_frontmatter(str(file_path)) if file_path.suffix == ".md" else {}
                 result["files"][file_rel] = {
@@ -543,11 +543,11 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
                 }
 
     # Discover working files
-    working_dir = project_path / "03-working"
+    working_dir = build_path / "03-working"
     if working_dir.exists():
         for file_path in sorted(working_dir.rglob("*")):
             if file_path.is_file():
-                file_rel = str(file_path.relative_to(project_path))
+                file_rel = str(file_path.relative_to(build_path))
                 metadata = extract_yaml_frontmatter(str(file_path)) if file_path.suffix == ".md" else {}
                 result["files"][file_rel] = {
                     "path": str(file_path),
@@ -555,14 +555,14 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
                 }
 
     # List outputs directory
-    outputs_dir = project_path / "04-outputs"
+    outputs_dir = build_path / "04-outputs"
     if outputs_dir.exists():
         result["outputs"] = [
             str(f.relative_to(outputs_dir)) for f in outputs_dir.rglob("*") if f.is_file()
         ]
     # Fallback to old path for backwards compatibility
-    elif (project_path / "03-outputs").exists():
-        outputs_dir = project_path / "03-outputs"
+    elif (build_path / "03-outputs").exists():
+        outputs_dir = build_path / "03-outputs"
         result["outputs"] = [
             str(f.relative_to(outputs_dir)) for f in outputs_dir.rglob("*") if f.is_file()
         ]
@@ -575,11 +575,11 @@ def load_project(project_id: str, base_path: str = ".", part: int = 0) -> Dict[s
         # Use curated list from resume-context, resolve to full paths
         recommended = []
         for rel_path in files_to_load:
-            full_path = project_path / rel_path
+            full_path = build_path / rel_path
             if full_path.exists():
                 recommended.append(str(full_path))
         # Always include resume-context itself first
-        resume_path = project_path / "01-planning" / "resume-context.md"
+        resume_path = build_path / "01-planning" / "resume-context.md"
         if resume_path.exists() and str(resume_path) not in recommended:
             recommended.insert(0, str(resume_path))
     else:
@@ -1033,29 +1033,29 @@ def extract_essential_orchestrator(base_path: str = ".") -> Dict[str, Any]:
         "routing": [
             {"priority": 1, "match": "skill trigger", "action": "load matched skill"},
             {"priority": 2, "match": "integration keyword", "action": "load {name}-connect"},
-            {"priority": 3, "match": "project number/name", "action": "execute-project"},
+            {"priority": 3, "match": "build number/name", "action": "execute-build"},
             {"priority": 4, "match": "no match", "action": "respond naturally"},
         ],
         "core_skills": {
-            "plan-project": "User wants to START something NEW with deliverable",
-            "execute-project": "User references EXISTING project by name/ID",
+            "plan-build": "User wants to START something NEW with deliverable",
+            "execute-build": "User references EXISTING build by name/ID",
             "create-skill": "User wants to AUTOMATE repeating work",
         },
         "skill_priority": "00-system/skills/ > 03-skills/ (System skills have priority!)",
         "concepts": {
-            "project": "Temporal work with beginning/end. Location: 02-projects/",
+            "build": "Temporal work with beginning/end. Location: 02-builds/",
             "skill": "Reusable workflow. 00-system/skills/ (system, priority) > 03-skills/ (user)",
-            "decision": "Will do ONCE? → Project. Will do AGAIN? → Skill.",
+            "decision": "Will do ONCE? → Build. Will do AGAIN? → Skill.",
         },
         "never_do": [
-            "Never create project/skill folders directly → use create-* skills",
+            "Never create build/skill folders directly → use plan-* skills",
             "Never auto-load learning skills → suggest, user decides",
             "Never create README.md, CHANGELOG.md in skills → clutter",
             "Never add documentation not needed for AI execution",
         ],
         "mode_rules": {
-            "plan_mode": "Project status=PLANNING: Read files, discuss approach",
-            "execute_mode": "Project status=IN_PROGRESS: Follow steps.md, don't read files directly",
+            "plan_mode": "Build status=PLANNING: Read files, discuss approach",
+            "execute_mode": "Build status=IN_PROGRESS: Follow steps.md, don't read files directly",
         },
     }
 
@@ -1071,7 +1071,7 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     1. user_goals - WHO I am, WHAT I want (identity/purpose)
 
     EARLY (Current context):
-    2. user_projects - WHAT I'm working on now (minimal: id, name, status, progress, current_task)
+    2. user_builds - WHAT I'm working on now (minimal: id, name, status, progress, current_task)
     3. orchestrator - HOW to behave (rules, but after knowing WHO)
 
     MIDDLE (Bulk data - lower attention):
@@ -1108,15 +1108,15 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
 
     # === EARLY: Current Work + Behavior ===
 
-    # 2. Projects - WHAT user is doing now (minimal metadata only)
-    # Include ACTIVE for backwards compatibility with older projects
-    all_projects = scan_projects(base_path, minimal=True)
-    active_projects = [
-        p for p in all_projects
+    # 2. Builds - WHAT user is doing now (minimal metadata only)
+    # Include ACTIVE for backwards compatibility with older builds
+    all_builds = scan_builds(base_path, minimal=True)
+    active_builds = [
+        p for p in all_builds
         if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")
     ]
     # Minimize to essential fields only
-    result["user_projects"] = [
+    result["user_builds"] = [
         {
             "id": p["id"],
             "name": p["name"],
@@ -1124,7 +1124,7 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
             "progress": p.get("progress", 0),
             "current_task": p.get("current_task")
         }
-        for p in active_projects
+        for p in active_builds
     ]
 
     # 3. Orchestrator - HOW to behave (after knowing WHO)
@@ -1160,8 +1160,8 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
         total_skills_count += len(result["skills"].get("user", []))
 
     result["stats"] = {
-        "total_projects": len(all_projects),
-        "active_projects": len(result["user_projects"]),
+        "total_builds": len(all_builds),
+        "active_builds": len(result["user_builds"]),
         "total_skills": total_skills_count,
     }
 
@@ -1233,9 +1233,9 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     result["state"] = {
         "goals_personalized": goals_personalized,
         "workspace_configured": workspace_configured,
-        "has_active_projects": len(result["user_projects"]) > 0,
-        "has_planning_projects": len([p for p in result["user_projects"] if p.get("status") == "PLANNING"]) > 0,
-        "has_in_progress_projects": len([p for p in result["user_projects"] if p.get("status") == "IN_PROGRESS"]) > 0,
+        "has_active_builds": len(result["user_builds"]) > 0,
+        "has_planning_builds": len([p for p in result["user_builds"] if p.get("status") == "PLANNING"]) > 0,
+        "has_in_progress_builds": len([p for p in result["user_builds"] if p.get("status") == "IN_PROGRESS"]) > 0,
         "learning_completed": learning_completed,
         "pending_onboarding": pending_onboarding,
         "onboarding_complete": len(pending_onboarding) == 0,
@@ -1250,7 +1250,7 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
         "Display the complete Nexus menu from orchestrator.md:",
         "- ASCII banner with version",
         "- User memory status (use state.goals_personalized flag)",
-        "- Active projects (user_projects)",
+        "- Active builds (user_builds)",
         "- Available skills by category (skills.core, skills.integrations, skills.user)",
         "- Workspace status (use state.workspace_configured flag)",
         "- Integrations status",
@@ -1289,40 +1289,48 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
     Uses MECE principle: Mutually Exclusive, Collectively Exhaustive.
     First match wins - no overlapping states.
 
+    NOTE: workspace_needs_validation is a MODE FLAG, not a state.
+    It adds a warning to the menu but doesn't override the primary state.
+
     Args:
-        context: Full startup context with stats, projects, onboarding
+        context: Full startup context with stats, builds, onboarding
 
     Returns:
         Markdown string with clear next-action directive
     """
-    # Priority 0: First run (no goals, no projects) - auto-trigger setup
-    if not context.get("goals_personalized", False) and context.get("total_projects", 0) == 0:
+    # Folder changes is a MODE FLAG - add to context for templates to use
+    workspace_warning = ""
+    if context.get("workspace_needs_validation", False):
+        workspace_warning = "\n📁 FOLDERS ⚠️ CHANGES DETECTED - consider 'update folders'"
+
+    # Priority 0: First run (no goals, no builds) - auto-trigger setup
+    if not context.get("goals_personalized", False) and context.get("total_builds", 0) == 0:
         return _template_first_run(context)
 
     # Priority 1: Onboarding incomplete (goals set but other onboarding pending)
     if len(context.get("pending_onboarding", [])) > 0:
-        return _template_onboarding_incomplete(context)
+        result = _template_onboarding_incomplete(context)
+        return result + workspace_warning if workspace_warning else result
 
     # Priority 2: Active work exists
-    if len(context.get("active_projects", [])) > 0:
-        return _template_active_projects(context)
+    if len(context.get("active_builds", [])) > 0:
+        result = _template_active_builds(context)
+        return result + workspace_warning if workspace_warning else result
 
-    # Priority 3: Workspace needs sync
-    if context.get("workspace_needs_validation", False):
-        return _template_workspace_modified(context)
+    # Priority 3: Fresh start (goals configured, no builds yet)
+    if context.get("total_builds", 0) == 0:
+        result = _template_fresh_workspace(context)
+        return result + workspace_warning if workspace_warning else result
 
-    # Priority 4: Fresh start (goals configured, no projects yet)
-    if context.get("total_projects", 0) == 0:
-        return _template_fresh_workspace(context)
-
-    # Priority 5: System ready (fallback)
-    return _template_system_ready(context)
+    # Priority 4: System ready (fallback)
+    result = _template_system_ready(context)
+    return result + workspace_warning if workspace_warning else result
 
 
 def _load_state_template(template_name: str, **kwargs) -> str:
     """Load state template from .claude/hooks/templates/ and format with kwargs."""
-    # Templates are in .claude/hooks/templates/ relative to project root
-    # loaders.py is in 00-system/core/nexus/, so go up 3 levels to project root
+    # Templates are in .claude/hooks/templates/ relative to nexus root
+    # loaders.py is in 00-system/core/nexus/, so go up 3 levels to nexus root
     template_dir = Path(__file__).parent.parent.parent.parent / ".claude" / "hooks" / "templates"
     template_path = template_dir / f"{template_name}.md"
 
@@ -1348,28 +1356,23 @@ def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
     return _load_state_template("startup_onboarding_incomplete", pending_list=pending_list)
 
 
-def _template_active_projects(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 2: Active projects exist - highlight project continuations."""
-    projects = context.get("active_projects", [])[:2]  # Max 2
-    project_list = "\n".join(
-        f"- Project {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
-        for p in projects
+def _template_active_builds(context: Dict[str, Any]) -> str:
+    """STARTUP STATE 2: Active builds exist - highlight build continuations."""
+    builds = context.get("active_builds", [])[:2]  # Max 2
+    build_list = "\n".join(
+        f"- Build {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
+        for p in builds
     )
-    return _load_state_template("startup_active_projects", project_list=project_list)
-
-
-def _template_workspace_modified(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 3: Workspace changes detected - suggest running update-workspace-map."""
-    return _load_state_template("startup_workspace_modified")
+    return _load_state_template("startup_active_builds", build_list=build_list)
 
 
 def _template_fresh_workspace(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 4: Fresh workspace (configured but no projects) - emphasize starting first project."""
+    """STARTUP STATE 3: Fresh workspace (configured but no builds) - emphasize starting first build."""
     return _load_state_template("startup_fresh_workspace")
 
 
 def _template_system_ready(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 5: System ready (fallback) - open-ended, ready for anything."""
+    """STARTUP STATE 4: System ready (fallback) - open-ended, ready for anything."""
     return _load_state_template("startup_system_ready")
 
 
@@ -1389,9 +1392,9 @@ def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
         suggestions.append("'setup workspace' - organize your folder structure (10 min)")
 
     # Priority 2: Active work
-    active_projects = context.get("active_projects", [])
+    active_builds = context.get("active_builds", [])
 
-    for proj in active_projects[:2]:  # Max 2 project suggestions
+    for proj in active_builds[:2]:  # Max 2 build suggestions
         name = proj.get("name", "Unknown")
         progress = proj.get("progress", 0)
         suggestions.append(f"'continue {name}' - resume at {progress}%")
@@ -1405,8 +1408,8 @@ def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
 
     # Priority 5: Exploration (if room)
     if len(suggestions) < 5:
-        if context.get("total_projects") == 0:
-            suggestions.append("'create project' - start your first project")
+        if context.get("total_builds") == 0:
+            suggestions.append("'plan build' - start your first build")
         else:
             suggestions.append("'explain nexus' - learn system capabilities")
 

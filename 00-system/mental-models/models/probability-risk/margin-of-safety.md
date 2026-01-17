@@ -6,7 +6,7 @@ description: Build buffer for errors and uncertainty
 when_to_use:
   - Engineering
   - Investing
-  - Project planning
+  - Build planning
   - Any high-stakes decision
 best_for: Protecting against unknowns and estimation errors
 ---
@@ -33,7 +33,7 @@ Always include buffer beyond minimum requirements. The world is more uncertain t
 |--------|------------------|
 | Engineering | Bridge rated 3x expected load |
 | Investing | Buy at 30%+ below intrinsic value |
-| Project planning | Add 20-50% buffer to estimates |
+| Build planning | Add 20-50% buffer to estimates |
 | Budgeting | Keep emergency fund |
 | Deadlines | Promise later, deliver earlier |
 

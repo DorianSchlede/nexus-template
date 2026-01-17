@@ -5,19 +5,19 @@ smart_default: true
 
 > **Purpose**: Define what you want to achieve (for AI context)
 >
-> **Updated**: Set via 'setup goals' skill, revised as needed
+> **Updated**: Set via 'setup memory' skill, revised as needed
 
 ---
 
 ## Current Role
 
-[TODO: Say 'setup goals' to personalize]
+[TODO: Say 'setup memory' to personalize]
 
 ---
 
 ## Short-Term Goal (3 months)
 
-[TODO: Say 'setup goals' to personalize]
+[TODO: Say 'setup memory' to personalize]
 
 **Why This Matters**:
 [TODO: Why is this important to you?]
@@ -31,7 +31,7 @@ smart_default: true
 
 ## Long-Term Vision (1-3 years)
 
-[TODO: Say 'setup goals' to personalize]
+[TODO: Say 'setup memory' to personalize]
 
 ---
 
@@ -43,4 +43,4 @@ smart_default: true
 
 ---
 
-**Last Updated**: [TODO: Updated after 'setup goals']
+**Last Updated**: [TODO: Updated after 'setup memory']

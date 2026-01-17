@@ -2,6 +2,7 @@
 # /// script
 # requires-python = ">=3.8"
 # ///
+from __future__ import annotations
 """
 Stream Claude's messages to the observability server after each tool call.
 

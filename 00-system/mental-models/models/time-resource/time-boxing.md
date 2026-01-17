@@ -41,7 +41,7 @@ Allocate a fixed amount of time to a task. When time expires, you stop—regardl
 | 25 min (Pomodoro) | Focused work sessions |
 | 50-90 min | Deep work blocks |
 | Half day | Major tasks |
-| 1 day | Project phases |
+| 1 day | Build phases |
 | 1 week | Sprint/iteration |
 
 ## Benefits

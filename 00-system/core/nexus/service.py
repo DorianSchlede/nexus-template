@@ -3,7 +3,7 @@ NexusService - Main service layer for Nexus.
 
 This module provides the primary API for the Nexus system:
 - startup() - Load session context
-- load_project() - Load specific project
+- load_build() - Load specific build
 - load_skill() - Load specific skill
 - check_updates() - Check for upstream updates
 - sync() - Sync from upstream
@@ -17,9 +17,9 @@ from .config import MANDATORY_MAPS, MEMORY_DIR
 from .loaders import (
     create_smart_defaults,
     detect_configured_integrations,
-    load_project,
+    load_build,
     load_skill_slim,
-    scan_projects,
+    scan_builds,
     scan_skills,
 )
 from .models import SystemState
@@ -65,7 +65,7 @@ class NexusService:
         Analyzes system state and returns EXACTLY what the AI should do.
 
         Args:
-            include_metadata: If True, include full project/skill metadata
+            include_metadata: If True, include full build/skill metadata
             resume_mode: If True, skip menu display (resuming from context summary)
             check_updates: If True, check for upstream updates
 
@@ -109,16 +109,16 @@ class NexusService:
             if files_exist[key]:
                 files_to_embed.append(str(path))
 
-        # Step 3: Scan projects and skills
+        # Step 3: Scan builds and skills
         if include_metadata:
-            projects = scan_projects(str(self.base_path))
+            builds = scan_builds(str(self.base_path))
             skills = scan_skills(str(self.base_path))
-            result["metadata"]["projects"] = projects
+            result["metadata"]["builds"] = builds
             result["metadata"]["skills"] = skills
         else:
-            projects = scan_projects(str(self.base_path))
+            builds = scan_builds(str(self.base_path))
             skills = []
-            result["metadata"] = {"note": "Use --metadata for full project/skill data"}
+            result["metadata"] = {"note": "Use --metadata for full build/skill data"}
 
         # Step 4: Handle first-time setup
         if not files_exist["goals"]:
@@ -135,7 +135,7 @@ class NexusService:
         state = detect_system_state(
             files_exist=files_exist,
             goals_path=optional_files["goals"],
-            projects=projects,
+            builds=builds,
             resume_mode=resume_mode,
         )
         result["system_state"] = state.value
@@ -157,7 +157,7 @@ class NexusService:
         stats = build_stats(
             base_path=self.base_path,
             memory_content={},  # Will be populated below
-            projects=projects,
+            builds=builds,
             skills=skills,
             files_exist=files_exist,
             goals_path=optional_files["goals"],
@@ -170,7 +170,7 @@ class NexusService:
         # Step 8: Build instructions
         instructions = build_instructions(
             state=state,
-            projects=projects,
+            builds=builds,
             display_hints=stats.get("display_hints", []),
         )
 
@@ -186,18 +186,18 @@ class NexusService:
 
         return result
 
-    def load_project(self, project_id: str, part: int = 0) -> Dict[str, Any]:
+    def load_build(self, build_id: str, part: int = 0) -> Dict[str, Any]:
         """
-        Load complete project context.
+        Load complete build context.
 
         Args:
-            project_id: Project ID or folder name prefix
+            build_id: Build ID or folder name prefix
             part: Which part to load (0=auto, 1=essential, 2=references)
 
         Returns:
-            Project context with files and metadata
+            Build context with files and metadata
         """
-        return load_project(project_id, str(self.base_path), part=part)
+        return load_build(build_id, str(self.base_path), part=part)
 
     def load_skill(self, skill_name: str) -> Dict[str, Any]:
         """
@@ -213,7 +213,7 @@ class NexusService:
 
     def load_metadata(self) -> Dict[str, Any]:
         """
-        Load only project and skill metadata.
+        Load only build and skill metadata.
 
         Returns:
             Metadata only (no memory content)
@@ -223,30 +223,30 @@ class NexusService:
         result = {
             "loaded_at": datetime.now().isoformat(),
             "bundle": "metadata",
-            "projects": scan_projects(str(self.base_path), minimal=True),
+            "builds": scan_builds(str(self.base_path), minimal=True),
             "skills": scan_skills(str(self.base_path), minimal=True),
         }
 
         result["stats"] = {
-            "total_projects": len(result["projects"]),
+            "total_builds": len(result["builds"]),
             "total_skills": len(result["skills"]),
-            "active_projects": len([p for p in result["projects"] if p.get("status") == "IN_PROGRESS"]),
+            "active_builds": len([p for p in result["builds"] if p.get("status") == "IN_PROGRESS"]),
         }
 
         return result
 
-    def list_projects(self, full: bool = False) -> Dict[str, Any]:
+    def list_builds(self, full: bool = False) -> Dict[str, Any]:
         """
-        List all projects.
+        List all builds.
 
         Args:
             full: If True, return all fields; if False, minimal fields
 
         Returns:
-            Dict with projects list
+            Dict with builds list
         """
-        projects = scan_projects(str(self.base_path), minimal=not full)
-        return {"projects": projects}
+        builds = scan_builds(str(self.base_path), minimal=not full)
+        return {"builds": builds}
 
     def list_skills(self, full: bool = False) -> Dict[str, Any]:
         """

@@ -29,7 +29,7 @@ This skill:
 **When to use**:
 - You reorganized 04-workspace/ folders
 - You notice AI can't find your folders
-- During onboarding (Project 03, Task 5.6)
+- During onboarding (Build 03, Task 5.6)
 - As part of regular maintenance (via close-session)
 
 ---

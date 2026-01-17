@@ -25,7 +25,7 @@ Options:
 1. All staged files (git status)
 2. All files in a directory
 3. Specific file list
-4. All code files in project
+4. All code files in build
 ```
 
 ### Step 2: Detect Languages and Tools
@@ -184,7 +184,7 @@ Installation complete! Formatter will run automatically before commits.
 
 ### Default Settings
 
-Create `.format-config.yaml` in project root:
+Create `.format-config.yaml` in build root:
 
 ```yaml
 format_and_lint:
@@ -221,7 +221,7 @@ format_and_lint:
 
 ### Tool-Specific Config
 
-Respect existing config files in project:
+Respect existing config files in build:
 - `pyproject.toml` / `setup.cfg` (Python)
 - `.prettierrc` / `.eslintrc` (JavaScript)
 - `golangci.yml` (Go)
@@ -280,10 +280,10 @@ ci-lint job:
   - Blocks merge if not passing
 ```
 
-### In Projects
-When used with execute-project skill:
+### In Builds
+When used with execute-build skill:
 ```
-Before ending project phase:
+Before ending build phase:
 → format and lint code --all
 → Verify all outputs are formatted
 → Add to final deliverables
@@ -333,7 +333,7 @@ Options:
 
 - Safe: All changes shown before applying
 - Reversible: Can undo with git
-- Customizable: Per-project configuration
+- Customizable: Per-build configuration
 - Efficient: Only processes changed files when possible
 - Intelligent: Skips binary files automatically
 
@@ -342,7 +342,7 @@ Options:
 ## Next Steps
 
 - **Single file?** → `format code --file path/to/file.py`
-- **Whole project?** → `format code --all`
+- **Whole build?** → `format code --all`
 - **Pre-commit hook?** → `format code --install-hook`
 - **Custom rules?** → Edit `.format-config.yaml`
 

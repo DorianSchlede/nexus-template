@@ -80,6 +80,6 @@ TRASH/
 **/nul
 
 # Large data files (exceed GitHub 100MB limit)
-02-projects/07-airtable-test-dataset-builder/02-resources/*.csv
+02-builds/07-airtable-test-dataset-builder/02-resources/*.csv
 05-archived/07-airtable-test-dataset-builder/02-resources/*.csv
 05-archived/07-airtable-test-dataset-builder/02-resources/*.json

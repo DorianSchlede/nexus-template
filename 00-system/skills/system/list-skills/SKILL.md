@@ -34,7 +34,7 @@ Group skills by their folder location:
 | Category | Location | Description |
 |----------|----------|-------------|
 | **Learning** | `00-system/skills/learning/` | Onboarding and tutorials |
-| **Projects** | `00-system/skills/projects/` | Project management |
+| **Builds** | `00-system/skills/builds/` | Build management |
 | **Skill Dev** | `00-system/skills/skill-dev/` | Skill creation and sharing |
 | **System** | `00-system/skills/system/` | System utilities |
 | **Tools** | `00-system/skills/tools/` | Productivity tools |
@@ -53,14 +53,14 @@ Output format:
 ## Learning (onboarding)
 - setup-goals: Personalize Nexus with your goals and role
 - setup-workspace: Configure your workspace folder structure
-- learn-projects: Tutorial on project system
+- learn-builds: Tutorial on build system
 - learn-skills: Tutorial on skill system
 - learn-nexus: Advanced system mastery
 
-## Projects
-- create-project: Create a new project with guided planning
-- execute-project: Work on a project systematically
-- archive-project: Archive completed projects
+## Builds
+- plan-build: Create a new build with guided planning
+- execute-build: Work on a build systematically
+- archive-build: Archive completed builds
 - bulk-complete: Mark multiple tasks complete
 
 ## System
@@ -90,7 +90,7 @@ Tip: Say the skill name or trigger phrase to use it.
 ## Notes
 
 - User skills in `03-skills/` take priority over system skills
-- Skill triggers are in the description (e.g., "say 'create project'")
+- Skill triggers are in the description (e.g., "say 'create build'")
 - Some skills are internal (e.g., master skills) and not directly triggered
 
 ---

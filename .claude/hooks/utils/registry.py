@@ -115,7 +115,7 @@ def extract_id_from_path(path: str) -> str:
     Handles:
     - /01-agents/meta-architect/current/meta-architect.md -> meta-architect
     - /01-agents/meta-architect.md -> meta-architect
-    - /02-skills/create-project/create-project.md -> create-project
+    - /02-skills/plan-build/plan-build.md -> plan-build
     """
     normalized = path.replace("\\", "/")
 

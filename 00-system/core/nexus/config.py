@@ -49,7 +49,7 @@ SYNC_PATHS: List[str] = [
 # Paths to NEVER touch (user's personal data)
 PROTECTED_PATHS: List[str] = [
     "01-memory/",
-    "02-projects/",
+    "02-builds/",
     "03-skills/",
     "04-workspace/",
     ".env",
@@ -87,9 +87,9 @@ ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
         "priority": "high",
         "time": "5-8 min",
     },
-    "learn_projects": {
-        "name": "learn-projects",
-        "trigger": "learn projects",
+    "learn_builds": {
+        "name": "learn-builds",
+        "trigger": "learn builds",
         "priority": "high",
         "time": "8-10 min",
     },
@@ -120,7 +120,7 @@ ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
 # Standard Nexus directory names (relative to base path)
 SYSTEM_DIR = "00-system"
 MEMORY_DIR = "01-memory"
-PROJECTS_DIR = "02-projects"
+BUILDS_DIR = "02-builds"
 SKILLS_DIR = "03-skills"
 WORKSPACE_DIR = "04-workspace"
 
@@ -130,7 +130,7 @@ USER_CONFIG_FILE = "user-config.yaml"
 MEMORY_MAP_FILE = "memory-map.md"
 CORE_LEARNINGS_FILE = "core-learnings.md"
 
-# Project structure
+# Build structure
 PLANNING_SUBDIR = "01-planning"
 RESOURCES_SUBDIR = "02-resources"
 WORKING_SUBDIR = "03-working"
@@ -158,9 +158,9 @@ def get_memory_path(base_path: Path, filename: str) -> Path:
     return base_path / MEMORY_DIR / filename
 
 
-def get_project_path(base_path: Path, project_id: str) -> Path:
-    """Return the full path to a project directory."""
-    return base_path / PROJECTS_DIR / project_id
+def get_build_path(base_path: Path, build_id: str) -> Path:
+    """Return the full path to a build directory."""
+    return base_path / BUILDS_DIR / build_id
 
 
 def get_skill_path(base_path: Path, skill_name: str, user_skill: bool = False) -> Path:

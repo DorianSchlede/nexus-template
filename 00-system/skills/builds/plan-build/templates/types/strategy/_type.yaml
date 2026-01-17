@@ -1,0 +1,22 @@
+name: Strategy
+description: |
+  Make strategic decisions, define direction, or plan approaches.
+  Use when: business strategy, product roadmaps, architecture decisions,
+  go-to-market planning, competitive positioning, organizational design.
+
+discovery:
+  inline: true
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "python 00-system/mental-models/scripts/select_mental_models.py --format brief"
+  max_rediscovery_rounds: 1
+
+features:
+  ears_requirements: false
+  incose_quality: false
+  correctness_properties: false

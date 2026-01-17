@@ -6,7 +6,7 @@ description: Empathize-Define-Ideate-Prototype-Test
 when_to_use:
   - Product development
   - Service design
-  - Innovation projects
+  - Innovation builds
   - User experience
 best_for: Human-centered problem solving
 ---

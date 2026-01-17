@@ -98,7 +98,7 @@ AI always wants to execute immediately unless you put it into a clear planning f
 - Surface-level solutions that don't address root problems
 
 **Nexus Solution:**  
-**Interactive project planning mode** enables you to express exactly what you want and get the best out of AI:
+**Interactive build planning mode** enables you to express exactly what you want and get the best out of AI:
 
 - **Planning Session (20 mins - 4 hours):** Collaborate with AI to define requirements, design, and tasks
 - **Review artifacts:** Read all planning documents to ensure completeness
@@ -108,7 +108,7 @@ AI always wants to execute immediately unless you put it into a clear planning f
 **The Pattern:**
 ```
 Session 1 (Planning - 20-30 min):
-- Create project structure (init_project.py)
+- Create build structure (init_build.py)
 - Collaboratively fill overview.md (purpose, success criteria, context)
 - Define plan.md with AI-guided mental models:
   * Socratic questioning to surface assumptions
@@ -139,7 +139,7 @@ Nexus-v3/
 │   │   ├── orchestrator.md      ← Kernel instructions
 │   │   └── init-memory.py       ← Memory initialization
 │   ├── skills/                   ← System skills
-│   │   ├── create-project/
+│   │   ├── plan-build/
 │   │   ├── create-skill/
 │   │   ├── close-session/
 │   │   └── validate-system/
@@ -151,7 +151,7 @@ Nexus-v3/
 │   ├── core-learnings.md        ← Patterns discovered
 │   └── session-reports/         ← Session logs
 │
-├── 02-projects/                  ← BOUNDED CONTEXTS (Active Processes)
+├── 02-builds/                  ← BOUNDED CONTEXTS (Active Processes)
 │   └── {ID}-{name}/
 │       ├── 01-planning/         ← Purpose, plan, execution steps
 │       ├── 02-resources/        ← Reference materials
@@ -171,7 +171,7 @@ Nexus-v3/
 
 ## Core Concepts
 
-### **Projects**
+### **Builds**
 
 **What:** Temporal work with beginning, middle, end  
 **When:** Building something specific (workflow, analysis, deliverable)  
@@ -180,7 +180,7 @@ Nexus-v3/
 
 **Example:**
 ```
-02-projects/01-lead-qualification/
+02-builds/01-lead-qualification/
   ├── 01-planning/
   │   ├── overview.md       # Purpose, success criteria, context, timeline
   │   ├── plan.md           # Approach, decisions, dependencies, mental models
@@ -209,7 +209,7 @@ Nexus-v3/
 ## Workflow
 1. Load goals.md for current objectives
 2. Scan session-reports/ from last 7 days
-3. Extract completed tasks from projects
+3. Extract completed tasks from builds
 4. Generate summary with metrics
 5. Save to workspace/reports/
 ```
@@ -247,14 +247,14 @@ AI: [Loads skill, follows exact steps, produces report]
 When you start:
 1. AI runs: nexus-loader.py --startup
 2. Loads: goals.md, roadmap.md, workspace-map.md
-3. Scans: All project metadata, all skill metadata
+3. Scans: All build metadata, all skill metadata
 4. AI knows: Who you are, what exists, what's available
 ```
 
 **Step 2: You Work Together**
 ```
 You: "Work on lead qualification"
-AI: [Loads project planning files]
+AI: [Loads build planning files]
 AI: "I see you're 48% complete (12/25 tasks). Let's continue..."
 You: Build, create, analyze
 AI: Saves work to appropriate folders
@@ -288,18 +288,18 @@ Every session begins the same way:
 2. AI runs `nexus-loader.py --startup`
 3. AI displays menu with:
    - Your goals
-   - Active projects
+   - Active builds
    - Available skills
    - Suggested next steps
 
-### **Working with Projects**
+### **Working with Builds**
 
-**Create a project:**
+**Create a build:**
 ```
-You: "Create a project for [goal]"
-AI: [Runs create-project skill]
-    - Offers project type (Build, Research, Strategy, Content, Process)
-    - Runs init_project.py (auto-assigns ID, creates structure)
+You: "Create a build for [goal]"
+AI: [Runs plan-build skill]
+    - Offers build type (Build, Research, Strategy, Content, Process)
+    - Runs init_build.py (auto-assigns ID, creates structure)
     - Guides collaborative planning:
       * overview.md (purpose, success criteria, context)
       * plan.md (approach + mental models: Socratic, Devil's Advocate, dependency research)
@@ -307,18 +307,18 @@ AI: [Runs create-project skill]
     - Saves for separate execution session
 ```
 
-**Work on a project:**
+**Work on a build:**
 ```
-You: "Work on [project name]"
-AI: [Loads project planning files]
+You: "Work on [build name]"
+AI: [Loads build planning files]
     - Shows current status
     - Shows next task
     - Continues where you left off
 ```
 
-**Complete a project:**
+**Complete a build:**
 ```
-You: "Finalize [project]"
+You: "Finalize [build]"
 AI: - Moves files to outputs/
     - Marks all tasks complete
     - Creates final documentation
@@ -371,14 +371,14 @@ AI: [Runs close-session]
 
 **Traditional AI:**
 ```
-You: "Create a project"
+You: "Create a build"
 AI: [Interprets, improvises, inconsistent]
 ```
 
 **Nexus:**
 ```
-You: "Create a project"
-AI: [Loads create-project/SKILL.md, executes exactly]
+You: "Create a build"
+AI: [Loads plan-build/SKILL.md, executes exactly]
 Result: 100% consistent
 ```
 
@@ -423,7 +423,7 @@ Python script creates structure (5 sec, consistent quality)
 Morning:
 1. Start session (AI loads context)
 2. Review suggested next steps
-3. Continue active project or start new one
+3. Continue active build or start new one
 
 During Work:
 4. Use skills for repeated tasks
@@ -439,7 +439,7 @@ End of Day:
 ### **Weekly Pattern**
 
 ```
-Monday-Thursday: Execute projects
+Monday-Thursday: Execute builds
 Friday: Create skills from patterns discovered
 Monthly: Review core-learnings.md, update roadmap.md
 ```
@@ -452,12 +452,12 @@ Monthly: Review core-learnings.md, update roadmap.md
 ✅ Always end sessions with "done" (run close-session)  
 ✅ Create skills for anything you do twice  
 ✅ Fill in planning files before building  
-✅ Use natural language (AI routes to correct skill/project)  
+✅ Use natural language (AI routes to correct skill/build)  
 ✅ Update goals.md as objectives evolve
 
 ### **Don't:**
 ❌ Skip close-session (progress won't save)  
-❌ Create projects without planning first  
+❌ Create builds without planning first  
 ❌ Manually organize files (let AI follow structure)  
 ❌ Re-explain context (it's in goals.md)
 
@@ -473,8 +473,8 @@ Monthly: Review core-learnings.md, update roadmap.md
 
 ### **Learning to Use It**
 
-- **Onboarding**: 4 projects, 1 hour, full mastery
-- **Skills**: create-project, create-skill, close-session
+- **Onboarding**: 4 builds, 1 hour, full mastery
+- **Skills**: plan-build, create-skill, close-session
 - **Menu**: Shows suggested next steps every session
 
 ### **Troubleshooting**
@@ -495,7 +495,7 @@ AI: [Runs validate-system skill]
 **Nexus in 3 Sentences:**
 
 1. **Nexus gives AI memory** - Remembers your role, workflows, and decisions permanently
-2. **Nexus provides structure** - Clear 5-folder system, consistent project templates, organized files
+2. **Nexus provides structure** - Clear 5-folder system, consistent build templates, organized files
 3. **Nexus enables reuse** - Save workflows as skills, trigger with keywords, use forever
 
 **Time to Value:** 1 hour onboarding → Immediate productivity
@@ -506,4 +506,4 @@ AI: [Runs validate-system skill]
 
 ---
 
-**Ready to start?** Say "create project" to start working, or "setup goals" to personalize first. AI will guide you.
+**Ready to start?** Say "create build" to start working, or "setup goals" to personalize first. AI will guide you.

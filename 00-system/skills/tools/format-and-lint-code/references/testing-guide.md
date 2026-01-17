@@ -20,7 +20,7 @@ pip install black flake8 pylint isort
 npm install -g prettier eslint
 ```
 
-### Test Project Structure
+### Test Build Structure
 
 ```
 test-format-lint/
@@ -113,7 +113,7 @@ function getData() {
 
 ### Test 3: Multi-Language Detection
 
-**Objective**: Verify language detection across mixed project
+**Objective**: Verify language detection across mixed build
 
 **Input Files**:
 ```
@@ -201,7 +201,7 @@ this_is_a_very_long_variable_name_that_exceeds_88_chars_but_not_100_characters_t
 **Objective**: Verify files matching exclude patterns are skipped
 
 **Setup**:
-Create project with:
+Create build with:
 ```
 .
 ├── src/
@@ -317,7 +317,7 @@ Skipping...
 **Objective**: Verify report output format and accuracy
 
 **Test Steps**:
-1. Create project with multiple issues
+1. Create build with multiple issues
 2. Run: `format and lint code --report`
 3. Verify report includes:
    - Languages detected

@@ -61,7 +61,7 @@ Ready to start? (yes/no)
 
 ### .env File
 
-**Location:** Project root (`Nexus-v4/.env`)
+**Location:** Build root (`Nexus-v4/.env`)
 
 **Required variables:**
 ```bash
@@ -133,7 +133,7 @@ echo "{{INTEGRATION_UPPER}}_API_KEY=your-key-here" >> .env
 | `401 Unauthorized` | Invalid API key | Check {{INTEGRATION_UPPER}}_API_KEY in .env |
 | `403 Forbidden` | No permission | {{PERMISSION_SOLUTION}} |
 | `404 Not Found` | Wrong resource ID | Verify resource ID |
-| `.env not found` | Missing .env file | Create .env in project root |
+| `.env not found` | Missing .env file | Create .env in build root |
 | Connection timeout | Network issue | Check internet, firewall |
 
 ---

@@ -3,9 +3,9 @@ import json
 import re
 from pathlib import Path
 
-PROJECT_PATTERN = re.compile(r'02-projects[/\\]([0-9]{2}-[a-zA-Z0-9_-]+)', re.IGNORECASE)
+BUILD_PATTERN = re.compile(r'02-builds[/\\]([0-9]{2}-[a-zA-Z0-9_-]+)', re.IGNORECASE)
 
-t = Path.home() / '.claude/projects/c--Users-dsber-infinite-auto-company-strategy-nexus/528f44e2-a3a0-4a28-beac-aa655e7c6369.jsonl'
+t = Path.home() / '.claude/builds/c--Users-dsber-infinite-auto-company-strategy-nexus/528f44e2-a3a0-4a28-beac-aa655e7c6369.jsonl'
 
 with open(t, 'r', encoding='utf-8') as f:
     lines = f.readlines()
@@ -13,7 +13,7 @@ with open(t, 'r', encoding='utf-8') as f:
 print(f'Total lines: {len(lines)}')
 print('Checking ALL entries...')
 
-project_mentions = {}
+build_mentions = {}
 for idx, line in enumerate(lines):
     try:
         data = json.loads(line)
@@ -34,18 +34,18 @@ for idx, line in enumerate(lines):
             tool_input = item.get('input', {})
             file_path = tool_input.get('file_path', '') or tool_input.get('path', '')
 
-            match = PROJECT_PATTERN.search(file_path)
+            match = BUILD_PATTERN.search(file_path)
             if match:
                 pid = match.group(1)
-                project_mentions[pid] = idx
+                build_mentions[pid] = idx
                 print(f'  [{idx}] {tool_name}: {pid}')
 
     except:
         continue
 
-print(f'\nTotal project mentions via file_path/path: {len(project_mentions)}')
-if project_mentions:
-    winner = max(project_mentions.items(), key=lambda x: x[1])[0]
+print(f'\nTotal build mentions via file_path/path: {len(build_mentions)}')
+if build_mentions:
+    winner = max(build_mentions.items(), key=lambda x: x[1])[0]
     print(f'Most recent: {winner}')
 else:
     print('NO MATCHES - checking if the pattern matches raw line content...')

@@ -73,7 +73,7 @@ Use this template to generate comprehensive validation reports.
 | SKILL.md | Critical | Counts, missing info |
 | framework-overview.md | High | File names, examples |
 | workflows.md | High | Structure, steps |
-| project-schema.yaml | Medium | Comments |
+| build-schema.yaml | Medium | Comments |
 | orchestrator.md | High | Loading pattern |
 
 **Total Files**: N
@@ -329,7 +329,7 @@ grep -r "tasks\.md" 00-system/   # Should return 0
 **Format**: `validation-{implementation-name}-YYYY-MM-DD.md`
 
 **Examples**:
-- `validation-init-project-2025-11-24.md`
+- `validation-init-build-2025-11-24.md`
 - `validation-create-skill-2025-11-24.md`
 - `validation-nexus-loader-2025-11-24.md`
 - `validation-system-wide-2025-11-24.md`

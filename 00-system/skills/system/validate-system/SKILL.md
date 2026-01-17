@@ -12,8 +12,8 @@ Check system integrity, auto-fix issues, validate maps, and run optional Python 
 The `validate-system` skill performs comprehensive system health checks, validates structural integrity, checks navigation map accuracy, runs optional Python validation hooks, and attempts to auto-fix common issues. Use this skill when navigation seems stale, after manual file changes, or as periodic maintenance.
 
 **Key Features:**
-- **Comprehensive Checks**: Core files, structure, memory, navigation, projects, skills
-- **Map Integrity Validation**: Ensures skill-map.md and project-map.md are accurate
+- **Comprehensive Checks**: Core files, structure, memory, navigation, builds, skills
+- **Map Integrity Validation**: Ensures skill-map.md and build-map.md are accurate
 - **Python Hooks**: Runs automated validators (optional, graceful skip if unavailable)
 - **Auto-Fix**: Regenerates navigation, recreates templates, repairs structure
 - **Detailed Reporting**: Clear report of checks, issues, and fixes
@@ -33,7 +33,7 @@ Create TodoWrite with all validation steps:
 - [ ] Check folder structure
 - [ ] Check memory files
 - [ ] Check navigation files
-- [ ] Validate projects
+- [ ] Validate builds
 - [ ] Validate skills
 - [ ] Check map integrity
 - [ ] Run Python hooks (if available)
@@ -53,7 +53,7 @@ This skill performs comprehensive system validation with the following checks:
 2. **Folder Structure** - Check required directories
 3. **Memory Files** - Validate Memory/ content
 4. **Navigation Files** - Check framework-map.md and skill-map.md
-5. **Projects** - Validate all projects in 02-Projects/
+5. **Builds** - Validate all builds in 02-Builds/
 6. **Skills** - Validate all skills in 00-system/Skills/
 7. **Map Integrity** - Ensure maps match actual files
 8. **Python Hooks** - Run validation hooks (if available)
@@ -116,13 +116,13 @@ This ensures all validation results and any auto-fixes are properly saved to mem
 - IF confirmed → Replace with template
 - IF declined → Add to manual fix list
 
-### Empty Projects/ Folder
-**Scenario**: Projects/ exists but is empty (only during first-time setup)
+### Empty Builds/ Folder
+**Scenario**: Builds/ exists but is empty (only during first-time setup)
 
 **Action**:
-- Report: "Projects/ folder is empty (no projects yet)"
+- Report: "Builds/ folder is empty (no builds yet)"
 - Note: "This is normal for new users."
-- Suggest: "Say 'create project' to start your first project!"
+- Suggest: "Say 'create build' to start your first build!"
 - Mark as INFO (not an error)
 
 ### Empty Skills/ Folder
@@ -172,7 +172,7 @@ This ensures all validation results and any auto-fixes are properly saved to mem
 
 **Map Integrity Importance:**
 - skill-map.md MUST match Skills/ folder
-- 02-projects/project-map.md MUST match Projects/ folder
+- 02-builds/build-map.md MUST match Builds/ folder
 - Dead links break navigation
 - close-session maintains integrity automatically
 
@@ -180,7 +180,7 @@ This ensures all validation results and any auto-fixes are properly saved to mem
 - Run when suspicious: anytime something feels off
 - Run after manual changes: edited files outside skills
 - Run periodically: weekly or monthly maintenance
-- NOT needed after normal skill/project usage (close-session handles it)
+- NOT needed after normal skill/build usage (close-session handles it)
 
 **Integration with close-session:**
 - close-session automatically maintains map integrity

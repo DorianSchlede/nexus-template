@@ -43,7 +43,7 @@ Follow these steps to validate skill functionality:
 
 **Check if skills correctly loaded nested skills:**
 
-- Identify if the skill called other skills (e.g., execute-project calls create-skill)
+- Identify if the skill called other skills (e.g., execute-build calls create-skill)
 - Verify nested skills were loaded using nexus-loader.py or explicit Read
 - Confirm nested skill workflows were followed correctly
 - Check that context was passed properly between skills
@@ -51,8 +51,8 @@ Follow these steps to validate skill functionality:
 
 **Example checks:**
 ```
-Primary Skill: execute-project
-  ✅ Loaded: Yes (via nexus-loader.py --skill execute-project)
+Primary Skill: execute-build
+  ✅ Loaded: Yes (via nexus-loader.py --skill execute-build)
 
   Nested Skill: create-skill
     ✅ Loaded: Yes (via nexus-loader.py --skill create-skill)

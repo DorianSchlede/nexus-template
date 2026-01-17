@@ -1,0 +1,54 @@
+#!/bin/sh
+# Universal hook runner - works on ALL Unix-like systems (macOS, Linux, WSL, Git Bash)
+#
+# Usage: .claude/hooks/run <script.py> [args...]
+#
+# Features:
+# - Finds uv in common locations
+# - Outputs diagnostic JSON for Claude if hook fails
+# - For Windows native (cmd/PowerShell), use: .claude\hooks\run.cmd
+
+# Add common binary locations to PATH
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
+
+# Windows compatibility (Git Bash / WSL / MSYS2)
+if [ -n "$USERPROFILE" ]; then
+    WIN_HOME=$(echo "$USERPROFILE" | sed 's|\\|/|g' | sed 's|C:|/c|')
+    export PATH="$WIN_HOME/.local/bin:$USERPROFILE/.local/bin:$PATH"
+fi
+
+# Get the script to run (first argument)
+SCRIPT="$1"
+shift
+
+# Function to output error context for Claude
+output_error() {
+    ERROR_MSG="$1"
+    SCRIPT_NAME="$2"
+
+    case "$SCRIPT_NAME" in
+        *session_start*)
+            cat << 'JSONEOF'
+{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"<nexus-context version=\"v4\" mode=\"error\">\n  <error type=\"hook_execution_failed\">\n    <message>ERRMSG</message>\n    <script>SCRIPTNAME</script>\n  </error>\n  <instruction importance=\"MANDATORY\">\n    HOOK EXECUTION FAILED. To fix:\n    1. Check if uv is installed: curl -LsSf https://astral.sh/uv/install.sh | sh\n    2. Or use Bash: ~/.local/bin/uv run .claude/hooks/session_start.py\n    3. Run /clear after fix\n    \n    For now, read 00-system/core/orchestrator.md and display menu.\n  </instruction>\n</nexus-context>"}}
+JSONEOF
+            ;;
+        *)
+            echo "{\"error\":\"$ERROR_MSG\",\"script\":\"$SCRIPT_NAME\"}"
+            ;;
+    esac
+}
+
+# Check if uv exists
+if ! command -v uv >/dev/null 2>&1; then
+    output_error "uv not found in PATH" "$SCRIPT" | sed "s/ERRMSG/uv not found in PATH/g" | sed "s/SCRIPTNAME/$SCRIPT/g"
+    exit 0
+fi
+
+# Run the hook with uv
+uv run "$SCRIPT" "$@"
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    output_error "Hook exited with code $EXIT_CODE" "$SCRIPT" | sed "s/ERRMSG/Hook exited with code $EXIT_CODE/g" | sed "s/SCRIPTNAME/$SCRIPT/g"
+    exit 0
+fi

@@ -116,7 +116,7 @@ report_location:
   configured_date: null
 ```
 
-User says: "validate docs for init_project.py"
+User says: "validate docs for init_build.py"
 
 AI asks: "Where should I save validation reports? [options]"
 User chooses: "option 1"
@@ -139,8 +139,8 @@ report_location:
 
 last_validation:
   date: "2025-11-24"
-  implementation: "init-project"
-  report_file: "validation-init-project-2025-11-24.md"
+  implementation: "init-build"
+  report_file: "validation-init-build-2025-11-24.md"
 
 validation_count: 1
 ```

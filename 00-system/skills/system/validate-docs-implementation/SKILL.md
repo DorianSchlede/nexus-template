@@ -53,7 +53,7 @@ description: "validate docs, docs vs implementation, check documentation."
 
 **Example Output**:
 ```markdown
-## Implementation Analysis: init_project.py
+## Implementation Analysis: init_build.py
 
 **Creates**:
 - 4 directories: 01-planning/, 02-resources/, 03-working/, 04-outputs/
@@ -181,7 +181,7 @@ AI: "Saving report to configured location: [location]"
 
 1. Create validation report using template (see `references/report-template.md`)
 2. Generate filename: `validation-{implementation}-YYYY-MM-DD.md`
-   - Example: `validation-init-project-2025-11-24.md`
+   - Example: `validation-init-build-2025-11-24.md`
 3. Save to configured location
 4. Display summary to user with link to full report
 
@@ -201,7 +201,7 @@ AI: "Saving report to configured location: [location]"
 - 23 total fixes
 - 0 grep results for old terms
 
-📄 Full report saved: [04-workspace/validation-reports/validation-init-project-2025-11-24.md](04-workspace/validation-reports/validation-init-project-2025-11-24.md)
+📄 Full report saved: [04-workspace/validation-reports/validation-init-build-2025-11-24.md](04-workspace/validation-reports/validation-init-build-2025-11-24.md)
 ```
 
 ---
@@ -219,7 +219,7 @@ AI: "Saving report to configured location: [location]"
 2. Search docs for old file names
 3. Replace all references systematically
 
-**Example**: The create-project validation we just did
+**Example**: The plan-build validation we just did
 
 ---
 
@@ -230,7 +230,7 @@ AI: "Saving report to configured location: [location]"
 - New folders not mentioned in docs
 
 **Process**:
-1. Check actual project structure (ls)
+1. Check actual build structure (ls)
 2. Compare against documented structure
 3. Update all structure diagrams and references
 

@@ -1,8 +1,8 @@
 ================================================================================
-MANDATORY: PROJECT EXECUTION CONTINUATION
+MANDATORY: BUILD EXECUTION CONTINUATION
 ================================================================================
 
-Project: {project_id}
+Build: {build_id}
 Phase: EXECUTION (Phase 1 complete, implementing)
 
 STEP 1 - MANDATORY: Initialize TodoWrite
@@ -11,7 +11,7 @@ STEP 1 - MANDATORY: Initialize TodoWrite
 - Create todo list with remaining tasks
 - Mark current task as in_progress
 
-STEP 2 - MANDATORY: Follow execute-project skill
+STEP 2 - MANDATORY: Follow execute-build skill
 - Work on ONE task at a time
 - Mark [x] complete immediately when done
 - Move to next unchecked task

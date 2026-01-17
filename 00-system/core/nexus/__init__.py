@@ -3,7 +3,7 @@ Nexus - Context loader and directive executor for Nexus-v4
 
 This package provides the core functionality for:
 - Loading startup context and system state detection
-- Scanning projects and skills
+- Scanning builds and skills
 - Managing memory files
 - Syncing with upstream repository
 
@@ -38,9 +38,9 @@ from .config import (
 )
 
 from .models import (
-    ProjectStatus,
+    BuildStatus,
     SystemState,
-    Project,
+    Build,
     Skill,
     Instructions,
     StartupResult,
@@ -62,9 +62,9 @@ __all__ = [
     "PROTECTED_PATHS",
     "DEFAULT_UPSTREAM_URL",
     # Models
-    "ProjectStatus",
+    "BuildStatus",
     "SystemState",
-    "Project",
+    "Build",
     "Skill",
     "Instructions",
     "StartupResult",

@@ -4,7 +4,7 @@ slug: sunk-cost-awareness
 category: time-resource
 description: Ignore past investments in future decisions
 when_to_use:
-  - Evaluating struggling projects
+  - Evaluating struggling builds
   - Cutting losses
   - Career decisions
   - Investment decisions
@@ -30,7 +30,7 @@ The money/time/effort is gone regardless of what you decide next. Your decision 
 ## Questions to Ask
 
 - Am I continuing this because it's the best path forward, or because I've already invested?
-- If I were starting fresh today, would I begin this project?
+- If I were starting fresh today, would I begin this build?
 - What would I advise a friend to do (ignoring what they've spent)?
 - What's the best use of resources going FORWARD?
 
@@ -38,7 +38,7 @@ The money/time/effort is gone regardless of what you decide next. Your decision 
 
 **Bad reasoning** (sunk cost fallacy):
 - "I've read 200 pages, I must finish this terrible book"
-- "We've spent $1M on this project, we can't stop now"
+- "We've spent $1M on this build, we can't stop now"
 - "I've been in this career for 10 years, I can't switch"
 
 **Good reasoning** (forward-looking):

@@ -1,4 +1,4 @@
-Display this menu in a SINGLE markdown code block, then follow the instructions below.
+Display this menu EXACTLY as shown (single code block), then follow instructions.
 
 ```
     ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
@@ -8,39 +8,43 @@ Display this menu in a SINGLE markdown code block, then follow the instructions 
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
-         Your 10x Operating System
+         Your AI Productivity System
 
 🧠 MEMORY
-   [Show role and focus from <user-goals>]
+   [Extract role from <user-goals>, e.g. "Product Designer | Nexus development"]
 
-📦 PROJECTS
-   [Show from <active-projects> or "None - ready to build!"]
+📋 CURRENT WORK
+   [Show completed count or "Nothing active"]
 
 🔧 SKILLS
-   [Show from <skills> metadata]
+   50+ available ▸ 'list skills'
 
-📁 WORKSPACE
-   Configured ▸ 'validate workspace' to sync
+📁 FOLDERS
+   Organized
 
 🔌 INTEGRATIONS
-   [Show from skills with *-connect pattern]
+   [List connected integrations or "None"]
 
-💡 WHAT WOULD YOU LIKE TO BUILD?
-   • 'create project' - start a new project
-   • 'create skill' - automate a workflow
-   • Or just tell me what you're working on!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 WHAT WOULD YOU LIKE TO DO?
+
+   • Tell me what you want to work on
+   • 'create skill' - automate a repeating task
+   • 'list skills' - see capabilities
 ```
 
 ================================================================================
-STATE: SYSTEM READY
+CLAUDE INSTRUCTIONS
 ================================================================================
 
-Onboarding complete. No active projects. Workspace validated.
+STATE: System ready (onboarding done, no active work)
 
-Route user input:
-Be ready for:
-- New project request → plan-project
-- Skill execution → Match and load skill
-- Exploration → Explain capabilities
+After menu, simply ask:
+"What would you like to work on?"
 
-Wait for user input.
+Routing:
+- New work request → plan-build skill
+- Skill trigger → load matching skill
+- Exploration → explain capabilities
+- General question → answer directly

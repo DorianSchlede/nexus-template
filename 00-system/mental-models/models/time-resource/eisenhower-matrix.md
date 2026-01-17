@@ -34,7 +34,7 @@ best_for: Quickly prioritizing tasks by urgency and importance
 
 ### Q1: Do (Urgent + Important)
 - Crises, emergencies
-- Deadline-driven projects
+- Deadline-driven builds
 - Last-minute preparations
 
 **Strategy**: Handle immediately, but aim to reduce these through better Q2 work

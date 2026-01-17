@@ -148,7 +148,7 @@ WRONG:
 
 ## Case Studies
 
-### Case Study: [PROJECT/EXAMPLE NAME]
+### Case Study: [BUILD/EXAMPLE NAME]
 
 **Context**: [Background and situation]
 

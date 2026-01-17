@@ -4,9 +4,9 @@ slug: pre-mortem
 category: diagnostic
 description: Identify failure modes before implementation
 when_to_use:
-  - High-stakes projects
+  - High-stakes builds
   - Risk mitigation
-  - Project planning
+  - Build planning
   - Launch preparation
 best_for: Preventing failures before they happen
 ---
@@ -17,7 +17,7 @@ best_for: Preventing failures before they happen
 
 ## The Concept
 
-Unlike a post-mortem (analyzing failure after it happens), a pre-mortem imagines the project has already failed and works backward to identify what went wrong.
+Unlike a post-mortem (analyzing failure after it happens), a pre-mortem imagines the build has already failed and works backward to identify what went wrong.
 
 ## Questions to Ask
 
@@ -29,7 +29,7 @@ Unlike a post-mortem (analyzing failure after it happens), a pre-mortem imagines
 
 ## Process
 
-1. Set the scene: "Imagine it's the future and this project has failed spectacularly"
+1. Set the scene: "Imagine it's the future and this build has failed spectacularly"
 2. Each person writes down reasons for the failure (independently)
 3. Share and compile all failure modes
 4. Prioritize by likelihood and impact

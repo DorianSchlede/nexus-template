@@ -9,8 +9,8 @@ This document provides expanded guidance for each step of the validation workflo
 Before starting validation, clarify with the user:
 
 1. **What implementation to validate?**
-   - Specific script/file (e.g., "init_project.py")
-   - Entire module/system (e.g., "create-project skill")
+   - Specific script/file (e.g., "init_build.py")
+   - Entire module/system (e.g., "plan-build skill")
    - Recent changes (e.g., "the refactor I just did")
 
 2. **What documentation scope?**
@@ -25,8 +25,8 @@ Before starting validation, clarify with the user:
 
 **Example Dialog**:
 ```
-User: "Check if the docs match init_project.py"
-AI: "I'll validate init_project.py against all system documentation (00-system/).
+User: "Check if the docs match init_build.py"
+AI: "I'll validate init_build.py against all system documentation (00-system/).
      Should I also check user-facing docs like README and guides?"
 User: "Yes, check everything"
 AI: "Got it - comprehensive validation across all docs. Starting now..."
@@ -85,10 +85,10 @@ For **workflows/processes**:
 ### Example Analysis
 
 ```markdown
-## Implementation Analysis: init_project.py
+## Implementation Analysis: init_build.py
 
 ### What It Creates
-- 4 directories in project root:
+- 4 directories in build root:
   - 01-planning/
   - 02-resources/
   - 03-working/
@@ -100,14 +100,14 @@ For **workflows/processes**:
   - steps.md (from template)
 
 ### What It Does
-- Auto-assigns next available project ID (scans existing)
-- Sanitizes project name (lowercase, hyphens)
+- Auto-assigns next available build ID (scans existing)
+- Sanitizes build name (lowercase, hyphens)
 - Creates complete folder structure in one operation
 - Populates files from embedded templates
-- Returns project directory path
+- Returns build directory path
 
 ### What It Requires
-- project-name (string, any format)
+- build-name (string, any format)
 - --path flag (directory where to create)
 
 ### What It Does NOT Do
@@ -344,7 +344,7 @@ grep -r "steps\.md" 00-system/
 Example:
 - Creates 4 directories + 3 files
 - Uses plan.md and steps.md (not design.md/tasks.md)
-- Auto-assigns project IDs
+- Auto-assigns build IDs
 
 ---
 
@@ -404,7 +404,7 @@ Example:
 
 **Scenario**: Code supports both old and new formats
 
-**Example**: execute-project supports "tasks.md OR steps.md"
+**Example**: execute-build supports "tasks.md OR steps.md"
 
 **Documentation Approach**:
 - Document new format as primary

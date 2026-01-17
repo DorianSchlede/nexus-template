@@ -18,7 +18,7 @@ core/
 ├── nexus/               # Python package
 │   ├── __init__.py      # Public API
 │   ├── config.py        # Constants and paths
-│   ├── models.py        # Dataclasses (Project, Skill, State)
+│   ├── models.py        # Dataclasses (Build, Skill, State)
 │   ├── loaders.py       # File scanning and loading
 │   ├── state.py         # State detection and instructions
 │   ├── service.py       # NexusService orchestration
@@ -37,14 +37,14 @@ core/
 # Startup (loads memory, detects state, returns instructions)
 python 00-system/core/nexus-loader.py --startup
 
-# Load project metadata + file paths
-python 00-system/core/nexus-loader.py --project {id}
+# Load build metadata + file paths
+python 00-system/core/nexus-loader.py --build {id}
 
 # Load skill content
 python 00-system/core/nexus-loader.py --skill {name}
 
-# List all projects/skills
-python 00-system/core/nexus-loader.py --list-projects
+# List all builds/skills
+python 00-system/core/nexus-loader.py --list-builds
 python 00-system/core/nexus-loader.py --list-skills
 
 # Check for updates

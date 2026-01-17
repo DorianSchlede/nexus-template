@@ -7,9 +7,9 @@
 2. **SECOND**: Apply default Claude Code behaviors only where Nexus doesn't specify
 
 **What the hook provides:**
-- Complete orchestrator instructions (routing, skills, projects)
+- Complete orchestrator instructions (routing, skills, builds)
 - User goals and memory
-- Active project states
+- Active build states
 - Skill loading rules
 - Startup action (display_menu, continue_working, etc.)
 

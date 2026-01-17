@@ -8,18 +8,18 @@ Built-in skills organized by category. Loaded automatically based on trigger phr
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
 | `learn-nexus` | "learn nexus", "nexus tips" | Master Nexus patterns |
-| `learn-projects` | "learn projects", "project tutorial" | Project creation guide |
+| `learn-builds` | "learn builds", "build tutorial" | Build creation guide |
 | `learn-skills` | "learn skills", "skill tutorial" | Skill creation guide |
 | `setup-goals` | "setup goals", "personalize" | Configure preferences |
 | `setup-workspace` | "setup workspace", "organize" | Folder structure setup |
 
-### `projects/` - Project Management
+### `builds/` - Build Management
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| `create-project` | "create project", "new project" | Guided project creation |
-| `execute-project` | "work on [name]", "continue" | Systematic execution |
+| `plan-build` | "create build", "new build" | Guided build creation |
+| `execute-build` | "work on [name]", "continue" | Systematic execution |
 | `bulk-complete` | "bulk complete", "mark all done" | Batch task completion |
-| `archive-project` | "archive [name]" | Move to archive |
+| `archive-build` | "archive [name]" | Move to archive |
 
 ### `notion/` - Notion Integration
 | Skill | Trigger | Purpose |

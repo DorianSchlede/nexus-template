@@ -36,17 +36,17 @@
 
 ## Common Use Cases
 
-### 1. Project Management Sync
+### 1. Build Management Sync
 
 **Integration**: GitHub + Linear + Jira
 
 **Workflow**:
 ```
-Nexus creates project
+Nexus creates build
   ↓
 GitHub repo created automatically
   ↓
-Linear project linked
+Linear build linked
   ↓
 Jira epic created (if using Jira)
   ↓
@@ -54,10 +54,10 @@ All connected, single source of truth
 ```
 
 **Example Commands**:
-- "Start new project for website redesign"
-  - Creates Nexus project structure
+- "Start new build for website redesign"
+  - Creates Nexus build structure
   - Creates GitHub repo with same name
-  - Initializes Linear project
+  - Initializes Linear build
   - Links all three together
   - Adds to Memory with references
 
@@ -103,7 +103,7 @@ Team stays informed automatically
 - Weekly summaries to #weekly-updates
 - Milestone completions to #wins
 - Blocker alerts to #help-needed
-- Project completions to #shipped
+- Build completions to #shipped
 
 ---
 
@@ -188,7 +188,7 @@ close-session triggers
   ↓
 Backs up Memory/ to Drive
   ↓
-Archives project outputs
+Archives build outputs
   ↓
 Creates dated snapshots
   ↓
@@ -197,8 +197,8 @@ Never lose context
 
 **Enhancement to close-session**:
 - Backup 01-memory/core-learnings.md
-- Backup 02-projects/project-map.md
-- Archive completed project outputs
+- Backup 02-builds/build-map.md
+- Archive completed build outputs
 - Create timestamped folder structure
 
 **Benefits**:
@@ -227,20 +227,20 @@ Never lose context
 
 2. **PR Automation**
    ```
-   Project completion → Create PR
-   - Detect project completion
+   Build completion → Create PR
+   - Detect build completion
    - Generate PR description
-   - Link to project overview
+   - Link to build overview
    - Tag reviewers
    ```
 
 3. **Repo Scaffolding**
    ```
-   New project → Initialize repo
+   New build → Initialize repo
    - Create repo with README
    - Add .gitignore from template
    - Create initial branch structure
-   - Add project metadata to README
+   - Add build metadata to README
    ```
 
 4. **Release Notes**
@@ -268,11 +268,11 @@ Never lose context
 
 2. **Milestone Alerts**
    ```
-   Project milestone reached → Slack notification
+   Build milestone reached → Slack notification
    - Detects milestone completion
    - Posts celebration to #wins
    - Tags team members
-   - Links to project details
+   - Links to build details
    ```
 
 3. **Blocker Escalation**
@@ -299,11 +299,11 @@ Never lose context
 
 **Use Cases**:
 
-1. **Project Documentation**
+1. **Build Documentation**
    ```
-   Nexus project → Notion page
-   - Creates Notion page for project
-   - Syncs project overview
+   Nexus build → Notion page
+   - Creates Notion page for build
+   - Syncs build overview
    - Updates on changes
    - Team collaboration in Notion
    ```
@@ -343,11 +343,11 @@ Never lose context
 
 1. **Deliverable Storage**
    ```
-   Project output → Drive folder
+   Build output → Drive folder
    - Creates organized folder
    - Uploads deliverables
    - Sets sharing permissions
-   - Links in project metadata
+   - Links in build metadata
    ```
 
 2. **Template Library**
@@ -355,7 +355,7 @@ Never lose context
    Load templates from Drive
    - Maintains template library
    - Fetches current version
-   - Applies to Nexus project
+   - Applies to Nexus build
    - Updates library as needed
    ```
 
@@ -372,7 +372,7 @@ Never lose context
    ```
    Automatic hourly/daily backups
    - Memory/ folder
-   - Active projects
+   - Active builds
    - Skill library
    - Timestamped versions
    ```
@@ -412,7 +412,7 @@ Never lose context
 
 4. **Milestone Tracking**
    ```
-   Linear milestones → Nexus project phases
+   Linear milestones → Nexus build phases
    - Link milestones
    - Track progress
    - Update stakeholders
@@ -437,7 +437,7 @@ Never lose context
 2. **Graph Visualization**
    ```
    Visualize Nexus structure in Obsidian graph
-   - Projects as nodes
+   - Builds as nodes
    - Skills as nodes
    - Links show relationships
    - Visual understanding
@@ -492,7 +492,7 @@ Never lose context
 ```
 1. User reports issue (Slack)
    ↓
-2. Create Nexus project for investigation
+2. Create Nexus build for investigation
    ↓
 3. Query database for related data (PostgreSQL)
    ↓
@@ -500,7 +500,7 @@ Never lose context
    ↓
 5. Create Linear issue with findings
    ↓
-6. Track fix in Nexus project
+6. Track fix in Nexus build
    ↓
 7. Update user in Slack when fixed
 ```

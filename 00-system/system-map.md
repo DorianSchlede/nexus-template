@@ -23,7 +23,7 @@ Nexus/
 │   ├── goals.md                    # User identity
 │   └── session-reports/            # History
 │
-├── 02-projects/                    # BUILD mode work (active)
+├── 02-builds/                    # BUILD mode work (active)
 │   └── {ID}-{name}/
 │       ├── 01-planning/            # 4 phases
 │       └── 04-outputs/             # Deliverables
@@ -34,8 +34,8 @@ Nexus/
 ├── 04-workspace/                   # User content
 │   └── workspace-map.md            # Structure doc
 │
-└── 05-archived/                    # Completed projects
-    └── {ID}-{name}/                # Archived project folders
+└── 05-archived/                    # Completed builds
+    └── {ID}-{name}/                # Archived build folders
 ```
 </section>
 
@@ -48,12 +48,12 @@ Session Starts
 Hook Injects Context (<200ms)
 - orchestrator.md (behavior)
 - skills catalog (what's available)
-- active projects (current work)
+- active builds (current work)
 - user goals (identity)
 - dynamic instructions (what to do next)
      ↓
 Claude Executes
-- If BUILD work → plan-project or execute-project
+- If BUILD work → plan-build or execute-build
 - If EXECUTE work → load skill
 - If unclear → display menu
 ```
@@ -64,8 +64,8 @@ Claude Executes
 
 | User Says | You Do |
 |-----------|--------|
-| "Build X" / "Create X" | plan-project |
-| "Continue project 29" | execute-project |
+| "Build X" / "Create X" | plan-build |
+| "Continue build 29" | execute-build |
 | "Send slack message" | Load skill |
 | "What can you do?" | Display menu |
 </section>
@@ -77,18 +77,18 @@ Claude Executes
 |------|------|
 | Behavior rules | `00-system/core/orchestrator.md` |
 | User identity | `01-memory/goals.md` |
-| Active projects | `02-projects/{ID}-{name}/` |
+| Active builds | `02-builds/{ID}-{name}/` |
 | Workflows | `03-skills/{name}/SKILL.md` |
 | User content | `04-workspace/` |
-| Archived projects | `05-archived/{ID}-{name}/` |
+| Archived builds | `05-archived/{ID}-{name}/` |
 </section>
 
 <section id="cli">
 ## CLI Commands
 
 ```bash
-# Load project context
-python 00-system/core/nexus-loader.py --project {ID}
+# Load build context
+python 00-system/core/nexus-loader.py --build {ID}
 
 # Load skill
 python 00-system/core/nexus-loader.py --skill {name}

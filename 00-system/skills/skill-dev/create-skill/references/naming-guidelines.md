@@ -25,7 +25,7 @@ Guidelines for choosing effective skill names.
 Action + object makes purpose immediately clear.
 
 ```
-create-project
+plan-build
 generate-report
 analyze-data
 rotate-pdf

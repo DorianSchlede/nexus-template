@@ -12,7 +12,7 @@
     ├── config.py            # Constants, paths, limits
     ├── models.py            # Data classes & enums
     ├── utils.py             # Helper functions
-    ├── loaders.py           # Scan/load projects, skills, memory
+    ├── loaders.py           # Scan/load builds, skills, memory
     ├── state.py             # State detection & instruction building
     ├── service.py           # NexusService (main API)
     ├── sync.py              # Git sync operations
@@ -60,8 +60,8 @@ flowchart TB
         START["--startup"]
         RESUME["--resume"]
         SKILL["--skill NAME"]
-        PROJ["--project ID"]
-        LIST_P["--list-projects"]
+        PROJ["--build ID"]
+        LIST_P["--list-builds"]
         LIST_S["--list-skills"]
         META["--metadata"]
         SYNC["--sync"]
@@ -71,8 +71,8 @@ flowchart TB
     subgraph "NexusService Methods"
         S_STARTUP["startup()"]
         S_SKILL["load_skill()"]
-        S_PROJ["load_project()"]
-        S_LIST_P["list_projects()"]
+        S_PROJ["load_build()"]
+        S_LIST_P["list_builds()"]
         S_LIST_S["list_skills()"]
         S_META["load_metadata()"]
         S_SYNC["sync()"]
@@ -82,7 +82,7 @@ flowchart TB
     subgraph "Output Handling"
         OUT_SMALL["Print JSON<br/>(< 30K chars)"]
         OUT_CACHE["Cache to file<br/>(> 30K chars)<br/>Print pointer"]
-        OUT_LARGE["Print full JSON<br/>(skill/project)"]
+        OUT_LARGE["Print full JSON<br/>(skill/build)"]
     end
 
     START --> S_STARTUP --> OUT_CACHE
@@ -103,10 +103,10 @@ flowchart TB
 | `--startup` | `startup()` | Load full context: memory, metadata, instructions |
 | `--resume` | `startup(resume_mode=True)` | Resume after context summary |
 | `--skill NAME` | `load_skill()` | File tree + SKILL.md (slim mode) |
-| `--project ID` | `load_project()` | Project metadata + file paths |
-| `--list-projects` | `list_projects()` | Scan all projects |
+| `--build ID` | `load_build()` | Build metadata + file paths |
+| `--list-builds` | `list_builds()` | Scan all builds |
 | `--list-skills` | `list_skills()` | Scan all skills |
-| `--metadata` | `load_metadata()` | Projects + skills only |
+| `--metadata` | `load_metadata()` | Builds + skills only |
 | `--check-update` | `check_updates()` | Check upstream version |
 | `--sync` | `sync()` | Sync from upstream |
 
@@ -136,11 +136,11 @@ sequenceDiagram
     SVC->>FS: Check goals.md, user-config.yaml, memory-map.md
     FS-->>SVC: files_exist{}
 
-    Note over SVC: Step 3: Scan projects & skills
-    SVC->>LDR: scan_projects()
-    LDR->>FS: Glob 02-projects/*/overview.md
-    FS-->>LDR: project files
-    LDR-->>SVC: projects[]
+    Note over SVC: Step 3: Scan builds & skills
+    SVC->>LDR: scan_builds()
+    LDR->>FS: Glob 02-builds/*/overview.md
+    FS-->>LDR: build files
+    LDR-->>SVC: builds[]
 
     SVC->>LDR: scan_skills()
     LDR->>FS: Glob 03-skills/**/SKILL.md
@@ -192,19 +192,19 @@ sequenceDiagram
   "loaded_at": "2025-12-31T...",
   "bundle": "startup",
   ">>> EXECUTE_FIRST <<<": { /* instructions */ },
-  "system_state": "operational_with_active_projects",
+  "system_state": "operational_with_active_builds",
   "memory_content": {
     "orchestrator.md": "...",
     "goals.md": "...",
     "user-config.yaml": "..."
   },
   "metadata": {
-    "projects": [...],
+    "builds": [...],
     "skills": [...]
   },
   "stats": {
-    "total_projects": 14,
-    "active_projects": 3,
+    "total_builds": 14,
+    "active_builds": 3,
     "total_skills": 100,
     "goals_personalized": true,
     "display_hints": [...]
@@ -287,14 +287,14 @@ stateDiagram-v2
     CheckGoals --> CheckTemplate: goals.md exists
 
     CheckTemplate --> FIRST_TIME_WITH_DEFAULTS: is_template=true
-    CheckTemplate --> CheckActiveProjects: is_template=false
+    CheckTemplate --> CheckActiveBuilds: is_template=false
 
-    CheckActiveProjects --> OPERATIONAL_WITH_ACTIVE_PROJECTS: Has IN_PROGRESS projects
-    CheckActiveProjects --> OPERATIONAL: No active projects
+    CheckActiveBuilds --> OPERATIONAL_WITH_ACTIVE_BUILDS: Has IN_PROGRESS builds
+    CheckActiveBuilds --> OPERATIONAL: No active builds
 
     RESUME: Resume Mode<br/>Load context immediately
     FIRST_TIME_WITH_DEFAULTS: First Time Setup<br/>Suggest onboarding
-    OPERATIONAL_WITH_ACTIVE_PROJECTS: Active Projects<br/>Highlight work in progress
+    OPERATIONAL_WITH_ACTIVE_BUILDS: Active Builds<br/>Highlight work in progress
     OPERATIONAL: Ready to Work<br/>Show menu
 ```
 
@@ -303,9 +303,9 @@ stateDiagram-v2
 | State | Action | Message |
 |-------|--------|---------|
 | `FIRST_TIME_WITH_DEFAULTS` | `display_menu` | Welcome! Quick Start Mode active |
-| `OPERATIONAL_WITH_ACTIVE_PROJECTS` | `display_menu` | Welcome back! N active projects |
+| `OPERATIONAL_WITH_ACTIVE_BUILDS` | `display_menu` | Welcome back! N active builds |
 | `OPERATIONAL` | `display_menu` | System ready |
-| `RESUME` | `EXECUTE_MANDATORY_LOADING_SEQUENCE` | Load project context first |
+| `RESUME` | `EXECUTE_MANDATORY_LOADING_SEQUENCE` | Load build context first |
 
 ---
 
@@ -358,12 +358,12 @@ classDiagram
         <<enumeration>>
         FIRST_TIME_WITH_DEFAULTS
         GOALS_NOT_PERSONALIZED
-        OPERATIONAL_WITH_ACTIVE_PROJECTS
+        OPERATIONAL_WITH_ACTIVE_BUILDS
         OPERATIONAL
         RESUME
     }
 
-    class ProjectStatus {
+    class BuildStatus {
         <<enumeration>>
         PLANNING
         IN_PROGRESS
@@ -372,10 +372,10 @@ classDiagram
         ARCHIVED
     }
 
-    class Project {
+    class Build {
         +str id
         +str name
-        +ProjectStatus status
+        +BuildStatus status
         +float progress
         +int tasks_total
         +int tasks_completed
@@ -399,7 +399,7 @@ classDiagram
         +to_dict()
     }
 
-    Project --> ProjectStatus
+    Build --> BuildStatus
 ```
 
 ---
@@ -446,7 +446,7 @@ Always loaded at startup (order matters):
 
 **Protected paths** (never touched):
 - `01-memory/`
-- `02-projects/`
+- `02-builds/`
 - `03-skills/`
 - `04-workspace/`
 - `.env`
@@ -470,14 +470,14 @@ result = service.startup(
     check_updates=True
 )
 
-# Load specific project
-project = service.load_project("14-advanced-hook-system")
+# Load specific build
+build = service.load_build("14-advanced-hook-system")
 
 # Load skill (slim mode - file tree + SKILL.md only)
 skill = service.load_skill("airtable-master")
 
-# List all projects/skills
-projects = service.list_projects(full=False)
+# List all builds/skills
+builds = service.list_builds(full=False)
 skills = service.list_skills(full=False)
 
 # Metadata only
@@ -495,10 +495,10 @@ The CLI wrapper exports these functions for direct import:
 ```python
 from nexus_loader import (
     load_startup,
-    load_project,
+    load_build,
     load_skill,
     load_metadata,
-    scan_projects,
+    scan_builds,
     scan_skills,
     check_for_updates,
     sync_from_upstream,
@@ -527,7 +527,7 @@ Instructions appear twice in startup result:
 
 Only `--startup` and `--resume` use cache redirection. Other commands print full JSON.
 
-**Why**: Startup output (~84KB) exceeds bash limits. Skills/projects need full content.
+**Why**: Startup output (~84KB) exceeds bash limits. Skills/builds need full content.
 
 ### 4. Progressive Disclosure
 

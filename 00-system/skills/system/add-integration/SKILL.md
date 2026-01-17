@@ -41,15 +41,15 @@ If user mentions connecting to external tools but `learn_integrations` is pendin
 Build complete API integrations following the master/connect/specialized pattern.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️ CRITICAL: MUST LOAD create-project SKILL ⚠️
+⚠️ CRITICAL: MUST LOAD plan-build SKILL ⚠️
 
-**MANDATORY**: In Step 4, load the create-project skill:
+**MANDATORY**: In Step 4, load the plan-build skill:
 
 ```bash
-python 00-system/core/nexus-loader.py --skill create-project
+python 00-system/core/nexus-loader.py --skill plan-build
 ```
 
-Then follow its workflow to create the integration project.
+Then follow its workflow to create the integration build.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## Purpose
@@ -59,7 +59,7 @@ The `add-integration` skill transforms API documentation into a complete, produc
 1. **Discovers** available API endpoints via web search
 2. **Presents** endpoints for user selection
 3. **Plans** the integration architecture
-4. **Creates a project** for implementation (via create-project skill)
+4. **Creates a build** for implementation (via plan-build skill)
 
 **Architecture Pattern**: See [references/integration-architecture.md](references/integration-architecture.md)
 
@@ -76,11 +76,11 @@ The `add-integration` skill transforms API documentation into a complete, produc
 │  Step 1: Initialize TodoList                            │
 │  Step 2: Ask which service to integrate                 │
 │  Step 3: Web search for API documentation               │
-│  Step 4: Create integration project (saves progress)    │
+│  Step 4: Create integration build (saves progress)    │
 │  Step 5: Parse and present available endpoints          │
 │  Step 6: User selects endpoints to implement            │
 │  Step 7: Gather authentication details & finalize       │
-│  Step 8: Prompt user to close session & start project   │
+│  Step 8: Prompt user to close session & start build   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -94,7 +94,7 @@ Create TodoWrite with all workflow steps:
 ```
 - [ ] Ask which service to integrate
 - [ ] Search for API documentation
-- [ ] Create integration project
+- [ ] Create integration build
 - [ ] Parse and present endpoints
 - [ ] User selects endpoints
 - [ ] Gather authentication details & finalize
@@ -166,22 +166,22 @@ Found:
 
 ---
 
-### Step 4: Create Integration Project
+### Step 4: Create Integration Build
 
-**Create project immediately after discovering API docs** to save progress.
+**Create build immediately after discovering API docs** to save progress.
 
-**Load the create-project skill:**
+**Load the plan-build skill:**
 ```bash
-python 00-system/core/nexus-loader.py --skill create-project
+python 00-system/core/nexus-loader.py --skill plan-build
 ```
 
-**Follow its workflow** with project name: "{Service Name} Integration"
+**Follow its workflow** with build name: "{Service Name} Integration"
 
 This creates:
 ```
-02-projects/{next_id}-{service_slug}-integration/
+02-builds/{next_id}-{service_slug}-integration/
 ├── 01-planning/
-│   ├── overview.md          # Project metadata (template)
+│   ├── overview.md          # Build metadata (template)
 │   ├── plan.md              # Approach and decisions (template)
 │   └── steps.md             # Implementation checklist (template)
 ├── 02-resources/            # For integration-config.json
@@ -189,7 +189,7 @@ This creates:
 └── 04-outputs/
 ```
 
-**After project is created**, update the generated files with integration-specific content.
+**After build is created**, update the generated files with integration-specific content.
 
 **Initial overview.md**:
 ```yaml
@@ -239,7 +239,7 @@ Configuration: In progress
 
 **Display**:
 ```
-Project created: 02-projects/{id}-{service_slug}-integration/
+Build created: 02-builds/{id}-{service_slug}-integration/
 
 Your progress is now being saved. Let's continue with endpoint selection...
 ```
@@ -250,7 +250,7 @@ Your progress is now being saved. Let's continue with endpoint selection...
 
 After fetching API docs, categorize and present.
 
-**Save discovered endpoints to project** (`02-resources/discovered-endpoints.json`):
+**Save discovered endpoints to build** (`02-resources/discovered-endpoints.json`):
 ```json
 {
   "discovered_at": "{timestamp}",
@@ -342,12 +342,12 @@ Selected {N} endpoints for implementation:
 • Create Contact (POST /contacts)
 • ...
 
-Saved to project. Now let's confirm the authentication setup...
+Saved to build. Now let's confirm the authentication setup...
 ```
 
 ---
 
-### Step 7: Gather Authentication Details & Finalize Project
+### Step 7: Gather Authentication Details & Finalize Build
 
 Based on API docs discovered:
 
@@ -376,7 +376,7 @@ I'll need this info for the integration config:
 
 **Wait for user confirmation/corrections.**
 
-**Finalize project files**:
+**Finalize build files**:
 
 1. **Update integration-config.json** with confirmed values:
 ```json
@@ -467,12 +467,12 @@ Will create:
 
 **Display confirmation**:
 ```
-Project Finalized!
+Build Finalized!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📁 02-projects/{id}-{service_slug}-integration/
+📁 02-builds/{id}-{service_slug}-integration/
 
-This project contains:
+This build contains:
 • Full implementation plan in steps.md
 • Configuration saved in integration-config.json
 • {N} endpoints ready to implement
@@ -503,9 +503,9 @@ NEXT STEPS
 2. Start a new session
 
 3. Say "work on {service_slug} integration"
-   (This will execute the implementation project)
+   (This will execute the implementation build)
 
-The project will guide you through:
+The build will guide you through:
 • Creating all skill folders
 • Generating scripts from templates
 • Setting up authentication
@@ -520,15 +520,15 @@ Ready to close this session? Say "done"
 
 ---
 
-## Project Execution Notes
+## Build Execution Notes
 
-When the user returns and says "work on {service} integration", the `execute-project` skill will:
+When the user returns and says "work on {service} integration", the `execute-build` skill will:
 
 1. **Load** the integration-config.json
 2. **Run** scaffold_integration.py with the config:
    ```bash
    python 00-system/skills/system/add-integration/scripts/scaffold_integration.py \
-     --config 02-projects/{id}-{service_slug}-integration/02-resources/integration-config.json
+     --config 02-builds/{id}-{service_slug}-integration/02-resources/integration-config.json
    ```
 3. **Check off** steps.md tasks as completed
 4. **Guide** through testing and validation
@@ -589,8 +589,8 @@ again when you're ready.
 
 ## Notes
 
-**Why projects?**
-- Integration implementation is multi-step work (project)
+**Why builds?**
+- Integration implementation is multi-step work (build)
 - Planning is reusable (skill handles discovery)
 - Separates planning from execution
 
@@ -618,4 +618,4 @@ again when you're ready.
 
 **Version**: 2.0
 **Updated**: 2025-12-11
-**Major change**: Now creates projects for implementation instead of doing everything in one session
+**Major change**: Now creates builds for implementation instead of doing everything in one session

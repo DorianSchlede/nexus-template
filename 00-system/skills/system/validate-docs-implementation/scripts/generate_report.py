@@ -10,7 +10,7 @@ While AI can generate reports manually, this script provides:
 - File management (overwrite protection)
 
 Usage:
-    python generate_report.py --implementation "init-project" \\
+    python generate_report.py --implementation "init-build" \\
                               --data report_data.json \\
                               --output-dir "04-workspace/validation-reports/"
 

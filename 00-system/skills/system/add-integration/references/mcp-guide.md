@@ -20,7 +20,7 @@
 
 **Model Context Protocol (MCP)** is an open protocol that allows Claude to connect to external tools and data sources. Think of it as a universal adapter that lets Claude interact with:
 
-- **Project Management**: GitHub, Linear, Jira, Asana, Trello
+- **Build Management**: GitHub, Linear, Jira, Asana, Trello
 - **Communication**: Slack, Discord, Microsoft Teams
 - **Storage**: Google Drive, Dropbox, Notion, Obsidian
 - **Databases**: PostgreSQL, MySQL, SQLite
@@ -65,8 +65,8 @@ npx -y @modelcontextprotocol/server-github
 ```
 
 **Use Cases**:
-- Track project issues in GitHub from Nexus
-- Create PRs based on project tasks
+- Track build issues in GitHub from Nexus
+- Create PRs based on build tasks
 - Review code directly in conversation
 
 ---
@@ -97,7 +97,7 @@ npx -y @modelcontextprotocol/server-gdrive
 ```
 
 **Use Cases**:
-- Store project outputs in Google Drive
+- Store build outputs in Google Drive
 - Sync deliverables automatically
 - Collaborate with team on documents
 
@@ -128,7 +128,7 @@ npx -y @modelcontextprotocol/server-slack
 ```
 
 **Use Cases**:
-- Send project updates to Slack channels
+- Send build updates to Slack channels
 - Notify team when milestones complete
 - Get notifications from Nexus in Slack
 
@@ -158,14 +158,14 @@ npx -y @modelcontextprotocol/server-notion
 ```
 
 **Use Cases**:
-- Sync Nexus projects to Notion databases
+- Sync Nexus builds to Notion databases
 - Export deliverables to Notion pages
 - Mirror tasks between Nexus and Notion
 
 ---
 
 ### Linear MCP
-**What it does**: Create issues, manage projects, track progress
+**What it does**: Create issues, manage builds, track progress
 
 **Installation**:
 ```bash
@@ -218,8 +218,8 @@ npx -y @modelcontextprotocol/server-postgres
 ```
 
 **Use Cases**:
-- Query data for analysis in projects
-- Store structured project metadata
+- Query data for analysis in builds
+- Store structured build metadata
 - Generate reports from database data
 
 ---
@@ -276,7 +276,7 @@ npx -y @modelcontextprotocol/server-obsidian
 
 **Use Cases**:
 - Sync Nexus Memory/ to Obsidian vault
-- Visualize project relationships in Obsidian graph
+- Visualize build relationships in Obsidian graph
 - Dual-mode: Nexus for workflows, Obsidian for notes
 
 ---
@@ -291,7 +291,7 @@ npx -y @modelcontextprotocol/server-obsidian
 
 ### Google API Credentials
 1. Go to https://console.cloud.google.com/
-2. Create new project or select existing
+2. Create new build or select existing
 3. Enable Google Drive API
 4. Create credentials (OAuth 2.0 Client ID)
 5. Download JSON credentials
@@ -471,30 +471,30 @@ server.start();
 
 ## Integration Ideas for Nexus
 
-### Project Management Integration
-- Sync Nexus projects to Linear/Jira
+### Build Management Integration
+- Sync Nexus builds to Linear/Jira
 - Auto-create issues from tasks.md
 - Track progress bidirectionally
 
 ### Storage Integration
-- Export project outputs to Google Drive
+- Export build outputs to Google Drive
 - Backup Memory/ to cloud storage
 - Share deliverables via Notion
 
 ### Communication Integration
-- Send project updates to Slack
+- Send build updates to Slack
 - Notify team of milestone completions
 - Create status reports via email
 
 ### Data Integration
-- Query databases for project research
-- Store structured project data
-- Generate analytics from project history
+- Query databases for build research
+- Store structured build data
+- Generate analytics from build history
 
 ### Knowledge Management Integration
 - Sync Memory/ to Obsidian vault
 - Create knowledge graph visualization
-- Link projects to existing notes
+- Link builds to existing notes
 
 ---
 

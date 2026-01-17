@@ -1,7 +1,7 @@
 """
 Transcript parsing utilities for Claude Code hooks.
 
-Shared logic for extracting project information from transcript JSONL files.
+Shared logic for extracting build information from transcript JSONL files.
 Used by both SessionStart and PreCompact hooks.
 
 Detection priority:
@@ -16,16 +16,16 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 
-# Project detection pattern: 02-projects/{id}-{name}/
-PROJECT_PATTERN = re.compile(r'02-projects[/\\]([0-9]{2}-[a-zA-Z0-9_-]+)', re.IGNORECASE)
+# Build detection pattern: 02-builds/{id}-{name}/
+BUILD_PATTERN = re.compile(r'02-builds[/\\]([0-9]{2}-[a-zA-Z0-9_-]+)', re.IGNORECASE)
 
 # Session ID pattern in YAML frontmatter
 SESSION_ID_PATTERN = re.compile(r'session_id:\s*"([^"]+)"')
 
 
-def find_project_by_session_id(projects_dir: str, session_id: str) -> Optional[str]:
+def find_build_by_session_id(builds_dir: str, session_id: str) -> Optional[str]:
     """
-    Find project by session_id match in resume-context.md files.
+    Find build by session_id match in resume-context.md files.
 
     MULTI-SESSION ENHANCEMENT:
     - Checks session_ids list first (all sessions)
@@ -35,27 +35,27 @@ def find_project_by_session_id(projects_dir: str, session_id: str) -> Optional[s
     PreCompact adds to session_ids list, SessionStart searches it.
 
     Args:
-        projects_dir: Path to 02-projects/ directory
+        builds_dir: Path to 02-builds/ directory
         session_id: Session ID to search for
 
     Returns:
-        project_id (e.g., "29-project-skill-handover") or None
+        build_id (e.g., "29-build-skill-handover") or None
     """
     if not session_id or session_id == "unknown":
         return None
 
-    projects_path = Path(projects_dir)
-    if not projects_path.exists():
-        logging.info(f"Projects directory not found: {projects_dir}")
+    builds_path = Path(builds_dir)
+    if not builds_path.exists():
+        logging.info(f"Builds directory not found: {builds_dir}")
         return None
 
     try:
-        # Scan all project resume-context.md files
-        for project_dir in projects_path.iterdir():
-            if not project_dir.is_dir():
+        # Scan all build resume-context.md files
+        for build_dir in builds_path.iterdir():
+            if not build_dir.is_dir():
                 continue
 
-            resume_file = project_dir / "01-planning" / "resume-context.md"
+            resume_file = build_dir / "01-planning" / "resume-context.md"
             if not resume_file.exists():
                 continue
 
@@ -71,9 +71,9 @@ def find_project_by_session_id(projects_dir: str, session_id: str) -> Optional[s
                 if session_ids_match:
                     id_list = re.findall(r'"([^"]+)"', session_ids_match.group(1))
                     if session_id in id_list:
-                        project_id = project_dir.name
-                        logging.info(f"Found project {project_id} in session_ids list (multi-session)")
-                        return project_id
+                        build_id = build_dir.name
+                        logging.info(f"Found build {build_id} in session_ids list (multi-session)")
+                        return build_id
                 else:
                     # Try multiline format
                     session_ids_match = re.search(
@@ -83,42 +83,42 @@ def find_project_by_session_id(projects_dir: str, session_id: str) -> Optional[s
                     if session_ids_match:
                         id_list = re.findall(r'"([^"]+)"', session_ids_match.group(1))
                         if session_id in id_list:
-                            project_id = project_dir.name
-                            logging.info(f"Found project {project_id} in session_ids list (multi-session)")
-                            return project_id
+                            build_id = build_dir.name
+                            logging.info(f"Found build {build_id} in session_ids list (multi-session)")
+                            return build_id
 
                 # Fallback to legacy session_id field (backward compat)
                 match = SESSION_ID_PATTERN.search(content)
                 if match and match.group(1) == session_id:
-                    project_id = project_dir.name
-                    logging.info(f"Found project {project_id} by legacy session_id match")
-                    return project_id
+                    build_id = build_dir.name
+                    logging.info(f"Found build {build_id} by legacy session_id match")
+                    return build_id
 
             except Exception:
                 continue
 
-        logging.info(f"No project found with session_id {session_id[:8]}...")
+        logging.info(f"No build found with session_id {session_id[:8]}...")
         return None
 
     except Exception as e:
-        logging.error(f"Error finding project by session_id: {e}")
+        logging.error(f"Error finding build by session_id: {e}")
         return None
 
 
-def parse_transcript_for_project(transcript_path: str, max_entries: int = 500) -> Tuple[Optional[str], str]:
+def parse_transcript_for_build(transcript_path: str, max_entries: int = 500) -> Tuple[Optional[str], str]:
     """
-    Parse transcript JSONL to detect active project from tool calls.
+    Parse transcript JSONL to detect active build from tool calls.
 
     Detection method: Extract file_path from actual tool_use entries (Read, Write, Edit, Glob, Bash).
-    Only counts projects from real file operations, NOT from text content or examples.
+    Only counts builds from real file operations, NOT from text content or examples.
 
     Args:
         transcript_path: Path to transcript JSONL file
         max_entries: Maximum number of entries to scan from end (default 500)
 
     Returns:
-        Tuple of (project_id, detection_method)
-        - project_id: e.g., "30-xml-context-restructure" or None
+        Tuple of (build_id, detection_method)
+        - build_id: e.g., "30-xml-context-restructure" or None
         - detection_method: "transcript" or "none"
     """
     path = Path(transcript_path).expanduser()
@@ -133,8 +133,8 @@ def parse_transcript_for_project(transcript_path: str, max_entries: int = 500) -
         # Read last N entries (most recent at end)
         last_entries = lines[-max_entries:] if len(lines) > max_entries else lines
 
-        # Track project mentions with recency (last mention wins)
-        project_mentions = {}
+        # Track build mentions with recency (last mention wins)
+        build_mentions = {}
 
         for idx, line in enumerate(last_entries):
             try:
@@ -160,30 +160,30 @@ def parse_transcript_for_project(transcript_path: str, max_entries: int = 500) -
                     # Extract file path from tool input
                     file_path = tool_input.get('file_path', '') or tool_input.get('path', '')
 
-                    # Match project pattern against actual file path
-                    match = PROJECT_PATTERN.search(file_path)
+                    # Match build pattern against actual file path
+                    match = BUILD_PATTERN.search(file_path)
                     if match:
-                        project_id = match.group(1)
-                        project_mentions[project_id] = idx
-                        logging.debug(f"Found project {project_id} from {tool_name} tool")
+                        build_id = match.group(1)
+                        build_mentions[build_id] = idx
+                        logging.debug(f"Found build {build_id} from {tool_name} tool")
 
             except json.JSONDecodeError:
                 continue
             except Exception:
                 continue
 
-        # Multi-project detection: if 3+ projects touched, this is bulk work, not focused project
-        if len(project_mentions) >= 3:
-            logging.info(f"Multi-project session detected ({len(project_mentions)} projects) - no single active project")
+        # Multi-build detection: if 3+ builds touched, this is bulk work, not focused build
+        if len(build_mentions) >= 3:
+            logging.info(f"Multi-build session detected ({len(build_mentions)} builds) - no single active build")
             return None, "none"
 
-        # Return most recently mentioned project (only if 1-2 projects touched)
-        if project_mentions:
-            most_recent_project = max(project_mentions.items(), key=lambda x: x[1])[0]
-            logging.info(f"Found project in transcript from tool_use: {most_recent_project}")
-            return most_recent_project, "transcript"
+        # Return most recently mentioned build (only if 1-2 builds touched)
+        if build_mentions:
+            most_recent_build = max(build_mentions.items(), key=lambda x: x[1])[0]
+            logging.info(f"Found build in transcript from tool_use: {most_recent_build}")
+            return most_recent_build, "transcript"
 
-        logging.info("No project found in transcript tool_use entries")
+        logging.info("No build found in transcript tool_use entries")
         return None, "none"
 
     except Exception as e:
@@ -191,26 +191,26 @@ def parse_transcript_for_project(transcript_path: str, max_entries: int = 500) -
         return None, "none"
 
 
-def check_skill_switch_after_project(transcript_path: str, project_id: Optional[str]) -> bool:
+def check_skill_switch_after_build(transcript_path: str, build_id: Optional[str]) -> bool:
     """
-    Check if user switched to a non-project skill AFTER loading a project.
+    Check if user switched to a non-build skill AFTER loading a build.
 
     This distinguishes:
-    - User loaded project, then switched to paper-search skill → True (moved on)
-    - User loaded project, was chatting about it (no skill switch) → False (still in context)
+    - User loaded build, then switched to paper-search skill → True (moved on)
+    - User loaded build, was chatting about it (no skill switch) → False (still in context)
 
-    Skill switch patterns (means LEFT project):
+    Skill switch patterns (means LEFT build):
     - 03-skills/*/SKILL.md - user skills
-    - 00-system/skills/(?!projects/) - system skills EXCEPT project skills
+    - 00-system/skills/(?!builds/) - system skills EXCEPT build skills
 
     Args:
         transcript_path: Path to transcript JSONL file
-        project_id: The project ID to check against
+        build_id: The build ID to check against
 
     Returns:
-        True if skill was loaded AFTER project, False otherwise
+        True if skill was loaded AFTER build, False otherwise
     """
-    if not project_id:
+    if not build_id:
         return False
 
     path = Path(transcript_path).expanduser()
@@ -224,22 +224,22 @@ def check_skill_switch_after_project(transcript_path: str, project_id: Optional[
         last_entries = lines[-50:] if len(lines) > 50 else lines
 
         # Patterns
-        project_pattern = re.compile(rf'02-projects/{re.escape(project_id)}/')
+        build_pattern = re.compile(rf'02-builds/{re.escape(build_id)}/')
         user_skill_pattern = re.compile(r'03-skills/[^/]+/SKILL\.md')
-        system_skill_pattern = re.compile(r'00-system/skills/(?!projects/)[^/]+/SKILL\.md')
+        system_skill_pattern = re.compile(r'00-system/skills/(?!builds/)[^/]+/SKILL\.md')
 
-        last_project_idx = -1
+        last_build_idx = -1
         last_skill_idx = -1
 
         for idx, line in enumerate(last_entries):
-            if project_pattern.search(line):
-                last_project_idx = idx
+            if build_pattern.search(line):
+                last_build_idx = idx
             if user_skill_pattern.search(line) or system_skill_pattern.search(line):
                 last_skill_idx = idx
 
-        # If skill was loaded AFTER project, user switched away
-        if last_project_idx >= 0 and last_skill_idx > last_project_idx:
-            logging.info(f"Skill switch detected after project {project_id}")
+        # If skill was loaded AFTER build, user switched away
+        if last_build_idx >= 0 and last_skill_idx > last_build_idx:
+            logging.info(f"Skill switch detected after build {build_id}")
             return True
 
         return False

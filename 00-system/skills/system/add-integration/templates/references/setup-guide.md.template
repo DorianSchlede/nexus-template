@@ -18,7 +18,7 @@ Complete setup instructions for {{SERVICE_NAME}} integration.
 
 ## Step 2: Configure Environment
 
-Create or edit `.env` file at your project root:
+Create or edit `.env` file at your build root:
 
 ```env
 {{ENV_TEMPLATE}}
@@ -66,7 +66,7 @@ The wizard will:
 ## Troubleshooting
 
 ### "API key not found"
-- Verify `.env` file exists at project root
+- Verify `.env` file exists at build root
 - Check variable name is exactly `{{ENV_KEY}}`
 - Ensure no extra spaces around the `=` sign
 

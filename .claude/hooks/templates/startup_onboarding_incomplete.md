@@ -1,4 +1,4 @@
-Display this menu in a SINGLE markdown code block, then follow the instructions below.
+Display this menu EXACTLY as shown (single code block), then follow instructions.
 
 ```
     ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
@@ -8,38 +8,45 @@ Display this menu in a SINGLE markdown code block, then follow the instructions 
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
-         Your 10x Operating System
+         Your AI Productivity System
 
 🧠 MEMORY
-   Not configured ▸ 'setup memory'
+   Not configured ▸ 'setup memory' (8 min)
 
-📦 PROJECTS
-   [Show from <active-projects> or "None yet"]
+📋 CURRENT WORK
+   Nothing yet
 
 🔧 SKILLS
-   [Show from <skills> metadata]
+   50+ available
 
-📁 WORKSPACE
-   [Show configured status from <state>]
+📁 FOLDERS
+   Not organized ▸ 'setup folders' (5 min)
 
 🔌 INTEGRATIONS
-   [Show from skills with *-connect pattern]
+   None
 
-💡 SUGGESTED NEXT STEPS
-   1. 'setup memory' - configure your goals (5 min) ⭐ RECOMMENDED
-   2. [other contextual suggestions]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 GETTING STARTED
+
+   1. 'setup memory' ⭐ recommended first
+   2. Tell me what you want to work on
+   3. 'list skills' - see capabilities
 ```
 
 ================================================================================
-STATE: ONBOARDING INCOMPLETE
+CLAUDE INSTRUCTIONS
 ================================================================================
 
-Pending setup:
+STATE: Onboarding incomplete (user skipped/interrupted setup-memory)
+
+Pending:
 {pending_list}
 
-After displaying menu, gently suggest:
-"Before we start, would you like to configure your goals?
-Say 'setup memory' for a 5-min setup."
+After menu, say:
+"Would you like to set up memory first? Takes 8 minutes and helps me understand
+your goals.
 
-If user declines, proceed with their request.
-Wait for user input.
+Say **'setup memory'** to start, or just tell me what you'd like to work on."
+
+If they describe work → help them (don't force setup).

@@ -18,6 +18,6 @@ python 00-system/core/nexus-loader.py --startup
 |--------|----------|
 | `display_menu` | Show Nexus menu, wait for user input |
 | `continue_working` | Skip menu, continue from context |
-| `load_and_execute_project` | Load and execute specified project |
+| `load_and_execute_build` | Load and execute specified build |
 
 Follow `instructions.action` from the loader output.

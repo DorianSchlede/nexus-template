@@ -18,7 +18,7 @@ This document establishes the foundational philosophy and measurable standards f
 
 **The Solution**: Deliver immediate value through concrete experience, then explain architecture once users have grounded context.
 
-**Proof**: Project 00 V2.0 redesign reduced drop-off from 35-45% to <15% by applying these principles.
+**Proof**: Build 00 V2.0 redesign reduced drop-off from 35-45% to <15% by applying these principles.
 
 ---
 
@@ -32,7 +32,7 @@ This document establishes the foundational philosophy and measurable standards f
 6. [Anti-Patterns Dictionary](#anti-patterns-dictionary)
 7. [Design Checklists](#design-checklists)
 8. [Measurement Framework](#measurement-framework)
-9. [Case Study: Project 00 V2.0](#case-study-project-00-v20)
+9. [Case Study: Build 00 V2.0](#case-study-build-00-v20)
 10. [Application Guide](#application-guide)
 
 ---
@@ -46,7 +46,7 @@ This document establishes the foundational philosophy and measurable standards f
 **Why**: Abstract concepts have no cognitive anchor points for first-time users. They're processed as meaningless information and forgotten within 5 minutes (Ebbinghaus Forgetting Curve).
 
 **Application**:
-- ❌ WRONG: "Let me teach you about Projects, Skills, and Memory"
+- ❌ WRONG: "Let me teach you about Builds, Skills, and Memory"
 - ✅ RIGHT: "What do you want to accomplish?" → [Captures goals] → "I just created your Memory. Here's why that matters..."
 
 **Test**: Can a user articulate value received BEFORE you explain architecture?
@@ -484,8 +484,8 @@ CALCULATE YOUR VOCABULARY LOAD:
 New Terms This Session:
 [ ] Count unique technical terms introduced
 [ ] Count acronyms (MCP, YAML, API)
-[ ] Count system concepts (Projects, Skills, Memory)
-[ ] Count file names/structures (project-map.md, 01-memory/)
+[ ] Count system concepts (Builds, Skills, Memory)
+[ ] Count file names/structures (build-map.md, 01-memory/)
 
 TOTAL NEW TERMS: _____
 
@@ -529,7 +529,7 @@ If >5 terms, ask:
 │  Level 5: CREATE                        │  90% Retention
 │  ─────────────────────────────          │  (User creates artifact)
 │  User builds something tangible         │
-│  Example: Create first project          │
+│  Example: Create first build          │
 └─────────────────────────────────────────┘
                 ↓
 ┌─────────────────────────────────────────┐
@@ -608,10 +608,10 @@ If >5 terms, ask:
 ❌ WRONG:
 New terms in first 10 minutes:
 - Memory System, Integration Hub, Skills System
-- Projects, Skills, Memory, Sessions
+- Builds, Skills, Memory, Sessions
 - MCP servers, YAML, metadata
-- close-session, create-project, create-skill
-- goals.md, roadmap.md, project-map.md
+- close-session, plan-build, create-skill
+- goals.md, roadmap.md, build-map.md
 = 15+ terms
 ```
 
@@ -675,9 +675,9 @@ When you return tomorrow, I'll remember your goals..."
 **Example**:
 ```
 ❌ WRONG:
-Project 00: 15 minutes (architecture teaching)
-Project 01: 20 minutes (more architecture)
-Project 02: 25 minutes (still more teaching)
+Build 00: 15 minutes (architecture teaching)
+Build 01: 20 minutes (more architecture)
+Build 02: 25 minutes (still more teaching)
 = 60 minutes before any real work
 ```
 
@@ -685,7 +685,7 @@ Project 02: 25 minutes (still more teaching)
 
 **Fix**: Deliver value <5 min, keep total onboarding <40 min
 
-**Metrics**: >20 min per project = 20-30% drop-off
+**Metrics**: >20 min per build = 20-30% drop-off
 
 ---
 
@@ -715,7 +715,7 @@ Ends with: "OK that's everything, goodbye"
 **Example**:
 ```
 ❌ WRONG:
-"A project might be 'Launch consulting business' or 'Write research paper'"
+"A build might be 'Launch consulting business' or 'Write research paper'"
 
 [User is a product manager - examples don't resonate]
 ```
@@ -937,7 +937,7 @@ Remember to do that next time! Goodbye."
 │ • Drop-Off Points: Where users quit                   │
 │   Target: <15% in first 5 min | Baseline: 35-45%     │
 │                                                        │
-│ • Session 2 Return: % who start next project          │
+│ • Session 2 Return: % who start next build          │
 │   Target: >75% | Baseline: 50% | V2.0: 75%+          │
 └────────────────────────────────────────────────────────┘
 
@@ -1161,7 +1161,7 @@ POST-SESSION SURVEY:
 
 ---
 
-## Case Study: Project 00 V2.0
+## Case Study: Build 00 V2.0
 
 ### The Transformation
 
@@ -1191,7 +1191,7 @@ POST-SESSION SURVEY:
 ```
 "Welcome to Nexus!
 
-Available Projects: 4 onboarding projects
+Available Builds: 4 onboarding builds
 Available Skills: 7 system skills
 
 Current State: Fresh start
@@ -1200,7 +1200,7 @@ Let's begin..."
 ```
 
 **Problems**:
-- User has NO context for "projects" or "skills"
+- User has NO context for "builds" or "skills"
 - Abstract concepts before any concrete experience
 - System-centric (not user-centric)
 
@@ -1348,9 +1348,9 @@ automatically. But we don't need that now—let's continue!"
 
 **V1.0 (Abstract Teaching, Again)**:
 ```
-"Let me explain Projects, Skills, and Memory...
+"Let me explain Builds, Skills, and Memory...
 
-Projects are focused work sessions...
+Builds are focused work sessions...
 Skills are reusable workflows...
 Memory is persistent context...
 
@@ -1412,7 +1412,7 @@ You'll never have to re-explain yourself."
 1. Read this document completely (1 hour)
 2. Study the CAVE Framework section (15 min)
 3. Review Anti-Patterns Dictionary (15 min)
-4. Examine Project 00 V2.0 case study (15 min)
+4. Examine Build 00 V2.0 case study (15 min)
 
 **Goal**: Understand WHY these principles work, not just WHAT they are
 
@@ -1420,7 +1420,7 @@ You'll never have to re-explain yourself."
 
 #### Step 2: Apply CAVE Framework
 
-**For each new onboarding project**:
+**For each new onboarding build**:
 
 1. **Define CONCRETE Phase (30-40% of time)**:
    - What personal context do we need from user?
@@ -1574,9 +1574,9 @@ Your onboarding succeeds when:
 
 **Document Status**: Living Document - Update as we learn from real-world testing
 
-**Last Major Update**: 2025-11-04 (Project 00 V2.0 redesign)
+**Last Major Update**: 2025-11-04 (Build 00 V2.0 redesign)
 
-**Next Review**: After Project 01, 02, 03 redesigns complete
+**Next Review**: After Build 01, 02, 03 redesigns complete
 
 **Maintained By**: UX Design Team / Meta Architect
 

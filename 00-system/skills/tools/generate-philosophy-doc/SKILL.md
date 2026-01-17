@@ -428,7 +428,7 @@ After initial draft:
 
 1. **Standalone File**: Save as `[domain]-philosophy.md` in appropriate location
 2. **System Documentation**: Place in `00-system/documentation/` if system-wide
-3. **Project Documentation**: Place in project folder if project-specific
+3. **Build Documentation**: Place in build folder if build-specific
 4. **External Sharing**: Package with any additional context needed
 
 **Delivery Includes**:

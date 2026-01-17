@@ -153,7 +153,7 @@ line_length = 100
 # Install globally
 npm install -g prettier
 
-# Or install in project
+# Or install in build
 npm install --save-dev prettier
 
 # Verify
@@ -188,7 +188,7 @@ coverage
 # Install
 npm install -g eslint
 
-# Or in project
+# Or in build
 npm install --save-dev eslint
 
 # Initialize (interactive)
@@ -476,7 +476,7 @@ python -m venv venv
 source venv/bin/activate
 pip install black flake8 pylint isort
 
-# Node: Use project-local installation
+# Node: Use build-local installation
 npm install --save-dev prettier eslint
 npx prettier --version
 ```

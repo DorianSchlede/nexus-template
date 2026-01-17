@@ -1,6 +1,6 @@
 ---
 name: learn-nexus
-description: "learn nexus, nexus tutorial, how nexus works."
+description: "Master Nexus philosophy and best practices. Load when user mentions: learn nexus, nexus tutorial, system mastery, nexus best practices, how nexus works, nexus philosophy, nexus design, understand nexus, nexus deep dive. 15-18 min."
 onboarding: true
 priority: medium
 ---
@@ -14,11 +14,11 @@ priority: medium
 Check `learning_tracker.completed.learn_nexus` in user-config.yaml. If `false`:
 
 **PROACTIVELY SUGGEST when user:**
-1. Has completed OTHER onboarding skills (setup-goals, learn-projects, learn-skills)
+1. Has completed OTHER onboarding skills (setup-memory, learn-builds, learn-skills)
    but hasn't done learn-nexus yet - suggest as "graduation" step
 2. Asks philosophical questions ("why does Nexus work this way?", "what's the design behind...")
 3. Encounters AI patterns (false progress, incomplete reads, over-engineering)
-4. Makes common mistakes (creating projects instead of skills, skipping close-session)
+4. Makes common mistakes (creating builds instead of skills, skipping close-session)
 5. Expresses interest in mastering the system or best practices
 6. After using Nexus for 3+ sessions without completing this skill
 
@@ -136,7 +136,7 @@ and evolves with every interaction.
    AI matches your message → context loads automatically.
 
 3. SKILL-FIRST EXECUTION
-   Skills have priority over projects.
+   Skills have priority over builds.
    User skills have priority over system skills.
 
 4. PROGRESSIVE DISCLOSURE
@@ -164,7 +164,7 @@ and evolves with every interaction.
 
 ## Part D: System Pitfalls (2 min)
 
-### Pitfall #1: Projects Instead of Skills
+### Pitfall #1: Builds Instead of Skills
 
 ```
 WRONG:
@@ -250,8 +250,8 @@ Evaluate additions, don't auto-accept/reject.
 ### Intelligent Friction
 
 ```
-You: "Create 10 projects for Q1"
-AI: "Before 10 projects: Which unblocks others?
+You: "Create 10 builds for Q1"
+AI: "Before 10 builds: Which unblocks others?
      Should some be skills? Start with 2-3?"
 ```
 
@@ -261,7 +261,7 @@ Good friction prevents wasted effort.
 
 ```
 Session 1 (Planning - 20-30 min):
-- Create project structure
+- Create build structure
 - Fill overview.md, plan.md, steps.md
 - NO IMPLEMENTATION
 
@@ -315,7 +315,7 @@ Answers:
    You're ready to use Nexus at full power.
 
    Next steps:
-   • 'create project' - Start a new project
+   • 'create build' - Start a new build
    • 'create skill' - Capture a workflow
    • Just work - Nexus guides you
    ```

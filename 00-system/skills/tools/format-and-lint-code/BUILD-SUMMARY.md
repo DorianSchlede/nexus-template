@@ -44,7 +44,7 @@ You now have a complete, production-ready Nexus skill for formatting and linting
 
 #### 4. **scripts/format_and_lint.py**
 Complete Python implementation with:
-- `LanguageDetector` class: Detects languages and files in projects
+- `LanguageDetector` class: Detects languages and files in builds
 - `ToolRunner` class: Executes formatters and linters
 - Support for 9 languages and 20+ tools
 - JSON output parsing for linters (flake8, eslint, etc.)
@@ -207,10 +207,10 @@ Lines of Code/Documentation: ~2,500+
    - Add to skill catalog in SessionStart hook
    - Skill will auto-trigger on: "format code", "lint code", "pre-commit"
 
-2. **Integrate with projects:**
-   - Call from execute-project before final commits
+2. **Integrate with builds:**
+   - Call from execute-build before final commits
    - Use --staged flag for efficiency
-   - Show results in project summary
+   - Show results in build summary
 
 3. **Integrate with CI/CD:**
    - Use --all flag with --strict mode
@@ -247,7 +247,7 @@ Lines of Code/Documentation: ~2,500+
 - ✅ CI/CD integration
 - ✅ Configuration file respecting (pyproject.toml, .prettierrc, etc.)
 - ✅ Exclude patterns support
-- ✅ Multi-language projects support
+- ✅ Multi-language builds support
 - ✅ Detailed reporting and summarization
 - ✅ Error recovery and graceful degradation
 
@@ -307,10 +307,10 @@ Layer 3: External Tools
 
 **Called by**:
 - Users directly: "format my code"
-- Projects: Before final commits
+- Builds: Before final commits
 - CI/CD: Code quality gates
 
-### With execute-project Skill
+### With execute-build Skill
 
 Can be integrated as final step:
 ```
@@ -364,7 +364,7 @@ Phase 4 Output:
 
 1. [ ] Read README.md for overview
 2. [ ] Install tools for your primary language
-3. [ ] Copy `.format-config.yaml.template` to your project
+3. [ ] Copy `.format-config.yaml.template` to your build
 4. [ ] Run: `format and lint code`
 
 ### Short Term (Next hour)
@@ -378,7 +378,7 @@ Phase 4 Output:
 
 9. [ ] Verify all team members can run tool
 10. [ ] Enforce formatting in code review process
-11. [ ] Add to project documentation
+11. [ ] Add to build documentation
 
 ---
 
@@ -387,7 +387,7 @@ Phase 4 Output:
 ### Documentation
 - [ ] Integrate SKILL.md with SessionStart hook
 - [ ] Add to skill catalog in orchestrator
-- [ ] Create example projects using this skill
+- [ ] Create example builds using this skill
 - [ ] Record 5-minute tutorial video
 
 ### Enhancement Ideas
@@ -482,7 +482,7 @@ Total                           ~62 KB
 
 - Nexus Orchestrator: See 00-system/core/orchestrator.md
 - Skill Structure: See 00-system/skills/README.md
-- Related Skills: see 00-system/skills/projects/
+- Related Skills: see 00-system/skills/builds/
 
 ---
 

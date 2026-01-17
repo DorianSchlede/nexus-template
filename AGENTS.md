@@ -27,7 +27,7 @@ python 00-system/core/nexus-loader.py --resume
 |--------|----------|
 | `display_menu` | Show Nexus menu, wait for user input |
 | `continue_working` | Skip menu, continue from summary context |
-| `load_and_execute_project` | Load and execute specified project |
+| `load_and_execute_build` | Load and execute specified build |
 
 **The `--resume` flag returns `continue_working` action** - this tells you to skip the menu and continue working based on the summary instructions.
 

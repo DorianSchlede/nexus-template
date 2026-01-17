@@ -18,11 +18,11 @@ description: "update nexus, sync nexus, check for updates, upgrade nexus."
 Updates these **system files** from upstream:
 - `00-system/` - Core framework, skills, documentation
 - `CLAUDE.md` - Entry point
-- `README.md` - Project readme
+- `README.md` - Build readme
 
 Protects these **user folders** (NEVER touched):
 - `01-memory/` - Your goals, learnings, config
-- `02-projects/` - Your projects
+- `02-builds/` - Your builds
 - `03-skills/` - Your custom skills
 - `04-workspace/` - Your files
 - `.env`, `.claude/` - Your secrets and settings
@@ -57,7 +57,7 @@ Files to update ({changes_count}):
 
 PROTECTED (will NOT be touched):
 - 01-memory/    (your goals & config)
-- 02-projects/  (your projects)
+- 02-builds/  (your builds)
 - 03-skills/    (your custom skills)
 - 04-workspace/ (your files)
 ```

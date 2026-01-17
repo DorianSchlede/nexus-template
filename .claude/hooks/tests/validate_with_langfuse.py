@@ -122,8 +122,8 @@ def analyze_session_patterns(traces):
         # Show trace sequence
         for i, trace in enumerate(sorted_traces, 1):
             source = trace.metadata.get('source', 'unknown') if hasattr(trace, 'metadata') and trace.metadata else 'unknown'
-            project = trace.metadata.get('detected_project', 'none') if hasattr(trace, 'metadata') and trace.metadata else 'none'
-            print(f"    {i}. {trace.timestamp.strftime('%H:%M:%S')} | {source:8} | project: {project}")
+            build = trace.metadata.get('detected_build', 'none') if hasattr(trace, 'metadata') and trace.metadata else 'none'
+            print(f"    {i}. {trace.timestamp.strftime('%H:%M:%S')} | {source:8} | build: {build}")
 
 
 def create_handover_trace_example():
@@ -153,19 +153,19 @@ def create_handover_trace_example():
         input={
             "session_id": session_id,
             "source": "compact",
-            "current_projects": ["28-handover-test-suite"]
+            "current_builds": ["28-handover-test-suite"]
         }
     )
 
     # Add detection spans
     detect_span = trace.span(
-        name="detect_project",
+        name="detect_build",
         input={
             "method": "session_id_match",
             "session_id": session_id
         },
         output={
-            "project_id": "28-handover-test-suite",
+            "build_id": "28-handover-test-suite",
             "found_via": "session_ids_list",
             "total_sessions_tracked": 4
         },
@@ -177,12 +177,12 @@ def create_handover_trace_example():
     phase_span = trace.span(
         name="detect_phase",
         input={
-            "project_id": "28-handover-test-suite",
+            "build_id": "28-handover-test-suite",
             "method": "metadata_first"
         },
         output={
             "phase": "execution",
-            "skill": "execute-project",
+            "skill": "execute-build",
             "source": "resume-context.md"
         },
         metadata={
@@ -194,9 +194,9 @@ def create_handover_trace_example():
     trace.update(
         output={
             "context_mode": "compact",
-            "detected_project": "28-handover-test-suite",
+            "detected_build": "28-handover-test-suite",
             "phase": "execution",
-            "skill": "execute-project",
+            "skill": "execute-build",
             "session_ids_count": 4
         },
         metadata={
@@ -215,13 +215,13 @@ def create_handover_trace_example():
     return trace
 
 
-def query_project_traces(project_id="28-handover-test-suite"):
-    """Query traces related to a specific project."""
+def query_build_traces(build_id="28-handover-test-suite"):
+    """Query traces related to a specific build."""
     if not LANGFUSE_AVAILABLE:
         return []
 
     print("=" * 80)
-    print(f"PROJECT-SPECIFIC TRACE ANALYSIS: {project_id}")
+    print(f"BUILD-SPECIFIC TRACE ANALYSIS: {build_id}")
     print("=" * 80)
 
     langfuse = Langfuse()
@@ -231,27 +231,27 @@ def query_project_traces(project_id="28-handover-test-suite"):
     # We'll fetch all and filter manually
     all_traces = langfuse.fetch_traces(limit=100)
 
-    # Filter by project
-    project_traces = []
+    # Filter by build
+    build_traces = []
     for trace in all_traces.data:
         if hasattr(trace, 'metadata') and trace.metadata:
-            if trace.metadata.get('detected_project') == project_id:
-                project_traces.append(trace)
+            if trace.metadata.get('detected_build') == build_id:
+                build_traces.append(trace)
 
-    print(f"\nFound {len(project_traces)} traces for project {project_id}")
+    print(f"\nFound {len(build_traces)} traces for build {build_id}")
 
     # Analyze session IDs
     session_ids = set()
-    for trace in project_traces:
+    for trace in build_traces:
         if trace.session_id:
             session_ids.add(trace.session_id)
 
-    print(f"Unique sessions that worked on this project: {len(session_ids)}")
+    print(f"Unique sessions that worked on this build: {len(session_ids)}")
 
     for sid in sorted(session_ids):
         print(f"  - {sid[:40]}...")
 
-    return project_traces
+    return build_traces
 
 
 def validate_multi_session_behavior():
@@ -260,22 +260,22 @@ def validate_multi_session_behavior():
     print("MULTI-SESSION VALIDATION")
     print("=" * 80)
 
-    # Check current project state
+    # Check current build state
     sys.path.insert(0, '.claude/hooks')
     from save_resume_state import find_nexus_root
-    from utils.project_state import detect_project_state
+    from utils.build_state import detect_build_state
 
     nexus_root = find_nexus_root()
-    project_path = nexus_root / "02-projects" / "28-handover-test-suite"
+    build_path = nexus_root / "02-builds" / "28-handover-test-suite"
 
-    state = detect_project_state(project_path)
+    state = detect_build_state(build_path)
 
     if not state:
-        print("Could not detect project state")
+        print("Could not detect build state")
         return False
 
-    print(f"\nCurrent Project State:")
-    print(f"  Project: {state.project_id} - {state.name}")
+    print(f"\nCurrent Build State:")
+    print(f"  Build: {state.build_id} - {state.name}")
     print(f"  Status: {state.status}")
     print(f"  Progress: {state.progress_percent}%")
     print(f"  Sessions tracked: {len(state.session_ids)}")
@@ -287,10 +287,10 @@ def validate_multi_session_behavior():
     # If Langfuse available, compare with traces
     if LANGFUSE_AVAILABLE:
         print(f"\nComparing with Langfuse traces...")
-        project_traces = query_project_traces("28-handover-test-suite")
+        build_traces = query_build_traces("28-handover-test-suite")
 
-        if project_traces:
-            trace_sessions = set(t.session_id for t in project_traces if t.session_id)
+        if build_traces:
+            trace_sessions = set(t.session_id for t in build_traces if t.session_id)
             file_sessions = set(state.session_ids)
 
             print(f"\nSession comparison:")

@@ -1,6 +1,6 @@
 ---
 name: setup-memory
-description: "setup memory, my goals, my role, about me, personalize."
+description: "Configure Nexus memory with your role, goals, and preferences. Load when user wants to personalize the system or teach Nexus about themselves. Keywords: setup memory, personalize, configure, my goals, my role, about me, preferences. 8 min."
 onboarding: true
 priority: critical
 ---
@@ -11,7 +11,7 @@ priority: critical
 
 ### When to Proactively Suggest (AI MUST check user-config.yaml)
 
-Check `learning_tracker.completed.setup_goals` AND `goals.md` for `smart_default: true`. If not personalized:
+Check `learning_tracker.completed.setup_memory` AND `goals.md` for `smart_default: true`. If not personalized:
 
 **PROACTIVELY SUGGEST when user:**
 1. **FIRST SESSION**: Always suggest during first interaction if goals not set
@@ -30,7 +30,7 @@ effectively, I'd love to learn about:
 - Your preferences
 
 This takes about 8 minutes and dramatically improves our collaboration.
-Say 'setup goals' to personalize, or continue with defaults.
+Say 'setup memory' to personalize, or continue with defaults.
 ```
 
 **Suggestion Pattern (returning user, still on defaults):**
@@ -38,24 +38,24 @@ Say 'setup goals' to personalize, or continue with defaults.
 💡 I notice you're still using Nexus defaults. Personalizing takes 8 minutes
 and helps me understand your work context, goals, and preferences.
 
-Ready to 'setup goals'? (This is a one-time setup that improves every session)
+Ready to 'setup memory'? (This is a one-time setup that improves every session)
 ```
 
 **Menu Integration:**
 When displaying menu with `goals_personalized: false`:
 ```
 🧠 MEMORY
-   ⚠️ Not personalized ▸ 'setup goals' (8 min, highly recommended)
+   ⚠️ Not personalized ▸ 'setup memory' (8 min, highly recommended)
 ```
 
 **DO NOT suggest if:**
-- `learning_tracker.completed.setup_goals: true`
+- `learning_tracker.completed.setup_memory: true`
 - `goals.md` no longer has `smart_default: true`
 - User explicitly declined personalization multiple times
 
 ---
 
-# Setup Goals
+# Setup Memory
 
 Guide user through goal definition and system personalization.
 
@@ -69,23 +69,44 @@ Transform smart default templates into meaningful, personalized context that imp
 
 ## Workflow
 
-### Step 1: Welcome & Language
+### Step 1: Welcome to Nexus
 
 **Display**:
 ```
-━━━ SETUP GOALS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Let's personalize Nexus to understand your work context.
-This takes about 8-10 minutes and improves AI collaboration.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
+    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+    ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
+    ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
+    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
+    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+
+         Welcome to Nexus!
 ```
 
-**Ask**: "What language would you like me to use? (English is default)"
+**Say**:
+"Hi! I'm Nexus - your AI productivity system. I help you:
 
-**Action**: Store preference in user-config.yaml, switch all communication.
+• **Plan work** - break big tasks into clear steps
+• **Stay organized** - track projects, files, and progress
+• **Remember context** - I learn about you and your goals
+
+**Setup is 2 short sessions:**
+1. **This session** (8 min) - I learn about you and your goals
+2. **Next session** (5 min) - We organize your folders
+
+Just follow along and answer the questions. Let's start!"
 
 ---
 
-### Step 2: Role Discovery
+### Step 2: Language
+
+**Ask**: "First - what language would you like me to use? (English is default)"
+
+**Action**: Store preference in user-config.yaml, switch all communication immediately.
+
+---
+
+### Step 3: Role Discovery
 
 **Ask**: "What do you do? Tell me about your current role or situation."
 
@@ -95,7 +116,7 @@ This takes about 8-10 minutes and improves AI collaboration.
 
 ---
 
-### Step 3: Short-Term Goal
+### Step 4: Short-Term Goal
 
 **Ask**: "What's the ONE thing you want to achieve in the next 3 months?"
 
@@ -108,7 +129,7 @@ This takes about 8-10 minutes and improves AI collaboration.
 
 ---
 
-### Step 4: Long-Term Vision
+### Step 5: Long-Term Vision
 
 **Ask**: "Where do you want to be in 1-3 years?"
 
@@ -118,7 +139,7 @@ Connect to short-term goal to show trajectory.
 
 ---
 
-### Step 5: Work Preferences
+### Step 6: Work Preferences
 
 Quick questions:
 1. "When do you do best work?" (morning/afternoon/evening)
@@ -129,7 +150,7 @@ Quick questions:
 
 ---
 
-### Step 6: Finalize
+### Step 7: Finalize
 
 **Actions** (MUST complete all):
 
@@ -141,7 +162,7 @@ Quick questions:
    ```yaml
    learning_tracker:
      completed:
-       setup_goals: true  # ADD THIS LINE
+       setup_memory: true  # ADD THIS LINE
    ```
 
 4. **Update language** in user-config.yaml (if user specified):
@@ -152,7 +173,7 @@ Quick questions:
 
 5. **Display completion**:
    ```
-   ✅ Setup Goals Complete!
+   ✅ Setup Memory Complete!
 
    Captured:
    • Your role and work context
@@ -162,26 +183,13 @@ Quick questions:
 
    Nexus now understands you. Context loads every session.
 
-   Next steps:
-   • 'setup workspace' - Organize your folders
-   • 'learn projects' - Understand project workflow
-   • 'create project' - Start working
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   💡 TIP: Work session by session, one topic at a time.
+   Close this chat now and open a new one for your next task.
+
+   Next session: 'setup folders' (5 min) or start working!
    ```
-
----
-
-### Step 7: Close-Session Practice
-
-**Display**:
-```
-━━━ IMPORTANT HABIT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-When done working, always say "done" or "close session".
-This saves progress and helps me remember context.
-Let's practice - say "done" now!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
-Wait for "done", then trigger close-session.
 
 ---
 
@@ -193,5 +201,4 @@ Wait for "done", then trigger close-session.
 - [ ] Success metrics defined
 - [ ] Long-term vision captured
 - [ ] `smart_default: true` removed from goals.md
-- [ ] `learning_tracker.completed.setup_goals: true` in user-config.yaml
-- [ ] User practiced close-session
+- [ ] `learning_tracker.completed.setup_memory: true` in user-config.yaml

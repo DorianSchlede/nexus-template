@@ -70,7 +70,7 @@ Create a practical folder structure in 04-workspace/ based on user's actual work
 
 **Ask**: "What types of files and content will you work with?"
 
-Listen for: document types, client/project categories, research vs output patterns.
+Listen for: document types, client/build categories, research vs output patterns.
 
 ---
 
@@ -145,7 +145,7 @@ Create/update `04-workspace/workspace-map.md` with structure and usage notes:
 
 3. **Display completion**:
    ```
-   ✅ Setup Workspace Complete!
+   ✅ Setup Folders Complete!
 
    Created:
    • {N} folders in 04-workspace/
@@ -153,15 +153,12 @@ Create/update `04-workspace/workspace-map.md` with structure and usage notes:
 
    Principle: Just-in-time organization. Add folders when needed.
 
-   Next steps:
-   • 'learn projects' - Understand project workflow
-   • 'learn skills' - Create reusable workflows
-   • 'create project' - Start your first project
-   ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-4. **Prompt close-session**:
-   ```
-   💡 When you're done working, say "done" to save progress.
+   💡 TIP: Work session by session, one topic at a time.
+   Close this chat now and open a new one for your next task.
+
+   You're all set up! Next session, just tell me what you want to work on.
    ```
 
 ---

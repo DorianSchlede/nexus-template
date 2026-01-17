@@ -60,14 +60,14 @@ See [references/installation-guide.md](references/installation-guide.md) for all
 
 ---
 
-### I want to INTEGRATE with my project
+### I want to INTEGRATE with my build
 
 1. Copy config template:
    ```bash
    cp templates/.format-config.yaml.template .format-config.yaml
    ```
 
-2. Edit `.format-config.yaml` with your project settings
+2. Edit `.format-config.yaml` with your build settings
 
 3. Test locally:
    ```bash
@@ -141,7 +141,7 @@ scripts/
 ### Configuration Templates
 ```
 templates/
-├── .format-config.yaml.template      (Project configuration)
+├── .format-config.yaml.template      (Build configuration)
 └── pre-commit.hook.template          (Git hook)
 ```
 
@@ -207,7 +207,7 @@ format code --all
 
 ## Common Scenarios
 
-### Scenario 1: New Python Project
+### Scenario 1: New Python Build
 ```bash
 1. pip install black flake8 pylint isort
 2. cp templates/.format-config.yaml.template .format-config.yaml
@@ -216,7 +216,7 @@ format code --all
 5. format code --install-hook
 ```
 
-### Scenario 2: Existing Project with Mixed Languages
+### Scenario 2: Existing Build with Mixed Languages
 ```bash
 1. Install tools for each language (see installation-guide.md)
 2. Copy config template

@@ -6,7 +6,7 @@ This document shows a complete example of the validation workflow in action.
 
 ## Context
 
-**User Request**: "Does the create-project SKILL.md comply with the files that the project creation actually creates?"
+**User Request**: "Does the plan-build SKILL.md comply with the files that the build creation actually creates?"
 
 **Initial Observation**: User noticed a potential mismatch between documentation and implementation.
 
@@ -16,15 +16,15 @@ This document shows a complete example of the validation workflow in action.
 
 ### Read the Implementation
 
-**File analyzed**: `00-system/skills/create-project/scripts/init_project.py`
+**File analyzed**: `00-system/skills/plan-build/scripts/init_build.py`
 
 **Key findings**:
 ```python
 # Lines 343-377: Creates 4 directories
-planning_dir = project_dir / "01-planning"
-resources_dir = project_dir / "02-resources"  # ← Note: resources!
-working_dir = project_dir / "03-working"
-outputs_dir = project_dir / "04-outputs"
+planning_dir = build_dir / "01-planning"
+resources_dir = build_dir / "02-resources"  # ← Note: resources!
+working_dir = build_dir / "03-working"
+outputs_dir = build_dir / "04-outputs"
 
 # Lines 382-421: Creates 3 files in planning/
 overview.md (lines 382-395)
@@ -39,10 +39,10 @@ steps.md (lines 410-421)
 ❌ Does NOT create: design.md, tasks.md, requirements.md (old names)
 ```
 
-### Check Actual Project Structure
+### Check Actual Build Structure
 
 ```bash
-$ ls -la "02-projects/01-onboarding-ux-improvements"
+$ ls -la "02-builds/01-onboarding-ux-improvements"
 drwxr-xr-x 1 dsber 197610 0 Nov 23 07:18 01-planning
 drwxr-xr-x 1 dsber 197610 0 Nov 23 07:18 02-resources  ← Confirmed!
 drwxr-xr-x 1 dsber 197610 0 Nov 23 07:18 03-working
@@ -64,11 +64,11 @@ $ grep -r "(design\.md|tasks\.md)" 00-system/
 **Results**: 31 files found with references to old file names
 
 **Key files identified**:
-- `00-system/skills/create-project/SKILL.md` (multiple refs)
+- `00-system/skills/plan-build/SKILL.md` (multiple refs)
 - `00-system/system-map.md` (structure diagram)
 - `00-system/documentation/framework-overview.md` (examples)
-- `00-system/skills/create-project/references/workflows.md` (workflow steps)
-- `00-system/skills/create-project/references/project-schema.yaml` (comments)
+- `00-system/skills/plan-build/references/workflows.md` (workflow steps)
+- `00-system/skills/plan-build/references/build-schema.yaml` (comments)
 - `00-system/core/orchestrator.md` (loading pattern)
 
 ### Search for Old Folder Structure
@@ -98,7 +98,7 @@ $ grep -r "(02-working|03-outputs)" 00-system/
 | system-map.md | Missing 02-resources/ | Structure | Critical |
 | framework-overview.md | "tasks.md" refs | File names | High |
 | workflows.md | "design.md" steps | File names | High |
-| project-schema.yaml | "tasks.md" in comments | File names | Medium |
+| build-schema.yaml | "tasks.md" in comments | File names | Medium |
 | orchestrator.md | Load pattern wrong | File names | High |
 
 **Total**: 6 files with multiple mismatches each
@@ -107,12 +107,12 @@ $ grep -r "(02-working|03-outputs)" 00-system/
 
 ## Step 4: Fix All Mismatches
 
-### Fix 1: create-project/SKILL.md
+### Fix 1: plan-build/SKILL.md
 
 **Line 15**:
 ```markdown
-OLD: 4. ✅ RUN init_project.py IMMEDIATELY (creates 3 planning files)
-NEW: 4. ✅ RUN init_project.py IMMEDIATELY (creates 4 directories + 3 planning files)
+OLD: 4. ✅ RUN init_build.py IMMEDIATELY (creates 3 planning files)
+NEW: 4. ✅ RUN init_build.py IMMEDIATELY (creates 4 directories + 3 planning files)
 ```
 
 **Line 56**:
@@ -125,11 +125,11 @@ NEW: - **Script-Generated Structure**: 4 directories (01-planning/, 02-resources
 **Lines 110-111**:
 ```markdown
 OLD:
-- Run `scripts/init_project.py "Project Name" --path 02-projects`
+- Run `scripts/init_build.py "Build Name" --path 02-builds`
 - Auto-generates 3 core files: `overview.md`, `plan.md`, `steps.md`
 
 NEW:
-- Run `scripts/init_project.py "Project Name" --path 02-projects`
+- Run `scripts/init_build.py "Build Name" --path 02-builds`
 - Auto-generates 4 directories: `01-planning/`, `02-resources/`, `03-working/`, `04-outputs/`
 - Auto-generates 3 planning files in 01-planning/: `overview.md`, `plan.md`, `steps.md`
 ```
@@ -137,15 +137,15 @@ NEW:
 **Lines 244-248**:
 ```markdown
 OLD:
-- **init_project.py**: ⚡ NEW! Quick project template generator
-  - Auto-generates empty project with all planning files
-  - Auto-assigns next available project ID
+- **init_build.py**: ⚡ NEW! Quick build template generator
+  - Auto-generates empty build with all planning files
+  - Auto-assigns next available build ID
   - Creates overview.md, plan.md, steps.md from templates
 
 NEW:
-- **init_project.py**: ⚡ Quick project template generator
-  - Auto-generates project structure with 4 directories (01-planning/, 02-resources/, 03-working/, 04-outputs/)
-  - Auto-assigns next available project ID
+- **init_build.py**: ⚡ Quick build template generator
+  - Auto-generates build structure with 4 directories (01-planning/, 02-resources/, 03-working/, 04-outputs/)
+  - Auto-assigns next available build ID
   - Creates 3 planning files in 01-planning/: overview.md, plan.md, steps.md from templates
 ```
 
@@ -158,7 +158,7 @@ NEW:
 **Lines 94-100** (structure diagram):
 ```markdown
 OLD:
-│   └── {ID}-{name}/                # User projects
+│   └── {ID}-{name}/                # User builds
 │       ├── 01-planning/
 │       │   ├── overview.md         # YAML metadata
 │       │   ├── design.md
@@ -167,7 +167,7 @@ OLD:
 │       └── 03-outputs/
 
 NEW:
-│   └── {ID}-{name}/                # User projects
+│   └── {ID}-{name}/                # User builds
 │       ├── 01-planning/
 │       │   ├── overview.md         # YAML metadata
 │       │   ├── plan.md
@@ -198,28 +198,28 @@ NEW: **Note**: `tasks_total`, `tasks_completed`, `progress` auto-calculated from
 **Lines 292-293**:
 ```markdown
 OLD:
-Read: {project}/01-planning/overview.md
-Read: {project}/01-planning/design.md
-Read: {project}/01-planning/tasks.md
+Read: {build}/01-planning/overview.md
+Read: {build}/01-planning/design.md
+Read: {build}/01-planning/tasks.md
 
 NEW:
-Read: {project}/01-planning/overview.md
-Read: {project}/01-planning/plan.md
-Read: {project}/01-planning/steps.md
+Read: {build}/01-planning/overview.md
+Read: {build}/01-planning/plan.md
+Read: {build}/01-planning/steps.md
 ```
 
 **Lines 538-539**:
 ```markdown
 OLD:
-  - 02-projects/05-website-development/01-planning/overview.md
-  - 02-projects/05-website-development/01-planning/requirements.md
-  - 02-projects/05-website-development/01-planning/design.md
-  - 02-projects/05-website-development/01-planning/tasks.md
+  - 02-builds/05-website-development/01-planning/overview.md
+  - 02-builds/05-website-development/01-planning/requirements.md
+  - 02-builds/05-website-development/01-planning/design.md
+  - 02-builds/05-website-development/01-planning/tasks.md
 
 NEW:
-  - 02-projects/05-website-development/01-planning/overview.md
-  - 02-projects/05-website-development/01-planning/plan.md
-  - 02-projects/05-website-development/01-planning/steps.md
+  - 02-builds/05-website-development/01-planning/overview.md
+  - 02-builds/05-website-development/01-planning/plan.md
+  - 02-builds/05-website-development/01-planning/steps.md
 ```
 
 **Additional fixes**: Lines 210, 625, 879, 1045
@@ -259,7 +259,7 @@ NEW:
 **Structure diagram** (lines 295-302):
 ```markdown
 OLD:
-Projects/{ID}-{name}/
+Builds/{ID}-{name}/
 ├── /planning
 │   ├── overview.md
 │   ├── requirements.md
@@ -269,7 +269,7 @@ Projects/{ID}-{name}/
     └── .gitkeep
 
 NEW:
-02-projects/{ID}-{name}/
+02-builds/{ID}-{name}/
 ├── 01-planning/
 │   ├── overview.md
 │   ├── plan.md
@@ -296,7 +296,7 @@ NEW:
 
 ---
 
-### Fix 5: project-schema.yaml
+### Fix 5: build-schema.yaml
 
 **Lines 21-24**:
 ```markdown
@@ -328,7 +328,7 @@ NEW:
   # them in YAML - they're automatically added to loader output!
 ```
 
-**Result**: 2 fixes in project-schema.yaml ✅
+**Result**: 2 fixes in build-schema.yaml ✅
 
 ---
 
@@ -337,14 +337,14 @@ NEW:
 **Lines 284-286**:
 ```markdown
 OLD:
-Read: {project}/01-planning/overview.md
-Read: {project}/01-planning/design.md
-Read: {project}/01-planning/tasks.md
+Read: {build}/01-planning/overview.md
+Read: {build}/01-planning/design.md
+Read: {build}/01-planning/tasks.md
 
 NEW:
-Read: {project}/01-planning/overview.md
-Read: {project}/01-planning/plan.md
-Read: {project}/01-planning/steps.md
+Read: {build}/01-planning/overview.md
+Read: {build}/01-planning/plan.md
+Read: {build}/01-planning/steps.md
 ```
 
 **Result**: 1 fix in orchestrator.md ✅
@@ -360,7 +360,7 @@ $ grep -r "design\.md" 00-system/
 # No results ✅
 
 $ grep -r "tasks\.md" 00-system/
-# Only in execute-project (intentional backward compatibility) ✅
+# Only in execute-build (intentional backward compatibility) ✅
 
 $ grep -r "requirements\.md" 00-system/
 # No results ✅
@@ -403,14 +403,14 @@ $ grep -r "03-outputs" 00-system/
 
 ### Files Updated: 6
 
-1. **00-system/skills/create-project/SKILL.md** - Core skill documentation
+1. **00-system/skills/plan-build/SKILL.md** - Core skill documentation
    - Line 15: Updated mandatory step description
    - Line 56: Updated key features
    - Lines 110-111: Updated step 1 workflow
    - Lines 244-248: Updated script description
 
 2. **00-system/system-map.md** - System navigation hub
-   - Lines 94-100: Updated project structure diagram
+   - Lines 94-100: Updated build structure diagram
    - Line 132: Changed tasks.md → steps.md reference
    - Line 182: Updated YAML note
 
@@ -418,13 +418,13 @@ $ grep -r "03-outputs" 00-system/
    - Lines 210, 292-293, 538-539: Changed file names
    - Lines 625, 879, 1045: Updated progress tracking refs
 
-4. **00-system/skills/create-project/references/workflows.md** - Workflow details
+4. **00-system/skills/plan-build/references/workflows.md** - Workflow details
    - Lines 24-25: Updated TOC
    - Lines 239-240: Updated TodoList
    - Lines 295-302: Updated structure diagram
    - Lines 427-449: Updated step names
 
-5. **00-system/skills/create-project/references/project-schema.yaml** - Schema docs
+5. **00-system/skills/plan-build/references/build-schema.yaml** - Schema docs
    - Lines 21-24: Updated calculated fields comments
    - Lines 38-40: Updated note
 

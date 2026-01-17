@@ -5,7 +5,7 @@ category: analytical
 description: Quantified impact with ROI calculation
 when_to_use:
   - Investment decisions
-  - Project prioritization
+  - Build prioritization
   - Budget allocation
   - Buy vs build decisions
 best_for: Quantifying financial impact of decisions

@@ -45,7 +45,7 @@ def main():
 Examples:
 {{CLI_EXAMPLES}}
 
-Environment Variables (in .env at project root):
+Environment Variables (in .env at build root):
 {{ENV_VARS_HELP}}
         """
     )

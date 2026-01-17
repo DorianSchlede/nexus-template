@@ -19,13 +19,23 @@ onboarding:
   last_completed: null
   sessions_completed: []
 
+first_encounters:
+  build_created: false
+  skill_loaded: false
+  workspace_used: false
+  memory_updated: false
+  close_session_used: false
+
+anti_patterns_warned:
+  repeated_build_pattern: false
+
 learning_tracker:
   session_count: 0
   completed:
     setup_memory: false
     setup_workspace: false
     learn_integrations: false
-    learn_projects: false
+    learn_builds: false
     learn_skills: false
     learn_nexus: false
   dismissed: []

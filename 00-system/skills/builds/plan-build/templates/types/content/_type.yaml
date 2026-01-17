@@ -1,0 +1,22 @@
+name: Content
+description: |
+  Create written content, documentation, or creative materials.
+  Use when: blog posts, documentation, marketing copy, presentations,
+  training materials, guides, tutorials, creative writing.
+
+discovery:
+  inline: true
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "python 00-system/mental-models/scripts/select_mental_models.py --format brief"
+  max_rediscovery_rounds: 1
+
+features:
+  ears_requirements: false
+  incose_quality: false
+  correctness_properties: false

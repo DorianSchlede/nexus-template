@@ -38,7 +38,7 @@ class TestPendingOnboarding(TestCase):
         (self.base_path / "00-system" / "core").mkdir(parents=True)
         (self.base_path / "00-system" / "skills" / "learning").mkdir(parents=True)
         (self.base_path / "01-memory").mkdir(parents=True)
-        (self.base_path / "02-projects").mkdir(parents=True)
+        (self.base_path / "02-builds").mkdir(parents=True)
         (self.base_path / "03-skills").mkdir(parents=True)
         (self.base_path / "04-workspace").mkdir(parents=True)
 
@@ -70,7 +70,7 @@ class TestPendingOnboarding(TestCase):
             'setup_goals': all_complete,
             'setup_workspace': all_complete,
             'learn_integrations': all_complete,
-            'learn_projects': all_complete,
+            'learn_builds': all_complete,
             'learn_skills': all_complete,
             'learn_nexus': all_complete,
         }
@@ -87,7 +87,7 @@ learning_tracker:
     setup_goals: {str(defaults['setup_goals']).lower()}
     setup_workspace: {str(defaults['setup_workspace']).lower()}
     learn_integrations: {str(defaults['learn_integrations']).lower()}
-    learn_projects: {str(defaults['learn_projects']).lower()}
+    learn_builds: {str(defaults['learn_builds']).lower()}
     learn_skills: {str(defaults['learn_skills']).lower()}
     learn_nexus: {str(defaults['learn_nexus']).lower()}
 ---
@@ -107,7 +107,7 @@ learning_tracker:
         # Check all expected skills are present
         pending_keys = {item['key'] for item in pending}
         expected_keys = {'setup_goals', 'setup_workspace', 'learn_integrations',
-                        'learn_projects', 'learn_skills', 'learn_nexus'}
+                        'learn_builds', 'learn_skills', 'learn_nexus'}
         self.assertEqual(pending_keys, expected_keys)
 
         # Should NOT be complete
@@ -131,7 +131,7 @@ learning_tracker:
         self.write_user_config(completed_skills={
             'setup_goals': True,
             'setup_workspace': True,
-            'learn_projects': True,
+            'learn_builds': True,
         })
 
         result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
@@ -182,7 +182,7 @@ learning_tracker:
         self.assertEqual(priorities.get('learn_nexus'), 'medium')
 
         # Others should be high
-        for key in ['setup_workspace', 'learn_projects', 'learn_skills', 'learn_integrations']:
+        for key in ['setup_workspace', 'learn_builds', 'learn_skills', 'learn_integrations']:
             self.assertEqual(priorities.get(key), 'high', f"{key} should have high priority")
 
     def test_trigger_values(self):
@@ -198,7 +198,7 @@ learning_tracker:
         expected_triggers = {
             'setup_goals': 'setup goals',
             'setup_workspace': 'setup workspace',
-            'learn_projects': 'learn projects',
+            'learn_builds': 'learn builds',
             'learn_skills': 'learn skills',
             'learn_integrations': 'learn integrations',
             'learn_nexus': 'learn nexus',
@@ -209,14 +209,14 @@ learning_tracker:
 
     def test_learning_completed_still_in_stats(self):
         """The learning_completed dict should still be in stats for backward compatibility"""
-        self.write_user_config(completed_skills={'setup_goals': True, 'learn_projects': True})
+        self.write_user_config(completed_skills={'setup_goals': True, 'learn_builds': True})
 
         result = nexus_loader.load_startup(str(self.base_path), check_updates=False)
         stats = result.get('stats', {})
 
         learning_completed = stats.get('learning_completed', {})
         self.assertTrue(learning_completed.get('setup_goals'))
-        self.assertTrue(learning_completed.get('learn_projects'))
+        self.assertTrue(learning_completed.get('learn_builds'))
         self.assertFalse(learning_completed.get('setup_workspace'))
 
     def test_missing_user_config_defaults_to_all_pending(self):
@@ -256,7 +256,7 @@ class TestDisplayHints(TestCase):
         (self.base_path / "00-system" / "core").mkdir(parents=True)
         (self.base_path / "00-system" / "skills").mkdir(parents=True)
         (self.base_path / "01-memory").mkdir(parents=True)
-        (self.base_path / "02-projects").mkdir(parents=True)
+        (self.base_path / "02-builds").mkdir(parents=True)
         (self.base_path / "03-skills").mkdir(parents=True)
         (self.base_path / "04-workspace").mkdir(parents=True)
 
@@ -292,7 +292,7 @@ learning_tracker:
     setup_goals: false
     setup_workspace: false
     learn_integrations: false
-    learn_projects: false
+    learn_builds: false
     learn_skills: false
     learn_nexus: false
 ---
@@ -331,7 +331,7 @@ learning_tracker:
     setup_goals: true
     setup_workspace: true
     learn_integrations: true
-    learn_projects: true
+    learn_builds: true
     learn_skills: true
     learn_nexus: true
 ---
@@ -361,7 +361,7 @@ class TestOnboardingIntegration(TestCase):
         (self.base_path / "00-system" / "core").mkdir(parents=True)
         (self.base_path / "00-system" / "skills" / "learning").mkdir(parents=True)
         (self.base_path / "01-memory").mkdir(parents=True)
-        (self.base_path / "02-projects").mkdir(parents=True)
+        (self.base_path / "02-builds").mkdir(parents=True)
         (self.base_path / "03-skills").mkdir(parents=True)
         (self.base_path / "04-workspace").mkdir(parents=True)
 
@@ -382,7 +382,7 @@ learning_tracker:
     setup_goals: true
     setup_workspace: true
     learn_integrations: true
-    learn_projects: true
+    learn_builds: true
     learn_skills: true
     learn_nexus: true
 ---

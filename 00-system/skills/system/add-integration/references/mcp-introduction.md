@@ -82,25 +82,25 @@ Imagine Claude is your personal assistant:
 - Manage repositories, issues, PRs
 - Create issues from tasks
 - Review code and PR status
-- Track project milestones
+- Track build milestones
 
 **GitLab**
 - Similar to GitHub
 - Issue tracking and merge requests
 
 **Linear**
-- Issue tracking and project management
+- Issue tracking and build management
 - Sync Nexus tasks to Linear
 
 **Jira**
-- Enterprise project management
-- Link Nexus projects to Jira epics
+- Enterprise build management
+- Link Nexus builds to Jira epics
 
 ### Communication Tools
 
 **Slack**
 - Send messages and notifications
-- Post project updates
+- Post build updates
 - Share session summaries
 - Create channels programmatically
 
@@ -122,7 +122,7 @@ Imagine Claude is your personal assistant:
 
 **Obsidian**
 - Sync Memory/ to Obsidian vault
-- Visualize project graphs
+- Visualize build graphs
 - Cross-reference notes
 
 ### Data & Databases
@@ -140,7 +140,7 @@ Imagine Claude is your personal assistant:
 
 **Trello**
 - Boards, cards, and lists
-- Visual project management
+- Visual build management
 
 **File System**
 - Enhanced local file access
@@ -158,16 +158,16 @@ Imagine Claude is your personal assistant:
 
 ## Example Use Cases in Nexus
 
-### 1. Project Management Sync
+### 1. Build Management Sync
 
 **Setup**: GitHub + Linear integration
 
 **Workflow**:
 ```
-User: "Start new project for website redesign"
-→ Nexus creates project structure
+User: "Start new build for website redesign"
+→ Nexus creates build structure
 → Claude creates GitHub repo
-→ Claude creates Linear project
+→ Claude creates Linear build
 → Links maintained automatically
 ```
 
@@ -218,7 +218,7 @@ User: "Analyze sales trends for Q4"
 ```
 close-session skill enhanced:
 → Backs up Memory/ to Drive
-→ Archives project outputs
+→ Archives build outputs
 → Creates dated snapshots
 → Never lose context
 ```

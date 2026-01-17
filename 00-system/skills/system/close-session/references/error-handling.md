@@ -4,38 +4,38 @@ Common error scenarios and solutions for the close-session workflow.
 
 ---
 
-## No Active Project
+## No Active Build
 
-**Scenario**: 02-projects/project-map.md shows no current focus
+**Scenario**: 02-builds/build-map.md shows no current focus
 
 **Action**:
-- Skip project state reading (Step 2)
+- Skip build state reading (Step 2)
 - Skip task completion review (Step 2.5)
 - Continue with map updates (Step 3)
 - Create general session report
-- Display summary without project info
+- Display summary without build info
 
 ---
 
 ## tasks.md Missing
 
-**Scenario**: Project folder exists but planning/tasks.md is missing
+**Scenario**: Build folder exists but planning/tasks.md is missing
 
 **Action**:
-- Report in summary: "⚠️ Project {name} missing tasks.md"
+- Report in summary: "⚠️ Build {name} missing tasks.md"
 - Suggest: "Run validate-system to check structure"
-- Skip progress calculation for that project
-- Continue with other projects
+- Skip progress calculation for that build
+- Continue with other builds
 
 ---
 
 ## Memory/ Files Corrupted
 
-**Scenario**: 02-projects/project-map.md or other memory files unreadable
+**Scenario**: 02-builds/build-map.md or other memory files unreadable
 
 **Action**:
 - Attempt to create from template
-- Scan Projects/ and Skills/ to rebuild
+- Scan Builds/ and Skills/ to rebuild
 - Report in summary: "⚠️ Rebuilt memory from scan"
 - Suggest: "Run validate-system to verify integrity"
 
@@ -43,7 +43,7 @@ Common error scenarios and solutions for the close-session workflow.
 
 ## Map Generation Fails
 
-**Scenario**: Error during Projects/ or Skills/ scan
+**Scenario**: Error during Builds/ or Skills/ scan
 
 **Action**:
 - Keep old maps (don't overwrite)
@@ -81,7 +81,7 @@ Common error scenarios and solutions for the close-session workflow.
 
 **Action**:
 - Note in summary: "⚠️ System not initialized"
-- Suggest: "Run 00-setup-memory project to initialize"
+- Suggest: "Run 00-setup-memory build to initialize"
 - Continue with map updates and session closure
 
 ---

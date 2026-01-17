@@ -46,7 +46,7 @@ Requirements:
 - Return ONLY the summary text
 
 Examples:
-- Reads configuration file from project root
+- Reads configuration file from build root
 - Executes npm install to update dependencies
 - Searches web for React documentation
 - Edits database schema to add user table

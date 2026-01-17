@@ -38,7 +38,7 @@ Present this concise explanation:
 Nexus is your **AI-powered work operating system**. It gives Claude:
 
 1. **Memory** - Your goals, preferences, and learnings persist across sessions
-2. **Projects** - Structured work with planning, tasks, and progress tracking
+2. **Builds** - Structured work with planning, tasks, and progress tracking
 3. **Skills** - Reusable workflows you can trigger with simple phrases
 
 ## The Magic
@@ -50,22 +50,22 @@ who you are or what you're working on.
 
 | Say This | What Happens |
 |----------|--------------|
-| "create project" | Start a new project with guided planning |
-| "continue [name]" | Resume work on a project |
+| "create build" | Start a new build with guided planning |
+| "continue [name]" | Resume work on a build |
 | "setup goals" | Personalize Nexus with your role and goals |
 | "list skills" | See all available skills |
 | "done" | Save progress and end session |
 
 ## The Decision Rule
 
-- **Projects** = Finite work (has an end)
+- **Builds** = Finite work (has an end)
 - **Skills** = Repeating workflows (used again)
 
-Creating "report-jan", "report-feb"? That's a SKILL, not projects!
+Creating "report-jan", "report-feb"? That's a SKILL, not builds!
 
 ## Quick Start
 
-1. Say "create project" to start working
+1. Say "create build" to start working
 2. Say "setup goals" to personalize (optional but recommended)
 3. Say "done" when finished to save your progress
 ```
@@ -77,11 +77,11 @@ Based on user's current state (from startup stats):
 **If goals not personalized:**
 > Want to personalize? Say "setup goals" to teach Nexus about your role and objectives.
 
-**If no projects exist:**
-> Ready to start? Say "create project" and I'll guide you through planning.
+**If no builds exist:**
+> Ready to start? Say "create build" and I'll guide you through planning.
 
-**If projects exist:**
-> You have active projects. Say "continue [name]" to resume, or "list skills" to see what else you can do.
+**If builds exist:**
+> You have active builds. Say "continue [name]" to resume, or "list skills" to see what else you can do.
 
 ---
 
@@ -89,7 +89,7 @@ Based on user's current state (from startup stats):
 
 If user wants more detail, point to:
 
-- **"learn projects"** - Deep dive into project system
+- **"learn builds"** - Deep dive into build system
 - **"learn skills"** - Deep dive into skill system
 - **"learn nexus"** - Advanced patterns and tips
 - **"list skills"** - See all available capabilities
@@ -98,7 +98,7 @@ If user wants more detail, point to:
 
 ## Success Criteria
 
-- [ ] User understands what Nexus does (memory, projects, skills)
+- [ ] User understands what Nexus does (memory, builds, skills)
 - [ ] User knows the key commands
-- [ ] User knows the project vs skill distinction
+- [ ] User knows the build vs skill distinction
 - [ ] User has clear next steps based on their current state

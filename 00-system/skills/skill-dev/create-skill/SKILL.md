@@ -33,7 +33,7 @@ Say 'learn skills' to start the tutorial, or 'skip' to create directly.
 If user is creating similar items (report-jan, report-feb, report-mar pattern):
 ```
 💡 I notice you're creating similar items. This is a perfect use case for
-a SKILL instead of multiple projects/files. Want to 'learn skills' first
+a SKILL instead of multiple builds/files. Want to 'learn skills' first
 to understand how to capture this as a reusable workflow?
 ```
 
@@ -361,7 +361,7 @@ Example: When building a `pdf-editor` skill to handle queries like "Help me rota
 Example: When designing a `frontend-webapp-builder` skill for queries like "Build me a todo app" or "Build me a dashboard to track my steps," the analysis shows:
 
 1. Writing a frontend webapp requires the same boilerplate HTML/React each time
-2. An `assets/hello-world/` template containing the boilerplate HTML/React project files would be helpful to store in the skill
+2. An `assets/hello-world/` template containing the boilerplate HTML/React build files would be helpful to store in the skill
 
 Example: When building a `big-query` skill to handle queries like "How many users have logged in today?" the analysis shows:
 

@@ -12,7 +12,7 @@
 2. [.claude/ - Claude Code Configuration](#claude---claude-code-configuration)
 3. [00-system/ - System Framework](#00-system---system-framework)
 4. [01-memory/ - Context Persistence](#01-memory---context-persistence)
-5. [02-projects/ - Temporal Work](#02-projects---temporal-work)
+5. [02-builds/ - Temporal Work](#02-builds---temporal-work)
 6. [03-skills/ - User Skills](#03-skills---user-skills)
 7. [04-workspace/ - User Content](#04-workspace---user-content)
 
@@ -27,13 +27,13 @@
 
 **Contents**:
 - What is Nexus-v3 (conversational work organization system)
-- Key features (projects, skills, memory, navigation, auto-detection)
+- Key features (builds, skills, memory, navigation, auto-detection)
 - Quick start guide (load claude.md, follow onboarding)
 - System requirements (Claude AI, optional Python/MCP)
 - Folder structure overview
-- How it works (projects, skills, memory, system skills)
-- Onboarding journey (5 projects, ~1.5-2 hours total)
-- Key commands (create project, create skill, validate, done)
+- How it works (builds, skills, memory, system skills)
+- Onboarding journey (5 builds, ~1.5-2 hours total)
+- Key commands (create build, create skill, validate, done)
 - Design philosophy (simplicity, guidance through structure, context preservation, progressive disclosure)
 - Optional features (Python hooks, MCP integrations)
 - Troubleshooting guide
@@ -110,7 +110,7 @@ Core framework infrastructure - all built-in system components
 - Navigation hub with links to all maps
 - Core capabilities explanation
 - Detailed folder structure with descriptions
-- Core entities documentation (Projects, Skills, Memory)
+- Core entities documentation (Builds, Skills, Memory)
 - Core infrastructure explanation (nexus-loader.py, orchestrator.md)
 - YAML metadata format documentation
 - System skills reference table
@@ -121,8 +121,8 @@ Core framework infrastructure - all built-in system components
 
 **Key Features**:
 - Central intelligence for system navigation
-- Links to all 4 navigation maps (system, memory, project, workspace)
-- Complete YAML format examples for both projects and skills
+- Links to all 4 navigation maps (system, memory, build, workspace)
+- Complete YAML format examples for both builds and skills
 - Progressive disclosure philosophy explained
 - Token budget monitoring information
 
@@ -143,32 +143,32 @@ Core framework infrastructure - all built-in system components
 - **Initialization Sequence**:
   - Step 1: Run startup script (loads 5 core files + generates metadata)
   - Step 2: Display dynamic menu (based on loaded content)
-  - Step 3: Smart routing (skills → projects → state checks → session end → general work)
+  - Step 3: Smart routing (skills → builds → state checks → session end → general work)
   - Step 4: Context loading rules
 - **3-State Model**:
-  - Goals empty → Run 00-define-goals project
+  - Goals empty → Run 00-define-goals build
   - Goals set + no workspace → Create workspace structure
   - Both exist → System operational
 - **Smart Routing Logic**:
   1. Match against skill triggers (from system-map.md)
-  2. Match against project names (from project-map.md)
+  2. Match against build names (from build-map.md)
   3. Check initialization state (simple 3-state)
   4. Check session end signals (done, finish, close)
   5. Handle general work requests
-- **Special Handling**: create-project skill warning system (enforce collaborative design)
+- **Special Handling**: plan-build skill warning system (enforce collaborative design)
 - **Context Loading Rules**: What to load always, what to load on-demand, what never to load
 - **Error Handling**: Missing files, user confusion, system issues
 - **Using nexus-loader.py**: All available commands and why to use the script
 - **Critical Principles**:
   - NO complex conditional logic in orchestrator
-  - State in data files (project-map.md), not code
+  - State in data files (build-map.md), not code
   - Dynamic menu based on file content
   - Always load same files at initialization
 - **Example Session Flows**: First time user, workspace setup, operational state
 
 **Key Philosophy**:
 - Orchestrator is ultra-minimal - it loads data and routes commands
-- Actual guidance/logic lives in project files themselves
+- Actual guidance/logic lives in build files themselves
 - State detection from data files, not hard-coded logic
 
 **Location Note**: Lives in `core/` because it's fundamental infrastructure, loaded every session
@@ -181,12 +181,12 @@ Core framework infrastructure - all built-in system components
 
 **What It Does**:
 - Loads core files at session start (5 files)
-- Scans all projects in `02-projects/` for YAML metadata
+- Scans all builds in `02-builds/` for YAML metadata
 - Scans all skills in `00-system/skills/` and `03-skills/` for YAML metadata
 - Generates current timestamp
 - Returns structured JSON output
 - Monitors token budget (warns if >7,000 tokens)
-- Provides on-demand loading for specific projects/skills
+- Provides on-demand loading for specific builds/skills
 - Auto-loads skill resources (references, scripts, assets)
 
 **Commands**:
@@ -194,14 +194,14 @@ Core framework infrastructure - all built-in system components
 # Session startup (5 files + metadata generation)
 python 00-system/core/nexus-loader.py --startup
 
-# Load specific project (all planning files + metadata)
-python nexus-loader.py --project {project-id}
+# Load specific build (all planning files + metadata)
+python nexus-loader.py --build {build-id}
 
 # Load specific skill (SKILL.md + auto-load declared resources)
 python nexus-loader.py --skill {skill-name}
 
-# List all projects (YAML metadata only, no file contents)
-python nexus-loader.py --list-projects
+# List all builds (YAML metadata only, no file contents)
+python nexus-loader.py --list-builds
 
 # List all skills (YAML metadata only, no file contents)
 python nexus-loader.py --list-skills
@@ -217,7 +217,7 @@ python nexus-loader.py --show-tokens
   "bundle": "startup",
   "files": { /* file contents */ },
   "metadata": {
-    "projects": [ /* project YAML data */ ],
+    "builds": [ /* build YAML data */ ],
     "skills": [ /* skill YAML data */ ]
   },
   "stats": { /* counts and totals */ }
@@ -252,12 +252,12 @@ python nexus-loader.py --show-tokens
 - **The Four Navigation Maps**:
   1. System Map - Framework structure
   2. Memory Map - Context persistence
-  3. Project Map - System state and current focus
+  3. Build Map - System state and current focus
   4. Workspace Map - Custom folder structure
 - **System Structure**: Complete folder hierarchy with descriptions
 - **How It All Works Together**: Session start → during work → session end flows
 - **Key Concepts**:
-  - Projects (temporal work with lifecycle)
+  - Builds (temporal work with lifecycle)
   - Skills (reusable workflows with V2.0 format)
   - Memory (context persistence)
   - Auto-Detection (YAML-driven matching)
@@ -266,7 +266,7 @@ python nexus-loader.py --show-tokens
 - **Documentation Reference**: Where to find all docs
 - **Design Principles**: 5 core principles explained
 - **Key Terminology**: Glossary of terms
-- **System Workflows**: Creating project, creating skill, working on project, ending session
+- **System Workflows**: Creating build, creating skill, working on build, ending session
 - **Why Nexus-v3**: Problems it solves, key benefits
 - **Need Help**: Navigation, building, understanding
 
@@ -336,7 +336,7 @@ python nexus-loader.py --show-tokens
 **Purpose**: Python script to validate task checkbox counts against YAML metadata
 
 **What It Does**:
-- Scans all project tasks.md files
+- Scans all build tasks.md files
 - Counts checkboxes (total and completed)
 - Compares against YAML metadata in overview.md
 - Reports discrepancies
@@ -382,23 +382,23 @@ python nexus-loader.py --show-tokens
 
 ---
 
-#### archive-project/
+#### archive-build/
 
-**Purpose**: Move completed projects to `_archived/` folder for clean project list
+**Purpose**: Move completed builds to `_archived/` folder for clean build list
 
-**Trigger**: "archive project", "archive [project-name]", "move to archived"
+**Trigger**: "archive build", "archive [build-name]", "move to archived"
 
 **Files**:
 - `SKILL.md` - Main skill workflow
 
 **What It Does**:
-1. Confirms project is COMPLETE
-2. Moves project folder to `02-projects/_archived/`
-3. Updates project-map.md
-4. Cleans up active project list
-5. Preserves project for historical reference
+1. Confirms build is COMPLETE
+2. Moves build folder to `02-builds/_archived/`
+3. Updates build-map.md
+4. Cleans up active build list
+5. Preserves build for historical reference
 
-**Use Case**: Maintain clean active project list by archiving completed work
+**Use Case**: Maintain clean active build list by archiving completed work
 
 ---
 
@@ -406,7 +406,7 @@ python nexus-loader.py --show-tokens
 
 **Purpose**: End session, update memory, save progress, clean temporary files
 
-**Trigger**: "done", "finish", "complete", "close", "wrap up", "end session", or when any system skill/project completes
+**Trigger**: "done", "finish", "complete", "close", "wrap up", "end session", or when any system skill/build completes
 
 **Files**:
 - `SKILL.md` - Main skill workflow
@@ -416,7 +416,7 @@ python nexus-loader.py --show-tokens
 1. Asks which tasks were completed in current session
 2. Updates task checkboxes in tasks.md
 3. Recalculates task counts and progress
-4. Updates project-map.md (current focus, recent decisions)
+4. Updates build-map.md (current focus, recent decisions)
 5. Generates session report in session-reports/
 6. Cleans temporary working files
 7. Preserves all context for next session
@@ -427,23 +427,23 @@ python nexus-loader.py --show-tokens
 
 ---
 
-#### create-project/
+#### plan-build/
 
-**Purpose**: Create new temporal work projects with AI-guided collaborative planning
+**Purpose**: Create new temporal work builds with AI-guided collaborative planning
 
-**Trigger**: "create project", "new project", "start something new"
+**Trigger**: "create build", "new build", "start something new"
 
 **Files**:
 - `SKILL.md` - Main skill workflow (collaborative design session)
-- `project-schema.yaml` - Complete project YAML specification
+- `build-schema.yaml` - Complete build YAML specification
 - `references/advanced-elicitation.md` - Advanced questioning techniques
-- `references/project-creation-workflow.md` - Detailed workflow documentation
+- `references/build-creation-workflow.md` - Detailed workflow documentation
 - `references/workspace-setup-workflow.md` - Special workflow for first-time workspace setup
-- `scripts/create-project.py` - Python script for folder creation and file generation
+- `scripts/plan-build.py` - Python script for folder creation and file generation
 
 **What It Does**:
 1. **CRITICAL**: Initializes TodoWrite (MANDATORY first step)
-2. **Interactive Elicitation**: Asks deep questions about project purpose, success criteria, constraints
+2. **Interactive Elicitation**: Asks deep questions about build purpose, success criteria, constraints
 3. **Mental Model Application**: Uses first-principles thinking, systems thinking, etc.
 4. **Collaborative Document Creation**:
    - overview.md (with YAML metadata)
@@ -452,17 +452,17 @@ python nexus-loader.py --show-tokens
    - tasks.md (checkbox list)
 5. **MANDATORY PAUSES**: User must review each document before proceeding
 6. **User Confirmation**: Required before each step
-7. Creates folder structure: `02-projects/{ID}-{name}/01-planning/`, `02-working/`, `03-outputs/`
-8. Updates project-map.md
+7. Creates folder structure: `02-builds/{ID}-{name}/01-planning/`, `02-working/`, `03-outputs/`
+8. Updates build-map.md
 
 **Special Handling**: Orchestrator displays critical warning before loading this skill to enforce collaborative design philosophy
 
-**Philosophy**: Projects are created through collaborative design sessions, NOT solo generation. AI must engage user interactively.
+**Philosophy**: Builds are created through collaborative design sessions, NOT solo generation. AI must engage user interactively.
 
 **Warning System**:
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️ CRITICAL: create-project is a COLLABORATIVE DESIGN SESSION
+⚠️ CRITICAL: plan-build is a COLLABORATIVE DESIGN SESSION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 This skill REQUIRES:
 1. ✅ TodoWrite initialization (Step 1 - MANDATORY)
@@ -520,7 +520,7 @@ Do NOT:
 
 #### update-tasks/
 
-**Purpose**: Quick task checkbox updates for current project without closing session
+**Purpose**: Quick task checkbox updates for current build without closing session
 
 **Trigger**: "update tasks", "check off tasks", "mark tasks complete", "mark tasks done"
 
@@ -528,7 +528,7 @@ Do NOT:
 - `SKILL.md` - Main skill workflow
 
 **What It Does**:
-1. Identifies current project from project-map.md
+1. Identifies current build from build-map.md
 2. Displays current tasks from tasks.md
 3. Asks which tasks to mark complete
 4. Updates checkboxes in tasks.md
@@ -556,7 +556,7 @@ Do NOT:
 
 **What It Does**:
 1. **Folder Structure Checks**: Verifies all required folders exist
-2. **Metadata Validation**: Checks YAML format in projects and skills
+2. **Metadata Validation**: Checks YAML format in builds and skills
 3. **Task Tracking**: Runs validate-tasks.py to verify checkbox counts
 4. **Framework Consistency**: Ensures maps are up-to-date
 5. **Auto-Repair**: Recreates missing template files
@@ -564,8 +564,8 @@ Do NOT:
 7. **Comprehensive Report**: Shows all issues found and fixed
 
 **Validation Checks**:
-- Required folders (00-system, 01-memory, 02-projects, 03-skills, 04-workspace)
-- Required files (system-map.md, memory-map.md, project-map.md, goals.md, workspace-map.md)
+- Required folders (00-system, 01-memory, 02-builds, 03-skills, 04-workspace)
+- Required files (system-map.md, memory-map.md, build-map.md, goals.md, workspace-map.md)
 - YAML frontmatter format
 - Task checkbox counts vs metadata
 - Navigation map accuracy
@@ -608,7 +608,7 @@ Context persistence across AI sessions - "Never start from scratch"
 
 **Contents**:
 - Memory files overview (goals, roadmap, core-learnings, session-reports)
-- Links to related maps (system, project, workspace)
+- Links to related maps (system, build, workspace)
 - How memory works (session start, during work, session end)
 - Maintenance philosophy (living documentation)
 
@@ -622,7 +622,7 @@ Context persistence across AI sessions - "Never start from scratch"
 
 **Purpose**: User objectives and success criteria
 
-**Initial State**: Placeholder template prompting user to run 00-define-goals project
+**Initial State**: Placeholder template prompting user to run 00-define-goals build
 
 **Contents After Initialization**:
 - What you want to achieve
@@ -631,7 +631,7 @@ Context persistence across AI sessions - "Never start from scratch"
 - Your work context (role, pattern, workload, challenges)
 
 **Updated**:
-- During 00-define-goals project (first time)
+- During 00-define-goals build (first time)
 - Manually as goals evolve
 - Via close-session when major shifts occur
 
@@ -693,7 +693,7 @@ Context persistence across AI sessions - "Never start from scratch"
 
 **Each Report Contains**:
 - Session date and duration
-- Projects worked on
+- Builds worked on
 - Tasks completed
 - Decisions made
 - Insights discovered
@@ -703,7 +703,7 @@ Context persistence across AI sessions - "Never start from scratch"
 
 **Use Case**:
 - Review past work
-- Understand project history
+- Understand build history
 - Track long-term progress
 - Search for previous decisions
 
@@ -727,16 +727,16 @@ Context persistence across AI sessions - "Never start from scratch"
 
 ---
 
-## 02-projects/ - Temporal Work
+## 02-builds/ - Temporal Work
 
 ### Purpose
 Organize temporal work with beginning, middle, and end
 
 ### Structure
 ```
-02-projects/
-├── project-map.md              # System state and current focus
-├── {ID}-{name}/                # Individual projects
+02-builds/
+├── build-map.md              # System state and current focus
+├── {ID}-{name}/                # Individual builds
 │   ├── 01-planning/
 │   │   ├── overview.md         # YAML metadata + description
 │   │   ├── requirements.md
@@ -744,23 +744,23 @@ Organize temporal work with beginning, middle, and end
 │   │   └── tasks.md            # Checkbox task list
 │   ├── 02-working/             # Work-in-progress files
 │   └── 03-outputs/             # Final deliverables
-└── _archived/                  # Completed projects
+└── _archived/                  # Completed builds
 ```
 
 ---
 
-### project-map.md
+### build-map.md
 
 **Purpose**: Track system state, current focus, and recent decisions
 
 **Contents**:
 - **System State**: Logic for initialization detection (3-state model)
   - IF goals.md missing/empty → Uninitialized → Load 00-define-goals
-  - IF onboarding not complete → Load current onboarding project
+  - IF onboarding not complete → Load current onboarding build
   - IF onboarding complete → System operational
 - **Current Focus**:
   - Last updated timestamp
-  - Active project name
+  - Active build name
   - Context description
 - **Recent Decisions**: Chronological log of important decisions with dates and rationale
 - **Notes**: Metadata generation explanation
@@ -782,7 +782,7 @@ Organize temporal work with beginning, middle, and end
 
 ---
 
-### Project Structure: {ID}-{name}/
+### Build Structure: {ID}-{name}/
 
 **Naming Convention**: `{ID}-{name}`
 - ID: Zero-padded numeric (00, 01, ..., 10, 11)
@@ -793,11 +793,11 @@ Organize temporal work with beginning, middle, and end
 
 #### 01-planning/
 
-**Purpose**: All planning documents (source of truth for project)
+**Purpose**: All planning documents (source of truth for build)
 
 ##### overview.md
 
-**Purpose**: Project overview with YAML metadata
+**Purpose**: Build overview with YAML metadata
 
 **YAML Frontmatter**:
 ```yaml
@@ -812,13 +812,13 @@ progress: 0.35
 tasks_completed: 3
 tasks_total: 8
 tags: [web, design]
-related_projects: [03-branding]
+related_builds: [03-branding]
 load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md"]
 ---
 ```
 
 **Markdown Content**:
-- Project overview and purpose
+- Build overview and purpose
 - Success criteria
 - Constraints and assumptions
 - Timeline
@@ -830,7 +830,7 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 - `tasks_completed` / `tasks_total`: Auto-counted from tasks.md checkboxes
 
 **Updated**:
-- Created by create-project skill
+- Created by plan-build skill
 - Progress auto-updated by close-session and update-tasks skills
 - Status manually updated or via close-session
 
@@ -847,7 +847,7 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 - Acceptance criteria
 - Dependencies
 
-**Created By**: create-project skill (collaborative session)
+**Created By**: plan-build skill (collaborative session)
 
 ---
 
@@ -862,7 +862,7 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 - Interface designs
 - Data models
 
-**Created By**: create-project skill (collaborative session)
+**Created By**: plan-build skill (collaborative session)
 
 ---
 
@@ -926,20 +926,20 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 - Reports
 - Deliverables
 
-**Note**: Permanent archive - preserved after project completion
+**Note**: Permanent archive - preserved after build completion
 
 ---
 
-### Example Projects in Template
+### Example Builds in Template
 
 #### 00-define-goals/
 
-**Purpose**: Onboarding project - initialize memory system
+**Purpose**: Onboarding build - initialize memory system
 
-**Trigger**: "project", "00-define-goals", "define goals"
+**Trigger**: "build", "00-define-goals", "define goals"
 
 **Tasks** (17 tasks):
-1. Learn what Projects are
+1. Learn what Builds are
 2. Learn what Skills are
 3. Learn what Memory is
 4. Discovery questions (role, work pattern, workload, challenges)
@@ -956,9 +956,9 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 
 #### 01-build-nexus-v3/
 
-**Purpose**: Meta-project for building the Nexus-v3 system itself
+**Purpose**: Meta-build for building the Nexus-v3 system itself
 
-**Trigger**: "nexus", "build project", "nexus-v3", "template system"
+**Trigger**: "nexus", "build build", "nexus-v3", "template system"
 
 **Tasks**: 624 tasks (extensive system build)
 
@@ -978,7 +978,7 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 - VALIDATION-REPORT.md
 - yaml-integration-complete.md
 
-**Note**: This is the project that created the template you're using
+**Note**: This is the build that created the template you're using
 
 ---
 
@@ -1041,19 +1041,19 @@ load_with: ["planning/requirements.md", "planning/design.md", "planning/tasks.md
 
 ### _archived/
 
-**Purpose**: Completed projects (historical archive)
+**Purpose**: Completed builds (historical archive)
 
-**Structure**: Same as active projects
+**Structure**: Same as active builds
 
-**Moved By**: archive-project skill
+**Moved By**: archive-build skill
 
 **Contains**:
-- 01-setup-structure (archived onboarding project)
-- 02-practice-project (archived onboarding project)
-- 03-practice-skill (archived onboarding project)
-- 04-complete-setup (archived onboarding project)
+- 01-setup-structure (archived onboarding build)
+- 02-practice-build (archived onboarding build)
+- 03-practice-skill (archived onboarding build)
+- 04-complete-setup (archived onboarding build)
 
-**Use Case**: Preserve completed work while keeping active project list clean
+**Use Case**: Preserve completed work while keeping active build list clean
 
 ---
 
@@ -1210,14 +1210,14 @@ User-defined custom folder structure for organizing their work
 **Example Structure**:
 ```
 04-workspace/
-├── Clients/              # Client projects and deliverables
+├── Clients/              # Client builds and deliverables
 │   ├── acme-corp/        # Acme Corporation (2024-2025)
 │   └── beta-inc/         # Beta Inc partnership
 ├── Research/             # Industry research and competitive analysis
 └── Templates/            # Reusable templates and resources
 ```
 
-**Created By**: create-project skill during workspace setup (Session 2)
+**Created By**: plan-build skill during workspace setup (Session 2)
 
 **Updated**: Manually by user when reorganizing workspace
 
@@ -1229,13 +1229,13 @@ User-defined custom folder structure for organizing their work
 
 ### User Folders
 
-**Created By**: User via create-project skill or manually
+**Created By**: User via plan-build skill or manually
 
 **Contents**: Whatever the user needs
 
 **Common Patterns**:
 - Clients/ - Client work organization
-- Projects/ - Real-world projects (not Nexus projects)
+- Builds/ - Real-world builds (not Nexus builds)
 - Research/ - Reference materials
 - Templates/ - Reusable templates
 - Archive/ - Historical files
@@ -1253,7 +1253,7 @@ User-defined custom folder structure for organizing their work
 **Implementation**:
 - **Session Start**: Only 5 files + metadata (~7,000 tokens)
 - **Skill Trigger**: SKILL.md loaded + auto-load resources
-- **Project Work**: Full planning files loaded on-demand
+- **Build Work**: Full planning files loaded on-demand
 - **Strategic Discussion**: Roadmap/learnings loaded when needed
 
 **Benefit**: Efficient token usage, faster initialization
@@ -1274,7 +1274,7 @@ User-defined custom folder structure for organizing their work
 description: Load when user mentions "website", "web dev", "homepage"
 ```
 User says: "let's work on the homepage"
-→ AI loads website project automatically
+→ AI loads website build automatically
 
 ---
 
@@ -1283,7 +1283,7 @@ User says: "let's work on the homepage"
 **Philosophy**: Logic lives in data files, not code
 
 **Implementation**:
-- project-map.md contains state detection logic
+- build-map.md contains state detection logic
 - tasks.md checkboxes are source of truth for progress
 - Orchestrator reads data and follows instructions
 
@@ -1298,7 +1298,7 @@ User says: "let's work on the homepage"
 **Implementation**:
 - close-session skill updates memory after every session
 - Session reports build historical archive
-- Project files preserve all decisions
+- Build files preserve all decisions
 - core-learnings accumulates patterns over time
 
 **Benefit**: Each session builds on previous work
@@ -1325,12 +1325,12 @@ User says: "let's work on the homepage"
 **Loaded Files** (~7,000 tokens):
 - system-map.md (~12,500 chars)
 - memory-map.md (~2,000 chars)
-- project-map.md (~2,800 chars)
+- build-map.md (~2,800 chars)
 - goals.md (~300 chars initially)
 - workspace-map.md (~2,000 chars)
 
 **Metadata** (variable):
-- Projects: ~200 tokens per project YAML
+- Builds: ~200 tokens per build YAML
 - Skills: ~100 tokens per skill YAML
 
 **Warning Threshold**: >7,000 tokens from metadata (3.5% of 200K context)
@@ -1339,7 +1339,7 @@ User says: "let's work on the homepage"
 
 ### On-Demand Loading
 
-**Project Load** (~5,000-10,000 tokens):
+**Build Load** (~5,000-10,000 tokens):
 - overview.md (~500-1,000 tokens)
 - requirements.md (~1,000-3,000 tokens)
 - design.md (~1,000-3,000 tokens)
@@ -1355,8 +1355,8 @@ User says: "let's work on the homepage"
 ### Best Practices
 
 1. **Keep Skills Under 500 Lines**: Use references/ for detailed docs
-2. **Break Large Projects into Phases**: Reduce task list size
-3. **Archive Completed Projects**: Keep active list small
+2. **Break Large Builds into Phases**: Reduce task list size
+3. **Archive Completed Builds**: Keep active list small
 4. **Use Progressive Disclosure**: Don't load everything upfront
 5. **Monitor Token Usage**: Use `--show-tokens` to check
 
@@ -1364,7 +1364,7 @@ User says: "let's work on the homepage"
 
 ## File Naming Conventions
 
-### Projects
+### Builds
 - Format: `{ID}-{name}`
 - ID: Zero-padded (00, 01, ..., 10, 11)
 - Name: lowercase-with-hyphens
@@ -1392,16 +1392,16 @@ User says: "let's work on the homepage"
 - **Root**: 2 files (README.md, CLAUDE.md)
 - **00-system**: ~50+ files (core infrastructure, 7 skills, documentation)
 - **01-memory**: 4 core files + session reports folder
-- **02-projects**: 1 map + 6 example projects + archived projects
+- **02-builds**: 1 map + 6 example builds + archived builds
 - **03-skills**: 1 map (template for user skills)
 - **04-workspace**: 1 map (user's custom structure)
 
 ### System Skills
 7 built-in skills:
 1. add-integration
-2. archive-project
+2. archive-build
 3. close-session
-4. create-project
+4. plan-build
 5. create-skill
 6. update-tasks
 7. validate-system
@@ -1409,7 +1409,7 @@ User says: "let's work on the homepage"
 ### Core Infrastructure
 - 1 Python loader script (nexus-loader.py)
 - 1 orchestrator document (orchestrator.md)
-- 4 navigation maps (system, memory, project, workspace)
+- 4 navigation maps (system, memory, build, workspace)
 - 1 master guide (framework-overview.md)
 
 ### Documentation
@@ -1434,7 +1434,7 @@ User says: "let's work on the homepage"
 - Moved core infrastructure to core/ folder
 - Applied "Just-In-Time Documentation" pattern
 - Enhanced task tracking automation
-- Added archive-project skill
+- Added archive-build skill
 - Added update-tasks skill
 
 ---
@@ -1449,12 +1449,12 @@ User says: "let's work on the homepage"
 ### Essential Maps
 1. **System Map**: [00-system/system-map.md](00-system/system-map.md)
 2. **Memory Map**: [01-memory/memory-map.md](01-memory/memory-map.md)
-3. **Project Map**: [02-projects/project-map.md](02-projects/project-map.md)
+3. **Build Map**: [02-builds/build-map.md](02-builds/build-map.md)
 4. **Workspace Map**: [04-workspace/workspace-map.md](04-workspace/workspace-map.md)
 
 ### Key Commands
 - Session start: `python 00-system/core/nexus-loader.py --startup`
-- Create project: User says "create project"
+- Create build: User says "create build"
 - Create skill: User says "create skill"
 - Validate system: User says "validate system"
 - End session: User says "done for now"

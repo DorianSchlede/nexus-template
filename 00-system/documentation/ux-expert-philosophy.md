@@ -43,7 +43,7 @@ We must distinguish between the two modes of interaction. Applying onboarding pr
 **Why**: "Momentum is Sacred" is false for experts. Speed without direction is wasted energy. You cannot revoke mental investment—thinking hard now saves hours of rework later.
 
 **Application**:
-- ❌ **Novice**: "Great, I created the project. Let's move on."
+- ❌ **Novice**: "Great, I created the build. Let's move on."
 - ✅ **Expert**: "Wait. You said 'AI qualification'. What happens if the AI is wrong? Let's add a fallback process before we continue."
 
 **Test**: Does the stop add more value than the time it costs?
@@ -58,8 +58,8 @@ We must distinguish between the two modes of interaction. Applying onboarding pr
 
 **Application**:
 - **Research**: Scan codebase/dependencies *before* the user asks.
-- **Suggest**: "This looks like a React project. Want me to add component templates?"
-- **Link**: "I see this relates to Project 03. Linking them now."
+- **Suggest**: "This looks like a React build. Want me to add component templates?"
+- **Link**: "I see this relates to Build 03. Linking them now."
 
 **Test**: Did the AI contribute information the user didn't explicitly provide?
 
@@ -88,7 +88,7 @@ We must distinguish between the two modes of interaction. Applying onboarding pr
 
 **Application**:
 - **Start Simple**: Universal 3 files (`overview.md`, `plan.md`, `steps.md`).
-- **Expand Dynamically**: "This is a Strategy project. I'm adding a 'Situation Analysis' section to `plan.md`."
+- **Expand Dynamically**: "This is a Strategy build. I'm adding a 'Situation Analysis' section to `plan.md`."
 
 **Test**: Is the complexity relevant to the *current* task?
 
@@ -101,11 +101,11 @@ Instead of just executing ("Yes"), the AI builds upon the user's intent ("Yes, A
 **Scenario**: User wants to create a lead qualification workflow.
 
 **Level 1 (Novice/Passive)**:
-> User: "Create lead qual project."
+> User: "Create lead qual build."
 > AI: "Done. `01-lead-qualification` created."
 
 **Level 2 (Expert/Collaborative)**:
-> User: "Create lead qual project."
+> User: "Create lead qual build."
 > AI: "Done. `01-lead-qualification` created.
 >
 > **AND** since you mentioned 'qualification', I've scanned your skills and found `lead-scoring-logic`.
@@ -137,7 +137,7 @@ Instead of just executing ("Yes"), the AI builds upon the user's intent ("Yes, A
 
 ## 5. Design Checklist for Expert Tools
 
-When building tools for experts (like `create-project`):
+When building tools for experts (like `plan-build`):
 
 - [ ] **Context Aware**: Does it read existing files/state before acting?
 - [ ] **Proactive**: Does it suggest relevant actions/links?

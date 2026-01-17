@@ -7,7 +7,7 @@
 - [Step 3: Check Folder Structure](#step-3-check-folder-structure)
 - [Step 4: Check Memory Files](#step-4-check-memory-files)
 - [Step 5: Check Navigation Files](#step-5-check-navigation-files)
-- [Step 6: Validate Projects](#step-6-validate-projects)
+- [Step 6: Validate Builds](#step-6-validate-builds)
 - [Step 7: Validate Skills](#step-7-validate-skills)
 - [Step 8: Validate Map Integrity](#step-8-validate-map-integrity-new)
 - [Step 9: Run Python Validation Hooks](#step-9-run-python-validation-hooks-new)
@@ -27,7 +27,7 @@ Create TodoWrite with all validation steps:
 - Check folder structure
 - Check memory files
 - Check navigation files
-- Validate projects
+- Validate builds
 - Validate skills
 - Validate map integrity
 - Run Python hooks (if available)
@@ -58,7 +58,7 @@ Checking core files...
 ✅ 00-system/Agents/orchestrator.md
 ✅ claude.md
 ✅ 00-system/Skills/close-session/SKILL.md
-✅ 00-system/Skills/create-project/SKILL.md
+✅ 00-system/Skills/plan-build/SKILL.md
 ✅ 00-system/Skills/create-skill/SKILL.md
 ✅ 00-system/Skills/validate-system/SKILL.md
 ✅ 00-system/Skills/add-integration/SKILL.md
@@ -77,7 +77,7 @@ Checking core files...
 - [ ] `00-system/` exists
 - [ ] `00-system/Agents/` exists
 - [ ] `00-system/Skills/` exists
-- [ ] `Projects/` exists
+- [ ] `Builds/` exists
 - [ ] `Skills/` exists (user skills)
 - [ ] `Memory/` exists
 - [ ] `01-memory/session-reports/` exists
@@ -93,7 +93,7 @@ Checking folder structure...
 ✅ 00-system/ folder
 ✅ 00-system/Agents/ folder
 ✅ 00-system/Skills/ folder
-✅ Projects/ folder
+✅ Builds/ folder
 ✅ Skills/ folder
 ✅ Memory/ folder
 ✅ 01-memory/session-reports/ folder
@@ -110,7 +110,7 @@ Checking folder structure...
 
 **Verify existence and validity of Memory/ files:**
 
-- [ ] `02-projects/project-map.md` exists and is valid markdown
+- [ ] `02-builds/build-map.md` exists and is valid markdown
 - [ ] `01-memory/goals.md` exists
 - [ ] `01-memory/core-learnings.md` exists
 
@@ -122,7 +122,7 @@ Checking folder structure...
 **Report format:**
 ```
 Checking memory files...
-✅ 02-projects/project-map.md (valid markdown)
+✅ 02-builds/build-map.md (valid markdown)
 ✅ 01-memory/goals.md
 ✅ 01-memory/core-learnings.md
 ```
@@ -158,12 +158,12 @@ Checking navigation files...
 
 ---
 
-### Step 6: Validate Projects
+### Step 6: Validate Builds
 
-**Scan Projects/ folder:**
+**Scan Builds/ folder:**
 
-For each folder in `Projects/`:
-1. Extract project ID and name from folder name
+For each folder in `Builds/`:
+1. Extract build ID and name from folder name
 2. Check required structure:
    - [ ] Has `/planning` folder
    - [ ] Has `/outputs` folder
@@ -178,8 +178,8 @@ For each folder in `Projects/`:
 
 **Report format:**
 ```
-Validating projects...
-Scanning Projects/ folder...
+Validating builds...
+Scanning Builds/ folder...
 
 ✅ 00-setup-memory
    ✓ /planning folder
@@ -198,14 +198,14 @@ Scanning Projects/ folder...
    ✓ /outputs folder
    ✗ Missing: planning/tasks.md
 
-Total projects scanned: 3
+Total builds scanned: 3
 Issues found: 1
 ```
 
 **If any failures:**
-- Missing folder → Add to issues: "Project {ID}-{name} missing {folder}"
-- Missing file → Add to issues: "Project {ID}-{name} missing {file}"
-- Invalid tasks.md → Add to issues: "Project {ID}-{name} has invalid tasks.md"
+- Missing folder → Add to issues: "Build {ID}-{name} missing {folder}"
+- Missing file → Add to issues: "Build {ID}-{name} missing {file}"
+- Invalid tasks.md → Add to issues: "Build {ID}-{name} has invalid tasks.md"
 - Mark as FIXABLE (can regenerate template or guide user)
 
 ---
@@ -278,13 +278,13 @@ Issues found: 1
    - [ ] All skills in skill-map.md exist in Skills/
    - [ ] No dead links or references
 
-**Check 02-projects/project-map.md accuracy:**
+**Check 02-builds/build-map.md accuracy:**
 
-1. **Load 02-projects/project-map.md** and extract all listed projects
-2. **Scan Projects/ folder** and get all actual project folders
+1. **Load 02-builds/build-map.md** and extract all listed builds
+2. **Scan Builds/ folder** and get all actual build folders
 3. **Compare:**
-   - [ ] All Projects/ folders are listed in 02-projects/project-map.md
-   - [ ] All projects in 02-projects/project-map.md exist in Projects/
+   - [ ] All Builds/ folders are listed in 02-builds/build-map.md
+   - [ ] All builds in 02-builds/build-map.md exist in Builds/
    - [ ] No dead links or references
 
 **Report format:**
@@ -296,9 +296,9 @@ skill-map.md:
 ✅ All 2 skills in skill-map.md exist
 ✅ No dead links
 
-02-projects/project-map.md:
-✅ All 6 projects from Projects/ folder are listed
-❌ Project "07-marketing-campaign" listed but folder doesn't exist
+02-builds/build-map.md:
+✅ All 6 builds from Builds/ folder are listed
+❌ Build "07-marketing-campaign" listed but folder doesn't exist
 ✅ No other dead links
 
 Issues found: 1
@@ -307,8 +307,8 @@ Issues found: 1
 **If any failures:**
 - Skill not listed → Add to issues: "Skill {name} exists but not in skill-map.md"
 - Skill listed but missing → Add to issues: "Skill {name} in skill-map.md but folder missing"
-- Project not listed → Add to issues: "Project {ID}-{name} exists but not in project-map.md"
-- Project listed but missing → Add to issues: "Project {ID}-{name} in project-map.md but folder missing"
+- Build not listed → Add to issues: "Build {ID}-{name} exists but not in build-map.md"
+- Build listed but missing → Add to issues: "Build {ID}-{name} in build-map.md but folder missing"
 - Mark as AUTO-FIXABLE (regenerate maps via close-session)
 
 ---
@@ -376,7 +376,7 @@ validate-markdown.py:
 validate-maps.py:
 ❌ Map integrity issues:
    - skill-map.md: Missing entry for "new-skill-name"
-   - project-map.md: Outdated progress for "05-website-development"
+   - build-map.md: Outdated progress for "05-website-development"
 
 Python hooks complete.
 Errors from hooks: 1
@@ -427,12 +427,12 @@ For each issue, determine if auto-fixable:
 
 4. **Map integrity issues (missing entries)**
    - Fix: Trigger close-session map update step
-   - Display: "Updating maps to include all projects/skills..."
+   - Display: "Updating maps to include all builds/skills..."
    - Result: "✓ Maps updated"
 
-5. **Project folder missing files**
+5. **Build folder missing files**
    - Fix: Create missing file from template
-   - Display: "Creating {project}/planning/{file} from template..."
+   - Display: "Creating {build}/planning/{file} from template..."
    - Result: "✓ {file} created"
 
 **NOT AUTO-FIXABLE Issues** (require user action):
@@ -443,7 +443,7 @@ For each issue, determine if auto-fixable:
 
 2. **Corrupted tasks.md** (invalid syntax)
    - Report: Cannot auto-fix, user edits required
-   - Suggest: Check {project}/planning/tasks.md for syntax errors
+   - Suggest: Check {build}/planning/tasks.md for syntax errors
 
 3. **YAML frontmatter in SKILL.md**
    - Report: Cannot auto-fix, user must remove manually
@@ -459,7 +459,7 @@ Auto-fixing issues...
 
 ✓ Fixed: Regenerated stale skill-map.md
 ✓ Fixed: Created missing 01-memory/core-learnings.md from template
-✓ Fixed: Updated project-map.md with missing projects
+✓ Fixed: Updated build-map.md with missing builds
 
 Cannot auto-fix:
 ❌ Skill "analyze-data" has YAML frontmatter

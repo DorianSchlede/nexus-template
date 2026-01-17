@@ -10,14 +10,14 @@ Save progress, update memory, regenerate navigation, and ensure system integrity
 ## Purpose
 
 The `close-session` skill is the most critical system skill. It ensures nothing is ever lost by:
-- Reading and updating project progress from steps.md checkboxes
+- Reading and updating build progress from steps.md checkboxes
 - Validating workspace-map.md accuracy (auto-detect mismatches)
 - Updating memory with decisions and patterns
 - Cleaning temporary files from root folder
 - Creating historical session reports
 - Displaying comprehensive summary
 
-**CRITICAL**: This skill is AUTO-TRIGGERED by all other skills and projects (not user-dependent!).
+**CRITICAL**: This skill is AUTO-TRIGGERED by all other skills and builds (not user-dependent!).
 
 ---
 
@@ -33,8 +33,8 @@ The `close-session` skill is the most critical system skill. It ensures nothing 
 ## Critical Rules
 
 1. **TodoWrite is MANDATORY**: Initialize at start with all 10 steps - prevents forgetting critical steps
-2. **PLANNING phase projects**: Skip task completion (Step 2/2.5)
-3. **IN_PROGRESS phase projects**: Auto-complete if execution signals detected
+2. **PLANNING phase builds**: Skip task completion (Step 2/2.5)
+3. **IN_PROGRESS phase builds**: Auto-complete if execution signals detected
 4. **Session reports**: Create in 01-memory/session-reports/
 5. **Summary display**: ≤5 lines per orchestrator.md rule
 
@@ -44,7 +44,7 @@ The `close-session` skill is the most critical system skill. It ensures nothing 
 
 ### Automatic & Interactive Task Completion
 Smart task completion with automatic detection:
-- **Automatic Bulk Complete**: If project work completed this session, auto-marks all tasks
+- **Automatic Bulk Complete**: If build work completed this session, auto-marks all tasks
 - **Manual Bulk Option**: If auto-detect missed it, offers bulk-complete during review
 - **Interactive Review**: Shows first 10 unchecked tasks for manual selection
 - User selects by number ("1, 3, 5"), "all", "bulk complete", or "none"
@@ -57,7 +57,7 @@ Smart task completion with automatic detection:
 Interactive cleanup with user choices:
 - Scans root folder for temp files
 - Asks what to do with each: keep, delete, or skip
-- Moves preserved files to project outputs/
+- Moves preserved files to build outputs/
 - Reports cleanup summary
 
 ### Session Reporting
@@ -75,7 +75,7 @@ Auto-calculates from checkboxes:
 
 ### Auto-Trigger Support
 Called automatically by other skills:
-- create-project
+- plan-build
 - validate-system
 - Any skill completion
 
@@ -94,7 +94,7 @@ Complete workflow with all 9 steps: See [workflow.md](references/workflow.md)
 
 ### Steps (from workflow.md):
 
-1. Read project state (skip if no IN_PROGRESS projects)
+1. Read build state (skip if no IN_PROGRESS builds)
 2. Review task completion (skip if PLANNING phase)
 3. Update maps
 4. Get timestamp
@@ -137,7 +137,7 @@ Session saved! ✅
 
 ### All Skills Must End With
 
-Every skill and project workflow should conclude with:
+Every skill and build workflow should conclude with:
 
 ```markdown
 ### Final Step: Close Session
@@ -158,7 +158,7 @@ For complete error scenarios and solutions, see [error-handling.md](references/e
 
 ### Common Scenarios:
 
-**No active project** → Skip project steps, continue with maps and cleanup
+**No active build** → Skip build steps, continue with maps and cleanup
 
 **Missing tasks.md** → Report in summary, suggest validate-system
 
@@ -208,9 +208,9 @@ This skill embodies the Nexus philosophy:
 
 This skill uses the **bulk-complete** system skill for efficient task completion:
 
-**Step 2 & 2.5**: Auto-runs bulk-complete when project work is done
+**Step 2 & 2.5**: Auto-runs bulk-complete when build work is done
 ```bash
-python 00-system/skills/bulk-complete/scripts/bulk-complete.py --project [ID] --all --no-confirm
+python 00-system/skills/bulk-complete/scripts/bulk-complete.py --build [ID] --all --no-confirm
 ```
 
 See [bulk-complete/SKILL.md](../bulk-complete/SKILL.md) for standalone usage, all options, and test coverage details.

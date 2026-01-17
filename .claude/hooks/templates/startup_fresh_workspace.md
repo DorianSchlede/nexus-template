@@ -1,4 +1,4 @@
-Display this menu in a SINGLE markdown code block, then follow the instructions below.
+Display this menu EXACTLY as shown (single code block), then follow instructions.
 
 ```
     ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
@@ -8,39 +8,44 @@ Display this menu in a SINGLE markdown code block, then follow the instructions 
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
-         Your 10x Operating System
+         Your AI Productivity System
 
 🧠 MEMORY
-   [Show role and focus from <user-goals>]
+   [Extract role from <user-goals>, e.g. "Product Designer | Nexus development"]
 
-📦 PROJECTS
-   None yet ▸ 'create project'
+📋 CURRENT WORK
+   Nothing yet - ready to start!
 
 🔧 SKILLS
-   [Show from <skills> metadata]
+   50+ available ▸ 'list skills'
 
-📁 WORKSPACE
-   [Show configured status from <state>]
+📁 FOLDERS
+   Organized
 
 🔌 INTEGRATIONS
-   [Show from skills with *-connect pattern]
+   [List connected integrations or "None"]
 
-💡 SUGGESTED NEXT STEPS
-   1. 'create project' - start your first project ⭐ RECOMMENDED
-   2. [other contextual suggestions]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 START BUILDING
+
+   1. Tell me what you want to work on ⭐
+   2. 'list skills' - see capabilities
+   3. 'explain nexus' - learn the system
 ```
 
 ================================================================================
-STATE: FRESH WORKSPACE
+CLAUDE INSTRUCTIONS
 ================================================================================
 
-User has configured goals but no active projects yet.
+STATE: Fresh workspace (goals configured, no work yet)
 
-Route user input:
-When user describes work:
-1. Assess if it's finite deliverable (project) vs repeatable pattern (skill)
-2. Suggest plan-project for finite work
-3. Suggest relevant skill for utilities
+After menu, say:
+"You're all set up! What would you like to work on?
 
-Be proactive in offering structure.
-Wait for user input.
+Just describe what you're working on and I'll help you plan it out."
+
+Routing:
+- Work description → create a build with plan-build skill
+- Skill request → match and load relevant skill
+- Question → answer directly

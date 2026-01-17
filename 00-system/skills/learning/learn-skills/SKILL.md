@@ -1,50 +1,61 @@
 ---
 name: learn-skills
-description: "learn skills, how do skills work, skill tutorial."
+description: "Learn how Nexus skills work. Load when user mentions: learn skills, how do skills work, what is a skill, skill tutorial, skill structure, understand skills, explain skills, when to create skill, skill vs build. 10-12 min."
 onboarding: true
 priority: high
 ---
 
-## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+## 🎯 Build-First Onboarding (CONTEXTUAL SUGGESTION)
 
-**This is an ONBOARDING skill with HIGH PRIORITY for proactive suggestion.**
+**This is a learning skill. With Build-First onboarding, suggest AFTER first task execution, not before.**
 
-### When to Proactively Suggest (AI MUST check user-config.yaml)
+### Auto-Complete via Checkpoint
 
-Check `learning_tracker.completed.learn_skills` in user-config.yaml. If `false`:
+```yaml
+# In user-config.yaml
+build_first.checkpoints.first_task_executed: true  → learn_skills auto-completed!
+```
+
+When user completes their first section in execute-build, `learn_skills` is **automatically marked complete** via `auto_complete_map`. They learned by DOING.
+
+### When to Proactively Suggest (Pattern Detection)
+
+Check both:
+- `learning_tracker.completed.learn_skills` - explicit completion
+- `build_first.checkpoints.first_task_executed` - auto-completion
 
 **PROACTIVELY SUGGEST when user:**
-1. Says "create skill" for the FIRST TIME (suggest learning before creating)
-2. Describes repeating work patterns ("every week I...", "I always have to...")
-3. Asks about automating workflows or creating templates
-4. Expresses confusion about what makes something a "skill"
-5. Creates multiple similar things (report-jan, report-feb anti-pattern)
-6. At the END of learn-projects (natural progression)
-7. When user completes a workflow that could be skill-worthy
+1. **Pattern detected** - does something similar to previous work ("I notice you've done this type of task before...")
+2. Creates multiple similar builds (report-jan, report-feb anti-pattern)
+3. Describes repeating work patterns ("every week I...", "I always have to...")
+4. Explicitly asks to learn about skills/automation
 
-**Suggestion Pattern:**
+**Suggestion Pattern (After Pattern Detection):**
 ```
-💡 I notice you're describing repeating work. Before creating a skill, would you
-like a 10-minute tutorial on what makes workflows "skill-worthy"? It covers:
+💡 I notice you've done similar work before. Want to understand how to
+turn repeating workflows into Skills?
+
+'learn skills' covers:
 - The 3-criteria skill-worthiness framework
 - How skills are structured
 - How AI triggers skills automatically
 
-Say 'learn skills' to start, or continue with your current task.
+Say 'learn skills' for the deep-dive (10 min), or continue working.
 ```
 
 **Anti-Pattern Detection:**
 ```
 If user creates: report-jan, report-feb, report-mar...
 → "I notice you're creating similar items. This is a perfect use case for
-   a SKILL instead of multiple projects. Want to 'learn skills' to understand
+   a SKILL instead of multiple builds. Want to 'learn skills' to understand
    how to capture this as a reusable workflow?"
 ```
 
 **DO NOT suggest if:**
-- `learning_tracker.completed.learn_skills: true`
-- User explicitly says "skip" or "just create the skill"
-- User has already created skills successfully
+- User is working on their FIRST build/task (let them DO first)
+- User explicitly says "skip" or dismisses
+- User is mid-task and focused
+- No repeating pattern detected
 
 ---
 
@@ -173,7 +184,7 @@ SYSTEM skills in 00-system/skills/
 
    Next steps:
    • 'create skill' - Create your first skill
-   • 'learn projects' - Learn about temporal work
+   • 'learn builds' - Learn about temporal work
    • 'learn nexus' - System mastery
    ```
 
@@ -186,7 +197,7 @@ SYSTEM skills in 00-system/skills/
 
 ## Success Criteria
 
-- [ ] User understands skill vs project distinction
+- [ ] User understands skill vs build distinction
 - [ ] User can apply 3-criteria skill-worthiness framework
 - [ ] User knows skill folder structure
 - [ ] User understands trigger mechanism

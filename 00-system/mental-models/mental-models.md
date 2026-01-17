@@ -1,14 +1,14 @@
 ---
 title: Mental Models Framework
-description: System-level catalog of 59 thinking frameworks across 12 categories for collaborative elicitation, strategic planning, and deep analysis. Loaded on-demand when referenced by create-project, execute-project, and create-skill at decision points. Supports progressive disclosure.
+description: System-level catalog of 59 thinking frameworks across 12 categories for collaborative elicitation, strategic planning, and deep analysis. Loaded on-demand when referenced by plan-build, execute-build, and create-skill at decision points. Supports progressive disclosure.
 category: thinking-frameworks
 load_type: on-demand
-referenced_by: [create-project, execute-project, create-skill]
+referenced_by: [plan-build, execute-build, create-skill]
 ---
 
 # Mental Models Framework
 
-**Purpose**: System-level catalog of thinking frameworks for collaborative work across all skills and projects.
+**Purpose**: System-level catalog of thinking frameworks for collaborative work across all skills and builds.
 
 **When to Use**:
 - **Requirements gathering**: Stakeholder mapping, first principles, SWOT
@@ -28,7 +28,7 @@ referenced_by: [create-project, execute-project, create-skill]
 - ✅ **Question templates** - Ready-to-use elicitation questions
 - ✅ **Progressive disclosure** - Reference specific models as needed
 - ✅ **User choice** - Always offer options, never prescribe
-- ✅ **Cross-skill reusability** - Works with create-project, execute-project, create-skill, etc.
+- ✅ **Cross-skill reusability** - Works with plan-build, execute-build, create-skill, etc.
 
 ---
 
@@ -48,13 +48,13 @@ referenced_by: [create-project, execute-project, create-skill]
 Now let's think through this comprehensively. I've reviewed the mental models catalog and recommend:
 
 1. **First Principles** – Strip assumptions, find fundamental truths
-   Best for: Novel projects, challenging assumptions
+   Best for: Novel builds, challenging assumptions
 
 2. **Stakeholder Mapping** – Identify all affected parties and interests
-   Best for: Multi-party projects, organizational work
+   Best for: Multi-party builds, organizational work
 
 3. **Pre-Mortem** – Imagine failure modes before implementation
-   Best for: High-stakes projects, risk mitigation
+   Best for: High-stakes builds, risk mitigation
 
 Which approach sounds most useful? Or we could combine them!
 ```
@@ -84,8 +84,8 @@ When offering mental models, use this concise format:
 - ❌ `**Pre-Mortem** – Failure analysis` (too brief, not descriptive enough)
 
 **Best for**: Add only when context matters (1 line, 5-10 words)
-- Example: `Best for: Novel projects, challenging assumptions`
-- Example: `Best for: High-stakes projects, risk mitigation`
+- Example: `Best for: Novel builds, challenging assumptions`
+- Example: `Best for: High-stakes builds, risk mitigation`
 
 **Principle**: User should understand what the model does and when to use it from 1-2 lines, not paragraphs.
 
@@ -208,7 +208,7 @@ When offering mental models, use this concise format:
 
 ### Pattern 1: Light Reference (Recommended)
 ```markdown
-# In execute-project SKILL.md
+# In execute-build SKILL.md
 
 ## Step 4: Execute with Mental Models (Optional)
 
@@ -223,7 +223,7 @@ Want to apply structured thinking? Load specific models from mental-models skill
 
 ### Pattern 2: Full Integration
 ```markdown
-# In create-project SKILL.md
+# In plan-build SKILL.md
 
 ## Step 6: Collaborative Planning
 
@@ -307,9 +307,9 @@ Offer mental models from mental-models skill:
 
 ## Integration Examples
 
-### Example 1: execute-project Integration
+### Example 1: execute-build Integration
 
-**In execute-project/SKILL.md**:
+**In execute-build/SKILL.md**:
 ```markdown
 ## Step 4D: Section Completion Checkpoint (Optional Mental Models)
 
@@ -332,9 +332,9 @@ If user chooses 2 or 3:
 
 ---
 
-### Example 2: create-project Integration
+### Example 2: plan-build Integration
 
-**In create-project/SKILL.md**:
+**In plan-build/SKILL.md**:
 ```markdown
 ## Step 7: Load plan.md → Apply Mental Models
 
@@ -349,7 +349,7 @@ Before filling plan.md, offer mental models from mental-models skill:
 
 **Benefits**:
 - ✅ Single source of truth (mental-models.md)
-- ✅ No duplication in create-project
+- ✅ No duplication in plan-build
 - ✅ Easy updates (change mental-models, all skills benefit)
 
 ---
@@ -407,7 +407,7 @@ Recommended: First Principles, Stakeholder Mapping
 ## Version History
 
 **v1.0** (2025-01-22):
-- Extracted from create-project skill
+- Extracted from plan-build skill
 - Reorganized for cross-skill reusability
 - Added progressive disclosure patterns
 - Created use-case and category reference files

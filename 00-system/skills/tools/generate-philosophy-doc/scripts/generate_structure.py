@@ -216,7 +216,7 @@ def generate_document_structure(domain: str, research_notes: Dict[str, Any] = No
 """
 
         elif section['id'] == 'case-studies':
-            doc += """### Case Study: [PROJECT/EXAMPLE NAME]
+            doc += """### Case Study: [BUILD/EXAMPLE NAME]
 
 **Context**: [Background and situation]
 

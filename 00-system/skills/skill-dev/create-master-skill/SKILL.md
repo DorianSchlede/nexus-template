@@ -6,26 +6,26 @@ description: "create master skill, integration master, shared skill library."
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️ CRITICAL EXECUTION REQUIREMENTS ⚠️
 
-WORKFLOW: Project FIRST, Research SECOND, Build THIRD
+WORKFLOW: Build FIRST, Research SECOND, Build THIRD
 
 MANDATORY STEPS (DO NOT SKIP):
 1. ✅ Create TodoWrite with ALL phases
 2. ✅ Ask integration name (e.g., "airtable", "slack", "github")
-3. ✅ RUN create-project skill to create planning project
+3. ✅ RUN plan-build skill to create planning build
 4. ✅ PHASE 1: Web Research - comprehensive API/integration research
 5. ✅ PHASE 2: Architecture Design - define master skill structure
 6. ✅ PHASE 3: Build - create master skill from templates
 7. ✅ PHASE 4: Validate - test and document
 
 ANTI-PATTERN (DO NOT DO THIS):
-❌ Skip project creation
+❌ Skip build creation
 ❌ Start building without research
 ❌ Create master skill without understanding the integration
 ❌ Copy from notion-master without adapting
 ❌ Skip validation phase
 
 CORRECT PATTERN (DO THIS):
-✅ Ask integration → Create project → Research → Design → Build → Validate
+✅ Ask integration → Create build → Research → Design → Build → Validate
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Create Master Skill
@@ -48,7 +48,7 @@ Master skills solve the **duplication problem**: When 3+ skills share common con
 **User says:** "create master skill for Airtable"
 
 **AI does:**
-1. Creates planning project: `{ID}-airtable-master-skill`
+1. Creates planning build: `{ID}-airtable-master-skill`
 2. Runs comprehensive web research on Airtable API
 3. Designs architecture based on research
 4. Builds master skill from templates
@@ -72,7 +72,7 @@ Integration name: ___________
 **After user provides name:**
 1. Validate name (lowercase, hyphenated)
 2. Check if `{integration}-master` already exists
-3. Create planning project using `create-project` skill
+3. Create planning build using `plan-build` skill
 
 ---
 
@@ -118,7 +118,7 @@ Integration name: ___________
    - Capture: Patterns, anti-patterns, optimization tips
 ```
 
-**Save research to:** `02-projects/{ID}-{integration}-master-skill/02-resources/research.md`
+**Save research to:** `02-builds/{ID}-{integration}-master-skill/02-resources/research.md`
 
 ---
 
@@ -144,7 +144,7 @@ Integration name: ___________
    - Common utility functions
    - Rate limiting (if needed)
 
-**Document architecture in:** `02-projects/{ID}-{integration}-master-skill/01-planning/plan.md`
+**Document architecture in:** `02-builds/{ID}-{integration}-master-skill/01-planning/plan.md`
 
 ---
 
@@ -213,12 +213,12 @@ Integration name: ___________
 User: "create master skill for airtable"
 
 AI: "I'll help you create an Airtable master skill. First, let me create
-     a planning project to organize this work."
+     a planning build to organize this work."
 
-     → Runs create-project skill
-     → Creates: 04-airtable-master-skill project
+     → Runs plan-build skill
+     → Creates: 04-airtable-master-skill build
 
-AI: "Project created. Now I'll research the Airtable API comprehensively."
+AI: "Build created. Now I'll research the Airtable API comprehensively."
 
      → Runs 8 web searches
      → Saves findings to research.md
@@ -262,10 +262,10 @@ A master skill is complete when:
 
 ## Why This Design?
 
-**Why Project First?**
+**Why Build First?**
 - Complex work deserves proper planning
 - Research findings need a home
-- Progress tracked via project tasks
+- Progress tracked via build tasks
 - Validates the approach before building
 
 **Why Research First?**

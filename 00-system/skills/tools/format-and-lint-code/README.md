@@ -26,7 +26,7 @@ npm install -g prettier eslint
 # See references/installation-guide.md for all languages
 ```
 
-### 2. Run in Current Project
+### 2. Run in Current Build
 
 ```bash
 # Format and lint all files
@@ -52,7 +52,7 @@ Now formatting and linting runs automatically before each commit.
 The skill follows this process:
 
 ```
-Analyze Project
+Analyze Build
     ↓
 Detect Languages
     ↓
@@ -71,7 +71,7 @@ Stage & Commit (Optional)
 
 ### Language Detection
 
-Automatically detects languages in your project:
+Automatically detects languages in your build:
 
 ```
 📦 Detected Tools:
@@ -122,9 +122,9 @@ Suggestion:
 
 ## Configuration
 
-### Project Configuration
+### Build Configuration
 
-Create `.format-config.yaml` in your project root:
+Create `.format-config.yaml` in your build root:
 
 ```yaml
 format_and_lint:

@@ -7,7 +7,7 @@ when_to_use:
   - Strategic planning
   - Self-assessment
   - Competitive analysis
-  - Project evaluation
+  - Build evaluation
 best_for: Quick strategic assessment of position
 ---
 

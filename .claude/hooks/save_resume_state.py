@@ -3,7 +3,7 @@
 PreCompact Hook: Save Resume State
 
 This hook is triggered before Claude Code compacts the context.
-It updates the active project's resume-context.md timestamp for
+It updates the active build's resume-context.md timestamp for
 cross-session resume detection.
 
 CRITICAL REQUIREMENTS:
@@ -13,7 +13,7 @@ CRITICAL REQUIREMENTS:
 Input (stdin JSON):
 {
   "session_id": "abc123",
-  "transcript_path": "~/.claude/projects/.../xxx.jsonl",
+  "transcript_path": "~/.claude/builds/.../xxx.jsonl",
   "hook_event_name": "PreCompact",
   "trigger": "manual" | "auto",
   "custom_instructions": ""
@@ -32,7 +32,7 @@ from pathlib import Path
 # Add parent directory to path for utils imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from utils.transcript import parse_transcript_for_project, find_project_by_session_id
+from utils.transcript import parse_transcript_for_build, find_build_by_session_id
 
 # Performance tracking
 START_TIME = time.perf_counter()
@@ -45,10 +45,10 @@ logging.basicConfig(
 
 
 def find_nexus_root() -> Path:
-    """Find the Nexus root directory from CLAUDE_PROJECT_DIR."""
-    project_dir = os.environ.get("CLAUDE_PROJECT_DIR", "")
-    if project_dir:
-        return Path(project_dir)
+    """Find the Nexus root directory from CLAUDE_BUILD_DIR."""
+    build_dir = os.environ.get("CLAUDE_BUILD_DIR", "")
+    if build_dir:
+        return Path(build_dir)
     # Fallback: try current directory
     return Path.cwd()
 
@@ -71,24 +71,24 @@ def cleanup_session_cache(nexus_root: Path, session_id: str) -> bool:
         return False
 
 
-def update_project_resume_context(nexus_root: Path, project_id: str, session_id: str) -> bool:
+def update_build_resume_context(nexus_root: Path, build_id: str, session_id: str) -> bool:
     """
-    Update project's resume-context.md with session_id list and timestamp.
+    Update build's resume-context.md with session_id list and timestamp.
 
     MULTI-SESSION ENHANCEMENT:
-    - Maintains session_ids list (all sessions that touched this project)
+    - Maintains session_ids list (all sessions that touched this build)
     - Keeps legacy session_id field (most recent, for backward compat)
     - Prevents duplicates in the list
 
     This enables SessionStart to:
-    1. Find project via ANY session in the list (multi-session support)
-    2. Find most recently active project via last_updated
+    1. Find build via ANY session in the list (multi-session support)
+    2. Find most recently active build via last_updated
     """
-    project_path = nexus_root / "02-projects" / project_id / "01-planning"
-    resume_file = project_path / "resume-context.md"
+    build_path = nexus_root / "02-builds" / build_id / "01-planning"
+    resume_file = build_path / "resume-context.md"
 
     if not resume_file.exists():
-        logging.info(f"No resume-context.md for project {project_id}")
+        logging.info(f"No resume-context.md for build {build_id}")
         return False
 
     try:
@@ -119,9 +119,9 @@ def update_project_resume_context(nexus_root: Path, project_id: str, session_id:
         # Add current session if not already in list
         if session_id not in existing_ids:
             existing_ids.append(session_id)
-            logging.info(f"Added session {session_id[:8]}... to project {project_id} (total: {len(existing_ids)} sessions)")
+            logging.info(f"Added session {session_id[:8]}... to build {build_id} (total: {len(existing_ids)} sessions)")
         else:
-            logging.info(f"Session {session_id[:8]}... already tracked for project {project_id}")
+            logging.info(f"Session {session_id[:8]}... already tracked for build {build_id}")
 
         # Format as inline YAML list for simplicity
         session_ids_str = "[" + ", ".join([f'"{sid}"' for sid in existing_ids]) + "]"
@@ -178,10 +178,10 @@ def update_project_resume_context(nexus_root: Path, project_id: str, session_id:
             )
 
         resume_file.write_text(content, encoding="utf-8")
-        logging.info(f"Updated resume-context.md for project {project_id} ({len(existing_ids)} sessions tracked)")
+        logging.info(f"Updated resume-context.md for build {build_id} ({len(existing_ids)} sessions tracked)")
         return True
     except Exception as e:
-        logging.error(f"Failed to update resume-context.md for {project_id}: {e}")
+        logging.error(f"Failed to update resume-context.md for {build_id}: {e}")
         return False
 
 
@@ -203,19 +203,19 @@ def main():
     # Clean up old session cache (new one will be created after compaction)
     cleanup_session_cache(nexus_root, session_id)
 
-    # Detect active project - try session_id match first (from previous compact), then transcript
-    projects_dir = str(nexus_root / "02-projects")
-    active_project_id = find_project_by_session_id(projects_dir, session_id)
+    # Detect active build - try session_id match first (from previous compact), then transcript
+    builds_dir = str(nexus_root / "02-builds")
+    active_build_id = find_build_by_session_id(builds_dir, session_id)
 
-    if not active_project_id:
+    if not active_build_id:
         # Fallback: parse transcript for tool_use patterns
-        active_project_id, _ = parse_transcript_for_project(transcript_path)
-        if active_project_id:
-            logging.info(f"Fallback: found project {active_project_id} from transcript")
+        active_build_id, _ = parse_transcript_for_build(transcript_path)
+        if active_build_id:
+            logging.info(f"Fallback: found build {active_build_id} from transcript")
 
-    # Update project's resume-context.md with session_id for exact matching
-    if active_project_id:
-        update_project_resume_context(nexus_root, active_project_id, session_id)
+    # Update build's resume-context.md with session_id for exact matching
+    if active_build_id:
+        update_build_resume_context(nexus_root, active_build_id, session_id)
 
     # Performance check
     elapsed_ms = (time.perf_counter() - START_TIME) * 1000

@@ -1,52 +1,67 @@
 ---
-name: learn-projects
-description: "learn projects, how do projects work, project tutorial."
+name: learn-builds
+description: "Learn how Nexus builds work. Load when user mentions: learn builds, how do builds work, builds vs skills, build tutorial, what is a build, build structure, build lifecycle, understand builds, explain builds. 8-10 min."
 onboarding: true
 priority: high
 ---
 
-## 🎯 AI Proactive Triggering (ONBOARDING SKILL)
+## 🎯 Build-First Onboarding (CONTEXTUAL SUGGESTION)
 
-**This is an ONBOARDING skill with HIGH PRIORITY for proactive suggestion.**
+**This is a learning skill. With Build-First onboarding, suggest AFTER first build, not before.**
 
-### When to Proactively Suggest (AI MUST check user-config.yaml)
+### Auto-Complete via Checkpoint
 
-Check `learning_tracker.completed.learn_projects` in user-config.yaml. If `false`:
+```yaml
+# In user-config.yaml
+build_first.checkpoints.first_build_created: true  → learn_builds auto-completed!
+```
+
+When user creates their first build, `learn_builds` is **automatically marked complete** via `auto_complete_map`. They learned by DOING.
+
+### When to Proactively Suggest (Post-Experience)
+
+Check both:
+- `learning_tracker.completed.learn_builds` - explicit completion
+- `build_first.checkpoints.first_build_created` - auto-completion
 
 **PROACTIVELY SUGGEST when user:**
-1. Says "create project" for the FIRST TIME (suggest learning before creating)
-2. Describes work that sounds like a project (deliverable, deadline, finite work)
-3. Asks about organizing work, tracking progress, or managing tasks
-4. Expresses confusion about projects vs skills
-5. Starts creating multiple similar "projects" (anti-pattern detection)
-6. At the END of setup-goals or setup-workspace (natural next step)
-7. When displaying the Nexus menu and `total_projects = 0`
+1. **AFTER first build** - asks "how does this build system work?" (wants deeper understanding)
+2. Expresses confusion about builds vs skills (after having used builds)
+3. Starts creating multiple similar "builds" (anti-pattern detection)
+4. Explicitly asks to learn/understand builds
 
-**Suggestion Pattern:**
+**Suggestion Pattern (Post-Experience):**
 ```
-💡 Before creating your first project, would you like a quick 8-minute tutorial
-on how Nexus projects work? It covers:
-- When to use projects vs skills
-- Project structure and lifecycle
+💡 You've already created a build! Want to understand the system more deeply?
+
+'learn builds' covers:
+- When to use builds vs skills (avoid anti-patterns)
+- Build lifecycle and best practices
 - How to track progress effectively
 
-Say 'learn projects' to start, or 'skip' to create your project directly.
+Say 'learn builds' for the deep-dive (8 min), or continue working.
+```
+
+**If user already created build, acknowledge it:**
+```
+You've got practical experience now! This tutorial will deepen your understanding
+of WHY the system works this way.
 ```
 
 **DO NOT suggest if:**
-- `learning_tracker.completed.learn_projects: true`
-- User explicitly says "just create the project" or "skip tutorial"
-- User has already created projects successfully
+- User is creating their FIRST build (let them DO first)
+- User explicitly says "skip" or dismisses
+- User is mid-task and focused
 
 ---
 
-# Learn Projects
+# Learn Builds
 
-Teach how Nexus projects work through examples and decision framework.
+Teach how Nexus builds work through examples and decision framework.
 
 ## Purpose
 
-Help user understand when to create projects vs skills, how projects are structured, and the project lifecycle. Uses concrete examples before abstract concepts.
+Help user understand when to create builds vs skills, how builds are structured, and the build lifecycle. Uses concrete examples before abstract concepts.
 
 **Time Estimate**: 8-10 minutes
 
@@ -56,19 +71,19 @@ Help user understand when to create projects vs skills, how projects are structu
 
 ### Step 1: Concrete Examples
 
-Show what IS and ISN'T a project:
+Show what IS and ISN'T a build:
 ```
-✅ PROJECTS:
+✅ BUILDS:
 - Build client proposal for Acme Corp
 - Research competitors and write analysis
 - Create onboarding docs for new hires
 
-❌ NOT PROJECTS (these are skills):
+❌ NOT BUILDS (these are skills):
 - Generate weekly status reports (repeating)
 - Qualify incoming leads (repeating)
 - Format documents (repeating)
 
-Pattern: Projects END. Skills REPEAT.
+Pattern: Builds END. Skills REPEAT.
 ```
 
 **Ask**: "What work are YOU planning? Let's classify it."
@@ -80,10 +95,10 @@ Pattern: Projects END. Skills REPEAT.
 ```
 Question 1: Direction or Work?
   • Direction = Goal (goals.md)
-  • Work = Project or Skill
+  • Work = Build or Skill
 
 Question 2: Does it repeat?
-  • NO → PROJECT (has endpoint)
+  • NO → BUILD (has endpoint)
   • YES → SKILL (reusable)
 
 ANTI-PATTERN:
@@ -93,10 +108,10 @@ ANTI-PATTERN:
 
 ---
 
-### Step 3: Project Structure
+### Step 3: Build Structure
 
 ```
-📁 02-projects/05-client-proposal/
+📁 02-builds/05-client-proposal/
 ├── 01-planning/
 │   ├── overview.md    # What & why
 │   ├── plan.md        # How
@@ -129,11 +144,11 @@ For each: apply decision framework together, explain reasoning.
 ### Step 6: How to Create
 
 ```
-To create a project, say:
-• "create project for [description]"
-• "new project: [name]"
+To create a build, say:
+• "create build for [description]"
+• "new build: [name]"
 
-Ready? Say "create project" to start one!
+Ready? Say "create build" to start one!
 ```
 
 ---
@@ -146,21 +161,21 @@ Ready? Say "create project" to start one!
    ```yaml
    learning_tracker:
      completed:
-       learn_projects: true  # ADD THIS LINE
+       learn_builds: true  # ADD THIS LINE
    ```
 
 2. **Display completion**:
    ```
-   ✅ Learn Projects Complete!
+   ✅ Learn Builds Complete!
 
    You now understand:
-   • Projects vs Skills (projects END, skills REPEAT)
+   • Builds vs Skills (builds END, skills REPEAT)
    • Decision framework (Direction → Work → Repeat?)
-   • Project structure (planning → resources → working → outputs)
+   • Build structure (planning → resources → working → outputs)
    • Lifecycle states (PLANNING → IN_PROGRESS → COMPLETE)
 
    Next steps:
-   • 'create project' - Start your first project
+   • 'create build' - Start your first build
    • 'learn skills' - Learn about reusable workflows
    • 'learn nexus' - System mastery
    ```
@@ -174,8 +189,8 @@ Ready? Say "create project" to start one!
 
 ## Success Criteria
 
-- [ ] User understands project vs skill distinction
+- [ ] User understands build vs skill distinction
 - [ ] User can apply decision framework
-- [ ] User knows project folder structure
+- [ ] User knows build folder structure
 - [ ] User understands lifecycle states
-- [ ] `learning_tracker.completed.learn_projects: true` in user-config.yaml
+- [ ] `learning_tracker.completed.learn_builds: true` in user-config.yaml

@@ -6,7 +6,7 @@ description: End-to-end process with waste identification
 when_to_use:
   - Process improvement
   - Lean transformation
-  - Efficiency projects
+  - Efficiency builds
   - Operations analysis
 best_for: Seeing the whole process, finding waste
 ---

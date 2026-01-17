@@ -19,7 +19,7 @@
 - ✅ Folder structure ({Y} folders)
 - ✅ Memory files ({Z} files)
 - ✅ Navigation files ({W} files)
-- ✅ Projects validated ({P} projects)
+- ✅ Builds validated ({P} builds)
 - ✅ Skills validated ({S} skills)
 - ✅ Map integrity ({M} maps)
 - {✅/⚠️/❌} Python hooks ({H} hooks)
@@ -129,7 +129,7 @@ Your system is operational but has {W} warnings to review. ⚠️
 ### Step 13: Auto-Trigger close-session
 
 Auto-trigger the `close-session` skill to:
-- Update 02-projects/project-map.md (if needed)
+- Update 02-builds/build-map.md (if needed)
 - Regenerate skill-map.md (if it was regenerated in auto-fix)
 - Create session report
 - Clean up temporary files

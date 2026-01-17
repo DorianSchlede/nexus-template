@@ -4,11 +4,11 @@ slug: stakeholder-mapping
 category: collaborative
 description: Identify all affected parties and interests
 when_to_use:
-  - Projects with multiple parties
+  - Builds with multiple parties
   - Organizational change
   - Product development
   - Client work
-best_for: Multi-party projects, understanding who matters
+best_for: Multi-party builds, understanding who matters
 ---
 
 # Stakeholder Mapping

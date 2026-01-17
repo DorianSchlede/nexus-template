@@ -4,7 +4,7 @@ slug: resource-dependency-mapping
 category: time-resource
 description: Identify critical resource constraints
 when_to_use:
-  - Project planning
+  - Build planning
   - Risk identification
   - Bottleneck prevention
   - Capacity planning
@@ -17,7 +17,7 @@ best_for: Understanding what resources you need and when
 
 ## Questions to Ask
 
-- What resources does this project require?
+- What resources does this build require?
 - Which resources are shared or constrained?
 - What depends on what (dependency chain)?
 - What's the critical path?
@@ -54,12 +54,12 @@ best_for: Understanding what resources you need and when
 
 ## Critical Path
 
-The longest chain of dependent activities. Delay here = project delay.
+The longest chain of dependent activities. Delay here = build delay.
 
 ## Risk Indicators
 
 - Single person with critical knowledge
-- Shared resource across multiple projects
+- Shared resource across multiple builds
 - External dependency with no control
 - No buffer in schedule
 

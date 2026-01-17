@@ -9,7 +9,7 @@ description: {{OPERATION_DESCRIPTION}}. Load when user says {{TRIGGER_PHRASES}}.
 
 ## Prerequisites
 
-Ensure `.env` file at project root contains:
+Ensure `.env` file at build root contains:
 
 ```
 {{ENV_VARS}}

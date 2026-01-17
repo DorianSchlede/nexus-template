@@ -47,7 +47,7 @@ The opposite of "straw manning" (weakening an opponent's argument). Steel mannin
 
 **Straw man**: "They just want to cut costs, they don't care about quality."
 
-**Steel man**: "Their position is that we can maintain 95% of quality while reducing costs 30%, which would fund two additional projects. The trade-off is accepting some non-critical defects that most users won't notice."
+**Steel man**: "Their position is that we can maintain 95% of quality while reducing costs 30%, which would fund two additional builds. The trade-off is accepting some non-critical defects that most users won't notice."
 
 ## Anti-Patterns
 

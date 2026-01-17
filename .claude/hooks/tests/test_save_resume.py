@@ -13,7 +13,7 @@ from unittest.mock import patch
 from save_resume_state import (
     find_nexus_root,
     cleanup_session_cache,
-    update_project_resume_context,
+    update_build_resume_context,
 )
 
 
@@ -21,13 +21,13 @@ class TestFindNexusRoot:
     """Tests for find_nexus_root()"""
 
     def test_uses_env_variable(self, tmp_path):
-        with patch.dict(os.environ, {"CLAUDE_PROJECT_DIR": str(tmp_path)}):
+        with patch.dict(os.environ, {"CLAUDE_BUILD_DIR": str(tmp_path)}):
             result = find_nexus_root()
             assert result == tmp_path
 
     def test_fallback_to_cwd(self):
         with patch.dict(os.environ, {}, clear=True):
-            os.environ.pop("CLAUDE_PROJECT_DIR", None)
+            os.environ.pop("CLAUDE_BUILD_DIR", None)
             result = find_nexus_root()
             assert result == Path.cwd()
 
@@ -64,19 +64,19 @@ class TestCleanupSessionCache:
         assert result is False
 
 
-class TestUpdateProjectResumeContext:
-    """Tests for update_project_resume_context()"""
+class TestUpdateBuildResumeContext:
+    """Tests for update_build_resume_context()"""
 
-    def test_updates_session_id(self, temp_nexus_root, create_project):
-        create_project("01-test", session_id="old-session")
+    def test_updates_session_id(self, temp_nexus_root, create_build):
+        create_build("01-test", session_id="old-session")
 
-        result = update_project_resume_context(
+        result = update_build_resume_context(
             temp_nexus_root, "01-test", "new-session-id"
         )
 
         assert result is True
 
-        resume_file = temp_nexus_root / "02-projects" / "01-test" / "01-planning" / "resume-context.md"
+        resume_file = temp_nexus_root / "02-builds" / "01-test" / "01-planning" / "resume-context.md"
         content = resume_file.read_text()
 
         # Multi-session enhancement: check session_ids list contains new ID
@@ -86,16 +86,16 @@ class TestUpdateProjectResumeContext:
         # Legacy session_id field should exist for backward compat
         assert 'session_id:' in content
 
-    def test_updates_last_updated(self, temp_nexus_root, create_project):
-        create_project("02-test", last_updated="2020-01-01T00:00:00Z")
+    def test_updates_last_updated(self, temp_nexus_root, create_build):
+        create_build("02-test", last_updated="2020-01-01T00:00:00Z")
 
         before = datetime.now(timezone.utc)
-        result = update_project_resume_context(temp_nexus_root, "02-test", "session")
+        result = update_build_resume_context(temp_nexus_root, "02-test", "session")
         after = datetime.now(timezone.utc)
 
         assert result is True
 
-        resume_file = temp_nexus_root / "02-projects" / "02-test" / "01-planning" / "resume-context.md"
+        resume_file = temp_nexus_root / "02-builds" / "02-test" / "01-planning" / "resume-context.md"
         content = resume_file.read_text()
 
         # Extract timestamp
@@ -106,35 +106,35 @@ class TestUpdateProjectResumeContext:
         assert before <= timestamp <= after
 
     def test_creates_session_id_if_missing(self, temp_nexus_root):
-        # Create project without session_id
-        project_path = temp_nexus_root / "02-projects" / "03-no-sid" / "01-planning"
-        project_path.mkdir(parents=True)
-        (project_path / "resume-context.md").write_text(
+        # Create build without session_id
+        build_path = temp_nexus_root / "02-builds" / "03-no-sid" / "01-planning"
+        build_path.mkdir(parents=True)
+        (build_path / "resume-context.md").write_text(
             '---\nfiles_to_load: []\n---\n# Resume'
         )
 
-        result = update_project_resume_context(temp_nexus_root, "03-no-sid", "added-session")
+        result = update_build_resume_context(temp_nexus_root, "03-no-sid", "added-session")
 
         assert result is True
-        content = (project_path / "resume-context.md").read_text()
+        content = (build_path / "resume-context.md").read_text()
         assert 'session_id: "added-session"' in content
 
     def test_returns_false_for_missing_file(self, temp_nexus_root):
-        result = update_project_resume_context(
-            temp_nexus_root, "nonexistent-project", "session"
+        result = update_build_resume_context(
+            temp_nexus_root, "nonexistent-build", "session"
         )
         assert result is False
 
-    def test_preserves_other_content(self, temp_nexus_root, create_project):
-        create_project("04-preserve")
+    def test_preserves_other_content(self, temp_nexus_root, create_build):
+        create_build("04-preserve")
 
         # Read original content
-        resume_file = temp_nexus_root / "02-projects" / "04-preserve" / "01-planning" / "resume-context.md"
+        resume_file = temp_nexus_root / "02-builds" / "04-preserve" / "01-planning" / "resume-context.md"
         original = resume_file.read_text()
         assert "files_to_load" in original
 
         # Update
-        update_project_resume_context(temp_nexus_root, "04-preserve", "new-session")
+        update_build_resume_context(temp_nexus_root, "04-preserve", "new-session")
 
         # Verify preserved
         updated = resume_file.read_text()
@@ -145,27 +145,27 @@ class TestUpdateProjectResumeContext:
 class TestIntegrationFlow:
     """Integration tests for PreCompact hook flow."""
 
-    def test_full_precompact_flow(self, temp_nexus_root, create_project, create_transcript, mock_tool_use_entry):
-        """Test the full PreCompact flow: detect project → update resume → cleanup cache"""
-        project_id = "05-integration"
+    def test_full_precompact_flow(self, temp_nexus_root, create_build, create_transcript, mock_tool_use_entry):
+        """Test the full PreCompact flow: detect build → update resume → cleanup cache"""
+        build_id = "05-integration"
         session_id = "integration-session-uuid"
 
-        # Create project with different session_id (simulating first compact)
-        create_project(project_id, session_id="previous-session")
+        # Create build with different session_id (simulating first compact)
+        create_build(build_id, session_id="previous-session")
 
-        # Create transcript with project activity
+        # Create transcript with build activity
         entries = [
-            mock_tool_use_entry("Read", f"02-projects/{project_id}/01-planning/overview.md"),
-            mock_tool_use_entry("Write", f"02-projects/{project_id}/03-working/draft.md"),
+            mock_tool_use_entry("Read", f"02-builds/{build_id}/01-planning/overview.md"),
+            mock_tool_use_entry("Write", f"02-builds/{build_id}/03-working/draft.md"),
         ]
         transcript = create_transcript(entries)
 
         # Simulate PreCompact updating resume context
-        result = update_project_resume_context(temp_nexus_root, project_id, session_id)
+        result = update_build_resume_context(temp_nexus_root, build_id, session_id)
         assert result is True
 
         # Verify session_id added to session_ids list (multi-session)
-        resume_file = temp_nexus_root / "02-projects" / project_id / "01-planning" / "resume-context.md"
+        resume_file = temp_nexus_root / "02-builds" / build_id / "01-planning" / "resume-context.md"
         content = resume_file.read_text()
 
         # Check multi-session tracking

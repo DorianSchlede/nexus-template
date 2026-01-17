@@ -67,7 +67,7 @@ learning_tracker:
 ```yaml
 # e.g., langfuse.yaml, airtable-bases.yaml
 api_key: [stored securely]
-project_id: [connection info]
+build_id: [connection info]
 # Integration-specific config
 ```
 </section>

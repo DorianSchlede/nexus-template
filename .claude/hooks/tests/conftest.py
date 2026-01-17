@@ -1,3 +1,4 @@
+from __future__ import annotations
 """
 Shared fixtures for handover test suite.
 """
@@ -24,10 +25,10 @@ def temp_nexus_root(tmp_path):
     # Create core directories
     (tmp_path / "00-system" / "core").mkdir(parents=True)
     (tmp_path / "00-system" / ".cache").mkdir(parents=True)
-    (tmp_path / "00-system" / "skills" / "projects" / "plan-project").mkdir(parents=True)
-    (tmp_path / "00-system" / "skills" / "projects" / "execute-project").mkdir(parents=True)
+    (tmp_path / "00-system" / "skills" / "builds" / "plan-build").mkdir(parents=True)
+    (tmp_path / "00-system" / "skills" / "builds" / "execute-build").mkdir(parents=True)
     (tmp_path / "01-memory").mkdir(parents=True)
-    (tmp_path / "02-projects").mkdir(parents=True)
+    (tmp_path / "02-builds").mkdir(parents=True)
     (tmp_path / "03-skills").mkdir(parents=True)
     (tmp_path / "04-workspace").mkdir(parents=True)
 
@@ -38,40 +39,40 @@ def temp_nexus_root(tmp_path):
     (tmp_path / "01-memory" / "goals.md").write_text("# Goals\nTest user goals.")
 
     # Create skill stubs
-    (tmp_path / "00-system" / "skills" / "projects" / "plan-project" / "SKILL.md").write_text(
-        "---\nname: plan-project\n---\n# Plan Project"
+    (tmp_path / "00-system" / "skills" / "builds" / "plan-build" / "SKILL.md").write_text(
+        "---\nname: plan-build\n---\n# Plan Build"
     )
-    (tmp_path / "00-system" / "skills" / "projects" / "execute-project" / "SKILL.md").write_text(
-        "---\nname: execute-project\n---\n# Execute Project"
+    (tmp_path / "00-system" / "skills" / "builds" / "execute-build" / "SKILL.md").write_text(
+        "---\nname: execute-build\n---\n# Execute Build"
     )
 
     return tmp_path
 
 
 @pytest.fixture
-def create_project(temp_nexus_root):
-    """Factory fixture to create mock projects."""
+def create_build(temp_nexus_root):
+    """Factory fixture to create mock builds."""
 
-    def _create_project(
-        project_id: str,
+    def _create_build(
+        build_id: str,
         status: str = "IN_PROGRESS",
         phase1_complete: bool = False,
         session_id: Optional[str] = None,
         last_updated: Optional[str] = None,
     ):
-        project_path = temp_nexus_root / "02-projects" / project_id / "01-planning"
-        project_path.mkdir(parents=True, exist_ok=True)
+        build_path = temp_nexus_root / "02-builds" / build_id / "01-planning"
+        build_path.mkdir(parents=True, exist_ok=True)
 
         # Create 01-overview.md
         overview = f"""---
-id: {project_id}
-name: {project_id}
+id: {build_id}
+name: {build_id}
 status: {status}
 ---
-# {project_id}
-Test project.
+# {build_id}
+Test build.
 """
-        (project_path / "01-overview.md").write_text(overview)
+        (build_path / "01-overview.md").write_text(overview)
 
         # Create 04-steps.md with optional phase 1 completion
         if phase1_complete:
@@ -94,7 +95,7 @@ Test project.
 ## Phase 2: Implementation
 - [ ] Task 3
 """
-        (project_path / "04-steps.md").write_text(steps)
+        (build_path / "04-steps.md").write_text(steps)
 
         # Create resume-context.md
         ts = last_updated or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -108,11 +109,11 @@ files_to_load:
 ---
 # Resume Context
 """
-        (project_path / "resume-context.md").write_text(resume)
+        (build_path / "resume-context.md").write_text(resume)
 
-        return project_path.parent
+        return build_path.parent
 
-    return _create_project
+    return _create_build
 
 
 @pytest.fixture
@@ -154,7 +155,7 @@ def mock_tool_use_entry():
 def mock_nexus_imports():
     """Mock nexus.loaders and related imports to avoid dependency on nexus core."""
     mock_loaders = MagicMock()
-    mock_loaders.scan_projects.return_value = []
+    mock_loaders.scan_builds.return_value = []
     mock_loaders.build_skills_xml.return_value = "<skills/>"
     mock_loaders.load_full_startup_context.return_value = {}
 

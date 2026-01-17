@@ -114,7 +114,7 @@ cat 03-skills/<skill-name>/SKILL.md
 | **Google Suite** | google-calendar, google-sheets, google-docs, google-slides |
 | **AI/Agents** | beam-connect, notebooklm, design-beam-agent |
 | **Productivity** | mental-models, ultrathink, create-meeting-minutes |
-| **System** | create-project, close-session, validate-system |
+| **System** | plan-build, close-session, validate-system |
 
 ---
 

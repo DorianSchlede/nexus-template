@@ -249,7 +249,7 @@ After editing config:
 
 **Get Credentials**:
 1. Go to: https://console.cloud.google.com/
-2. Create project (or use existing)
+2. Create build (or use existing)
 3. Enable Google Drive API
 4. Create OAuth 2.0 credentials
 5. Download client_id and client_secret

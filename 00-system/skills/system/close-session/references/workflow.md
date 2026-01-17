@@ -7,10 +7,10 @@ Complete step-by-step workflow for saving progress, updating memory, regeneratin
 ## Table of Contents
 
 - [Step 1: Initialize TodoList](#step-1-initialize-todolist)
-- [Step 2: Read Active Project State](#step-2-read-active-project-state)
+- [Step 2: Read Active Build State](#step-2-read-active-build-state)
 - [Step 2.5: Review Task Completion (Interactive)](#step-25-review-task-completion-new---interactive)
 - [Step 3: Update Maps](#step-3-update-maps-replaces-build-maps-skill)
-  - [3a. Scan Projects/ Folder](#3a-scan-projects-folder)
+  - [3a. Scan Builds/ Folder](#3a-scan-builds-folder)
   - [3b. Scan Skills/ Folder](#3b-scan-skills-folder)
   - [3e. Validate Integrity](#3e-validate-integrity)
 - [Step 4: Get Fresh Timestamp](#step-4-get-fresh-timestamp)
@@ -21,7 +21,7 @@ Complete step-by-step workflow for saving progress, updating memory, regeneratin
   - [6b. Process Each Temp File](#5b-process-each-temp-file)
   - [6c. Report Cleanup Summary](#5c-report-cleanup-summary)
 - [Step 7: Create Session Report](#step-7-create-session-report)
-- [Step 7.5: Skill Execution Review](#step-75-skill-execution-review-for-create-project)
+- [Step 7.5: Skill Execution Review](#step-75-skill-execution-review-for-plan-build)
 - [Step 8: Display Summary](#step-8-display-summary)
 - [Step 9: Mark TodoWrite Complete](#step-9-mark-todowrite-complete)
 - [Step 10: Instruct User to Start Fresh Session](#step-10-instruct-user-to-start-fresh-session)
@@ -32,9 +32,9 @@ Complete step-by-step workflow for saving progress, updating memory, regeneratin
 
 Create TodoWrite with all workflow steps:
 ```
-- [ ] Read project state
+- [ ] Read build state
 - [ ] Review task completion (interactive)
-- [ ] Update maps (scan Projects/ and Skills/)
+- [ ] Update maps (scan Builds/ and Skills/)
 - [ ] Update memory files
 - [ ] Clean temp files (interactive)
 - [ ] Create session report
@@ -48,20 +48,20 @@ This creates transparency and allows progress tracking during session closure.
 
 ---
 
-## Step 2: Read Active Project State & Auto-Complete if Done
+## Step 2: Read Active Build State & Auto-Complete if Done
 
 ⚠️ **CRITICAL WARNING - COMMON MISTAKE**:
 **DO NOT** skip task completion because you think tasks.md is "just documentation"!
 **EVERY tasks.md file contains ACTUAL CHECKBOXES** that must be marked complete!
-Even onboarding projects (00-define-goals, 01-first-project, etc.) have REAL tasks!
+Even onboarding builds (00-define-goals, 01-first-build, etc.) have REAL tasks!
 
-**Identify Active Project**:
-- Scan `02-projects/` for projects with `status: IN_PROGRESS` in `overview.md`
+**Identify Active Build**:
+- Scan `02-builds/` for builds with `status: IN_PROGRESS` in `overview.md`
 - If multiple found, select the most recently modified
-- Extract project ID and name
+- Extract build ID and name
 
 **IF current focus exists**:
-- Load `Projects/{ID}-{name}/planning/tasks.md`
+- Load `Builds/{ID}-{name}/planning/tasks.md`
 - **CRITICAL**: This file contains REAL checkboxes, not just documentation!
 - Count total tasks (all checkboxes: `- [ ]` and `- [x]`)
 - Count completed tasks (only `- [x]` or `- [X]`)
@@ -75,11 +75,11 @@ Even onboarding projects (00-define-goals, 01-first-project, etc.) have REAL tas
 **⚠️ AUTOMATIC BULK-COMPLETION CHECK** (MANDATORY - 10+ TASK THRESHOLD):
 
 **Trigger Conditions** (ALL must be true):
-1. Active project exists with **status: IN_PROGRESS** (NOT PLANNING!)
-2. Project has **≥10 unchecked tasks** remaining
+1. Active build exists with **status: IN_PROGRESS** (NOT PLANNING!)
+2. Build has **≥10 unchecked tasks** remaining
 3. **Session involved actual execution work** (not just planning):
-   - execute-project skill was used this session
-   - OR user explicitly confirmed "project work is done" (not just "done")
+   - execute-build skill was used this session
+   - OR user explicitly confirmed "build work is done" (not just "done")
    - OR all sections in steps.md were marked complete
 
 **Detection Logic**:
@@ -87,18 +87,18 @@ Even onboarding projects (00-define-goals, 01-first-project, etc.) have REAL tas
 # Count unchecked tasks in steps.md or tasks.md
 unchecked_count = count_unchecked_tasks(tasks_file)
 
-# Read project status from overview.md
-project_status = read_yaml_field(overview_md, 'status')
+# Read build status from overview.md
+build_status = read_yaml_field(overview_md, 'status')
 
 # Check if execution work actually happened (NOT just planning)
 execution_signals = [
-    "execute-project skill used",
+    "execute-build skill used",
     "all sections complete",
-    "project work is done"  # explicit, not just "done"
+    "build work is done"  # explicit, not just "done"
 ]
 
 # AUTO-TRIGGER only if ALL conditions met
-if (project_status == "IN_PROGRESS" and
+if (build_status == "IN_PROGRESS" and
     unchecked_count >= 10 and
     has_execution_signal(session_context)):
     auto_bulk_complete = True
@@ -111,7 +111,7 @@ else:
 ```
 🎉 Detected completed execution work!
 
-Project: [project-name]
+Build: [build-name]
 Status: IN_PROGRESS → All execution work complete, but [N] tasks unchecked (≥10 threshold met)
 
 Automatically marking all tasks as complete using bulk-complete...
@@ -119,9 +119,9 @@ Automatically marking all tasks as complete using bulk-complete...
 
 **IF status is PLANNING**:
 ```
-⏭️ Skipping auto-bulk-complete (project still in PLANNING phase)
+⏭️ Skipping auto-bulk-complete (build still in PLANNING phase)
 
-Project: [project-name]
+Build: [build-name]
 Status: PLANNING
 Tasks: [N] unchecked tasks remain
 
@@ -131,7 +131,7 @@ Will offer manual review in Step 2.5 instead.
 **Execute**:
 ```bash
 python 00-system/skills/bulk-complete/scripts/bulk-complete.py \
-  --project [project-id] \
+  --build [build-id] \
   --all \
   --no-confirm
 ```
@@ -147,7 +147,7 @@ python 00-system/skills/bulk-complete/scripts/bulk-complete.py \
 **THEN** skip Step 2.5 entirely (all tasks already complete, no manual review needed)
 
 **IF no current focus**:
-- Note: "No active project this session"
+- Note: "No active build this session"
 - Continue with general session closure
 
 ---
@@ -158,30 +158,30 @@ python 00-system/skills/bulk-complete/scripts/bulk-complete.py \
 - Skip this entire step (all tasks already complete)
 - Continue to Step 3
 
-**IF project status is PLANNING**:
+**IF build status is PLANNING**:
 - Skip this step entirely (planning tasks shouldn't be auto-completed)
-- Note: "Project in PLANNING phase - tasks will be completed during execution"
+- Note: "Build in PLANNING phase - tasks will be completed during execution"
 - Continue to Step 3
 
-**IF current focus project still has unchecked tasks AND status is IN_PROGRESS**:
+**IF current focus build still has unchecked tasks AND status is IN_PROGRESS**:
 
 ### 1. Display context
 ```
-Let's update your task list for [project-name].
+Let's update your task list for [build-name].
 
 You've been working on: [current task from tasks.md]
 ```
 
-### 2. Check if project appears complete but wasn't auto-detected
+### 2. Check if build appears complete but wasn't auto-detected
 
-**IF project seems complete but wasn't caught in Step 2**:
+**IF build seems complete but wasn't caught in Step 2**:
 
 ```
-This project appears to be complete!
+This build appears to be complete!
 
 However, I see [N] unchecked tasks in tasks.md. Would you like to:
 
-a) "bulk complete" - Mark all remaining tasks as complete (fast, for finished projects)
+a) "bulk complete" - Mark all remaining tasks as complete (fast, for finished builds)
 b) "review" - Review tasks individually to select which to check off
 c) "skip" - Leave tasks as-is
 
@@ -189,13 +189,13 @@ What would you like to do?
 ```
 
 **IF user says "bulk complete" or "bulk"**:
-- Run: `python 00-system/skills/bulk-complete/scripts/bulk-complete.py --project [project-id] --all --no-confirm`
+- Run: `python 00-system/skills/bulk-complete/scripts/bulk-complete.py --build [build-id] --all --no-confirm`
 - Script will mark ALL unchecked tasks as `[x]` without confirmation
 - Script validates by re-reading file
 - Display script output: "✅ VALIDATED: Re-read file shows 0 uncompleted, [N] completed"
 - Display: "✅ Marked [N] tasks as complete!"
 - Recalculate progress (should now be 100%)
-- **Skip to Step 3** (project is now complete)
+- **Skip to Step 3** (build is now complete)
 
 **IF user says "review"**:
 - Continue to Step 3 below (interactive selection)
@@ -217,7 +217,7 @@ Unchecked tasks:
 2. [ ] Create 00-system/ folder
 3. [ ] Create 00-system/agents/ folder
 4. [ ] Create 00-system/skills/ folder
-5. [ ] Create Projects/ folder
+5. [ ] Create Builds/ folder
 [... up to 10]
 
 Say: "1, 3, 5" or "none" or "all"
@@ -252,7 +252,7 @@ New progress: 5/624 tasks (0.8%)
 
 **IF 100% complete**:
 - Celebrate: "🎉 All tasks complete!"
-- Suggest archival: "Run 'archive project [name]' to move to archived/"
+- Suggest archival: "Run 'archive build [name]' to move to archived/"
 
 ---
 
@@ -260,10 +260,10 @@ New progress: 5/624 tasks (0.8%)
 
 This is the core navigation regeneration step.
 
-### 3a. Scan Projects/ Folder
+### 3a. Scan Builds/ Folder
 
 ```
-For each folder in Projects/:
+For each folder in Builds/:
   1. Identify {ID}-{name} format
   2. Load planning/tasks.md
   3. Count total tasks (checkboxes)
@@ -275,7 +275,7 @@ For each folder in Projects/:
      - COMPLETE: 100% complete
   7. Identify first unchecked task (current task)
   8. Get last modified timestamp of tasks.md
-  9. Build project data structure
+  9. Build build data structure
 ```
 
 ### 3b. Scan Skills/ Folder
@@ -300,7 +300,7 @@ Check for issues:
 - [ ] All skills in Skills/ are listed in skill-map.md
 - [ ] No dead links in navigation
 - [ ] Timestamps are current
-- [ ] All required files exist (tasks.md for projects, SKILL.md for skills)
+- [ ] All required files exist (tasks.md for builds, SKILL.md for skills)
 
 **IF issues found**:
 - Report in session summary (Step 8)
@@ -371,14 +371,14 @@ Look for temporary files:
 - `*.temp`
 - `*.log`
 - Unnamed files: `file-1.md`, `untitled.md`, `unnamed-*.md`
-- Tool output files not in project outputs/
+- Tool output files not in build outputs/
 - Draft files not intentionally saved
 
 **Exclude from scan**:
 - `claude.md` (root file)
 - `README.md` (documentation)
 - `skill-map.md` (navigation)
-- Any file in 00-system/, Projects/, Skills/, Memory/, User-Folders/
+- Any file in 00-system/, Builds/, Skills/, Memory/, User-Folders/
 
 ### 5b. Process Each Temp File
 
@@ -395,16 +395,16 @@ Preview: [first 2 lines of content]
 What should I do with this file?
 
 Options:
-- "keep" or "preserve" → Ask which project outputs/ to move to
+- "keep" or "preserve" → Ask which build outputs/ to move to
 - "delete" or "remove" → Delete permanently
 - "skip" → Leave it for now
 ```
 
 #### 3. If user says "keep" or "preserve"
 ```
-Which project should this go in?
+Which build should this go in?
 
-Active projects:
+Active builds:
 - 05-website-development
 - 06-client-outreach
 
@@ -412,9 +412,9 @@ Or say "skip" to leave it.
 ```
 
 **Then**:
-- Move file to `Projects/{ID}-{name}/outputs/`
+- Move file to `Builds/{ID}-{name}/outputs/`
 - Rename if needed to avoid conflicts
-- Confirm: "Moved to Projects/{ID}-{name}/outputs/{filename}"
+- Confirm: "Moved to Builds/{ID}-{name}/outputs/{filename}"
 
 #### 4. If user says "delete" or "remove"
 - Delete file
@@ -449,25 +449,25 @@ Generate historical record in 01-memory/session-reports/.
 # Session Report - YYYY-MM-DD
 
 **Duration**: [start time estimate] - [end time]
-**Focus**: [project name or "General work" or "System setup"]
+**Focus**: [build name or "General work" or "System setup"]
 
 ## Work Completed
 
-[IF project work:]
+[IF build work:]
 - [Completed task 1 from tasks.md]
 - [Completed task 2 from tasks.md]
 
-[IF no project work:]
+[IF no build work:]
 - [Summary of what was done this session]
 
 ## Progress Made
 
-[IF project work:]
+[IF build work:]
 **Before**: X/Y tasks complete
 **After**: Z/Y tasks complete
 **Status**: [status before] → [status after]
 
-[IF no project work:]
+[IF no build work:]
 General session: [brief description]
 
 ## Decisions Made
@@ -498,7 +498,7 @@ No new patterns detected.
 ## Next Steps
 
 [Recommendations based on current state:]
-- Continue: [next task in current project]
+- Continue: [next task in current build]
 - Or: [alternative actions]
 
 ## Context Notes
@@ -514,18 +514,18 @@ No new patterns detected.
 
 ---
 
-## Step 7.5: Skill Execution Review (For create-project)
+## Step 7.5: Skill Execution Review (For plan-build)
 
-**IF `create-project` skill was used this session:**
+**IF `plan-build` skill was used this session:**
 
-Check session history/context to determine if create-project was executed. If yes, ask user:
+Check session history/context to determine if plan-build was executed. If yes, ask user:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Quick Execution Review
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-I want to make sure I followed the create-project workflow correctly.
+I want to make sure I followed the plan-build workflow correctly.
 
 Did I:
 ✅ Use TodoWrite at the beginning?
@@ -560,7 +560,7 @@ Show comprehensive session summary to user:
 Session saved! ✅
 
 Progress:
-- Project: [project name or "General work"]
+- Build: [build name or "General work"]
 - Completed: [X tasks or "N/A"]
 - Status: [current status or "N/A"]
 
@@ -580,13 +580,13 @@ Patterns Detected:
    Say "create skill" to capture this workflow!
 
 Next Session:
-[IF current focus project:]
-- Continue: [project name]
+[IF current focus build:]
+- Continue: [build name]
 - Next task: [first unchecked task description]
 
 [IF no current focus:]
 - Start new work, or
-- Say "create project" to begin something new
+- Say "create build" to begin something new
 
 [IF issues found in validation:]
 ⚠️ Issues detected: [count]
@@ -624,7 +624,7 @@ Please either:
 
 This ensures:
 ✓ Clean context for next session
-✓ Fresh loading of updated project state
+✓ Fresh loading of updated build state
 ✓ Proper memory boundaries
 ✓ No context pollution from previous session
 

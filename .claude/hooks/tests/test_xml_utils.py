@@ -145,12 +145,12 @@ class TestOpenSection:
     """Tests for open_section()"""
 
     def test_simple_tag(self):
-        result = open_section("projects")
-        assert result == "  <projects>"
+        result = open_section("builds")
+        assert result == "  <builds>"
 
     def test_with_attributes(self):
-        result = open_section("project", {"id": "test", "status": "active"})
-        assert "<project" in result
+        result = open_section("build", {"id": "test", "status": "active"})
+        assert "<build" in result
         assert 'id="test"' in result
         assert 'status="active"' in result
 
@@ -167,7 +167,7 @@ class TestCloseSection:
     """Tests for close_section()"""
 
     def test_simple_tag(self):
-        assert close_section("projects") == "  </projects>"
+        assert close_section("builds") == "  </builds>"
 
     def test_custom_indent(self):
         assert close_section("tag", indent=4) == "    </tag>"

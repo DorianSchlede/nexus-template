@@ -2,9 +2,9 @@
 Test multi-session handover with real Claude Code transcripts.
 
 This script validates the enhanced handover system against actual session data:
-1. Simulates multiple sessions working on same project
+1. Simulates multiple sessions working on same build
 2. Verifies session_ids list accumulation
-3. Tests cross-session project detection
+3. Tests cross-session build detection
 4. Validates state transitions (new → compact → resume)
 """
 
@@ -16,13 +16,13 @@ from datetime import datetime
 # Add hooks to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from save_resume_state import update_project_resume_context, find_nexus_root
-from utils.transcript import find_project_by_session_id, parse_transcript_for_project
-from utils.project_state import detect_project_state
+from save_resume_state import update_build_resume_context, find_nexus_root
+from utils.transcript import find_build_by_session_id, parse_transcript_for_build
+from utils.build_state import detect_build_state
 
 
 def test_current_session_state():
-    """Test 1: Detect current session's project and state."""
+    """Test 1: Detect current session's build and state."""
     print("=" * 80)
     print("TEST 1: Current Session State Detection")
     print("=" * 80)
@@ -30,22 +30,22 @@ def test_current_session_state():
     nexus_root = find_nexus_root()
     print(f"Nexus Root: {nexus_root}\n")
 
-    # Find project 28
-    project_path = nexus_root / "02-projects" / "28-handover-test-suite"
+    # Find build 28
+    build_path = nexus_root / "02-builds" / "28-handover-test-suite"
 
-    if not project_path.exists():
-        print("❌ Project 28 not found")
+    if not build_path.exists():
+        print("❌ Build 28 not found")
         return False
 
-    print("📁 Project 28 found")
-    state = detect_project_state(project_path)
+    print("📁 Build 28 found")
+    state = detect_build_state(build_path)
 
     if not state:
-        print("❌ Could not detect project state")
+        print("❌ Could not detect build state")
         return False
 
     print("\n📊 Current State:")
-    print(f"   ID: {state.project_id}")
+    print(f"   ID: {state.build_id}")
     print(f"   Name: {state.name}")
     print(f"   Status: {state.status}")
     print(f"   Phase: {state.current_phase} → {state.next_action}")
@@ -62,13 +62,13 @@ def test_current_session_state():
 
 
 def test_multi_session_simulation():
-    """Test 2: Simulate multiple sessions touching same project."""
+    """Test 2: Simulate multiple sessions touching same build."""
     print("=" * 80)
     print("TEST 2: Multi-Session Simulation")
     print("=" * 80)
 
     nexus_root = find_nexus_root()
-    project_id = "28-handover-test-suite"
+    build_id = "28-handover-test-suite"
 
     # Simulate 3 different sessions
     test_sessions = [
@@ -77,11 +77,11 @@ def test_multi_session_simulation():
         "test-session-gamma-003"
     ]
 
-    print(f"Simulating {len(test_sessions)} sessions working on project {project_id}...\n")
+    print(f"Simulating {len(test_sessions)} sessions working on build {build_id}...\n")
 
     for i, session_id in enumerate(test_sessions, 1):
         print(f"Session {i}: {session_id}")
-        result = update_project_resume_context(nexus_root, project_id, session_id)
+        result = update_build_resume_context(nexus_root, build_id, session_id)
 
         if not result:
             print(f"   ❌ Failed to update resume context")
@@ -91,7 +91,7 @@ def test_multi_session_simulation():
 
     # Verify all sessions tracked
     print("\n📋 Verifying session tracking...")
-    resume_file = nexus_root / "02-projects" / project_id / "01-planning" / "resume-context.md"
+    resume_file = nexus_root / "02-builds" / build_id / "01-planning" / "resume-context.md"
 
     if not resume_file.exists():
         print("❌ resume-context.md not found")
@@ -109,10 +109,10 @@ def test_multi_session_simulation():
 
     # Test detection from each session
     print("\n🔍 Testing detection from each session ID...")
-    projects_dir = str(nexus_root / "02-projects")
+    builds_dir = str(nexus_root / "02-builds")
 
     for session_id in test_sessions:
-        detected = find_project_by_session_id(projects_dir, session_id)
+        detected = find_build_by_session_id(builds_dir, session_id)
 
         if detected and "28-handover-test-suite" in detected:
             print(f"   ✅ {session_id[:20]}... → {detected}")
@@ -125,7 +125,7 @@ def test_multi_session_simulation():
 
 
 def test_real_transcript_detection():
-    """Test 3: Parse actual transcript and detect project."""
+    """Test 3: Parse actual transcript and detect build."""
     print("=" * 80)
     print("TEST 3: Real Transcript Detection")
     print("=" * 80)
@@ -156,24 +156,24 @@ def test_real_transcript_detection():
     print(f"   Path: {recent_transcript}")
 
     # Parse transcript
-    detected_project, method = parse_transcript_for_project(str(recent_transcript))
+    detected_build, method = parse_transcript_for_build(str(recent_transcript))
 
-    if detected_project:
-        print(f"\n✅ Detected Project: {detected_project}")
+    if detected_build:
+        print(f"\n✅ Detected Build: {detected_build}")
         print(f"   Detection Method: {method}")
 
-        # Get project state
-        project_path = nexus_root / "02-projects" / detected_project
-        if project_path.exists():
-            state = detect_project_state(project_path)
+        # Get build state
+        build_path = nexus_root / "02-builds" / detected_build
+        if build_path.exists():
+            state = detect_build_state(build_path)
             if state:
-                print(f"\n📊 Project State:")
+                print(f"\n📊 Build State:")
                 print(f"   Status: {state.status}")
                 print(f"   Progress: {state.progress_percent}%")
                 print(f"   Tracked Sessions: {len(state.session_ids)}")
     else:
-        print(f"\n⚠️  No project detected (method: {method})")
-        print("   This is OK if transcript doesn't contain project work")
+        print(f"\n⚠️  No build detected (method: {method})")
+        print("   This is OK if transcript doesn't contain build work")
 
     print("\n✅ Transcript detection successful\n")
     return True
@@ -189,20 +189,20 @@ def test_session_lifecycle():
 Session Lifecycle (as implemented):
 
 1. NEW session (session_id: aaa111)
-   → SessionStart detects no project
-   → User works on Project 28
+   → SessionStart detects no build
+   → User works on Build 28
    → PreCompact saves: session_ids: ["aaa111"]
 
 2. COMPACT (same session_id: aaa111)
-   → SessionStart finds project via "aaa111"
+   → SessionStart finds build via "aaa111"
    → User continues work
    → PreCompact updates: session_ids: ["aaa111"] (no duplicate)
 
 3. RESUME (NEW session_id: bbb222)
    → SessionStart searches session_ids list
    → Doesn't find "bbb222" yet
-   → Falls back to most recent project → finds Project 28
-   → User works on project
+   → Falls back to most recent build → finds Build 28
+   → User works on build
    → PreCompact updates: session_ids: ["aaa111", "bbb222"]
 
 4. Later RESUME (another NEW session_id: ccc333)
@@ -217,8 +217,8 @@ Session Lifecycle (as implemented):
 """)
 
     nexus_root = find_nexus_root()
-    project_id = "28-handover-test-suite"
-    resume_file = nexus_root / "02-projects" / project_id / "01-planning" / "resume-context.md"
+    build_id = "28-handover-test-suite"
+    resume_file = nexus_root / "02-builds" / build_id / "01-planning" / "resume-context.md"
 
     if resume_file.exists():
         content = resume_file.read_text(encoding="utf-8")
@@ -244,8 +244,8 @@ def test_cleanup_simulation():
     print("=" * 80)
 
     nexus_root = find_nexus_root()
-    project_id = "28-handover-test-suite"
-    resume_file = nexus_root / "02-projects" / project_id / "01-planning" / "resume-context.md"
+    build_id = "28-handover-test-suite"
+    resume_file = nexus_root / "02-builds" / build_id / "01-planning" / "resume-context.md"
 
     if not resume_file.exists():
         print("⚠️  No resume-context.md found")

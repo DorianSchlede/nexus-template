@@ -7,9 +7,9 @@ This is a thin CLI wrapper that delegates to the nexus package.
 Usage:
     python nexus-loader.py --startup           # Load session context + return instructions
     python nexus-loader.py --resume            # Resume from context summary
-    python nexus-loader.py --project ID        # Load specific project
+    python nexus-loader.py --build ID        # Load specific build
     python nexus-loader.py --skill name        # Load specific skill
-    python nexus-loader.py --list-projects     # Scan project metadata
+    python nexus-loader.py --list-builds     # Scan build metadata
     python nexus-loader.py --list-skills       # Scan skill metadata
     python nexus-loader.py --metadata          # Load only metadata
     python nexus-loader.py --check-update      # Check if upstream updates available
@@ -46,10 +46,10 @@ def load_startup(base_path: str = ".", include_metadata: bool = True,
     )
 
 
-def load_project(project_id: str, base_path: str = "."):
-    """Backward compatible wrapper for NexusService.load_project()"""
+def load_build(build_id: str, base_path: str = "."):
+    """Backward compatible wrapper for NexusService.load_build()"""
     service = NexusService(base_path)
-    return service.load_project(project_id)
+    return service.load_build(build_id)
 
 
 def load_skill(skill_name: str, base_path: str = "."):
@@ -64,10 +64,10 @@ def load_metadata(base_path: str = "."):
     return service.load_metadata()
 
 
-def scan_projects(base_path: str = ".", minimal: bool = True):
-    """Backward compatible wrapper for project scanning"""
-    from nexus.loaders import scan_projects as _scan_projects
-    return _scan_projects(base_path, minimal)
+def scan_builds(base_path: str = ".", minimal: bool = True):
+    """Backward compatible wrapper for build scanning"""
+    from nexus.loaders import scan_builds as _scan_builds
+    return _scan_builds(base_path, minimal)
 
 
 def scan_skills(base_path: str = ".", minimal: bool = True):
@@ -102,12 +102,12 @@ def main():
     parser.add_argument('--startup', action='store_true', help='Load startup context with embedded memory files')
     parser.add_argument('--resume', action='store_true', help='Resume after context summary (skip menu, continue working)')
     parser.add_argument('--skip-update-check', action='store_true', help='Skip update check during startup (faster startup)')
-    parser.add_argument('--metadata', action='store_true', help='Load only project/skill metadata (use after --startup --no-metadata)')
+    parser.add_argument('--metadata', action='store_true', help='Load only build/skill metadata (use after --startup --no-metadata)')
     parser.add_argument('--no-metadata', action='store_true', help='Exclude metadata from startup (smaller output, use --metadata separately)')
-    parser.add_argument('--project', help='Load project by ID')
+    parser.add_argument('--build', help='Load build by ID')
     parser.add_argument('--part', type=int, default=0, help='Part to load for split responses (0=auto, 1=essential, 2=references)')
     parser.add_argument('--skill', help='Load skill by name (returns file tree + SKILL.md, use Read for references)')
-    parser.add_argument('--list-projects', action='store_true', help='List all projects')
+    parser.add_argument('--list-builds', action='store_true', help='List all builds')
     parser.add_argument('--list-skills', action='store_true', help='List all skills')
     parser.add_argument('--full', action='store_true', help='Return complete metadata (default: minimal fields for efficiency)')
     parser.add_argument('--base-path', default=str(detected_nexus_root), help='Base path to Nexus-v4 (default: auto-detected)')
@@ -139,12 +139,12 @@ def main():
         )
     elif args.metadata:
         result = service.load_metadata()
-    elif args.project:
-        result = service.load_project(args.project, part=args.part)
+    elif args.build:
+        result = service.load_build(args.build, part=args.part)
     elif args.skill:
         result = service.load_skill(args.skill)
-    elif args.list_projects:
-        result = service.list_projects(full=args.full)
+    elif args.list_builds:
+        result = service.list_builds(full=args.full)
     elif args.list_skills:
         result = service.list_skills(full=args.full)
     else:
@@ -168,7 +168,7 @@ def main():
     output_chars = len(output)
 
     # Check if output exceeds bash limit - if so, cache to file
-    # ONLY for startup/resume commands (not for --skill, --project, etc.)
+    # ONLY for startup/resume commands (not for --skill, --build, etc.)
     is_startup_command = args.startup or args.resume
     if output_chars > BASH_OUTPUT_LIMIT and is_startup_command:
         # Create cache directory if needed
@@ -206,12 +206,12 @@ def main():
                 "orchestrator.md - AI behavior rules, routing, menu display (CRITICAL)",
                 "system-map.md - Navigation structure",
                 "memory files - goals.md, user-config.yaml, memory-map.md",
-                "metadata - all projects and skills"
+                "metadata - all builds and skills"
             ],
         }
         print(json.dumps(cache_result, indent=2, ensure_ascii=False))
     elif output_chars > BASH_OUTPUT_LIMIT:
-        # For non-startup commands (--skill, --project), just print the full output
+        # For non-startup commands (--skill, --build), just print the full output
         # Claude's bash tool can handle large outputs, and these need the full content
         print(output)
     else:
