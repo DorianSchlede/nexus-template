@@ -542,8 +542,9 @@ ACTION: {action}
     skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
-    # State detection with detailed logging
+    # State detection with detailed logging and validation
     from nexus.utils import is_template_file
+    import hashlib
 
     goals_is_template = is_template_file(str(goals_path))
     goals_personalized = check_goals_personalized(goals_path)
@@ -557,6 +558,14 @@ ACTION: {action}
     logging.info(f"State detection: workspace_map_path={workspace_map_path}, exists={workspace_map_path.exists()}")
     logging.info(f"State detection: workspace_is_template={workspace_is_template}, workspace_configured={workspace_configured}")
 
+    # VALIDATION: Ensure consistency between template detection and personalization
+    if goals_is_template and goals_personalized:
+        logging.error(f"STATE INCONSISTENCY: goals_is_template={goals_is_template} but goals_personalized={goals_personalized}")
+        goals_personalized = False  # Force correct value
+    if workspace_is_template and workspace_configured:
+        logging.error(f"STATE INCONSISTENCY: workspace_is_template={workspace_is_template} but workspace_configured={workspace_configured}")
+        workspace_configured = False  # Force correct value
+
     config_path = base_path / "01-memory" / "user-config.yaml"
     learning_completed = extract_learning_completed(config_path)
     pending_onboarding = build_pending_onboarding(learning_completed)
@@ -565,8 +574,12 @@ ACTION: {action}
 
     onboarding_complete = len(pending_onboarding) == 0
 
+    # Generate state hash for tamper detection
+    state_str = f"goals={goals_personalized}|workspace={workspace_configured}|onboarding={onboarding_complete}"
+    state_hash = hashlib.md5(state_str.encode()).hexdigest()[:8]
+
     xml_parts.append(f'''
-  <state>
+  <state hash="{state_hash}">
     <goals-personalized>{str(goals_personalized).lower()}</goals-personalized>
     <workspace-configured>{str(workspace_configured).lower()}</workspace-configured>
     <onboarding-complete>{str(onboarding_complete).lower()}</onboarding-complete>''')
@@ -970,6 +983,16 @@ def main():
                 xml_dump_path = cache_dir / "session_start_context.xml"
                 with open(xml_dump_path, "w", encoding="utf-8") as f:
                     f.write(additional_context_str)
+
+                # Timestamped state log (append-only for debugging stale context issues)
+                state_log_path = cache_dir / "session_state_history.log"
+                with open(state_log_path, "a", encoding="utf-8") as f:
+                    f.write(f"\n--- {datetime.now().isoformat()} | session={session_id} ---\n")
+                    f.write(f"state_hash={state_hash}\n")
+                    f.write(f"goals_personalized={goals_personalized} (is_template={goals_is_template})\n")
+                    f.write(f"workspace_configured={workspace_configured} (is_template={workspace_is_template})\n")
+                    f.write(f"onboarding_complete={onboarding_complete}\n")
+                    f.write(f"pending_onboarding_count={len(pending_onboarding)}\n")
 
                 # Token estimation report
                 estimated_tokens = len(additional_context_str) / 4
