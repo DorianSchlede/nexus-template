@@ -11,7 +11,7 @@ Built-in skills organized by category. Loaded automatically based on trigger phr
 | `learn-builds` | "learn builds", "build tutorial" | Build creation guide |
 | `learn-skills` | "learn skills", "skill tutorial" | Skill creation guide |
 | `setup-goals` | "setup goals", "personalize" | Configure preferences |
-| `setup-workspace` | "setup workspace", "organize" | Folder structure setup |
+| `create-folders` | "create folders", "organize" | Folder structure setup |
 
 ### `builds/` - Build Management
 | Skill | Trigger | Purpose |

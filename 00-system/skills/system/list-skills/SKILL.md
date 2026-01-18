@@ -52,7 +52,7 @@ Output format:
 
 ## Learning (onboarding)
 - setup-goals: Personalize Nexus with your goals and role
-- setup-workspace: Configure your workspace folder structure
+- create-folders: Configure your workspace folder structure
 - learn-builds: Tutorial on build system
 - learn-skills: Tutorial on skill system
 - learn-nexus: Advanced system mastery

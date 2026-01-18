@@ -43,7 +43,7 @@ user_preferences:
 learning_tracker:
   completed:
     setup_memory: true/false
-    setup_workspace: true/false
+    create_folders: true/false
     learn_integrations: true/false
     # ... more skills
 ```

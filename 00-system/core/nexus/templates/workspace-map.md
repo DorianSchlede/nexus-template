@@ -5,7 +5,7 @@ smart_default: true
 
 > **Purpose**: Document your workspace folder structure for AI context
 >
-> **Updated**: Set via 'setup workspace' skill
+> **Updated**: Set via 'create folders' skill
 
 ---
 
@@ -16,13 +16,13 @@ smart_default: true
 └── (not configured yet)
 ```
 
-**After running 'setup workspace', this will contain your personalized structure.**
+**After running 'create folders', this will contain your personalized structure.**
 
 ---
 
 ## Example Structures
 
-The setup-workspace skill will create folders based on your role and work patterns.
+The create-folders skill will create folders based on your role and work patterns.
 
 **Example for a Developer:**
 ```
@@ -57,7 +57,7 @@ The setup-workspace skill will create folders based on your role and work patter
 
 ## Usage Notes
 
-[TODO: Say 'setup workspace' to create your personalized folder structure]
+[TODO: Say 'create folders' to create your personalized folder structure]
 
 ---
 

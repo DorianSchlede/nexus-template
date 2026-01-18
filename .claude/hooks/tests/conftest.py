@@ -160,10 +160,10 @@ def mock_nexus_imports():
     mock_loaders.load_full_startup_context.return_value = {}
 
     mock_state = MagicMock()
-    mock_state.check_goals_personalized.return_value = True
-    mock_state.check_workspace_configured.return_value = True
+    # Removed check_goals_personalized and check_workspace_configured mocks
+    # State now derived from learning_tracker (2026-01-18 refactor)
     mock_state.build_pending_onboarding.return_value = []
-    mock_state.extract_learning_completed.return_value = {}
+    mock_state.extract_learning_completed.return_value = {"setup_memory": True, "create_folders": True}
 
     with patch.dict(
         sys.modules,

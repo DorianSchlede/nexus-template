@@ -11,28 +11,25 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
          Your AI Productivity System
 
 🧠 MEMORY
-   [Extract role from <user-goals>, e.g. "Product Designer | Nexus development"]
+   {memory_status}
 
 📋 CURRENT WORK ⭐
-   [List each from <active-builds>:]
-   • [name] | [progress]% complete
+   {work_status}
 
 🔧 SKILLS
-   50+ available ▸ 'list skills'
+   50+ available
 
 📁 FOLDERS
-   Organized
+   {folders_status}
 
 🔌 INTEGRATIONS
-   [List connected integrations or "None"]
+   {integrations_status}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💡 CONTINUE YOUR WORK
 
-   1. 'continue [name]' ⭐ resume where you left off
-   2. Tell me what else you want to work on
-   3. 'list skills' - see capabilities
+   {getting_started}
 ```
 
 ================================================================================
@@ -44,10 +41,16 @@ STATE: Active builds exist
 Current work:
 {build_list}
 
-After menu, ask:
-"Would you like to continue **[most recent build name]**? Or start something new?"
+After the menu, give a CTA to continue the most recent build.
+
+Say:
+"Let's continue working on [BUILD_NAME].
+
+Say 'yes' or '1' to continue, or tell me what else you'd like to do!"
+
+Wait for user confirmation before loading execute-build skill.
 
 Routing:
-- "continue X" → load execute-build skill
+- "yes" or "1" or "continue" → load execute-build skill
+- "2" or "3" → handle the corresponding suggestion
 - New work request → check if related to existing build first
-- If unclear → ask which build or if new work

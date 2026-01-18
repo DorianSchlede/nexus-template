@@ -28,7 +28,6 @@ from .state import (
     build_instructions,
     build_pending_onboarding,
     build_stats,
-    check_goals_personalized,
     detect_system_state,
     extract_learning_completed,
 )

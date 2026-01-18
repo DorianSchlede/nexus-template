@@ -1,5 +1,4 @@
 ---
-smart_default: true
 ---
 # Your Goals
 
@@ -11,36 +10,36 @@ smart_default: true
 
 ## Current Role
 
-[TODO: Say 'setup memory' to personalize]
+Bäckermeister
 
 ---
 
 ## Short-Term Goal (3 months)
 
-[TODO: Say 'setup memory' to personalize]
+100 neue Rezepte für ein Rezeptbuch entwickeln - kreative, geile Backwaren, keine Standardsachen.
 
 **Why This Matters**:
-[TODO: Why is this important to you?]
+Das Rezeptbuch ist der erste Schritt zum Aufbau meiner Marke und öffnet Türen für größere Ziele.
 
 **Success Metrics**:
-- [ ] Metric 1
-- [ ] Metric 2
-- [ ] Metric 3
+- [ ] 100 Rezepte entwickelt und dokumentiert
+- [ ] Rezepte getestet und für gut befunden
+- [ ] Bereit fürs Rezeptbuch
 
 ---
 
 ## Long-Term Vision (1-3 years)
 
-[TODO: Say 'setup memory' to personalize]
+Bäckerei-Imperium aufbauen, TV-Bäcker werden, und eine eigene Backschule gründen.
 
 ---
 
 ## Work Style & Preferences
 
-**Best Working Hours**: [TODO]
-**Typical Session Length**: [TODO: 30min, 2hrs, etc.]
-**Focus Areas**: [TODO: What types of work are you doing?]
+**Best Working Hours**: Morgens
+**Typical Session Length**: 30 Minuten
+**Focus Areas**: Alles - Rezepte, Planung, Marketing, und mehr
 
 ---
 
-**Last Updated**: [TODO: Updated after 'setup memory']
+**Last Updated**: 2026-01-17

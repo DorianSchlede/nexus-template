@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S python3 -B
 from __future__ import annotations
 """
 SessionStart Hook - MVC v3.2 + Resume Enhancement (Minimum Viable Context)
@@ -24,14 +24,22 @@ Triggered by Claude Code on:
 - After compaction (source=compact) - NOW WITH AUTO-RESUME
 """
 
-import json
 import sys
+sys.dont_write_bytecode = True  # Prevent .pyc creation for subsequently imported modules
+
 import os
+import json
 import re
 import time
 import logging
+import shutil
 from pathlib import Path
 from datetime import datetime
+
+# Clean stale caches on every invocation (fast, <1ms)
+for _cache in [Path(__file__).parent / "utils" / "__pycache__",
+               Path(__file__).parent.parent.parent / "00-system" / "core" / "nexus" / "__pycache__"]:
+    shutil.rmtree(_cache, ignore_errors=True)
 
 # Performance tracking
 START_TIME = time.perf_counter()
@@ -426,7 +434,7 @@ def load_instruction_template(name: str, **kwargs) -> str:
 # XML Context Builders (Phase 3 - XML Context Restructure)
 # ============================================================================
 
-def build_startup_xml(build_dir: str, session_id: str, source: str, action: str = "display_menu") -> str:
+def build_startup_xml(build_dir: str, session_id: str, source: str, action: str = "display_menu") -> tuple:
     """
     Build complete STARTUP mode XML context.
 
@@ -443,7 +451,7 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
         action: "display_menu" or "continue_working"
 
     Returns:
-        Complete XML context string
+        Tuple of (xml_string, state_metadata_dict)
     """
     base_path = Path(build_dir)
     timestamp = datetime.now().isoformat()
@@ -455,10 +463,8 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction
+        from nexus.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction, detect_configured_integrations
         from nexus.state import (
-            check_goals_personalized,
-            check_workspace_configured,
             build_pending_onboarding,
             extract_learning_completed,
         )
@@ -542,32 +548,29 @@ ACTION: {action}
     skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
-    # State detection with detailed logging and validation
+    # State detection - SINGLE SOURCE OF TRUTH: learning_tracker.completed
+    # Refactored 2026-01-18: Use learning_tracker instead of check_* functions
     from nexus.utils import is_template_file
     import hashlib
 
-    goals_is_template = is_template_file(str(goals_path))
-    goals_personalized = check_goals_personalized(goals_path)
-
-    workspace_map_path = base_path / "04-workspace" / "workspace-map.md"
-    workspace_is_template = is_template_file(str(workspace_map_path))
-    workspace_configured = check_workspace_configured(base_path)
-
-    logging.info(f"State detection: goals_path={goals_path}, exists={goals_path.exists()}")
-    logging.info(f"State detection: goals_is_template={goals_is_template}, goals_personalized={goals_personalized}")
-    logging.info(f"State detection: workspace_map_path={workspace_map_path}, exists={workspace_map_path.exists()}")
-    logging.info(f"State detection: workspace_is_template={workspace_is_template}, workspace_configured={workspace_configured}")
-
-    # VALIDATION: Ensure consistency between template detection and personalization
-    if goals_is_template and goals_personalized:
-        logging.error(f"STATE INCONSISTENCY: goals_is_template={goals_is_template} but goals_personalized={goals_personalized}")
-        goals_personalized = False  # Force correct value
-    if workspace_is_template and workspace_configured:
-        logging.error(f"STATE INCONSISTENCY: workspace_is_template={workspace_is_template} but workspace_configured={workspace_configured}")
-        workspace_configured = False  # Force correct value
-
     config_path = base_path / "01-memory" / "user-config.yaml"
     learning_completed = extract_learning_completed(config_path)
+
+    # Derive state from learning_tracker (single source of truth)
+    goals_personalized = learning_completed.get("setup_memory", False)
+    workspace_configured = learning_completed.get("create_folders", False)
+
+    # Keep template checks for debug logging only (not for state)
+    goals_is_template = is_template_file(str(goals_path))
+    workspace_map_path = base_path / "04-workspace" / "workspace-map.md"
+    workspace_is_template = is_template_file(str(workspace_map_path))
+
+    logging.info(f"State detection: goals_path={goals_path}, exists={goals_path.exists()}")
+    logging.info(f"State detection: goals_personalized={goals_personalized} (from learning_tracker.setup_memory)")
+    logging.info(f"State detection: goals_is_template={goals_is_template} (debug only)")
+    logging.info(f"State detection: workspace_map_path={workspace_map_path}, exists={workspace_map_path.exists()}")
+    logging.info(f"State detection: workspace_configured={workspace_configured} (from learning_tracker.create_folders)")
+    logging.info(f"State detection: workspace_is_template={workspace_is_template} (debug only)")
     pending_onboarding = build_pending_onboarding(learning_completed)
 
     logging.info(f"State detection: pending_onboarding count={len(pending_onboarding)}")
@@ -605,6 +608,24 @@ ACTION: {action}
     xml_parts.append(f'''
   <action>{action}</action>''')
 
+    # Extract user role from goals.md for menu display
+    user_role = ""
+    if goals_path.exists():
+        try:
+            goals_text = goals_path.read_text(encoding='utf-8')
+            role_match = re.search(r'## Current Role\s*\n+([^\n#]+)', goals_text)
+            if role_match:
+                user_role = role_match.group(1).strip()
+        except Exception:
+            pass
+
+    # Detect configured integrations (safe - returns [] on error)
+    try:
+        all_integrations = detect_configured_integrations(str(base_path))
+        configured_integrations = [i["name"] for i in all_integrations if i.get("active")]
+    except Exception:
+        configured_integrations = []
+
     # Build context for MECE state templates
     mece_context = {
         "pending_onboarding": pending_onboarding,
@@ -612,6 +633,9 @@ ACTION: {action}
         "workspace_needs_validation": False,  # TODO: detect workspace changes
         "total_builds": len(all_builds),
         "goals_personalized": goals_personalized,
+        "workspace_configured": workspace_configured,
+        "user_role": user_role,
+        "configured_integrations": configured_integrations,
     }
 
     # Use MECE state templates for dynamic instruction generation
@@ -624,7 +648,21 @@ ACTION: {action}
 
     xml_parts.append('\n</nexus-context>')
 
-    return '\n'.join(xml_parts)
+    # Return XML and state metadata for debugging
+    state_metadata = {
+        "state_hash": state_hash,
+        "goals_personalized": goals_personalized,
+        "goals_is_template": goals_is_template,
+        "goals_path": str(goals_path.resolve()),
+        "workspace_configured": workspace_configured,
+        "workspace_is_template": workspace_is_template,
+        "workspace_path": str(workspace_map_path.resolve()),
+        "onboarding_complete": onboarding_complete,
+        "pending_onboarding_count": len(pending_onboarding),
+        "build_dir": build_dir,
+    }
+
+    return '\n'.join(xml_parts), state_metadata
 
 
 def build_compact_xml(build_dir: str, session_id: str, source: str, mode_result: dict) -> str:
@@ -888,7 +926,7 @@ def main():
         source = input_data.get("source", "startup")
         transcript_path = input_data.get("transcript_path", "unknown")
 
-        build_dir = os.environ.get("CLAUDE_BUILD_DIR", "")
+        build_dir = os.environ.get("CLAUDE_PROJECT_DIR", "") or os.environ.get("CLAUDE_BUILD_DIR", "")
 
         # 1. Write session ID to session-specific file for tracking
         if session_id != "unknown":
@@ -922,13 +960,14 @@ def main():
         logging.info(f"Context mode determined: mode={mode}, action={action}, build={mode_result.get('build_id')}")
 
         # 3. Build XML context based on mode
+        state_metadata = None  # Only populated for startup mode
         if mode == "compact" and mode_result.get("build_id"):
             # COMPACT mode: Build continuation with full context
             additional_context_str = build_compact_xml(build_dir, session_id, source, mode_result)
             logging.info(f"Built COMPACT XML context ({len(additional_context_str)} chars)")
         else:
             # STARTUP mode: Full menu with all skills and builds
-            additional_context_str = build_startup_xml(build_dir, session_id, source, action)
+            additional_context_str, state_metadata = build_startup_xml(build_dir, session_id, source, action)
             logging.info(f"Built STARTUP XML context ({len(additional_context_str)} chars)")
 
         # 4. Output as proper hook response with additionalContext
@@ -985,14 +1024,18 @@ def main():
                     f.write(additional_context_str)
 
                 # Timestamped state log (append-only for debugging stale context issues)
-                state_log_path = cache_dir / "session_state_history.log"
-                with open(state_log_path, "a", encoding="utf-8") as f:
-                    f.write(f"\n--- {datetime.now().isoformat()} | session={session_id} ---\n")
-                    f.write(f"state_hash={state_hash}\n")
-                    f.write(f"goals_personalized={goals_personalized} (is_template={goals_is_template})\n")
-                    f.write(f"workspace_configured={workspace_configured} (is_template={workspace_is_template})\n")
-                    f.write(f"onboarding_complete={onboarding_complete}\n")
-                    f.write(f"pending_onboarding_count={len(pending_onboarding)}\n")
+                if state_metadata:
+                    state_log_path = cache_dir / "session_state_history.log"
+                    with open(state_log_path, "a", encoding="utf-8") as f:
+                        f.write(f"\n--- {datetime.now().isoformat()} | session={session_id} ---\n")
+                        f.write(f"build_dir={state_metadata.get('build_dir', 'unknown')}\n")
+                        f.write(f"state_hash={state_metadata['state_hash']}\n")
+                        f.write(f"goals_path={state_metadata.get('goals_path', 'unknown')}\n")
+                        f.write(f"goals_personalized={state_metadata['goals_personalized']} (is_template={state_metadata['goals_is_template']})\n")
+                        f.write(f"workspace_path={state_metadata.get('workspace_path', 'unknown')}\n")
+                        f.write(f"workspace_configured={state_metadata['workspace_configured']} (is_template={state_metadata['workspace_is_template']})\n")
+                        f.write(f"onboarding_complete={state_metadata['onboarding_complete']}\n")
+                        f.write(f"pending_onboarding_count={state_metadata['pending_onboarding_count']}\n")
 
                 # Token estimation report
                 estimated_tokens = len(additional_context_str) / 4

@@ -33,7 +33,7 @@ learning_tracker:
   session_count: 0
   completed:
     setup_memory: false
-    setup_workspace: false
+    create_folders: false
     learn_integrations: false
     learn_builds: false
     learn_skills: false

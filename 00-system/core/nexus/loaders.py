@@ -125,7 +125,7 @@ def scan_skills(base_path: str = ".", minimal: bool = True) -> List[Dict[str, An
 
     # LEARNING SKILLS - second priority, for onboarding
     LEARNING_SKILL_NAMES = {
-        "setup-memory", "setup-workspace", "learn-builds",
+        "setup-memory", "create-folders", "learn-builds",
         "learn-skills", "learn-integrations", "learn-nexus"
     }
 
@@ -1166,55 +1166,36 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     }
 
     # === ACTION INSTRUCTIONS & STATE DETECTION ===
-    # Use state.py functions for comprehensive state detection and instructions
+    # SINGLE SOURCE OF TRUTH: learning_tracker.completed in user-config.yaml
+    # Refactored 2026-01-18: Use extract_learning_completed() for all state
 
     try:
         from .state import (
-            check_goals_personalized,
-            check_workspace_configured,
             build_display_hints,
             build_pending_onboarding,
             extract_learning_completed,
         )
     except ImportError:
         # Fallback if state.py not available
-        check_goals_personalized = None
-        check_workspace_configured = None
         build_display_hints = None
         build_pending_onboarding = None
         extract_learning_completed = None
 
-    # Check goals personalization
-    goals_path = base / "01-memory" / "goals.md"
-    if check_goals_personalized:
-        goals_personalized = check_goals_personalized(goals_path)
-    else:
-        # Fallback: simple check
-        goals_personalized = False
-        try:
-            if goals_path.exists():
-                content = goals_path.read_text(encoding="utf-8")
-                if "smart_default: true" not in content.lower():
-                    goals_personalized = True
-        except Exception:
-            pass
-
-    # Check workspace configuration
-    if check_workspace_configured:
-        workspace_configured = check_workspace_configured(base)
-    else:
-        workspace_configured = False
-
-    # Get learning completion status
+    # Get learning completion status FIRST (single source of truth)
     learning_completed = {}
     pending_onboarding = []
+    config_path = base / "01-memory" / "user-config.yaml"
+
     if extract_learning_completed and build_pending_onboarding:
         try:
-            config_path = base / "01-memory" / "user-config.yaml"
             learning_completed = extract_learning_completed(config_path)
             pending_onboarding = build_pending_onboarding(learning_completed)
         except Exception:
             pass
+
+    # Derive state from learning_tracker (single source of truth)
+    goals_personalized = learning_completed.get("setup_memory", False)
+    workspace_configured = learning_completed.get("create_folders", False)
 
     # Build display hints (for menu rendering suggestions)
     display_hints = []
@@ -1260,7 +1241,7 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     if not goals_personalized:
         instruction_parts.append("⚠️  ONBOARDING: Goals not personalized - prominently suggest 'setup memory' as #1 next step")
     if not workspace_configured:
-        instruction_parts.append("⚠️  ONBOARDING: Workspace not configured - suggest 'setup workspace' in next steps")
+        instruction_parts.append("⚠️  ONBOARDING: Workspace not configured - suggest 'create folders' in next steps")
 
     # Add display hints guidance
     if display_hints:
@@ -1344,36 +1325,180 @@ def _load_state_template(template_name: str, **kwargs) -> str:
         return template_path.read_text(encoding='utf-8')
 
 
+def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
+    """
+    Build dynamic status strings for all menu sections.
+
+    Shared helper for all startup templates to ensure consistency.
+    Returns dict with: memory_status, work_status, folders_status, integrations_status
+    """
+    goals_done = context.get("goals_personalized", False)
+    workspace_done = context.get("workspace_configured", False)
+    active_builds = context.get("active_builds", [])
+    integrations = context.get("configured_integrations", [])
+
+    # Memory status
+    if goals_done:
+        user_role = context.get("user_role", "Configured")
+        memory_status = f"✓ {user_role}"
+    else:
+        memory_status = "Not configured ▸ 'setup memory' (8 min)"
+
+    # Work status - show builds with progress
+    if active_builds:
+        work_lines = []
+        for b in active_builds[:3]:
+            name = b.get('name', 'Build')
+            progress = b.get('progress', 0)
+            status = b.get('status', 'IN_PROGRESS')
+            work_lines.append(f"• {name} | {progress}% complete")
+        work_status = "\n   ".join(work_lines)
+    else:
+        work_status = "Nothing yet"
+
+    # Folders status
+    if workspace_done:
+        folders_status = "✓ Organized"
+    else:
+        folders_status = "Not organized ▸ 'create folders' (5 min)"
+
+    # Integrations status
+    if integrations:
+        if len(integrations) == 1:
+            integrations_status = f"1 connected: {integrations[0]}"
+        else:
+            integrations_status = f"{len(integrations)} connected"
+    else:
+        integrations_status = "None"
+
+    return {
+        "memory_status": memory_status,
+        "work_status": work_status,
+        "folders_status": folders_status,
+        "integrations_status": integrations_status,
+        "goals_done": goals_done,
+        "workspace_done": workspace_done,
+    }
+
+
 def _template_first_run(context: Dict[str, Any]) -> str:
     """STARTUP STATE 0: First run - auto-trigger setup-memory skill."""
     return _load_state_template("startup_first_run")
 
 
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 1: Onboarding incomplete - gently suggest completing setup."""
+    """STARTUP STATE 1: Onboarding incomplete - show ACTUAL state, not hardcoded."""
     pending = context.get("pending_onboarding", [])
-    pending_list = "\n".join(f"- {skill}" for skill in pending[:3])
-    return _load_state_template("startup_onboarding_incomplete", pending_list=pending_list)
+    # pending is a list of dicts with keys: key, name, trigger, priority, time
+    pending_list = "\n".join(
+        f"- {skill.get('name', skill) if isinstance(skill, dict) else skill}"
+        for skill in pending[:3]
+    )
+
+    # Get dynamic status
+    status = _build_dynamic_status(context)
+    goals_done = status["goals_done"]
+    workspace_done = status["workspace_done"]
+
+    # Getting started suggestions - prioritize incomplete onboarding steps
+    suggestions = []
+    if not goals_done:
+        suggestions.append("'setup memory' - configure your role & goals (Recommended)")
+    elif not workspace_done:
+        suggestions.append("'create folders' - organize your workspace (Recommended)")
+    suggestions.append("Tell me what you want to work on")
+    suggestions.append("'list skills' - see capabilities")
+    getting_started = "\n   ".join(f"{i+1}. {s}" for i, s in enumerate(suggestions))
+
+    return _load_state_template(
+        "startup_onboarding_incomplete",
+        pending_list=pending_list,
+        memory_status=status["memory_status"],
+        work_status=status["work_status"],
+        folders_status=status["folders_status"],
+        integrations_status=status["integrations_status"],
+        getting_started=getting_started
+    )
 
 
 def _template_active_builds(context: Dict[str, Any]) -> str:
     """STARTUP STATE 2: Active builds exist - highlight build continuations."""
-    builds = context.get("active_builds", [])[:2]  # Max 2
+    status = _build_dynamic_status(context)
+    active_builds = context.get("active_builds", [])
+
+    # Build list for instructions section
+    builds = active_builds[:2]
     build_list = "\n".join(
         f"- Build {p.get('id', '?')}: {p.get('name', 'Unknown')} ({p.get('status', '?')}, {p.get('progress', 0)}%)"
         for p in builds
     )
-    return _load_state_template("startup_active_builds", build_list=build_list)
+
+    # Getting started - prioritize continuing builds
+    suggestions = []
+    if builds:
+        first_build = builds[0]
+        suggestions.append(f"'continue {first_build.get('name', 'build')}' - resume where you left off (Recommended)")
+    suggestions.append("Tell me what else you want to work on")
+    suggestions.append("'list skills' - see capabilities")
+    getting_started = "\n   ".join(f"{i+1}. {s}" for i, s in enumerate(suggestions))
+
+    return _load_state_template(
+        "startup_active_builds",
+        build_list=build_list,
+        memory_status=status["memory_status"],
+        work_status=status["work_status"],
+        folders_status=status["folders_status"],
+        integrations_status=status["integrations_status"],
+        getting_started=getting_started
+    )
 
 
 def _template_fresh_workspace(context: Dict[str, Any]) -> str:
     """STARTUP STATE 3: Fresh workspace (configured but no builds) - emphasize starting first build."""
-    return _load_state_template("startup_fresh_workspace")
+    status = _build_dynamic_status(context)
+
+    # Getting started - encourage first build
+    suggestions = [
+        "Tell me what you want to work on (Recommended)",
+        "'list skills' - see capabilities",
+        "'explain nexus' - learn the system"
+    ]
+    getting_started = "\n   ".join(f"{i+1}. {s}" for i, s in enumerate(suggestions))
+
+    return _load_state_template(
+        "startup_fresh_workspace",
+        memory_status=status["memory_status"],
+        work_status=status["work_status"],
+        folders_status=status["folders_status"],
+        integrations_status=status["integrations_status"],
+        getting_started=getting_started
+    )
 
 
 def _template_system_ready(context: Dict[str, Any]) -> str:
     """STARTUP STATE 4: System ready (fallback) - open-ended, ready for anything."""
-    return _load_state_template("startup_system_ready")
+    status = _build_dynamic_status(context)
+    total_builds = context.get("total_builds", 0)
+
+    # Getting started - open ended
+    suggestions = [
+        "Tell me what you want to work on",
+        "'create skill' - automate a repeating task",
+        "'list skills' - see capabilities"
+    ]
+    getting_started = "\n   ".join(f"{i+1}. {s}" for i, s in enumerate(suggestions))
+
+    # Completed builds info
+    completed_info = f"{total_builds} builds completed" if total_builds > 0 else "Nothing active"
+
+    return _load_state_template(
+        "startup_system_ready",
+        memory_status=status["memory_status"],
+        work_status=completed_info,
+        folders_status=status["folders_status"],
+        integrations_status=status["integrations_status"],
+        getting_started=getting_started
+    )
 
 
 def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
@@ -1389,7 +1514,7 @@ def build_suggested_next_steps(context: Dict[str, Any]) -> List[str]:
         suggestions.append("'setup memory' - configure your goals and role (5 min)")
 
     if not context.get("workspace_configured"):
-        suggestions.append("'setup workspace' - organize your folder structure (10 min)")
+        suggestions.append("'create folders' - organize your folder structure (5 min)")
 
     # Priority 2: Active work
     active_builds = context.get("active_builds", [])

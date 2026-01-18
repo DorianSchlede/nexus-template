@@ -31,36 +31,80 @@ def parse_simple_yaml(yaml_text: str) -> Dict[str, Any]:
     Supports:
     - Simple key: value pairs
     - Lists with - items
-    - Nested objects (one level)
+    - Nested objects (multi-level via indentation)
     - Quoted strings
     - Numbers and booleans
 
     Does NOT support:
     - Multi-line values
-    - Complex nested structures
     - YAML anchors/references
+    - Flow syntax for nested structures
     """
-    result = {}
-    current_key = None
-    current_list = None
+    def parse_value(value: str) -> Any:
+        """Parse a YAML value string into Python type."""
+        value = value.strip()
+        if not value:
+            return None
+        if value.lower() == 'true':
+            return True
+        if value.lower() == 'false':
+            return False
+        if value.lower() == 'null' or value.lower() == '~':
+            return None
+        # Remove quotes
+        if (value.startswith('"') and value.endswith('"')) or \
+           (value.startswith("'") and value.endswith("'")):
+            return value[1:-1]
+        # Inline list like ["a", "b"]
+        if value.startswith('[') and value.endswith(']'):
+            return value  # Return as string, let caller handle
+        # Try number
+        try:
+            if '.' in value:
+                return float(value)
+            return int(value)
+        except ValueError:
+            return value
 
-    for line in yaml_text.split('\n'):
+    def get_indent(line: str) -> int:
+        """Get the indentation level (number of leading spaces)."""
+        return len(line) - len(line.lstrip())
+
+    lines = yaml_text.split('\n')
+    result: Dict[str, Any] = {}
+
+    # Stack to track nested objects: [(indent_level, parent_dict, current_key)]
+    stack: List[Tuple[int, Dict[str, Any], Optional[str]]] = [(-1, result, None)]
+
+    i = 0
+    while i < len(lines):
+        line = lines[i]
         stripped = line.strip()
 
         # Skip empty lines and comments
         if not stripped or stripped.startswith('#'):
+            i += 1
             continue
+
+        indent = get_indent(line)
+
+        # Pop stack until we find the right parent for this indent level
+        while len(stack) > 1 and indent <= stack[-1][0]:
+            stack.pop()
+
+        current_parent = stack[-1][1]
 
         # List item
         if stripped.startswith('- '):
-            if current_list is not None:
-                item = stripped[2:].strip()
-                # Remove quotes
-                if item.startswith('"') and item.endswith('"'):
-                    item = item[1:-1]
-                elif item.startswith("'") and item.endswith("'"):
-                    item = item[1:-1]
-                current_list.append(item)
+            item_value = stripped[2:].strip()
+            parent_key = stack[-1][2]
+
+            if parent_key and parent_key in current_parent:
+                target_list = current_parent[parent_key]
+                if isinstance(target_list, list):
+                    parsed_item = parse_value(item_value)
+                    target_list.append(parsed_item)
+            i += 1
             continue
 
         # Key: value pair
@@ -69,38 +113,31 @@ def parse_simple_yaml(yaml_text: str) -> Dict[str, Any]:
             key = key.strip()
             value = value.strip()
 
-            # Start of a list
+            # No value = start of nested object or list
             if not value:
-                current_key = key
-                current_list = []
-                result[key] = current_list
-                continue
+                # Check if next non-empty line is a list item or nested key
+                j = i + 1
+                while j < len(lines) and not lines[j].strip():
+                    j += 1
 
-            # Regular key-value
-            current_list = None
-            current_key = None
-
-            # Parse value type
-            if value.lower() == 'true':
-                result[key] = True
-            elif value.lower() == 'false':
-                result[key] = False
-            elif value.lower() == 'null':
-                result[key] = None
-            elif value.startswith('"') and value.endswith('"'):
-                result[key] = value[1:-1]
-            elif value.startswith("'") and value.endswith("'"):
-                result[key] = value[1:-1]
-            else:
-                # Try number
-                try:
-                    if '.' in value:
-                        result[key] = float(value)
+                if j < len(lines):
+                    next_stripped = lines[j].strip()
+                    if next_stripped.startswith('- '):
+                        # It's a list
+                        current_parent[key] = []
+                        stack.append((indent, current_parent, key))
                     else:
-                        result[key] = int(value)
-                except ValueError:
-                    # Keep as string
-                    result[key] = value
+                        # It's a nested object
+                        current_parent[key] = {}
+                        stack.append((indent, current_parent[key], key))
+                else:
+                    # End of file, assume empty dict
+                    current_parent[key] = {}
+            else:
+                # Regular key-value
+                current_parent[key] = parse_value(value)
+
+        i += 1
 
     return result
 

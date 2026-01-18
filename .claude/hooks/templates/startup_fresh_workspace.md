@@ -11,27 +11,25 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
          Your AI Productivity System
 
 🧠 MEMORY
-   [Extract role from <user-goals>, e.g. "Product Designer | Nexus development"]
+   {memory_status}
 
 📋 CURRENT WORK
-   Nothing yet - ready to start!
+   {work_status}
 
 🔧 SKILLS
-   50+ available ▸ 'list skills'
+   50+ available
 
 📁 FOLDERS
-   Organized
+   {folders_status}
 
 🔌 INTEGRATIONS
-   [List connected integrations or "None"]
+   {integrations_status}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💡 START BUILDING
 
-   1. Tell me what you want to work on ⭐
-   2. 'list skills' - see capabilities
-   3. 'explain nexus' - learn the system
+   {getting_started}
 ```
 
 ================================================================================
@@ -40,12 +38,24 @@ CLAUDE INSTRUCTIONS
 
 STATE: Fresh workspace (goals configured, no work yet)
 
-After menu, say:
-"You're all set up! What would you like to work on?
+After the menu, explain the two working modes and give recommendations.
 
-Just describe what you're working on and I'll help you plan it out."
+Say:
+"You're all set up! Nexus has two modes:
+
+**BUILD** - Create something new (projects, research, content)
+**EXECUTE** - Run skills for quick tasks
+
+Here's what you can do:
+
+1. 'I want to build something' - Start your first build (Recommended)
+2. 'add integration' - Connect external tools (Slack, APIs, etc.)
+3. 'list skills' - See all available skills
+
+What would you like to do? Say '1' to start building!"
 
 Routing:
-- Work description → create a build with plan-build skill
-- Skill request → match and load relevant skill
-- Question → answer directly
+- "1" or "build" or work description → load plan-build skill
+- "2" or "integration" → load add-integration skill
+- "3" or "skills" → load list-skills skill
+- Skill trigger → match and load relevant skill

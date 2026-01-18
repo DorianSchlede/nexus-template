@@ -10,11 +10,20 @@
 ```
 
 ================================================================================
-FIRST RUN - AUTO-TRIGGER SETUP
+CLAUDE INSTRUCTIONS
 ================================================================================
 
-This is a fresh Nexus installation. Goals not yet configured.
+STATE: First run - fresh installation
 
-**Immediately load the `setup-memory` skill** to configure user goals.
+After showing the banner, give these 3 recommendations:
 
-Do NOT wait for user input - start setup now.
+1. 'setup memory' - Tell me about yourself (8 min)
+2. 'create folders' - Organize your workspace (5 min)
+3. 'list skills' - See what I can do
+
+Then say:
+"Let's start with setup memory - I'll learn about your role and goals.
+
+Say 'yes' or '1' to begin!"
+
+Wait for user confirmation before loading the setup-memory skill.

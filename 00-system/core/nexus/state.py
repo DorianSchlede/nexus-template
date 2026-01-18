@@ -306,7 +306,7 @@ def build_display_hints(
     # Onboarding summary (for emphasis in suggested steps)
     if pending_onboarding:
         # Sort by priority (setup_memory first, then others)
-        priority_order = ["setup_memory", "setup_workspace", "learn_builds", "learn_skills", "learn_integrations", "learn_nexus"]
+        priority_order = ["setup_memory", "create_folders", "learn_builds", "learn_skills", "learn_integrations", "learn_nexus"]
         sorted_pending = sorted(pending_onboarding, key=lambda x: priority_order.index(x["key"]) if x["key"] in priority_order else 99)
 
         hints.append(f"ONBOARDING_INCOMPLETE: {len(pending_onboarding)} skills pending")
@@ -318,8 +318,8 @@ def build_display_hints(
 
             if skill_key == "setup_memory":
                 hints.append(f"SUGGEST_ONBOARDING: 'setup memory' - teach Nexus about you ({skill['time']})")
-            elif skill_key == "setup_workspace":
-                hints.append(f"SUGGEST_ONBOARDING: 'setup workspace' - organize your files ({skill['time']})")
+            elif skill_key == "create_folders":
+                hints.append(f"SUGGEST_ONBOARDING: 'create folders' - organize your files ({skill['time']})")
             elif skill_key == "learn_builds":
                 hints.append(f"SUGGEST_ONBOARDING: 'learn builds' - understand builds vs skills ({skill['time']})")
             elif skill_key == "learn_skills":
@@ -369,7 +369,7 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
     """
     default_completed = {
         "setup_memory": False,
-        "setup_workspace": False,
+        "create_folders": False,
         "learn_integrations": False,
         "learn_builds": False,
         "learn_skills": False,
@@ -431,33 +431,6 @@ def check_integrations_configured(base_path: Path) -> bool:
     return False
 
 
-def check_workspace_configured(base_path: Path) -> bool:
-    """
-    Check if workspace is configured.
-
-    Args:
-        base_path: Root path to Nexus installation
-
-    Returns:
-        True if workspace-map.md exists and is not a template
-    """
-    workspace_map_path = base_path / WORKSPACE_DIR / "workspace-map.md"
-    return workspace_map_path.exists() and not is_template_file(str(workspace_map_path))
-
-
-def check_goals_personalized(goals_path: Path) -> bool:
-    """
-    Check if goals have been personalized.
-
-    Args:
-        goals_path: Path to goals.md
-
-    Returns:
-        True if goals exist and are not a template
-    """
-    return goals_path.exists() and not is_template_file(str(goals_path))
-
-
 def build_stats(
     base_path: Path,
     memory_content: Dict[str, str],
@@ -489,13 +462,16 @@ def build_stats(
     # Count user skills vs system skills
     user_skills = [s for s in skills if "03-skills" in s.get("_file_path", "")]
 
-    # Check configuration status
-    goals_personalized = check_goals_personalized(goals_path)
-    workspace_configured = check_workspace_configured(base_path)
-    integrations_configured = check_integrations_configured(base_path)
-
-    # Get learning completion status
+    # Get learning completion status FIRST (single source of truth)
+    # Refactored 2026-01-18: Use learning_tracker instead of check_* functions
     learning_completed = extract_learning_completed(config_path)
+
+    # Derive state from learning_tracker (single source of truth)
+    goals_personalized = learning_completed.get("setup_memory", False)
+    workspace_configured = learning_completed.get("create_folders", False)
+
+    # Integrations still use file-based check (not in learning_tracker)
+    integrations_configured = check_integrations_configured(base_path)
 
     # Build pending onboarding
     pending_onboarding = build_pending_onboarding(learning_completed)

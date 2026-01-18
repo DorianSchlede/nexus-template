@@ -81,9 +81,9 @@ ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
         "priority": "critical",
         "time": "8 min",
     },
-    "setup_workspace": {
-        "name": "setup-workspace",
-        "trigger": "setup workspace",
+    "create_folders": {
+        "name": "create-folders",
+        "trigger": "create folders",
         "priority": "high",
         "time": "5-8 min",
     },

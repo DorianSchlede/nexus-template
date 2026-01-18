@@ -3,10 +3,10 @@
 # Purpose: Store persistent user preferences (loaded every session)
 # Updated: Set during onboarding, modified anytime
 
-smart_default: true
+smart_default: false
 
 user_preferences:
-  language: ""
+  language: "Deutsch"
   timezone: ""
   date_format: "YYYY-MM-DD"
 
@@ -14,26 +14,26 @@ user_preferences:
     python_cmd: "python"
 
 onboarding:
-  status: "not_started"
-  current_session: 0
-  last_completed: null
-  sessions_completed: []
+  status: "in_progress"
+  current_session: 1
+  last_completed: "setup_memory"
+  sessions_completed: ["setup_memory"]
 
 first_encounters:
-  build_created: false
-  skill_loaded: false
+  build_created: true
+  skill_loaded: true
   workspace_used: false
-  memory_updated: false
+  memory_updated: true
   close_session_used: false
 
 anti_patterns_warned:
   repeated_build_pattern: false
 
 learning_tracker:
-  session_count: 0
+  session_count: 1
   completed:
-    setup_memory: false
-    setup_workspace: false
+    setup_memory: true
+    create_folders: false
     learn_integrations: false
     learn_builds: false
     learn_skills: false
@@ -48,8 +48,8 @@ slack_power:
   default_days: 7       # How far back to search by default
   confirm_post: true    # Always confirm before posting to Slack
 
-created: null
-updated: null
+created: "2026-01-17"
+updated: "2026-01-17"
 ---
 
 # Instructions for AI

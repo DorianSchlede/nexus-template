@@ -11,42 +11,46 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
          Your AI Productivity System
 
 🧠 MEMORY
-   Not configured ▸ 'setup memory' (8 min)
+   {memory_status}
 
 📋 CURRENT WORK
-   Nothing yet
+   {work_status}
 
 🔧 SKILLS
    50+ available
 
 📁 FOLDERS
-   Not organized ▸ 'setup folders' (5 min)
+   {folders_status}
 
 🔌 INTEGRATIONS
-   None
+   {integrations_status}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💡 GETTING STARTED
 
-   1. 'setup memory' ⭐ recommended first
-   2. Tell me what you want to work on
-   3. 'list skills' - see capabilities
+   {getting_started}
 ```
 
 ================================================================================
 CLAUDE INSTRUCTIONS
 ================================================================================
 
-STATE: Onboarding incomplete (user skipped/interrupted setup-memory)
+STATE: Onboarding partially complete
 
-Pending:
+Pending onboarding (optional, not blocking):
 {pending_list}
 
-After menu, say:
-"Would you like to set up memory first? Takes 8 minutes and helps me understand
-your goals.
+After the menu, give a CTA for the recommended next step.
 
-Say **'setup memory'** to start, or just tell me what you'd like to work on."
+If goals not done, say:
+"Let's start with setup memory - I'll learn about you.
 
-If they describe work → help them (don't force setup).
+Say 'yes' or '1' to begin!"
+
+If goals done but folders not done, say:
+"Let's set up your folders - only takes 5 minutes.
+
+Say 'yes' or '1' to begin!"
+
+Wait for user confirmation before loading the skill.
