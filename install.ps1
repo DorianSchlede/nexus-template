@@ -16,34 +16,34 @@ $ProgressPreference = "SilentlyContinue"
 
 function Write-Info {
     param([string]$Message)
-    Write-Host "ℹ " -ForegroundColor Blue -NoNewline
+    Write-Host "[i] " -ForegroundColor Blue -NoNewline
     Write-Host $Message
 }
 
 function Write-Success {
     param([string]$Message)
-    Write-Host "✓ " -ForegroundColor Green -NoNewline
+    Write-Host "[OK] " -ForegroundColor Green -NoNewline
     Write-Host $Message
 }
 
 function Write-Warning {
     param([string]$Message)
-    Write-Host "⚠ " -ForegroundColor Yellow -NoNewline
+    Write-Host "[!] " -ForegroundColor Yellow -NoNewline
     Write-Host $Message
 }
 
 function Write-Error {
     param([string]$Message)
-    Write-Host "✗ " -ForegroundColor Red -NoNewline
+    Write-Host "[X] " -ForegroundColor Red -NoNewline
     Write-Host $Message
 }
 
 function Write-Header {
     param([string]$Message)
     Write-Host ""
-    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor White
+    Write-Host "========================================" -ForegroundColor White
     Write-Host $Message -ForegroundColor White
-    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor White
+    Write-Host "========================================" -ForegroundColor White
     Write-Host ""
 }
 
@@ -326,43 +326,43 @@ function Show-Summary {
 
     if (Get-Command claude -ErrorAction SilentlyContinue) {
         Write-Host "  " -NoNewline
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "[OK]" -ForegroundColor Green -NoNewline
         Write-Host " Claude Code"
     } else {
         Write-Host "  " -NoNewline
-        Write-Host "⚠" -ForegroundColor Yellow -NoNewline
+        Write-Host "[!]" -ForegroundColor Yellow -NoNewline
         Write-Host " Claude Code (not in PATH)"
     }
 
     if (Get-Command uv -ErrorAction SilentlyContinue) {
         Write-Host "  " -NoNewline
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "[OK]" -ForegroundColor Green -NoNewline
         Write-Host " uv"
     } else {
         Write-Host "  " -NoNewline
-        Write-Host "⚠" -ForegroundColor Yellow -NoNewline
+        Write-Host "[!]" -ForegroundColor Yellow -NoNewline
         Write-Host " uv (not in PATH)"
     }
 
     if (Get-Command git -ErrorAction SilentlyContinue) {
         Write-Host "  " -NoNewline
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "[OK]" -ForegroundColor Green -NoNewline
         Write-Host " Git"
     } else {
         Write-Host "  " -NoNewline
-        Write-Host "✗" -ForegroundColor Red -NoNewline
+        Write-Host "[X]" -ForegroundColor Red -NoNewline
         Write-Host " Git"
     }
 
     if ($script:VsCodeInstalled) {
         Write-Host "  " -NoNewline
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "[OK]" -ForegroundColor Green -NoNewline
         Write-Host " VS Code"
     }
 
     if ($NexusDir) {
         Write-Host "  " -NoNewline
-        Write-Host "✓" -ForegroundColor Green -NoNewline
+        Write-Host "[OK]" -ForegroundColor Green -NoNewline
         Write-Host " Nexus Template ($NexusDir)"
     }
 
@@ -370,12 +370,12 @@ function Show-Summary {
 
     # PATH warning
     if ($script:PathUpdated) {
-        Write-Host "⚠  PATH was updated during installation" -ForegroundColor Yellow
+        Write-Host "[!] PATH was updated during installation" -ForegroundColor Yellow
         Write-Host ""
         Write-Host "To apply changes:" -ForegroundColor White
         Write-Host "  Restart your terminal (PowerShell/Command Prompt)"
         Write-Host ""
-        Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor White
+        Write-Host "========================================" -ForegroundColor White
         Write-Host ""
     }
 
