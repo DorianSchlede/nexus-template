@@ -1,7 +1,7 @@
 ---
 id: 03-one-command-installer
 name: One-Command Installer
-status: COMPLETE
+status: ✅ COMPLETE
 description: "Build: One-Command Installer"
 created: 2026-01-23
 completed: 2026-01-23
