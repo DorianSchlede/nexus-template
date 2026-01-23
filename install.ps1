@@ -414,14 +414,10 @@ function Main {
     Clear-Host
 
     Write-Host ""
-    Write-Host "    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗" -ForegroundColor White
-    Write-Host "    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝" -ForegroundColor White
-    Write-Host "    ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗" -ForegroundColor White
-    Write-Host "    ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║" -ForegroundColor White
-    Write-Host "    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║" -ForegroundColor White
-    Write-Host "    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝" -ForegroundColor White
-    Write-Host ""
-    Write-Host "         One-Command Installer" -ForegroundColor White
+    Write-Host "    ========================================" -ForegroundColor White
+    Write-Host "              NEXUS INSTALLER               " -ForegroundColor White
+    Write-Host "         One-Command Setup for All          " -ForegroundColor White
+    Write-Host "    ========================================" -ForegroundColor White
     Write-Host ""
 
     Get-PlatformInfo
