@@ -72,12 +72,37 @@ Capture workflows you repeat. Say "create skill" after doing something useful, a
 
 ## Quick Start
 
-### Prerequisites
+### One-Command Install
 
-#### System Requirements
-- **macOS 13.0+**, **Ubuntu 20.04+** / **Debian 10+**, or **Windows 10+** (with Git Bash or WSL)
-- 4 GB+ RAM
-- Internet connection
+**macOS / Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/DorianSchlede/nexus-template/main/install.sh | bash
+```
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/DorianSchlede/nexus-template/main/install.ps1 | iex
+```
+
+This installs:
+- ✅ Claude Code (AI assistant CLI & VS Code extension)
+- ✅ uv (Python package manager for Nexus hooks)
+- ✅ Git (Windows only, includes Git Bash for hooks)
+- ✅ Nexus template (cloned to your specified directory)
+- ❓ VS Code (optional, asks during installation)
+
+**After installation:**
+1. Restart your terminal (for PATH updates)
+2. `cd` to your Nexus directory
+3. Open in VS Code: `code .`
+4. Start Claude Code and say `hi`
+
+> **System Requirements**: macOS 13.0+, Ubuntu 20.04+, or Windows 10 1809+ (Build 17763) | 4GB+ RAM | Internet connection
+
+<details>
+<summary>Manual Installation (if one-command fails)</summary>
+
+### Prerequisites
 
 #### Required Software
 
@@ -88,7 +113,7 @@ Capture workflows you repeat. Say "create skill" after doing something useful, a
 | **uv** | [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) | Runs Nexus hooks (Python package manager) |
 | **Git** *(Windows only)* | [git-scm.com](https://git-scm.com/download/win) | Required for hooks on Windows |
 
-#### Quick Install Commands
+#### Individual Install Commands
 
 **macOS / Linux / WSL:**
 ```bash
@@ -106,6 +131,9 @@ irm https://claude.ai/install.ps1 | iex
 
 # uv (required for Nexus hooks)
 irm https://astral.sh/uv/install.ps1 | iex
+
+# Git for Windows (includes Git Bash)
+winget install --id Git.Git
 ```
 
 **VS Code Extension:**
@@ -114,14 +142,12 @@ ext install anthropic.claude-code
 ```
 Or search "Claude Code" in VS Code Extensions marketplace.
 
-**Windows only:** Also install [Git for Windows](https://git-scm.com/download/win) (includes Git Bash, required for hooks).
-
 > **Note:** After installing, restart your terminal/VS Code for PATH changes to take effect.
 
-#### Detailed Installation
+#### Details
 
 <details>
-<summary>Claude Code details</summary>
+<summary>Claude Code</summary>
 
 > **Docs:** [code.claude.com/docs/en/setup](https://code.claude.com/docs/en/setup) | **GitHub:** [anthropics/claude-code](https://github.com/anthropics/claude-code)
 
@@ -130,7 +156,7 @@ The commands above install both the CLI and enable the [VS Code Extension](https
 </details>
 
 <details>
-<summary>uv details</summary>
+<summary>uv</summary>
 
 > **Docs:** [docs.astral.sh/uv](https://docs.astral.sh/uv/) | **GitHub:** [astral-sh/uv](https://github.com/astral-sh/uv)
 
@@ -139,7 +165,7 @@ uv is an extremely fast Python package manager. Nexus hooks use it to run Python
 </details>
 
 <details>
-<summary>Git for Windows details</summary>
+<summary>Git for Windows</summary>
 
 > **Download:** [git-scm.com/download/win](https://git-scm.com/download/win) | **Project:** [gitforwindows.org](https://gitforwindows.org/)
 
@@ -147,7 +173,9 @@ Windows users need Git Bash for Claude Code hooks. Git for Windows includes it a
 
 </details>
 
-### Step 1: Create Your Nexus
+</details>
+
+### Step 1: Create Your Nexus (if not using one-command installer)
 
 1. Click **[Use this template](https://github.com/DorianSchlede/nexus-template/generate)**
 2. Name your repo (e.g., `my-nexus`), click **Create repository**
