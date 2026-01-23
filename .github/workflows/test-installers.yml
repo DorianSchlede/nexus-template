@@ -70,9 +70,9 @@ jobs:
           $ErrorActionPreference = "Stop"
           try {
             $null = [scriptblock]::Create((Get-Content .\install.ps1 -Raw))
-            Write-Host "✓ PowerShell syntax valid"
+            Write-Host "[OK] PowerShell syntax valid"
           } catch {
-            Write-Error "✗ PowerShell syntax error: $_"
+            Write-Error "[X] PowerShell syntax error: $_"
             exit 1
           }
 
@@ -81,9 +81,9 @@ jobs:
         run: |
           $content = Get-Content .\install.ps1 -Raw
           if ($content -match "`r`n") {
-            Write-Host "✓ CRLF line endings (correct for PowerShell)"
+            Write-Host "[OK] CRLF line endings (correct for PowerShell)"
           } else {
-            Write-Error "✗ LF line endings detected (should be CRLF for PowerShell)"
+            Write-Error "[X] LF line endings detected (should be CRLF for PowerShell)"
             exit 1
           }
 
@@ -105,9 +105,9 @@ jobs:
           $content = Get-Content .\install.ps1 -Raw
           foreach ($func in $functions) {
             if ($content -match "function $func") {
-              Write-Host "✓ $func found"
+              Write-Host "[OK] $func found"
             } else {
-              Write-Error "✗ $func missing"
+              Write-Error "[X] $func missing"
               exit 1
             }
           }
@@ -190,9 +190,9 @@ jobs:
         run: |
           try {
             $version = claude --version 2>&1
-            Write-Host "✓ Claude Code installed: $version"
+            Write-Host "[OK] Claude Code installed: $version"
           } catch {
-            Write-Host "⚠ Claude Code not in PATH (may require terminal restart)"
+            Write-Host "[!] Claude Code not in PATH (may require terminal restart)"
           }
 
       - name: Verify uv Installed
@@ -200,9 +200,9 @@ jobs:
         run: |
           try {
             $version = uv --version
-            Write-Host "✓ uv installed: $version"
+            Write-Host "[OK] uv installed: $version"
           } catch {
-            Write-Host "⚠ uv not in PATH (may require terminal restart)"
+            Write-Host "[!] uv not in PATH (may require terminal restart)"
           }
 
       - name: Verify Git Installed
@@ -210,9 +210,9 @@ jobs:
         run: |
           try {
             $version = git --version
-            Write-Host "✓ Git installed: $version"
+            Write-Host "[OK] Git installed: $version"
           } catch {
-            Write-Error "✗ Git not installed"
+            Write-Error "[X] Git not installed"
             exit 1
           }
 
@@ -221,10 +221,10 @@ jobs:
         run: |
           $nexusPath = "$env:TEMP\nexus-test"
           if (Test-Path $nexusPath) {
-            Write-Host "✓ Nexus cloned to $nexusPath"
+            Write-Host "[OK] Nexus cloned to $nexusPath"
             Get-ChildItem $nexusPath
           } else {
-            Write-Error "✗ Nexus not cloned"
+            Write-Error "[X] Nexus not cloned"
             exit 1
           }
 
