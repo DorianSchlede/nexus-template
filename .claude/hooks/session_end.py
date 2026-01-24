@@ -24,7 +24,6 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from datetime import datetime
-from utils.http import send_to_server
 
 # Local logs directory for transcript backup
 LOGS_DIR = Path(__file__).parent.parent.parent / "logs"
@@ -100,27 +99,6 @@ def cleanup_stale_caches(max_age_minutes: int = 60) -> int:
         return 0
 
 
-def send_transcript_to_server(session_id: str, transcript_path: str) -> bool:
-    """Send full transcript to server for storage and analysis."""
-    try:
-        if not os.path.exists(transcript_path):
-            return False
-
-        with open(transcript_path, 'r', encoding='utf-8') as f:
-            transcript_content = f.read()
-
-        # Send to server
-        send_to_server(
-            f"/api/v2/sessions/{session_id}/transcript",
-            {
-                "transcript": transcript_content,
-                "format": "jsonl",
-                "timestamp": datetime.now().isoformat()
-            }
-        )
-        return True
-    except Exception:
-        return False
 
 
 def main():
@@ -136,22 +114,9 @@ def main():
         # 2. Cleanup stale caches from crashed/orphaned sessions (older than 60 min)
         cleanup_stale_caches(max_age_minutes=60)
 
-        # 3. Send session end event
-        send_to_server(
-            f"/api/v2/sessions/{session_id}/end",
-            {
-                "reason": reason,
-                "timestamp": datetime.now().isoformat()
-            }
-        )
-
-        # 4. Capture and send full transcript
+        # 3. Save transcript locally as backup
         if transcript_path:
-            # Save locally as backup
             save_transcript_locally(session_id, transcript_path)
-
-            # Send to server for analysis
-            send_transcript_to_server(session_id, transcript_path)
 
         sys.exit(0)
 

@@ -4,42 +4,42 @@
 
 > **Purpose**: Define what you want to achieve (for AI context)
 >
-> **Updated**: Set via 'setup goals' skill, revised as needed
+> **Updated**: Set via 'setup memory' skill, revised as needed
 
 ---
 
 ## Current Role
 
-Bäckermeister
+[TODO: Replace with user's role or position]
 
 ---
 
 ## Short-Term Goal (3 months)
 
-100 neue Rezepte für ein Rezeptbuch entwickeln - kreative, geile Backwaren, keine Standardsachen.
+[TODO: Replace with what user wants to accomplish in next 3 months]
 
 **Why This Matters**:
-Das Rezeptbuch ist der erste Schritt zum Aufbau meiner Marke und öffnet Türen für größere Ziele.
+[TODO: Replace with why this goal is important]
 
 **Success Metrics**:
-- [ ] 100 Rezepte entwickelt und dokumentiert
-- [ ] Rezepte getestet und für gut befunden
-- [ ] Bereit fürs Rezeptbuch
+- [ ] [TODO: Replace with measurable outcome 1]
+- [ ] [TODO: Replace with measurable outcome 2]
+- [ ] [TODO: Replace with measurable outcome 3]
 
 ---
 
 ## Long-Term Vision (1-3 years)
 
-Bäckerei-Imperium aufbauen, TV-Bäcker werden, und eine eigene Backschule gründen.
+[TODO: Replace with where user wants to be in 1-3 years]
 
 ---
 
 ## Work Style & Preferences
 
-**Best Working Hours**: Morgens
-**Typical Session Length**: 30 Minuten
-**Focus Areas**: Alles - Rezepte, Planung, Marketing, und mehr
+**Best Working Hours**: [TODO: Replace with when user is most productive]
+**Typical Session Length**: [TODO: Replace with typical work session length]
+**Focus Areas**: [TODO: Replace with areas user wants help with]
 
 ---
 
-**Last Updated**: 2026-01-17
+**Last Updated**: [TODO: Replace with current date]

@@ -6,15 +6,15 @@
 smart_default: true
 
 user_preferences:
-  language: ""
-  timezone: ""
+  language: "[TODO: Replace with user's language preference, e.g., 'English', 'Deutsch']"
+  timezone: "[TODO: Replace with user's timezone, e.g., 'America/New_York', 'Europe/Berlin']"
   date_format: "YYYY-MM-DD"
 
   system:
-    python_cmd: "python"
+    python_cmd: "[TODO: Replace with 'python' or 'python3' depending on system]"
 
 onboarding:
-  status: "skipped"
+  status: "not_started"
   current_session: 0
   last_completed: null
   sessions_completed: []
@@ -59,6 +59,6 @@ If smart_default is true:
 - Suggest onboarding skills when contextually appropriate
 - User can work immediately without setup
 
-If language is not set (empty string):
+If language is not set (empty string or TODO):
 - Default to English
 - Prompt user to set preference during setup-memory skill

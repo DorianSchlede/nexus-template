@@ -14,7 +14,6 @@ from datetime import datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.constants import ensure_session_log_dir
-from utils.http import send_to_server
 from utils.registry import lookup_shortcut, detect_type_from_path, extract_id_from_path
 
 
@@ -130,20 +129,6 @@ def detect_from_path_patterns(file_path):
     return None
 
 
-def stream_executable(executable, session_id):
-    """Stream executable event to server. Fire-and-forget."""
-    # Use shortcut as target fallback if target is empty
-    target = executable.get("target") or executable.get("shortcut") or "unknown"
-
-    payload = {
-        "type": executable["type"],
-        "executable_id": executable["id"],
-        "target": target,
-        "shortcut": executable.get("shortcut"),
-        "detection_method": executable["detection_method"],
-        "timestamp": datetime.now().isoformat()
-    }
-    send_to_server(f"/api/v2/sessions/{session_id}/executable", payload)
 
 
 def is_dangerous_rm_command(command):
@@ -326,13 +311,11 @@ def main():
         log_path = log_dir / "pre_tool_use.json"
 
         # =================================================================
-        # EXECUTABLE DETECTION & STREAMING (v2)
+        # EXECUTABLE DETECTION (v2)
         # =================================================================
         # Detect if this tool call is loading an executable (agent/skill/task/workflow)
-        # Stream to observability server instead of writing local files
+        # Note: Observability server removed - detection kept for future use
         executable = detect_executable(tool_name, tool_input)
-        if executable:
-            stream_executable(executable, session_id)
 
         # Read existing log data or initialize empty list
         if log_path.exists():

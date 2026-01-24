@@ -14,3 +14,7 @@
 - Startup action (display_menu, continue_working, etc.)
 
 **Your job:** Execute the `<action>` from the hook context, then follow Nexus routing rules for all subsequent interactions.
+
+---
+
+**⚠️ FALLBACK**: If the SessionStart hook fails to load, follow manual initialization instructions at [00-system/core/manual-init.md](00-system/core/manual-init.md).

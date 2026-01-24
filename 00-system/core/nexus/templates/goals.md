@@ -11,36 +11,36 @@ smart_default: true
 
 ## Current Role
 
-[TODO: Say 'setup memory' to personalize]
+[TODO: Replace with user's role or position]
 
 ---
 
 ## Short-Term Goal (3 months)
 
-[TODO: Say 'setup memory' to personalize]
+[TODO: Replace with what user wants to accomplish in next 3 months]
 
 **Why This Matters**:
-[TODO: Why is this important to you?]
+[TODO: Replace with why this goal is important]
 
 **Success Metrics**:
-- [ ] Metric 1
-- [ ] Metric 2
-- [ ] Metric 3
+- [ ] [TODO: Replace with measurable outcome 1]
+- [ ] [TODO: Replace with measurable outcome 2]
+- [ ] [TODO: Replace with measurable outcome 3]
 
 ---
 
 ## Long-Term Vision (1-3 years)
 
-[TODO: Say 'setup memory' to personalize]
+[TODO: Replace with where user wants to be in 1-3 years]
 
 ---
 
 ## Work Style & Preferences
 
-**Best Working Hours**: [TODO]
-**Typical Session Length**: [TODO: 30min, 2hrs, etc.]
-**Focus Areas**: [TODO: What types of work are you doing?]
+**Best Working Hours**: [TODO: Replace with when user is most productive]
+**Typical Session Length**: [TODO: Replace with typical work session length]
+**Focus Areas**: [TODO: Replace with areas user wants help with]
 
 ---
 
-**Last Updated**: [TODO: Updated after 'setup memory']
+**Last Updated**: [TODO: Replace with current date]

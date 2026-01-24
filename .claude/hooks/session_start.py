@@ -1,27 +1,23 @@
 #!/usr/bin/env -S python3 -B
 from __future__ import annotations
 """
-SessionStart Hook - MVC v3.2 + Resume Enhancement (Minimum Viable Context)
+SessionStart Hook - Nexus v5 Context Injection
 
-ZERO DEPENDENCIES. No yaml. No loaders.py. Just stdlib.
+Loads Nexus operating context via XML injection to Claude's additionalContext.
 
-Key changes in v3.2:
-- Skill priority CORRECTED: 00-system/skills/ > 03-skills/
-- Extended never_do rules from create-skill
-- Plan/Execute mode rules added
-- Routing: Skill -> Integration -> Build
-
-Phase 2 Resume Enhancement:
-- Reads precompact_state.json (FLAT schema) from PreCompact hook
-- Loads resume-context.md from detected build
-- Injects catastrophic loading instructions via additionalContext
-- Performance target: <200ms execution time
+What it does:
+- Detects workspace from transcript path (multi-window safe)
+- Loads orchestrator, skills, builds, and user goals from nexus modules
+- Injects complete context as XML for STARTUP or COMPACT mode
+- Auto-resumes active builds based on session_id matching
 
 Triggered by Claude Code on:
-- New session start (source=startup)
-- Session resume (source=resume) - NOW WITH AUTO-RESUME
-- After /clear command (source=clear) - EXCLUDED from auto-resume
-- After compaction (source=compact) - NOW WITH AUTO-RESUME
+- New session start (source=new)
+- Session resume (source=resume)
+- After /clear command (source=clear)
+- After compaction (source=compact)
+
+Performance target: <200ms execution time
 """
 
 import sys
@@ -53,8 +49,6 @@ logging.basicConfig(
 # Add parent directory to path for utils imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from utils.http import send_to_server
-from utils.server import ensure_server_running
 from utils.transcript import parse_transcript_for_build, find_build_by_session_id
 from utils.xml import escape_xml_content, escape_xml_attribute, load_file_to_xml
 
@@ -127,6 +121,17 @@ def determine_context_mode(source: str, transcript_path: str, build_dir: str, se
 
     NOTE: Once in a build, you STAY in build context. No skill switch detection.
     """
+    # ✅ FIX: Validate source="compact" makes sense (defend against VSCode bugs)
+    if source in ("compact", "resume"):
+        if not transcript_path or transcript_path == "unknown":
+            logging.warning(f"Source is '{source}' but no transcript path provided")
+            logging.warning("Treating as new session")
+            source = "new"
+        elif not Path(transcript_path).exists():
+            logging.warning(f"Source is '{source}' but transcript doesn't exist: {transcript_path}")
+            logging.warning("Treating as new session")
+            source = "new"
+
     # Rule 1: New session = STARTUP with menu
     if source == "new":
         logging.info("Case 1: new session → startup + display_menu")
@@ -144,7 +149,10 @@ def determine_context_mode(source: str, transcript_path: str, build_dir: str, se
 
     # Rule 2b: FALLBACK - Parse transcript for tool_use patterns
     if not last_build:
-        last_build, _ = parse_transcript_for_build(transcript_path)
+        last_build, _ = parse_transcript_for_build(
+            transcript_path,
+            workspace_builds_dir=builds_path  # ✅ Validate against workspace
+        )
         if last_build:
             logging.info(f"Fallback: found build {last_build} from transcript")
 
@@ -176,6 +184,25 @@ def determine_context_mode(source: str, transcript_path: str, build_dir: str, se
 
     # Rule 6: Build work detected - determine phase
     if last_build:
+        # ✅ FIX: Validate build exists in workspace (multi-window safety)
+        build_path = Path(build_dir) / "02-builds" / last_build
+        if not build_path.exists():
+            logging.error("=" * 80)
+            logging.error("BUILD NOT FOUND IN WORKSPACE")
+            logging.error(f"  Build ID: {last_build}")
+            logging.error(f"  Expected path: {build_path}")
+            logging.error(f"  Workspace: {build_dir}")
+            logging.error("  This is likely a cross-workspace contamination bug")
+            logging.error("  Falling back to startup mode for safety")
+            logging.error("=" * 80)
+            return {
+                "mode": "startup",
+                "build_id": None,
+                "phase": None,
+                "skill": None,
+                "action": "display_menu"
+            }
+
         detected_skill = detect_build_phase(build_dir, last_build)
         phase = "planning" if detected_skill == "plan-build" else "execution"
 
@@ -470,14 +497,32 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
         )
     except ImportError as e:
         logging.error(f"Failed to import nexus modules: {e}")
-        # Return minimal fallback XML
-        return f"""<nexus-context version="v4" mode="startup">
+        logging.error(f"Attempted workspace: {build_dir}")
+        logging.error(f"Nexus core path: {nexus_core}")
+        logging.error(f"Nexus core exists: {nexus_core.exists()}")
+
+        # Return minimal fallback XML (must return tuple!)
+        fallback_xml = f"""<nexus-context version="v4" mode="startup">
   <session id="{escape_xml_attribute(session_id)}" source="{escape_xml_attribute(source)}" timestamp="{timestamp}"/>
-  <error>Failed to load nexus modules: {escape_xml_content(str(e))}</error>
+  <error>
+❌ NEXUS NOT FOUND
+
+VSCode opened in wrong workspace.
+
+Expected: Nexus instance root (with 00-system/, 01-memory/, etc.)
+Got: {escape_xml_content(str(base_path))}
+Looking for: {escape_xml_content(str(nexus_core))}
+Exists: {nexus_core.exists()}
+
+Fix: Open VSCode in the correct Nexus workspace folder.
+  </error>
   <instruction importance="MANDATORY">
-    Read 00-system/core/orchestrator.md and display menu.
+Tell the user to open VSCode in the correct Nexus workspace folder (the directory containing 00-system/, 01-memory/, 02-builds/, etc.).
+
+Current directory: {escape_xml_content(str(base_path))}
   </instruction>
 </nexus-context>"""
+        return fallback_xml, {}
 
     # Build XML parts
     xml_parts = []
@@ -630,7 +675,7 @@ ACTION: {action}
     mece_context = {
         "pending_onboarding": pending_onboarding,
         "active_builds": active_builds,
-        "workspace_needs_validation": False,  # TODO: detect workspace changes
+        "workspace_needs_validation": False,
         "total_builds": len(all_builds),
         "goals_personalized": goals_personalized,
         "workspace_configured": workspace_configured,
@@ -823,100 +868,81 @@ SKILL: {skill}
     return '\n'.join(xml_parts)
 
 
-# ============================================================================
-# Langfuse Auto-Start Functions
-# ============================================================================
-
-def ensure_langfuse_running(build_dir: str) -> dict:
+def derive_workspace_from_transcript(transcript_path: str) -> str:
     """
-    Ensure Langfuse containers and monitor are running.
+    Derive workspace root from transcript path.
 
-    Checks:
-    1. Docker containers (langfuse-langfuse-web-1)
-    2. claude-langfuse-monitor process
+    Transcript is typically at:
+    {workspace}/.claude/transcripts/{session_id}.jsonl
 
-    Starts them if not running. Fire-and-forget, non-blocking.
-
-    Returns:
-        Dict with status: {"langfuse": "running|started|failed", "monitor": "running|started|failed"}
+    Extract {workspace} from this path.
     """
-    import subprocess
-
-    result = {"langfuse": "unknown", "monitor": "unknown"}
-    langfuse_dir = Path(build_dir) / "04-workspace" / "langfuse"
-
-    # Skip if langfuse not installed
-    if not langfuse_dir.exists():
-        logging.info("Langfuse not installed in 04-workspace/langfuse - skipping auto-start")
-        return {"langfuse": "not_installed", "monitor": "not_installed"}
+    if not transcript_path or transcript_path == "unknown":
+        return ""
 
     try:
-        # 1. Check if Langfuse containers are running
-        check_cmd = ["docker", "ps", "--filter", "name=langfuse-langfuse-web", "--format", "{{.Names}}"]
-        check_result = subprocess.run(check_cmd, capture_output=True, text=True, timeout=5)
+        transcript = Path(transcript_path).resolve()
 
-        if "langfuse-langfuse-web" in check_result.stdout:
-            result["langfuse"] = "running"
-            logging.info("Langfuse containers already running")
-        else:
-            # Start Langfuse containers
-            logging.info("Starting Langfuse containers...")
-            start_cmd = ["docker", "compose", "up", "-d"]
-            subprocess.Popen(
-                start_cmd,
-                cwd=str(langfuse_dir),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0
-            )
-            result["langfuse"] = "started"
-            logging.info("Langfuse containers starting in background")
-    except subprocess.TimeoutExpired:
-        result["langfuse"] = "timeout"
-        logging.warning("Docker check timed out - Docker might not be running")
-    except FileNotFoundError:
-        result["langfuse"] = "docker_not_found"
-        logging.warning("Docker not found in PATH")
+        # Look for .claude directory in parents
+        current = transcript.parent
+        while current != current.parent:
+            if current.name == ".claude":
+                # Workspace is parent of .claude
+                return str(current.parent)
+            current = current.parent
     except Exception as e:
-        result["langfuse"] = "failed"
-        logging.error(f"Failed to check/start Langfuse: {e}")
+        logging.warning(f"Failed to derive workspace from transcript: {e}")
 
-    try:
-        # 2. Check if monitor is running (look for node process with claude-langfuse)
-        if os.name == 'nt':
-            # Windows: use tasklist
-            check_cmd = ["tasklist", "/FI", "IMAGENAME eq node.exe", "/FO", "CSV"]
-            check_result = subprocess.run(check_cmd, capture_output=True, text=True, timeout=5, shell=True)
-            # Can't easily distinguish monitor from other node processes on Windows
-            # Just check if config exists and assume it might be running
-            config_file = Path.home() / ".claude-langfuse" / "config.json"
-            if config_file.exists():
-                result["monitor"] = "configured"
-                logging.info("claude-langfuse-monitor configured (can't verify if running on Windows)")
-            else:
-                result["monitor"] = "not_configured"
-        else:
-            # Unix: use pgrep
-            check_cmd = ["pgrep", "-f", "claude-langfuse-monitor"]
-            check_result = subprocess.run(check_cmd, capture_output=True, text=True, timeout=5)
-            if check_result.returncode == 0:
-                result["monitor"] = "running"
-                logging.info("claude-langfuse-monitor already running")
-            else:
-                # Start monitor
-                logging.info("Starting claude-langfuse-monitor...")
-                subprocess.Popen(
-                    ["npx", "claude-langfuse-monitor", "start"],
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    start_new_session=True
-                )
-                result["monitor"] = "started"
-    except Exception as e:
-        result["monitor"] = "failed"
-        logging.error(f"Failed to check/start monitor: {e}")
+    return ""
 
-    return result
+
+def determine_workspace_root(input_data: dict) -> str:
+    """
+    Determine workspace root with fallback chain.
+
+    Priority:
+    0. Hook file location (MOST RELIABLE - hook is always at .claude/hooks/)
+    1. workspace_root from VSCode (if available in future)
+    2. Derive from transcript_path (multi-window safe)
+    3. CLAUDE_PROJECT_DIR env var
+    4. Current working directory (LEAST RELIABLE)
+    """
+    # Priority 0: Hook file location (hook is at .claude/hooks/session_start.py)
+    # Workspace is 2 levels up: .claude/hooks/ -> .claude/ -> workspace/
+    hook_file = Path(__file__).resolve()
+    workspace_from_hook = hook_file.parent.parent.parent
+
+    # Validate it looks like a Nexus instance (has 00-system/)
+    if (workspace_from_hook / "00-system").exists():
+        logging.info(f"Using workspace from hook location: {workspace_from_hook}")
+        return str(workspace_from_hook)
+    else:
+        logging.warning(f"Hook location doesn't look like Nexus: {workspace_from_hook}")
+
+    # Priority 1: Direct from VSCode (future enhancement)
+    workspace = input_data.get("workspace_root", "")
+    if workspace and Path(workspace).exists():
+        logging.info(f"Using workspace from VSCode: {workspace}")
+        return workspace
+
+    # Priority 2: Derive from transcript (BEST for multi-window)
+    transcript_path = input_data.get("transcript_path", "")
+    if transcript_path:
+        workspace = derive_workspace_from_transcript(transcript_path)
+        if workspace and Path(workspace).exists():
+            logging.info(f"Derived workspace from transcript: {workspace}")
+            return workspace
+
+    # Priority 3: Environment variable
+    workspace = os.environ.get("CLAUDE_PROJECT_DIR", "") or os.environ.get("CLAUDE_BUILD_DIR", "")
+    if workspace and Path(workspace).exists():
+        logging.info(f"Using workspace from env var: {workspace}")
+        return workspace
+
+    # Priority 4: Current working directory (LEAST RELIABLE)
+    workspace = str(Path.cwd())
+    logging.warning(f"Falling back to current working directory: {workspace}")
+    return workspace
 
 
 def main():
@@ -926,7 +952,39 @@ def main():
         source = input_data.get("source", "startup")
         transcript_path = input_data.get("transcript_path", "unknown")
 
-        build_dir = os.environ.get("CLAUDE_PROJECT_DIR", "") or os.environ.get("CLAUDE_BUILD_DIR", "")
+        # ✅ FIX: Use multi-window safe workspace detection
+        build_dir = determine_workspace_root(input_data)
+
+        # Validate workspace exists and is a Nexus instance
+        if not build_dir:
+            logging.error("Could not determine workspace root - using fallback mode")
+            build_dir = str(Path.cwd())
+
+        workspace_path = Path(build_dir)
+        if not workspace_path.exists():
+            logging.error(f"Workspace directory doesn't exist: {build_dir}")
+            # Return minimal startup context
+            source = "new"
+
+        # Validate transcript belongs to this workspace (multi-window safety)
+        if transcript_path and transcript_path != "unknown":
+            transcript_file = Path(transcript_path).resolve()
+            expected_transcript_dir = workspace_path / ".claude" / "transcripts"
+
+            try:
+                if not transcript_file.is_relative_to(expected_transcript_dir):
+                    logging.error("=" * 80)
+                    logging.error("WORKSPACE MISMATCH DETECTED (multi-window)")
+                    logging.error(f"  Transcript: {transcript_file}")
+                    logging.error(f"  Expected in: {expected_transcript_dir}")
+                    logging.error(f"  Workspace: {workspace_path}")
+                    logging.error("  This usually means VSCode passed wrong transcript path")
+                    logging.error("  Forcing new session mode for safety")
+                    logging.error("=" * 80)
+                    source = "new"  # Force startup mode
+            except (ValueError, AttributeError):
+                # is_relative_to might fail on older Python or cross-drive paths
+                logging.warning("Could not validate transcript path - proceeding with caution")
 
         # 1. Write session ID to session-specific file for tracking
         if session_id != "unknown":
@@ -939,11 +997,6 @@ def main():
                 session_file.write_text(session_id)
             except Exception:
                 pass
-
-        # 1.5. Auto-start Langfuse if installed (fire-and-forget)
-        if build_dir:
-            langfuse_status = ensure_langfuse_running(build_dir)
-            logging.info(f"Langfuse auto-start: {langfuse_status}")
 
         # =======================================================================
         # NEW XML CONTEXT INJECTION (Build 30 - XML Context Restructure)
@@ -1056,21 +1109,6 @@ def main():
                         f.write(f"✓ Within target ({int(target_tokens - estimated_tokens):,} tokens headroom)\n")
             except Exception:
                 pass
-
-        # 7. Ensure server is running (fire-and-forget)
-        ensure_server_running()
-
-        # 8. Send session start event (fire-and-forget)
-        send_to_server(
-            f"/api/v2/sessions/{session_id}/start",
-            {
-                "source_app": "nexus",
-                "source": source,
-                "mode": mode,
-                "build_id": build_id,
-                "timestamp": datetime.now().isoformat()
-            }
-        )
 
         sys.exit(0)
 

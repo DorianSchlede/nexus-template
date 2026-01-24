@@ -105,7 +105,11 @@ def find_build_by_session_id(builds_dir: str, session_id: str) -> Optional[str]:
         return None
 
 
-def parse_transcript_for_build(transcript_path: str, max_entries: int = 500) -> Tuple[Optional[str], str]:
+def parse_transcript_for_build(
+    transcript_path: str,
+    max_entries: int = 500,
+    workspace_builds_dir: Optional[str] = None
+) -> Tuple[Optional[str], str]:
     """
     Parse transcript JSONL to detect active build from tool calls.
 
@@ -115,6 +119,7 @@ def parse_transcript_for_build(transcript_path: str, max_entries: int = 500) -> 
     Args:
         transcript_path: Path to transcript JSONL file
         max_entries: Maximum number of entries to scan from end (default 500)
+        workspace_builds_dir: Optional path to 02-builds/ for validation (multi-window safety)
 
     Returns:
         Tuple of (build_id, detection_method)
@@ -180,6 +185,20 @@ def parse_transcript_for_build(transcript_path: str, max_entries: int = 500) -> 
         # Return most recently mentioned build (only if 1-2 builds touched)
         if build_mentions:
             most_recent_build = max(build_mentions.items(), key=lambda x: x[1])[0]
+
+            # ✅ FIX: Validate build exists in workspace (multi-window safety)
+            if workspace_builds_dir:
+                build_path = Path(workspace_builds_dir) / most_recent_build
+                if not build_path.exists():
+                    logging.warning("=" * 80)
+                    logging.warning("BUILD FROM TRANSCRIPT NOT IN WORKSPACE")
+                    logging.warning(f"  Build ID: {most_recent_build}")
+                    logging.warning(f"  Expected: {build_path}")
+                    logging.warning(f"  This transcript is from a different workspace")
+                    logging.warning("  Ignoring build detection for safety")
+                    logging.warning("=" * 80)
+                    return None, "none"
+
             logging.info(f"Found build in transcript from tool_use: {most_recent_build}")
             return most_recent_build, "transcript"
 
