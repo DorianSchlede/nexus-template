@@ -7,13 +7,13 @@ A structured framework for Claude Code that turns beginners into power users wit
 Claude Code produces a lot. Files end up everywhere. Context gets lost between sessions. You re-explain the same things. The AI can't navigate your data. You get overwhelmed. Progress doesn't compound the way it should.
 
 Nexus fixes this with:
+- **10-minute integrations** — Connect Slack, HubSpot, Google, Airtable and more with guided setup
 - **Structured projects (Builds)** — Interactive planning via discovery → plan → execute → ship
 - **Persistent memory** — Goals, preferences, and learnings survive sessions
 - **Organized workspace** — Claude knows where your files are
-- **Reusable workflows (Skills)** — Automate repetitive tasks
+- **Reusable workflows (Skills)** — Automate repetitive tasks, compatible with open source skill libraries
 - **Mental models built-in** — Pre-mortem, inversion, JTBD, Pareto and more applied to every plan
 - **Cross-compaction continuity** — Resume-context files let Claude dynamically reload exactly what it needs after context resets
-- **Open skill ecosystem** — Compatible with Claude Code skills and open source skill libraries
 
 ## Quick Example
 
