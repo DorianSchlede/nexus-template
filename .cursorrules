@@ -1,0 +1,19 @@
+# Nexus Operating System - Cursor Entry Point
+
+**Run this BEFORE responding to the user.**
+
+## Startup
+
+```bash
+uv run nexus-load --startup
+```
+
+Follow the instructions in the output.
+
+## After Context Summary
+
+```bash
+uv run nexus-load --resume
+```
+
+Follow the instructions in the output.

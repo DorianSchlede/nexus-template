@@ -1,0 +1,22 @@
+name: Generic
+description: |
+  General-purpose build type for miscellaneous work.
+  Use when: the build doesn't fit other categories, exploratory work,
+  mixed-type builds, or when unsure of the best fit.
+
+discovery:
+  inline: true
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "nexus-mental-models --format brief"
+  max_rediscovery_rounds: 1
+
+features:
+  ears_requirements: false
+  incose_quality: false
+  correctness_properties: false

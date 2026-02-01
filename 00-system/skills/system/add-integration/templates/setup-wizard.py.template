@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""
+{{SERVICE_NAME}} Setup Wizard
+
+Interactive setup for {{SERVICE_NAME}} integration.
+Guides through API key setup, tests connection, and saves to .env.
+
+Usage:
+    python setup_{{SERVICE_SLUG}}.py
+"""
+
+import os
+import sys
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent.parent
+ENV_FILE = PROJECT_ROOT / ".env"
+
+
+def print_header():
+    """Print setup header"""
+    print()
+    print("=" * 50)
+    print("  {{SERVICE_NAME}} Integration Setup")
+    print("=" * 50)
+    print()
+
+
+def get_existing_env():
+    """Load existing .env variables"""
+    env_vars = {}
+    if ENV_FILE.exists():
+        with open(ENV_FILE, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, _, value = line.partition('=')
+                    env_vars[key.strip()] = value.strip().strip('"\'')
+    return env_vars
+
+
+def save_to_env(new_vars):
+    """Save variables to .env file, preserving existing content"""
+    existing = get_existing_env()
+    existing.update(new_vars)
+
+    # Read existing file to preserve comments and structure
+    lines = []
+    if ENV_FILE.exists():
+        with open(ENV_FILE, 'r') as f:
+            for line in f:
+                stripped = line.strip()
+                if stripped and not stripped.startswith('#') and '=' in stripped:
+                    key = stripped.split('=')[0].strip()
+                    if key in new_vars:
+                        # Replace with new value
+                        lines.append(f"{key}={new_vars[key]}\n")
+                        del new_vars[key]
+                    else:
+                        lines.append(line)
+                else:
+                    lines.append(line)
+
+    # Add any new variables not in existing file
+    if new_vars:
+        if lines and not lines[-1].endswith('\n'):
+            lines.append('\n')
+        lines.append(f"\n# {{SERVICE_NAME}} Integration\n")
+        for key, value in new_vars.items():
+            lines.append(f"{key}={value}\n")
+
+    with open(ENV_FILE, 'w') as f:
+        f.writelines(lines)
+
+
+def test_connection(api_key{{ADDITIONAL_TEST_PARAMS}}):
+    """Test API connection"""
+    try:
+        import requests
+
+{{CONNECTION_TEST_CODE}}
+
+    except ImportError:
+        print("Error: requests library not installed")
+        print("Run: pip install requests")
+        return False
+    except Exception as e:
+        print(f"Connection test failed: {e}")
+        return False
+
+
+def main():
+    print_header()
+
+    existing = get_existing_env()
+
+    # Check if already configured
+    if existing.get('{{ENV_KEY}}'):
+        print("{{SERVICE_NAME}} appears to be already configured.")
+        print(f"  API Key: {existing['{{ENV_KEY}}'][:8]}...")
+        response = input("\nReconfigure? (y/N): ").strip().lower()
+        if response != 'y':
+            print("Setup cancelled.")
+            return
+        print()
+
+    # Get API key
+    print("Step 1: Get your {{SERVICE_NAME}} API key")
+    print("-" * 40)
+{{API_KEY_INSTRUCTIONS}}
+    print()
+
+    api_key = input("Paste your API key here: ").strip()
+    if not api_key:
+        print("Error: API key is required")
+        sys.exit(1)
+
+{{ADDITIONAL_SETUP_STEPS}}
+
+    # Test connection
+    print()
+    print("Step {{FINAL_STEP_NUM}}: Testing connection...")
+    print("-" * 40)
+
+    if test_connection(api_key{{ADDITIONAL_TEST_ARGS}}):
+        print("Connection successful!")
+        print()
+
+        # Save to .env
+        print("Saving configuration to .env...")
+        save_to_env({
+            '{{ENV_KEY}}': api_key,
+{{ADDITIONAL_SAVE_VARS}}
+        })
+
+        print()
+        print("=" * 50)
+        print("  Setup Complete!")
+        print("=" * 50)
+        print()
+        print("You can now use {{SERVICE_NAME}} skills:")
+{{USAGE_EXAMPLES}}
+        print()
+    else:
+        print()
+        print("Setup failed. Please check your credentials and try again.")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

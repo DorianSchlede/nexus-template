@@ -1,0 +1,107 @@
+---
+name: {{INTEGRATION}}-master
+description: Shared resource library for {{INTEGRATION_TITLE}} integration skills. DO NOT load directly - provides common references (setup, API docs, error handling) and scripts used by {{CHILD_SKILL_1}}, {{CHILD_SKILL_2}}, and {{CHILD_SKILL_3}}.
+---
+
+# {{INTEGRATION_TITLE}} Master
+
+**This is NOT a user-facing skill.** It's a shared resource library.
+
+## Purpose
+
+Provides shared resources to eliminate duplication across:
+- `{{CHILD_SKILL_1}}` - {{CHILD_SKILL_1_DESC}}
+- `{{CHILD_SKILL_2}}` - {{CHILD_SKILL_2_DESC}}
+- `{{CHILD_SKILL_3}}` - {{CHILD_SKILL_3_DESC}}
+
+**Instead of loading this skill**, users invoke the specific skill above.
+
+---
+
+## Architecture: DRY Principle
+
+**Problem solved:** {{NUM_SKILLS}} skills had duplicated content (setup {{NUM_SKILLS}}x, API docs {{NUM_SKILLS}}x, error tables {{NUM_SKILLS}}x).
+
+**Solution:** Extract shared content into `references/` and `scripts/`.
+
+**Result:** Significant context reduction and single source of truth.
+
+---
+
+## Shared Resources
+
+### references/
+
+**[setup-guide.md](references/setup-guide.md)** - Complete setup wizard
+- Getting {{INTEGRATION_TITLE}} API key / credentials
+- Configuration files (.env, user-config.yaml)
+- Validation steps
+
+**[api-reference.md](references/api-reference.md)** - API patterns
+- Base URL and authentication
+- Key endpoints with examples
+- Request/response formats
+- Rate limits
+
+**[error-handling.md](references/error-handling.md)** - Troubleshooting
+- Common errors and solutions
+- Recovery patterns
+- Debugging tips
+
+{{ADDITIONAL_REFERENCES}}
+
+### scripts/
+
+**[check_{{INTEGRATION}}_config.py](scripts/check_{{INTEGRATION}}_config.py)** - Pre-flight validation
+- Checks .env for required variables
+- Tests API connection
+- Returns actionable errors
+
+**[discover_resources.py](scripts/discover_resources.py)** - Resource discovery
+- Finds accessible {{RESOURCE_TYPE}}s
+- Extracts schemas
+- Saves to context file
+
+{{ADDITIONAL_SCRIPTS}}
+
+---
+
+## How Skills Reference This
+
+Each skill loads shared resources **only when needed** (progressive disclosure):
+
+**{{CHILD_SKILL_1}}** uses:
+- `check_{{INTEGRATION}}_config.py` (validate before operation)
+- `api-reference.md` (query patterns)
+- `error-handling.md` (troubleshooting)
+
+**{{CHILD_SKILL_2}}** uses:
+- `check_{{INTEGRATION}}_config.py` (validate before operation)
+- `api-reference.md` ({{OPERATION_2}} patterns)
+- `error-handling.md` (troubleshooting)
+
+**{{CHILD_SKILL_3}}** uses:
+- `check_{{INTEGRATION}}_config.py` (validate before operation)
+- `api-reference.md` ({{OPERATION_3}} patterns)
+- `error-handling.md` (troubleshooting)
+
+---
+
+## Usage Example
+
+**User says:** "{{EXAMPLE_USER_REQUEST}}"
+
+**What happens:**
+1. AI loads `{{CHILD_SKILL_1}}` (NOT {{INTEGRATION}}-master)
+2. `{{CHILD_SKILL_1}}` SKILL.md says: "Run check_{{INTEGRATION}}_config.py first"
+3. AI executes: `python {{INTEGRATION}}-master/scripts/check_{{INTEGRATION}}_config.py`
+4. AI executes the requested operation
+5. If errors occur, AI loads: `{{INTEGRATION}}-master/references/error-handling.md`
+
+**{{INTEGRATION}}-master is NEVER loaded directly** - it's just a resource library.
+
+---
+
+**Version**: 1.0
+**Created**: {{DATE}}
+**Status**: {{STATUS}}

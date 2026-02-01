@@ -1,0 +1,34 @@
+---
+description: Nexus operating system entry point. Run nexus-load to get context.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# Nexus Operating System - Cursor Entry Point
+
+**Run this BEFORE responding to the user.**
+
+## Startup
+
+```bash
+uv run nexus-load --startup
+```
+
+Follow the instructions in the output.
+
+## After Context Summary
+
+```bash
+uv run nexus-load --resume
+```
+
+Follow the instructions in the output.
+
+## Manual Fallback
+
+If nexus-load fails, read these files in order:
+1. `00-system/core/orchestrator.md` — Routing rules
+2. `01-memory/goals.md` — User context
+3. `02-builds/active/` — Work in progress
+
+Then follow the orchestrator instructions.

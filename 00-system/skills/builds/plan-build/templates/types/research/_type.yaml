@@ -1,0 +1,24 @@
+name: Research
+description: |
+  Conduct academic or technical research with paper analysis.
+  Use when: literature reviews, systematic reviews, technical deep-dives,
+  competitive analysis requiring papers, knowledge synthesis from publications.
+
+discovery:
+  skill: create-research-build
+  skill_load_command: "nexus-load --skill create-research-build"
+  inline: false
+
+outputs:
+  discovery_file: "02-discovery.md"
+  versioned_resources: true
+
+mental_models:
+  dynamic: true
+  load_command: "nexus-mental-models --format brief"
+  max_rediscovery_rounds: 2
+
+features:
+  ears_requirements: false
+  incose_quality: false
+  correctness_properties: false

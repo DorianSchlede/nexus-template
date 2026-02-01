@@ -1,0 +1,11 @@
+[project]
+name = "airtable"
+version = "0.1.0"
+description = "Airtable integration skills for Nexus"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.0",
+]
+
+[tool.uv]
+dev-dependencies = []

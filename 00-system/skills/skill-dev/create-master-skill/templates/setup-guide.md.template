@@ -1,0 +1,184 @@
+# {{INTEGRATION_TITLE}} Setup Guide
+
+**Single source of truth for setting up {{INTEGRATION_TITLE}} integration with Nexus**
+
+Reference this file from all {{INTEGRATION_TITLE}}-related skills using progressive disclosure.
+
+---
+
+## Pre-Flight Check
+
+Before ANY {{INTEGRATION_TITLE}} operation, verify setup:
+
+```
+🔍 Pre-flight check...
+
+1. API Key:     [.env → {{INTEGRATION_UPPER}}_API_KEY]
+2. {{RESOURCE_ID_NAME}}:  [.env → {{INTEGRATION_UPPER}}_{{RESOURCE_UPPER}}_ID] (optional)
+3. User ID:     [user-config.yaml → {{INTEGRATION}}_user_id] (optional)
+
+❌ Missing config? → Run First-Time Setup below
+✅ All configured? → Proceed with operation
+```
+
+**To run check programmatically:** Use `00-system/skills/{{INTEGRATION}}-master/scripts/check_{{INTEGRATION}}_config.py`
+
+---
+
+## First-Time Setup Wizard
+
+### Interactive Setup Flow
+
+```
+🔧 {{INTEGRATION_TITLE}} Setup Required
+
+I'll help you set up {{INTEGRATION_TITLE}} integration:
+
+Step 1: Get API Key
+   → Go to {{API_KEY_URL}}
+   → {{API_KEY_INSTRUCTIONS}}
+   → Copy the API key/token
+
+Step 2: Add to .env
+   → I'll create/update your .env file with:
+     {{INTEGRATION_UPPER}}_API_KEY=your-key-here
+     {{ADDITIONAL_ENV_VARS}}
+
+Step 3: Validate Connection
+   → I'll test the API connection
+   → Verify your credentials work
+
+Step 4: Get User ID (optional)
+   → Query {{INTEGRATION_TITLE}} API for your user info
+   → Save to user-config.yaml
+
+Ready to start? (yes/no)
+```
+
+---
+
+## Configuration Files
+
+### .env File
+
+**Location:** Build root (`Nexus-v4/.env`)
+
+**Required variables:**
+```bash
+{{INTEGRATION_UPPER}}_API_KEY={{API_KEY_FORMAT}}
+{{ADDITIONAL_REQUIRED_VARS}}
+```
+
+**Optional variables:**
+```bash
+{{OPTIONAL_ENV_VARS}}
+```
+
+**How to set:**
+```bash
+# If .env doesn't exist, create it
+echo "{{INTEGRATION_UPPER}}_API_KEY=your-key-here" > .env
+
+# If .env exists, append
+echo "{{INTEGRATION_UPPER}}_API_KEY=your-key-here" >> .env
+```
+
+### user-config.yaml File
+
+**Location:** `01-memory/user-config.yaml`
+
+**Optional fields:**
+```yaml
+{{INTEGRATION}}_user_id: "{{USER_ID_FORMAT}}"
+{{INTEGRATION}}_user_name: "Your Name"
+```
+
+**How to get user ID:**
+```bash
+# Query {{INTEGRATION_TITLE}} API
+{{GET_USER_CURL}}
+```
+
+---
+
+## Validation
+
+### Test API Connection
+
+```bash
+{{TEST_CONNECTION_CURL}}
+```
+
+**Expected responses:**
+- `401 Unauthorized` → Invalid API key, check {{INTEGRATION_UPPER}}_API_KEY
+- `403 Forbidden` → Insufficient permissions
+- `200 Success` → Connection works
+
+### Test Resource Access
+
+```bash
+{{TEST_RESOURCE_CURL}}
+```
+
+**Expected responses:**
+- `404 Not Found` → Wrong resource ID or no access
+- `200 Success` → Resource accessible
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `401 Unauthorized` | Invalid API key | Check {{INTEGRATION_UPPER}}_API_KEY in .env |
+| `403 Forbidden` | No permission | {{PERMISSION_SOLUTION}} |
+| `404 Not Found` | Wrong resource ID | Verify resource ID |
+| `.env not found` | Missing .env file | Create .env in build root |
+| Connection timeout | Network issue | Check internet, firewall |
+
+---
+
+## Automated Setup Script
+
+**Script:** `00-system/skills/{{INTEGRATION}}-master/scripts/setup_{{INTEGRATION}}.py`
+
+**What it does:**
+1. Checks for existing .env and user-config.yaml
+2. Guides through API key setup
+3. Tests API connection
+4. Retrieves user ID (optional)
+5. Saves configuration
+6. Runs resource discovery
+
+**Usage:**
+```bash
+python 00-system/skills/{{INTEGRATION}}-master/scripts/setup_{{INTEGRATION}}.py
+```
+
+---
+
+## Security Notes
+
+- **Never commit** `.env` to git (already in .gitignore)
+- **API keys are secrets** - treat like passwords
+- **Rotate keys** if compromised
+- **Use least privilege** - only request needed permissions
+
+---
+
+## Reference from Skills
+
+**In SKILL.md files, reference this document:**
+
+```markdown
+## Setup
+
+Before using this skill, ensure {{INTEGRATION_TITLE}} is configured.
+
+**Quick check:** Run pre-flight validation
+**First time?** See [Setup Guide](../{{INTEGRATION}}-master/references/setup-guide.md)
+```
+
+---
+
+**Last Updated:** {{DATE}}

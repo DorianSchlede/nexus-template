@@ -1,0 +1,255 @@
+# {{INTEGRATION_TITLE}} API Reference
+
+**Consolidated {{INTEGRATION_TITLE}} API documentation for Nexus integration.**
+
+---
+
+## Base Configuration
+
+### API Base URL
+
+```
+{{API_BASE_URL}}
+```
+
+### Required Headers
+
+```bash
+Authorization: {{AUTH_HEADER_FORMAT}}
+Content-Type: application/json
+{{ADDITIONAL_HEADERS}}
+```
+
+### API Version
+
+{{API_VERSION_INFO}}
+
+---
+
+## Authentication
+
+### Method: {{AUTH_METHOD}}
+
+{{AUTH_DESCRIPTION}}
+
+**Header format:**
+```
+Authorization: {{AUTH_HEADER_FORMAT}}
+```
+
+**Example:**
+```bash
+curl -H "Authorization: {{AUTH_EXAMPLE}}" {{API_BASE_URL}}/{{EXAMPLE_ENDPOINT}}
+```
+
+{{ADDITIONAL_AUTH_INFO}}
+
+---
+
+## Core Endpoints
+
+### List {{RESOURCE_PLURAL}}
+
+```bash
+GET {{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}
+```
+
+**Parameters:**
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+{{LIST_PARAMS}}
+
+**Example:**
+```bash
+curl "{{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}?limit=10" \
+  -H "Authorization: {{AUTH_EXAMPLE}}"
+```
+
+**Response:**
+```json
+{{LIST_RESPONSE_EXAMPLE}}
+```
+
+---
+
+### Get {{RESOURCE_SINGULAR}}
+
+```bash
+GET {{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{id}
+```
+
+**Example:**
+```bash
+curl "{{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{{EXAMPLE_ID}}" \
+  -H "Authorization: {{AUTH_EXAMPLE}}"
+```
+
+**Response:**
+```json
+{{GET_RESPONSE_EXAMPLE}}
+```
+
+---
+
+### Create {{RESOURCE_SINGULAR}}
+
+```bash
+POST {{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}
+```
+
+**Request body:**
+```json
+{{CREATE_REQUEST_EXAMPLE}}
+```
+
+**Example:**
+```bash
+curl -X POST "{{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}" \
+  -H "Authorization: {{AUTH_EXAMPLE}}" \
+  -H "Content-Type: application/json" \
+  -d '{{CREATE_CURL_DATA}}'
+```
+
+**Response:**
+```json
+{{CREATE_RESPONSE_EXAMPLE}}
+```
+
+---
+
+### Update {{RESOURCE_SINGULAR}}
+
+```bash
+{{UPDATE_METHOD}} {{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{id}
+```
+
+**Request body:**
+```json
+{{UPDATE_REQUEST_EXAMPLE}}
+```
+
+**Example:**
+```bash
+curl -X {{UPDATE_METHOD}} "{{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{{EXAMPLE_ID}}" \
+  -H "Authorization: {{AUTH_EXAMPLE}}" \
+  -H "Content-Type: application/json" \
+  -d '{{UPDATE_CURL_DATA}}'
+```
+
+---
+
+### Delete {{RESOURCE_SINGULAR}}
+
+```bash
+DELETE {{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{id}
+```
+
+**Example:**
+```bash
+curl -X DELETE "{{API_BASE_URL}}/{{RESOURCE_ENDPOINT}}/{{EXAMPLE_ID}}" \
+  -H "Authorization: {{AUTH_EXAMPLE}}"
+```
+
+---
+
+## Query & Filtering
+
+### Filter Syntax
+
+{{FILTER_SYNTAX_DESCRIPTION}}
+
+**Operators:**
+| Operator | Description | Example |
+|----------|-------------|---------|
+{{FILTER_OPERATORS}}
+
+**Example filtered query:**
+```bash
+{{FILTER_EXAMPLE}}
+```
+
+---
+
+### Sorting
+
+{{SORT_DESCRIPTION}}
+
+**Example:**
+```bash
+{{SORT_EXAMPLE}}
+```
+
+---
+
+### Pagination
+
+{{PAGINATION_DESCRIPTION}}
+
+**Parameters:**
+| Parameter | Description |
+|-----------|-------------|
+{{PAGINATION_PARAMS}}
+
+**Example:**
+```bash
+{{PAGINATION_EXAMPLE}}
+```
+
+---
+
+## Rate Limits
+
+| Limit Type | Value |
+|------------|-------|
+{{RATE_LIMIT_TABLE}}
+
+**Rate limit headers:**
+```
+{{RATE_LIMIT_HEADERS}}
+```
+
+**Handling rate limits:**
+1. Check `{{RATE_REMAINING_HEADER}}` header
+2. If limited (429), wait for `{{RETRY_AFTER_HEADER}}` seconds
+3. Use exponential backoff (1s, 2s, 4s, 8s...)
+
+---
+
+## Common Patterns
+
+### Pattern 1: {{PATTERN_1_NAME}}
+
+{{PATTERN_1_DESCRIPTION}}
+
+```bash
+{{PATTERN_1_EXAMPLE}}
+```
+
+### Pattern 2: {{PATTERN_2_NAME}}
+
+{{PATTERN_2_DESCRIPTION}}
+
+```bash
+{{PATTERN_2_EXAMPLE}}
+```
+
+---
+
+## Property Types Reference
+
+| Type | Description | Read Format | Write Format |
+|------|-------------|-------------|--------------|
+{{PROPERTY_TYPES_TABLE}}
+
+---
+
+## Official Documentation
+
+- **API Reference:** {{OFFICIAL_API_DOCS_URL}}
+- **Authentication:** {{OFFICIAL_AUTH_DOCS_URL}}
+- **Rate Limits:** {{OFFICIAL_RATE_DOCS_URL}}
+- **Changelog:** {{OFFICIAL_CHANGELOG_URL}}
+
+---
+
+**Last Updated:** {{DATE}}

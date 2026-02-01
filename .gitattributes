@@ -1,0 +1,20 @@
+# Git attributes for Nexus Template
+
+# Shell scripts should always use LF line endings
+*.sh text eol=lf
+
+# PowerShell scripts can use CRLF (Windows default)
+*.ps1 text eol=crlf
+
+# Python scripts use LF
+*.py text eol=lf
+
+# Markdown and documentation use LF
+*.md text eol=lf
+
+# YAML files use LF
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# JSON files use LF
+*.json text eol=lf

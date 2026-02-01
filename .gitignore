@@ -1,0 +1,90 @@
+# Nexus-v4 .gitignore
+
+# Temporary output files
+startup.txt
+*.log
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# MCP Configuration (contains API keys)
+.mcp.local.json
+
+# Claude Code local settings (user-specific, not for sharing)
+.claude/settings.local.json
+.claude/.setup_complete
+.claude/sessions/
+
+# Google OAuth credentials
+google-credentials.json
+
+# Database files
+events.db
+events.db-shm
+events.db-wal
+*.db
+
+# Logs
+logs/
+
+# Trash
+TRASH/
+
+# Cache directories
+.cache/
+00-system/.cache/
+
+# Kiro
+.kiro/
+
+# Problematic files
+**/nul
+
+# Meta skills (internal development)
+00-system/skills/meta/
+
+# Active builds (work in progress)
+02-builds/active/*
+# Completed builds
+02-builds/complete/*

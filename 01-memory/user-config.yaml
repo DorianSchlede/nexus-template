@@ -1,0 +1,203 @@
+---
+# User Configuration
+# Purpose: Store persistent user preferences (loaded every session)
+# Updated: Set during onboarding, modified anytime
+# Schema Version: 5.0
+
+smart_default: true
+schema_version: "5.0"
+
+user_preferences:
+  language: "English"
+  timezone: "[TODO: Replace with user's timezone, e.g., 'America/New_York', 'Europe/Berlin']"
+  date_format: "YYYY-MM-DD"
+  auto_install_packages: null  # null = ask first time, true = auto-install, false = always ask
+
+  system:
+    python_cmd: "[TODO: Replace with 'python' or 'python3' depending on system]"
+
+onboarding:
+  # Overall status (simplified in v5)
+  # Values: not_started | in_progress | complete
+  status: "complete"
+
+  # Current in-progress skill (for cross-session resume)
+  # Values: null | "quick-start" | "complete-setup"
+  in_progress_skill: null
+
+  # User choices during onboarding
+  language_preference: "en"  # en, de, es, fr, it, ja, zh, or custom string
+
+  # Which onboarding path chosen (v5 hybrid approach)
+  # Values: null | "quick_start" | "complete_setup"
+  path_chosen: "quick_start"
+
+  # Quick Start state (Path A - 8-10 min)
+  quick_start_state:
+    step_completed: 5  # 0-5 (which step is done)
+    goal_captured: true
+    workspace_created: true
+    build_chosen: true
+    planning_complete: true
+
+  # Complete Setup state (Path B - 10-12 min)
+  complete_setup_state:
+    step_completed: 0  # 0-7 (which step is done)
+    files_uploaded: false
+    file_analysis_done: false
+    role_captured: false
+    goals_captured: false
+    roadmap_created: false
+    workspace_created: false
+    first_build_created: true
+    hi_menu_taught: false
+
+  # Timestamps (for analytics)
+  started_at: null
+  completed_at: null
+
+first_encounters:
+  resume_update_reminder: true
+  build_created: true
+  skill_loaded: true
+  workspace_used: true
+  memory_updated: true
+  close_session_used: true
+
+anti_patterns_warned:
+  repeated_build_pattern: false
+
+learning_tracker:
+  session_count: 0
+  completed:
+    # Onboarding paths
+    quick_start: true
+    complete_setup: false
+    # Optional learning skills
+    how_nexus_works: false
+    learn_integrations: false
+    learn_builds: false
+    learn_skills: false
+    learn_nexus: false
+    learn_memory: false
+  dismissed: []
+  last_suggested: null
+  suggestion_preference: "normal"
+
+created: null
+updated: null
+
+# =============================================================================
+# INSTRUCTIONS FOR AI (all lines below are comments)
+# =============================================================================
+#
+# SCHEMA VERSION 5.0 - Hybrid Onboarding Approach
+#
+# When this file is loaded (every session via --startup):
+# 1. Respect the language preference throughout ALL interactions
+# 2. Use timezone for accurate session timestamps
+# 3. Format dates according to user preference
+# 4. Check onboarding.status for session routing
+# 5. Check learning_tracker for skill suggestions
+#
+# =============================================================================
+# ONBOARDING FLOW (v5 - Hybrid Approach)
+# =============================================================================
+#
+# Session 1:
+#   1. Heroic intro (real examples, 1 min)
+#   2. Language selection (30 sec)
+#   3. Fork decision: "Quick Start (6 min)" vs "Complete Setup (10-12 min)"
+#
+# If Quick Start chosen:
+#   - Sets path_chosen = "quick_start"
+#   - Loads quick-start skill (6 steps: 0-5)
+#   - Step 0: How Nexus works (30 sec) - file structure, auto-save
+#   - Step 1: Goal capture + clarification via AskUserQuestion (2-3 min)
+#   - Step 2: Workspace setup with iteration (2 min) - user confirms structure
+#   - Step 3: First BUILD selection from dynamic options (2 min)
+#   - Step 4: Planning rounds - 3 rounds of 2 questions each (3-4 min)
+#   - Step 5: What's next - explain new session for execution (1 min)
+#   - Total: ~8-10 minutes
+#   - Result: Goal defined, workspace ready, BUILD fully planned, ready for execution next session
+#
+# If Complete Setup chosen:
+#   - Sets path_chosen = "complete_setup"
+#   - Loads complete-setup skill (7 steps)
+#   - Step 1: Optional file upload + AI analysis (2-3 min)
+#   - Step 2: Define goals (2 min)
+#   - Step 3: Generate roadmap (max 3 items) (2 min)
+#   - Step 4: Create workspace structure (1-2 min)
+#   - Step 5: Create first BUILD (2 min)
+#   - Step 6: Teach "Hi" → Menu (1 min)
+#   - Step 7: Archive onboarding project (automatic)
+#   - Total: ~10-12 minutes
+#   - Result: Personalized roadmap, contextualized workspace, first BUILD
+#
+# =============================================================================
+# ONBOARDING STATUS VALUES (v5 - Simplified)
+# =============================================================================
+#
+# not_started    -> First run, show heroic intro
+# in_progress    -> Currently in onboarding (check in_progress_skill)
+# complete       -> Onboarding finished, normal operation
+#
+# =============================================================================
+# CROSS-SESSION CONTINUITY
+# =============================================================================
+#
+# If onboarding.status == "in_progress":
+#   - Check path_chosen to determine which path
+#   - Check appropriate state object (quick_start_state or complete_setup_state)
+#   - Resume from step_completed + 1
+#
+# If session source is "compact" and in_progress_skill is set:
+#   - Resume the skill from where user left off
+#   - For quick-start: resume from quick_start_state.step_completed + 1
+#   - For complete-setup: resume from complete_setup_state.step_completed + 1
+#
+# =============================================================================
+# LANGUAGE PREFERENCE
+# =============================================================================
+#
+# If onboarding.language_preference is set:
+#   - Use this language for ALL user-facing text
+#   - Supported: en, de, es, fr, it, ja, zh, or custom string
+#   - AI should respond in selected language
+# If not set (null):
+#   - Default to English
+#   - Will be set during onboarding flow (language selection step)
+#
+# =============================================================================
+# STATE MANAGEMENT (v5)
+# =============================================================================
+#
+# Use state_writer.py for all config updates:
+#
+#   from nexus.state_writer import update_yaml_path, update_multiple_paths
+#
+#   # Single update
+#   update_yaml_path(config_path, "onboarding.status", "in_progress")
+#
+#   # Multiple updates (preferred for atomic operation)
+#   update_multiple_paths(config_path, {
+#       "onboarding.status": "in_progress",
+#       "onboarding.path_chosen": "quick_start",
+#       "onboarding.quick_start_state.step_completed": 2
+#   })
+#
+# This ensures atomic writes and prevents config corruption.
+#
+# =============================================================================
+# MIGRATION FROM v4
+# =============================================================================
+#
+# If upgrading from v4 (no schema_version field):
+#   - migrate.py automatically runs on session start
+#   - Renames: setup_system_state → complete_setup_state
+#   - Renames: projects_initiated → first_build_created
+#   - Adds: schema_version, path_chosen, quick_start_state
+#   - Updates: in_progress_skill "setup-system" → "complete-setup"
+#   - Simplifies: status values (7 → 3)
+#   - Backup created before migration
+#

@@ -1,0 +1,94 @@
+# {{SERVICE_NAME}} Setup Guide
+
+Complete setup instructions for {{SERVICE_NAME}} integration.
+
+## Prerequisites
+
+- Python 3.8+
+- `pip install requests python-dotenv`
+- {{SERVICE_NAME}} account with API access
+
+---
+
+## Step 1: Get Your API Key
+
+{{API_KEY_INSTRUCTIONS}}
+
+---
+
+## Step 2: Configure Environment
+
+Create or edit `.env` file at your build root:
+
+```env
+{{ENV_TEMPLATE}}
+```
+
+---
+
+## Step 3: Verify Setup
+
+Run the configuration checker:
+
+```bash
+python 00-system/skills/{{SERVICE_SLUG}}/{{SERVICE_SLUG}}-master/scripts/check_{{SERVICE_SLUG}}_config.py --test
+```
+
+Expected output:
+```
+{{SERVICE_NAME}} Configuration Status
+========================================
+Status: CONFIGURED
+
+Present variables:
+  {{ENV_KEY}}: xxxxxxxx...
+
+Connection: OK
+```
+
+---
+
+## Alternative: Interactive Setup
+
+Run the setup wizard for guided configuration:
+
+```bash
+python 00-system/skills/{{SERVICE_SLUG}}/{{SERVICE_SLUG}}-master/scripts/setup_{{SERVICE_SLUG}}.py
+```
+
+The wizard will:
+1. Guide you through getting credentials
+2. Test the connection
+3. Save configuration to `.env`
+
+---
+
+## Troubleshooting
+
+### "API key not found"
+- Verify `.env` file exists at build root
+- Check variable name is exactly `{{ENV_KEY}}`
+- Ensure no extra spaces around the `=` sign
+
+### "Connection failed"
+- Verify API key is correct
+- Check your {{SERVICE_NAME}} account has API access enabled
+{{ADDITIONAL_TROUBLESHOOTING}}
+
+### "401 Unauthorized"
+- API key may be invalid or expired
+- Generate a new key and update `.env`
+
+---
+
+## Security Notes
+
+- Never commit `.env` to version control
+- Add `.env` to your `.gitignore`
+- Use read-only API keys when possible
+- Rotate keys periodically (recommended: every 90 days)
+
+---
+
+**Version**: 1.0
+**Created**: {{CREATED_DATE}}
