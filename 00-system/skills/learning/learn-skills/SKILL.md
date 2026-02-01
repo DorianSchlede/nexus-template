@@ -188,9 +188,9 @@ SYSTEM skills in 00-system/skills/
    • 'learn nexus' - System mastery
    ```
 
-3. **Prompt close-session**:
+3. **Session ending tip**:
    ```
-   💡 When you're done working, say "done" to save progress.
+   💡 When you're done, open a NEW chat for your next topic.
    ```
 
 ---

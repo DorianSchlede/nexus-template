@@ -1,0 +1,43 @@
+[project]
+name = "nexus-cli"
+version = "5.0.0"
+description = "Nexus AI Operating System - CLI hooks and tools"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+# Lifecycle hooks - called by Claude Code
+nexus-session-start = "nexus_cli:session_start_main"
+nexus-session-end = "nexus_cli:session_end_main"
+nexus-session-summary = "nexus_cli:session_summary_main"
+nexus-pre-tool-use = "nexus_cli:pre_tool_use_main"
+nexus-post-tool-use = "nexus_cli:post_tool_use_main"
+nexus-user-prompt-submit = "nexus_cli:user_prompt_submit_main"
+nexus-save-resume-state = "nexus_cli:save_resume_state_main"
+# Build management tools
+nexus-load = "nexus_cli:load_main"
+nexus-init-build = "nexus_cli:init_build_main"
+nexus-bulk-complete = "nexus_cli:bulk_complete_main"
+nexus-update-resume = "nexus_cli:update_resume_main"
+# Mental models
+nexus-mental-models = "nexus_cli:mental_models_main"
+# Skill development
+nexus-init-skill = "nexus_cli:init_skill_main"
+nexus-package-skill = "nexus_cli:package_skill_main"
+nexus-validate-skill = "nexus_cli:validate_skill_main"
+# Validation
+nexus-validate-workspace = "nexus_cli:validate_workspace_main"
+
+[project.optional-dependencies]
+langfuse = [
+    "langfuse>=2.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["00-system/nexus_cli"]

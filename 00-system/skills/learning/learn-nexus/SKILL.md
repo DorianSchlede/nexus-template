@@ -186,7 +186,7 @@ Without "done" / "close session":
 ❌ Learnings not captured
 ❌ Next session loses context
 
-Always say "done" when finished.
+Open a NEW chat when you're done with this topic.
 ```
 
 ### Pitfall #3: Over-Organizing
@@ -320,9 +320,9 @@ Answers:
    • Just work - Nexus guides you
    ```
 
-3. **Prompt close-session**:
+3. **Session ending tip**:
    ```
-   💡 When you're done working, say "done" to save progress.
+   💡 When you're done, open a NEW chat for your next topic.
    ```
 
 ---

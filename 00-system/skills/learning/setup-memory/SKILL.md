@@ -351,10 +351,9 @@ Based on the context, this person might want to:
 
    🚀 WHAT'S NEXT:
 
-   1. Close this chat (type 'done' or just close)
-   2. Open a NEW chat
-   3. Say 'hi' - I'll greet you with your context loaded
-   4. Say 'create folders' to organize your workspace
+   1. Open a NEW chat (just click "New Chat" or close this one)
+   2. Say 'hi' - I'll greet you with your context loaded
+   3. Say 'create folders' to organize your workspace
 
    The next session takes ~5 min and sets up your folder structure.
 
