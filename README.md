@@ -13,6 +13,7 @@ Nexus fixes this with:
 - **Reusable workflows (Skills)** — Automate repetitive tasks
 - **Mental models built-in** — Pre-mortem, inversion, JTBD, Pareto and more applied to every plan
 - **Cross-compaction continuity** — Resume-context files let Claude dynamically reload exactly what it needs after context resets
+- **Open skill ecosystem** — Compatible with Claude Code skills and open source skill libraries
 
 ## Quick Example
 
