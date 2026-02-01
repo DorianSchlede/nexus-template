@@ -2,10 +2,10 @@
 
 # Nexus
 
-**Build *the* AI copilot system you didn't think was possible.**
+**Build yourself the AI copilot system you didn't even dream of.**
 
-Efficiency you haven't experienced. Beginner-friendly and simple enough to start today.<br/>
-For Claude Code, Cursor, Cowork — and anyone ready to stop copy-pasting.
+Efficiency you haven't experienced. Beginner-friendly and easy context import.<br/>
+For user of ChatGPT, Claude Code, Cursor, Antigravity, Cowork — and anyone ready to stop copy-pasting and maximize AI efficiency.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-orange.svg)](https://claude.ai/download)
