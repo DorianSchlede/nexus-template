@@ -9,6 +9,7 @@ Claude Code produces a lot. Files end up everywhere. Context gets lost between s
 Nexus fixes this with:
 - **10-minute integrations** — Connect Slack, HubSpot, Google, Airtable and more with guided setup
 - **Structured projects (Builds)** — Interactive planning via discovery → plan → execute → ship
+- **Context upload** — Drop in existing files, docs, or examples during onboarding and Claude learns from them
 - **Persistent memory** — Goals, preferences, and learnings survive sessions
 - **Organized workspace** — Claude knows where your files are
 - **Reusable workflows (Skills)** — Automate repetitive tasks, compatible with open source skill libraries
