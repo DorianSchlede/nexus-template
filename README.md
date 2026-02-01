@@ -11,11 +11,8 @@ Nexus fixes this with:
 - **Persistent memory** — Goals, preferences, and learnings survive sessions
 - **Organized workspace** — Claude knows where your files are
 - **Reusable workflows (Skills)** — Automate repetitive tasks
-- **Mental models built-in** — Structured thinking applied to every plan:
-  - *Pre-Mortem*: What could go wrong? Address it before you start
-  - *Inversion*: What would make this fail? Do the opposite
-  - *Jobs to Be Done*: What's the user actually trying to accomplish?
-  - *Pareto*: What 20% of work drives 80% of results?
+- **Mental models built-in** — Pre-mortem, inversion, JTBD, Pareto and more applied to every plan
+- **Cross-compaction continuity** — Resume-context files let Claude dynamically reload exactly what it needs after context resets
 
 ## Quick Example
 
