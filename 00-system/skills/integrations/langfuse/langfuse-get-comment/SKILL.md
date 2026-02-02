@@ -10,7 +10,7 @@ Retrieve a specific comment by ID.
 ## Usage
 
 ```bash
-python scripts/get_comment.py --comment "comment-abc123"
+uv run python scripts/get_comment.py --comment "comment-abc123"
 ```
 
 ## Parameters

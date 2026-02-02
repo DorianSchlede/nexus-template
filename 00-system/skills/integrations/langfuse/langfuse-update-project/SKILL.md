@@ -12,7 +12,7 @@ Update project settings.
 ## Usage
 
 ```bash
-python scripts/update_project.py --project "proj-abc" --name "New Name"
+uv run python scripts/update_project.py --project "proj-abc" --name "New Name"
 ```
 
 ## Parameters

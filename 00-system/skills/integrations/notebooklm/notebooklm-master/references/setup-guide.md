@@ -91,7 +91,7 @@ NOTEBOOKLM_ENDPOINT_LOCATION=global
 ## Step 6: Verify Setup
 
 ```bash
-python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --test
+uv run python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --test
 ```
 
 Expected output:

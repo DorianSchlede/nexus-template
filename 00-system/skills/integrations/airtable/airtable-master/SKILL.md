@@ -61,7 +61,7 @@ Provides shared resources to eliminate duplication across:
 
 **[check_airtable_config.py](scripts/check_airtable_config.py)** - Pre-flight validation
 ```bash
-python check_airtable_config.py [--verbose] [--json]
+uv run python check_airtable_config.py [--verbose] [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -76,7 +76,7 @@ Exit codes: 0=configured, 1=partial (no bases), 2=not configured
 
 **[setup_airtable.py](scripts/setup_airtable.py)** - Interactive setup wizard
 ```bash
-python setup_airtable.py [--non-interactive] [--api-key KEY]
+uv run python setup_airtable.py [--non-interactive] [--api-key KEY]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -91,7 +91,7 @@ Default: Runs interactively. Guides through PAT creation, tests connection, save
 
 **[discover_bases.py](scripts/discover_bases.py)** - Base discovery (GET /meta/bases)
 ```bash
-python discover_bases.py [--refresh] [--json] [--with-schema]
+uv run python discover_bases.py [--refresh] [--json] [--with-schema]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -109,7 +109,7 @@ Saves to: `01-memory/integrations/airtable-bases.yaml`
 
 **[query_records.py](scripts/query_records.py)** - Query records from table (GET /{baseId}/{tableIdOrName})
 ```bash
-python query_records.py --base BASE --table TABLE [--filter FORMULA] [--fields FIELDS] [--view VIEW] [--sort FIELD] [--limit N] [--json] [--verbose]
+uv run python query_records.py --base BASE --table TABLE [--filter FORMULA] [--fields FIELDS] [--view VIEW] [--sort FIELD] [--limit N] [--json] [--verbose]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -138,13 +138,13 @@ python query_records.py --base BASE --table TABLE [--filter FORMULA] [--fields F
 **[manage_records.py](scripts/manage_records.py)** - CRUD operations (POST/PATCH/PUT/DELETE /{baseId}/{tableIdOrName})
 ```bash
 # Create record(s)
-python manage_records.py create --base BASE --table TABLE --data JSON [--file FILE] [--typecast] [--json] [--verbose]
+uv run python manage_records.py create --base BASE --table TABLE --data JSON [--file FILE] [--typecast] [--json] [--verbose]
 
 # Update record(s)
-python manage_records.py update --base BASE --table TABLE --record RECID --data JSON [--file FILE] [--typecast] [--replace] [--json] [--verbose]
+uv run python manage_records.py update --base BASE --table TABLE --record RECID --data JSON [--file FILE] [--typecast] [--replace] [--json] [--verbose]
 
 # Delete record(s)
-python manage_records.py delete --base BASE --table TABLE --record RECID [--file FILE] [--json] [--verbose]
+uv run python manage_records.py delete --base BASE --table TABLE --record RECID [--file FILE] [--json] [--verbose]
 ```
 
 | Argument | Required | Default | Description |
@@ -167,21 +167,21 @@ python manage_records.py delete --base BASE --table TABLE --record RECID [--file
 **Usage Examples:**
 ```bash
 # Create a single record
-python manage_records.py create --base "My CRM" --table "Contacts" \
+uv run python manage_records.py create --base "My CRM" --table "Contacts" \
     --data '{"Name": "John Doe", "Email": "john@example.com"}'
 
 # Create multiple records from file
-python manage_records.py create --base appXXX --table tblYYY --file records.json
+uv run python manage_records.py create --base appXXX --table tblYYY --file records.json
 
 # Update a record
-python manage_records.py update --base "Tasks" --table "Tasks" \
+uv run python manage_records.py update --base "Tasks" --table "Tasks" \
     --record recXXX --data '{"Status": "Done"}'
 
 # Delete a record
-python manage_records.py delete --base "Tasks" --table "Tasks" --record recXXX
+uv run python manage_records.py delete --base "Tasks" --table "Tasks" --record recXXX
 
 # Batch operations with typecast
-python manage_records.py create --base "CRM" --table "Leads" \
+uv run python manage_records.py create --base "CRM" --table "Leads" \
     --file leads.json --typecast
 ```
 
@@ -198,7 +198,7 @@ When an Airtable skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
+uv run python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

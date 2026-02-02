@@ -18,7 +18,7 @@ Common errors and solutions for Google integration skills.
 **Solutions:**
 ```bash
 # Re-authenticate
-python 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 ---
@@ -36,7 +36,7 @@ python 00-system/skills/google/google-master/scripts/google_auth.py --login
 
 1. **Missing scope:** Re-authenticate to grant all permissions
    ```bash
-   python google_auth.py --login
+   uv run python google_auth.py --login
    ```
 
 2. **Resource not shared:** The document/sheet/calendar isn't shared with you
@@ -202,8 +202,8 @@ python 00-system/skills/google/google-master/scripts/google_auth.py --login
 
 **Solution:**
 ```bash
-python google_auth.py --logout
-python google_auth.py --login
+uv run python google_auth.py --logout
+uv run python google_auth.py --login
 ```
 
 ### "Invalid grant"
@@ -214,7 +214,7 @@ python google_auth.py --login
 ```bash
 # Remove old token and re-authenticate
 rm 01-memory/integrations/google-token.json
-python google_auth.py --login
+uv run python google_auth.py --login
 ```
 
 ---
@@ -224,7 +224,7 @@ python google_auth.py --login
 ### 1. Check Configuration First
 
 ```bash
-python 00-system/skills/google/google-master/scripts/check_google_config.py --json
+uv run python 00-system/skills/google/google-master/scripts/check_google_config.py --json
 ```
 
 ### 2. Verify Service Access

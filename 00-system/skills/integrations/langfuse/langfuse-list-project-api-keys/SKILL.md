@@ -12,7 +12,7 @@ List all API keys for a project.
 ## Usage
 
 ```bash
-python scripts/list_project_api_keys.py --project "proj-abc123"
+uv run python scripts/list_project_api_keys.py --project "proj-abc123"
 ```
 
 ## Parameters

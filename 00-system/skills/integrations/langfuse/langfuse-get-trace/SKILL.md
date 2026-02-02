@@ -11,7 +11,7 @@ Get detailed view of a specific trace.
 
 ### CLI
 ```bash
-python scripts/get_trace.py --id <trace_id>
+uv run python scripts/get_trace.py --id <trace_id>
 ```
 
 ### Python

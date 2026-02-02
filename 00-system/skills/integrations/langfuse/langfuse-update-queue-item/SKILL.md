@@ -10,7 +10,7 @@ Update a queue item status.
 ## Usage
 
 ```bash
-python scripts/update_queue_item.py --queue "queue-abc" --item "item-xyz" --status COMPLETED
+uv run python scripts/update_queue_item.py --queue "queue-abc" --item "item-xyz" --status COMPLETED
 ```
 
 ## API Reference

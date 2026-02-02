@@ -10,7 +10,7 @@ Get an annotation queue by ID.
 ## Usage
 
 ```bash
-python scripts/get_annotation_queue.py --id "queue-abc"
+uv run python scripts/get_annotation_queue.py --id "queue-abc"
 ```
 
 ## API Reference

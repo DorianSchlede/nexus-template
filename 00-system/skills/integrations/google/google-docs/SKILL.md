@@ -10,7 +10,7 @@ Read, write, create, and manage Google Docs via OAuth authentication.
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service docs
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service docs
 ```
 
 **Exit codes:**
@@ -24,47 +24,47 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### Read Document
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py read <document_id>
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py read <document_id>
 ```
 
 ### Create Document
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py create "My Document" --content "Initial content here"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py create "My Document" --content "Initial content here"
 ```
 
 ### Insert Text
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py insert <document_id> "Text to insert" --index 1
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py insert <document_id> "Text to insert" --index 1
 ```
 
 ### Append Text
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py append <document_id> "Text to append at end"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py append <document_id> "Text to append at end"
 ```
 
 ### Find and Replace
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py replace <document_id> "old text" "new text"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py replace <document_id> "old text" "new text"
 ```
 
 ### Export Document
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py export <document_id> --format pdf --output ./report.pdf
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py export <document_id> --format pdf --output ./report.pdf
 ```
 
 ### List Documents
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py list --query "report"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py list --query "report"
 ```
 
 ### Copy Document
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py copy <document_id> "Copy of My Document"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py copy <document_id> "Copy of My Document"
 ```
 
 ### Rename Document
 ```bash
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py rename <document_id> "New Title"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py rename <document_id> "New Title"
 ```
 
 ---

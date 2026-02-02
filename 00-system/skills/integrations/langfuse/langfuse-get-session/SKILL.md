@@ -11,7 +11,7 @@ Get detailed view of a specific session with its traces.
 
 ### CLI
 ```bash
-python scripts/get_session.py --id <session_id>
+uv run python scripts/get_session.py --id <session_id>
 ```
 
 ### Python

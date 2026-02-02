@@ -10,7 +10,7 @@ Check the health status of the Langfuse instance.
 ## Usage
 
 ```bash
-python scripts/health.py
+uv run python scripts/health.py
 ```
 
 ## Parameters

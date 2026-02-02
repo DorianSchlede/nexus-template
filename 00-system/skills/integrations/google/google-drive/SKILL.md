@@ -13,7 +13,7 @@ Upload, download, and manage files and folders in Google Drive via OAuth authent
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service drive
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service drive
 ```
 
 **Exit codes:**
@@ -27,72 +27,72 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### List Files (Root)
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py list
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py list
 ```
 
 ### List Files in Folder
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py list --folder <folder_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py list --folder <folder_id>
 ```
 
 ### Search Files
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py search "report"
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py search "report"
 ```
 
 ### Get File Info
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py info <file_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py info <file_id>
 ```
 
 ### Download File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py download <file_id> --output ./local_file.pdf
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py download <file_id> --output ./local_file.pdf
 ```
 
 ### Download Google Doc as PDF
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py download <doc_id> --format pdf
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py download <doc_id> --format pdf
 ```
 
 ### Upload File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py upload ./local_file.pdf --folder <folder_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py upload ./local_file.pdf --folder <folder_id>
 ```
 
 ### Create Folder
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py create-folder "New Folder" --parent <parent_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py create-folder "New Folder" --parent <parent_id>
 ```
 
 ### Move File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py move <file_id> <destination_folder_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py move <file_id> <destination_folder_id>
 ```
 
 ### Copy File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py copy <file_id> --name "Copy of File"
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py copy <file_id> --name "Copy of File"
 ```
 
 ### Rename File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py rename <file_id> "New Name"
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py rename <file_id> "New Name"
 ```
 
 ### Delete File (Trash)
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py delete <file_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py delete <file_id>
 ```
 
 ### Share File
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py share <file_id> user@example.com --role writer
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py share <file_id> user@example.com --role writer
 ```
 
 ### Get Sharing Info
 ```bash
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py sharing <file_id>
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py sharing <file_id>
 ```
 
 ---

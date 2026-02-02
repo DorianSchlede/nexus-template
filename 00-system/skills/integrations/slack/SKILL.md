@@ -65,13 +65,13 @@ slack/
 
 ```bash
 # Send message
-python slack-master/scripts/send_message.py --channel "#general" --text "Hello!"
+uv run python slack-master/scripts/send_message.py --channel "#general" --text "Hello!"
 
 # Search messages
-python slack-master/scripts/search_messages.py --query "project update"
+uv run python slack-master/scripts/search_messages.py --query "project update"
 
 # List channels
-python slack-master/scripts/list_channels.py --json
+uv run python slack-master/scripts/list_channels.py --json
 ```
 
 ## Authentication

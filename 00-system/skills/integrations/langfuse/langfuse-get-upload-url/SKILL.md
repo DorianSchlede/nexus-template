@@ -10,8 +10,8 @@ Get a presigned URL to upload media (images, audio, etc.).
 ## Usage
 
 ```bash
-python scripts/get_upload_url.py --trace "trace-abc" --field "input" --type "image/png"
-python scripts/get_upload_url.py --trace "trace-abc" --observation "obs-123" --field "output" --type "audio/mp3"
+uv run python scripts/get_upload_url.py --trace "trace-abc" --field "input" --type "image/png"
+uv run python scripts/get_upload_url.py --trace "trace-abc" --observation "obs-123" --field "output" --type "audio/mp3"
 ```
 
 ## Parameters

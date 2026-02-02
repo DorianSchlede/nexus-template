@@ -11,7 +11,7 @@ Get detailed view of a specific observation.
 
 ### CLI
 ```bash
-python scripts/get_observation.py --id <observation_id>
+uv run python scripts/get_observation.py --id <observation_id>
 ```
 
 ### Python

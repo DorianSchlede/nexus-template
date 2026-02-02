@@ -11,9 +11,9 @@ Get list of datasets from Langfuse for experiment evaluation.
 
 ### CLI
 ```bash
-python scripts/list_datasets.py
-python scripts/list_datasets.py --limit 20
-python scripts/list_datasets.py --page 2
+uv run python scripts/list_datasets.py
+uv run python scripts/list_datasets.py --limit 20
+uv run python scripts/list_datasets.py --page 2
 ```
 
 ## Parameters

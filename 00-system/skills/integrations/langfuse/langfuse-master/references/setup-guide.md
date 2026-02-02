@@ -34,7 +34,7 @@ LANGFUSE_HOST=https://tracing.beamstudio.ai
 ## Verify Configuration
 
 ```bash
-python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
+uv run python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
 ```
 
 Expected output:

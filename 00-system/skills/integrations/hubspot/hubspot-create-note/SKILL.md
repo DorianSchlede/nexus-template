@@ -11,7 +11,7 @@ description: "Create a note engagement in HubSpot CRM. Load when user says 'crea
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -30,14 +30,14 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Simple note:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
   --body "Spoke with John about pricing. He's interested in the enterprise tier." \
   --json
 ```
 
 **Note with timestamp:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
   --body "Meeting notes from yesterday's call" \
   --timestamp "2025-12-12T14:00:00Z" \
   --json

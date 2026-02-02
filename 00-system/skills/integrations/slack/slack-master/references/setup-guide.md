@@ -32,10 +32,10 @@ Run the setup script from this skill's folder:
 
 ```bash
 # If skill is in 03-skills/slack/:
-python 03-skills/slack/slack-master/scripts/setup_slack.py
+uv run python 03-skills/slack/slack-master/scripts/setup_slack.py
 
 # If skill is in 00-system/skills/slack/:
-python 00-system/skills/slack/slack-master/scripts/setup_slack.py
+uv run python 00-system/skills/slack/slack-master/scripts/setup_slack.py
 ```
 
 Your browser opens → Sign in to Slack → Click "Allow" → Done!
@@ -48,10 +48,10 @@ Your personal token is saved to `.env` as `SLACK_USER_TOKEN`.
 
 ```bash
 # If skill is in 03-skills/slack/:
-python 03-skills/slack/slack-master/scripts/check_slack_config.py
+uv run python 03-skills/slack/slack-master/scripts/check_slack_config.py
 
 # If skill is in 00-system/skills/slack/:
-python 00-system/skills/slack/slack-master/scripts/check_slack_config.py
+uv run python 00-system/skills/slack/slack-master/scripts/check_slack_config.py
 ```
 
 You should see:
@@ -122,7 +122,7 @@ Run `setup_slack.py` as usual.
 Run the check script (use the path matching your skill location):
 
 ```bash
-python <skill-path>/slack-master/scripts/check_slack_config.py
+uv run python <skill-path>/slack-master/scripts/check_slack_config.py
 ```
 
 Expected output:
@@ -144,7 +144,7 @@ Expected output:
 
 **Fix**: Re-run the OAuth setup:
 ```bash
-python <skill-path>/slack-master/scripts/setup_slack.py
+uv run python <skill-path>/slack-master/scripts/setup_slack.py
 ```
 
 ### "missing_scope" Error

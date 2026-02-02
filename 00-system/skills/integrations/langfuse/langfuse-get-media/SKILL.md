@@ -10,7 +10,7 @@ Retrieve media content (images, audio, etc.) by ID.
 ## Usage
 
 ```bash
-python scripts/get_media.py --media "media-abc123"
+uv run python scripts/get_media.py --media "media-abc123"
 ```
 
 ## Parameters

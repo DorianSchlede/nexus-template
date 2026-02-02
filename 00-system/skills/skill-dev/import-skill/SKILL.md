@@ -22,13 +22,13 @@ Pull any skill from our shared 120+ skill database directly into `03-skills/`. H
 
 ```bash
 # Import a specific skill
-python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --files-table tblhx8DRvcHN7GWmJ \
   --skill "gmail" --token MUTAGENT --output 03-skills
 
 # List all available skills (dry-run)
-python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --all --token MUTAGENT --dry-run
 ```
@@ -43,13 +43,13 @@ First, find what you need:
 
 ```bash
 # Search by name
-python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --fields "Name,Description,Team" \
   --filter "{Name} contains 'gmail'"
 
 # List all skills
-python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --fields "Name,Team" --limit 200
 ```
@@ -57,7 +57,7 @@ python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
 ### Step 2: Import the Skill
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --files-table tblhx8DRvcHN7GWmJ \
   --skill "<SKILL_NAME>" --token MUTAGENT --output 03-skills
@@ -146,7 +146,7 @@ User: "import the gmail skill"
 
 AI: Importing gmail from Skill Marketplace...
 
-    python download_skill.py --base app1gngDx52VAgjVQ \
+    uv run python download_skill.py --base app1gngDx52VAgjVQ \
       --table tblsQL8n9EfMAFIyD --files-table tblhx8DRvcHN7GWmJ \
       --skill "gmail" --token MUTAGENT --output 03-skills
 

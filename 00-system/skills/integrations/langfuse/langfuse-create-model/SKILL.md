@@ -10,8 +10,8 @@ Create a new model definition for cost tracking.
 ## Usage
 
 ```bash
-python scripts/create_model.py --name "gpt-4o-mini" --match-pattern "gpt-4o-mini.*" --input-price 0.00015 --output-price 0.0006
-python scripts/create_model.py --name "claude-3-opus" --match-pattern "claude-3-opus.*" --unit "TOKENS" --input-price 0.015 --output-price 0.075
+uv run python scripts/create_model.py --name "gpt-4o-mini" --match-pattern "gpt-4o-mini.*" --input-price 0.00015 --output-price 0.0006
+uv run python scripts/create_model.py --name "claude-3-opus" --match-pattern "claude-3-opus.*" --unit "TOKENS" --input-price 0.015 --output-price 0.075
 ```
 
 ## Parameters

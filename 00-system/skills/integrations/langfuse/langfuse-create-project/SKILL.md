@@ -12,7 +12,7 @@ Create a new Langfuse project.
 ## Usage
 
 ```bash
-python scripts/create_project.py --name "My Project" --org "org-abc123"
+uv run python scripts/create_project.py --name "My Project" --org "org-abc123"
 ```
 
 ## Parameters

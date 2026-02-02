@@ -11,7 +11,7 @@ description: "Log a call engagement in HubSpot CRM. Load when user says 'log cal
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -33,7 +33,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Log completed call:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
   --title "Discovery Call with Acme" \
   --body "Discussed requirements, timeline, and budget. Next step: send proposal." \
   --duration 30 \
@@ -42,7 +42,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
 
 **Log missed call:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
   --title "Follow-up attempt" \
   --status "NO_ANSWER" \
   --direction "OUTBOUND" \

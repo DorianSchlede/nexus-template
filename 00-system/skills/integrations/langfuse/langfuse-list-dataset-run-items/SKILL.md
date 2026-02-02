@@ -11,8 +11,8 @@ Get list of items from a dataset evaluation run.
 
 ### CLI
 ```bash
-python scripts/list_dataset_run_items.py --dataset "my-dataset" --run "run-2024-01"
-python scripts/list_dataset_run_items.py --dataset "my-dataset" --run "run-2024-01" --limit 20
+uv run python scripts/list_dataset_run_items.py --dataset "my-dataset" --run "run-2024-01"
+uv run python scripts/list_dataset_run_items.py --dataset "my-dataset" --run "run-2024-01" --limit 20
 ```
 
 ## Parameters

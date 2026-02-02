@@ -22,7 +22,7 @@ Meta-skill for HeyReach LinkedIn automation integration.
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
 ```
 
 | `ai_action` | What to Do |
@@ -71,19 +71,19 @@ All scripts located in: `00-system/skills/heyreach/heyreach-master/scripts/`
 
 ### List Campaigns
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/list_campaigns.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/list_campaigns.py --json
 ```
 
 ### Add Leads
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/add_leads.py \
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/add_leads.py \
   --campaign-id camp-123 \
   --linkedin-urls "linkedin.com/in/user1,linkedin.com/in/user2"
 ```
 
 ### Get Stats
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/get_stats.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/get_stats.py --json
 ```
 
 ---

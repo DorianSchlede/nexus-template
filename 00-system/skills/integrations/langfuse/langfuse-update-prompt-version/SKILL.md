@@ -12,10 +12,10 @@ Update labels on a specific prompt version. Use this to promote versions to prod
 ### CLI
 ```bash
 # Add production label to version 3
-python scripts/update_prompt_version.py --name "my-prompt" --version 3 --labels production
+uv run python scripts/update_prompt_version.py --name "my-prompt" --version 3 --labels production
 
 # Set multiple labels
-python scripts/update_prompt_version.py --name "my-prompt" --version 2 --labels "staging,reviewed"
+uv run python scripts/update_prompt_version.py --name "my-prompt" --version 2 --labels "staging,reviewed"
 ```
 
 ## Parameters

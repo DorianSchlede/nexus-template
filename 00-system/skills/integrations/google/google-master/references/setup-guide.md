@@ -114,7 +114,7 @@ Replace with your actual values from Step 5.
 Run the authentication script:
 
 ```bash
-python 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 This will:
@@ -128,7 +128,7 @@ This will:
 ## Step 8: Verify Setup
 
 ```bash
-python 00-system/skills/google/google-master/scripts/check_google_config.py
+uv run python 00-system/skills/google/google-master/scripts/check_google_config.py
 ```
 
 Should output:
@@ -203,7 +203,7 @@ To revoke Nexus's access to your Google account:
 
 Or locally:
 ```bash
-python google_auth.py --logout
+uv run python google_auth.py --logout
 ```
 
 ---

@@ -10,8 +10,8 @@ Ingest multiple traces, spans, generations, and events in a single request.
 ## Usage
 
 ```bash
-python scripts/batch_ingest.py --file events.json
-python scripts/batch_ingest.py --batch '[{"type": "trace-create", "body": {...}}]'
+uv run python scripts/batch_ingest.py --file events.json
+uv run python scripts/batch_ingest.py --batch '[{"type": "trace-create", "body": {...}}]'
 ```
 
 ## Parameters

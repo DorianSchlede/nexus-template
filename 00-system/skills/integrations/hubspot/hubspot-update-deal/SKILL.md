@@ -11,7 +11,7 @@ description: "Update an existing deal in HubSpot CRM. Load when user says 'updat
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -33,7 +33,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Update stage (move deal):**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
   --id 5840795376 \
   --stage "closedwon" \
   --json
@@ -41,7 +41,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
 
 **Update amount:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
   --id 5840795376 \
   --amount 75000 \
   --json
@@ -49,7 +49,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
 
 **Close deal as won:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
   --id 5840795376 \
   --stage "closedwon" \
   --closedate "2025-12-13" \
@@ -76,7 +76,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
 
 If user says "close the Acme deal", first search:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_deals.py --name "Acme" --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_deals.py --name "Acme" --json
 ```
 
 Then use the returned ID for the update.

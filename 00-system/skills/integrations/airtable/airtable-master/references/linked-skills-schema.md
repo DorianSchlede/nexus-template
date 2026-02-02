@@ -89,7 +89,7 @@ def download_skill_linked(base_id, skills_table, files_table, skill_name, output
 
 ```bash
 # Create SkillFiles table
-python manage_tables.py create --base app1gngDx52VAgjVQ --name "SkillFiles" \
+uv run python manage_tables.py create --base app1gngDx52VAgjVQ --name "SkillFiles" \
   --fields '[
     {"name": "FilePath", "type": "singleLineText"},
     {"name": "Content", "type": "multilineText"},
@@ -100,7 +100,7 @@ python manage_tables.py create --base app1gngDx52VAgjVQ --name "SkillFiles" \
   ]' --token MUTAGENT
 
 # Add link field to Skills table
-python manage_fields.py create --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
+uv run python manage_fields.py create --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --name "Files" --type multipleRecordLinks \
   --link-table <SkillFiles_table_id> --token MUTAGENT
 ```
@@ -109,7 +109,7 @@ python manage_fields.py create --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIy
 
 ```bash
 # Get all Python files for a skill
-python query_records.py --base app1gngDx52VAgjVQ --table SkillFiles \
+uv run python query_records.py --base app1gngDx52VAgjVQ --table SkillFiles \
   --filter "{FileType}='py'" --token MUTAGENT
 
 # Get files for a specific skill (using linked record)

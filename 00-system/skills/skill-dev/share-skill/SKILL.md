@@ -24,12 +24,12 @@ Push any skill from `03-skills/` or `00-system/skills/` to the shared marketplac
 
 ```bash
 # Upload a single skill
-python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --skill-path 03-skills/my-skill
 
 # Upload all local skills (batch)
-python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT
 ```
@@ -67,7 +67,7 @@ What this skill does...
 ### Step 2: Preview Upload (Dry Run)
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --skill-path 03-skills/my-skill --dry-run
 ```
@@ -84,7 +84,7 @@ python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py 
 ### Step 3: Upload to Marketplace
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/upload_local_skills.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --skill-path 03-skills/my-skill
 ```
@@ -99,7 +99,7 @@ my-skill... OK (created recXXX)
 If skill is too large (>90KB), it becomes a "partial" bundle. Upload files separately:
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/upload_skill_files.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/upload_skill_files.py \
   --base app1gngDx52VAgjVQ --table tblhx8DRvcHN7GWmJ \
   --token MUTAGENT --skill my-skill
 ```
@@ -211,7 +211,7 @@ AI: Uploading gmail-helper to Skill Marketplace...
     Validating SKILL.md... OK
     Creating bundle... 3 files, 2,845 bytes
 
-    python upload_local_skills.py --base app1gngDx52VAgjVQ \
+    uv run python upload_local_skills.py --base app1gngDx52VAgjVQ \
       --table tblsQL8n9EfMAFIyD --token MUTAGENT \
       --skill-path 03-skills/gmail-helper
 

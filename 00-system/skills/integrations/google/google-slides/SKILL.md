@@ -13,7 +13,7 @@ Create, edit, and manage Google Slides presentations via OAuth authentication.
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service slides
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service slides
 ```
 
 **Exit codes:**
@@ -27,67 +27,67 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### List Presentations
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py list
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py list
 ```
 
 ### Search Presentations
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py list --query "quarterly"
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py list --query "quarterly"
 ```
 
 ### Get Presentation Info
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py info <presentation_id>
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py info <presentation_id>
 ```
 
 ### Create Presentation
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py create "Q4 Sales Report"
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py create "Q4 Sales Report"
 ```
 
 ### Read Slide Content
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py read <presentation_id> --slide 1
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py read <presentation_id> --slide 1
 ```
 
 ### Add Blank Slide
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py add-slide <presentation_id>
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py add-slide <presentation_id>
 ```
 
 ### Add Slide with Layout
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py add-slide <presentation_id> --layout title_body
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py add-slide <presentation_id> --layout title_body
 ```
 
 ### Delete Slide
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py delete-slide <presentation_id> <slide_id>
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py delete-slide <presentation_id> <slide_id>
 ```
 
 ### Add Text Box
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py add-text <presentation_id> <slide_id> "Hello World" --x 100 --y 100
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py add-text <presentation_id> <slide_id> "Hello World" --x 100 --y 100
 ```
 
 ### Add Image
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py add-image <presentation_id> <slide_id> "https://example.com/image.png"
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py add-image <presentation_id> <slide_id> "https://example.com/image.png"
 ```
 
 ### Duplicate Presentation
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py duplicate <presentation_id> "Copy of Presentation"
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py duplicate <presentation_id> "Copy of Presentation"
 ```
 
 ### Export to PDF
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./output.pdf --format pdf
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./output.pdf --format pdf
 ```
 
 ### Export to PowerPoint
 ```bash
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./output.pptx --format pptx
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./output.pptx --format pptx
 ```
 
 ---

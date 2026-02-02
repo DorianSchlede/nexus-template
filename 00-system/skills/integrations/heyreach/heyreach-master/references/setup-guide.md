@@ -35,7 +35,7 @@ HEYREACH_API_KEY=your-api-key-here
 Run the config checker:
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
 ```
 
 Expected output:

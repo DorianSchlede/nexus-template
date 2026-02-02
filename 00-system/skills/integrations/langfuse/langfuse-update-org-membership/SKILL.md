@@ -12,7 +12,7 @@ Update a member's role in the organization.
 ## Usage
 
 ```bash
-python scripts/update_org_membership.py --org "org-abc123" --membership "mem-xyz" --role "ADMIN"
+uv run python scripts/update_org_membership.py --org "org-abc123" --membership "mem-xyz" --role "ADMIN"
 ```
 
 ## Parameters

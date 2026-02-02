@@ -524,7 +524,7 @@ When the user returns and says "work on {service} integration", the `execute-bui
 1. **Load** the integration-config.json
 2. **Run** scaffold_integration.py with the config:
    ```bash
-   python 00-system/skills/system/add-integration/scripts/scaffold_integration.py \
+   uv run python 00-system/skills/system/add-integration/scripts/scaffold_integration.py \
      --config 02-builds/{id}-{service_slug}-integration/02-resources/integration-config.json
    ```
 3. **Check off** steps.md tasks as completed

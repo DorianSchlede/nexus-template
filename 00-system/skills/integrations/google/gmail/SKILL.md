@@ -49,7 +49,7 @@ These do NOT require confirmation:
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service gmail
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service gmail
 ```
 
 **Exit codes:**
@@ -63,59 +63,59 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### List Emails
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py list --max 10
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py list --max 10
 ```
 
 ### List Unread Emails
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py list --query "is:unread" --max 10
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py list --query "is:unread" --max 10
 ```
 
 ### Search Emails
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py search "from:user@example.com subject:report"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py search "from:user@example.com subject:report"
 ```
 
 ### Read Email
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py read <message_id>
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py read <message_id>
 ```
 
 ### Send Email
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py send --to "user@example.com" --subject "Hello" --body "Message body"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py send --to "user@example.com" --subject "Hello" --body "Message body"
 ```
 
 ### Reply to Email
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py reply <message_id> --body "Reply text"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py reply <message_id> --body "Reply text"
 ```
 
 ### Forward Email
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py forward <message_id> --to "user@example.com"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py forward <message_id> --to "user@example.com"
 ```
 
 ### Create Draft
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py draft --to "user@example.com" --subject "Draft" --body "Content"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py draft --to "user@example.com" --subject "Draft" --body "Content"
 ```
 
 ### List Drafts
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py drafts
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py drafts
 ```
 
 ### List Labels
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py labels
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py labels
 ```
 
 ### Trash/Archive/Mark Read
 ```bash
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py trash <message_id>
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py archive <message_id>
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py mark-read <message_id>
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py trash <message_id>
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py archive <message_id>
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py mark-read <message_id>
 ```
 
 ---

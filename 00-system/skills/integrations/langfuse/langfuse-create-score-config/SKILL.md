@@ -11,13 +11,13 @@ Create a new score configuration for evaluation metrics.
 
 ```bash
 # Numeric score
-python scripts/create_score_config.py --name "accuracy" --data-type NUMERIC --min 0 --max 1
+uv run python scripts/create_score_config.py --name "accuracy" --data-type NUMERIC --min 0 --max 1
 
 # Categorical score
-python scripts/create_score_config.py --name "quality" --data-type CATEGORICAL --categories "good,bad,neutral"
+uv run python scripts/create_score_config.py --name "quality" --data-type CATEGORICAL --categories "good,bad,neutral"
 
 # Boolean score
-python scripts/create_score_config.py --name "correct" --data-type BOOLEAN
+uv run python scripts/create_score_config.py --name "correct" --data-type BOOLEAN
 ```
 
 ## Parameters

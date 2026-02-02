@@ -11,7 +11,7 @@ description: "Search companies in HubSpot CRM by name or domain. Load when user 
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -22,21 +22,21 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 ### Search by Name
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
   --name "Acme" \
   --json
 ```
 
 ### Search by Domain
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
   --domain "acme.com" \
   --json
 ```
 
 ### With Limit
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
   --name "Tech" \
   --limit 20 \
   --json

@@ -12,7 +12,7 @@ Remove a member from the organization.
 ## Usage
 
 ```bash
-python scripts/delete_org_membership.py --org "org-abc123" --membership "mem-xyz"
+uv run python scripts/delete_org_membership.py --org "org-abc123" --membership "mem-xyz"
 ```
 
 ## Parameters

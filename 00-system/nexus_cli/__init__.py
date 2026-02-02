@@ -176,7 +176,7 @@ def init_build_main() -> None:
 
     Usage:
         nexus-init-build "Build Name" --type build|research|strategy
-        nexus-init-build "Build Name" --path 02-builds
+        nexus-init-build "Build Name" --path 02-builds/active
     """
     _run_script("00-system/skills/builds/plan-build/scripts/init_build.py")
 
@@ -186,7 +186,7 @@ def bulk_complete_main() -> None:
 
     Usage:
         nexus-bulk-complete BUILD_PATH STEP_NUMBERS...
-        nexus-bulk-complete 02-builds/01-my-build 1 2 3
+        nexus-bulk-complete 02-builds/active/01-my-build 1 2 3
     """
     _run_script("00-system/skills/builds/execute-build/scripts/bulk-complete.py")
 
@@ -196,7 +196,7 @@ def update_resume_main() -> None:
 
     Usage:
         nexus-update-resume BUILD_PATH
-        nexus-update-resume 02-builds/01-my-build
+        nexus-update-resume 02-builds/active/01-my-build
     """
     _run_script("00-system/skills/builds/execute-build/scripts/update-resume.py")
 

@@ -11,7 +11,7 @@ Retrieve a specific dataset item by ID.
 
 ### CLI
 ```bash
-python scripts/get_dataset_item.py --id "item-abc123"
+uv run python scripts/get_dataset_item.py --id "item-abc123"
 ```
 
 ## Parameters

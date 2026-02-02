@@ -12,7 +12,7 @@ List all API keys at the organization level.
 ## Usage
 
 ```bash
-python scripts/list_org_api_keys.py --org "org-abc123"
+uv run python scripts/list_org_api_keys.py --org "org-abc123"
 ```
 
 ## Parameters

@@ -10,7 +10,7 @@ Update media metadata (e.g., mark as uploaded).
 ## Usage
 
 ```bash
-python scripts/update_media.py --media "media-abc123" --uploaded
+uv run python scripts/update_media.py --media "media-abc123" --uploaded
 ```
 
 ## Parameters

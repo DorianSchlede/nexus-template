@@ -43,10 +43,10 @@ All Google skills reference these resources (progressive disclosure).
 
 **[google_auth.py](scripts/google_auth.py)** - Unified OAuth for all Google services
 ```bash
-python google_auth.py --check [--service SERVICE] [--json]
-python google_auth.py --login [--service SERVICE]
-python google_auth.py --logout
-python google_auth.py --status
+uv run python google_auth.py --check [--service SERVICE] [--json]
+uv run python google_auth.py --login [--service SERVICE]
+uv run python google_auth.py --logout
+uv run python google_auth.py --status
 ```
 
 | Argument | Required | Default | Description |
@@ -69,7 +69,7 @@ python google_auth.py --status
 
 **[check_google_config.py](scripts/check_google_config.py)** - Pre-flight validation
 ```bash
-python check_google_config.py [--json]
+uv run python check_google_config.py [--json]
 ```
 
 | Argument | Required | Default | Description |
@@ -159,7 +159,7 @@ When a Google skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/google/google-master/scripts/check_google_config.py --json
+uv run python 00-system/skills/google/google-master/scripts/check_google_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

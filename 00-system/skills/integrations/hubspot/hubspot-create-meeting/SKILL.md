@@ -11,7 +11,7 @@ description: "Create a meeting engagement in HubSpot CRM. Load when user says 'c
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -32,7 +32,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Meeting with times:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
   --title "Product Demo" \
   --body "Demo of new features for enterprise team" \
   --start "2025-12-15T14:00:00Z" \
@@ -42,7 +42,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
 
 **Quick meeting (defaults to now + 1 hour):**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
   --title "Quick sync call" \
   --json
 ```

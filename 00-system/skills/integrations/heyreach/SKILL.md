@@ -26,7 +26,7 @@ Load this skill when user mentions:
 Before ANY operation, validate configuration:
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
 ```
 
 ### Handle Config Status
@@ -70,7 +70,7 @@ All scripts are in `00-system/skills/heyreach/heyreach-master/scripts/`
 
 **list_campaigns.py** - List all campaigns
 ```bash
-python list_campaigns.py [--limit N] [--offset N] [--json]
+uv run python list_campaigns.py [--limit N] [--offset N] [--json]
 ```
 Trigger: "list campaigns", "show campaigns", "my campaigns"
 
@@ -78,7 +78,7 @@ Trigger: "list campaigns", "show campaigns", "my campaigns"
 
 **get_campaign.py** - Get campaign details
 ```bash
-python get_campaign.py --campaign-id ID [--json]
+uv run python get_campaign.py --campaign-id ID [--json]
 ```
 Trigger: "campaign details", "show campaign [name]"
 
@@ -86,7 +86,7 @@ Trigger: "campaign details", "show campaign [name]"
 
 **toggle_campaign.py** - Pause/resume campaign
 ```bash
-python toggle_campaign.py --campaign-id ID --status ACTIVE|PAUSED [--json]
+uv run python toggle_campaign.py --campaign-id ID --status ACTIVE|PAUSED [--json]
 ```
 Trigger: "pause campaign", "resume campaign", "start/stop campaign"
 
@@ -96,8 +96,8 @@ Trigger: "pause campaign", "resume campaign", "start/stop campaign"
 
 **add_leads.py** - Add leads to campaign
 ```bash
-python add_leads.py --campaign-id ID --linkedin-urls URL1,URL2 [--json]
-python add_leads.py --campaign-id ID --leads '[{"linkedInUrl":"..."}]' [--json]
+uv run python add_leads.py --campaign-id ID --linkedin-urls URL1,URL2 [--json]
+uv run python add_leads.py --campaign-id ID --leads '[{"linkedInUrl":"..."}]' [--json]
 ```
 Trigger: "add leads", "add to campaign", "import leads"
 
@@ -105,7 +105,7 @@ Trigger: "add leads", "add to campaign", "import leads"
 
 **get_leads.py** - Get campaign leads
 ```bash
-python get_leads.py --campaign-id ID [--limit N] [--json]
+uv run python get_leads.py --campaign-id ID [--limit N] [--json]
 ```
 Trigger: "campaign leads", "show leads", "list leads"
 
@@ -115,7 +115,7 @@ Trigger: "campaign leads", "show leads", "list leads"
 
 **get_conversations.py** - Get message threads
 ```bash
-python get_conversations.py [--campaign-id ID] [--limit N] [--json]
+uv run python get_conversations.py [--campaign-id ID] [--limit N] [--json]
 ```
 Trigger: "conversations", "messages", "inbox", "replies"
 
@@ -125,7 +125,7 @@ Trigger: "conversations", "messages", "inbox", "replies"
 
 **list_accounts.py** - List connected accounts
 ```bash
-python list_accounts.py [--json]
+uv run python list_accounts.py [--json]
 ```
 Trigger: "linkedin accounts", "connected accounts", "my accounts"
 
@@ -135,7 +135,7 @@ Trigger: "linkedin accounts", "connected accounts", "my accounts"
 
 **list_lists.py** - List lead lists
 ```bash
-python list_lists.py [--limit N] [--json]
+uv run python list_lists.py [--limit N] [--json]
 ```
 Trigger: "lead lists", "show lists", "my lists"
 
@@ -143,7 +143,7 @@ Trigger: "lead lists", "show lists", "my lists"
 
 **create_list.py** - Create lead list
 ```bash
-python create_list.py --name NAME [--description DESC] [--json]
+uv run python create_list.py --name NAME [--description DESC] [--json]
 ```
 Trigger: "create list", "new list"
 
@@ -153,7 +153,7 @@ Trigger: "create list", "new list"
 
 **get_stats.py** - Get overall analytics
 ```bash
-python get_stats.py [--json]
+uv run python get_stats.py [--json]
 ```
 Trigger: "heyreach stats", "overall stats", "analytics"
 
@@ -161,7 +161,7 @@ Trigger: "heyreach stats", "overall stats", "analytics"
 
 **get_metrics.py** - Get campaign metrics
 ```bash
-python get_metrics.py --campaign-id ID [--json]
+uv run python get_metrics.py --campaign-id ID [--json]
 ```
 Trigger: "campaign metrics", "campaign performance"
 
@@ -190,7 +190,7 @@ Trigger: "campaign metrics", "campaign performance"
 **User**: "show my heyreach campaigns"
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/list_campaigns.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/list_campaigns.py --json
 ```
 
 **Display**:
@@ -213,7 +213,7 @@ Found 3 campaigns:
 **User**: "add linkedin.com/in/john-doe and linkedin.com/in/jane-smith to Q4 Enterprise"
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/add_leads.py \
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/add_leads.py \
   --campaign-id camp-abc123 \
   --linkedin-urls "linkedin.com/in/john-doe,linkedin.com/in/jane-smith" \
   --json
@@ -231,7 +231,7 @@ python 00-system/skills/heyreach/heyreach-master/scripts/add_leads.py \
 **User**: "what are my overall stats?"
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/get_stats.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/get_stats.py --json
 ```
 
 **Display**:

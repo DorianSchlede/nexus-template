@@ -17,7 +17,7 @@ The SessionStart hook calls Python functions from the nexus loader. Do the same:
 
 **Step 1: Run the loader script**
 ```bash
-python3 -c "
+uv run python -c "
 import sys
 sys.path.insert(0, '00-system/core')
 from nexus.loaders import load_full_startup_context
@@ -42,7 +42,7 @@ The loader will output the complete startup context including:
 ```markdown
 I'm initializing Nexus manually. Please run:
 
-python3 -c "
+uv run python -c "
 import sys
 sys.path.insert(0, '00-system/core')
 from nexus.loaders import load_full_startup_context

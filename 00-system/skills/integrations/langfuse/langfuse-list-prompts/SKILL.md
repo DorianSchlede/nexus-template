@@ -11,11 +11,11 @@ Get list of prompts from Langfuse with optional filtering.
 
 ### CLI
 ```bash
-python scripts/list_prompts.py
-python scripts/list_prompts.py --limit 20
-python scripts/list_prompts.py --name "my-prompt"
-python scripts/list_prompts.py --label production
-python scripts/list_prompts.py --tag "v1"
+uv run python scripts/list_prompts.py
+uv run python scripts/list_prompts.py --limit 20
+uv run python scripts/list_prompts.py --name "my-prompt"
+uv run python scripts/list_prompts.py --label production
+uv run python scripts/list_prompts.py --tag "v1"
 ```
 
 ### Python

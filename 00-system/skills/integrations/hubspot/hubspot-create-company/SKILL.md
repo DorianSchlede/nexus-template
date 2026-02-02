@@ -11,7 +11,7 @@ description: "Create a new company in HubSpot CRM. Load when user says 'create c
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -33,14 +33,14 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Minimal (name only):**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
   --name "Acme Corp" \
   --json
 ```
 
 **Full company:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
   --name "Acme Corp" \
   --domain "acme.com" \
   --industry "Technology" \

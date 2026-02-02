@@ -53,7 +53,7 @@ These do NOT require confirmation:
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service calendar
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service calendar
 ```
 
 **Exit codes:**
@@ -67,47 +67,47 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### List Upcoming Events
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --max 10
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --max 10
 ```
 
 ### List Today's Events
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --from "today" --to "tomorrow"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --from "today" --to "tomorrow"
 ```
 
 ### List This Week's Events
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --from "2025-12-16" --to "2025-12-20"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --from "2025-12-16" --to "2025-12-20"
 ```
 
 ### Get Event Details
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py get <event_id>
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py get <event_id>
 ```
 
 ### List Calendars
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py calendars
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py calendars
 ```
 
 ### Search Events
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py search "sales call"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py search "sales call"
 ```
 
 ### Check Availability
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py freebusy --from "2025-12-16T09:00" --to "2025-12-16T17:00"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py freebusy --from "2025-12-16T09:00" --to "2025-12-16T17:00"
 ```
 
 ### Find Available Slots (Sales Priority)
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py find-slots --duration 30 --from "2025-12-16" --to "2025-12-20" --hours "9-17"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py find-slots --duration 30 --from "2025-12-16" --to "2025-12-20" --hours "9-17"
 ```
 
 ### Create Event
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py create \
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py create \
   --summary "Sales Call with Acme Corp" \
   --start "2025-12-16T14:00" \
   --end "2025-12-16T14:30" \
@@ -117,29 +117,29 @@ python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py c
 
 ### Quick Add (Natural Language)
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py quick-add "Meeting with John tomorrow at 3pm"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py quick-add "Meeting with John tomorrow at 3pm"
 ```
 
 ### Update Event
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py update <event_id> \
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py update <event_id> \
   --start "2025-12-17T15:00" \
   --end "2025-12-17T15:30"
 ```
 
 ### Delete Event
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py delete <event_id>
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py delete <event_id>
 ```
 
 ### Add Attendees
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py add-attendees <event_id> --attendees "user@example.com"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py add-attendees <event_id> --attendees "user@example.com"
 ```
 
 ### Remove Attendees
 ```bash
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py remove-attendees <event_id> --attendees "user@example.com"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py remove-attendees <event_id> --attendees "user@example.com"
 ```
 
 ---
@@ -361,15 +361,15 @@ By default, all operations use the primary calendar. To use a different calendar
 
 ```bash
 # List events from a specific calendar
-python calendar_operations.py list --calendar "work@group.calendar.google.com"
+uv run python calendar_operations.py list --calendar "work@group.calendar.google.com"
 
 # Create event on specific calendar
-python calendar_operations.py create --calendar "sales@company.com" --summary "Team Meeting" ...
+uv run python calendar_operations.py create --calendar "sales@company.com" --summary "Team Meeting" ...
 ```
 
 To find available calendar IDs:
 ```bash
-python calendar_operations.py calendars
+uv run python calendar_operations.py calendars
 ```
 
 ---

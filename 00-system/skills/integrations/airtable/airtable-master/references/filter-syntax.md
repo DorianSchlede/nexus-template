@@ -9,7 +9,7 @@
 Filters use Airtable formula syntax with `filterByFormula` parameter:
 
 ```bash
-python query_records.py --base appXXX --table "Tasks" --filter "{Status}='Active'"
+uv run python query_records.py --base appXXX --table "Tasks" --filter "{Status}='Active'"
 ```
 
 **Key Rules:**
@@ -319,31 +319,31 @@ OR(
 
 ### Basic filter
 ```bash
-python query_records.py --base "CRM" --table "Contacts" \
+uv run python query_records.py --base "CRM" --table "Contacts" \
   --filter "{Status}='Active'"
 ```
 
 ### Combined conditions
 ```bash
-python query_records.py --base appXXX --table "Tasks" \
+uv run python query_records.py --base appXXX --table "Tasks" \
   --filter "AND({Status}!='Done', {Priority}='High')"
 ```
 
 ### Date filter
 ```bash
-python query_records.py --base appXXX --table "Tasks" \
+uv run python query_records.py --base appXXX --table "Tasks" \
   --filter "{Due Date}<=TODAY()"
 ```
 
 ### Text search
 ```bash
-python query_records.py --base appXXX --table "Projects" \
+uv run python query_records.py --base appXXX --table "Projects" \
   --filter "SEARCH('mobile', LOWER({Name}))>0"
 ```
 
 ### With sorting and limit
 ```bash
-python query_records.py --base appXXX --table "Tasks" \
+uv run python query_records.py --base appXXX --table "Tasks" \
   --filter "{Status}='Active'" \
   --sort "-Due Date" \
   --limit 10

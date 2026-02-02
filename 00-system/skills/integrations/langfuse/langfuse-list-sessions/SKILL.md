@@ -11,8 +11,8 @@ Get list of user sessions from Langfuse.
 
 ### CLI
 ```bash
-python scripts/list_sessions.py --limit 20
-python scripts/list_sessions.py --from 2025-01-01T00:00:00Z
+uv run python scripts/list_sessions.py --limit 20
+uv run python scripts/list_sessions.py --from 2025-01-01T00:00:00Z
 ```
 
 ### Python

@@ -12,10 +12,10 @@ Add a new item (test case) to a dataset.
 ### CLI
 ```bash
 # Basic item
-python scripts/create_dataset_item.py --dataset "my-dataset" --input '{"query": "Hello"}' --expected '{"response": "Hi"}'
+uv run python scripts/create_dataset_item.py --dataset "my-dataset" --input '{"query": "Hello"}' --expected '{"response": "Hi"}'
 
 # With metadata
-python scripts/create_dataset_item.py --dataset "my-dataset" --input '{"q": "test"}' --metadata '{"source": "prod"}'
+uv run python scripts/create_dataset_item.py --dataset "my-dataset" --input '{"q": "test"}' --metadata '{"source": "prod"}'
 ```
 
 ## Parameters

@@ -120,7 +120,7 @@ User: "plan build for X"
 ```bash
 # 1.1 Detect type from user input (semantic matching)
 # 1.2 Create build structure
-nexus-init-build "Build Name" --type {type} --path 02-builds
+nexus-init-build "Build Name" --type {type} --path 02-builds/active
 
 # 1.3 Load templates from types/{type}/
 # 1.4 Initialize resume-context.md
@@ -403,7 +403,7 @@ For **build** and **skill** build types, discovery.md includes EARS-formatted re
 
 ### scripts/
 - **init_build.py**: Build template generator with `--type` flag
-  - Usage: `nexus-init-build "Name" --type build --path 02-builds`
+  - Usage: `nexus-init-build "Name" --type build --path 02-builds/active`
   - Auto-generates structure with type-specific templates
 
 ### templates/types/

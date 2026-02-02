@@ -11,8 +11,8 @@ Get list of evaluation runs for a dataset.
 
 ### CLI
 ```bash
-python scripts/list_dataset_runs.py --name "my-dataset"
-python scripts/list_dataset_runs.py --name "my-dataset" --limit 10
+uv run python scripts/list_dataset_runs.py --name "my-dataset"
+uv run python scripts/list_dataset_runs.py --name "my-dataset" --limit 10
 ```
 
 ## Parameters

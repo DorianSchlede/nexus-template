@@ -14,7 +14,7 @@ Meta-skill for NotebookLM Enterprise operations. Routes to appropriate skills ba
 Before any operation, verify configuration:
 
 ```bash
-python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --json
+uv run python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --json
 ```
 
 **Parse `ai_action` field:**
@@ -39,7 +39,7 @@ Match user intent to appropriate workflow:
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-create-notebook/scripts/create_notebook.py --title "TITLE"
+uv run python 00-system/skills/notebooklm/notebooklm-create-notebook/scripts/create_notebook.py --title "TITLE"
 ```
 
 ---
@@ -50,7 +50,7 @@ python 00-system/skills/notebooklm/notebooklm-create-notebook/scripts/create_not
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-list-notebooks/scripts/list_notebooks.py
+uv run python 00-system/skills/notebooklm/notebooklm-list-notebooks/scripts/list_notebooks.py
 ```
 
 ---
@@ -61,7 +61,7 @@ python 00-system/skills/notebooklm/notebooklm-list-notebooks/scripts/list_notebo
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-get-notebook/scripts/get_notebook.py --notebook-id "ID"
+uv run python 00-system/skills/notebooklm/notebooklm-get-notebook/scripts/get_notebook.py --notebook-id "ID"
 ```
 
 ---
@@ -72,7 +72,7 @@ python 00-system/skills/notebooklm/notebooklm-get-notebook/scripts/get_notebook.
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-delete-notebooks/scripts/delete_notebooks.py --notebook-ids "ID1,ID2"
+uv run python 00-system/skills/notebooklm/notebooklm-delete-notebooks/scripts/delete_notebooks.py --notebook-ids "ID1,ID2"
 ```
 
 ---
@@ -83,7 +83,7 @@ python 00-system/skills/notebooklm/notebooklm-delete-notebooks/scripts/delete_no
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-share-notebook/scripts/share_notebook.py --notebook-id "ID" --email "user@example.com" --role "READER"
+uv run python 00-system/skills/notebooklm/notebooklm-share-notebook/scripts/share_notebook.py --notebook-id "ID" --email "user@example.com" --role "READER"
 ```
 
 ---
@@ -95,16 +95,16 @@ python 00-system/skills/notebooklm/notebooklm-share-notebook/scripts/share_noteb
 **Action:**
 ```bash
 # For web URL
-python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type web --url "https://..."
+uv run python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type web --url "https://..."
 
 # For YouTube
-python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type youtube --url "https://youtube.com/..."
+uv run python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type youtube --url "https://youtube.com/..."
 
 # For text
-python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type text --content "Your text..."
+uv run python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type text --content "Your text..."
 
 # For Google Drive
-python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type drive --resource-id "DRIVE_FILE_ID"
+uv run python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py --notebook-id "ID" --type drive --resource-id "DRIVE_FILE_ID"
 ```
 
 ---
@@ -115,7 +115,7 @@ python 00-system/skills/notebooklm/notebooklm-add-sources/scripts/add_sources.py
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-upload-file/scripts/upload_file.py --notebook-id "ID" --file "/path/to/file.pdf"
+uv run python 00-system/skills/notebooklm/notebooklm-upload-file/scripts/upload_file.py --notebook-id "ID" --file "/path/to/file.pdf"
 ```
 
 ---
@@ -126,7 +126,7 @@ python 00-system/skills/notebooklm/notebooklm-upload-file/scripts/upload_file.py
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-get-source/scripts/get_source.py --notebook-id "ID" --source-id "SOURCE_ID"
+uv run python 00-system/skills/notebooklm/notebooklm-get-source/scripts/get_source.py --notebook-id "ID" --source-id "SOURCE_ID"
 ```
 
 ---
@@ -137,7 +137,7 @@ python 00-system/skills/notebooklm/notebooklm-get-source/scripts/get_source.py -
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-delete-sources/scripts/delete_sources.py --notebook-id "ID" --source-ids "S1,S2"
+uv run python 00-system/skills/notebooklm/notebooklm-delete-sources/scripts/delete_sources.py --notebook-id "ID" --source-ids "S1,S2"
 ```
 
 ---
@@ -148,7 +148,7 @@ python 00-system/skills/notebooklm/notebooklm-delete-sources/scripts/delete_sour
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-create-audio/scripts/create_audio.py --notebook-id "ID" [--focus "Topic focus"] [--language "en"]
+uv run python 00-system/skills/notebooklm/notebooklm-create-audio/scripts/create_audio.py --notebook-id "ID" [--focus "Topic focus"] [--language "en"]
 ```
 
 ---
@@ -159,7 +159,7 @@ python 00-system/skills/notebooklm/notebooklm-create-audio/scripts/create_audio.
 
 **Action:**
 ```bash
-python 00-system/skills/notebooklm/notebooklm-delete-audio/scripts/delete_audio.py --notebook-id "ID"
+uv run python 00-system/skills/notebooklm/notebooklm-delete-audio/scripts/delete_audio.py --notebook-id "ID"
 ```
 
 ---
@@ -170,15 +170,15 @@ python 00-system/skills/notebooklm/notebooklm-delete-audio/scripts/delete_audio.
 
 ```bash
 # 1. Create notebook
-python .../create_notebook.py --title "Research Project"
+uv run python .../create_notebook.py --title "Research Project"
 # Returns: notebookId: abc123
 
 # 2. Add sources
-python .../add_sources.py --notebook-id abc123 --type web --url "https://..."
-python .../upload_file.py --notebook-id abc123 --file "/path/to/paper.pdf"
+uv run python .../add_sources.py --notebook-id abc123 --type web --url "https://..."
+uv run python .../upload_file.py --notebook-id abc123 --file "/path/to/paper.pdf"
 
 # 3. Generate audio
-python .../create_audio.py --notebook-id abc123 --focus "Key findings"
+uv run python .../create_audio.py --notebook-id abc123 --focus "Key findings"
 ```
 
 ### Full research workflow

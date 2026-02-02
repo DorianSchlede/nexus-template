@@ -11,7 +11,7 @@ Get detailed view of a specific score.
 
 ### CLI
 ```bash
-python scripts/get_score.py --id <score_id>
+uv run python scripts/get_score.py --id <score_id>
 ```
 
 ### Python

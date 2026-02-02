@@ -25,12 +25,12 @@ Discover skills from the shared marketplace. Filter by name, team, or integratio
 
 ```bash
 # List all skills
-python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --fields "Name,Description,Team" --limit 200
 
 # Search by name
-python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --fields "Name,Description,Team" \
   --filter "FIND('gmail', LOWER({Name}))"
@@ -44,7 +44,7 @@ python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
 
 **List all available skills:**
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --token MUTAGENT --fields "Name,Team" --limit 200
 ```
@@ -90,7 +90,7 @@ Found 5 records
 Once you find what you need:
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
+uv run python 00-system/skills/airtable/airtable-master/scripts/download_skill.py \
   --base app1gngDx52VAgjVQ --table tblsQL8n9EfMAFIyD \
   --files-table tblhx8DRvcHN7GWmJ \
   --skill "<SKILL_NAME>" --token MUTAGENT --output 03-skills
@@ -146,7 +146,7 @@ User: "what slack skills are available?"
 
 AI: Searching Skill Marketplace for Slack skills...
 
-    python query_records.py --base app1gngDx52VAgjVQ \
+    uv run python query_records.py --base app1gngDx52VAgjVQ \
       --table tblsQL8n9EfMAFIyD --token MUTAGENT \
       --fields "Name,Description" \
       --filter "FIND('slack', LOWER({Name}))"
@@ -170,7 +170,7 @@ AI: Searching Skill Marketplace for Slack skills...
 For programmatic use:
 
 ```bash
-python query_records.py ... --json
+uv run python query_records.py ... --json
 ```
 
 Returns:

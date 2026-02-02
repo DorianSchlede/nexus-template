@@ -10,8 +10,8 @@ List comments filtered by object type and ID.
 ## Usage
 
 ```bash
-python scripts/list_comments.py --type "TRACE" --id "trace-abc"
-python scripts/list_comments.py --type "OBSERVATION" --id "obs-123" --limit 50
+uv run python scripts/list_comments.py --type "TRACE" --id "trace-abc"
+uv run python scripts/list_comments.py --type "OBSERVATION" --id "obs-123" --limit 50
 ```
 
 ## Parameters

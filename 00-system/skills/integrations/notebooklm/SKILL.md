@@ -45,7 +45,7 @@ NotebookLM Enterprise requires:
 
 Run setup:
 ```bash
-python 00-system/skills/notebooklm/notebooklm-master/scripts/setup_notebooklm.py
+uv run python 00-system/skills/notebooklm/notebooklm-master/scripts/setup_notebooklm.py
 ```
 
 ## Architecture

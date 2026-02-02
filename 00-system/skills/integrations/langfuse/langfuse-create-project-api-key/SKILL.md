@@ -12,7 +12,7 @@ Create a new API key for a project.
 ## Usage
 
 ```bash
-python scripts/create_project_api_key.py --project "proj-abc123" --note "Production key"
+uv run python scripts/create_project_api_key.py --project "proj-abc123" --note "Production key"
 ```
 
 ## Parameters

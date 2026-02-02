@@ -11,8 +11,8 @@ Get list of items in a dataset for evaluation.
 
 ### CLI
 ```bash
-python scripts/list_dataset_items.py --dataset "my-dataset"
-python scripts/list_dataset_items.py --dataset "my-dataset" --limit 20
+uv run python scripts/list_dataset_items.py --dataset "my-dataset"
+uv run python scripts/list_dataset_items.py --dataset "my-dataset" --limit 20
 ```
 
 ## Parameters

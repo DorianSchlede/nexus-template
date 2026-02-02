@@ -10,7 +10,7 @@ Remove a user assignment from annotation queue.
 ## Usage
 
 ```bash
-python scripts/delete_queue_assignment.py --queue "queue-abc" --user "user@email.com"
+uv run python scripts/delete_queue_assignment.py --queue "queue-abc" --user "user@email.com"
 ```
 
 ## API Reference

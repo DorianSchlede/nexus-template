@@ -11,8 +11,8 @@ Get list of configured models (for cost tracking).
 
 ### CLI
 ```bash
-python scripts/list_models.py
-python scripts/list_models.py --limit 20
+uv run python scripts/list_models.py
+uv run python scripts/list_models.py --limit 20
 ```
 
 ### Python

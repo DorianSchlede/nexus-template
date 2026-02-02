@@ -32,7 +32,7 @@ This skill uses `google-master` shared library:
 Every interaction MUST start with config validation:
 
 ```bash
-python 00-system/skills/google/google-master/scripts/check_google_config.py --json
+uv run python 00-system/skills/google/google-master/scripts/check_google_config.py --json
 ```
 
 **Exit code meanings:**
@@ -245,7 +245,7 @@ A browser window will open for Google sign-in.
 ### Step 2: Run Login
 
 ```bash
-python 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 ### Step 3: Verify Success
@@ -306,7 +306,7 @@ Commands:
 **Purpose**: Get new OAuth token (e.g., after scope changes or token expiry).
 
 ```bash
-python 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 This removes the old token and initiates a fresh OAuth flow.
@@ -320,7 +320,7 @@ This removes the old token and initiates a fresh OAuth flow.
 **Purpose**: Remove stored credentials.
 
 ```bash
-python 00-system/skills/google/google-master/scripts/google_auth.py --logout
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --logout
 ```
 
 Display:

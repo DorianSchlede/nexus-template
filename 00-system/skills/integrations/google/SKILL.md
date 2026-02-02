@@ -44,7 +44,7 @@ The wizard guides you through:
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/check_google_config.py --json
+uv run python 00-system/skills/google/google-master/scripts/check_google_config.py --json
 ```
 
 **Exit codes:**
@@ -54,7 +54,7 @@ python3 00-system/skills/google/google-master/scripts/check_google_config.py --j
 
 **To authenticate (grants access to ALL services):**
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 ---
@@ -64,73 +64,73 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --login
 ### Gmail
 ```bash
 # List recent emails
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py list --max 10
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py list --max 10
 
 # Send email (creates draft first, asks for confirmation)
-python3 00-system/skills/google/gmail/scripts/gmail_operations.py send --to "user@example.com" --subject "Hello" --body "Message"
+uv run python 00-system/skills/google/gmail/scripts/gmail_operations.py send --to "user@example.com" --subject "Hello" --body "Message"
 ```
 
 ### Google Docs
 ```bash
 # Read document
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py read <document_id>
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py read <document_id>
 
 # Create document
-python3 00-system/skills/google/google-docs/scripts/docs_operations.py create "My Document" --content "Initial content"
+uv run python 00-system/skills/google/google-docs/scripts/docs_operations.py create "My Document" --content "Initial content"
 ```
 
 ### Google Sheets
 ```bash
 # Read data
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py read <spreadsheet_id> "Sheet1!A1:D10"
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py read <spreadsheet_id> "Sheet1!A1:D10"
 
 # Append rows
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py append <spreadsheet_id> "Sheet1!A:D" --values '[["New", "Row", "Data"]]'
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py append <spreadsheet_id> "Sheet1!A:D" --values '[["New", "Row", "Data"]]'
 ```
 
 ### Google Calendar
 ```bash
 # List upcoming events
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --max 10
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py list --max 10
 
 # Find available slots
-python3 00-system/skills/google/google-calendar/scripts/calendar_operations.py find-slots --duration 30 --from "2025-12-16" --to "2025-12-20"
+uv run python 00-system/skills/google/google-calendar/scripts/calendar_operations.py find-slots --duration 30 --from "2025-12-16" --to "2025-12-20"
 ```
 
 ### Google Drive
 ```bash
 # List files in root
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py list
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py list
 
 # Upload file
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py upload ./local_file.pdf
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py upload ./local_file.pdf
 
 # Download file
-python3 00-system/skills/google/google-drive/scripts/drive_operations.py download <file_id> --output ./downloaded.pdf
+uv run python 00-system/skills/google/google-drive/scripts/drive_operations.py download <file_id> --output ./downloaded.pdf
 ```
 
 ### Google Tasks
 ```bash
 # List tasks
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks
 
 # Create task
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Call John" --due 2025-12-20
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Call John" --due 2025-12-20
 
 # Complete task
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py complete <task_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py complete <task_id>
 ```
 
 ### Google Slides
 ```bash
 # List presentations
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py list
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py list
 
 # Create presentation
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py create "Q4 Report"
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py create "Q4 Report"
 
 # Export to PDF
-python3 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./report.pdf
+uv run python 00-system/skills/google/google-slides/scripts/slides_operations.py export <presentation_id> ./report.pdf
 ```
 
 ---
@@ -200,7 +200,7 @@ pip install google-auth google-auth-oauthlib google-api-python-client
 
 ### 3. Authenticate
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --login
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --login
 ```
 
 This opens a browser to grant permissions for all services at once.

@@ -10,8 +10,8 @@ Ingest OpenTelemetry Protocol (OTLP) data into Langfuse.
 ## Usage
 
 ```bash
-python scripts/otel_ingest.py --file otel_spans.json
-python scripts/otel_ingest.py --spans '[...]'
+uv run python scripts/otel_ingest.py --file otel_spans.json
+uv run python scripts/otel_ingest.py --spans '[...]'
 ```
 
 ## Parameters

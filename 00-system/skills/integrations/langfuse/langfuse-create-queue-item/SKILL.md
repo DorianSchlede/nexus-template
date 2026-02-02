@@ -10,7 +10,7 @@ Add a trace/observation to an annotation queue.
 ## Usage
 
 ```bash
-python scripts/create_queue_item.py --queue "queue-abc" --trace "trace-xyz"
+uv run python scripts/create_queue_item.py --queue "queue-abc" --trace "trace-xyz"
 ```
 
 ## API Reference

@@ -10,8 +10,8 @@ Update an existing score configuration.
 ## Usage
 
 ```bash
-python scripts/update_score_config.py --id "config-abc" --description "Updated desc"
-python scripts/update_score_config.py --id "config-abc" --archived
+uv run python scripts/update_score_config.py --id "config-abc" --description "Updated desc"
+uv run python scripts/update_score_config.py --id "config-abc" --archived
 ```
 
 ## API Reference

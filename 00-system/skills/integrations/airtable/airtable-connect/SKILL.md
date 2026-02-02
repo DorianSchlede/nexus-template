@@ -34,10 +34,10 @@ Use `--token NAME` to switch between different Airtable workspaces/accounts:
 
 ```bash
 # Default token (AIRTABLE_API_KEY)
-python discover_bases.py
+uv run python discover_bases.py
 
 # Named token (AIRTABLE_API_KEY_MUTAGENT)
-python discover_bases.py --token MUTAGENT
+uv run python discover_bases.py --token MUTAGENT
 ```
 
 **Setup multiple tokens in `.env`:**
@@ -62,7 +62,7 @@ AIRTABLE_API_KEY_CLIENT=pat.zzz...   # Named token for client workspace
 
 1. Run config check with JSON to detect setup state:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
+   uv run python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
    ```
 
 2. Parse the `ai_action` field in JSON output:
@@ -87,7 +87,7 @@ AIRTABLE_API_KEY_CLIENT=pat.zzz...   # Named token for client workspace
 Every workflow MUST start with config validation:
 
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
+uv run python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.py --json
 ```
 
 **Parse `ai_action` from JSON:**
@@ -113,7 +113,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 1. Run config check (Workflow 0)
 2. Run discovery script:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/discover_bases.py
+   uv run python 00-system/skills/airtable/airtable-master/scripts/discover_bases.py
    ```
 3. Script outputs:
    - Number of bases found
@@ -142,7 +142,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
    - If no match → Suggest running discovery
 4. Run query:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/query_records.py \
      --base <base_id> --table <table_name> [--filter "..."] [--sort ...] [--limit N]
    ```
 5. Format and display results using field types from cached schema
@@ -170,7 +170,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
    - Validate input against field type
 5. Run create:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_records.py create \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_records.py create \
      --base <base_id> --table <table_name> \
      --fields '{"Name": "...", "Status": "..."}'
    ```
@@ -194,7 +194,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 4. Accept changes from user
 5. Run update:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_records.py update \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_records.py update \
      --base <base_id> --table <table_name> --record <record_id> \
      --fields '{"Status": "Done", "Priority": "High"}'
    ```
@@ -214,7 +214,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 3. Confirm with user: "Are you sure you want to delete [record name]?"
 4. Run delete:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_records.py delete \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_records.py delete \
      --base <base_id> --table <table_name> --record <record_id>
    ```
 5. Confirm deletion
@@ -232,7 +232,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 2. Collect records to process
 3. Run batch operation:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_records.py batch-create \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_records.py batch-create \
      --base <base_id> --table <table_name> \
      --records '[{"fields": {...}}, {"fields": {...}}]'
    ```
@@ -253,7 +253,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 2. Load context and identify target base
 3. List existing tables to avoid name conflicts:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_tables.py list \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_tables.py list \
      --base <base_id> [--token NAME]
    ```
 4. Collect table details from user:
@@ -262,7 +262,7 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
    - Initial fields (optional, defaults to "Name" singleLineText)
 5. Create table:
    ```bash
-   python 00-system/skills/airtable/airtable-master/scripts/manage_tables.py create \
+   uv run python 00-system/skills/airtable/airtable-master/scripts/manage_tables.py create \
      --base <base_id> --name "Table Name" \
      --fields '[{"name": "Name", "type": "singleLineText"}, {"name": "Status", "type": "singleSelect", "options": {"choices": [{"name": "Todo"}, {"name": "Done"}]}}]' \
      [--token NAME]
@@ -290,13 +290,13 @@ python 00-system/skills/airtable/airtable-master/scripts/check_airtable_config.p
 
 ### List Fields
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py list \
+uv run python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py list \
   --base <base_id> --table <table_id_or_name> [--token NAME]
 ```
 
 ### Create Field
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py create \
+uv run python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py create \
   --base <base_id> --table <table_id_or_name> \
   --name "Field Name" --type singleSelect \
   --choices "Option1,Option2,Option3" \
@@ -305,7 +305,7 @@ python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py create
 
 ### Update Field
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py update \
+uv run python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py update \
   --base <base_id> --table <table_id_or_name> --field <field_id> \
   --name "New Name" --description "Updated description" \
   [--token NAME]
@@ -313,7 +313,7 @@ python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py update
 
 ### Show Available Field Types
 ```bash
-python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py types
+uv run python 00-system/skills/airtable/airtable-master/scripts/manage_fields.py types
 ```
 
 **Common Field Types**:
@@ -462,7 +462,7 @@ User: "create a Projects table in my Mutagent base"
 AI: [Uses MUTAGENT token]
     Creating table "Projects" in base app1gngDx52VAgjVQ...
 
-    python manage_tables.py create --base app1gngDx52VAgjVQ --name "Projects" --token MUTAGENT
+    uv run python manage_tables.py create --base app1gngDx52VAgjVQ --name "Projects" --token MUTAGENT
 
     [OK] Table created: tbl83yYyFGvFDpv9V
     Want to add fields to this table?
@@ -473,11 +473,11 @@ AI: [Uses MUTAGENT token]
 User: "yes, add Status and Description fields"
 AI: Adding fields to Projects table...
 
-    python manage_fields.py create --base app1gngDx52VAgjVQ --table tbl83yYyFGvFDpv9V \
+    uv run python manage_fields.py create --base app1gngDx52VAgjVQ --table tbl83yYyFGvFDpv9V \
       --name "Status" --type singleSelect --choices "Todo,In Progress,Done" --token MUTAGENT
     [OK] Created: Status (singleSelect)
 
-    python manage_fields.py create --base app1gngDx52VAgjVQ --table tbl83yYyFGvFDpv9V \
+    uv run python manage_fields.py create --base app1gngDx52VAgjVQ --table tbl83yYyFGvFDpv9V \
       --name "Description" --type multilineText --token MUTAGENT
     [OK] Created: Description (multilineText)
 ```

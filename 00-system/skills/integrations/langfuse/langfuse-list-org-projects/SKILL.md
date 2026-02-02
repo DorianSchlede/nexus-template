@@ -12,7 +12,7 @@ List all projects in an organization.
 ## Usage
 
 ```bash
-python scripts/list_org_projects.py --org "org-abc123"
+uv run python scripts/list_org_projects.py --org "org-abc123"
 ```
 
 ## Parameters

@@ -23,12 +23,12 @@ Load this skill when user says:
 
 **First-time setup:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/setup_slack.py
+uv run python 00-system/skills/slack/slack-master/scripts/setup_slack.py
 ```
 
 **Check configuration:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
+uv run python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
 ```
 
 ---
@@ -40,7 +40,7 @@ python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
 **Always run first:**
 
 ```bash
-python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
+uv run python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
 ```
 
 **If `ai_action` is `proceed_with_operation`:**
@@ -84,7 +84,7 @@ Use the appropriate script from `slack-master/scripts/`:
 
 **Send message:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/send_message.py \
+uv run python 00-system/skills/slack/slack-master/scripts/send_message.py \
   --channel "C1234567890" \
   --text "Hello from Nexus!" \
   --json
@@ -92,7 +92,7 @@ python 00-system/skills/slack/slack-master/scripts/send_message.py \
 
 **Update message:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/update_message.py \
+uv run python 00-system/skills/slack/slack-master/scripts/update_message.py \
   --channel "C1234567890" \
   --ts "1234567890.123456" \
   --text "Updated message" \
@@ -101,7 +101,7 @@ python 00-system/skills/slack/slack-master/scripts/update_message.py \
 
 **Delete message:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/delete_message.py \
+uv run python 00-system/skills/slack/slack-master/scripts/delete_message.py \
   --channel "C1234567890" \
   --ts "1234567890.123456" \
   --json
@@ -111,7 +111,7 @@ python 00-system/skills/slack/slack-master/scripts/delete_message.py \
 
 **List channels:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/list_channels.py \
+uv run python 00-system/skills/slack/slack-master/scripts/list_channels.py \
   --types "public_channel,private_channel" \
   --limit 50 \
   --json
@@ -119,14 +119,14 @@ python 00-system/skills/slack/slack-master/scripts/list_channels.py \
 
 **Get channel info:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/channel_info.py \
+uv run python 00-system/skills/slack/slack-master/scripts/channel_info.py \
   --channel "C1234567890" \
   --json
 ```
 
 **Get channel history:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/channel_history.py \
+uv run python 00-system/skills/slack/slack-master/scripts/channel_history.py \
   --channel "C1234567890" \
   --limit 20 \
   --json
@@ -136,14 +136,14 @@ python 00-system/skills/slack/slack-master/scripts/channel_history.py \
 
 **List users:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/list_users.py \
+uv run python 00-system/skills/slack/slack-master/scripts/list_users.py \
   --limit 100 \
   --json
 ```
 
 **Get user info:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/user_info.py \
+uv run python 00-system/skills/slack/slack-master/scripts/user_info.py \
   --user "U1234567890" \
   --json
 ```
@@ -152,7 +152,7 @@ python 00-system/skills/slack/slack-master/scripts/user_info.py \
 
 **Search messages:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/search_messages.py \
+uv run python 00-system/skills/slack/slack-master/scripts/search_messages.py \
   --query "project update" \
   --count 20 \
   --json
@@ -160,7 +160,7 @@ python 00-system/skills/slack/slack-master/scripts/search_messages.py \
 
 **Search files:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/search_files.py \
+uv run python 00-system/skills/slack/slack-master/scripts/search_files.py \
   --query "report.pdf" \
   --count 10 \
   --json
@@ -170,7 +170,7 @@ python 00-system/skills/slack/slack-master/scripts/search_files.py \
 
 **Upload file:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/upload_file.py \
+uv run python 00-system/skills/slack/slack-master/scripts/upload_file.py \
   --file "/path/to/file.pdf" \
   --channels "C1234567890" \
   --title "My Report" \
@@ -179,7 +179,7 @@ python 00-system/skills/slack/slack-master/scripts/upload_file.py \
 
 **List files:**
 ```bash
-python 00-system/skills/slack/slack-master/scripts/list_files.py \
+uv run python 00-system/skills/slack/slack-master/scripts/list_files.py \
   --channel "C1234567890" \
   --limit 20 \
   --json
@@ -248,7 +248,7 @@ When user references a channel by name (e.g., "#general"):
 
 1. First, list channels to find the ID:
    ```bash
-   python list_channels.py --json
+   uv run python list_channels.py --json
    ```
 
 2. Find matching channel in response
@@ -269,7 +269,7 @@ When user references someone by name (e.g., "@john"):
 
 1. List users to find the ID:
    ```bash
-   python list_users.py --json
+   uv run python list_users.py --json
    ```
 
 2. Find matching user in response

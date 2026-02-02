@@ -157,7 +157,7 @@
 ### Step 1: Validate Configuration
 
 ```bash
-python 00-system/skills/notion/airtable-master/scripts/check_airtable_config.py
+uv run python 00-system/skills/notion/airtable-master/scripts/check_airtable_config.py
 ```
 
 This validates:
@@ -193,7 +193,7 @@ curl "https://api.airtable.com/v0/meta/bases" \
 ### Step 4: Check Python Dependencies
 
 ```bash
-python -c "import requests; import yaml; print('[OK] Dependencies OK')"
+uv run python -c "import requests; import yaml; print('[OK] Dependencies OK')"
 ```
 
 ---

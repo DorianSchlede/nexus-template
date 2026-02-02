@@ -10,8 +10,8 @@ Add a comment to a trace or observation.
 ## Usage
 
 ```bash
-python scripts/create_comment.py --type "TRACE" --id "trace-abc" --content "This trace shows high latency"
-python scripts/create_comment.py --type "OBSERVATION" --id "obs-123" --content "Review needed" --author "reviewer@example.com"
+uv run python scripts/create_comment.py --type "TRACE" --id "trace-abc" --content "This trace shows high latency"
+uv run python scripts/create_comment.py --type "OBSERVATION" --id "obs-123" --content "Review needed" --author "reviewer@example.com"
 ```
 
 ## Parameters

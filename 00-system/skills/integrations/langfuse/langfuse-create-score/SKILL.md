@@ -11,13 +11,13 @@ Add a score/evaluation to a trace or observation.
 
 ```bash
 # Score a trace
-python scripts/create_score.py --trace "trace-abc" --name "accuracy" --value 0.95
+uv run python scripts/create_score.py --trace "trace-abc" --name "accuracy" --value 0.95
 
 # Score an observation
-python scripts/create_score.py --trace "trace-abc" --observation "obs-xyz" --name "quality" --value 1
+uv run python scripts/create_score.py --trace "trace-abc" --observation "obs-xyz" --name "quality" --value 1
 
 # With comment
-python scripts/create_score.py --trace "trace-abc" --name "correct" --value 1 --comment "Perfect response"
+uv run python scripts/create_score.py --trace "trace-abc" --name "correct" --value 1 --comment "Perfect response"
 ```
 
 ## Parameters

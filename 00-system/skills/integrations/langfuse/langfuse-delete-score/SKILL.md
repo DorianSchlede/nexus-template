@@ -10,7 +10,7 @@ Delete a score by ID.
 ## Usage
 
 ```bash
-python scripts/delete_score.py --id "score-abc123"
+uv run python scripts/delete_score.py --id "score-abc123"
 ```
 
 ## API Reference

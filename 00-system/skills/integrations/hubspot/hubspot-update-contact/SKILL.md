@@ -11,7 +11,7 @@ description: "Update an existing contact in HubSpot CRM. Load when user says 'up
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -34,7 +34,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Update phone:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
   --id 12345 \
   --phone "+1987654321" \
   --json
@@ -42,7 +42,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
 
 **Update multiple fields:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
   --id 12345 \
   --firstname "Jonathan" \
   --company "New Corp Inc" \
@@ -55,7 +55,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
 
 If user says "update John Doe", first search for the contact:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py --name "John Doe" --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py --name "John Doe" --json
 ```
 
 Then use the returned ID for the update.

@@ -10,7 +10,7 @@ Get list of annotation queues for human review.
 ## Usage
 
 ```bash
-python scripts/list_annotation_queues.py
+uv run python scripts/list_annotation_queues.py
 ```
 
 ## API Reference

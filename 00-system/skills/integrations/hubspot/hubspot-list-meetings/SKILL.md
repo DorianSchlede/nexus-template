@@ -11,7 +11,7 @@ description: "List meeting engagements from HubSpot CRM. Load when user says 'li
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -22,17 +22,17 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 ### Basic List (default 10 meetings)
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --json
 ```
 
 ### With Limit
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --limit 25 --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --limit 25 --json
 ```
 
 ### With Pagination
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --after "cursor_value" --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --after "cursor_value" --json
 ```
 
 ---

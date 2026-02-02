@@ -14,7 +14,7 @@ Delete a Langfuse project.
 ## Usage
 
 ```bash
-python scripts/delete_project.py --project "proj-abc123"
+uv run python scripts/delete_project.py --project "proj-abc123"
 ```
 
 ## Parameters

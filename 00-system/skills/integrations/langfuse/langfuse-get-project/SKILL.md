@@ -11,7 +11,7 @@ Get the project associated with the current API key.
 
 ### CLI
 ```bash
-python scripts/get_project.py
+uv run python scripts/get_project.py
 ```
 
 ### Python

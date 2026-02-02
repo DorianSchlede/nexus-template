@@ -10,7 +10,7 @@ Delete a model definition by ID.
 ## Usage
 
 ```bash
-python scripts/delete_model.py --id "model-abc123"
+uv run python scripts/delete_model.py --id "model-abc123"
 ```
 
 ## Parameters

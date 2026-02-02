@@ -12,13 +12,13 @@ Retrieve a specific prompt from Langfuse by name, optionally with specific versi
 ### CLI
 ```bash
 # Get latest version
-python scripts/get_prompt.py --name "my-prompt"
+uv run python scripts/get_prompt.py --name "my-prompt"
 
 # Get specific version
-python scripts/get_prompt.py --name "my-prompt" --version 2
+uv run python scripts/get_prompt.py --name "my-prompt" --version 2
 
 # Get by label
-python scripts/get_prompt.py --name "my-prompt" --label production
+uv run python scripts/get_prompt.py --name "my-prompt" --label production
 ```
 
 ## Parameters

@@ -11,7 +11,7 @@ description: "Create a new deal in HubSpot CRM. Load when user says 'create deal
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -33,14 +33,14 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Minimal (name only):**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
   --name "New Enterprise Deal" \
   --json
 ```
 
 **Full deal:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
   --name "Acme Corp - Enterprise" \
   --amount 50000 \
   --stage "qualifiedtobuy" \

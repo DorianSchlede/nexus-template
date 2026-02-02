@@ -287,6 +287,8 @@ def init_skill(skill_name, path=None):
 
 
 def main():
+    import argparse
+
     # Configure UTF-8 output for cross-platform compatibility (Windows/macOS/Linux)
     if sys.stdout.encoding != 'utf-8':
         try:
@@ -296,24 +298,37 @@ def main():
             import io
             sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-    if len(sys.argv) < 2:
-        print("Usage: init_skill.py <skill-name> [--path <path>]")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description='Initialize a new Nexus skill with template structure',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Examples:
+  init_skill.py my-new-skill                     # Auto-detect location
+  init_skill.py my-skill --path 03-skills        # Explicit path
+  init_skill.py my-api-helper --path 00-system/skills/integrations
 
-    skill_name = sys.argv[1]
-    path = None
+Skill structure created:
+  03-skills/
+    my-skill/
+      SKILL.md           (main skill definition)
+      scripts/           (executable Python scripts)
+      references/        (documentation loaded into context)
+      assets/            (files used in output, not loaded)
+'''
+    )
+    parser.add_argument('name', help='Skill name (use hyphens, e.g., my-new-skill)')
+    parser.add_argument('--path', '-p', help='Path to skills directory (default: auto-detect)')
 
-    if len(sys.argv) >= 4 and sys.argv[2] == '--path':
-        path = sys.argv[3]
+    args = parser.parse_args()
 
-    print(f"[INIT] Initializing skill: {skill_name}")
-    if path:
-        print(f"   Location: {path} (explicit)")
+    print(f"[INIT] Initializing skill: {args.name}")
+    if args.path:
+        print(f"   Location: {args.path} (explicit)")
     else:
         print(f"   Location: auto-detecting context...")
     print()
 
-    result = init_skill(skill_name, path)
+    result = init_skill(args.name, args.path)
 
     if result:
         sys.exit(0)

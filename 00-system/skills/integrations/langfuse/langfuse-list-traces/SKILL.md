@@ -11,10 +11,10 @@ Get list of LLM traces from Langfuse.
 
 ### CLI
 ```bash
-python scripts/list_traces.py --limit 20
-python scripts/list_traces.py --user-id user123
-python scripts/list_traces.py --session-id sess123
-python scripts/list_traces.py --name "chat-completion"
+uv run python scripts/list_traces.py --limit 20
+uv run python scripts/list_traces.py --user-id user123
+uv run python scripts/list_traces.py --session-id sess123
+uv run python scripts/list_traces.py --name "chat-completion"
 ```
 
 ### Python

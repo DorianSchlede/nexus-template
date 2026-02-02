@@ -90,7 +90,7 @@ When a NotebookLM skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --json
+uv run python 00-system/skills/notebooklm/notebooklm-master/scripts/check_notebooklm_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

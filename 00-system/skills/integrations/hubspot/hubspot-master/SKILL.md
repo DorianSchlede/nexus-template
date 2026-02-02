@@ -81,7 +81,7 @@ All HubSpot skills reference these resources (progressive disclosure).
 
 **[check_hubspot_config.py](scripts/check_hubspot_config.py)** - Pre-flight validation
 ```bash
-python check_hubspot_config.py [--json]
+uv run python check_hubspot_config.py [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -95,7 +95,7 @@ Exit codes: 0=configured, 1=partial, 2=not configured
 
 **[setup_hubspot.py](scripts/setup_hubspot.py)** - Interactive setup wizard
 ```bash
-python setup_hubspot.py
+uv run python setup_hubspot.py
 ```
 No arguments - runs interactively. Guides through Private App setup, tests connection, saves to `.env`.
 
@@ -107,7 +107,7 @@ No arguments - runs interactively. Guides through Private App setup, tests conne
 
 **[list_contacts.py](scripts/list_contacts.py)** - List contacts (GET /crm/v3/objects/contacts)
 ```bash
-python list_contacts.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
+uv run python list_contacts.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -122,7 +122,7 @@ python list_contacts.py [--limit N] [--properties PROPS] [--after CURSOR] [--jso
 
 **[create_contact.py](scripts/create_contact.py)** - Create contact (POST /crm/v3/objects/contacts)
 ```bash
-python create_contact.py --email EMAIL [--firstname NAME] [--lastname NAME] [--phone PHONE] [--company COMPANY] [--json]
+uv run python create_contact.py --email EMAIL [--firstname NAME] [--lastname NAME] [--phone PHONE] [--company COMPANY] [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -139,7 +139,7 @@ python create_contact.py --email EMAIL [--firstname NAME] [--lastname NAME] [--p
 
 **[update_contact.py](scripts/update_contact.py)** - Update contact (PATCH /crm/v3/objects/contacts/{id})
 ```bash
-python update_contact.py --id CONTACT_ID [--email EMAIL] [--firstname NAME] [--lastname NAME] [--phone PHONE] [--json]
+uv run python update_contact.py --id CONTACT_ID [--email EMAIL] [--firstname NAME] [--lastname NAME] [--phone PHONE] [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -156,7 +156,7 @@ python update_contact.py --id CONTACT_ID [--email EMAIL] [--firstname NAME] [--l
 
 **[search_contacts.py](scripts/search_contacts.py)** - Search contacts (POST /crm/v3/objects/contacts/search)
 ```bash
-python search_contacts.py [--email EMAIL] [--name NAME] [--company COMPANY] [--limit N] [--json]
+uv run python search_contacts.py [--email EMAIL] [--name NAME] [--company COMPANY] [--limit N] [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -174,7 +174,7 @@ python search_contacts.py [--email EMAIL] [--name NAME] [--company COMPANY] [--l
 
 **[list_companies.py](scripts/list_companies.py)** - List companies (GET /crm/v3/objects/companies)
 ```bash
-python list_companies.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
+uv run python list_companies.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
 ```
 
 **When to Use:** Use when user says "list companies", "get companies", "show companies".
@@ -183,7 +183,7 @@ python list_companies.py [--limit N] [--properties PROPS] [--after CURSOR] [--js
 
 **[create_company.py](scripts/create_company.py)** - Create company (POST /crm/v3/objects/companies)
 ```bash
-python create_company.py --name NAME [--domain DOMAIN] [--industry INDUSTRY] [--json]
+uv run python create_company.py --name NAME [--domain DOMAIN] [--industry INDUSTRY] [--json]
 ```
 
 **When to Use:** Use when user says "create company", "add company", "new company".
@@ -192,7 +192,7 @@ python create_company.py --name NAME [--domain DOMAIN] [--industry INDUSTRY] [--
 
 **[search_companies.py](scripts/search_companies.py)** - Search companies (POST /crm/v3/objects/companies/search)
 ```bash
-python search_companies.py [--name NAME] [--domain DOMAIN] [--industry INDUSTRY] [--limit N] [--json]
+uv run python search_companies.py [--name NAME] [--domain DOMAIN] [--industry INDUSTRY] [--limit N] [--json]
 ```
 
 **When to Use:** Use when user says "search companies", "find company", "lookup company".
@@ -203,7 +203,7 @@ python search_companies.py [--name NAME] [--domain DOMAIN] [--industry INDUSTRY]
 
 **[list_deals.py](scripts/list_deals.py)** - List deals (GET /crm/v3/objects/deals)
 ```bash
-python list_deals.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
+uv run python list_deals.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
 ```
 
 **When to Use:** Use when user says "list deals", "get deals", "show deals", "show pipeline".
@@ -212,7 +212,7 @@ python list_deals.py [--limit N] [--properties PROPS] [--after CURSOR] [--json]
 
 **[create_deal.py](scripts/create_deal.py)** - Create deal (POST /crm/v3/objects/deals)
 ```bash
-python create_deal.py --name NAME [--amount AMOUNT] [--stage STAGE] [--pipeline PIPELINE] [--json]
+uv run python create_deal.py --name NAME [--amount AMOUNT] [--stage STAGE] [--pipeline PIPELINE] [--json]
 ```
 
 **When to Use:** Use when user says "create deal", "add deal", "new deal", "new opportunity".
@@ -221,7 +221,7 @@ python create_deal.py --name NAME [--amount AMOUNT] [--stage STAGE] [--pipeline 
 
 **[update_deal.py](scripts/update_deal.py)** - Update deal (PATCH /crm/v3/objects/deals/{id})
 ```bash
-python update_deal.py --id DEAL_ID [--name NAME] [--amount AMOUNT] [--stage STAGE] [--json]
+uv run python update_deal.py --id DEAL_ID [--name NAME] [--amount AMOUNT] [--stage STAGE] [--json]
 ```
 
 **When to Use:** Use when user says "update deal", "edit deal", "change deal stage".
@@ -230,7 +230,7 @@ python update_deal.py --id DEAL_ID [--name NAME] [--amount AMOUNT] [--stage STAG
 
 **[search_deals.py](scripts/search_deals.py)** - Search deals (POST /crm/v3/objects/deals/search)
 ```bash
-python search_deals.py [--name NAME] [--stage STAGE] [--min-amount N] [--max-amount N] [--limit N] [--json]
+uv run python search_deals.py [--name NAME] [--stage STAGE] [--min-amount N] [--max-amount N] [--limit N] [--json]
 ```
 
 **When to Use:** Use when user says "search deals", "find deal", "lookup deal".
@@ -241,7 +241,7 @@ python search_deals.py [--name NAME] [--stage STAGE] [--min-amount N] [--max-amo
 
 **[get_associations.py](scripts/get_associations.py)** - Get associations (GET /crm/v4/objects/{type}/{id}/associations/{toType})
 ```bash
-python get_associations.py --object-type TYPE --object-id ID --to-type TO_TYPE [--json]
+uv run python get_associations.py --object-type TYPE --object-id ID --to-type TO_TYPE [--json]
 ```
 
 **When to Use:** Use when user says "get associations", "linked records", "related contacts".
@@ -268,7 +268,7 @@ When a HubSpot skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

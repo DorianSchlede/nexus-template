@@ -31,10 +31,10 @@ Validates environment variables.
 
 ```bash
 # Check config
-python check_langfuse_config.py --json
+uv run python check_langfuse_config.py --json
 
 # Test connection
-python check_langfuse_config.py --test
+uv run python check_langfuse_config.py --test
 ```
 
 Returns:

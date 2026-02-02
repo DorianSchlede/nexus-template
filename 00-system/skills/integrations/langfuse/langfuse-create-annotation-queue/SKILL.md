@@ -10,7 +10,7 @@ Create a new annotation queue for human review.
 ## Usage
 
 ```bash
-python scripts/create_annotation_queue.py --name "review-queue" --description "Production review"
+uv run python scripts/create_annotation_queue.py --name "review-queue" --description "Production review"
 ```
 
 ## API Reference

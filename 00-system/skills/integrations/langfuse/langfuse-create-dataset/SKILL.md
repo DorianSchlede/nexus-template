@@ -11,9 +11,9 @@ Create a new dataset in Langfuse for storing evaluation test cases.
 
 ### CLI
 ```bash
-python scripts/create_dataset.py --name "my-dataset"
-python scripts/create_dataset.py --name "eval-set" --description "Production evaluation cases"
-python scripts/create_dataset.py --name "test-set" --metadata '{"version": "1.0"}'
+uv run python scripts/create_dataset.py --name "my-dataset"
+uv run python scripts/create_dataset.py --name "eval-set" --description "Production evaluation cases"
+uv run python scripts/create_dataset.py --name "test-set" --metadata '{"version": "1.0"}'
 ```
 
 ## Parameters

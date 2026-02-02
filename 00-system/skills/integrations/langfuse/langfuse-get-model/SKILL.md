@@ -11,7 +11,7 @@ Get detailed view of a specific model.
 
 ### CLI
 ```bash
-python scripts/get_model.py --id <model_id>
+uv run python scripts/get_model.py --id <model_id>
 ```
 
 ### Python

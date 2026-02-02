@@ -52,7 +52,7 @@ All HeyReach skills reference these resources (progressive disclosure).
 
 **[check_heyreach_config.py](scripts/check_heyreach_config.py)** - Pre-flight validation
 ```bash
-python check_heyreach_config.py [--json]
+uv run python check_heyreach_config.py [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -87,7 +87,7 @@ When a HeyReach skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

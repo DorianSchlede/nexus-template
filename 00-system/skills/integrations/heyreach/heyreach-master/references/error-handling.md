@@ -42,7 +42,7 @@ Troubleshooting guide for HeyReach API integration.
 **Fix**:
 ```bash
 # Check current config
-python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
+uv run python 00-system/skills/heyreach/heyreach-master/scripts/check_heyreach_config.py --json
 
 # If invalid, update .env with new key
 HEYREACH_API_KEY=your-new-key

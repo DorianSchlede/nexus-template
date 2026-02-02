@@ -10,7 +10,7 @@ Assign a user to an annotation queue.
 ## Usage
 
 ```bash
-python scripts/create_queue_assignment.py --queue "queue-abc" --user "user@email.com"
+uv run python scripts/create_queue_assignment.py --queue "queue-abc" --user "user@email.com"
 ```
 
 ## API Reference

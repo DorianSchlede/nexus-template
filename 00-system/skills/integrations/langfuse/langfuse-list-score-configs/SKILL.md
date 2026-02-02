@@ -10,8 +10,8 @@ Get list of score configurations for evaluation metrics.
 ## Usage
 
 ```bash
-python scripts/list_score_configs.py
-python scripts/list_score_configs.py --limit 20
+uv run python scripts/list_score_configs.py
+uv run python scripts/list_score_configs.py --limit 20
 ```
 
 ## Parameters

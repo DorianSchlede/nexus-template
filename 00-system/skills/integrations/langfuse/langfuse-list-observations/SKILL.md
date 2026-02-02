@@ -11,9 +11,9 @@ Get list of observations (spans, generations, events) from Langfuse.
 
 ### CLI
 ```bash
-python scripts/list_observations.py --limit 20
-python scripts/list_observations.py --trace-id trace123
-python scripts/list_observations.py --type GENERATION
+uv run python scripts/list_observations.py --limit 20
+uv run python scripts/list_observations.py --trace-id trace123
+uv run python scripts/list_observations.py --type GENERATION
 ```
 
 ### Python

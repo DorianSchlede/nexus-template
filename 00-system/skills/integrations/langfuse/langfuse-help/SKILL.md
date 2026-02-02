@@ -63,14 +63,14 @@ for trace in session["traces"]:
 ### Use create_score.py for Validation
 ```bash
 # Validates before sending (API accepts garbage!)
-python create_score.py --trace {id} --name goal_achievement \
+uv run python create_score.py --trace {id} --name goal_achievement \
   --string-value complete --config-id {uuid}
 
 # List all known configs
-python create_score.py --list-configs
+uv run python create_score.py --list-configs
 
 # With metadata (rich JSON, ~1MB limit)
-python create_score.py --trace {id} --name session_notes --value 1 \
+uv run python create_score.py --trace {id} --name session_notes --value 1 \
   --metadata '{"trace_ids": ["a","b"], "findings": [...]}'
 ```
 
@@ -109,16 +109,16 @@ CONFIG_IDS = {
 
 ```bash
 # 1. Check config
-python 03-skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
+uv run python 03-skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
 
 # 2. List recent traces
-python 03-skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 10
+uv run python 03-skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 10
 
 # 3. Get trace with observations
-python 03-skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id {trace_id}
+uv run python 03-skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id {trace_id}
 
 # 4. Create score (validated)
-python 03-skills/langfuse/langfuse-create-score/scripts/create_score.py \
+uv run python 03-skills/langfuse/langfuse-create-score/scripts/create_score.py \
   --trace {id} --name tool_efficiency --value 0.85 \
   --config-id 84965473-0f54-4248-999e-7b8627fc9c29
 ```

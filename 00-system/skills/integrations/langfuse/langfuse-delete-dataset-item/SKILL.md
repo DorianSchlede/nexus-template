@@ -11,7 +11,7 @@ Delete a dataset item by ID.
 
 ### CLI
 ```bash
-python scripts/delete_dataset_item.py --id "item-abc123"
+uv run python scripts/delete_dataset_item.py --id "item-abc123"
 ```
 
 ## Parameters

@@ -90,7 +90,7 @@ All Slack skills reference these resources (progressive disclosure).
 
 **[check_slack_config.py](scripts/check_slack_config.py)** - Pre-flight validation
 ```bash
-python check_slack_config.py [--json]
+uv run python check_slack_config.py [--json]
 ```
 | Argument | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -104,7 +104,7 @@ Exit codes: 0=configured, 1=partial, 2=not configured
 
 **[setup_slack.py](scripts/setup_slack.py)** - Interactive OAuth wizard
 ```bash
-python setup_slack.py
+uv run python setup_slack.py
 ```
 No arguments - runs interactively. Guides through OAuth authorization, gets user token, saves to `.env`.
 
@@ -133,22 +133,22 @@ Provides:
 
 **[send_message.py](scripts/send_message.py)** - Send message (chat.postMessage)
 ```bash
-python send_message.py --channel CHANNEL --text "Message" [--thread-ts TS] [--json]
+uv run python send_message.py --channel CHANNEL --text "Message" [--thread-ts TS] [--json]
 ```
 
 **[update_message.py](scripts/update_message.py)** - Update message (chat.update)
 ```bash
-python update_message.py --channel CHANNEL --ts TIMESTAMP --text "New text" [--json]
+uv run python update_message.py --channel CHANNEL --ts TIMESTAMP --text "New text" [--json]
 ```
 
 **[delete_message.py](scripts/delete_message.py)** - Delete message (chat.delete)
 ```bash
-python delete_message.py --channel CHANNEL --ts TIMESTAMP [--json]
+uv run python delete_message.py --channel CHANNEL --ts TIMESTAMP [--json]
 ```
 
 **[schedule_message.py](scripts/schedule_message.py)** - Schedule message (chat.scheduleMessage)
 ```bash
-python schedule_message.py --channel CHANNEL --text "Message" --post-at UNIX_TS [--json]
+uv run python schedule_message.py --channel CHANNEL --text "Message" --post-at UNIX_TS [--json]
 ```
 
 ---
@@ -157,22 +157,22 @@ python schedule_message.py --channel CHANNEL --text "Message" --post-at UNIX_TS 
 
 **[list_channels.py](scripts/list_channels.py)** - List channels (conversations.list)
 ```bash
-python list_channels.py [--types public,private] [--limit N] [--json]
+uv run python list_channels.py [--types public,private] [--limit N] [--json]
 ```
 
 **[channel_info.py](scripts/channel_info.py)** - Get channel info (conversations.info)
 ```bash
-python channel_info.py --channel CHANNEL [--json]
+uv run python channel_info.py --channel CHANNEL [--json]
 ```
 
 **[channel_history.py](scripts/channel_history.py)** - Get messages (conversations.history)
 ```bash
-python channel_history.py --channel CHANNEL [--limit N] [--oldest TS] [--latest TS] [--json]
+uv run python channel_history.py --channel CHANNEL [--limit N] [--oldest TS] [--latest TS] [--json]
 ```
 
 **[create_channel.py](scripts/create_channel.py)** - Create channel (conversations.create)
 ```bash
-python create_channel.py --name NAME [--is-private] [--json]
+uv run python create_channel.py --name NAME [--is-private] [--json]
 ```
 
 ---
@@ -181,12 +181,12 @@ python create_channel.py --name NAME [--is-private] [--json]
 
 **[list_users.py](scripts/list_users.py)** - List workspace users (users.list)
 ```bash
-python list_users.py [--limit N] [--json]
+uv run python list_users.py [--limit N] [--json]
 ```
 
 **[user_info.py](scripts/user_info.py)** - Get user info (users.info)
 ```bash
-python user_info.py --user USER_ID [--json]
+uv run python user_info.py --user USER_ID [--json]
 ```
 
 ---
@@ -195,12 +195,12 @@ python user_info.py --user USER_ID [--json]
 
 **[upload_file.py](scripts/upload_file.py)** - Upload file (files.upload)
 ```bash
-python upload_file.py --file PATH --channels C1,C2 [--title TITLE] [--json]
+uv run python upload_file.py --file PATH --channels C1,C2 [--title TITLE] [--json]
 ```
 
 **[list_files.py](scripts/list_files.py)** - List files (files.list)
 ```bash
-python list_files.py [--channel CHANNEL] [--user USER] [--limit N] [--json]
+uv run python list_files.py [--channel CHANNEL] [--user USER] [--limit N] [--json]
 ```
 
 ---
@@ -209,12 +209,12 @@ python list_files.py [--channel CHANNEL] [--user USER] [--limit N] [--json]
 
 **[search_messages.py](scripts/search_messages.py)** - Search messages (search.messages)
 ```bash
-python search_messages.py --query "search terms" [--count N] [--json]
+uv run python search_messages.py --query "search terms" [--count N] [--json]
 ```
 
 **[search_files.py](scripts/search_files.py)** - Search files (search.files)
 ```bash
-python search_files.py --query "search terms" [--count N] [--json]
+uv run python search_files.py --query "search terms" [--count N] [--json]
 ```
 
 ---
@@ -226,7 +226,7 @@ When a Slack skill fails due to missing configuration, the AI should:
 ### Step 1: Run Config Check with JSON Output
 
 ```bash
-python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
+uv run python 00-system/skills/slack/slack-master/scripts/check_slack_config.py --json
 ```
 
 ### Step 2: Parse the `ai_action` Field

@@ -12,13 +12,13 @@ Create a new prompt in Langfuse with versioning support.
 ### CLI
 ```bash
 # Create a text prompt
-python scripts/create_prompt.py --name "my-prompt" --prompt "You are a helpful assistant"
+uv run python scripts/create_prompt.py --name "my-prompt" --prompt "You are a helpful assistant"
 
 # Create a chat prompt
-python scripts/create_prompt.py --name "chat-prompt" --type chat --prompt '[{"role": "system", "content": "You are helpful"}]'
+uv run python scripts/create_prompt.py --name "chat-prompt" --type chat --prompt '[{"role": "system", "content": "You are helpful"}]'
 
 # With labels and config
-python scripts/create_prompt.py --name "prod-prompt" --prompt "..." --labels production --config '{"temperature": 0.7}'
+uv run python scripts/create_prompt.py --name "prod-prompt" --prompt "..." --labels production --config '{"temperature": 0.7}'
 ```
 
 ## Parameters

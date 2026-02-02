@@ -11,7 +11,7 @@ description: "Log an email engagement in HubSpot CRM. Load when user says 'log e
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -32,7 +32,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Log sent email:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
   --subject "Follow up on proposal" \
   --body "Hi John, following up on our conversation about the enterprise package..." \
   --json
@@ -40,7 +40,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
 
 **Log received email:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
   --subject "Re: Proposal" \
   --body "Thanks for sending over the details..." \
   --direction "INCOMING_EMAIL" \

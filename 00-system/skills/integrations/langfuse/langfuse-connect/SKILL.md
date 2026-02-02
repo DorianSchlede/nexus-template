@@ -11,7 +11,7 @@ User-facing entry point for Langfuse integration. Routes to appropriate operatio
 
 For score config IDs, trace structure, and API patterns, load:
 ```bash
-python 00-system/core/nexus-loader.py --skill langfuse-help
+uv run python 00-system/core/nexus-loader.py --skill langfuse-help
 ```
 
 ---
@@ -21,7 +21,7 @@ python 00-system/core/nexus-loader.py --skill langfuse-help
 Before any operation, run config check:
 
 ```bash
-python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --json
+uv run python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --json
 ```
 
 **If `ai_action` is:**
@@ -188,7 +188,7 @@ python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.p
 ### Workflow 0: Config Check (Auto - ALWAYS FIRST)
 
 ```bash
-python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --json
+uv run python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --json
 ```
 
 ### Workflow 1: List Traces
@@ -196,7 +196,7 @@ python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.p
 Show recent LLM traces.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 20
+uv run python 00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 20
 ```
 
 ### Workflow 2: Get Trace Details
@@ -204,7 +204,7 @@ python 00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py --l
 Get detailed view of specific trace.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id <trace_id>
+uv run python 00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id <trace_id>
 ```
 
 ### Workflow 3: List Observations
@@ -212,7 +212,7 @@ python 00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id <t
 List spans, generations, and events.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-list-observations/scripts/list_observations.py --limit 20
+uv run python 00-system/skills/langfuse/langfuse-list-observations/scripts/list_observations.py --limit 20
 ```
 
 ### Workflow 4: Get Observation
@@ -220,7 +220,7 @@ python 00-system/skills/langfuse/langfuse-list-observations/scripts/list_observa
 Get specific observation details.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-observation/scripts/get_observation.py --id <obs_id>
+uv run python 00-system/skills/langfuse/langfuse-get-observation/scripts/get_observation.py --id <obs_id>
 ```
 
 ### Workflow 5: List Sessions
@@ -228,7 +228,7 @@ python 00-system/skills/langfuse/langfuse-get-observation/scripts/get_observatio
 List user sessions.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-list-sessions/scripts/list_sessions.py --limit 20
+uv run python 00-system/skills/langfuse/langfuse-list-sessions/scripts/list_sessions.py --limit 20
 ```
 
 ### Workflow 6: Get Session
@@ -236,7 +236,7 @@ python 00-system/skills/langfuse/langfuse-list-sessions/scripts/list_sessions.py
 Get session with traces.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-session/scripts/get_session.py --id <session_id>
+uv run python 00-system/skills/langfuse/langfuse-get-session/scripts/get_session.py --id <session_id>
 ```
 
 ### Workflow 7: List Scores
@@ -244,7 +244,7 @@ python 00-system/skills/langfuse/langfuse-get-session/scripts/get_session.py --i
 List evaluation scores.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-list-scores/scripts/list_scores.py --limit 20
+uv run python 00-system/skills/langfuse/langfuse-list-scores/scripts/list_scores.py --limit 20
 ```
 
 ### Workflow 8: Get Score
@@ -252,7 +252,7 @@ python 00-system/skills/langfuse/langfuse-list-scores/scripts/list_scores.py --l
 Get specific score.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-score/scripts/get_score.py --id <score_id>
+uv run python 00-system/skills/langfuse/langfuse-get-score/scripts/get_score.py --id <score_id>
 ```
 
 ### Workflow 9: List Models
@@ -260,7 +260,7 @@ python 00-system/skills/langfuse/langfuse-get-score/scripts/get_score.py --id <s
 List configured models (for cost tracking).
 
 ```bash
-python 00-system/skills/langfuse/langfuse-list-models/scripts/list_models.py
+uv run python 00-system/skills/langfuse/langfuse-list-models/scripts/list_models.py
 ```
 
 ### Workflow 10: Get Model
@@ -268,7 +268,7 @@ python 00-system/skills/langfuse/langfuse-list-models/scripts/list_models.py
 Get model details.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-model/scripts/get_model.py --id <model_id>
+uv run python 00-system/skills/langfuse/langfuse-get-model/scripts/get_model.py --id <model_id>
 ```
 
 ### Workflow 11: Get Project
@@ -276,7 +276,7 @@ python 00-system/skills/langfuse/langfuse-get-model/scripts/get_model.py --id <m
 Get current project info.
 
 ```bash
-python 00-system/skills/langfuse/langfuse-get-project/scripts/get_project.py
+uv run python 00-system/skills/langfuse/langfuse-get-project/scripts/get_project.py
 ```
 
 ---
@@ -285,13 +285,13 @@ python 00-system/skills/langfuse/langfuse-get-project/scripts/get_project.py
 
 ```bash
 # Check config
-python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
+uv run python 00-system/skills/langfuse/langfuse-master/scripts/check_langfuse_config.py --test
 
 # List recent traces
-python 00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 10
+uv run python 00-system/skills/langfuse/langfuse-list-traces/scripts/list_traces.py --limit 10
 
 # Get specific trace
-python 00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id abc123
+uv run python 00-system/skills/langfuse/langfuse-get-trace/scripts/get_trace.py --id abc123
 ```
 
 ---

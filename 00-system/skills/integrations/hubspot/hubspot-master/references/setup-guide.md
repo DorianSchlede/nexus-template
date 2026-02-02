@@ -73,7 +73,7 @@ Token format: `pat-na1-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`
 
 Run the setup wizard:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/setup_hubspot.py
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/setup_hubspot.py
 ```
 
 ### Option B: Manual Setup
@@ -89,7 +89,7 @@ HUBSPOT_ACCESS_TOKEN=pat-na1-your-token-here
 
 Run the config checker:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py
 ```
 
 You should see:

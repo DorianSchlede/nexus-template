@@ -11,7 +11,7 @@ Delete a prompt from Langfuse by name. This deletes all versions of the prompt.
 
 ### CLI
 ```bash
-python scripts/delete_prompt.py --name "my-prompt"
+uv run python scripts/delete_prompt.py --name "my-prompt"
 ```
 
 ## Parameters

@@ -11,7 +11,7 @@ Retrieve a specific evaluation run from a dataset.
 
 ### CLI
 ```bash
-python scripts/get_dataset_run.py --dataset "my-dataset" --run "run-2024-01"
+uv run python scripts/get_dataset_run.py --dataset "my-dataset" --run "run-2024-01"
 ```
 
 ## Parameters

@@ -11,7 +11,7 @@ Retrieve a specific dataset from Langfuse by name.
 
 ### CLI
 ```bash
-python scripts/get_dataset.py --name "my-dataset"
+uv run python scripts/get_dataset.py --name "my-dataset"
 ```
 
 ## Parameters

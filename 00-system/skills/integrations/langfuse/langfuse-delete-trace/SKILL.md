@@ -10,7 +10,7 @@ Delete a single trace by ID.
 ## Usage
 
 ```bash
-python scripts/delete_trace.py --id "trace-abc123"
+uv run python scripts/delete_trace.py --id "trace-abc123"
 ```
 
 ## Parameters

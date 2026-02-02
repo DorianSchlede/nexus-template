@@ -12,10 +12,10 @@ Link a trace/observation to a dataset item as part of an evaluation run.
 ### CLI
 ```bash
 # Link trace to dataset item
-python scripts/create_dataset_run_item.py --run "run-2024-01" --dataset-item "item-123" --trace "trace-abc"
+uv run python scripts/create_dataset_run_item.py --run "run-2024-01" --dataset-item "item-123" --trace "trace-abc"
 
 # With observation
-python scripts/create_dataset_run_item.py --run "run-2024-01" --dataset-item "item-123" --observation "obs-xyz"
+uv run python scripts/create_dataset_run_item.py --run "run-2024-01" --dataset-item "item-123" --observation "obs-xyz"
 ```
 
 ## Parameters

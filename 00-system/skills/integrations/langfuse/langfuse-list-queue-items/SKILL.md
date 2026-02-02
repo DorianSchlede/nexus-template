@@ -10,7 +10,7 @@ Get items in an annotation queue.
 ## Usage
 
 ```bash
-python scripts/list_queue_items.py --queue "queue-abc"
+uv run python scripts/list_queue_items.py --queue "queue-abc"
 ```
 
 ## API Reference

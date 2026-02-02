@@ -10,7 +10,7 @@ Get a specific score configuration by ID.
 ## Usage
 
 ```bash
-python scripts/get_score_config.py --id "config-abc123"
+uv run python scripts/get_score_config.py --id "config-abc123"
 ```
 
 ## API Reference

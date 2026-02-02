@@ -10,8 +10,8 @@ Delete multiple traces matching filter criteria.
 ## Usage
 
 ```bash
-python scripts/delete_traces.py --ids "trace-1,trace-2,trace-3"
-python scripts/delete_traces.py --filter '{"name": "test-trace"}'
+uv run python scripts/delete_traces.py --ids "trace-1,trace-2,trace-3"
+uv run python scripts/delete_traces.py --filter '{"name": "test-trace"}'
 ```
 
 ## Parameters

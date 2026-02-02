@@ -11,7 +11,7 @@ Read, write, and manage Google Sheets via OAuth authentication.
 ## Pre-Flight Check (ALWAYS FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service sheets
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service sheets
 ```
 
 **Exit codes:**
@@ -25,32 +25,32 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### Read Data
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py read <spreadsheet_id> "Sheet1!A1:D10"
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py read <spreadsheet_id> "Sheet1!A1:D10"
 ```
 
 ### Write Data
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py write <spreadsheet_id> "Sheet1!A1" --values '[["Name", "Amount"], ["Contract A", 5000]]'
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py write <spreadsheet_id> "Sheet1!A1" --values '[["Name", "Amount"], ["Contract A", 5000]]'
 ```
 
 ### Append Rows
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py append <spreadsheet_id> "Sheet1!A:D" --values '[["New Row", "Data", "Here", "Now"]]'
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py append <spreadsheet_id> "Sheet1!A:D" --values '[["New Row", "Data", "Here", "Now"]]'
 ```
 
 ### Get Sheet Info
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py info <spreadsheet_id>
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py info <spreadsheet_id>
 ```
 
 ### List Spreadsheets
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py list --query "tracking"
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py list --query "tracking"
 ```
 
 ### Create Spreadsheet
 ```bash
-python3 00-system/skills/google/google-sheets/scripts/sheets_operations.py create "New Spreadsheet" --sheets "Data" "Summary"
+uv run python 00-system/skills/google/google-sheets/scripts/sheets_operations.py create "New Spreadsheet" --sheets "Data" "Summary"
 ```
 
 ---

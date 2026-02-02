@@ -13,7 +13,7 @@ Create, update, and manage tasks and task lists in Google Tasks via OAuth authen
 ## Pre-Flight Check (ALWAYS RUN FIRST)
 
 ```bash
-python3 00-system/skills/google/google-master/scripts/google_auth.py --check --service tasks
+uv run python 00-system/skills/google/google-master/scripts/google_auth.py --check --service tasks
 ```
 
 **Exit codes:**
@@ -27,72 +27,72 @@ python3 00-system/skills/google/google-master/scripts/google_auth.py --check --s
 
 ### List Task Lists
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py lists
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py lists
 ```
 
 ### Create Task List
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create-list "Work Tasks"
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create-list "Work Tasks"
 ```
 
 ### List Tasks (Default List)
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks
 ```
 
 ### List Tasks (Specific List)
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks --list <list_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks --list <list_id>
 ```
 
 ### List Tasks Including Completed
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks --show-completed
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py tasks --show-completed
 ```
 
 ### Create Task
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Buy groceries"
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Buy groceries"
 ```
 
 ### Create Task with Due Date
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Submit report" --due 2025-12-25
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Submit report" --due 2025-12-25
 ```
 
 ### Create Task with Notes
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Call John" --notes "Discuss project timeline"
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Call John" --notes "Discuss project timeline"
 ```
 
 ### Create Subtask
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Subtask" --parent <parent_task_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py create "Subtask" --parent <parent_task_id>
 ```
 
 ### Update Task
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py update <task_id> --title "New title" --due 2025-12-30
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py update <task_id> --title "New title" --due 2025-12-30
 ```
 
 ### Complete Task
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py complete <task_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py complete <task_id>
 ```
 
 ### Uncomplete Task
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py uncomplete <task_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py uncomplete <task_id>
 ```
 
 ### Delete Task
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py delete <task_id>
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py delete <task_id>
 ```
 
 ### Clear Completed Tasks
 ```bash
-python3 00-system/skills/google/google-tasks/scripts/tasks_operations.py clear-completed
+uv run python 00-system/skills/google/google-tasks/scripts/tasks_operations.py clear-completed
 ```
 
 ---

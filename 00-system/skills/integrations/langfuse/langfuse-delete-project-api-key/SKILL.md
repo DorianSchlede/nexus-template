@@ -14,7 +14,7 @@ Delete an API key from a project.
 ## Usage
 
 ```bash
-python scripts/delete_project_api_key.py --project "proj-abc123" --key "key-xyz789"
+uv run python scripts/delete_project_api_key.py --project "proj-abc123" --key "key-xyz789"
 ```
 
 ## Parameters

@@ -11,7 +11,7 @@ description: "Get associated records in HubSpot CRM. Load when user says 'get as
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -29,7 +29,7 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 **Get contacts on a deal:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
   --object-type deals \
   --object-id 5840795376 \
   --to-type contacts \
@@ -38,7 +38,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
 
 **Get contacts at a company:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
   --object-type companies \
   --object-id 6493611979 \
   --to-type contacts \
@@ -47,7 +47,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
 
 **Get deals for a contact:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
   --object-type contacts \
   --object-id 12345 \
   --to-type deals \
@@ -56,7 +56,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
 
 **Get company for a contact:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
   --object-type contacts \
   --object-id 12345 \
   --to-type companies \

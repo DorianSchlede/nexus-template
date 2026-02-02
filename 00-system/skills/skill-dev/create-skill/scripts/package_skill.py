@@ -121,22 +121,32 @@ def package_skill(skill_path, output_dir=None):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python utils/package_skill.py <path/to/skill-folder> [output-directory]")
-        print("\nExample:")
-        print("  python utils/package_skill.py skills/public/my-skill")
-        print("  python utils/package_skill.py skills/public/my-skill ./dist")
-        sys.exit(1)
+    import argparse
 
-    skill_path = sys.argv[1]
-    output_dir = sys.argv[2] if len(sys.argv) > 2 else None
+    parser = argparse.ArgumentParser(
+        description='Package a skill folder into a distributable .skill file',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Examples:
+  package_skill.py 03-skills/my-skill              # Package to current directory
+  package_skill.py 03-skills/my-skill ./dist       # Package to ./dist directory
 
-    print(f"[PACK] Packaging skill: {skill_path}")
-    if output_dir:
-        print(f"   Output directory: {output_dir}")
+The .skill file is a zip archive containing the entire skill folder.
+Validation is run automatically before packaging.
+'''
+    )
+    parser.add_argument('skill_path', help='Path to the skill folder')
+    parser.add_argument('output_dir', nargs='?', default=None,
+                        help='Output directory for .skill file (default: current directory)')
+
+    args = parser.parse_args()
+
+    print(f"[PACK] Packaging skill: {args.skill_path}")
+    if args.output_dir:
+        print(f"   Output directory: {args.output_dir}")
     print()
 
-    result = package_skill(skill_path, output_dir)
+    result = package_skill(args.skill_path, args.output_dir)
 
     if result:
         sys.exit(0)

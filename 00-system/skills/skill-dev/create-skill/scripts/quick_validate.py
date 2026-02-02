@@ -86,10 +86,26 @@ def validate_skill(skill_path):
     return True, "Skill is valid!"
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python quick_validate.py <skill_directory>")
-        sys.exit(1)
-    
-    valid, message = validate_skill(sys.argv[1])
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description='Validate a skill folder structure and SKILL.md format',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Examples:
+  quick_validate.py 03-skills/my-skill
+  quick_validate.py 00-system/skills/integrations/slack-connect
+
+Validates:
+  - SKILL.md exists and has valid YAML frontmatter
+  - Required fields (name, description) are present
+  - Naming conventions are followed
+'''
+    )
+    parser.add_argument('skill_path', help='Path to the skill folder')
+
+    args = parser.parse_args()
+
+    valid, message = validate_skill(args.skill_path)
     print(message)
     sys.exit(0 if valid else 1)

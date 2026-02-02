@@ -11,9 +11,9 @@ Get list of evaluation scores from Langfuse.
 
 ### CLI
 ```bash
-python scripts/list_scores.py --limit 20
-python scripts/list_scores.py --trace-id trace123
-python scripts/list_scores.py --name "accuracy"
+uv run python scripts/list_scores.py --limit 20
+uv run python scripts/list_scores.py --trace-id trace123
+uv run python scripts/list_scores.py --name "accuracy"
 ```
 
 ### Python

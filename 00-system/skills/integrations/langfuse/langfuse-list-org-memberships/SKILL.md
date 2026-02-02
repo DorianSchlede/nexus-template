@@ -12,7 +12,7 @@ List all members of an organization.
 ## Usage
 
 ```bash
-python scripts/list_org_memberships.py --org "org-abc123"
+uv run python scripts/list_org_memberships.py --org "org-abc123"
 ```
 
 ## Parameters

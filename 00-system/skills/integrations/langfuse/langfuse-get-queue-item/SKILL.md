@@ -10,7 +10,7 @@ Get a specific queue item.
 ## Usage
 
 ```bash
-python scripts/get_queue_item.py --queue "queue-abc" --item "item-xyz"
+uv run python scripts/get_queue_item.py --queue "queue-abc" --item "item-xyz"
 ```
 
 ## API Reference

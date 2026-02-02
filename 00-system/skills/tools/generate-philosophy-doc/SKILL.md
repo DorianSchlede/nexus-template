@@ -83,7 +83,7 @@ Use the WebSearch tool or Perplexity API to gather comprehensive research:
 
 **Optional**: Use `scripts/research_topic.py` to generate search queries:
 ```bash
-python scripts/research_topic.py "Landing Page Design" "principles,frameworks,anti-patterns,metrics"
+uv run python scripts/research_topic.py "Landing Page Design" "principles,frameworks,anti-patterns,metrics"
 ```
 
 ---
@@ -99,7 +99,7 @@ Copy [assets/philosophy-template.md](assets/philosophy-template.md) and fill in 
 **Option B: Script-Assisted**
 
 ```bash
-python scripts/generate_structure.py "Landing Page Design" > output.md
+uv run python scripts/generate_structure.py "Landing Page Design" > output.md
 ```
 
 Then fill in placeholders with researched content.

@@ -10,7 +10,7 @@ Remove an item from annotation queue.
 ## Usage
 
 ```bash
-python scripts/delete_queue_item.py --queue "queue-abc" --item "item-xyz"
+uv run python scripts/delete_queue_item.py --queue "queue-abc" --item "item-xyz"
 ```
 
 ## API Reference

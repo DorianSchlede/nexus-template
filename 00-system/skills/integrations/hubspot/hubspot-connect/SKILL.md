@@ -41,7 +41,7 @@ Load this skill when user says:
 Before ANY HubSpot operation, validate configuration:
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 ### Handle Config Status
@@ -113,7 +113,7 @@ After user provides token:
 HUBSPOT_ACCESS_TOKEN=pat-na1-xxx
 
 # Re-run config check to verify
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 ### Handling 403 Forbidden (Missing Scopes)
@@ -152,7 +152,7 @@ Then try again!
 **Trigger**: "list contacts", "show contacts", "get contacts"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_contacts.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_contacts.py --json
 ```
 
 **Display Format**:
@@ -179,7 +179,7 @@ Found 10 contacts:
 **Optional**: First name, last name, phone, company
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_contact.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_contact.py \
   --email "user@example.com" \
   --firstname "John" \
   --lastname "Doe" \
@@ -192,7 +192,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/create_contact.py \
 **Trigger**: "search contacts", "find contact", "lookup contact"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --email "john@example.com" \
   --json
 ```
@@ -200,7 +200,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
 or
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --name "John" \
   --json
 ```
@@ -213,7 +213,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
 **Required**: Contact ID
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
   --id 12345 \
   --phone "+1234567890" \
   --json
@@ -225,7 +225,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_contact.py \
 **Trigger**: "list companies", "show companies"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_companies.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_companies.py --json
 ```
 
 ---
@@ -234,7 +234,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/list_companies.py --json
 **Trigger**: "create company", "add company", "new company"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
   --name "Acme Corp" \
   --domain "acme.com" \
   --industry "Technology" \
@@ -247,7 +247,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/create_company.py \
 **Trigger**: "search companies", "find company"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
   --name "Acme" \
   --json
 ```
@@ -258,7 +258,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/search_companies.py \
 **Trigger**: "list deals", "show deals", "show pipeline"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_deals.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_deals.py --json
 ```
 
 ---
@@ -267,7 +267,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/list_deals.py --json
 **Trigger**: "create deal", "add deal", "new deal", "new opportunity"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
   --name "Enterprise Deal" \
   --amount 50000 \
   --stage "qualifiedtobuy" \
@@ -280,7 +280,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/create_deal.py \
 **Trigger**: "update deal", "edit deal", "change deal stage"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
   --id 12345 \
   --stage "closedwon" \
   --json
@@ -292,7 +292,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/update_deal.py \
 **Trigger**: "search deals", "find deal"
 
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_deals.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_deals.py \
   --name "Enterprise" \
   --min-amount 10000 \
   --json
@@ -305,7 +305,7 @@ python 00-system/skills/hubspot/hubspot-master/scripts/search_deals.py \
 
 ```bash
 # Get contacts associated with a deal
-python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
   --object-type deals \
   --object-id 12345 \
   --to-type contacts \
@@ -319,12 +319,12 @@ python 00-system/skills/hubspot/hubspot-master/scripts/get_associations.py \
 
 **List Emails:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_emails.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_emails.py --json
 ```
 
 **Log Email:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
   --subject "Follow up" \
   --body "Meeting follow-up email" \
   --json
@@ -332,12 +332,12 @@ python 00-system/skills/hubspot/hubspot-master/scripts/log_email.py \
 
 **List Calls:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_calls.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_calls.py --json
 ```
 
 **Log Call:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
   --title "Sales Call" \
   --body "Discussed pricing" \
   --duration 30 \
@@ -346,24 +346,24 @@ python 00-system/skills/hubspot/hubspot-master/scripts/log_call.py \
 
 **List Notes:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_notes.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_notes.py --json
 ```
 
 **Create Note:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_note.py \
   --body "Important note about this contact" \
   --json
 ```
 
 **List Meetings:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/list_meetings.py --json
 ```
 
 **Create Meeting:**
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/create_meeting.py \
   --title "Product Demo" \
   --body "Demo of new features" \
   --start "2025-12-15T14:00:00Z" \

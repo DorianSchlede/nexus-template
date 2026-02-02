@@ -10,7 +10,7 @@ Get metrics and usage statistics from Langfuse.
 ## Usage
 
 ```bash
-python scripts/metrics.py
+uv run python scripts/metrics.py
 ```
 
 ## Parameters

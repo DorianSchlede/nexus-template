@@ -11,7 +11,7 @@ description: "Search contacts in HubSpot CRM by email, name, or company. Load wh
 
 Before running, execute config check:
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/check_hubspot_config.py --json
 ```
 
 If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup guide.
@@ -22,28 +22,28 @@ If `ai_action` is not `proceed_with_operation`, follow hubspot-connect setup gui
 
 ### Search by Email
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --email "john@example.com" \
   --json
 ```
 
 ### Search by Name
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --name "John" \
   --json
 ```
 
 ### Search by Company
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --company "Acme" \
   --json
 ```
 
 ### Combined Search with Limit
 ```bash
-python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
+uv run python 00-system/skills/hubspot/hubspot-master/scripts/search_contacts.py \
   --name "John" \
   --company "Acme" \
   --limit 20 \
