@@ -1337,7 +1337,7 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
         step = onboarding_action.get("resume_from_step", 1)
         return _load_state_template("compact_onboarding_resume", skill=skill, step=step)
 
-    # Priority 0: First run (no goals, no builds) - auto-trigger setup
+    # Priority 0: First run (no goals, no builds) - auto-trigger onboarding
     if not context.get("goals_personalized", False) and context.get("total_builds", 0) == 0:
         return _template_first_run(context)
 
@@ -1495,7 +1495,12 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
 
 def _template_first_run(context: Dict[str, Any]) -> str:
     """STARTUP STATE 0: First run - unified onboarding flow."""
-    return _load_state_template("startup_onboarding")
+    # Load quick-start skill directly (no template)
+    skill_path = Path(__file__).parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
+    try:
+        return skill_path.read_text(encoding='utf-8')
+    except FileNotFoundError:
+        return f"Onboarding skill not found at {skill_path}"
 
 
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:
