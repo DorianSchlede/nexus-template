@@ -1315,13 +1315,13 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
     onboarding_action = context.get("onboarding_action", {})
     action = onboarding_action.get("action")
 
-    if action == "run_setup":
-        # Fresh install: Run /setup skill before anything else
-        return _load_state_template("startup_fresh_install")
-
-    if action == "show_heroic_intro":
-        # First-time user: Show heroic intro with real examples
-        return _load_state_template("startup_first_run")
+    if action == "run_onboarding":
+        # Unified onboarding: Load quick-start skill directly (no template)
+        skill_path = Path(__file__).parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
+        try:
+            return skill_path.read_text(encoding='utf-8')
+        except FileNotFoundError:
+            return f"Onboarding skill not found at {skill_path}"
 
     elif action == "load_complete_setup":
         # Tour complete, need setup: Auto-load complete-setup
@@ -1494,8 +1494,8 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
 
 
 def _template_first_run(context: Dict[str, Any]) -> str:
-    """STARTUP STATE 0: First run - auto-trigger setup-memory skill."""
-    return _load_state_template("startup_first_run")
+    """STARTUP STATE 0: First run - unified onboarding flow."""
+    return _load_state_template("startup_onboarding")
 
 
 def _template_onboarding_incomplete(context: Dict[str, Any]) -> str:

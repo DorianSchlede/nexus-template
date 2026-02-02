@@ -1,25 +1,23 @@
 ---
 name: quick-start
-description: "Quick 10-15 minute start: optional context upload, goal, optional roadmap, workspace, first BUILD."
+description: "Complete onboarding: welcome, language, goals, workspace, first BUILD, permissions."
 onboarding: true
 priority: critical
-duration: "10-15 min"
+duration: "12-18 min"
 cross_session_continuity: true
 ---
 
 # Quick Start
 
-Onboarding flow: optionally upload context, capture your goal, optionally create a roadmap, set up your workspace (informed by roadmap), and plan your first BUILD.
+Complete onboarding flow: welcome, language selection, optionally upload context, capture your goal, optionally create a roadmap, set up your workspace (informed by roadmap), plan your first BUILD, configure permissions.
 
-**New Flow**: Roadmap comes BEFORE workspace, so your roadmap items can inform folder structure.
+**This skill is auto-injected by the SessionStart hook when onboarding is not complete.**
 
 ---
 
 ## Pre-Execution
 
-**IMPORTANT**: This skill assumes language selection is already complete (handled by startup_first_run.md).
-
-**State Initialization**:
+**State Initialization** (on first run):
 ```python
 from nexus.state_writer import update_multiple_paths
 from datetime import datetime
@@ -46,17 +44,89 @@ def get_resume_step():
 
 ---
 
-## STEP 0/7: How Nexus Works (30 sec)
+## STEP 0/10: Welcome & Language (1 min)
+
+**Display the welcome banner**:
+```
+    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
+    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+    ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
+    ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
+    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
+    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              Your AI operating system
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ChatGPT gives you answers. Nexus enables you to build.
+
+What people actually use it for:
+
+  > Job Search
+     Search 15 job boards every morning, prioritize matches,
+     and generate tailored CVs from your stored stories.
+
+  > Health System
+     Talk to your fitness data, log meals from photos,
+     get personalized training plans that adapt to your progress.
+
+  > Content Engine
+     Interview yourself to capture stories, plan your calendar,
+     auto-generate posts that sound like you.
+
+The difference: Everything you build is always remembered.
+Context compounds. Every session makes it smarter.
+
+Ready?
+```
+
+**Then display language selection**:
+```
+What language do you want to work in?
+
+1. English
+2. Deutsch
+3. Español
+4. Français
+5. Italiano
+6. 日本語
+7. 中文
+8. Other (type your language)
+
+(All future sessions will use this language)
+
+Type the number (1-8):
+```
+
+**When user responds**:
+- If 1-7: Map to language code (en, de, es, fr, it, ja, zh)
+- If 8: Ask "Which language?" and accept their input
+
+**Save state**:
+```python
+update_multiple_paths(config_path, {
+    "onboarding.quick_start_state.step_completed": 0,
+    "onboarding.language_preference": "<selected_language_code>",
+    "user_preferences.language": "<selected_language_name>"
+})
+```
+
+**IMPORTANT**: After language selection, ALL subsequent content must be displayed in the user's chosen language.
+
+---
+
+## STEP 1/10: How Nexus Works (30 sec)
 
 **Display**:
 ```
-STEP 0/7: How Nexus Works
+STEP 1/10: How Nexus Works
 ----------------------------------------------------
 
 Here's the key idea:
 
 This Nexus folder IS your project. Everything lives here.
-I remember what we work on. You never start from zero.
+I remember what we work on. Every session compounds.
 
   01-memory/     → Your context (I pre-load this every session)
   02-builds/     → Where we plan and build things together
@@ -71,13 +141,20 @@ Ready?
 
 **Wait for confirmation**
 
+**Save state**:
+```python
+update_multiple_paths(config_path, {
+    "onboarding.quick_start_state.step_completed": 1
+})
+```
+
 ---
 
-## STEP 1/7: Context Upload (Optional) (2-3 min if used)
+## STEP 2/10: Context Upload (Optional) (2-3 min if used)
 
 **Display**:
 ```
-STEP 1/7: Context Upload (Optional)
+STEP 2/10: Context Upload (Optional)
 ----------------------------------------------------
 
 Have files that show what you work on?
@@ -109,24 +186,24 @@ The skill will:
 3. Save insights to 01-memory/input/_analysis/
 4. Auto-add "Organize Initial Context" to roadmap
 
-After skill completes, continue to Step 2.
+After skill completes, continue to Step 3.
 ```
 
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 1,
+    "onboarding.quick_start_state.step_completed": 2,
     "onboarding.quick_start_state.context_uploaded": True/False
 })
 ```
 
 ---
 
-## STEP 2/7: Your Goal (2-3 min)
+## STEP 3/10: Your Goal (2-3 min)
 
 **Display**:
 ```
-STEP 2/7: Your Goal
+STEP 3/10: Your Goal
 ----------------------------------------------------
 
 What's your goal for this Nexus?
@@ -188,7 +265,7 @@ Options: {dynamically generated}
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 2,
+    "onboarding.quick_start_state.step_completed": 3,
     "onboarding.quick_start_state.goal_captured": True,
     "first_encounters.memory_updated": True
 })
@@ -196,11 +273,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 3/7: Create Roadmap (Optional) (2-3 min if used)
+## STEP 4/10: Create Roadmap (Optional) (2-3 min if used)
 
 **Display**:
 ```
-STEP 3/7: Create Roadmap (Optional)
+STEP 4/10: Create Roadmap (Optional)
 ----------------------------------------------------
 
 Your goal: {goal_summary}
@@ -234,26 +311,26 @@ The skill will:
 
 The roadmap will inform your workspace structure.
 
-After skill completes, continue to Step 4.
+After skill completes, continue to Step 5.
 ```
 
-**If skipped, continue to Step 4**
+**If skipped, continue to Step 5**
 
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 3,
+    "onboarding.quick_start_state.step_completed": 4,
     "onboarding.quick_start_state.roadmap_created": True/False
 })
 ```
 
 ---
 
-## STEP 4/7: Your Workspace (2 min)
+## STEP 5/10: Your Workspace (2 min)
 
 **Display**:
 ```
-STEP 4/7: Your Workspace
+STEP 5/10: Your Workspace
 ----------------------------------------------------
 
 Here's something important:
@@ -269,7 +346,7 @@ It's navigatable by both you AND me.
 Let's set it up based on {your roadmap / your goal}.
 ```
 
-**STEP 4a: Ask structure preference**
+**STEP 5a: Ask structure preference**
 
 **Use AskUserQuestion**:
 ```
@@ -281,7 +358,7 @@ Options:
 - "Keep it simple" - minimal folders
 ```
 
-**STEP 4b: Propose folders**
+**STEP 5b: Propose folders**
 
 **If roadmap exists**: Use roadmap items to suggest folders
 **If no roadmap**: Use goal to suggest folders
@@ -328,7 +405,7 @@ This is YOUR space. It grows with you.
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 4,
+    "onboarding.quick_start_state.step_completed": 5,
     "onboarding.quick_start_state.workspace_created": True,
     "first_encounters.workspace_used": True
 })
@@ -336,11 +413,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 5/7: Your First Build (2 min)
+## STEP 6/10: Your First Build (2 min)
 
 **Display**:
 ```
-STEP 5/7: Your First Build
+STEP 6/10: Your First Build
 ----------------------------------------------------
 
 {If roadmap exists:}
@@ -413,7 +490,7 @@ Options:
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 5,
+    "onboarding.quick_start_state.step_completed": 6,
     "onboarding.quick_start_state.build_chosen": True,
     "first_encounters.build_created": True
 })
@@ -421,11 +498,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 6/7: Plan the Build (3-4 min)
+## STEP 7/10: Plan the Build (3-4 min)
 
 **Display**:
 ```
-STEP 6/7: Plan the Build
+STEP 7/10: Plan the Build
 ----------------------------------------------------
 
 Let me understand what we're building.
@@ -476,21 +553,21 @@ This is how Nexus compounds - input becomes persistent context.
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 6,
+    "onboarding.quick_start_state.step_completed": 7,
     "onboarding.quick_start_state.planning_complete": True
 })
 ```
 
 ---
 
-## STEP 7/7: What's Next (1 min)
+## STEP 8/10: What You Built (1 min)
 
 **Display**:
 ```
-STEP 7/7: What's Next
+STEP 8/10: What You Built
 ----------------------------------------------------
 
-Here's what you built:
+Here's what you've created so far:
 
   - Goal defined         → 01-memory/goals.md
   {If roadmap:}
@@ -498,7 +575,7 @@ Here's what you built:
   - Workspace ready      → 04-workspace/
   - First build planned  → 02-builds/{name}/
   {If context:}
-  - Context analyzed     → 01-memory/input/ (temporary, organize next)
+  - Context analyzed     → 01-memory/input/
 
 ----------------------------------------------------
 
@@ -511,16 +588,145 @@ HOW NEXUS WORKS:
 
 ----------------------------------------------------
 
-WHAT TO DO NOW:
+Almost done! One more step to configure permissions.
+```
+
+**Save state**:
+```python
+update_multiple_paths(config_path, {
+    "onboarding.quick_start_state.step_completed": 8
+})
+```
+
+---
+
+## STEP 9/10: Permissions Setup (1-2 min)
+
+**Display**:
+```
+STEP 9/10: Permissions Setup
+----------------------------------------------------
+
+One last thing before we finish.
+
+Nexus works best when I can read files, make edits, and run commands
+without asking you each time. This is called "automatic" mode.
+
+Here's what automatic mode allows:
+  - Read any file in this project
+  - Edit and create files
+  - Run shell commands (git, npm, python, etc.)
+  - Search the web for documentation
+
+SAFEGUARDS (even in automatic mode):
+  - I'll pause for important decisions (architecture, strategy, scope)
+  - Destructive git commands are automatically blocked (force push, reset --hard)
+  - I'll never commit without your explicit request
+  - I won't touch sensitive files (.env, credentials, secrets)
+  - Nexus hooks monitor for risky patterns and block them
+
+Automatic mode means fewer interruptions, not zero oversight.
+You stay in control of what matters.
+
+You can change this anytime by editing .claude/settings.local.json
+```
+
+**Use AskUserQuestion**:
+```
+Question: "How should I handle permissions?"
+Header: "Permissions"
+Options:
+- "Automatic (Recommended)" - I can work without interruptions. Best for productivity.
+- "Ask each time" - I'll ask before every action. More control, more prompts.
+```
+
+### If user chose "Automatic":
+
+**Check and create files**:
+
+1. Check if `.claude/settings.local.json` exists
+2. Check if `.vscode/settings.json` exists
+3. Show what will be created/changed
+4. Ask confirmation
+
+**Create `.claude/settings.local.json`**:
+```json
+{
+  "permissions": {
+    "allow": ["Bash(*)", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch"]
+  }
+}
+```
+
+**Create/update `.vscode/settings.json`** (merge with existing if present):
+```json
+{
+  "markdown.preview.breaks": true,
+  "markdown.preview.typographer": true,
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
+}
+```
+
+**Create setup marker**: `.claude/.setup_complete`
+
+### If user chose "Ask each time":
+
+**Create only markdown preview settings** in `.vscode/settings.json`:
+```json
+{
+  "markdown.preview.breaks": true,
+  "markdown.preview.typographer": true,
+  "files.associations": {
+    "*.md": "markdown"
+  }
+}
+```
+
+**Create setup marker**: `.claude/.setup_complete`
+
+**Save state**:
+```python
+update_multiple_paths(config_path, {
+    "onboarding.quick_start_state.step_completed": 9,
+    "onboarding.quick_start_state.permissions_configured": True
+})
+```
+
+---
+
+## STEP 10/10: Start Fresh (30 sec)
+
+**Display**:
+```
+STEP 10/10: Start Fresh
+----------------------------------------------------
+
+Setup complete! Here's what you built:
+
+  - Goal defined         → 01-memory/goals.md
+  {If roadmap:}
+  - Roadmap created      → 01-memory/roadmap.md
+  - Workspace ready      → 04-workspace/
+  - First build planned  → 02-builds/{name}/
+  {If context:}
+  - Context analyzed     → 01-memory/input/
+
+----------------------------------------------------
+
+TO ACTIVATE AUTOMATIC MODE:
 
   1. Close this chat
   2. Open a new chat
   3. Type: Hi
 
-That's it. I'll show you your build, ready to execute.
+The new session will have full permissions.
+I'll show you your build, ready to execute.
 
 All your progress is saved. Nothing is lost.
-You'll pick up exactly where we left off.
 
 ----------------------------------------------------
 
@@ -533,7 +739,7 @@ from datetime import datetime
 from nexus.state_writer import update_multiple_paths
 
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 7,
+    "onboarding.quick_start_state.step_completed": 10,
     "onboarding.status": "complete",
     "onboarding.in_progress_skill": None,
     "onboarding.completed_at": datetime.now().isoformat(),
@@ -550,17 +756,19 @@ update_multiple_paths(config_path, {
 onboarding:
   status: "complete"
   path_chosen: "quick_start"
+  language_preference: "en"
   started_at: "..."
   completed_at: "..."
 
   quick_start_state:
-    step_completed: 7
+    step_completed: 10
     context_uploaded: true/false
     goal_captured: true
     roadmap_created: true/false
     workspace_created: true
     build_chosen: true
     planning_complete: true
+    permissions_configured: true
 
 first_encounters:
   build_created: true
@@ -570,6 +778,13 @@ first_encounters:
 
 **Files Created**:
 ```
+.claude/
+  settings.local.json         # Permissions (if automatic)
+  .setup_complete             # Marker file
+
+.vscode/
+  settings.json               # VS Code settings
+
 01-memory/
   goals.md                    # PERMANENT
   roadmap.md                  # PERMANENT (if created)
@@ -600,24 +815,32 @@ first_encounters:
 ## Flow Summary
 
 ```
-Step 0: How Nexus Works
+Step 0: Welcome & Language
          ↓
-Step 1: Context Upload (optional)
-         ↓ informs
-Step 2: Your Goal
-         ↓ informs
-Step 3: Create Roadmap (optional)
-         ↓ informs
-Step 4: Your Workspace (uses roadmap for structure)
-         ↓ informs
-Step 5: Your First Build (from roadmap or goal)
+Step 1: How Nexus Works
          ↓
-Step 6: Plan the Build
+Step 2: Context Upload (optional)
+         ↓ informs
+Step 3: Your Goal
+         ↓ informs
+Step 4: Create Roadmap (optional)
+         ↓ informs
+Step 5: Your Workspace (uses roadmap for structure)
+         ↓ informs
+Step 6: Your First Build (from roadmap or goal)
          ↓
-Step 7: What's Next
+Step 7: Plan the Build
+         ↓
+Step 8: What You Built (summary)
+         ↓
+Step 9: Permissions Setup
+         ↓
+Step 10: Start Fresh (close → new chat)
 ```
 
+**Key insight**: Welcome + language first ensures all content is in user's language.
 **Key insight**: Roadmap before Workspace means folder structure reflects what you're building.
+**Key insight**: Permissions at end ensures new chat has full automatic mode.
 
 ---
 
@@ -635,8 +858,8 @@ Step 7: What's Next
 ## Implementation Notes
 
 **Modular Skills**:
-- `analyze-context` - File analysis (Step 1)
-- `create-roadmap` - Roadmap creation (Step 3)
+- `analyze-context` - File analysis (Step 2)
+- `create-roadmap` - Roadmap creation (Step 4)
 - Both standalone, called from quick-start when needed
 
 **Dynamic Generation**:
@@ -644,16 +867,23 @@ Step 7: What's Next
 - multiSelect: true where multiple answers make sense
 - Always include "Other" option
 
-**Total Time**: ~10-15 minutes
-- Step 0: 30 sec
-- Step 1: 0-3 min (optional)
-- Step 2: 2-3 min
-- Step 3: 0-3 min (optional)
-- Step 4: 2 min
+**Language Support**:
+- After Step 0, ALL content must be in user's chosen language
+- Supported: en, de, es, fr, it, ja, zh, or custom
+
+**Total Time**: ~12-18 minutes
+- Step 0: 1 min (welcome + language)
+- Step 1: 30 sec
+- Step 2: 0-3 min (optional)
+- Step 3: 2-3 min
+- Step 4: 0-3 min (optional)
 - Step 5: 2 min
-- Step 6: 3-4 min
-- Step 7: 1 min
+- Step 6: 2 min
+- Step 7: 3-4 min
+- Step 8: 1 min
+- Step 9: 1-2 min
+- Step 10: 30 sec
 
 ---
 
-*Quick Start - the main onboarding path for Nexus*
+*Quick Start - the complete onboarding path for Nexus*
