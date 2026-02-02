@@ -1,6 +1,5 @@
 ---
 name: Fishbone Diagram (Ishikawa)
-slug: fishbone-diagram
 category: diagnostic
 description: Visual cause-effect analysis across dimensions
 when_to_use:

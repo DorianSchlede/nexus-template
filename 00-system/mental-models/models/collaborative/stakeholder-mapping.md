@@ -1,6 +1,5 @@
 ---
 name: Stakeholder Mapping
-slug: stakeholder-mapping
 category: collaborative
 description: Identify all affected parties and interests
 when_to_use:

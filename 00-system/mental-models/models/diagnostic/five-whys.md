@@ -1,6 +1,5 @@
 ---
 name: Root Cause Analysis (5 Whys)
-slug: five-whys
 category: diagnostic
 description: Drill to fundamental causes
 when_to_use:

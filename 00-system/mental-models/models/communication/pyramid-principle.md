@@ -1,6 +1,5 @@
 ---
 name: Pyramid Principle
-slug: pyramid-principle
 category: communication
 description: Lead with conclusion, then support
 when_to_use:

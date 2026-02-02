@@ -1,6 +1,5 @@
 ---
 name: Expected Value
-slug: expected-value
 category: probability-risk
 description: Probability-weighted outcome calculation
 when_to_use:

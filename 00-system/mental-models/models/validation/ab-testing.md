@@ -1,6 +1,5 @@
 ---
 name: A/B Testing Framework
-slug: ab-testing
 category: validation
 description: Controlled comparison of alternatives
 when_to_use:

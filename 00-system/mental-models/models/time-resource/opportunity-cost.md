@@ -1,6 +1,5 @@
 ---
 name: Opportunity Cost
-slug: opportunity-cost
 category: time-resource
 description: What you give up by choosing this option
 when_to_use:

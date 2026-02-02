@@ -1,6 +1,5 @@
 ---
 name: First Principles
-slug: first-principles
 category: cognitive
 description: Strip assumptions, find fundamental truths
 when_to_use:

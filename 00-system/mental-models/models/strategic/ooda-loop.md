@@ -1,6 +1,5 @@
 ---
 name: OODA Loop
-slug: ooda-loop
 category: strategic
 description: Observe-Orient-Decide-Act rapid cycle
 when_to_use:

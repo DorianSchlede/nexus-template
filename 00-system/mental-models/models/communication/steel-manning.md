@@ -1,6 +1,5 @@
 ---
 name: Steel Manning
-slug: steel-manning
 category: communication
 description: Present the strongest version of opposing views
 when_to_use:

@@ -1,6 +1,5 @@
 ---
 name: Eisenhower Matrix
-slug: eisenhower-matrix
 category: time-resource
 description: Urgent vs Important prioritization
 when_to_use:

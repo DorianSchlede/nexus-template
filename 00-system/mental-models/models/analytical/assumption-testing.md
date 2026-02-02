@@ -1,6 +1,5 @@
 ---
 name: Assumption Testing
-slug: assumption-testing
 category: analytical
 description: Identify and validate critical assumptions
 when_to_use:

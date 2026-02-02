@@ -1,6 +1,5 @@
 ---
 name: Decision Matrix
-slug: decision-matrix
 category: analytical
 description: Multi-criteria weighted evaluation
 when_to_use:

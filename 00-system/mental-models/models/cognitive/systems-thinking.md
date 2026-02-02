@@ -1,6 +1,5 @@
 ---
 name: Systems Thinking
-slug: systems-thinking
 category: cognitive
 description: Analyze interdependencies and feedback loops
 when_to_use:

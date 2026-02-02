@@ -1,6 +1,5 @@
 ---
 name: Second-Order Thinking
-slug: second-order-thinking
 category: cognitive
 description: Consider consequences of consequences
 when_to_use:

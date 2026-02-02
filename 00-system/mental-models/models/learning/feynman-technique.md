@@ -1,6 +1,5 @@
 ---
 name: Feynman Technique
-slug: feynman-technique
 category: learning
 description: Explain simply to identify gaps
 when_to_use:

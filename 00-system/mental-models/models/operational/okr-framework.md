@@ -1,6 +1,5 @@
 ---
 name: OKR Framework
-slug: okr-framework
 category: operational
 description: Objectives and Key Results alignment
 when_to_use:

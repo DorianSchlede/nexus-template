@@ -1,6 +1,5 @@
 ---
 name: Time Boxing
-slug: time-boxing
 category: time-resource
 description: Fixed time allocation forcing completion
 when_to_use:

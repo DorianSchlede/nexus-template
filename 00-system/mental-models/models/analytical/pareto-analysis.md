@@ -1,6 +1,5 @@
 ---
 name: Pareto Analysis (80/20)
-slug: pareto-analysis
 category: analytical
 description: Prioritization by impact concentration
 when_to_use:

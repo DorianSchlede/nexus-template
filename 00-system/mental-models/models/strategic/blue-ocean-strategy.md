@@ -1,6 +1,5 @@
 ---
 name: Blue Ocean Strategy
-slug: blue-ocean-strategy
 category: strategic
 description: Create uncontested market space
 when_to_use:

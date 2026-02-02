@@ -1,6 +1,5 @@
 ---
 name: SCAMPER
-slug: scamper
 category: creative
 description: Substitute-Combine-Adapt-Modify-Put to use-Eliminate-Reverse
 when_to_use:

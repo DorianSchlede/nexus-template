@@ -1,6 +1,5 @@
 ---
 name: Sunk Cost Awareness
-slug: sunk-cost-awareness
 category: time-resource
 description: Ignore past investments in future decisions
 when_to_use:

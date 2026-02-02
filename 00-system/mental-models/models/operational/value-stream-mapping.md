@@ -1,6 +1,5 @@
 ---
 name: Value Stream Mapping
-slug: value-stream-mapping
 category: operational
 description: End-to-end process with waste identification
 when_to_use:

@@ -1,6 +1,5 @@
 ---
 name: Fault Tree Analysis
-slug: fault-tree-analysis
 category: diagnostic
 description: Work backward from failures to root causes
 when_to_use:

@@ -1,6 +1,5 @@
 ---
 name: Pre-Mortem Analysis
-slug: pre-mortem
 category: diagnostic
 description: Identify failure modes before implementation
 when_to_use:

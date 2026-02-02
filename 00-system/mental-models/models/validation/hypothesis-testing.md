@@ -1,6 +1,5 @@
 ---
 name: Hypothesis Testing
-slug: hypothesis-testing
 category: validation
 description: Scientific method with controlled experiments
 when_to_use:

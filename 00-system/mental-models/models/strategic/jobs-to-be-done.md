@@ -1,6 +1,5 @@
 ---
 name: Jobs to Be Done
-slug: jobs-to-be-done
 category: strategic
 description: Outcome-focused needs analysis
 when_to_use:

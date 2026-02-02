@@ -1,6 +1,5 @@
 ---
 name: Regret Minimization
-slug: regret-minimization
 category: probability-risk
 description: Choose to minimize future regret
 when_to_use:

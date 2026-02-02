@@ -1,6 +1,5 @@
 ---
 name: Theory of Constraints
-slug: theory-of-constraints
 category: operational
 description: Find and elevate the bottleneck
 when_to_use:

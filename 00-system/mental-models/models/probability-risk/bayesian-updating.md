@@ -1,6 +1,5 @@
 ---
 name: Bayesian Updating
-slug: bayesian-updating
 category: probability-risk
 description: Revise beliefs based on new evidence
 when_to_use:

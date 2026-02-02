@@ -1,6 +1,5 @@
 ---
 name: Deliberate Practice
-slug: deliberate-practice
 category: learning
 description: Focused improvement on specific weaknesses
 when_to_use:

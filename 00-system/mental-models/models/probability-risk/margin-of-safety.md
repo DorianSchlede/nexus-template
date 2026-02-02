@@ -1,6 +1,5 @@
 ---
 name: Margin of Safety
-slug: margin-of-safety
 category: probability-risk
 description: Build buffer for errors and uncertainty
 when_to_use:

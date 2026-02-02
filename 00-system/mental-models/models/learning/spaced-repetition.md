@@ -1,6 +1,5 @@
 ---
 name: Spaced Repetition
-slug: spaced-repetition
 category: learning
 description: Optimize review timing for retention
 when_to_use:

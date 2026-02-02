@@ -1,6 +1,5 @@
 ---
 name: Six Thinking Hats
-slug: six-thinking-hats
 category: collaborative
 description: Explore six distinct perspectives systematically
 when_to_use:

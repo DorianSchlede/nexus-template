@@ -1,6 +1,5 @@
 ---
 name: SWOT Analysis
-slug: swot-analysis
 category: analytical
 description: Strengths, Weaknesses, Opportunities, Threats
 when_to_use:

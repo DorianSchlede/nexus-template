@@ -1,6 +1,5 @@
 ---
 name: Cost-Benefit Analysis
-slug: cost-benefit-analysis
 category: analytical
 description: Quantified impact with ROI calculation
 when_to_use:

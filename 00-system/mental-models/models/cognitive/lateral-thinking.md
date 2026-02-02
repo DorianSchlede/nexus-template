@@ -1,6 +1,5 @@
 ---
 name: Lateral Thinking
-slug: lateral-thinking
 category: cognitive
 description: Generate creative alternatives through non-linear paths
 when_to_use:

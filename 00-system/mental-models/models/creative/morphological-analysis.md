@@ -1,6 +1,5 @@
 ---
 name: Morphological Analysis
-slug: morphological-analysis
 category: creative
 description: Systematic solution space exploration
 when_to_use:

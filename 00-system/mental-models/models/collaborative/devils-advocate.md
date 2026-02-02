@@ -1,6 +1,5 @@
 ---
 name: Devil's Advocate
-slug: devils-advocate
 category: collaborative
 description: Deliberately argue the opposing position
 when_to_use:

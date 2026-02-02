@@ -1,6 +1,5 @@
 ---
 name: Analogous Reasoning
-slug: analogous-reasoning
 category: cognitive
 description: Apply patterns from similar domains
 when_to_use:

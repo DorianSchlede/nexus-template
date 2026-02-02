@@ -1,6 +1,5 @@
 ---
 name: Constraint Removal
-slug: constraint-removal
 category: creative
 description: Ask "what if X limitation didn't exist?"
 when_to_use:

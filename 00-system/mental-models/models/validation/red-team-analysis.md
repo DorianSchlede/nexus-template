@@ -1,6 +1,5 @@
 ---
 name: Red Team Analysis
-slug: red-team-analysis
 category: validation
 description: Adversarial perspective to find weaknesses
 when_to_use:

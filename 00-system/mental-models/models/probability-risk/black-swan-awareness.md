@@ -1,6 +1,5 @@
 ---
 name: Black Swan Awareness
-slug: black-swan-awareness
 category: probability-risk
 description: Account for high-impact rare events
 when_to_use:

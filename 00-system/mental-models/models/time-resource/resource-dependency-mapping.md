@@ -1,6 +1,5 @@
 ---
 name: Resource Dependency Mapping
-slug: resource-dependency-mapping
 category: time-resource
 description: Identify critical resource constraints
 when_to_use:

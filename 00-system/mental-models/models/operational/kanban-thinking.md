@@ -1,6 +1,5 @@
 ---
 name: Kanban Thinking
-slug: kanban-thinking
 category: operational
 description: Visualize work, limit WIP, optimize flow
 when_to_use:

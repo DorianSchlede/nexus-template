@@ -1,6 +1,5 @@
 ---
 name: MECE Principle
-slug: mece
 category: collaborative
 description: Mutually Exclusive, Collectively Exhaustive breakdown
 when_to_use:

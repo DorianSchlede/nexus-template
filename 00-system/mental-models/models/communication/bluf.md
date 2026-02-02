@@ -1,6 +1,5 @@
 ---
 name: BLUF (Bottom Line Up Front)
-slug: bluf
 category: communication
 description: State the key point first
 when_to_use:

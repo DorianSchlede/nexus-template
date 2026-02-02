@@ -1,6 +1,5 @@
 ---
 name: Force Field Analysis
-slug: force-field-analysis
 category: diagnostic
 description: Map driving vs restraining forces
 when_to_use:

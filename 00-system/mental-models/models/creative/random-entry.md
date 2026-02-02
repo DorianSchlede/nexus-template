@@ -1,6 +1,5 @@
 ---
 name: Random Entry
-slug: random-entry
 category: creative
 description: Introduce random stimulus to break patterns
 when_to_use:

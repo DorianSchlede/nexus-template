@@ -1,6 +1,5 @@
 ---
 name: Porter's Five Forces
-slug: porters-five-forces
 category: strategic
 description: Analyze competitive dynamics
 when_to_use:

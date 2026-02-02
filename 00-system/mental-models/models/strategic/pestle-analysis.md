@@ -1,6 +1,5 @@
 ---
 name: PESTLE Analysis
-slug: pestle-analysis
 category: strategic
 description: Political, Economic, Social, Tech, Legal, Environmental factors
 when_to_use:

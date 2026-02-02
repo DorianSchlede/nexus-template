@@ -1,6 +1,5 @@
 ---
 name: Situation-Complication-Resolution
-slug: situation-complication-resolution
 category: communication
 description: Structure persuasive narratives
 when_to_use:

@@ -1,6 +1,5 @@
 ---
 name: Sensitivity Analysis
-slug: sensitivity-analysis
 category: analytical
 description: Test how changes in inputs affect outputs
 when_to_use:

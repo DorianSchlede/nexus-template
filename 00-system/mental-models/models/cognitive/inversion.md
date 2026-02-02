@@ -1,6 +1,5 @@
 ---
 name: Inversion
-slug: inversion
 category: cognitive
 description: Solve problems by considering the opposite
 when_to_use:

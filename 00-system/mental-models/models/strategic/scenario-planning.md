@@ -1,6 +1,5 @@
 ---
 name: Scenario Planning
-slug: scenario-planning
 category: strategic
 description: Model multiple future states
 when_to_use:

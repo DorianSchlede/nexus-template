@@ -1,6 +1,5 @@
 ---
 name: T-Shaped Skills
-slug: t-shaped-skills
 category: learning
 description: Deep expertise plus broad knowledge
 when_to_use:

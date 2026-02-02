@@ -1,6 +1,5 @@
 ---
 name: Design Thinking
-slug: design-thinking
 category: creative
 description: Empathize-Define-Ideate-Prototype-Test
 when_to_use:

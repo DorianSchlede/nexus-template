@@ -1,6 +1,5 @@
 ---
 name: Prototyping
-slug: prototyping
 category: validation
 description: Build testable representations for validation
 when_to_use:

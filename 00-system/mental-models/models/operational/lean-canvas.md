@@ -1,6 +1,5 @@
 ---
 name: Lean Canvas
-slug: lean-canvas
 category: operational
 description: One-page business model
 when_to_use:
