@@ -131,6 +131,7 @@ NEXUS has TWO modes:
 <section id="never-do">
 ## Never Do
 
+- [ERROR] Never use Skill tool to load skills → Use `nexus-load --skill` (Nexus CLI)
 - [ERROR] Never create build/skill folders manually → Use plan-build
 - [ERROR] Never auto-load learning skills → Suggest, user decides
 - [ERROR] Never create README/CHANGELOG in skills → Clutter
@@ -199,6 +200,16 @@ NEXUS has TWO modes:
 - **Read**: Know exact file path
 - **Explore**: Need to find files, understand codebase structure
 - **Grep**: Search for specific text patterns across files
+
+**Skill Loading (CRITICAL)**:
+- **NEXUS has its own CLI** separate from Claude Code
+- **ALWAYS use**: `nexus-load --skill {skill-name}` or `nexus-load --skill {skill-name} --args "{args}"`
+- **NEVER use**: `Skill(skill="{skill-name}")` ← This is Claude Code's built-in tool, NOT Nexus
+- **Why**: The Skill tool bypasses Nexus context injection, state management, and hooks
+- **Examples**:
+  - [OK] `nexus-load --skill analyze-context`
+  - [OK] `nexus-load --skill plan-build --args "Website Redesign"`
+  - [FAIL] `Skill(skill="analyze-context")` ← Bypasses Nexus architecture
 </section>
 
 <section id="context-strategy" priority="CRITICAL">

@@ -595,14 +595,27 @@ After all SubAgents complete:
 1. **Each agent wrote**: `01-memory/input/_analysis/batch-{N}-insights.md`
 2. **Aggregation phase**: Read all batch files, synthesize into master summary
 
-**Aggregation Logic**:
+**CRITICAL: Validate completeness BEFORE aggregating**
+
+**Aggregation Logic with Validation**:
 ```python
 from pathlib import Path
+from nexus.validators import validate_aggregation_completeness
 
 analysis_dir = Path("01-memory/input/_analysis/")
 batch_files = sorted(analysis_dir.glob("batch-*-insights.md"))
 
-# Read all batch insights
+# STEP 1: Validate all expected batches exist
+expected_batch_count = len(batches)  # From Step 4
+actual_batch_count = len(batch_files)
+
+validate_aggregation_completeness(
+    expected=expected_batch_count,
+    actual=actual_batch_count,
+    context="batch insights discovery"
+)
+
+# STEP 2: Read all batch insights
 all_insights = []
 for batch_file in batch_files:
     content = batch_file.read_text()
@@ -611,7 +624,46 @@ for batch_file in batch_files:
         "content": content
     })
 
-# Now create master summary by synthesizing across batches
+# STEP 3: Validate all batches were read
+validate_aggregation_completeness(
+    expected=expected_batch_count,
+    actual=len(all_insights),
+    context="batch insights reading"
+)
+
+# STEP 4: Now safe to create master summary
+# All batches confirmed discovered and read
+```
+
+**If >3 batches: Use subagent for aggregation (recommended)**
+
+```python
+if expected_batch_count > 3:
+    # Spawn aggregation subagent instead of doing it manually
+    Task(
+        subagent_type="general-purpose",
+        prompt=f"""
+        Aggregate all batch analysis files in 01-memory/input/_analysis/.
+
+        CRITICAL REQUIREMENTS:
+        1. List all batch-*-insights.md files (expect {expected_batch_count} files)
+        2. Validate all {expected_batch_count} files exist before proceeding
+        3. Read EVERY file completely (no skipping)
+        4. Verify you read all {expected_batch_count} files
+        5. ONLY THEN write aggregation summary
+
+        Use nexus.validators.validate_aggregation_completeness() to validate:
+        - After discovering files
+        - After reading all files
+        - Before writing summary
+
+        Output: 01-memory/input/_analysis/analysis-summary.md
+        """,
+        description=f"Aggregating {expected_batch_count} batch insights"
+    )
+else:
+    # Manual aggregation for ≤3 batches
+    # ... use validation logic above
 ```
 
 **Create master summary**: `01-memory/input/_analysis/analysis-summary.md`
