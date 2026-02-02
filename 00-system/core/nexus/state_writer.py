@@ -4,7 +4,6 @@ State Writer - Generic YAML Config Updater for Nexus
 Provides atomic, safe updates to user-config.yaml with:
 - Nested path support (e.g., "onboarding.path_chosen")
 - Atomic writes (write to .tmp -> rename)
-- Automatic backups before modifications
 - YAML validation
 - Concurrent write safety
 
@@ -42,7 +41,7 @@ def update_yaml_path(
     config_path: Path,
     yaml_path: str,
     value: Any,
-    create_backup: bool = True
+    create_backup: bool = False
 ) -> bool:
     """
     Update a nested YAML path in user-config.yaml atomically.
@@ -51,7 +50,7 @@ def update_yaml_path(
         config_path: Path to the YAML config file (e.g., 01-memory/user-config.yaml)
         yaml_path: Dot-separated path to the field (e.g., "onboarding.path_chosen")
         value: Value to set (str, int, bool, list, dict, None)
-        create_backup: Whether to create backup before write (default: True)
+        create_backup: Whether to create backup before write (default: False)
 
     Returns:
         bool: True if update succeeded, False otherwise
@@ -113,7 +112,7 @@ def update_yaml_path(
 def update_multiple_paths(
     config_path: Path,
     updates: dict[str, Any],
-    create_backup: bool = True
+    create_backup: bool = False
 ) -> bool:
     """
     Update multiple YAML paths in a single atomic operation.
@@ -129,7 +128,7 @@ def update_multiple_paths(
                 "onboarding.path_chosen": "quick_start",
                 "onboarding.quick_start_state.step_completed": 1
             }
-        create_backup: Whether to create backup before write
+        create_backup: Whether to create backup before write (default: False)
 
     Returns:
         bool: True if all updates succeeded, False otherwise
