@@ -1,25 +1,27 @@
 ---
 name: setup
-description: "setup, configure, first run, initial setup, configure settings"
+description: "DEPRECATED - Use quick-start instead. Setup is now integrated into onboarding."
 ---
 
-# /setup - Post-Installation Configuration
+# /setup - DEPRECATED
 
-Quick configuration that runs once after installation. Sets up permissions and transitions directly to onboarding.
+**This skill is deprecated as of 2026-02-02.**
 
-## Purpose
+All setup functionality (permissions, configuration) has been moved into the **quick-start** onboarding skill (Step 9).
 
-The installer handles deterministic tasks (download, install dependencies). This skill:
+## If you manually triggered this
 
-1. **Asks about Permission Settings** - Explains why automatic permissions help
-2. **Auto-configures VS Code** - Sets markdown preview settings automatically
-3. **Marks setup complete** - Prevents re-running
-4. **Transitions to onboarding** - Continues in same chat
+The quick-start onboarding flow now includes:
+- Step 0: Welcome & Language
+- Steps 1-8: Goals, workspace, first build planning
+- Step 9: Permissions Setup ← (previously in this skill)
+- Step 10: Start fresh
 
-## Triggers
+Say "hi" to start the quick-start onboarding flow.
 
-- Automatically when SessionStart detects fresh install
-- Manually via "setup" or "configure settings"
+## For developers
+
+This skill should no longer auto-trigger. The SessionStart hook should inject quick-start directly when onboarding is needed.
 
 ---
 
@@ -69,6 +71,21 @@ Options:
 ### Step 3: VS Code Settings (AUTOMATIC)
 
 Automatically create/update `.vscode/settings.json`:
+
+**If user chose "Automatic" in Step 2:**
+```json
+{
+  "markdown.preview.breaks": true,
+  "markdown.preview.typographer": true,
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
+}
+```
+
+**If user chose "Ask each time" in Step 2:**
 ```json
 {
   "markdown.preview.breaks": true,
@@ -79,7 +96,7 @@ Automatically create/update `.vscode/settings.json`:
 }
 ```
 
-No question needed - these settings just improve markdown rendering.
+The `claudeCode.allowDangerouslySkipPermissions` setting is the VS Code extension bypass (the `.claude/settings.local.json` is for CLI).
 
 ### Step 4: Mark Setup Complete
 
@@ -119,8 +136,8 @@ After setup completes:
 
 | File | When | Purpose |
 |------|------|---------|
-| `.claude/settings.local.json` | If user chooses "Automatic" | Permission bypass |
-| `.vscode/settings.json` | Always | Markdown preview |
+| `.claude/settings.local.json` | If user chooses "Automatic" | CLI permission bypass |
+| `.vscode/settings.json` | Always | Markdown preview + VS Code extension permission bypass (if Automatic) |
 | `.claude/.setup_complete` | Always | Prevent re-run |
 
 ---
