@@ -210,6 +210,72 @@ NEXUS has TWO modes:
   - [OK] `nexus-load --skill analyze-context`
   - [OK] `nexus-load --skill plan-build --args "Website Redesign"`
   - [FAIL] `Skill(skill="analyze-context")` ← Bypasses Nexus architecture
+
+**Exploration Budget**:
+- **Max 10 reads before justification**: If you need >10 Read operations, pause and explain why
+- **Use Explore agent for discovery**: Broad questions like "where is X handled?" → Explore agent, not sequential reads
+- **Use Grep for pattern matching before Reading**: Search for patterns first, then read matched files
+- **Examples**:
+  - [OK] Grep for "validate_" → Read 3 matched files
+  - [OK] Explore agent: "Find all authentication code"
+  - [FAIL] Read 15 files sequentially without search
+  - [FAIL] Read file, realize wrong one, repeat 20 times
+
+**Tool Selection Criteria**:
+
+| Need | Tool | When | Don't Use When |
+|------|------|------|----------------|
+| **Known file path** | Read | You know exact file location | File might not exist, use Glob first |
+| **Pattern search** | Grep | Find code/text patterns | Need to understand context, use Explore |
+| **File discovery** | Glob | Find files by name/extension | Don't know what you're looking for |
+| **Broad questions** | Explore agent | "Where is X?", "How does Y work?" | You know the specific file already |
+
+**Anti-Patterns**:
+- [FAIL] Don't read everything sequentially hoping to find something
+- [FAIL] Don't use Read when you should Grep first
+- [FAIL] Don't launch Explore agent for known file paths
+- [FAIL] Don't read >10 files without explaining investigation strategy
+
+**Subagent Communication**:
+
+When launching subagents, always communicate what's happening:
+
+**Template 1 - Launch Announcement**:
+```
+I'm launching {N} subagents to {task description}.
+Each will {specific action}, output to {location}.
+This will take ~{estimated duration}.
+You'll see {expected result} when complete.
+```
+
+**Template 2 - Progress Update** (for long operations):
+```
+{N}/{Total} subagents complete...
+```
+
+**Template 3 - Completion Summary**:
+```
+[OK] All subagents complete
+Results: {summary of what was accomplished}
+Outputs: {where to find results}
+```
+
+**Examples**:
+```
+Good: "I'm launching 5 subagents to analyze your batch files.
+       Each will extract key insights, output to _analysis/.
+       This will take ~2-3 minutes.
+       You'll see aggregated themes when complete."
+
+Bad:  {launches subagents silently, user confused}
+```
+
+**Why This Matters**: Subagents can take 30s-3min. Users need to know:
+1. What's happening
+2. How long it will take
+3. What they'll get
+
+Without communication, users think the system is frozen.
 </section>
 
 <section id="context-strategy" priority="CRITICAL">
