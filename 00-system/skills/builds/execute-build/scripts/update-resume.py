@@ -288,25 +288,33 @@ def main():
     # Try to find 02-builds from CWD
     build_path = None
 
-    # Check if CWD has 02-builds
-    if (cwd / "02-builds" / args.build).exists():
-        build_path = cwd / "02-builds" / args.build
-    # Check if CWD parent has 02-builds
-    elif (cwd.parent / "02-builds" / args.build).exists():
-        build_path = cwd.parent / "02-builds" / args.build
-    # Check if CWD grandparent has 02-builds
-    elif (cwd.parent.parent / "02-builds" / args.build).exists():
-        build_path = cwd.parent.parent / "02-builds" / args.build
-    # Fallback: calculate from script location
+    # Check active builds first, then complete, then root (legacy)
+    search_paths = [
+        cwd / "02-builds" / "active" / args.build,
+        cwd / "02-builds" / "complete" / args.build,
+        cwd / "02-builds" / args.build,  # Legacy
+        cwd.parent / "02-builds" / "active" / args.build,
+        cwd.parent / "02-builds" / "complete" / args.build,
+        cwd.parent / "02-builds" / args.build,  # Legacy
+    ]
+
+    for path in search_paths:
+        if path.exists():
+            build_path = path
+            break
     else:
+        # Fallback: calculate from script location
         project_root = Path(__file__).resolve().parents[4]
-        build_path = project_root / "02-builds" / args.build
+        for subdir in ["active", "complete", ""]:
+            fallback_path = project_root / "02-builds" / subdir / args.build if subdir else project_root / "02-builds" / args.build
+            if fallback_path.exists():
+                build_path = fallback_path
+                break
 
     if not build_path or not build_path.exists():
-        logging.error(f"Build directory not found: {build_path}")
+        logging.error(f"Build directory not found: {args.build}")
         logging.error(f"CWD: {cwd}")
-        logging.error(f"Looked in: {cwd / '02-builds' / args.build}")
-        logging.error(f"Also tried: {cwd.parent / '02-builds' / args.build}")
+        logging.error(f"Searched in: 02-builds/active/, 02-builds/complete/, 02-builds/")
         sys.exit(1)
 
     # Build updates dict

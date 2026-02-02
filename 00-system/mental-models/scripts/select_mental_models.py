@@ -71,13 +71,12 @@ def scan_mental_models(models_dir: Path, category_filter: Optional[str] = None) 
                 if model_category != category_filter:
                     continue
 
+            # Derive slug from filename (no YAML field needed)
+            slug = Path(metadata.get('_file_name', '')).stem
             models.append({
                 "name": metadata.get('name', ''),
-                "slug": metadata.get('slug', ''),
-                "category": metadata.get('category', metadata.get('_category_folder', '')),
-                "description": metadata.get('description', ''),
-                "when_to_use": metadata.get('when_to_use', []),
-                "best_for": metadata.get('best_for', ''),
+                "slug": slug,
+                "category": metadata.get('_category_folder', ''),
                 "file": metadata.get('_file_path', '')
             })
 
@@ -89,37 +88,33 @@ def scan_mental_models(models_dir: Path, category_filter: Optional[str] = None) 
 def format_output(models: List[Dict[str, Any]], format_type: str, base_path: Path) -> str:
     """Format output based on requested format."""
     if format_type == 'brief':
-        # AI-optimized format: name, description, relative path - grouped by category
+        # Compact: category → slug list (AI derives path from pattern)
+        # Path pattern: 00-system/mental-models/models/{category}/{slug}.md
         by_category = {}
         for m in models:
             cat = m.get('category', 'other')
             if cat not in by_category:
                 by_category[cat] = []
-            # Convert absolute path to relative path from project root
-            abs_path = m.get('file', '')
-            if abs_path:
-                try:
-                    rel_path = str(Path(abs_path).relative_to(base_path))
-                except ValueError:
-                    rel_path = abs_path
-            else:
-                rel_path = ''
-            by_category[cat].append({
-                "name": m.get('name'),
-                "description": m.get('description'),
-                "path": rel_path
-            })
-        return json.dumps(by_category, indent=2, ensure_ascii=False)
+            by_category[cat].append(m.get('slug', ''))
+
+        lines = ["# Models by Category", "# Path: 00-system/mental-models/models/{category}/{slug}.md", ""]
+        for cat, slugs in sorted(by_category.items()):
+            lines.append(f"{cat}: {', '.join(slugs)}")
+        return '\n'.join(lines)
 
     elif format_type == 'list':
-        # Ultra-compact: just names grouped by category (for quick reference)
+        # Names only for display to user
         by_category = {}
         for m in models:
             cat = m.get('category', 'other')
             if cat not in by_category:
                 by_category[cat] = []
             by_category[cat].append(m.get('name'))
-        return json.dumps(by_category, indent=2, ensure_ascii=False)
+
+        lines = []
+        for cat, names in sorted(by_category.items()):
+            lines.append(f"**{cat}**: {', '.join(names)}")
+        return '\n'.join(lines)
 
     else:  # 'full'
         return json.dumps(models, indent=2, ensure_ascii=False)

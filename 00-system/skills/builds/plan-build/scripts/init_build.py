@@ -588,12 +588,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  init_build.py "Website Redesign" --path 02-builds --type build
-  init_build.py "Market Research" --path 02-builds --type research
-  init_build.py my-feature --path 02-builds -d "Add new feature" --id 15
+  init_build.py "Website Redesign" --path 02-builds/active --type build
+  init_build.py "Market Research" --path 02-builds/active --type research
+  init_build.py my-feature --path 02-builds/active -d "Add new feature" --id 15
 
 Build structure created:
-  02-builds/
+  02-builds/active/
     NN-build-name/
       01-planning/
         01-overview.md   (purpose, goals)

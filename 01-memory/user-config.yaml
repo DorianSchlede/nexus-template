@@ -19,26 +19,27 @@ user_preferences:
 onboarding:
   # Overall status (simplified in v5)
   # Values: not_started | in_progress | complete
-  status: "complete"
+  status: "not_started"
 
   # Current in-progress skill (for cross-session resume)
   # Values: null | "quick-start" | "complete-setup"
   in_progress_skill: null
 
   # User choices during onboarding
-  language_preference: "en"  # en, de, es, fr, it, ja, zh, or custom string
+  language_preference: null  # en, de, es, fr, it, ja, zh, or custom string
 
   # Which onboarding path chosen (v5 hybrid approach)
   # Values: null | "quick_start" | "complete_setup"
-  path_chosen: "quick_start"
+  path_chosen: null
 
-  # Quick Start state (Path A - 8-10 min)
+  # Quick Start state (Path A - 8 min)
   quick_start_state:
-    step_completed: 5  # 0-5 (which step is done)
-    goal_captured: true
-    workspace_created: true
-    build_chosen: true
-    planning_complete: true
+    step_completed: 0  # 0-5 (which step is done)
+    intention_captured: false
+    first_build_created: true
+    planning_experienced: false  # User answered 1 discovery question
+    workspace_created: false
+    hi_menu_taught: false
 
   # Complete Setup state (Path B - 10-12 min)
   complete_setup_state:
@@ -57,12 +58,11 @@ onboarding:
   completed_at: null
 
 first_encounters:
-  resume_update_reminder: true
   build_created: true
   skill_loaded: true
-  workspace_used: true
+  workspace_used: false
   memory_updated: true
-  close_session_used: true
+  close_session_used: false
 
 anti_patterns_warned:
   repeated_build_pattern: false
@@ -71,7 +71,7 @@ learning_tracker:
   session_count: 0
   completed:
     # Onboarding paths
-    quick_start: true
+    quick_start: false
     complete_setup: false
     # Optional learning skills
     how_nexus_works: false
@@ -111,15 +111,14 @@ updated: null
 #
 # If Quick Start chosen:
 #   - Sets path_chosen = "quick_start"
-#   - Loads quick-start skill (6 steps: 0-5)
-#   - Step 0: How Nexus works (30 sec) - file structure, auto-save
-#   - Step 1: Goal capture + clarification via AskUserQuestion (2-3 min)
-#   - Step 2: Workspace setup with iteration (2 min) - user confirms structure
-#   - Step 3: First BUILD selection from dynamic options (2 min)
-#   - Step 4: Planning rounds - 3 rounds of 2 questions each (3-4 min)
-#   - Step 5: What's next - explain new session for execution (1 min)
-#   - Total: ~8-10 minutes
-#   - Result: Goal defined, workspace ready, BUILD fully planned, ready for execution next session
+#   - Loads quick-start skill (5 steps)
+#   - Step 1: Capture intention (1 min)
+#   - Step 2: BUILD concept + Create first BUILD + Generate immediate value (3 min)
+#   - Step 3: Mini-planning experience (1 discovery question) (1 min)
+#   - Step 4: Create workspace (1 min)
+#   - Step 5: End with options (continue/explore/close) (2 min)
+#   - Total: ~8 minutes
+#   - Result: First BUILD with immediate value (3 ideas), planning experienced, "Hi" flow learned, option to continue
 #
 # If Complete Setup chosen:
 #   - Sets path_chosen = "complete_setup"

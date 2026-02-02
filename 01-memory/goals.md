@@ -1,36 +1,46 @@
 ---
+smart_default: true
 ---
 # Your Goals
 
 > **Purpose**: Define what you want to achieve (for AI context)
 >
-> This file loads every session - it's how I stay relevant to YOU.
+> **Updated**: Set via 'setup memory' skill, revised as needed
 
 ---
 
-## Goal
+## Current Role
 
-Automate LinkedIn - build a system that generates leads through consistent, strategic content without the daily grind.
-
----
-
-## Success Looks Like
-
-Leads coming from LinkedIn - DMs, inquiries, and business opportunities flowing from content.
+[TODO: Replace with user's role or position]
 
 ---
 
-## Current Friction
+## Short-Term Goal (3 months)
 
-Coming up with ideas - blank page syndrome makes each post a struggle to start.
+[TODO: Replace with what user wants to accomplish in next 3 months]
+
+**Why This Matters**:
+[TODO: Replace with why this goal is important]
+
+**Success Metrics**:
+- [ ] [TODO: Replace with measurable outcome 1]
+- [ ] [TODO: Replace with measurable outcome 2]
+- [ ] [TODO: Replace with measurable outcome 3]
 
 ---
 
-## Context
+## Long-Term Vision (1-3 years)
 
-You want LinkedIn to work FOR you, not be another task on your list. The system should handle the hard part (ideas) so you can focus on showing up authentically. The end game isn't vanity metrics - it's actual business results.
+[TODO: Replace with where user wants to be in 1-3 years]
 
 ---
 
-**Created**: 2026-01-31
-**Last Updated**: 2026-01-31
+## Work Style & Preferences
+
+**Best Working Hours**: [TODO: Replace with when user is most productive]
+**Typical Session Length**: [TODO: Replace with typical work session length]
+**Focus Areas**: [TODO: Replace with areas user wants help with]
+
+---
+
+**Last Updated**: [TODO: Replace with current date]

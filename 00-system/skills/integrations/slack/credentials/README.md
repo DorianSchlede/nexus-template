@@ -24,7 +24,7 @@ SLACK_CLIENT_SECRET=your-client-secret
 ### Step 3: Authorize Your Account
 
 ```bash
-python 00-system/skills/slack/slack-master/scripts/setup_slack.py
+uv run python 00-system/skills/slack/slack-master/scripts/setup_slack.py
 ```
 
 Browser opens → Sign in → Click "Allow" → Done!

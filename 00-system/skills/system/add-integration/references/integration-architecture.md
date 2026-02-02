@@ -123,7 +123,7 @@ def main():
 Every operation starts with config validation:
 
 ```bash
-python {service}-master/scripts/check_{service}_config.py --json
+uv run python {service}-master/scripts/check_{service}_config.py --json
 ```
 
 Returns:

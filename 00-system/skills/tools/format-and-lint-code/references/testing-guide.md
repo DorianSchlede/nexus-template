@@ -12,7 +12,7 @@ mkdir test-format-lint
 cd test-format-lint
 
 # Create virtual environment (optional but recommended)
-python -m venv venv
+uv run python -m venv venv
 source venv/bin/activate  # or 'venv\Scripts\activate' on Windows
 
 # Install dependencies
@@ -412,7 +412,7 @@ Run these after any code changes:
 echo "Running regression test suite..."
 
 # Test 1: Basic Python
-python -m format_and_lint python_files/simple.py
+uv run python -m format_and_lint python_files/simple.py
 [ $? -eq 0 ] && echo "[OK] Test 1 passed" || echo "[FAIL] Test 1 FAILED"
 
 # Test 2: JavaScript
@@ -420,7 +420,7 @@ node -e "require('eslint-cli').execute('js_files/simple.js')"
 [ $? -eq 0 ] && echo "[OK] Test 2 passed" || echo "[FAIL] Test 2 FAILED"
 
 # Test 3: Multi-language
-python -m format_and_lint .
+uv run python -m format_and_lint .
 [ $? -eq 0 ] && echo "[OK] Test 3 passed" || echo "[FAIL] Test 3 FAILED"
 
 echo "Regression suite complete"

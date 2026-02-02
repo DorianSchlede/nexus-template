@@ -227,12 +227,14 @@ def bulk_complete_tasks(
     """
     base = Path(base_path)
 
-    # Find build folder - try multiple patterns
+    # Find build folder - try multiple patterns (active first, then complete, then root for legacy)
     possible_folders = [
-        base / "02-builds" / build_id,  # Full ID provided
-        base / "02-builds" / f"{build_id.zfill(2)}-*",  # Just number provided
-        base / "02-builds" / "00-onboarding" / build_id,  # Onboarding subfolder
-        base / "02-builds" / "00-onboarding" / f"{build_id.zfill(2)}-*",  # Onboarding with number
+        base / "02-builds" / "active" / build_id,  # Full ID in active
+        base / "02-builds" / "active" / f"{build_id.zfill(2)}-*",  # Just number in active
+        base / "02-builds" / "complete" / build_id,  # Full ID in complete
+        base / "02-builds" / "complete" / f"{build_id.zfill(2)}-*",  # Just number in complete
+        base / "02-builds" / build_id,  # Legacy: root of 02-builds
+        base / "02-builds" / f"{build_id.zfill(2)}-*",  # Legacy: root with number
     ]
 
     build_path = None
@@ -244,7 +246,7 @@ def bulk_complete_tasks(
 
     if not build_path or not build_path.exists():
         print(f"[ERROR] Build not found: {build_id}")
-        print(f"[INFO] Searched in: 02-builds/")
+        print(f"[INFO] Searched in: 02-builds/active/, 02-builds/complete/, 02-builds/")
         return False
 
     # Find task file (steps.md or tasks.md) - NEW AUTO-DETECTION

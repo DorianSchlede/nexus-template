@@ -3,7 +3,7 @@
 [DEPRECATED] - Use init_build.py instead
 
 This script is deprecated. Use the new improved script:
-    python 00-system/skills/plan-build/scripts/init_build.py "Build Name" --path 02-builds
+    python 00-system/skills/plan-build/scripts/init_build.py "Build Name" --path 02-builds/active
 
 New improvements:
 - Auto-assigns build IDs (no manual ID selection)
@@ -38,7 +38,7 @@ print("[DEPRECATED] DEPRECATION WARNING")
 print("="*70)
 print("This script (plan-build.py) is deprecated.")
 print("\nPlease use the new script instead:")
-print("  python 00-system/skills/plan-build/scripts/init_build.py \"Build Name\" --path 02-builds")
+print("  python 00-system/skills/plan-build/scripts/init_build.py \"Build Name\" --path 02-builds/active")
 print("\nThe new script provides:")
 print("  - Auto-assigned build IDs")
 print("  - Improved 4-folder structure (with 02-resources/)")

@@ -5,7 +5,7 @@ smart_default: true
 
 > **Purpose**: Document your workspace folder structure for AI context
 >
-> **Updated**: Set via onboarding or 'update workspace map'
+> **Updated**: Set via 'create folders' skill
 
 ---
 
@@ -13,22 +13,52 @@ smart_default: true
 
 ```
 04-workspace/
-├── content/             # Your posts, drafts, and published content
-├── ideas/               # Topic bank and content ideas
-└── templates/           # Post formats, hooks, CTAs you reuse
+└── (not configured yet)
+```
+
+**After running 'create folders', this will contain your personalized structure.**
+
+---
+
+## Example Structures
+
+The create-folders skill will create folders based on your role and work patterns.
+
+**Example for a Developer:**
+```
+04-workspace/
+├── projects/           # Active coding projects
+├── research/           # Technical research & notes
+├── docs/               # Documentation drafts
+└── sandbox/            # Experiments & prototypes
+```
+
+**Example for a Consultant:**
+```
+04-workspace/
+├── clients/            # Client-specific folders
+├── proposals/          # Business proposals
+├── research/           # Market & competitor research
+├── templates/          # Reusable documents
+└── deliverables/       # Final outputs
+```
+
+**Example for a Researcher:**
+```
+04-workspace/
+├── papers/             # Academic papers & sources
+├── experiments/        # Research experiments
+├── data/               # Datasets & analysis
+├── notes/              # Research notes
+└── outputs/            # Publications & reports
 ```
 
 ---
 
-## How This Works
+## Usage Notes
 
-- **You** organize files however you want
-- **I** read this map to find things
-- **Skills** save outputs here automatically
-- **Builds** deliver final work here
-
-To reorganize: Move files around, then say "update workspace map"
+[TODO: Say 'create folders' to create your personalized folder structure]
 
 ---
 
-**Last Updated**: 2026-01-31
+**Last Updated**: [Not configured]

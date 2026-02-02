@@ -225,7 +225,7 @@ Before using this skill, ensure {Integration} is configured.
 
 **Quick check:**
 \`\`\`bash
-python 00-system/skills/{integration}-master/scripts/check_config.py
+uv run python 00-system/skills/{integration}-master/scripts/check_config.py
 \`\`\`
 
 **First time setup?** See [{Integration} Setup Guide](../{integration}-master/references/setup-guide.md)
@@ -241,9 +241,9 @@ python 00-system/skills/{integration}-master/scripts/check_config.py
 
 ```bash
 # Always from Nexus root
-python 00-system/skills/{integration}-master/scripts/check_config.py
-python 00-system/skills/{integration}-master/scripts/discover_resources.py
-python 00-system/skills/{integration}-master/scripts/query_resources.py --filter "..."
+uv run python 00-system/skills/{integration}-master/scripts/check_config.py
+uv run python 00-system/skills/{integration}-master/scripts/discover_resources.py
+uv run python 00-system/skills/{integration}-master/scripts/query_resources.py --filter "..."
 ```
 
 ---

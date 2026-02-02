@@ -159,7 +159,7 @@ chmod +x scripts/script-name.py
 
 Or execute with interpreter explicitly:
 ```bash
-python scripts/script-name.py
+uv run python scripts/script-name.py
 ```
 
 ### Script Runtime Error

@@ -472,7 +472,7 @@ chmod +x .git/hooks/pre-commit
 
 ```bash
 # Python: Use virtual environments
-python -m venv venv
+uv run python -m venv venv
 source venv/bin/activate
 pip install black flake8 pylint isort
 
