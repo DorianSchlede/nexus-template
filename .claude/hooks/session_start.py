@@ -222,16 +222,15 @@ def determine_onboarding_action(session_source: str, onboarding_state: dict, bui
     Returns:
         dict with action, skill, template, resume_step
     """
-    # Priority 0: Check for fresh install (needs setup before onboarding)
-    if build_dir and check_fresh_install(build_dir):
-        return {
-            "action": "run_setup",
-            "skill": "setup",
-            "template": "startup_first_run",
-            "fresh_install": True
-        }
-
     status = onboarding_state.get("status", "not_started")
+
+    # Priority 0: Check for fresh install OR not_started (unified onboarding flow)
+    if (build_dir and check_fresh_install(build_dir)) or status == "not_started":
+        return {
+            "action": "run_onboarding",
+            "template": "startup_onboarding",
+            "fresh_install": build_dir and check_fresh_install(build_dir)
+        }
     in_progress_skill = onboarding_state.get("in_progress_skill")
 
     # Check if in-progress skill (cross-session continuity)
@@ -259,15 +258,8 @@ def determine_onboarding_action(session_source: str, onboarding_state: dict, bui
                 "template": "compact_onboarding_resume"
             }
 
-    # Route based on status
-    if status == "not_started":
-        return {
-            "action": "show_heroic_intro",
-            "template": "startup_first_run"
-        }
-
     # v5: in_progress - check path_chosen
-    elif status == "in_progress":
+    if status == "in_progress":
         path_chosen = onboarding_state.get("path_chosen")
 
         if path_chosen == "quick_start":
@@ -287,10 +279,10 @@ def determine_onboarding_action(session_source: str, onboarding_state: dict, bui
                 "template": "compact_onboarding_resume"
             }
         else:
-            # Shouldn't happen, but fallback to showing intro
+            # Shouldn't happen, but fallback to onboarding
             return {
-                "action": "show_heroic_intro",
-                "template": "startup_first_run"
+                "action": "run_onboarding",
+                "template": "startup_onboarding"
             }
 
     # v5: complete - normal operation
@@ -802,6 +794,20 @@ Current directory: {escape_xml_content(str(base_path))}
     onboarding_action = determine_onboarding_action(source, onboarding_state, build_dir)
 
     logging.info(f"Onboarding action: {onboarding_action.get('action')}, skill={onboarding_action.get('skill')}")
+
+    # Initialize onboarding state if starting onboarding
+    if onboarding_action.get('action') == 'run_onboarding':
+        try:
+            from nexus.state_writer import update_multiple_paths
+            update_multiple_paths(config_path, {
+                "onboarding.status": "in_progress",
+                "onboarding.path_chosen": "quick_start",
+                "onboarding.in_progress_skill": "quick-start",
+                "onboarding.started_at": datetime.now().isoformat()
+            })
+            logging.info("Initialized onboarding state: status=in_progress, skill=quick-start")
+        except Exception as e:
+            logging.warning(f"Failed to initialize onboarding state: {e}")
 
     # Build XML parts
     xml_parts = []

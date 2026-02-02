@@ -17,18 +17,7 @@ Complete onboarding flow: welcome, language selection, optionally upload context
 
 ## Pre-Execution
 
-**State Initialization** (on first run):
-```python
-from nexus.state_writer import update_multiple_paths
-from datetime import datetime
-
-update_multiple_paths(config_path, {
-    "onboarding.status": "in_progress",
-    "onboarding.path_chosen": "quick_start",
-    "onboarding.in_progress_skill": "quick-start",
-    "onboarding.started_at": datetime.now().isoformat()
-})
-```
+**State Initialization**: The SessionStart hook automatically initializes onboarding state when this skill is loaded.
 
 ---
 
