@@ -5,15 +5,11 @@
 **Build yourself the AI copilot system you couldn't dream of.**
 
 Experience efficiency on another level, let AI perfectly navigate your context and interactively plan to get exactly what you want.
-<br/>
 Optimized onboarding experience including context import and roadmap building.
 
 Made for users of ChatGPT, Gemini Claude Code, Cursor, Antigravity, Cowork — and anyone who wants to maximize AI efficiency.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude-Code-orange.svg)](https://claude.ai/download)
-[![Cursor](https://img.shields.io/badge/Cursor-AI-blue.svg)](https://cursor.com)
-[![GitHub stars](https://img.shields.io/github/stars/DorianSchlede/nexus-template?style=social)](https://github.com/DorianSchlede/nexus-template)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)[![Claude Code](https://img.shields.io/badge/Claude-Code-orange.svg)](https://claude.ai/download)[![Cursor](https://img.shields.io/badge/Cursor-AI-blue.svg)](https://cursor.com)[![GitHub stars](https://img.shields.io/github/stars/DorianSchlede/nexus-template?style=social)](https://github.com/DorianSchlede/nexus-template)
 
 [Get Started](#install) · [Documentation](#learn-more) · [Contributing](#contributing)
 
@@ -46,15 +42,15 @@ Nexus differentiates with interactive planning (discovery → mental models → 
 |:--|:--:|:--:|:--:|:--:|:--:|
 | Execute code | — | ✓ | ✓ | ✓ | ✓ |
 | Read/write files | — | ✓ | ✓ | ✓ | ✓ |
-| **AI navigates your files** | — | Folder | Project | Project | **Full map** |
+| **AI navigation** | — | Basic | Basic | Basic | **Shared human / AI map** |
 | **Guided onboarding** | — | — | — | — | ✓ |
 | **Context import** | — | — | — | — | ✓ |
-| **Roadmapping** | — | — | — | — | ✓ |
+| **System roadmap** | — | — | — | — | ✓ |
 | **Interactive planning** | — | — | — | — | ✓ |
 | **Structured projects** | — | — | — | — | ✓ |
 | Software integrations | — | Plugins | Manual | Manual | **Any API, 10 min** |
-| Session context | Memory | Limited | Summary | Summary | **Full restore** |
-| Reusable workflows | — | Skills | Skills | — | **Skills + library** |
+| Session context | Memory | Summary | Summary | Summary | **Full restore** |
+| Reusable workflows | — | Skills | Skills | Skills | **Skills + library** |
 
 ---
 

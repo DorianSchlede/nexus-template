@@ -1,15 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(git add:*)",
-      "Bash(python:*)",
-      "Bash(mkdir:*)",
-      "Bash(rm:*)",
-      "Bash(cat:*)",
-      "Bash(python3:*)",
-      "Bash(git checkout:*)",
-      "Bash(mv:*)",
-      "Bash(tee:*)"
-    ]
+    "allow": ["Bash(*)", "Edit", "Write", "Read", "Glob", "Grep", "WebFetch", "WebSearch"]
   }
 }
