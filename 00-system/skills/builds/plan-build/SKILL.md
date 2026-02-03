@@ -124,9 +124,57 @@ nexus-init-build "Build Name" --type {type} --path 02-builds/active
 
 # 1.3 Load templates from types/{type}/
 # 1.4 Initialize resume-context.md
+# 1.5 Check roadmap and link if match found (see below)
 ```
 
 **Output**: Build folder with 4 directories + planning file templates
+
+#### Step 1.5: Roadmap Linking (REQ-2)
+
+**If `01-memory/roadmap.yaml` exists**, check if build name matches a roadmap item:
+
+```python
+# Roadmap linking logic (executed inline by AI)
+from pathlib import Path
+import re
+
+def slugify(name: str) -> str:
+    """Convert name to slug: lowercase, replace spaces with hyphens, remove non-alphanumeric."""
+    slug = name.lower().replace(" ", "-")
+    slug = re.sub(r"[^a-z0-9-]", "", slug)
+    slug = re.sub(r"-+", "-", slug).strip("-")
+    return slug
+
+roadmap_path = Path("01-memory/roadmap.yaml")
+if roadmap_path.exists():
+    import yaml
+    with open(roadmap_path) as f:
+        roadmap = yaml.safe_load(f)
+
+    build_name = "Build Name"  # The name being created
+    build_id = "XX-build-name"  # The generated build ID
+
+    for item in roadmap.get("items", []):
+        if item.get("build_id"):
+            continue  # Already linked
+
+        # Match: slugified item name contained in build ID slug
+        item_slug = slugify(item["name"])
+        build_slug = slugify(build_id)
+
+        if item_slug in build_slug:
+            # LINK: Set build_id on roadmap item
+            item["build_id"] = build_id
+            with open(roadmap_path, "w") as f:
+                yaml.dump(roadmap, f, default_flow_style=False, allow_unicode=True)
+            print(f"Linked roadmap item '{item['name']}' to build '{build_id}'")
+            break
+```
+
+**CRITICAL - Slug Matching Rules**:
+- Slugify both item name and build ID
+- Match if item slug is CONTAINED in build slug (handles numbered prefixes like "01-content-calendar")
+- Example: "Content Calendar" → "content-calendar" matches "01-content-calendar"
 
 ### Phase 2: Discovery
 

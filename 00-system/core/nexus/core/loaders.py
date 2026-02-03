@@ -29,6 +29,7 @@ from ..utils.utils import (
     is_template_file,
     parse_env_file,
 )
+from .roadmap import get_roadmap_summary, format_roadmap_line
 
 
 def validate_build_schema(metadata: Dict[str, Any], file_path: str = "") -> None:
@@ -1536,6 +1537,21 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
         integrations_status = "None"
 
     # === NEW: builds_section for startup_main_menu ===
+    # Get roadmap summary if roadmap exists
+    base_path = context.get("_base_path", ".")
+    roadmap_path = Path(base_path) / MEMORY_DIR / "roadmap.yaml"
+    roadmap_line = None
+    try:
+        # Build ID sets for status derivation
+        active_ids = {b.get("id", "") for b in active_builds if b.get("id")}
+        complete_builds = context.get("complete_builds", [])
+        complete_ids = {b.get("id", "") for b in complete_builds if b.get("id")}
+
+        roadmap_summary = get_roadmap_summary(roadmap_path, active_ids, complete_ids)
+        roadmap_line = format_roadmap_line(roadmap_summary)
+    except Exception:
+        pass  # Roadmap not available, continue without it
+
     if active_builds:
         build_lines = []
         for idx, b in enumerate(active_builds[:5], start=1):
@@ -1553,6 +1569,10 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
         builds_section += "\n\n     Say: plan (start new) | #1 (continue build) | roadmap (view/manage)"
     else:
         builds_section = "     No active builds yet.\n\n     Say: plan (start your first project) | roadmap (view/manage)"
+
+    # Inject roadmap line at the top of builds_section if roadmap exists
+    if roadmap_line:
+        builds_section = f"     {roadmap_line}\n\n{builds_section}"
 
     # === NEW: skills_section for startup_main_menu ===
     if user_skills:

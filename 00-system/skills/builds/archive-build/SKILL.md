@@ -74,6 +74,29 @@ Ask: "Archive {name}? This moves it to 02-builds/complete/. (yes/no)"
    ```yaml
    archived: 2025-11-02
    ```
+4. **Mark roadmap item complete (REQ-5)**:
+   ```python
+   # Roadmap completion marking (executed inline by AI)
+   from pathlib import Path
+   from datetime import datetime
+
+   roadmap_path = Path("01-memory/roadmap.yaml")
+   if roadmap_path.exists():
+       import yaml
+       with open(roadmap_path) as f:
+           roadmap = yaml.safe_load(f)
+
+       build_id = "{ID}-{name}"  # The build being archived
+
+       for item in roadmap.get("items", []):
+           if item.get("build_id") == build_id:
+               if not item.get("completed_at"):
+                   item["completed_at"] = datetime.now().strftime("%Y-%m-%d")
+                   with open(roadmap_path, "w") as f:
+                       yaml.dump(roadmap, f, default_flow_style=False, allow_unicode=True)
+                   print(f"Marked roadmap item '{item['name']}' as complete")
+               break
+   ```
 
 ### Step 6: Confirm Success
 

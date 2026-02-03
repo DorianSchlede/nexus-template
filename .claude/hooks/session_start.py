@@ -746,6 +746,7 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
             sys.path.insert(0, str(nexus_core))
 
         from nexus.core.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction, detect_configured_integrations
+        from nexus.core.roadmap import sync_roadmap_backwards
         from nexus.state.state import (
             build_pending_onboarding,
             extract_learning_completed,
@@ -872,6 +873,24 @@ ONBOARDING: {onboarding_state.get("status", "not_started")}
     # Active builds (include ACTIVE for backwards compatibility with older builds)
     all_builds = scan_builds(str(base_path), minimal=True)
     active_builds = [p for p in all_builds if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")]
+
+    # Get complete builds for roadmap sync
+    complete_builds = scan_builds(str(base_path), minimal=True, include_complete=True)
+    complete_builds = [p for p in complete_builds if p.get("status") == "COMPLETE"]
+
+    # Run backwards sync for roadmap (REQ-6)
+    roadmap_path = base_path / "01-memory" / "roadmap.yaml"
+    if roadmap_path.exists():
+        try:
+            sync_result = sync_roadmap_backwards(
+                roadmap_path,
+                [{"id": b.get("id", "")} for b in active_builds],
+                [{"id": b.get("id", "")} for b in complete_builds]
+            )
+            if sync_result.get("linked") or sync_result.get("completed"):
+                logging.debug(f"Roadmap sync: linked {len(sync_result.get('linked', []))}, completed {len(sync_result.get('completed', []))}")
+        except Exception as e:
+            logging.debug(f"Roadmap sync skipped: {e}")
 
     xml_parts.append('\n  <active-builds>')
     for proj in active_builds:

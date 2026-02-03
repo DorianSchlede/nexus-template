@@ -18,7 +18,7 @@ Plan what to build next. AI suggests items based on your goals and context, you 
 - Prioritize by impact and dependencies
 - Create a living document that guides your Nexus work
 
-**Output**: `01-memory/roadmap.md`
+**Output**: `01-memory/roadmap.yaml`
 
 ---
 
@@ -220,74 +220,51 @@ Then provide detailed explanation with:
 
 ### Step 6: Save Roadmap
 
-**Create `01-memory/roadmap.md`**:
+**Create `01-memory/roadmap.yaml`** (YAML format for reliable parsing):
 
-```markdown
----
-created: "{today}"
-last_updated: "{today}"
-items_count: {count}
----
+```yaml
+# =============================================================================
+# Your Roadmap - What you're building with this Nexus
+# Created: {today}
+# =============================================================================
+#
+# STATUS DERIVATION (automatic - never edit these fields manually):
+# - build_id: Auto-set when you say "build {name}"
+# - completed_at: Auto-set when build completes
+# - Status is derived: completed_at set → done, build_id set → in progress
+#
+# TO START BUILDING: Say "build {item name}"
+# TO UPDATE: Say "update roadmap"
+# =============================================================================
 
-# Your Roadmap
+items:
+  - name: "{Item Name}"
+    type: feature       # feature | integration | research | strategy | fix | improvement
+    priority: high      # critical | high | medium | low
+    rationale: "{Why this matters - connected to your goals}"
+    done_when: "{Clear success criteria - what 'done' looks like}"
+    build_id: null      # AUTO-SET when build created
+    completed_at: null  # AUTO-SET when build completes
+    depends_on: []
 
-> What you're building with this Nexus
+  - name: "{Item 2 Name}"
+    type: feature
+    priority: medium
+    rationale: "{Rationale}"
+    done_when: "{Criteria}"
+    build_id: null
+    completed_at: null
+    depends_on:
+      - "{Item Name}"   # If depends on item 1
 
----
-
-## Active Items
-
-### 1. {Item Name}
-
-**Type**: {BUILD|SKILL|INTEGRATION}
-**Priority**: {high|medium|low}
-**Status**: Not Started
-**Dependencies**: {none or item names}
-
-**Why This Matters**:
-{rationale connected to goals}
-
-**What "Done" Looks Like**:
-{clear success criteria}
-
----
-
-### 2. {Item Name}
-
-**Type**: {type}
-**Priority**: {priority}
-**Status**: Not Started
-**Dependencies**: {deps}
-
-**Why This Matters**:
-{rationale}
-
-**What "Done" Looks Like**:
-{criteria}
-
----
-
-{repeat for all items}
-
----
-
-## Completed Items
-
-(None yet)
-
----
-
-## How This Works
-
-- Start with item #1 (or highest priority)
-- Say "build {item name}" to begin
-- Items move to Completed when done
-- Add new items anytime: "update roadmap"
-
----
-
-**Last Updated**: {today}
+  # {repeat for all items}
 ```
+
+**CRITICAL - Format Rules**:
+- **type** MUST be one of: `feature`, `integration`, `research`, `strategy`, `fix`, `improvement`
+- **priority** MUST be one of: `critical`, `high`, `medium`, `low`
+- **build_id** and **completed_at**: Always set to `null` initially (system manages these)
+- **depends_on**: List of item names this depends on (empty list if none)
 
 ---
 
@@ -298,11 +275,11 @@ items_count: {count}
 Roadmap saved!
 ----------------------------------------------------
 
-Created: 01-memory/roadmap.md
+Created: 01-memory/roadmap.yaml
 
 {count} items planned:
-  1. {item 1} ({type})
-  2. {item 2} ({type})
+  1. {item 1} ({type}, {priority})
+  2. {item 2} ({type}, {priority})
   ...
 
 To start building:
@@ -311,7 +288,8 @@ To start building:
 To update later:
 → "update roadmap"
 
-Your roadmap loads every session - I'll know what you're working toward.
+Your roadmap syncs automatically - when you create builds, they link to roadmap items.
+When builds complete, the roadmap updates.
 ```
 
 ---
@@ -328,9 +306,11 @@ Your roadmap loads every session - I'll know what you're working toward.
   - Reference tools for INTEGRATION suggestions
   - Incorporate patterns discovered
 
-**With builds**:
-- Roadmap items become builds via "build {name}"
-- When build completes, item moves to Completed section
+**With builds (BIDIRECTIONAL SYNC)**:
+- **Forwards**: When you say "build {name}", plan-build matches against roadmap items by slug comparison and sets `build_id`
+- **Backwards**: On session start, system auto-links unlinked items to existing builds by name match
+- **Completion**: When build moves to complete/, system sets `completed_at` automatically
+- Status is DERIVED (never stored): `completed_at` set → done; `build_id` in active → in_progress; no `build_id` → not started
 
 ---
 

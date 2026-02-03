@@ -1,0 +1,44 @@
+# =============================================================================
+# Roadmap Template
+# Purpose: Define what to build and in what order
+# Updated: Created by create-roadmap skill, synced automatically
+# =============================================================================
+#
+# SCHEMA:
+# - name (required): Human-readable item name
+# - type: feature | integration | research | strategy | fix | improvement
+# - priority: critical | high | medium | low
+# - rationale: Why this item matters
+# - done_when: Acceptance criteria
+# - build_id: Auto-set when build is created (do not edit manually)
+# - completed_at: Auto-set when build completes (do not edit manually)
+# - depends_on: List of item names this depends on
+#
+# STATUS DERIVATION (never stored):
+# - completed_at set → "completed"
+# - build_id in complete/ folder → "completed"
+# - build_id in active/ folder → "in_progress"
+# - no build_id → "not_started"
+#
+# =============================================================================
+
+items:
+  - name: "Example Feature"
+    type: feature
+    priority: high
+    rationale: "Explain why this matters to users"
+    done_when: "User can X, Y works correctly, tests pass"
+    build_id: null
+    completed_at: null
+    depends_on: []
+
+  # Example with dependency
+  # - name: "Advanced Feature"
+  #   type: feature
+  #   priority: medium
+  #   rationale: "Builds on Example Feature"
+  #   done_when: "Feature complete with documentation"
+  #   build_id: null
+  #   completed_at: null
+  #   depends_on:
+  #     - "Example Feature"
