@@ -7,11 +7,10 @@ Built-in skills organized by category. Loaded automatically based on trigger phr
 ### `learning/` - Onboarding & Education
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
+| `quick-start` | "quick start", "onboarding" | Complete setup (goals, workspace, roadmap) |
 | `learn-nexus` | "learn nexus", "nexus tips" | Master Nexus patterns |
 | `learn-builds` | "learn builds", "build tutorial" | Build creation guide |
 | `learn-skills` | "learn skills", "skill tutorial" | Skill creation guide |
-| `setup-goals` | "setup goals", "personalize" | Configure preferences |
-| `create-folders` | "create folders", "organize" | Folder structure setup |
 
 ### `builds/` - Build Management
 | Skill | Trigger | Purpose |

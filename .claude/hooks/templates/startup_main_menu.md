@@ -7,6 +7,7 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+    Build yourself the AI copilot system of your dreams.
 
 
 GOAL
@@ -17,23 +18,51 @@ GOAL
 BUILD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Create & build your system
-Start something new, or continue where you left off.
 
 {builds_section}
 
+Commands
+› plan [skill]         Create new skill
+› plan [integration]   Connect new service
+› plan [anything]      Describe what you want
+› #1                   Continue build
+› roadmap              View all builds
 
-WORK
+
+SKILLS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Run your automations
-Skills are reusable workflows you build once, run often.
 
 {skills_section}
 
+Commands
+› list              Show all skills
+› analyze context   Import & analyze files
+› integrations      View prebuilt integrations
 
-CHAT
+
+LEARN
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Just talk
-No structure needed. Ask anything, I'll help directly.
+Understand the system
+
+› learn builds        How builds work
+› learn skills        How skills work
+› learn integrations  Understanding integrations
+› learn nexus         Deep dive into the system
+
+
+SETTINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Configure your system
+
+› setup goals         Adjust your goals
+› update workspace    Update workspace map
+› update nexus        Update system
+› reset               Start fresh
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+What can I help you with?
 
 ```
 
@@ -50,14 +79,28 @@ Wait for user input, then route:
 
 BUILD triggers:
 - "plan" or "new build" → load plan-build skill
+- "plan skill" or "create skill" → load plan-build skill in skill mode
+- "plan integration" or "add integration" → load add-integration skill
 - "#N" or "N" (number) → load execute-build for build at that index
-- "manage" → show all builds with status
 - "roadmap" → view and manage roadmap
 
-WORK triggers:
+SKILLS triggers:
 - [skill name] → load that skill
-- "create" or "new skill" → load plan-build skill in skill mode
 - "list" or "list skills" → load list-skills skill
+- "analyze context" → load analyze-context skill
+- "integrations" → show available integrations
+
+LEARN triggers:
+- "learn builds" → load learn-builds skill
+- "learn skills" → load learn-skills skill
+- "learn integrations" → load learn-integrations skill
+- "learn nexus" → load learn-nexus skill
+
+SETTINGS triggers:
+- "setup goals" → load setup-goals skill
+- "update workspace" → load update-workspace-map skill
+- "update nexus" → load update-nexus skill
+- "reset" → load reset-instance skill
 
 CHAT (implicit):
 - Any other input → respond naturally, no forced workflow

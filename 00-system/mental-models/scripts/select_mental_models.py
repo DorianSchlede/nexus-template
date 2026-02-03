@@ -120,6 +120,9 @@ def format_output(models: List[Dict[str, Any]], format_type: str, base_path: Pat
         return json.dumps(models, indent=2, ensure_ascii=False)
 
 def main():
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent / "core"))
+
     parser = argparse.ArgumentParser(description='Scan mental models metadata')
     parser.add_argument('--category', type=str, help='Filter by category')
     parser.add_argument('--format', type=str, default='full',
@@ -138,8 +141,12 @@ def main():
     # Scan all models
     all_models = scan_mental_models(models_dir, args.category)
 
-    # Output formatted JSON
-    print(format_output(all_models, args.format, base_path))
+    # Format output
+    output = format_output(all_models, args.format, base_path)
+
+    # Handle large output - use temp file if > 30k chars
+    from nexus.utils.utils import handle_large_output
+    print(handle_large_output(output, "mental_models", base_path))
 
 if __name__ == "__main__":
     main()

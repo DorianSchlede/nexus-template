@@ -1,12 +1,14 @@
 # Build YAML Frontmatter Schema
+# Valid statuses defined in: 00-system/core/nexus/utils/config.py (BUILD_VALID_STATUSES)
 
 # REQUIRED
 required:
   - id: string              # "05-website-development"
   - name: string            # "Website Development"
-  - status: enum            # PLANNING | IN_PROGRESS | COMPLETE
+  - status: enum            # PLANNING | IN_PROGRESS | ACTIVE | COMPLETE | ARCHIVED
   - description: string     # "Load when user mentions 'website', 'web dev'"
   - created: date           # YYYY-MM-DD
+  - build_path: string      # "02-builds/active/05-website-development/"
 
 # OPTIONAL (manually added to YAML)
 optional:

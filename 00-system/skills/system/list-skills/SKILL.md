@@ -51,8 +51,7 @@ Output format:
 # Available Skills
 
 ## Learning (onboarding)
-- setup-goals: Personalize Nexus with your goals and role
-- create-folders: Configure your workspace folder structure
+- quick-start: Complete onboarding (goals, workspace, first build)
 - learn-builds: Tutorial on build system
 - learn-skills: Tutorial on skill system
 - learn-nexus: Advanced system mastery

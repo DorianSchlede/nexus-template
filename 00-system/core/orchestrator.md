@@ -140,6 +140,7 @@ NEXUS has TWO modes:
 - [ERROR] Never commit without user request → Respect git workflow
 - [ERROR] Never write/edit without reading first → Always Read before Write/Edit
 - [ERROR] Never guess file contents → Use Read or Explore agent
+- [ERROR] Never use invalid build status → Valid: PLANNING, IN_PROGRESS, ACTIVE, COMPLETE, ARCHIVED only
 </section>
 
 <section id="auto-fix" priority="CRITICAL">
@@ -203,12 +204,13 @@ NEXUS has TWO modes:
 
 **Skill Loading (CRITICAL)**:
 - **NEXUS has its own CLI** separate from Claude Code
-- **ALWAYS use**: `nexus-load --skill {skill-name}` or `nexus-load --skill {skill-name} --args "{args}"`
+- **ALWAYS use**: `nexus-load --skill {skill-name}` (skill context returned as JSON)
+- **For skills with builds**: First `nexus-load --skill {skill-name}`, then `nexus-load --build {ID}`
 - **NEVER use**: `Skill(skill="{skill-name}")` ← This is Claude Code's built-in tool, NOT Nexus
 - **Why**: The Skill tool bypasses Nexus context injection, state management, and hooks
 - **Examples**:
   - [OK] `nexus-load --skill analyze-context`
-  - [OK] `nexus-load --skill plan-build --args "Website Redesign"`
+  - [OK] `nexus-load --skill execute-build` then `nexus-load --build 04`
   - [FAIL] `Skill(skill="analyze-context")` ← Bypasses Nexus architecture
 
 **Exploration Budget**:
@@ -300,6 +302,25 @@ Without communication, users think the system is frozen.
 - Trust the resume context
 - Files may have changed → Re-load if you modify them
 - goals.md, workspace-map loaded fresh each time
+</section>
+
+<section id="context-preservation" priority="CRITICAL">
+## Context Preservation (Builds)
+
+**The mechanism**: `files_to_load` in resume-context.md are AUTO-LOADED in COMPACT mode.
+
+**Pattern during work**:
+1. Make decision → Write to `02-resources/decisions.md`
+2. Discover gotcha → Write to `03-working/session-notes.md`
+3. Hit blocker → Add to `blockers` list in YAML
+4. **Always**: Add new context files to `files_to_load` with `# reason` comment
+
+**Before session end**:
+- Update `continue_at` with specific pointer (e.g., "api.py:142", "Phase 2, Task 3")
+- Add any new working files to `files_to_load`
+- Note blockers in YAML field
+
+**Philosophy**: Don't capture context in prose. Write it to FILES, add to `files_to_load`. The hook auto-loads those files - that's the mechanism. Prose just POINTS to files.
 </section>
 
 <section id="skill-discovery">

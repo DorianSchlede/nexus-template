@@ -750,6 +750,7 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
         from nexus.state.state import (
             build_pending_onboarding,
             extract_learning_completed,
+            extract_quick_start_state,
         )
     except ImportError as e:
         logging.error(f"Failed to import nexus modules: {e}")
@@ -909,17 +910,18 @@ ONBOARDING: {onboarding_state.get("status", "not_started")}
     skills_xml = build_skills_xml_compact(str(base_path))
     xml_parts.append(f'\n{skills_xml}')
 
-    # State detection - SINGLE SOURCE OF TRUTH: learning_tracker.completed
-    # Refactored 2026-01-18: Use learning_tracker instead of check_* functions
+    # State detection - SINGLE SOURCE OF TRUTH: quick_start_state
+    # Refactored 2026-02-03: Use quick_start_state (setup-memory/create-folders removed)
     from nexus.utils.utils import is_template_file
     import hashlib
 
     config_path = base_path / "01-memory" / "user-config.yaml"
     learning_completed = extract_learning_completed(config_path)
+    quick_start_state = extract_quick_start_state(config_path)
 
-    # Derive state from learning_tracker (single source of truth)
-    goals_personalized = learning_completed.get("setup_memory", False)
-    workspace_configured = learning_completed.get("create_folders", False)
+    # Derive state from quick_start_state (quick-start covers setup-memory and create-folders)
+    goals_personalized = quick_start_state.get("goal_captured", False)
+    workspace_configured = quick_start_state.get("workspace_created", False)
 
     # Keep template checks for debug logging only (not for state)
     goals_is_template = is_template_file(str(goals_path))
@@ -927,10 +929,10 @@ ONBOARDING: {onboarding_state.get("status", "not_started")}
     workspace_is_template = is_template_file(str(workspace_map_path))
 
     logging.info(f"State detection: goals_path={goals_path}, exists={goals_path.exists()}")
-    logging.info(f"State detection: goals_personalized={goals_personalized} (from learning_tracker.setup_memory)")
+    logging.info(f"State detection: goals_personalized={goals_personalized} (from quick_start_state.goal_captured)")
     logging.info(f"State detection: goals_is_template={goals_is_template} (debug only)")
     logging.info(f"State detection: workspace_map_path={workspace_map_path}, exists={workspace_map_path.exists()}")
-    logging.info(f"State detection: workspace_configured={workspace_configured} (from learning_tracker.create_folders)")
+    logging.info(f"State detection: workspace_configured={workspace_configured} (from quick_start_state.workspace_created)")
     logging.info(f"State detection: workspace_is_template={workspace_is_template} (debug only)")
     pending_onboarding = build_pending_onboarding(learning_completed)
 

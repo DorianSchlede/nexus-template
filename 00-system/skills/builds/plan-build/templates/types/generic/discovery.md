@@ -5,7 +5,71 @@
 
 ---
 
-## Context
+## Discovery Questions
+
+*Answers from Phase 2a - understand what user wants to accomplish*
+
+### What Are You Trying To Accomplish?
+
+{{build_description}}
+
+### Why Is This Needed?
+
+{{rationale}}
+
+### Constraints & Requirements
+
+- {{constraint_1}}
+- {{constraint_2}}
+
+### What Does Success Look Like?
+
+{{success_criteria}}
+
+---
+
+## AI Codebase Research
+
+*Findings from Phase 2b automated exploration (minimal for generic builds)*
+
+### Files Analyzed
+
+**Files Found**: {{file_count}}
+
+| File | Relevance |
+|------|-----------|
+| {{file_path}} | {{relevance}} |
+
+### Key Findings
+
+{{key_findings}}
+
+---
+
+## Related Builds & Skills
+
+*Existing work that relates to this build*
+
+### Related Builds
+
+| Build | Status | Relevance |
+|-------|--------|-----------|
+| {{build_id}} | {{status}} | {{why_related}} |
+
+### Related Skills
+
+| Skill | Location | Relevance |
+|-------|----------|-----------|
+| {{skill_name}} | {{location}} | {{relevance}} |
+
+---
+
+## Follow-up Questions
+
+*Questions from Phase 2c, informed by research findings*
+*If new areas discovered → loop back to AI Research (max 2 loops)*
+
+### Context
 
 *What do we know about this build?*
 
@@ -13,7 +77,7 @@
 
 ---
 
-## Key Questions
+### Key Questions
 
 - {{question_1}}
 - {{question_2}}

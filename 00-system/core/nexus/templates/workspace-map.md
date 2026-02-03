@@ -5,7 +5,7 @@ smart_default: true
 
 > **Purpose**: Document your workspace folder structure for AI context
 >
-> **Updated**: Set via 'create folders' skill
+> **Updated**: Set via 'quick start' skill
 
 ---
 
@@ -16,13 +16,13 @@ smart_default: true
 └── (not configured yet)
 ```
 
-**After running 'create folders', this will contain your personalized structure.**
+**After running 'quick start', this will contain your personalized structure.**
 
 ---
 
 ## Example Structures
 
-The create-folders skill will create folders based on your role and work patterns.
+The quick-start skill will create folders based on your role and work patterns.
 
 **Example for a Developer:**
 ```
@@ -57,7 +57,7 @@ The create-folders skill will create folders based on your role and work pattern
 
 ## Usage Notes
 
-[TODO: Say 'create folders' to create your personalized folder structure]
+[TODO: Say 'quick start' to create your personalized folder structure]
 
 ---
 

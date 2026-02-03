@@ -65,7 +65,22 @@ Key: Set `current_section` to **NEXT** section (not completed one).
 
 - More sections → repeat from step 4
 - User says "pause" → offer partial bulk-complete, trigger close-session
-- 100% done → update status to COMPLETE, suggest archive
+- 100% done → update status to COMPLETE (see below), suggest archive
+
+### 8. Update Build Status (When Complete)
+
+**CRITICAL**: Use Edit tool to update `status:` in `01-planning/01-overview.md`.
+
+**Valid statuses ONLY**: `PLANNING`, `IN_PROGRESS`, `ACTIVE`, `COMPLETE`, `ARCHIVED`
+
+```yaml
+# In 01-overview.md frontmatter, change:
+status: IN_PROGRESS
+# To:
+status: COMPLETE
+```
+
+**NEVER use**: `EXECUTION`, `DONE`, `FINISHED`, or any other value. These are invalid and will cause warnings.
 
 ---
 
@@ -127,16 +142,33 @@ These fields are automatically synced by PreCompact hook:
 
 ### Claude Must Update
 
-After completing a section, update these in resume-context.md:
+After completing work, update these in resume-context.md:
 
-1. **files_to_load** - Update to include relevant working files:
+1. **continue_at** - Specific pointer for next agent:
    ```yaml
-   files_to_load:
-     - "01-planning/04-steps.md"
-     - "03-working/current-file.py"  # Add working files as created
+   continue_at: "03-working/api.py:142"  # or "Phase 2, Task 3"
    ```
 
-2. **Progress Summary** - Update with session accomplishments:
+2. **blockers** - List any blockers:
+   ```yaml
+   blockers:
+     - "Waiting for user decision on auth method"
+   ```
+
+3. **files_to_load** - Add working files with reason comments:
+   ```yaml
+   files_to_load:
+     - "01-planning/04-steps.md"         # Execution checklist
+     - "02-resources/decisions.md"       # Key decisions made
+     - "03-working/current-file.py"      # Active work in progress
+   ```
+
+**Pattern**: Create context files → Add to files_to_load:
+- Made a decision? → Write to `02-resources/decisions.md` → Add to list
+- Found a gotcha? → Write to `03-working/session-notes.md` → Add to list
+- Hook AUTO-LOADS these files in COMPACT mode
+
+4. **Context for Next Agent** - Prose that POINTS to files:
    ```markdown
    ### Latest Session (YYYY-MM-DD)
 
@@ -144,13 +176,16 @@ After completing a section, update these in resume-context.md:
    - [x] Section N tasks
    - [x] Created working file X
 
-   **Key decisions:**
-   - Decision made and rationale
+   **Key files:**
+   - See `decisions.md` for rationale on API design
+   - See `session-notes.md` for gotchas discovered
 
    **Next steps:**
-   1. Next section/task to do
-   2. Following task
+   1. Continue at `continue_at` location
+   2. Check `blockers` if any
    ```
+
+> **Philosophy**: Don't capture context in prose. Write it to FILES, add to `files_to_load`. Prose just POINTS to files.
 
 ---
 

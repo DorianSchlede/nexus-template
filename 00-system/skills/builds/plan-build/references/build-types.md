@@ -275,15 +275,40 @@ For any operation sequence, resume-context.md reflects actual state.
 
 **CRITICAL**: Every plan.md MUST include this section, populated by AI through research.
 
-### AI's Research Checklist
+### AI's Research Checklist (MANDATORY)
+
+**This checklist is NOT optional.** AI MUST complete all 3 phases before proceeding to mental models.
 
 Before completing plan.md, AI must:
 
-- [ ] **Scan codebase** for related files
-- [ ] **Check for related builds** in 02-builds/
-- [ ] **Identify related skills** in 03-skills/
-- [ ] **Find external system configs** (MCP servers, integrations)
-- [ ] **Document all connections** in Dependencies & Links section
+1. **Phase 2a: Discovery Questions** - Understand what user wants to build
+   - [ ] What are you building? (1-2 sentence description)
+   - [ ] What problem does this solve?
+   - [ ] Who/what will use this?
+   - [ ] Any constraints or requirements?
+   - [ ] What does success look like?
+
+2. **Phase 2b: Active Research** - AI explores based on answers
+   - [ ] Search targets extracted from user's answers
+   - [ ] Complexity assessed (Simple/Medium/Complex)
+   - [ ] Subagents spawned (0-5 based on complexity)
+   - [ ] Codebase searched for related files
+   - [ ] Related builds checked in 02-builds/
+   - [ ] Related skills checked in 03-skills/ and 00-system/skills/
+   - [ ] Integration configs checked in 01-memory/integrations/
+   - [ ] Web search performed (if relevant)
+   - [ ] Findings consolidated and presented to user
+
+3. **Phase 2c: Informed Follow-ups** - Questions + optional follow-up research
+   - [ ] Follow-up questions reference research findings
+   - [ ] New areas discovered? → Loop back to 2b (max 2 loops)
+   - [ ] All gaps addressed before proceeding
+
+4. **Documentation**
+   - [ ] All findings written to 02-discovery.md (not just chat)
+   - [ ] Dependencies & Links section populated in plan.md
+
+**See**: [active-discovery-guide.md](active-discovery-guide.md) for detailed patterns and examples.
 
 ---
 
@@ -307,8 +332,11 @@ Mental models are applied AFTER discovery, not before:
 Before completing build creation, verify:
 
 - [ ] Build type correctly detected (semantic matching)
-- [ ] Discovery completed BEFORE mental models
-- [ ] Discovery findings written to 02-discovery.md
+- [ ] Phase 2a Discovery Questions completed (understand what user wants)
+- [ ] Phase 2b Active Research completed (AI explores based on answers)
+- [ ] Phase 2c Informed Follow-ups completed (questions + optional follow-up research)
+- [ ] Follow-up research loops completed if needed (max 2 loops)
+- [ ] All discovery findings written to 02-discovery.md
 - [ ] Mental models applied to discovery findings
 - [ ] Dependencies & Links section researched and populated
 - [ ] Resume-context.md updated with phase transitions

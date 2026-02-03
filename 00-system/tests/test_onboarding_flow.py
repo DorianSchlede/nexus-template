@@ -12,6 +12,7 @@ import tempfile
 import shutil
 from pathlib import Path
 from nexus.core.loaders import scan_builds, load_build, validate_build_schema
+from nexus.utils.config import BUILD_VALID_STATUSES
 
 
 class TestOnboardingFlow:
@@ -241,9 +242,8 @@ class TestBuildSchema:
         """Test all valid status values are accepted"""
         import warnings
 
-        valid_statuses = ["PLANNING", "IN_PROGRESS", "ACTIVE", "COMPLETE", "ARCHIVED"]
-
-        for status in valid_statuses:
+        # Use constant from config.py - SINGLE SOURCE OF TRUTH
+        for status in BUILD_VALID_STATUSES:
             metadata = {
                 "id": "test",
                 "name": "Test",

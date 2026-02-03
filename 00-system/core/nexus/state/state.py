@@ -304,9 +304,10 @@ def build_display_hints(
         hints.append(f"SHOW_UPDATE_BANNER: v{local_ver} -> v{upstream_ver}")
 
     # Onboarding summary (for emphasis in suggested steps)
+    # NOTE: setup_memory and create_folders removed - quick-start covers both
     if pending_onboarding:
-        # Sort by priority (setup_memory first, then others)
-        priority_order = ["setup_memory", "create_folders", "learn_builds", "learn_skills", "learn_integrations", "learn_nexus"]
+        # Sort by priority
+        priority_order = ["learn_builds", "learn_skills", "learn_integrations", "learn_nexus"]
         sorted_pending = sorted(pending_onboarding, key=lambda x: priority_order.index(x["key"]) if x["key"] in priority_order else 99)
 
         hints.append(f"ONBOARDING_INCOMPLETE: {len(pending_onboarding)} skills pending")
@@ -314,13 +315,8 @@ def build_display_hints(
         # Add individual skill hints for menu rendering
         for skill in sorted_pending:
             skill_key = skill["key"]
-            skill_name = skill["name"]
 
-            if skill_key == "setup_memory":
-                hints.append(f"SUGGEST_ONBOARDING: 'setup memory' - teach Nexus about you ({skill['time']})")
-            elif skill_key == "create_folders":
-                hints.append(f"SUGGEST_ONBOARDING: 'create folders' - organize your files ({skill['time']})")
-            elif skill_key == "learn_builds":
+            if skill_key == "learn_builds":
                 hints.append(f"SUGGEST_ONBOARDING: 'learn builds' - understand builds vs skills ({skill['time']})")
             elif skill_key == "learn_skills":
                 hints.append(f"SUGGEST_ONBOARDING: 'learn skills' - automate repeating work ({skill['time']})")
@@ -367,9 +363,9 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
     Returns:
         Dict mapping skill keys to completion status
     """
+    # NOTE: setup_memory and create_folders removed - quick-start covers both
     default_completed = {
-        "setup_memory": False,
-        "create_folders": False,
+        "quick_start": False,
         "learn_integrations": False,
         "learn_builds": False,
         "learn_skills": False,
@@ -396,6 +392,45 @@ def extract_learning_completed(config_path: Path) -> Dict[str, bool]:
         pass
 
     return default_completed
+
+
+def extract_quick_start_state(config_path: Path) -> Dict[str, Any]:
+    """
+    Extract onboarding.quick_start_state from user-config.yaml.
+
+    Used to derive goals_personalized and workspace_configured after quick-start.
+
+    Args:
+        config_path: Path to user-config.yaml
+
+    Returns:
+        Dict with quick_start_state fields
+    """
+    default_state = {
+        "step_completed": 0,
+        "goal_captured": False,
+        "workspace_created": False,
+        "roadmap_created": False,
+    }
+
+    if not config_path.exists():
+        return default_state
+
+    try:
+        content = config_path.read_text(encoding="utf-8")
+        if HAS_YAML:
+            config_data = yaml.safe_load(content)
+        else:
+            config_data = parse_simple_yaml(content)
+
+        if config_data and "onboarding" in config_data:
+            onboarding = config_data["onboarding"]
+            if "quick_start_state" in onboarding and isinstance(onboarding["quick_start_state"], dict):
+                default_state.update(onboarding["quick_start_state"])
+    except Exception:
+        pass
+
+    return default_state
 
 
 def check_integrations_configured(base_path: Path) -> bool:
@@ -466,9 +501,12 @@ def build_stats(
     # Refactored 2026-01-18: Use learning_tracker instead of check_* functions
     learning_completed = extract_learning_completed(config_path)
 
-    # Derive state from learning_tracker (single source of truth)
-    goals_personalized = learning_completed.get("setup_memory", False)
-    workspace_configured = learning_completed.get("create_folders", False)
+    # Get quick_start_state for goals/workspace status
+    quick_start_state = extract_quick_start_state(config_path)
+
+    # Derive state from quick_start_state (quick-start covers setup-memory and create-folders)
+    goals_personalized = quick_start_state.get("goal_captured", False)
+    workspace_configured = quick_start_state.get("workspace_created", False)
 
     # Integrations still use file-based check (not in learning_tracker)
     integrations_configured = check_integrations_configured(base_path)

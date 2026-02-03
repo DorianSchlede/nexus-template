@@ -25,6 +25,8 @@ logger = logging.getLogger(__name__)
 # YAML SCHEMA CONSTANTS
 # =============================================================================
 
+from ..utils.config import ROADMAP_VALID_TYPES, ROADMAP_VALID_PRIORITIES
+
 # Required fields for each roadmap item
 REQUIRED_FIELDS: List[str] = ["name"]
 
@@ -39,9 +41,9 @@ OPTIONAL_FIELDS: Dict[str, Any] = {
     "depends_on": [],
 }
 
-# Valid values for constrained fields
-VALID_TYPES: List[str] = ["feature", "integration", "research", "strategy", "fix", "improvement"]
-VALID_PRIORITIES: List[str] = ["critical", "high", "medium", "low"]
+# Valid values - imported from config.py (single source of truth)
+VALID_TYPES = ROADMAP_VALID_TYPES
+VALID_PRIORITIES = ROADMAP_VALID_PRIORITIES
 
 # Status values (derived, never stored)
 STATUS_COMPLETED = "completed"

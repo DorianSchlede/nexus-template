@@ -322,14 +322,13 @@ When ready to learn, users can invoke any skill by trigger phrase:
 
 | Skill | Trigger Phrases | Duration |
 |-------|-----------------|----------|
-| **setup-memory** | "setup memory", "personalize" | 8-10 min |
-| **create-folders** | "create folders", "setup workspace" | 5-8 min |
+| **quick-start** | Auto-triggered on first run | 15-20 min |
 | **learn-integrations** | "learn integrations", "connect tools" | 10-12 min |
 | **learn-builds** | "learn builds", "how do builds work" | 8-10 min |
 | **learn-skills** | "learn skills", "how do skills work" | 10-12 min |
 | **learn-nexus** | "learn nexus", "system mastery" | 15-18 min |
 
-**Total if all completed**: ~55 minutes (but completely optional!)
+**Total if all completed**: ~60 minutes (quick-start required, others optional)
 
 ### Legacy Onboarding (4 Builds)
 
@@ -985,11 +984,10 @@ nexus-load --show-tokens      # Display token costs
 | **execute-build** | Execute build work systematically | "continue [build]", "work on" |
 | **archive-build** | Archive completed builds | "archive build" |
 
-### Learning (10 skills)
+### Learning (8 skills)
 | Skill | Purpose | Trigger |
 |-------|---------|---------|
-| **setup-memory** | Configure goals and preferences | "setup memory" |
-| **create-folders** | Set up workspace folders | "create folders" |
+| **quick-start** | Complete onboarding (goals, workspace, roadmap) | "quick start" |
 | **learn-integrations** | Learn how to connect external tools | "learn integrations" |
 | **learn-builds** | Learn build system | "learn builds" |
 | **learn-skills** | Learn skill system | "learn skills" |

@@ -1,15 +1,16 @@
 ---
 name: quick-start
-description: "Complete onboarding: welcome, language, goals, workspace, first BUILD, permissions."
+description: "Complete onboarding: welcome, language, goals, integrations, workspace, first BUILD, permissions."
 onboarding: true
 priority: critical
-duration: "12-18 min"
+duration: "15-20 min"
 cross_session_continuity: true
+version: "2.0"
 ---
 
 # Quick Start
 
-Complete onboarding flow: welcome, language selection, optionally upload context, capture your goal, optionally create a roadmap, set up your workspace (informed by roadmap), plan your first BUILD, configure permissions.
+Complete onboarding flow: welcome, language selection, optionally upload context, capture your goal, **discover integrations**, optionally create a roadmap, set up your workspace **(with concrete proposals)**, plan your first BUILD **(using plan-build skill)**, configure permissions, **clear session restart instructions**.
 
 **This skill is auto-injected by the SessionStart hook when onboarding is not complete.**
 
@@ -33,7 +34,7 @@ def get_resume_step():
 
 ---
 
-## STEP 0/10: Welcome & Language (1 min)
+## STEP 0/11: Welcome & Language (1 min)
 
 **Display the welcome banner**:
 ```
@@ -52,15 +53,15 @@ ChatGPT gives you answers. Nexus enables you to build.
 
 What people actually use it for:
 
-  > Job Search
+  → Job Search
      Search 15 job boards every morning, prioritize matches,
      and generate tailored CVs from your stored stories.
 
-  > Health System
+  → Health System
      Talk to your fitness data, log meals from photos,
      get personalized training plans that adapt to your progress.
 
-  > Content Engine
+  → Content Engine
      Interview yourself to capture stories, plan your calendar,
      auto-generate posts that sound like you.
 
@@ -105,11 +106,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 1/10: How Nexus Works (30 sec)
+## STEP 1/11: How Nexus Works (30 sec)
 
 **Display**:
 ```
-STEP 1/10: How Nexus Works
+STEP 1/11: How Nexus Works
 ----------------------------------------------------
 
 Here's the key idea:
@@ -139,11 +140,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 2/10: Context Upload (Optional) (2-3 min if used)
+## STEP 2/11: Context Upload (Optional) (2-3 min if used)
 
 **Display**:
 ```
-STEP 2/10: Context Upload (Optional)
+STEP 2/11: Context Upload (Optional)
 ----------------------------------------------------
 
 Have files that show what you work on?
@@ -188,11 +189,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 3/10: Your Goal (2-3 min)
+## STEP 3/11: Your Goal (2-3 min)
 
 **Display**:
 ```
-STEP 3/10: Your Goal
+STEP 3/11: Your Goal
 ----------------------------------------------------
 
 What's your goal for this Nexus?
@@ -262,14 +263,101 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 4/10: Create Roadmap (Optional) (2-3 min if used)
+## STEP 4/11: Integrations (NEW) (1-2 min)
 
 **Display**:
 ```
-STEP 4/10: Create Roadmap (Optional)
+STEP 4/11: Integrations
+----------------------------------------------------
+
+Nexus can connect to external tools and services.
+
+When connected, I can:
+  - Send messages to Slack
+  - Create tasks in your project manager
+  - Read/write to Google Docs
+  - Track data in your CRM
+  - And more...
+
+{If context uploaded and tools detected:}
+I noticed you use: {detected tools}
+```
+
+**Use AskUserQuestion**:
+```
+Question: "Which tools do you want to connect?" (multiSelect: true)
+Header: "Integrations"
+Options (DYNAMIC based on goal domain):
+
+For Content/Marketing goals:
+- "Slack" - Team communication, notifications
+- "Google Workspace" - Docs, Sheets, Calendar
+- "LinkedIn" - Direct posting (coming soon)
+- "Notion" - Notes and databases
+- "None for now" - I'll set these up later
+
+For Sales/CRM goals:
+- "HubSpot" - CRM, contacts, deals
+- "Slack" - Team communication
+- "Google Workspace" - Email, calendar
+- "Airtable" - Databases, tracking
+- "None for now"
+
+For Development goals:
+- "GitHub" - Repos, issues, PRs
+- "Slack" - Team updates
+- "Jira" - Project tracking
+- "None for now"
+
+Default (no specific domain):
+- "Slack" - Team communication
+- "Google Workspace" - Docs, Sheets, Calendar
+- "Notion" - Notes and databases
+- "None for now"
+```
+
+**Store selected integrations**:
+```python
+# Save to goals.md under new section
+append_to_goals("""
+## Integrations to Connect
+
+{for each selected integration}
+- [ ] {integration_name} - {purpose}
+""")
+
+# Also save to state for roadmap generation
+update_multiple_paths(config_path, {
+    "onboarding.quick_start_state.step_completed": 4,
+    "onboarding.quick_start_state.integrations_selected": ["slack", "google", ...]
+})
+```
+
+**If integrations selected, show**:
+```
+Got it! These integrations will appear in your roadmap.
+
+To connect them later, just say:
+  "connect slack"
+  "connect hubspot"
+  etc.
+
+Each integration has a setup wizard.
+```
+
+---
+
+## STEP 5/11: Create Roadmap (Optional) (2-3 min if used)
+
+**Display**:
+```
+STEP 5/11: Create Roadmap (Optional)
 ----------------------------------------------------
 
 Your goal: {goal_summary}
+
+{If integrations selected:}
+Integrations to set up: {list}
 
 Want to plan what you'll build to achieve this?
 
@@ -294,32 +382,33 @@ Options:
 LOAD SKILL: create-roadmap
 
 The skill will:
-1. Suggest items based on goal + context
-2. Let you add/remove/prioritize
-3. Save to 01-memory/roadmap.md
+1. Suggest items based on goal + context + integrations
+2. Auto-include integration setup for selected tools
+3. Let you add/remove/prioritize
+4. Save to 01-memory/roadmap.yaml
 
 The roadmap will inform your workspace structure.
 
-After skill completes, continue to Step 5.
+After skill completes, continue to Step 6.
 ```
 
-**If skipped, continue to Step 5**
+**If skipped, continue to Step 6**
 
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 4,
+    "onboarding.quick_start_state.step_completed": 5,
     "onboarding.quick_start_state.roadmap_created": True/False
 })
 ```
 
 ---
 
-## STEP 5/10: Your Workspace (2 min)
+## STEP 6/11: Your Workspace (IMPROVED) (2-3 min)
 
 **Display**:
 ```
-STEP 5/10: Your Workspace
+STEP 6/11: Your Workspace
 ----------------------------------------------------
 
 Here's something important:
@@ -331,55 +420,128 @@ Without structure, you'll drown in AI output.
 
 04-workspace/ is where YOUR outputs live.
 It's navigatable by both you AND me.
-
-Let's set it up based on {your roadmap / your goal}.
 ```
 
-**STEP 5a: Ask structure preference**
+**STEP 6a: Generate and Show Proposals**
+
+**CRITICAL**: Don't just ask preference - SHOW concrete proposals based on goal/roadmap.
+
+**Generate 2-3 proposals based on context**:
+
+```python
+def generate_workspace_proposals(goal, roadmap_items, integrations):
+    """
+    Generate 2-3 concrete workspace proposals.
+    Each proposal is a complete folder structure with explanations.
+    """
+
+    proposals = []
+
+    # Proposal A: By Content Stage / Workflow Stage
+    proposal_a = {
+        "name": "By Stage",
+        "description": "Organize by where things are in your workflow",
+        "structure": generate_stage_based_structure(goal),
+        "best_for": "Clear workflow, easy to find current work"
+    }
+
+    # Proposal B: By Project / Topic
+    proposal_b = {
+        "name": "By Project",
+        "description": "Separate folder for each initiative",
+        "structure": generate_project_based_structure(roadmap_items),
+        "best_for": "Multiple parallel projects, clear boundaries"
+    }
+
+    # Proposal C: Hybrid / Custom based on domain
+    proposal_c = {
+        "name": "Hybrid",
+        "description": "Mix of stages and projects",
+        "structure": generate_hybrid_structure(goal, roadmap_items),
+        "best_for": "Flexibility, grows naturally"
+    }
+
+    return [proposal_a, proposal_b, proposal_c]
+```
+
+**Example for LinkedIn Content goal**:
+
+```
+I'll show you 3 workspace options. Pick the one that fits how you think:
+
+----------------------------------------------------
+OPTION A: By Stage
+----------------------------------------------------
+04-workspace/
+├── 1-ideen/              # Raw ideas, inspiration
+├── 2-planung/            # Content being planned
+├── 3-entwuerfe/          # Drafts in progress
+├── 4-fertig/             # Ready to publish
+├── 5-veroeffentlicht/    # Published archive
+└── referenzen/           # Inspiration, examples
+
+Best for: Clear workflow, always know what's "in progress"
+
+----------------------------------------------------
+OPTION B: By Project (from your roadmap)
+----------------------------------------------------
+04-workspace/
+├── ideen-bank/           # For: Content Ideen-Bank build
+├── stories/              # For: Deine Story-Sammlung build
+├── templates/            # For: Content Templates build
+├── kalender/             # For: Content Kalender build
+├── posts/                # All post drafts & final
+└── tracking/             # Analytics & engagement
+
+Best for: Each roadmap item has its home
+
+----------------------------------------------------
+OPTION C: Hybrid
+----------------------------------------------------
+04-workspace/
+├── content/              # All content work
+│   ├── ideen/
+│   ├── entwuerfe/
+│   └── fertig/
+├── system/               # Your processes & templates
+│   ├── templates/
+│   └── workflows/
+├── tracking/             # Analytics & progress
+└── referenzen/           # Inputs & inspiration
+
+Best for: Balance of workflow and organization
+```
 
 **Use AskUserQuestion**:
 ```
-Question: "How do you naturally organize things?"
+Question: "Which structure fits how you think?"
+Header: "Workspace"
 Options:
-- "By type" - drafts, final, references
-- "By project" - separate folders per initiative
-- "By stage" - inbox, working, done
-- "Keep it simple" - minimal folders
+- "Option A: By Stage" - Clear workflow stages
+- "Option B: By Project" - Matches your roadmap
+- "Option C: Hybrid" - Flexible mix
+- "Show me something else" - I'll customize
 ```
 
-**STEP 5b: Propose folders**
-
-**If roadmap exists**: Use roadmap items to suggest folders
-**If no roadmap**: Use goal to suggest folders
-
+**If "Show me something else"**:
 ```
-Example with roadmap items:
-04-workspace/
-├── content-calendar/        # For your Content Calendar build
-├── client-templates/        # For your Client Templates build
-├── research/                # For research outputs
-└── references/              # Inspiration and inputs
+Tell me how you naturally organize things:
+- By time? (this week, this month, archive)
+- By type? (documents, images, data)
+- By client/person?
+- Something specific?
 
-Example without roadmap:
-04-workspace/
-├── drafts/                  # Work in progress
-├── published/               # Final versions
-└── references/              # Inputs and inspiration
+I'll create a custom structure.
 ```
 
-**Use AskUserQuestion**:
-```
-Question: "Does this work?"
-Options:
-- "Yes, create it"
-- "Tweak it"
-- "Show different approach"
-```
+**After selection, create the folders and workspace-map.md**
 
-**After creating folders**:
+**Display**:
 ```
 Created workspace structure
 ----------------------------------------------------
+
+Your folders are ready in 04-workspace/
 
 IMPORTANT: You can change this anytime.
 
@@ -389,12 +551,10 @@ Then say "update workspace map" and I'll sync.
 This is YOUR space. It grows with you.
 ```
 
-**Create workspace-map.md**
-
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 5,
+    "onboarding.quick_start_state.step_completed": 6,
     "onboarding.quick_start_state.workspace_created": True,
     "first_encounters.workspace_used": True
 })
@@ -402,11 +562,11 @@ update_multiple_paths(config_path, {
 
 ---
 
-## STEP 6/10: Your First Build (2 min)
+## STEP 7/11: Your First Build (2 min)
 
 **Display**:
 ```
-STEP 6/10: Your First Build
+STEP 7/11: Your First Build
 ----------------------------------------------------
 
 {If roadmap exists:}
@@ -466,75 +626,57 @@ Options:
 - Other (tell me)
 ```
 
-**Create BUILD structure using nexus-init-build**:
-```python
-from nexus.config import BUILDS_ACTIVE_DIR
-import subprocess
-
-build_name = "{chosen_name}"
-build_type = "feature"  # or other type based on selection
-
-# Use nexus-init-build script to create build with proper schema
-result = subprocess.run(
-    ["uv", "run", "nexus-init-build", build_name, "--type", build_type, "--path", str(BUILDS_ACTIVE_DIR)],
-    capture_output=True,
-    text=True
-)
-
-if result.returncode != 0:
-    raise RuntimeError(f"Failed to create build: {result.stderr}")
-
-print(f"[OK] Build created: {build_name}")
-```
-
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 6,
-    "onboarding.quick_start_state.build_chosen": True,
-    "first_encounters.build_created": True
+    "onboarding.quick_start_state.step_completed": 7,
+    "onboarding.quick_start_state.build_chosen": True
 })
 ```
 
 ---
 
-## STEP 7/10: Plan the Build (3-4 min)
+## STEP 8/11: Plan the Build (IMPROVED) (3-4 min)
+
+**CRITICAL CHANGE**: Load the actual plan-build skill instead of manually running questions.
 
 **Display**:
 ```
-STEP 7/10: Plan the Build
+STEP 8/11: Plan the Build
 ----------------------------------------------------
 
-Let me understand what we're building.
+Now I'll load the planning workflow.
 
-I'll ask a few questions. Each answer gets saved.
-When we execute next session, I'll reference all of this.
-```
+This will:
+1. Ask discovery questions specific to your build type
+2. Research best practices (if needed)
+3. Create a detailed execution plan
+4. Save everything to the build folder
 
-**3 Rounds of questions** (DYNAMICALLY GENERATED):
-
-### Round 1: Context
-```
-Question 1: "Who is this for?"
-Question 2: "What problem does this solve?" (multiSelect: true)
+Let's go!
 ```
 
-### Round 2: Specifics
-```
-Question 3: "What's ONE example of what 'good' looks like?"
-Question 4: "Any constraints?" (multiSelect: true)
+**LOAD SKILL: plan-build**
+
+```bash
+uv run nexus-load --skill plan-build
 ```
 
-### Round 3: Scope
-```
-Question 5: "What's the minimum viable version?"
-Question 6: "What would be nice-to-have later?" (multiSelect: true)
+**Pass context to plan-build**:
+```python
+# The plan-build skill needs to know:
+# 1. Build name (from step 7)
+# 2. Build type (detected from goal/name)
+# 3. That this is onboarding (simplified mode)
+
+# Plan-build will:
+# 1. Create build structure with nexus-init-build
+# 2. Run type-specific discovery
+# 3. Generate plan and steps
+# 4. Link to roadmap if applicable
 ```
 
-**Generate planning documents**:
-- `02-discovery.md`
-- `03-plan.md`
-- `04-steps.md`
+**After plan-build completes**:
 
 **Display**:
 ```
@@ -553,29 +695,32 @@ This is how Nexus compounds - input becomes persistent context.
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 7,
-    "onboarding.quick_start_state.planning_complete": True
+    "onboarding.quick_start_state.step_completed": 8,
+    "onboarding.quick_start_state.planning_complete": True,
+    "first_encounters.build_created": True
 })
 ```
 
 ---
 
-## STEP 8/10: What You Built (1 min)
+## STEP 9/11: What You Built (1 min)
 
 **Display**:
 ```
-STEP 8/10: What You Built
+STEP 9/11: What You Built
 ----------------------------------------------------
 
 Here's what you've created so far:
 
-  - Goal defined         → 01-memory/goals.md
+  ✓ Goal defined         → 01-memory/goals.md
+  {If integrations:}
+  ✓ Integrations noted   → Ready to connect
   {If roadmap:}
-  - Roadmap created      → 01-memory/roadmap.md
-  - Workspace ready      → 04-workspace/
-  - First build planned  → 02-builds/{name}/
+  ✓ Roadmap created      → 01-memory/roadmap.yaml
+  ✓ Workspace ready      → 04-workspace/
+  ✓ First build planned  → 02-builds/active/{name}/
   {If context:}
-  - Context analyzed     → 01-memory/input/
+  ✓ Context analyzed     → 01-memory/input/
 
 ----------------------------------------------------
 
@@ -588,23 +733,23 @@ HOW NEXUS WORKS:
 
 ----------------------------------------------------
 
-Almost done! One more step to configure permissions.
+Almost done! Two more steps.
 ```
 
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 8
+    "onboarding.quick_start_state.step_completed": 9
 })
 ```
 
 ---
 
-## STEP 9/10: Permissions Setup (1-2 min)
+## STEP 10/11: Permissions Setup (1-2 min)
 
 **Display**:
 ```
-STEP 9/10: Permissions Setup
+STEP 10/11: Permissions Setup
 ----------------------------------------------------
 
 One last thing before we finish.
@@ -691,46 +836,83 @@ Options:
 **Save state**:
 ```python
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 9,
+    "onboarding.quick_start_state.step_completed": 10,
     "onboarding.quick_start_state.permissions_configured": True
 })
 ```
 
 ---
 
-## STEP 10/10: Start Fresh (30 sec)
+## STEP 11/11: Start Fresh (IMPROVED) (1 min)
 
-**Display**:
+**Display summary**:
 ```
-STEP 10/10: Start Fresh
+STEP 11/11: Start Fresh
 ----------------------------------------------------
 
 Setup complete! Here's what you built:
 
-  - Goal defined         → 01-memory/goals.md
+  ✓ Goal defined         → 01-memory/goals.md
+  {If integrations:}
+  ✓ Integrations noted   → {list}
   {If roadmap:}
-  - Roadmap created      → 01-memory/roadmap.md
-  - Workspace ready      → 04-workspace/
-  - First build planned  → 02-builds/{name}/
+  ✓ Roadmap created      → 01-memory/roadmap.yaml ({N} items)
+  ✓ Workspace ready      → 04-workspace/
+  ✓ First build planned  → 02-builds/active/{name}/
   {If context:}
-  - Context analyzed     → 01-memory/input/
+  ✓ Context analyzed     → 01-memory/input/
+```
+
+**Display IDE-specific restart instructions**:
+
+```
+----------------------------------------------------
+TO START YOUR NEXT SESSION:
+----------------------------------------------------
+
+The permissions need a fresh session to activate.
+Here's how to start a new session:
+
+┌─────────────────────────────────────────────────┐
+│  IN VS CODE:                                    │
+│                                                 │
+│  1. Click the "+" button in the Claude panel    │
+│     (top right of this chat)                    │
+│                                                 │
+│     OR press: Cmd+Shift+P (Mac) / Ctrl+Shift+P │
+│     Then type: "Claude: New Chat"               │
+│                                                 │
+│  2. In the new chat, type: Hi                   │
+│                                                 │
+│  That's it! I'll show your build, ready to go.  │
+└─────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────┐
+│  IN TERMINAL:                                   │
+│                                                 │
+│  1. Type: exit                                  │
+│     (or press Ctrl+C)                           │
+│                                                 │
+│  2. Start again: claude                         │
+│                                                 │
+│  3. Type: Hi                                    │
+└─────────────────────────────────────────────────┘
 
 ----------------------------------------------------
 
-TO ACTIVATE AUTOMATIC MODE:
+WHAT HAPPENS NEXT:
 
-  1. Close this chat
-  2. Open a new chat
-  3. Type: Hi
+When you say "Hi" in a new session:
+  → I load your goals, roadmap, and active build
+  → I show you where we left off
+  → We start EXECUTING your first build
 
-The new session will have full permissions.
-I'll show you your build, ready to execute.
-
-All your progress is saved. Nothing is lost.
+Your context is saved. Nothing is lost.
+Every session picks up where we left off.
 
 ----------------------------------------------------
 
-See you in the next session!
+See you in the next session! 👋
 ```
 
 **Save completion state**:
@@ -739,7 +921,7 @@ from datetime import datetime
 from nexus.state_writer import update_multiple_paths
 
 update_multiple_paths(config_path, {
-    "onboarding.quick_start_state.step_completed": 10,
+    "onboarding.quick_start_state.step_completed": 11,
     "onboarding.status": "complete",
     "onboarding.in_progress_skill": None,
     "onboarding.completed_at": datetime.now().isoformat(),
@@ -761,9 +943,10 @@ onboarding:
   completed_at: "..."
 
   quick_start_state:
-    step_completed: 10
+    step_completed: 11
     context_uploaded: true/false
     goal_captured: true
+    integrations_selected: ["slack", "google"]  # NEW
     roadmap_created: true/false
     workspace_created: true
     build_chosen: true
@@ -786,8 +969,8 @@ first_encounters:
   settings.json               # VS Code settings
 
 01-memory/
-  goals.md                    # PERMANENT
-  roadmap.md                  # PERMANENT (if created)
+  goals.md                    # PERMANENT (includes integrations section)
+  roadmap.yaml                # PERMANENT (if created)
   input/                      # TEMPORARY (if files uploaded)
     {uploaded files}
     _analysis/                # SubAgent outputs (temporary)
@@ -795,18 +978,20 @@ first_encounters:
       {theme}-insights.md
 
 02-builds/
-  {ID}-{name}/
-    01-planning/
-      01-overview.md
-      02-discovery.md
-      03-plan.md
-      04-steps.md
-    02-resources/
-    03-working/
-    04-outputs/
+  active/
+    {ID}-{name}/
+      01-planning/
+        01-overview.md
+        02-discovery.md
+        03-plan.md
+        04-steps.md
+        resume-context.md
+      02-resources/
+      03-working/
+      04-outputs/
 
 04-workspace/
-  {folders based on roadmap or goal}/
+  {folders based on selected proposal}/
   workspace-map.md
 ```
 
@@ -815,32 +1000,36 @@ first_encounters:
 ## Flow Summary
 
 ```
-Step 0: Welcome & Language
-         ↓
-Step 1: How Nexus Works
-         ↓
-Step 2: Context Upload (optional)
-         ↓ informs
-Step 3: Your Goal
-         ↓ informs
-Step 4: Create Roadmap (optional)
-         ↓ informs
-Step 5: Your Workspace (uses roadmap for structure)
-         ↓ informs
-Step 6: Your First Build (from roadmap or goal)
-         ↓
-Step 7: Plan the Build
-         ↓
-Step 8: What You Built (summary)
-         ↓
-Step 9: Permissions Setup
-         ↓
-Step 10: Start Fresh (close → new chat)
+Step 0:  Welcome & Language
+          ↓
+Step 1:  How Nexus Works
+          ↓
+Step 2:  Context Upload (optional)
+          ↓ informs
+Step 3:  Your Goal
+          ↓ informs
+Step 4:  Integrations (NEW)          ← Ask about tools
+          ↓ informs
+Step 5:  Create Roadmap (optional)   ← Includes integrations
+          ↓ informs
+Step 6:  Your Workspace              ← Show concrete proposals
+          ↓ informs
+Step 7:  Your First Build (choose)
+          ↓
+Step 8:  Plan the Build              ← Load plan-build skill
+          ↓
+Step 9:  What You Built (summary)
+          ↓
+Step 10: Permissions Setup
+          ↓
+Step 11: Start Fresh                 ← Clear IDE instructions
 ```
 
-**Key insight**: Welcome + language first ensures all content is in user's language.
-**Key insight**: Roadmap before Workspace means folder structure reflects what you're building.
-**Key insight**: Permissions at end ensures new chat has full automatic mode.
+**Key Changes from v1**:
+1. **Step 4 (NEW)**: Integrations question - what tools to connect
+2. **Step 6 (IMPROVED)**: Show 2-3 concrete workspace proposals
+3. **Step 8 (IMPROVED)**: Load actual plan-build skill
+4. **Step 11 (IMPROVED)**: IDE-specific session restart instructions
 
 ---
 
@@ -850,6 +1039,7 @@ Step 10: Start Fresh (close → new chat)
 |-------|----------|
 | analyze-context fails | Log error, continue without context |
 | create-roadmap fails | Log error, continue to workspace |
+| plan-build fails | Fall back to manual questions |
 | User gives vague goal | Ask clarifying question |
 | Session compacts | Resume from step_completed + 1 |
 
@@ -859,11 +1049,13 @@ Step 10: Start Fresh (close → new chat)
 
 **Modular Skills**:
 - `analyze-context` - File analysis (Step 2)
-- `create-roadmap` - Roadmap creation (Step 4)
-- Both standalone, called from quick-start when needed
+- `create-roadmap` - Roadmap creation (Step 5)
+- `plan-build` - Build planning (Step 8) ← NEW
+- All standalone, called from quick-start when needed
 
 **Dynamic Generation**:
 - All options generated from goal + context + roadmap
+- Workspace proposals generated from goal/roadmap
 - multiSelect: true where multiple answers make sense
 - Always include "Other" option
 
@@ -871,19 +1063,20 @@ Step 10: Start Fresh (close → new chat)
 - After Step 0, ALL content must be in user's chosen language
 - Supported: en, de, es, fr, it, ja, zh, or custom
 
-**Total Time**: ~12-18 minutes
+**Total Time**: ~15-20 minutes
 - Step 0: 1 min (welcome + language)
 - Step 1: 30 sec
 - Step 2: 0-3 min (optional)
 - Step 3: 2-3 min
-- Step 4: 0-3 min (optional)
-- Step 5: 2 min
-- Step 6: 2 min
-- Step 7: 3-4 min
-- Step 8: 1 min
-- Step 9: 1-2 min
-- Step 10: 30 sec
+- Step 4: 1-2 min (integrations) ← NEW
+- Step 5: 0-3 min (optional)
+- Step 6: 2-3 min (workspace proposals)
+- Step 7: 2 min
+- Step 8: 3-4 min (plan-build skill)
+- Step 9: 1 min
+- Step 10: 1-2 min
+- Step 11: 1 min
 
 ---
 
-*Quick Start - the complete onboarding path for Nexus*
+*Quick Start v2.0 - Complete onboarding with integrations, proposals, and clear instructions*

@@ -7,9 +7,12 @@ This module contains shared helper functions for:
 - Token estimation
 - Checkbox counting
 - Template detection
+- Large output handling (temp file pattern)
 """
 
+import json
 import re
+import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -413,3 +416,88 @@ def calculate_bundle_tokens(result: Dict[str, Any]) -> Dict[str, int]:
     token_counts["percentage"] = round((token_counts["total"] / CONTEXT_WINDOW) * 100, 2)
 
     return token_counts
+
+
+def handle_large_output(
+    output: str,
+    command_name: str,
+    base_path: Optional[Path] = None,
+    limit: int = 30000,
+    session_id: Optional[str] = None,
+    extra_fields: Optional[Dict[str, Any]] = None,
+) -> str:
+    """
+    Handle CLI output that may exceed Claude Code's 30k character limit.
+
+    If output exceeds the limit, writes to a temp file and returns JSON
+    instruction for Claude to read the file. Otherwise returns the output as-is.
+
+    MANDATORY: All CLI scripts should use this function for output that could
+    potentially exceed 30k characters to prevent truncation.
+
+    Args:
+        output: The full output string (typically JSON)
+        command_name: Name of the command for the temp filename (e.g., "mental_models")
+        base_path: Base path to Nexus root (for cache directory). If None, uses cwd.
+        limit: Character limit (default 30000)
+        session_id: Optional session ID for deterministic filenames (multi-session support)
+        extra_fields: Optional dict of extra fields to include in the instruction JSON
+
+    Returns:
+        Either the original output (if under limit) or JSON instruction to read temp file
+
+    Usage:
+        result = {"data": [...]}
+        output = json.dumps(result, indent=2)
+        print(handle_large_output(output, "my_command"))
+
+        # With session support and extra fields:
+        print(handle_large_output(
+            output, "startup", base_path,
+            session_id="abc123",
+            extra_fields={"mode": "startup", "instructions": {...}}
+        ))
+    """
+    from .config import CACHE_DIR
+
+    if len(output) <= limit:
+        return output
+
+    # Determine base path
+    if base_path is None:
+        base_path = Path.cwd()
+
+    # Create cache directory
+    cache_dir = base_path / CACHE_DIR
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
+    # Generate filename - use session hash if provided for deterministic names
+    if session_id:
+        import hashlib
+        session_hash = hashlib.md5(session_id.encode()).hexdigest()[:8]
+        cache_filename = f"output_{command_name}_{session_hash}.json"
+    else:
+        unique_id = uuid.uuid4().hex[:8]
+        cache_filename = f"output_{command_name}_{unique_id}.json"
+
+    cache_file = cache_dir / cache_filename
+
+    # Write full output to cache file
+    cache_file.write_text(output, encoding="utf-8")
+
+    # Return instruction for Claude to read the file
+    cache_path = str(cache_file.relative_to(base_path)).replace("\\", "/")
+
+    instruction = {
+        "MANDATORY": f"Output exceeded {limit} chars ({len(output)}). Use Read tool on '{cache_path}' NOW to get full content.",
+        "cached": True,
+        "cache_file": cache_path,
+        "chars": len(output),
+        "action": "DELETE file after reading (cleanup)",
+    }
+
+    # Merge extra fields if provided
+    if extra_fields:
+        instruction.update(extra_fields)
+
+    return json.dumps(instruction, indent=2, ensure_ascii=False)

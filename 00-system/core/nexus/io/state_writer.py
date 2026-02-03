@@ -354,9 +354,10 @@ def set_onboarding_status(config_path: Path, status: str) -> bool:
     Returns:
         bool: True if update succeeded
     """
-    valid_statuses = ["not_started", "in_progress", "complete"]
-    if status not in valid_statuses:
-        print(f"Error: Invalid status '{status}'. Must be one of: {valid_statuses}")
+    from ..utils.config import ONBOARDING_VALID_STATUSES
+
+    if status not in ONBOARDING_VALID_STATUSES:
+        print(f"Error: Invalid status '{status}'. Must be one of: {ONBOARDING_VALID_STATUSES}")
         return False
 
     return update_yaml_path(config_path, "onboarding.status", status)
@@ -374,3 +375,61 @@ def set_in_progress_skill(config_path: Path, skill_name: Optional[str]) -> bool:
         bool: True if update succeeded
     """
     return update_yaml_path(config_path, "onboarding.in_progress_skill", skill_name)
+
+
+def update_build_status(overview_path: Path, status: str) -> bool:
+    """
+    Update a build's status in its 01-overview.md YAML frontmatter.
+
+    VALIDATES against BUILD_VALID_STATUSES before writing.
+
+    Args:
+        overview_path: Path to the build's 01-planning/01-overview.md file
+        status: New status (must be one of: PLANNING, IN_PROGRESS, ACTIVE, COMPLETE, ARCHIVED)
+
+    Returns:
+        bool: True if update succeeded, False if invalid status or file error
+
+    Example:
+        >>> update_build_status(Path("02-builds/active/05-my-build/01-planning/01-overview.md"), "COMPLETE")
+        True
+    """
+    import re
+    from ..utils.config import BUILD_VALID_STATUSES
+
+    # Validate status
+    status_upper = status.upper()
+    if status_upper not in BUILD_VALID_STATUSES:
+        print(f"Error: Invalid build status '{status}'. Must be one of: {', '.join(BUILD_VALID_STATUSES)}")
+        return False
+
+    if not overview_path.exists():
+        print(f"Error: Build overview file not found: {overview_path}")
+        return False
+
+    try:
+        content = overview_path.read_text(encoding='utf-8')
+
+        # Match and replace status in YAML frontmatter
+        # Pattern: status: VALUE (at start of line, within frontmatter)
+        pattern = r'^(status:\s*)(\S+)(.*)$'
+
+        def replace_status(match):
+            return f"{match.group(1)}{status_upper}{match.group(3)}"
+
+        new_content, count = re.subn(pattern, replace_status, content, count=1, flags=re.MULTILINE)
+
+        if count == 0:
+            print(f"Error: Could not find 'status:' field in {overview_path}")
+            return False
+
+        # Atomic write
+        temp_path = overview_path.with_suffix('.tmp')
+        temp_path.write_text(new_content, encoding='utf-8')
+        temp_path.replace(overview_path)
+
+        return True
+
+    except Exception as e:
+        print(f"Error updating build status: {e}")
+        return False

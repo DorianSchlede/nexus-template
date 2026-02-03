@@ -74,19 +74,8 @@ INTEGRATION_ENV_VARS: Dict[str, str] = {
 # =============================================================================
 
 # Maps skill keys to their metadata for proactive suggestions
+# NOTE: setup_memory and create_folders removed - quick-start covers both
 ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
-    "setup_memory": {
-        "name": "setup-memory",
-        "trigger": "setup memory",
-        "priority": "critical",
-        "time": "8 min",
-    },
-    "create_folders": {
-        "name": "create-folders",
-        "trigger": "create folders",
-        "priority": "high",
-        "time": "5-8 min",
-    },
     "learn_builds": {
         "name": "learn-builds",
         "trigger": "learn builds",
@@ -112,6 +101,22 @@ ONBOARDING_SKILLS: Dict[str, Dict[str, str]] = {
         "time": "15-18 min",
     },
 }
+
+# =============================================================================
+# ENUM CONSTANTS - SINGLE SOURCE OF TRUTH
+# =============================================================================
+
+# Build statuses (used by: loaders.py, state_writer.py, tests, execute-build)
+BUILD_VALID_STATUSES = ["PLANNING", "IN_PROGRESS", "ACTIVE", "COMPLETE", "ARCHIVED"]
+
+# Onboarding statuses (used by: state_writer.py)
+ONBOARDING_VALID_STATUSES = ["not_started", "in_progress", "complete"]
+
+# Roadmap item types (used by: roadmap.py)
+ROADMAP_VALID_TYPES = ["feature", "integration", "research", "strategy", "fix", "improvement"]
+
+# Roadmap priorities (used by: roadmap.py)
+ROADMAP_VALID_PRIORITIES = ["critical", "high", "medium", "low"]
 
 # =============================================================================
 # DIRECTORY STRUCTURE

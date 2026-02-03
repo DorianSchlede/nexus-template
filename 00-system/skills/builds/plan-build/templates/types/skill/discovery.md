@@ -5,9 +5,112 @@
 
 ---
 
-## Skill Definition
+## Discovery Questions
 
-### Skill Identity
+*Answers from Phase 2a - understand what user wants to build*
+
+### What Skill Are You Creating?
+
+{{skill_description}}
+
+### What Problem Does This Solve?
+
+{{problem_statement}}
+
+### When Should This Skill Trigger?
+
+{{trigger_scenarios}}
+
+### Constraints & Requirements
+
+- {{constraint_1}}
+- {{constraint_2}}
+
+### What Does Success Look Like?
+
+{{success_criteria}}
+
+---
+
+## AI Codebase Research
+
+*Findings from Phase 2b automated exploration*
+
+### Files Analyzed
+
+**Complexity Assessment**: Simple / Medium / Complex
+**Agents Used**: {{agent_count}}
+**Files Found**: {{file_count}}
+
+### Similar Skills Found
+
+| Skill | Location | Relevance |
+|-------|----------|-----------|
+| {{skill_name}} | {{location}} | {{how_similar}} |
+
+### Existing Patterns
+
+*What exists currently that relates to this skill*
+
+{{existing_patterns_summary}}
+
+### Impact Assessment
+
+*How this skill affects existing code*
+
+{{impact_summary}}
+
+---
+
+## AI Web Research (Optional)
+
+*Best practices from web search - skip if not requested*
+
+### Queries Performed
+
+1. {{query_1}}
+2. {{query_2}}
+3. {{query_3}}
+
+### Best Practices Found
+
+| Practice | Source | Relevance |
+|----------|--------|-----------|
+| {{practice}} | {{source_url}} | {{relevance}} |
+
+### Recommendations
+
+- {{recommendation_1}}
+- {{recommendation_2}}
+
+---
+
+## Related Builds & Skills
+
+*Existing work that relates to this skill*
+
+### Related Builds
+
+| Build | Status | Relevance |
+|-------|--------|-----------|
+| {{build_id}} | {{status}} | {{why_related}} |
+
+### Related Skills
+
+| Skill | Location | How to Reuse |
+|-------|----------|--------------|
+| {{skill_name}} | {{location}} | {{reuse_strategy}} |
+
+---
+
+## Follow-up Questions
+
+*Type-specific questions from Phase 2c, informed by research findings*
+*If new areas discovered → loop back to AI Research (max 2 loops)*
+
+### Skill Definition
+
+#### Skill Identity
 
 | Attribute | Value |
 |-----------|-------|
@@ -16,7 +119,7 @@
 | Category | {{category}} |
 | Complexity | Simple / Medium / Complex |
 
-### Triggers
+#### Triggers
 
 *Phrases that invoke this skill:*
 
@@ -26,11 +129,11 @@
 
 ---
 
-## Requirements (EARS Format)
+### Requirements (EARS Format)
 
 *All requirements MUST follow EARS patterns. See references/ears-patterns.md for templates.*
 
-### Functional Requirements
+#### Functional Requirements
 
 **REQ-1**: WHEN user invokes {{skill_name}}, THE skill SHALL {{behavior}}
 
@@ -38,13 +141,13 @@
 
 **REQ-3**: {{ears_pattern}}
 
-### Non-Functional Requirements
+#### Non-Functional Requirements
 
 **REQ-NF-1**: THE skill SKILL.md SHALL be under 200 lines
 
 **REQ-NF-2**: {{ears_pattern}}
 
-### Quality Checklist (INCOSE)
+#### Quality Checklist (INCOSE)
 
 *Verify each requirement meets INCOSE quality rules:*
 

@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from ..utils.config import (
+    BUILD_VALID_STATUSES,
     INTEGRATION_ENV_VARS,
     MEMORY_DIR,
     BUILDS_DIR,
@@ -53,7 +54,6 @@ def validate_build_schema(metadata: Dict[str, Any], file_path: str = "") -> None
     from datetime import datetime
 
     required_fields = ["id", "name", "status", "created", "build_path"]
-    valid_statuses = ["PLANNING", "IN_PROGRESS", "ACTIVE", "COMPLETE", "ARCHIVED"]
 
     # Check required fields exist
     missing_fields = [field for field in required_fields if field not in metadata or not metadata[field]]
@@ -64,13 +64,13 @@ def validate_build_schema(metadata: Dict[str, Any], file_path: str = "") -> None
             f"Required: id, name, status, created, build_path"
         )
 
-    # Validate status enum
+    # Validate status enum (uses BUILD_VALID_STATUSES from config.py)
     if "status" in metadata:
         status = str(metadata["status"]).upper()
-        if status not in valid_statuses:
+        if status not in BUILD_VALID_STATUSES:
             warnings.warn(
                 f"Build schema validation: Invalid status '{metadata['status']}' in {file_path or 'metadata'}\n"
-                f"Valid statuses: {', '.join(valid_statuses)}"
+                f"Valid statuses: {', '.join(BUILD_VALID_STATUSES)}"
             )
 
     # Validate created date format (ISO 8601)
@@ -197,7 +197,7 @@ def scan_skills(base_path: str = ".", minimal: bool = True, include_integration_
 
     # LEARNING SKILLS - second priority, for onboarding
     LEARNING_SKILL_NAMES = {
-        "how-nexus-works", "complete-setup", "setup-memory", "create-folders",
+        "how-nexus-works", "quick-start",
         "learn-builds", "learn-skills", "learn-integrations", "learn-nexus"
     }
 
@@ -1253,23 +1253,26 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     }
 
     # === ACTION INSTRUCTIONS & STATE DETECTION ===
-    # SINGLE SOURCE OF TRUTH: learning_tracker.completed in user-config.yaml
-    # Refactored 2026-01-18: Use extract_learning_completed() for all state
+    # SINGLE SOURCE OF TRUTH: quick_start_state in user-config.yaml
+    # Refactored 2026-02-03: Use quick_start_state (setup-memory/create-folders removed)
 
     try:
-        from .state import (
+        from ..state.state import (
             build_display_hints,
             build_pending_onboarding,
             extract_learning_completed,
+            extract_quick_start_state,
         )
     except ImportError:
         # Fallback if state.py not available
         build_display_hints = None
         build_pending_onboarding = None
         extract_learning_completed = None
+        extract_quick_start_state = None
 
-    # Get learning completion status FIRST (single source of truth)
+    # Get learning completion status and quick_start_state
     learning_completed = {}
+    quick_start_state = {}
     pending_onboarding = []
     config_path = base / "01-memory" / "user-config.yaml"
 
@@ -1280,9 +1283,15 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
         except Exception:
             pass
 
-    # Derive state from learning_tracker (single source of truth)
-    goals_personalized = learning_completed.get("setup_memory", False)
-    workspace_configured = learning_completed.get("create_folders", False)
+    if extract_quick_start_state:
+        try:
+            quick_start_state = extract_quick_start_state(config_path)
+        except Exception:
+            pass
+
+    # Derive state from quick_start_state (quick-start covers setup-memory and create-folders)
+    goals_personalized = quick_start_state.get("goal_captured", False)
+    workspace_configured = quick_start_state.get("workspace_created", False)
 
     # Build display hints (for menu rendering suggestions)
     display_hints = []
@@ -1378,7 +1387,8 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
 
     if action == "run_onboarding":
         # Unified onboarding: Load quick-start skill directly (no template)
-        skill_path = Path(__file__).parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
+        # Path: loaders.py is at 00-system/core/nexus/core/, skill is at 00-system/skills/
+        skill_path = Path(__file__).parent.parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
         try:
             return skill_path.read_text(encoding='utf-8')
         except FileNotFoundError:
@@ -1452,8 +1462,8 @@ def _make_progress_bar(percent: float, width: int = 10) -> str:
 def _load_state_template(template_name: str, **kwargs) -> str:
     """Load state template from .claude/hooks/templates/ and format with kwargs."""
     # Templates are in .claude/hooks/templates/ relative to nexus root
-    # loaders.py is in 00-system/core/nexus/, so go up 3 levels to nexus root
-    template_dir = Path(__file__).parent.parent.parent.parent / ".claude" / "hooks" / "templates"
+    # loaders.py is in 00-system/core/nexus/core/, so go up 5 levels to nexus root
+    template_dir = Path(__file__).parent.parent.parent.parent.parent / ".claude" / "hooks" / "templates"
     template_path = template_dir / f"{template_name}.md"
 
     try:
@@ -1482,7 +1492,7 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
     curated_system_skills = ["list-skills", "mental-models"]
 
     # Extract goal from user_goals content
-    goal = "Configure your goal with 'setup memory'"
+    goal = "Not configured yet"
     if goals_done:
         user_goals = context.get("user_goals", "")
         if user_goals:
@@ -1494,8 +1504,15 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
                 # Remove TODO markers and brackets
                 if not extracted.startswith('[TODO'):
                     goal = extracted
+            # Fallback: Try to extract from ## Ziel (German) or ## Goal section
+            if goal == "Not configured yet":
+                match = re.search(r'## (?:Ziel|Goal)\s*\n+([^\n#]+)', user_goals)
+                if match:
+                    extracted = match.group(1).strip()
+                    if not extracted.startswith('[TODO'):
+                        goal = extracted
             # Fallback: extract from first heading after Current Role
-            if goal == "Configure your goal with 'setup memory'":
+            if goal == "Not configured yet":
                 match = re.search(r'## Current Role\n\n(.+?)(?:\n\n|---)', user_goals, re.DOTALL)
                 if match:
                     extracted = match.group(1).strip()
@@ -1540,7 +1557,8 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
     # Get roadmap summary if roadmap exists
     base_path = context.get("_base_path", ".")
     roadmap_path = Path(base_path) / MEMORY_DIR / "roadmap.yaml"
-    roadmap_line = None
+    roadmap_items = []
+    remaining_count = 0
     try:
         # Build ID sets for status derivation
         active_ids = {b.get("id", "") for b in active_builds if b.get("id")}
@@ -1548,40 +1566,55 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
         complete_ids = {b.get("id", "") for b in complete_builds if b.get("id")}
 
         roadmap_summary = get_roadmap_summary(roadmap_path, active_ids, complete_ids)
-        roadmap_line = format_roadmap_line(roadmap_summary)
+        roadmap_items = roadmap_summary.get("items", [])
+        remaining_count = max(0, len(roadmap_items) - 5)  # Items beyond first 5
     except Exception:
         pass  # Roadmap not available, continue without it
 
-    if active_builds:
+    # Build section: Show first 5 builds with status (no progress bar)
+    if roadmap_items:
+        build_lines = []
+        for idx, item in enumerate(roadmap_items[:5], start=1):
+            name = item.get('name', 'Build')[:35]  # Truncate long names
+            status = item.get('status', 'PLANNED').upper()
+            # Format: "#1  Content Ideas Bank                         PLANNING"
+            build_lines.append(f"#{idx}  {name:<40} {status}")
+        builds_section = "\n".join(build_lines)
+        if remaining_count > 0:
+            builds_section += f"\n...+{remaining_count}"
+    elif active_builds:
+        # Fallback to active builds if no roadmap
         build_lines = []
         for idx, b in enumerate(active_builds[:5], start=1):
-            name = b.get('name', 'Build')[:25]  # Truncate long names
-            progress = b.get('progress', 0)
-            # Convert decimal to percentage if needed
-            if isinstance(progress, float) and progress <= 1.0:
-                progress_pct = int(progress * 100)
-            else:
-                progress_pct = int(progress)
-            bar = _make_progress_bar(progress_pct)
-            # Format: "     #1  Name                      ########--  80%"
-            build_lines.append(f"     #{idx}  {name:<25} {bar}  {progress_pct}%")
+            name = b.get('name', 'Build')[:35]
+            status = b.get('status', 'IN_PROGRESS').upper()
+            build_lines.append(f"#{idx}  {name:<40} {status}")
         builds_section = "\n".join(build_lines)
-        builds_section += "\n\n     Say: plan (start new) | #1 (continue build) | roadmap (view/manage)"
+        remaining = max(0, len(active_builds) - 5)
+        if remaining > 0:
+            builds_section += f"\n...+{remaining}"
     else:
-        builds_section = "     No active builds yet.\n\n     Say: plan (start your first project) | roadmap (view/manage)"
-
-    # Inject roadmap line at the top of builds_section if roadmap exists
-    if roadmap_line:
-        builds_section = f"     {roadmap_line}\n\n{builds_section}"
+        builds_section = "No active builds yet."
 
     # === NEW: skills_section for startup_main_menu ===
+    # Format: "› skill-name          Description"
     if user_skills:
-        skill_names = [s.get('name', s) if isinstance(s, dict) else s for s in user_skills[:5]]
-        skills_list = " | ".join(skill_names)
-        skills_section = f"     {skills_list}\n\n     Say: [skill name] (run it) | create (make new) | list (see all)"
+        skill_lines = []
+        for skill in user_skills[:5]:
+            if isinstance(skill, dict):
+                name = skill.get('name', '')
+                desc = skill.get('description', '')[:25]  # Truncate description
+            else:
+                name = skill
+                desc = ""
+            skill_lines.append(f"› {name:<20} {desc}")
+        skills_section = "\n".join(skill_lines)
+        remaining = max(0, len(user_skills) - 5)
+        if remaining > 0:
+            skills_section += f"\n...+{remaining}"
     else:
-        # Show curated system skills when no user skills
-        skills_section = f"     No custom skills yet.\n\n     Say: create (make your first) | list (see system skills)"
+        # Show message when no user skills
+        skills_section = "No custom skills yet."
 
     return {
         "memory_status": memory_status,
@@ -1599,7 +1632,8 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
 def _template_first_run(context: Dict[str, Any]) -> str:
     """STARTUP STATE 0: First run - unified onboarding flow."""
     # Load quick-start skill directly (no template)
-    skill_path = Path(__file__).parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
+    # Path: loaders.py is at 00-system/core/nexus/core/, skill is at 00-system/skills/
+    skill_path = Path(__file__).parent.parent.parent.parent / "skills" / "learning" / "quick-start" / "SKILL.md"
     try:
         return skill_path.read_text(encoding='utf-8')
     except FileNotFoundError:

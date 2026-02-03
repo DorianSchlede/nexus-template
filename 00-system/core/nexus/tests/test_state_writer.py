@@ -25,7 +25,6 @@ def create_test_config():
         },
         'learning_tracker': {
             'completed': {
-                'setup_memory': False,
                 'how_nexus_works': False
             }
         }

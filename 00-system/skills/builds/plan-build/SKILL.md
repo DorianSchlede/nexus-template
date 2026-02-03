@@ -42,10 +42,14 @@ Tip: Run 'learn builds' later if you want to understand the build system deeply.
 WORKFLOW SEQUENCE (DO NOT SKIP STEPS)
 
 1. TYPE DETECTION      → Semantic match from _type.yaml descriptions
-2. BUILD SETUP       → Run init_build.py with detected type
-3. DISCOVERY           → Skill-based OR inline (depends on type)
+2. BUILD SETUP         → Run init_build.py with detected type
+3. DISCOVERY           → 3-phase flow (inline) OR skill-based
+   3a. Discovery Questions → Understand what user wants to build
+   3b. Active Research     → AI explores based on answers
+   3c. Informed Follow-ups → Questions + optional follow-up research
+       ↳ Loop to 3b if new areas discovered (max 2 loops)
 4. MENTAL MODELS       → **MANDATORY** - Run AFTER discovery
-5. RE-DISCOVERY        → If gaps found (max 2 rounds)
+5. RE-DISCOVERY        → If mental models reveal gaps (max 2 rounds)
 6. FINALIZATION        → Fill 03-plan.md, fill 04-steps.md
 -------------------------------------------------------
 
@@ -176,7 +180,19 @@ if roadmap_path.exists():
 - Match if item slug is CONTAINED in build slug (handles numbered prefixes like "01-content-calendar")
 - Example: "Content Calendar" → "content-calendar" matches "01-content-calendar"
 
-### Phase 2: Discovery
+### Phase 2: Discovery (3-Phase Flow)
+
+**Discovery follows ASK → RESEARCH → ASK (+ optional loop) pattern:**
+
+```
+Phase 2a: Discovery Questions (understand the build)
+    ↓
+Phase 2b: Active Research (targeted by answers)
+    ↓
+Phase 2c: Informed Follow-ups + Optional Follow-up Research
+    ↓ (if gaps found)
+    Loop back to 2b for deeper research
+```
 
 **Check _type.yaml for discovery method:**
 
@@ -197,15 +213,145 @@ nexus-load --skill {skill-name}
 | research | create-research-build |
 | skill | create-skill |
 
+**Note**: Skill-based types skip the 3-phase flow - their skills handle discovery.
+
 #### Inline Discovery (build, strategy, content, process, generic)
 
-```bash
-# Load discovery.md template from templates/types/{type}/
-# Ask discovery questions interactively
-# Write answers to build's 02-discovery.md
+**Phase 2a: Discovery Questions**
+
+Ask type-specific discovery questions FIRST to understand what the user wants:
+
+```markdown
+Let me understand what you're building:
+
+1. **What are you building?**
+   - Describe the feature/system in 1-2 sentences
+
+2. **What problem does this solve?**
+   - Why is this needed? What pain point does it address?
+
+3. **Who/what will use this?**
+   - Users? Other systems? Internal tools?
+
+4. **Any constraints or requirements?**
+   - Must integrate with existing systems?
+   - Performance requirements?
+   - Technology preferences or restrictions?
+
+5. **What does success look like?**
+   - How will you know this build is complete?
 ```
 
-**CRITICAL**: Discovery MUST complete before mental models.
+**AI then uses these answers to target research** (see [active-discovery-guide.md](references/active-discovery-guide.md)).
+
+**Phase 2b: Active Research**
+
+AI-driven research BASED ON discovery answers from Phase 2a:
+
+**Step 1: Determine Search Targets from Answers**
+
+Extract search targets from user's discovery answers:
+- Build description → keywords for codebase search
+- Problem statement → related patterns to find
+- Integration mentions → systems to check
+- Constraints → areas that might conflict
+
+**Step 2: Assess Complexity**
+```
+Simple (single file/function)  → 0 agents, direct Grep/Glob
+Medium (component/feature)     → 1-2 targeted agents
+Complex (multi-component)      → 3-5 specialized agents
+```
+
+**Step 3: Dynamic Subagent Exploration** (for medium/complex)
+
+AI determines BOTH number AND purpose of agents based on:
+- Build description from Phase 2a (e.g., "auth feature" → explore auth, security, users)
+- Problem statement (what systems might be affected)
+- Codebase structure (what exists to explore)
+
+```python
+# Spawn ALL agents in a single message for parallel execution
+for purpose in agent_purposes:
+    Task(
+        subagent_type="Explore",
+        prompt=generate_agent_prompt(purpose, build_description, discovery_answers),
+        description=f"Exploring {purpose['focus_area']}"
+    )
+```
+
+**Step 4: Related Builds Check**
+- Scan `02-builds/active/` and `02-builds/complete/` for similar names/purposes
+- Warn if duplicates found (don't block)
+- Document in "Related Builds & Skills" section
+
+**Step 5: Related Skills Check**
+- Scan `03-skills/` and `00-system/skills/` for reusable skills
+- Check if build would affect existing skills
+- Document findings
+
+**Step 6: Integration Check** (if relevant)
+- Query `01-memory/integrations/` for relevant integrations
+- Check if existing integrations provide context for this build
+
+**Step 7: Web Search** (for best practices)
+- Max 3 queries based on build topic (see [active-discovery-guide.md](references/active-discovery-guide.md))
+- Ask user: "Should I search the web for best practices on {topic}?"
+- Document best practices found
+
+**Step 8: Present Consolidated Findings**
+
+Display research results BEFORE follow-up questions:
+
+```
+RESEARCH COMPLETE
+----------------------------------------------------
+Based on your description of {build_summary}:
+
+Codebase: Found {N} related files in {areas}
+  - {file1} - {why relevant}
+  - {file2} - {why relevant}
+
+Related Work: {N} builds, {N} skills could be affected
+  - {build/skill} - {relationship}
+
+Web Research: {N} best practices found (if performed)
+  - {practice} - {source}
+
+I have some follow-up questions based on what I found...
+```
+
+**Phase 2c: Informed Follow-ups + Optional Follow-up Research**
+
+Ask follow-up questions INFORMED by research findings:
+
+```markdown
+Given I found {finding from research}:
+- {Question about how to handle this}
+
+Given {another finding}:
+- {Another question informed by what AI discovered}
+```
+
+Example informed questions:
+- "Given I found existing session management in src/auth/, should we extend it or create new?"
+- "Given Build 02-auth-refactor is also modifying auth files, should we coordinate or wait?"
+- "The web search suggests using JWT for this. Your current system uses sessions. Migrate or keep both?"
+
+**Follow-up Research (if needed):**
+
+If user's answers reveal new areas to explore:
+```
+Your answer mentions {new_area} that I didn't search earlier.
+Should I research {new_area} before we continue?
+```
+
+If yes → Loop back to Phase 2b with targeted search
+If no → Continue to mental models
+
+**Write all findings to build's 02-discovery.md** (not just chat output).
+
+**CRITICAL**: Discovery phases MUST complete before mental models. Max 2 research loops to avoid infinite discovery.
 
 ### Phase 3: Mental Models (After Discovery) - MANDATORY
 
@@ -373,14 +519,31 @@ PreCompact hook automatically syncs these fields:
 
 ### Claude Must Update
 
-Update these fields manually at phase transitions:
+Update these fields at session end:
 
-1. **files_to_load** - Context files for resume:
-   - Planning start: `[overview, discovery, plan, steps]`
-   - Planning complete: `[discovery, plan, steps]` (drop overview)
-   - Execution start: `[steps, working files as created]`
+1. **continue_at** - Specific pointer for next agent:
+   ```yaml
+   continue_at: "02-discovery.md Phase 2"  # or specific line reference
+   ```
 
-2. **Progress Summary** - Session accomplishments:
+2. **blockers** - List any blockers:
+   ```yaml
+   blockers: []  # or ["Waiting for user input on scope"]
+   ```
+
+3. **files_to_load** - Context files (AUTO-LOADED in COMPACT mode):
+   ```yaml
+   files_to_load:
+     - "01-planning/02-discovery.md"   # Research findings
+     - "01-planning/03-plan.md"        # Approach decisions
+     - "02-resources/decisions.md"     # Key decisions made
+   ```
+
+   **Pattern**: Write context to FILES → Add to `files_to_load`
+   - Made decision? → Write to `02-resources/decisions.md` → Add to list
+   - Hook AUTO-LOADS these files for next session
+
+4. **Context for Next Agent** - Prose that POINTS to files:
    ```markdown
    ### Latest Session (YYYY-MM-DD)
 
@@ -388,13 +551,14 @@ Update these fields manually at phase transitions:
    - [x] Created 02-discovery.md with 12 problems
    - [x] Applied Pre-Mortem mental model
 
-   **Key decisions:**
-   - Using inline discovery (not skill-based)
+   **Key files:**
+   - See `decisions.md` for approach rationale
 
    **Next steps:**
-   1. Complete 03-plan.md approach section
-   2. Fill 04-steps.md with concrete tasks
+   1. Continue at `continue_at` location
    ```
+
+> **Philosophy**: Don't capture context in prose. Write it to FILES, add to `files_to_load`. Prose just POINTS to files.
 
 ### Standard Field Values
 
@@ -496,7 +660,7 @@ Each type folder contains:
 
 ### Memory Files Missing
 - Warn user: "Memory files not initialized"
-- Suggest: "Please run 00-setup-memory build first"
+- Suggest: "Please run 'quick start' first to configure your goals"
 - DO NOT create build
 
 ### Discovery Skill Not Found

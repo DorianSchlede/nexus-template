@@ -85,8 +85,8 @@ A SKILL is a repeatable workflow you can execute anytime.
 
 **Examples**:
 [OK] 'close session' → Save progress, create report
-[OK] 'setup memory' → Configure your goals & context
 [OK] 'list skills' → Show available workflows
+[OK] 'mental models' → Apply thinking frameworks
 [OK] Integration skills (if you add Slack, Airtable, etc.)
 
 **When to create a SKILL**:
@@ -108,7 +108,7 @@ A SKILL is a repeatable workflow you can execute anytime.
 │           └─ NO → Just do it (no structure needed)
 
 **How to load skills**:
-- Type the skill name: 'setup memory', 'close session'
+- Type the skill name: 'close session', 'mental models'
 - Or browse: 'list skills'
 
 Nexus has 50+ built-in skills, and you can create your own.
@@ -139,7 +139,7 @@ Contains:
 - Work style & preferences
 
 **How it works**:
-- Set once: 'setup memory' (8 min)
+- Set during onboarding (quick-start)
 - Loaded every session automatically
 - I always know your context
 
@@ -158,9 +158,9 @@ And I already know your role, company type, goals, and style.
 - user-config.yaml → Preferences & settings
 ```
 
-**Ask**: "Have you set up your memory yet?"
+**Ask**: "Have you completed the quick-start onboarding?"
 
-If NO → "I recommend 'setup memory' after this tour (8 min)"
+If NO → "I recommend completing onboarding to set up your goals and workspace"
 If YES → "Great! That's why I understand your context."
 
 ---
@@ -207,7 +207,7 @@ Documents your folder structure so I can navigate efficiently.
 
 When you say "use my brand canvas template", I know exactly where to find it.
 
-**Setup**: 'create folders' skill (5 min) helps you organize.
+**Setup**: Workspace is configured during quick-start onboarding.
 ```
 
 ---
@@ -267,16 +267,13 @@ You now understand:
 **Quick Reference**:
 - New work with deliverables → "build [name]"
 - Repeating task → "create skill [name]" or use existing
-- Set context → "setup memory"
-- Organize files → "create folders"
 - See options → "list skills"
 - Start session → "Hi"
 - End session → "close session"
 
 **Recommended next steps**:
-1. If memory not set: 'setup memory' (8 min)
-2. If folders not organized: 'create folders' (5 min)
-3. Start your first BUILD: "build [what you want to create]"
+1. Start your first BUILD: "build [what you want to create]"
+2. Explore skills: "list skills"
 
 Type 'Hi' to see the menu, or tell me what you want to work on.
 ```

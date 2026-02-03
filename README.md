@@ -2,7 +2,7 @@
 
 # Nexus
 
-**Build yourself the AI copilot system you couldn't dream of.**
+**Build yourself the AI copilot system of your dreams.**
 
 Experience efficiency on another level, let AI perfectly navigate your context and interactively plan to get exactly what you want.
 Optimized onboarding experience including context import and roadmap building.

@@ -27,7 +27,7 @@ sys.path.insert(0, str(SCRIPT_DIR))
 
 from nexus import NexusService
 from nexus.utils.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING, CACHE_DIR, CACHE_STARTUP_FILE
-from nexus.utils.utils import calculate_bundle_tokens
+from nexus.utils.utils import calculate_bundle_tokens, handle_large_output
 
 # =============================================================================
 # BACKWARD COMPATIBILITY SHIM
@@ -167,44 +167,28 @@ def main():
     output = json.dumps(result, indent=2, ensure_ascii=False)
     output_chars = len(output)
 
-    # Check if output exceeds bash limit - if so, cache to file
-    # ONLY for startup/resume commands (not for --skill, --build, etc.)
-    is_startup_command = args.startup or args.resume
-    if output_chars > BASH_OUTPUT_LIMIT and is_startup_command:
-        # Create cache directory if needed
-        cache_dir = detected_nexus_root / CACHE_DIR
-        cache_dir.mkdir(parents=True, exist_ok=True)
+    # Determine command type for filename
+    if args.startup or args.resume:
+        cmd_type = "startup"
+    elif args.build:
+        cmd_type = f"build_{args.build}"
+    elif args.skill:
+        cmd_type = f"skill_{args.skill}"
+    elif args.list_builds:
+        cmd_type = "list_builds"
+    elif args.list_skills:
+        cmd_type = "list_skills"
+    elif args.metadata:
+        cmd_type = "metadata"
+    else:
+        cmd_type = "output"
 
-        # Determine cache filename - ALWAYS unique to prevent multi-session collisions
-        import uuid
-        if args.session:
-            # Use hash of session ID for deterministic, fixed-length suffix
-            import hashlib
-            session_hash = hashlib.md5(args.session.encode()).hexdigest()[:8]
-            cache_filename = f"context_startup_{session_hash}.json"
-        else:
-            # Generate unique filename for this invocation
-            unique_id = uuid.uuid4().hex[:8]
-            cache_filename = f"context_startup_{unique_id}.json"
-
-        # Write full output to cache file
-        cache_file = cache_dir / cache_filename
-        cache_file.write_text(output, encoding='utf-8')
-
-        # Return CLEAR instruction for Claude to read the cached file
-        # The cache contains orchestrator.md, memory files, and full metadata
-        cache_path = str(cache_file.relative_to(detected_nexus_root)).replace("\\", "/")
-
-        # Extract dynamic instructions from result
-        instructions = result.get("instructions", {})
-        mode = "resume" if args.resume else "startup"
-
-        cache_result = {
-            "MANDATORY": f"Use Read tool on '{cache_path}' NOW - contains orchestrator.md with AI behavior rules",
-            "mode": mode,
-            "cached": True,
-            "cache_file": cache_path,
-            "instructions": instructions,  # Dynamic next steps based on --startup/--resume
+    # Build extra fields for startup commands
+    extra_fields = None
+    if (args.startup or args.resume) and output_chars > BASH_OUTPUT_LIMIT:
+        extra_fields = {
+            "mode": "resume" if args.resume else "startup",
+            "instructions": result.get("instructions", {}),
             "contains": [
                 "orchestrator.md - AI behavior rules, routing, menu display (CRITICAL)",
                 "system-map.md - Navigation structure",
@@ -212,22 +196,28 @@ def main():
                 "metadata - all builds and skills"
             ],
         }
-        print(json.dumps(cache_result, indent=2, ensure_ascii=False))
-    elif output_chars > BASH_OUTPUT_LIMIT:
-        # For non-startup commands (--skill, --build), just print the full output
-        # Claude's bash tool can handle large outputs, and these need the full content
-        print(output)
-    else:
-        # Add truncation detection metadata at the very end
+
+    # Use shared utility for large output handling
+    # MANDATORY: ALL commands must use temp file when output > 30k chars
+    final_output = handle_large_output(
+        output=output,
+        command_name=cmd_type,
+        base_path=detected_nexus_root,
+        limit=BASH_OUTPUT_LIMIT,
+        session_id=args.session,
+        extra_fields=extra_fields,
+    )
+
+    # If output wasn't cached (under limit), add truncation metadata
+    if final_output == output:
         result['_output'] = {
             'chars': output_chars,
             'truncation_risk': output_chars > BASH_OUTPUT_LIMIT * 0.9,
             'split_recommended': output_chars > BASH_OUTPUT_LIMIT,
         }
-
-        # Re-serialize with metadata
         final_output = json.dumps(result, indent=2, ensure_ascii=False)
-        print(final_output)
+
+    print(final_output)
 
 
 if __name__ == "__main__":

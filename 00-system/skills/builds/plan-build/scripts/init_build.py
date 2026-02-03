@@ -514,12 +514,18 @@ current_phase: "planning"
 # next_action: AUTO-SYNCED unless you set a custom value (e.g., "implement-phase-3")
 # Custom values are preserved; standard values (plan-build, execute-build) are auto-managed
 next_action: "plan-build"
-# files_to_load: MANUAL - update this when creating working files
+# continue_at: MANUAL - specific pointer for next agent (e.g., "api.py:142", "Phase 2, Task 3")
+continue_at: ""
+# blockers: MANUAL - list any blockers preventing progress
+blockers: []
+
+# files_to_load: MANUAL - these are AUTO-LOADED in COMPACT mode
+# Add working files as you create them, with reason comments
 files_to_load:
-  - "01-planning/01-overview.md"
-  - "01-planning/02-discovery.md"
-  - "01-planning/03-plan.md"
-  - "01-planning/04-steps.md"
+  - "01-planning/01-overview.md"    # Purpose and success criteria
+  - "01-planning/02-discovery.md"   # Research and dependencies
+  - "01-planning/03-plan.md"        # Approach and decisions
+  - "01-planning/04-steps.md"       # Execution checklist
 
 # DISCOVERY STATE (MANUAL)
 rediscovery_round: 0
@@ -532,10 +538,18 @@ total_tasks: {total_tasks}
 tasks_completed: {tasks_completed}
 ---
 
-## Progress Summary
+## Context for Next Agent
 
 **Build Type**: {build_type}
 **Phase**: Planning | 0/{total_tasks} tasks (0%)
+
+> **Philosophy**: Don't capture context in prose here. Write context to FILES
+> (e.g., `02-resources/decisions.md`), add to `files_to_load`. The hook
+> AUTO-LOADS those files in COMPACT mode. This prose just POINTS to files.
+
+### Key Files
+- See `files_to_load` above - these are auto-loaded in COMPACT mode
+- Add working files as you create them (with `# reason` comments)
 
 ### Latest Session
 
@@ -548,7 +562,7 @@ tasks_completed: {tasks_completed}
 
 ---
 
-*Update this summary after each session with accomplishments and next steps*
+*Before session end: Update `continue_at`, add new files to `files_to_load`, note any `blockers`*
 """
         (planning_dir / "resume-context.md").write_text(resume_content, encoding='utf-8')
         print("[OK] Created resume-context.md")

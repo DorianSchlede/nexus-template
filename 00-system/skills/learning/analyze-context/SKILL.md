@@ -772,9 +772,130 @@ These insights will inform your goals and workspace setup.
 
 ---
 
-### Step 9: Add Roadmap Item for Context Processing
+### Step 9: Workspace Organization (Interactive)
 
-**AUTOMATIC**: When context is uploaded, add a roadmap item to process it properly.
+**CRITICAL: Only run this step if workspace is already configured**
+
+**Check workspace status:**
+```python
+from pathlib import Path
+
+workspace_map = Path("04-workspace/workspace-map.md")
+workspace_configured = workspace_map.exists() and workspace_map.stat().st_size > 500
+
+# Also check if workspace has actual folders
+workspace_dir = Path("04-workspace/")
+workspace_folders = [f for f in workspace_dir.iterdir() if f.is_dir() and not f.name.startswith('.')]
+```
+
+**IF workspace IS configured:**
+
+Display organization proposal:
+```
+ORGANIZE INTO WORKSPACE?
+----------------------------------------------------
+
+Your workspace is set up with:
+  - {folder1}/    {description from workspace-map}
+  - {folder2}/    {description}
+  - {folder3}/    {description}
+
+Based on the analysis, I'd suggest:
+
+  {file1}, {file2}     → {folder1}/
+  {file3}              → {folder2}/
+  {file4}, {file5}     → {folder3}/
+  {file6}              → (new folder: {suggested_name}/)
+
+Options:
+  [1] Yes, organize as suggested
+  [2] No, keep in input/ for now
+  [3] Let me choose for each file
+```
+
+**Wait for user input:**
+
+**Option 1: Auto-organize**
+```python
+# Move files based on suggestions
+for file, target_folder in organization_plan.items():
+    source = Path(f"01-memory/input/{file}")
+    target = Path(f"04-workspace/{target_folder}/{file}")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    source.rename(target)
+
+# Update workspace-map.md if new folders created
+# Keep analysis files in _analysis/ for reference
+```
+
+Display:
+```
+Files organized!
+
+Moved:
+  - {file1} → 04-workspace/{folder1}/
+  - {file2} → 04-workspace/{folder1}/
+  - {file3} → 04-workspace/{folder2}/
+  ...
+
+Analysis kept at:
+→ 01-memory/input/_analysis/
+
+Original files cleared from input/.
+```
+
+**Option 2: Keep in input/**
+```
+Okay, files stay in 01-memory/input/.
+
+When you're ready to organize, say "organize context" or
+I'll add it to your roadmap as a task.
+```
+→ Proceed to Step 10 (add roadmap item)
+
+**Option 3: Manual choice**
+```
+Let's go through each file:
+
+{file1} ({type}, {size})
+  Theme: {detected theme}
+
+  Where should this go?
+  [1] {folder1}/
+  [2] {folder2}/
+  [3] {folder3}/
+  [4] New folder: ___
+  [5] Skip (keep in input/)
+
+Your choice:
+```
+
+Repeat for each file, then move based on choices.
+
+---
+
+**IF workspace is NOT configured (onboarding):**
+
+Skip this step entirely. Display:
+```
+Analysis complete!
+
+Your workspace isn't set up yet - that's next.
+These insights will help structure your workspace.
+```
+
+→ Proceed to Step 10 (roadmap item for later organization)
+
+---
+
+### Step 10: Add Roadmap Item for Context Processing (Conditional)
+
+**Only add roadmap item if:**
+- User chose "keep in input/" (Option 2 in Step 9), OR
+- Workspace is not configured yet (onboarding flow)
+
+**Skip this step if:**
+- User already organized files into workspace (Option 1 or 3 in Step 9)
 
 **Check if roadmap.md exists**:
 ```python

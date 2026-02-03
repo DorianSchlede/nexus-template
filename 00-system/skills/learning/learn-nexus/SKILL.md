@@ -14,7 +14,7 @@ priority: medium
 Check `learning_tracker.completed.learn_nexus` in user-config.yaml. If `false`:
 
 **PROACTIVELY SUGGEST when user:**
-1. Has completed OTHER onboarding skills (setup-memory, learn-builds, learn-skills)
+1. Has completed quick-start onboarding and other learning skills (learn-builds, learn-skills)
    but hasn't done learn-nexus yet - suggest as "graduation" step
 2. Asks philosophical questions ("why does Nexus work this way?", "what's the design behind...")
 3. Encounters AI patterns (false progress, incomplete reads, over-engineering)

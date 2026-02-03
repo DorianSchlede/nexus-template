@@ -5,30 +5,137 @@
 
 ---
 
-## Current State
+## Discovery Questions
+
+*Answers from Phase 2a - understand the strategic decision*
+
+### What Decision Are You Making?
+
+{{decision_description}}
+
+### Why Is This Decision Needed Now?
+
+{{decision_driver}}
+
+### What Are The Stakes?
+
+{{stakes_impact}}
+
+### Known Constraints
+
+- {{constraint_1}}
+- {{constraint_2}}
+
+### What Does Success Look Like?
+
+{{success_criteria}}
+
+---
+
+## AI Codebase Research
+
+*Findings from Phase 2b automated exploration*
+
+### Related Code Found
+
+**Files Analyzed**: {{file_count}}
+
+| Area | Files | Impact |
+|------|-------|--------|
+| {{area}} | {{files}} | {{impact}} |
+
+### Existing Decisions
+
+*Past decisions that relate to this strategy*
+
+| Decision | Date | Outcome | Relevance |
+|----------|------|---------|-----------|
+| {{decision}} | {{date}} | {{outcome}} | {{relevance}} |
+
+### Technical Constraints
+
+*What the codebase tells us about feasibility*
+
+{{technical_constraints}}
+
+---
+
+## AI Web Research
+
+*Market analysis and competitor insights*
+
+### Queries Performed
+
+1. {{query_1}} (market analysis)
+2. {{query_2}} (competitor landscape)
+3. {{query_3}} (industry trends)
+
+### Market Insights
+
+| Insight | Source | Relevance |
+|---------|--------|-----------|
+| {{insight}} | {{source_url}} | {{relevance}} |
+
+### Competitor Analysis
+
+| Competitor | Approach | Learnings |
+|------------|----------|-----------|
+| {{competitor}} | {{their_approach}} | {{what_we_learn}} |
+
+### Industry Trends
+
+- {{trend_1}}
+- {{trend_2}}
+
+---
+
+## Related Builds & Skills
+
+*Existing work that relates to this strategy*
+
+### Related Builds
+
+| Build | Status | Relevance |
+|-------|--------|-----------|
+| {{build_id}} | {{status}} | {{why_related}} |
+
+### Related Skills
+
+| Skill | Location | How to Leverage |
+|-------|----------|-----------------|
+| {{skill_name}} | {{location}} | {{leverage_strategy}} |
+
+---
+
+## Follow-up Questions
+
+*Type-specific questions from Phase 2c, informed by research findings*
+*If new areas discovered → loop back to AI Research (max 2 loops)*
+
+### Current State
 
 *Where are we now?*
 
-### Situation Analysis
+#### Situation Analysis
 
 {{current_situation}}
 
-### Pain Points
+#### Pain Points
 
 - {{pain_1}}
 - {{pain_2}}
 - {{pain_3}}
 
-### Constraints
+#### Constraints
 
 - {{constraint_1}}
 - {{constraint_2}}
 
 ---
 
-## Options Analysis
+### Options Analysis
 
-### Option 1: {{option_name}}
+#### Option 1: {{option_name}}
 
 **Description**: {{description}}
 
@@ -43,7 +150,7 @@
 **Effort**: Low / Medium / High
 **Risk**: Low / Medium / High
 
-### Option 2: {{option_name}}
+#### Option 2: {{option_name}}
 
 **Description**: {{description}}
 

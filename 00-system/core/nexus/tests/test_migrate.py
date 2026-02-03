@@ -35,8 +35,7 @@ def create_v4_config():
         },
         'learning_tracker': {
             'completed': {
-                'how_nexus_works': True,
-                'setup_memory': False
+                'how_nexus_works': True
             }
         }
     }

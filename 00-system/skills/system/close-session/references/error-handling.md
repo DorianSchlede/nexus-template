@@ -81,7 +81,7 @@ Common error scenarios and solutions for the close-session workflow.
 
 **Action**:
 - Note in summary: "[!] System not initialized"
-- Suggest: "Run 00-setup-memory build to initialize"
+- Suggest: "Run 'quick start' to initialize your goals"
 - Continue with map updates and session closure
 
 ---
