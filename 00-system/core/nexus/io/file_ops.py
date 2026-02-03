@@ -235,7 +235,7 @@ if __name__ == "__main__":
     print("""
 # Example 1: Safe write with existence check
 # -------------------------------------------
-from nexus.file_ops import safe_write
+from nexus.io.file_ops import safe_write
 
 # This will fail if file exists and is >100 bytes
 try:
@@ -252,7 +252,7 @@ except FileOperationError as e:
 
 # Example 2: Read-then-write pattern (RECOMMENDED)
 # -------------------------------------------------
-from nexus.file_ops import safe_read_then_write
+from nexus.io.file_ops import safe_read_then_write
 
 # This automatically reads, backs up, then writes
 existing = safe_read_then_write(
@@ -268,7 +268,7 @@ else:
 
 # Example 3: Check before writing
 # --------------------------------
-from nexus.file_ops import check_file_exists_and_warn
+from nexus.io.file_ops import check_file_exists_and_warn
 
 exists, size = check_file_exists_and_warn("output.md")
 
@@ -304,7 +304,7 @@ Use safe_write() to enforce this pattern automatically.
 
 Example workflow:
 ```python
-from nexus.file_ops import safe_write
+from nexus.io.file_ops import safe_write
 from pathlib import Path
 
 # WRONG - just write without checking
@@ -322,7 +322,7 @@ Exception: New files in empty directories (e.g., BUILD initialization)
 # ---------------------------------------------
 def process_batch_outputs(batch_results):
     '''Process multiple outputs safely'''
-    from nexus.file_ops import safe_write
+    from nexus.io.file_ops import safe_write
 
     for batch_num, result in enumerate(batch_results, 1):
         output_file = f"output-{batch_num:02d}.md"

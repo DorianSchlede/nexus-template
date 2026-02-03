@@ -1431,7 +1431,7 @@ def _make_progress_bar(percent: float, width: int = 10) -> str:
         String like "████████░░" or "########--" depending on terminal
     """
     # Import here to avoid circular imports
-    from nexus.chars import PROGRESS_FULL, PROGRESS_EMPTY
+    from nexus.utils.chars import PROGRESS_FULL, PROGRESS_EMPTY
 
     # Handle edge cases
     if percent < 0:

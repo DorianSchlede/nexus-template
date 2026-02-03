@@ -11,7 +11,7 @@ Supports:
 - Legacy Windows CMD (ASCII fallback)
 
 Usage:
-    from nexus.chars import OK, ERROR, WARN, ARROW, PROGRESS_FULL, PROGRESS_EMPTY
+    from nexus.utils.chars import OK, ERROR, WARN, ARROW, PROGRESS_FULL, PROGRESS_EMPTY
 
     print(f"{OK} Task completed")  # ✓ in modern terminals, [OK] in legacy CMD
     print(f"{ARROW} Next step")    # → in modern terminals, -> in legacy CMD
@@ -240,7 +240,7 @@ def prettify(text: str) -> str:
         Returns text unchanged (ASCII-safe)
 
     Usage:
-        from nexus.chars import prettify
+        from nexus.utils.chars import prettify
         print(prettify("[OK] Done -> Next step"))
         # Modern: "✓ Done → Next step"
         # Legacy: "[OK] Done -> Next step"
@@ -262,7 +262,7 @@ def nprint(*args, **kwargs) -> None:
     in modern terminals (VS Code, iTerm2, Windows Terminal, etc.).
 
     Usage:
-        from nexus.chars import nprint
+        from nexus.utils.chars import nprint
         nprint("[OK] Task completed -> Next")
         # Modern: "✓ Task completed → Next"
         # Legacy: "[OK] Task completed -> Next"

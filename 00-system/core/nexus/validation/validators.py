@@ -208,7 +208,7 @@ output_file.write_text(summary)
 
 # Example 2: Using validate_aggregation_files
 # -------------------------------------------
-from nexus.validators import validate_aggregation_files
+from nexus.validation.validators import validate_aggregation_files
 
 # This discovers files AND validates all were read
 batch_files = validate_aggregation_files(

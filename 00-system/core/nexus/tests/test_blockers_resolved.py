@@ -252,7 +252,7 @@ def test_blocker_3_migration():
     else:
         content = session_start_path.read_text()
 
-        if 'from nexus.migrate import migrate_if_needed' not in content:
+        if 'from nexus.state.migrate import migrate_if_needed' not in content:
             print("[ERROR] Migration not imported in session_start.py")
             return False
 

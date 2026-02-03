@@ -26,8 +26,8 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from nexus import NexusService
-from nexus.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING, CACHE_DIR, CACHE_STARTUP_FILE
-from nexus.utils import calculate_bundle_tokens
+from nexus.utils.config import BASH_OUTPUT_LIMIT, METADATA_BUDGET_WARNING, CACHE_DIR, CACHE_STARTUP_FILE
+from nexus.utils.utils import calculate_bundle_tokens
 
 # =============================================================================
 # BACKWARD COMPATIBILITY SHIM
@@ -66,13 +66,13 @@ def load_metadata(base_path: str = "."):
 
 def scan_builds(base_path: str = ".", minimal: bool = True):
     """Backward compatible wrapper for build scanning"""
-    from nexus.loaders import scan_builds as _scan_builds
+    from nexus.core.loaders import scan_builds as _scan_builds
     return _scan_builds(base_path, minimal)
 
 
 def scan_skills(base_path: str = ".", minimal: bool = True):
     """Backward compatible wrapper for skill scanning"""
-    from nexus.loaders import scan_skills as _scan_skills
+    from nexus.core.loaders import scan_skills as _scan_skills
     return _scan_skills(base_path, minimal)
 
 

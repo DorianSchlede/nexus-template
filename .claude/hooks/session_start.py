@@ -745,8 +745,8 @@ def build_startup_xml(build_dir: str, session_id: str, source: str, action: str 
         if str(nexus_core) not in sys.path:
             sys.path.insert(0, str(nexus_core))
 
-        from nexus.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction, detect_configured_integrations
-        from nexus.state import (
+        from nexus.core.loaders import scan_builds, build_skills_xml_compact, load_full_startup_context, build_next_action_instruction, detect_configured_integrations
+        from nexus.state.state import (
             build_pending_onboarding,
             extract_learning_completed,
         )
@@ -784,7 +784,7 @@ Current directory: {escape_xml_content(str(base_path))}
 
     # Migrate config schema if needed (v4 → v5)
     try:
-        from nexus.migrate import migrate_if_needed
+        from nexus.state.migrate import migrate_if_needed
         migrate_if_needed(config_path, create_backup=True)
     except Exception as e:
         logging.warning(f"Config migration skipped: {e}")
@@ -798,7 +798,7 @@ Current directory: {escape_xml_content(str(base_path))}
     # Initialize onboarding state if starting onboarding
     if onboarding_action.get('action') == 'run_onboarding':
         try:
-            from nexus.state_writer import update_multiple_paths
+            from nexus.io.state_writer import update_multiple_paths
             update_multiple_paths(config_path, {
                 "onboarding.status": "in_progress",
                 "onboarding.path_chosen": "quick_start",
@@ -892,7 +892,7 @@ ONBOARDING: {onboarding_state.get("status", "not_started")}
 
     # State detection - SINGLE SOURCE OF TRUTH: learning_tracker.completed
     # Refactored 2026-01-18: Use learning_tracker instead of check_* functions
-    from nexus.utils import is_template_file
+    from nexus.utils.utils import is_template_file
     import hashlib
 
     config_path = base_path / "01-memory" / "user-config.yaml"
