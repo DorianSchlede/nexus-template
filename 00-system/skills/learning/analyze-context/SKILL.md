@@ -600,7 +600,7 @@ After all SubAgents complete:
 **Aggregation Logic with Validation**:
 ```python
 from pathlib import Path
-from nexus.validators import validate_aggregation_completeness
+from nexus.validation.validators import validate_aggregation_completeness
 
 analysis_dir = Path("01-memory/input/_analysis/")
 batch_files = sorted(analysis_dir.glob("batch-*-insights.md"))

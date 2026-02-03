@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 import shutil
 from pathlib import Path
-from nexus.loaders import scan_builds, load_build, validate_build_schema
+from nexus.core.loaders import scan_builds, load_build, validate_build_schema
 
 
 class TestOnboardingFlow:

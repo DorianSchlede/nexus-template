@@ -13,7 +13,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from .config import MANDATORY_MAPS, MEMORY_DIR
+from ..utils.config import MANDATORY_MAPS, MEMORY_DIR
 from .loaders import (
     create_smart_defaults,
     detect_configured_integrations,
@@ -23,7 +23,7 @@ from .loaders import (
     scan_skills,
 )
 from .models import SystemState
-from .state import (
+from ..state.state import (
     build_display_hints,
     build_instructions,
     build_pending_onboarding,
@@ -32,7 +32,7 @@ from .state import (
     extract_learning_completed,
 )
 from .sync import check_for_updates, sync_from_upstream
-from .utils import embed_file_contents, is_template_file
+from ..utils.utils import embed_file_contents, is_template_file
 
 
 class NexusService:

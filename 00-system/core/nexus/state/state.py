@@ -19,14 +19,14 @@ except ImportError:
     HAS_YAML = False
     yaml = None
 
-from .config import (
+from ..utils.config import (
     MANDATORY_MAPS,
     MEMORY_DIR,
     ONBOARDING_SKILLS,
     WORKSPACE_DIR,
 )
-from .models import SystemState
-from .utils import is_template_file, parse_simple_yaml
+from ..core.models import SystemState
+from ..utils.utils import is_template_file, parse_simple_yaml
 
 
 def detect_system_state(

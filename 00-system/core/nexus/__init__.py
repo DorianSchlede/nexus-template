@@ -26,7 +26,7 @@ except ImportError:
     # Install with: pip install pyyaml
 
 # Public API exports
-from .config import (
+from .utils.config import (
     CHARS_PER_TOKEN,
     CONTEXT_WINDOW,
     METADATA_BUDGET_WARNING,
@@ -37,7 +37,7 @@ from .config import (
     DEFAULT_UPSTREAM_URL,
 )
 
-from .models import (
+from .core.models import (
     BuildStatus,
     SystemState,
     Build,
@@ -47,7 +47,7 @@ from .models import (
 )
 
 # Service class
-from .service import NexusService
+from .core.service import NexusService
 
 __all__ = [
     # Version

@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from .config import (
+from ..utils.config import (
     INTEGRATION_ENV_VARS,
     MEMORY_DIR,
     BUILDS_DIR,
@@ -22,7 +22,7 @@ from .config import (
     SYSTEM_DIR,
     get_templates_dir,
 )
-from .utils import (
+from ..utils.utils import (
     count_checkboxes,
     extract_yaml_frontmatter,
     get_first_unchecked_task,

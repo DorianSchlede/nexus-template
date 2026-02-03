@@ -9,7 +9,7 @@ Purpose: Fix Session Quality Issues (Build 02, Phase 1.4)
 import pytest
 import time
 from pathlib import Path
-from nexus.file_ops import (
+from nexus.io.file_ops import (
     safe_write,
     safe_read_then_write,
     check_file_exists_and_warn,

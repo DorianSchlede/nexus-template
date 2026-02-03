@@ -21,8 +21,8 @@ except ImportError:
     HAS_YAML = False
     yaml = None
 
-from .config import DEFAULT_UPSTREAM_URL, SYNC_PATHS
-from .utils import parse_simple_yaml
+from ..utils.config import DEFAULT_UPSTREAM_URL, SYNC_PATHS
+from ..utils.utils import parse_simple_yaml
 
 
 def run_git_command(args: List[str], cwd: str = None) -> Tuple[bool, str]:

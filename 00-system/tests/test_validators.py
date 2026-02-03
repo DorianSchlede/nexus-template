@@ -8,7 +8,7 @@ Purpose: Fix Session Quality Issues (Build 02, Phase 1.2)
 
 import pytest
 from pathlib import Path
-from nexus.validators import (
+from nexus.validation.validators import (
     validate_aggregation_completeness,
     validate_aggregation_files,
     extract_batch_numbers,
