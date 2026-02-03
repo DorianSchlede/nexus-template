@@ -466,14 +466,25 @@ Options:
 - Other (tell me)
 ```
 
-**Create BUILD structure**:
-```
-02-builds/{ID}-{name}/
-├── 01-planning/
-│   └── 01-overview.md
-├── 02-resources/
-├── 03-working/
-└── 04-outputs/
+**Create BUILD structure using nexus-init-build**:
+```python
+from nexus.config import BUILDS_ACTIVE_DIR
+import subprocess
+
+build_name = "{chosen_name}"
+build_type = "feature"  # or other type based on selection
+
+# Use nexus-init-build script to create build with proper schema
+result = subprocess.run(
+    ["uv", "run", "nexus-init-build", build_name, "--type", build_type, "--path", str(BUILDS_ACTIVE_DIR)],
+    capture_output=True,
+    text=True
+)
+
+if result.returncode != 0:
+    raise RuntimeError(f"Failed to create build: {result.stderr}")
+
+print(f"[OK] Build created: {build_name}")
 ```
 
 **Save state**:

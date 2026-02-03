@@ -31,6 +31,58 @@ from .utils import (
 )
 
 
+def validate_build_schema(metadata: Dict[str, Any], file_path: str = "") -> None:
+    """
+    Validate build metadata schema and log warnings for missing/invalid fields.
+
+    Does not raise exceptions - only logs warnings to help identify schema issues.
+
+    Args:
+        metadata: Build metadata dictionary from YAML frontmatter
+        file_path: Path to the file being validated (for error messages)
+
+    Required fields:
+        - id: Build ID (string)
+        - name: Build name (string)
+        - status: Build status (PLANNING, IN_PROGRESS, ACTIVE)
+        - created: Creation date (ISO format)
+        - build_path: Path to build directory (string)
+    """
+    import warnings
+    from datetime import datetime
+
+    required_fields = ["id", "name", "status", "created", "build_path"]
+    valid_statuses = ["PLANNING", "IN_PROGRESS", "ACTIVE", "COMPLETE", "ARCHIVED"]
+
+    # Check required fields exist
+    missing_fields = [field for field in required_fields if field not in metadata or not metadata[field]]
+
+    if missing_fields:
+        warnings.warn(
+            f"Build schema validation: Missing required fields in {file_path or 'metadata'}: {', '.join(missing_fields)}\n"
+            f"Required: id, name, status, created, build_path"
+        )
+
+    # Validate status enum
+    if "status" in metadata:
+        status = str(metadata["status"]).upper()
+        if status not in valid_statuses:
+            warnings.warn(
+                f"Build schema validation: Invalid status '{metadata['status']}' in {file_path or 'metadata'}\n"
+                f"Valid statuses: {', '.join(valid_statuses)}"
+            )
+
+    # Validate created date format (ISO 8601)
+    if "created" in metadata:
+        try:
+            datetime.fromisoformat(str(metadata["created"]))
+        except (ValueError, TypeError):
+            warnings.warn(
+                f"Build schema validation: Invalid date format '{metadata['created']}' in {file_path or 'metadata'}\n"
+                f"Expected: ISO 8601 format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)"
+            )
+
+
 def scan_builds(base_path: str = ".", minimal: bool = True, include_complete: bool = False) -> List[Dict[str, Any]]:
     """
     Scan all builds and extract YAML metadata + count actual tasks.
@@ -69,6 +121,9 @@ def scan_builds(base_path: str = ".", minimal: bool = True, include_complete: bo
             for overview_file in builds_dir.glob(pattern):
                 metadata = extract_yaml_frontmatter(str(overview_file))
                 if metadata and "error" not in metadata:
+                    # Validate build schema (logs warnings, doesn't fail)
+                    validate_build_schema(metadata, str(overview_file))
+
                     # Count actual checkboxes from 04-steps.md (numbered naming convention)
                     build_dir = overview_file.parent.parent
                     steps_file = build_dir / "01-planning" / "04-steps.md"
@@ -550,6 +605,11 @@ def load_build(build_id: str, base_path: str = ".", part: int = 0) -> Dict[str, 
         for file_path in sorted(planning_dir.glob("*.md")):
             file_rel = f"01-planning/{file_path.name}"
             metadata = extract_yaml_frontmatter(str(file_path))
+
+            # Validate build schema for overview files
+            if file_path.name.endswith("overview.md"):
+                validate_build_schema(metadata, str(file_path))
+
             result["files"][file_rel] = {
                 "path": str(file_path),
                 "metadata": metadata,
@@ -1139,7 +1199,7 @@ def load_full_startup_context(base_path: str = ".") -> Dict[str, Any]:
     all_builds = scan_builds(base_path, minimal=True)
     active_builds = [
         p for p in all_builds
-        if p.get("status") in ("IN_PROGRESS", "PLANNING", "ACTIVE")
+        if p.get("status", "").upper() in ("IN_PROGRESS", "PLANNING", "ACTIVE")
     ]
     # Minimize to essential fields only
     result["user_builds"] = [
@@ -1348,6 +1408,7 @@ def build_next_action_instruction(context: Dict[str, Any]) -> str:
 
     result = _load_state_template(
         "startup_main_menu",
+        goal=status["goal"],
         builds_section=status["builds_section"],
         skills_section=status["skills_section"],
     )
@@ -1410,7 +1471,7 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
 
     Shared helper for all startup templates to ensure consistency.
     Returns dict with: memory_status, work_status, folders_status, integrations_status,
-                       builds_section, skills_section
+                       builds_section, skills_section, goal
     """
     goals_done = context.get("goals_personalized", False)
     workspace_done = context.get("workspace_configured", False)
@@ -1418,6 +1479,27 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
     integrations = context.get("configured_integrations", [])
     user_skills = context.get("user_skills", [])
     curated_system_skills = ["list-skills", "mental-models"]
+
+    # Extract goal from user_goals content
+    goal = "Configure your goal with 'setup memory'"
+    if goals_done:
+        user_goals = context.get("user_goals", "")
+        if user_goals:
+            # Try to extract short-term goal
+            import re
+            match = re.search(r'## Short-Term Goal.*?\n\n(.+?)(?:\n\n|\*\*Why)', user_goals, re.DOTALL)
+            if match:
+                extracted = match.group(1).strip()
+                # Remove TODO markers and brackets
+                if not extracted.startswith('[TODO'):
+                    goal = extracted
+            # Fallback: extract from first heading after Current Role
+            if goal == "Configure your goal with 'setup memory'":
+                match = re.search(r'## Current Role\n\n(.+?)(?:\n\n|---)', user_goals, re.DOTALL)
+                if match:
+                    extracted = match.group(1).strip()
+                    if not extracted.startswith('[TODO'):
+                        goal = f"Role: {extracted}"
 
     # Memory status
     if goals_done:
@@ -1468,9 +1550,9 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
             # Format: "     #1  Name                      ########--  80%"
             build_lines.append(f"     #{idx}  {name:<25} {bar}  {progress_pct}%")
         builds_section = "\n".join(build_lines)
-        builds_section += "\n\n     Say: plan (start new) | #1 (continue build) | manage (see all)"
+        builds_section += "\n\n     Say: plan (start new) | #1 (continue build) | roadmap (view/manage)"
     else:
-        builds_section = "     No active builds yet.\n\n     Say: plan (start your first project)"
+        builds_section = "     No active builds yet.\n\n     Say: plan (start your first project) | roadmap (view/manage)"
 
     # === NEW: skills_section for startup_main_menu ===
     if user_skills:
@@ -1490,6 +1572,7 @@ def _build_dynamic_status(context: Dict[str, Any]) -> Dict[str, str]:
         "workspace_done": workspace_done,
         "builds_section": builds_section,
         "skills_section": skills_section,
+        "goal": goal,
     }
 
 
