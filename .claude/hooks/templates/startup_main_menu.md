@@ -9,18 +9,31 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
 
-  BUILD ─────────────────────────────── Create & finish projects
-  Start something new, or continue where you left off.
+GOAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{goal}
+
+
+BUILD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Create & build your system
+Start something new, or continue where you left off.
 
 {builds_section}
 
-  WORK ──────────────────────────────── Run your automations
-  Skills are reusable workflows you build once and run anytime.
+
+WORK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Run your automations
+Skills are reusable workflows you build once, run often.
 
 {skills_section}
 
-  CHAT ─────────────────────────────────────── Just talk
-  No structure needed. Ask anything, I'll help directly.
+
+CHAT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Just talk
+No structure needed. Ask anything, I'll help directly.
 
 ```
 
@@ -39,6 +52,7 @@ BUILD triggers:
 - "plan" or "new build" → load plan-build skill
 - "#N" or "N" (number) → load execute-build for build at that index
 - "manage" → show all builds with status
+- "roadmap" → view and manage roadmap
 
 WORK triggers:
 - [skill name] → load that skill

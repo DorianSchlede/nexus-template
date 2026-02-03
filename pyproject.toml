@@ -34,6 +34,9 @@ nexus-validate-workspace = "nexus_cli:validate_workspace_main"
 langfuse = [
     "langfuse>=2.0.0",
 ]
+dev = [
+    "pytest>=7.0.0",
+]
 
 [build-system]
 requires = ["hatchling"]
