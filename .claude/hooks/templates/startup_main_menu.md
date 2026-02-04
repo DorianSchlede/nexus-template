@@ -7,6 +7,7 @@ Display this menu EXACTLY as shown (single code block), then follow instructions
     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
     ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
     ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+    ─────────────────────────────────────────────
     Build yourself the AI copilot system of your dreams.
 
 
